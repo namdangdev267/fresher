@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "916498692629",
+    "project_id": "cukcuk-c9de6",
+    "storage_bucket": "cukcuk-c9de6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916498692629:android:14b701d2257981aa352c1c",
+        "android_client_info": {
+          "package_name": "vn.com.misa.cukcukstarterclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916498692629-u9icaglrbf289isdhdkdtjmovkmm7kjf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6cxpDmn0-8XiofcE_dJ_jku01M25uZgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916498692629-u9icaglrbf289isdhdkdtjmovkmm7kjf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

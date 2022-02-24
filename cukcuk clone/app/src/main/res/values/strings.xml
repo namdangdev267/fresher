@@ -1,0 +1,145 @@
+<resources>
+    <string name="app_name">MISA.CukcukStarterClone</string>
+    <string name="title_set_up_step_1">Bước 1: Chọn loại hình nhà hàng</string>
+    <string name="title_set_up_step_2">Bước 2: Thiết lập thực đơn</string>
+    <string name="title_set_up_step_3">Bước 3: Hoàn thành</string>
+    <string name="text_continue">TIẾP TỤC</string>
+    <string name="string_finish_setting">THIẾT LẬP THÀNH CÔNG</string>
+    <string name="string_welcome">Bạn vừa thiết lập ban đầu thành công, giờ đây bạn có thể bán hàng ngay.</string>
+    <string name="btn_start_app">Bắt đầu sử dụng</string>
+    <string name="prefix_drawable_name">ic_</string>
+    <string name="postfix_drawable_name">_fill</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_edit_item">Sửa món</string>
+    <string name="menu_item_name">Tên món</string>
+    <string name="menu_item_price">Giá bán</string>
+    <string name="menu_item_group">Nhóm thực đơn</string>
+    <string name="menu_item_unit">Đơn vị tính</string>
+    <string name="string_save">Lưu lại</string>
+    <string name="text_select_image">Chọn ảnh</string>
+    <string name="menu_item_name_should_not_be_empty">Tên món không được để trống</string>
+    <string name="menu_item_price_should_not_be_empty">Giá món không được để trống</string>
+    <string name="init_price_value">0</string>
+    <string name="save_data_failed">Save data failed</string>
+    <string name="item_list_orders">Danh sách hóa đơn</string>
+    <string name="item_list_menu">Danh sách thực đơn</string>
+    <string name="item_fav_serve">Sở thích phục vụ</string>
+    <string name="item_report">Báo cáo</string>
+    <string name="item_setting">Thiết lập</string>
+    <string name="item_sync">Đồng bộ dữ liệu</string>
+    <string name="item_security">Chính sách bảo mật</string>
+    <string name="item_share">Giới thiệu cho bạn bè</string>
+    <string name="item_rating">Đánh giá ứng dụng</string>
+    <string name="item_send_report">Gửi thông báo lỗi</string>
+    <string name="item_info">Thông tin ứng dụng</string>
+    <string name="item_logout">Đăng xuất</string>
+    <string name="navigation_drawer_open">Hello</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="search_title">Tìm kiếm món ăn</string>
+    <string name="cancel">HỦY</string>
+    <string name="checkout">THU TIỀN</string>
+    <string name="string_select_item">Chọn món</string>
+    <string name="Checkout">Thu tiền</string>
+    <string name="Save">Lưu lại</string>
+    <string name="total_amount">Còn phải thu:</string>
+    <string name="empty_cart_quantity">0</string>
+    <string name="string_promotion">Khuyến mại</string>
+    <string name="promotion_cash">VND</string>
+    <string name="promotion_percent">%</string>
+    <string name="string_note">Ghi chú...</string>
+    <string name="string_done">ĐỒNG Ý</string>
+    <string name="string_cancel">HUỶ BỎ</string>
+    <string name="invalid_promotion">Số tiền giảm phải nhỏ hơn giá gốc</string>
+    <string name="error_add_new_cart_item">Thêm mới không thành công</string>
+    <string name="title_checkout">Thu tiền</string>
+    <string name="string_atm_card">Thẻ ngân hàng</string>
+    <string name="string_cash">Tiền mặt</string>
+    <string name="text_finish">HOÀN THÀNH</string>
+    <string name="title_total_money">Tổng tiền</string>
+    <string name="title_customer_pay">Khách đưa</string>
+    <string name="title_changes">Trả lại</string>
+    <string name="title_order_list">Danh sách order</string>
+    <string name="title_order">Hóa đơn</string>
+    <string name="title_order_details">Chi tiết hóa đơn</string>
+    <string name="title_menu_group">Nhóm thực đơn</string>
+    <string name="title_edit_group">Sửa nhóm thực đơn</string>
+    <string name="menu_group_name">Tên nhóm (*)</string>
+    <string name="error_menu_group_empty">Tên nhóm thực đơn không được để trống</string>
+    <string name="title_report">Báo cáo</string>
+    <string name="title_report_overall">Doanh thu tổng quan</string>
+    <string name="title_report_details">Doanh thu theo mặt hàng</string>
+    <string name="string_report_no_data">Không có dữ liệu</string>
+    <string name="report_total_money">Tổng số tiền thu được</string>
+    <string name="report_cash">Tiền mặt</string>
+    <string name="report_other">Thanh toán khác</string>
+    <string name="vnd_unit">đ</string>
+    <string name="string_income_by_day">DOANH THU THEO NGÀY</string>
+    <string name="total">Tổng:</string>
+    <string name="revenue">Doanh thu</string>
+    <string name="item_name">Tên mặt hàng</string>
+    <string name="quantity">Số lượng</string>
+    <string name="discount">Khuyến mãi</string>
+    <string name="price">Tiền hàng</string>
+    <string name="text_discount">KM:</string>
+    <string name="string_income_by_hour">DOANH THU THEO GIỜ</string>
+    <string name="cukcuk">CUKCUK</string>
+    <string name="string_forget_password">Quên mật khẩu?</string>
+    <string name="btn_login">Đăng Nhập</string>
+    <string name="string_enter_email">Nhập email</string>
+    <string name="string_enter_password">Nhập mật khẩu</string>
+    <string name="string_do_you_have_an_account">Bạn chưa có tài khoản?</string>
+    <string name="register">Đăng ký</string>
+    <string name="email_must_not_be_empty">Email không được để trống</string>
+    <string name="password_must_not_be_empty">Mật khẩu không được để trống</string>
+    <string name="email">Email (*)</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="password">Mật khẩu</string>
+    <string name="password_confirm">Nhập lại mật khẩu</string>
+    <string name="password_confirm_wrong">Mật khẩu nhập lại không đúng</string>
+    <string name="app_package_name">vn.com.misa.cukcukstartermobile</string>
+    <string name="string_share_app">Chào bạn. Bạn có thể download phiên bản Android của ứng dụng CUKCUK Starter - Bán hàng tại địa chỉ: https://play.google.com/store/apps/details?id=vn.com.misa.cukcukstartermobile\nXem thêm thông tin chi tiết tại website: www.cukcuk.vn</string>
+    <string name="app_url">https://www.cukcuk.vn</string>
+    <string name="play_store_url">https://play.google.com/store/apps/details?id=</string>
+    <string name="email_support">sonca@support.misa.com.vn</string>
+    <string name="email_cshk">htkh@software.misa.com.vn</string>
+    <string name="string_mail_title">[CUKCUK] Gửi thông báo lỗi cho MISA</string>
+    <string name="string_email_body">Gửi thông báo lỗi\n\n\n---\n</string>
+
+    <string-array name="unit_spinner">
+        <item>"Suất"</item>
+        <item>"Đĩa"</item>
+        <item>"Cốc"</item>
+        <item>"Lon"</item>
+        <item>"Chai"</item>
+        <item>"Bát"</item>
+        <item>"Cái"</item>
+        <item>"Quả"</item>
+        <item>"Chiếc"</item>
+    </string-array>
+
+    <string-array name="group_icon">
+        <item>"do_uong"</item>
+        <item>"pho_bun"</item>
+        <item>"coffee"</item>
+        <item>"banh_ngot"</item>
+        <item>"tra_sua"</item>
+        <item>"bit_tet"</item>
+        <item>"com_van_phong"</item>
+        <item>"banh_mi"</item>
+        <item>"pizza"</item>
+        <item>"banh_keo"</item>
+        <item>"beer"</item>
+        <item>"kem"</item>
+        <item>"do_uong_coc"</item>
+        <item>"do_dong_chai"</item>
+    </string-array>
+
+    <string-array name="report_by">
+        <item>"Hôm nay"</item>
+        <item>"Hôm qua"</item>
+        <item>"Tuần này"</item>
+        <item>"Tuần trước"</item>
+        <item>"Tháng này"</item>
+        <item>"Khác"</item>
+    </string-array>
+</resources>

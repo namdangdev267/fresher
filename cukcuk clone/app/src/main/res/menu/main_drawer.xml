@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_order">
+        <item
+            android:id="@+id/navOrdersList"
+            android:icon="@drawable/ic_order_fill"
+            android:title="@string/item_list_orders" />
+    </group>
+
+    <group android:id="@+id/group_menu">
+        <item
+            android:id="@+id/navMenuList"
+            android:icon="@drawable/ic_menu_items"
+            android:title="@string/item_list_menu" />
+    </group>
+
+    <group android:id="@+id/group_fav_serve">
+        <item
+            android:id="@+id/navFavServe"
+            android:icon="@drawable/ic_fav_serve"
+            android:title="@string/item_fav_serve" />
+    </group>
+
+    <group android:id="@+id/group_report">
+        <item
+            android:id="@+id/navReport"
+            android:icon="@drawable/ic_report"
+            android:title="@string/item_report" />
+    </group>
+
+    <group android:id="@+id/group_setting">
+        <item
+            android:id="@+id/navSetting"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/item_setting" />
+    </group>
+
+    <group android:id="@+id/group_sync">
+        <item
+            android:id="@+id/navSync"
+            android:icon="@drawable/ic_sync"
+            android:title="@string/item_sync" />
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/navSecurity"
+            android:icon="@drawable/ic_security"
+            android:title="@string/item_security" />
+    </group>
+
+    <group android:id="@+id/group_share">
+        <item
+            android:id="@+id/navShare"
+            android:icon="@drawable/ic_share"
+            android:title="@string/item_share" />
+    </group>
+
+    <group android:id="@+id/group_rating">
+        <item
+            android:id="@+id/navRating"
+            android:icon="@drawable/ic_star"
+            android:title="@string/item_rating" />
+    </group>
+
+    <group android:id="@+id/group_send_report">
+        <item
+            android:id="@+id/navSendReport"
+            android:icon="@drawable/ic_adb"
+            android:title="@string/item_send_report" />
+    </group>
+
+    <group android:id="@+id/group_info">
+        <item
+            android:id="@+id/navInfo"
+            android:icon="@drawable/ic_info"
+            android:title="@string/item_info" />
+    </group>
+
+    <group android:id="@+id/group_log_out">
+        <item
+            android:id="@+id/navLogout"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/item_logout" />
+    </group>
+</menu>

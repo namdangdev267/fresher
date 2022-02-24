@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black_opacity_50">#80000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_opacity_60">#99FFFFFF</color>
+
+    <color name="blueLight100">#e7f5ff</color>
+    <color name="blueLight200">#a4ceea</color>
+    <color name="blue">#0873B9</color>
+    <color name="light_blue">#e7f5fe</color>
+    <color name="dark_blue">#005D99</color>
+    <color name="darker_blue">#003F67</color>
+    <color name="light_yellow">#fff3e7</color>
+    <color name="yellow">#E59744</color>
+    <color name="dark_yellow">#D87E1E</color>
+    <color name="light_grey">#f5f5f5</color>
+    <color name="greyLight200">#e6e6e6</color>
+    <color name="grey">#E0E0E0</color>
+    <color name="dark_grey">#767676</color>
+    <color name="green">#09AF4F</color>
+    <color name="light_pink">#ff8181</color>
+    <color name="red">#d52a2b</color>
+
+    <color name="pie_1">#0099fc</color>
+    <color name="pie_2">#fc7a7a</color>
+    <color name="pie_3">#07d42d</color>
+    <color name="pie_4">#fd9369</color>
+    <color name="pie_5">#7a89fe</color>
+    <color name="pie_6">#facb00</color>
+    <color name="pie_7">#af7cfb</color>
+    <color name="pie_8">#46d7ec</color>
+
+    <color name="colorErrorToast">#ff4444</color>
+    <color name="colorWarningToast">#ffa244</color>
+
+</resources>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.main.checkout.CheckoutFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/title_checkout"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroupPayment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        app:checkedButton="@+id/btnCash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCash"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/string_cash"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp_8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAtmCard"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/string_atm_card"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp_8" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <View
+        android:id="@+id/viewTotalMoneyDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleGroupPayment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/title_total_money"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/viewTotalMoneyDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleGroupPayment" />
+
+    <TextView
+        android:id="@+id/tvTotalMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/viewTotalMoneyDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleGroupPayment"
+        tools:text="@tools:sample/lorem" />
+
+    <View
+        android:id="@+id/viewCustomerPayDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTotalMoneyDivider" />
+
+    <TextView
+        android:id="@+id/tvTitleCustomerPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/title_customer_pay"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/viewCustomerPayDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTotalMoneyDivider" />
+
+    <EditText
+        android:id="@+id/edtCustomerPay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end|center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:text="@string/empty_cart_quantity"
+        app:layout_constraintBottom_toTopOf="@id/viewCustomerPayDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTitleCustomerPay"
+        app:layout_constraintTop_toBottomOf="@+id/viewTotalMoneyDivider"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/btnFinish"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_green_text_view"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="@string/text_finish"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clChanges"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewCustomerPayDivider">
+
+        <TextView
+            android:id="@+id/tvFirstChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@id/tvSecondChangesOption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="30.000" />
+
+        <TextView
+            android:id="@+id/tvSecondChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFirstChangesOption"
+            app:layout_constraintEnd_toStartOf="@id/tvThirdChangesOption"
+            app:layout_constraintStart_toEndOf="@id/tvFirstChangesOption"
+            app:layout_constraintTop_toTopOf="@id/tvFirstChangesOption"
+            tools:text="40.000" />
+
+        <TextView
+            android:id="@+id/tvThirdChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFirstChangesOption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvSecondChangesOption"
+            app:layout_constraintTop_toTopOf="@id/tvFirstChangesOption"
+            tools:text="50.000" />
+
+        <TextView
+            android:id="@+id/tvFourthChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@id/tvFifthChangesOption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFirstChangesOption"
+            tools:text="30.000" />
+
+        <TextView
+            android:id="@+id/tvFifthChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFourthChangesOption"
+            app:layout_constraintEnd_toStartOf="@id/tvSixthChangesOption"
+            app:layout_constraintStart_toEndOf="@id/tvFourthChangesOption"
+            app:layout_constraintTop_toTopOf="@id/tvFourthChangesOption"
+            tools:text="40.000" />
+
+        <TextView
+            android:id="@+id/tvSixthChangesOption"
+            style="@style/TextViewChanges"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_money_changes_text_view"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFourthChangesOption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvFifthChangesOption"
+            app:layout_constraintTop_toTopOf="@+id/tvFourthChangesOption"
+            tools:text="50.000" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llChanges"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clChanges">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_changes"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvChanges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_cart_quantity"
+            android:textAlignment="textEnd"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llChanges" />
+</androidx.constraintlayout.widget.ConstraintLayout>

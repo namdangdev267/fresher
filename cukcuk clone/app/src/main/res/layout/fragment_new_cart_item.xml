@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/tvItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="@id/tvItemName"
+        app:layout_constraintTop_toBottomOf="@id/tvItemName"
+        tools:text="@tools:sample/lorem" />
+
+    <View
+        android:id="@+id/titleDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvItemPrice" />
+
+    <ImageView
+        android:id="@+id/ivPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:background="@drawable/circle_plus"
+        app:layout_constraintBottom_toTopOf="@+id/titleDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvCartItemQuantity"
+        android:layout_width="@dimen/dp_36"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/text_view_corner_background"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlus"
+        app:layout_constraintEnd_toStartOf="@+id/ivPlus"
+        app:layout_constraintTop_toTopOf="@id/ivPlus" />
+
+    <ImageView
+        android:id="@+id/ivMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:background="@drawable/circle_minus"
+        app:layout_constraintBottom_toTopOf="@+id/titleDivider"
+        app:layout_constraintEnd_toStartOf="@id/tvCartItemQuantity"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/promotionDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_48"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDivider" />
+
+    <TextView
+        android:id="@+id/tvPromotionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_8"
+        android:gravity="center"
+        android:text="@string/string_promotion"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/promotionDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDivider" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroupPromotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/dp_8"
+        app:checkedButton="@+id/btnCash"
+        app:layout_constraintBottom_toTopOf="@id/promotionDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDivider"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCash"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text="@string/promotion_percent"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp_8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAtmCard"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text="@string/promotion_cash"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp_8" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <EditText
+        android:id="@+id/edtPromotion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@null"
+        android:gravity="end|center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingEnd="16dp"
+        android:text="@string/empty_cart_quantity"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/promotionDivider"
+        app:layout_constraintEnd_toStartOf="@id/toggleGroupPromotion"
+        app:layout_constraintStart_toEndOf="@id/tvPromotionTitle"
+        app:layout_constraintTop_toBottomOf="@id/titleDivider"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/noteDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/promotionDivider" />
+
+    <EditText
+        android:id="@+id/edtNote"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="@null"
+        android:hint="@string/string_note"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/noteDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/promotionDivider" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        style="@style/TextViewNewCartItemAction"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:text="@string/string_cancel"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toStartOf="@+id/tvDone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noteDivider" />
+
+    <TextView
+        android:id="@+id/tvDone"
+        style="@style/TextViewNewCartItemAction"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@color/dark_yellow"
+        android:text="@string/string_done"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvCancel"
+        app:layout_constraintTop_toBottomOf="@id/noteDivider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
