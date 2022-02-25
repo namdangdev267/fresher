@@ -6,4 +6,8 @@
     <string name="switch_text">Tách dòng</string>
     <string name="total_items">1</string>
     <string name="total_price">Tổng 1,1</string>
+
+    <string name="nameProduct_example">tui xach</string>
+    <string name="idProduct_example">ABC1</string>
+    <string name="priceProduct_example">10000,0</string>
 </resources>

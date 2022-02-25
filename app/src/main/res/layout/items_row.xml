@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="90dp">
+    android:layout_height="@dimen/dp_90">
 
     <ImageView
         android:id="@+id/ivProduct"
-        android:layout_width="60dp"
+        android:layout_width="@dimen/dp_60"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -14,42 +14,42 @@
 
     <TextView
         android:id="@+id/tvProductName"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
-        android:text="tui xach"
-        android:textSize="18sp"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:text="@string/nameProduct_example"
+        android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/ivProduct"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvProductId"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
-        android:text="AABC1"
-        android:textSize="18sp"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:text="@string/idProduct_example"
+        android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/ivProduct"
         app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
 
     <TextView
         android:id="@+id/tvProductPrice"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
-        android:text="100000"
-        android:textSize="18sp"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:text="@string/priceProduct_example"
+        android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/ivProduct"
         app:layout_constraintTop_toBottomOf="@+id/tvProductId" />
+
     <View
         android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="@dimen/dp_0.5"
         android:background="@color/pink"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
