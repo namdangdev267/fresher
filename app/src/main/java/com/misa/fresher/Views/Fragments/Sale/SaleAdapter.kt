@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.Item
 import com.misa.fresher.R
 
-
 class SaleAdapter(private val listItem:MutableList<Item>):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){

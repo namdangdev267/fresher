@@ -5,7 +5,7 @@
     android:layout_height="80dp"
     android:layout_marginTop="0.1dp"
     android:layout_marginBottom="0.1dp"
-    android:background="@drawable/ripple_item"
+    android:background="@drawable/ripple_rectangle"
     android:clickable="true"
     android:focusable="true"
     >
@@ -33,7 +33,9 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/id_item"
         app:layout_constraintLeft_toRightOf="@id/image_item"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
     <TextView
         android:id="@+id/id_item"

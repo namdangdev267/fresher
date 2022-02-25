@@ -13,7 +13,9 @@
         android:layout_height="50dp"
         android:background="#2b3176"
         android:orientation="horizontal"
-        android:weightSum="20">
+        android:weightSum="20"
+
+        >
 
         <ImageView
             android:id="@+id/menu"
@@ -21,7 +23,11 @@
             android:layout_height="match_parent"
             android:layout_weight="2.5"
             android:padding="10dp"
-            android:src="@drawable/ic_menu_24" />
+            android:src="@drawable/ic_menu_24"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/ripple_circle"
+            />
 
         <ImageView
 
@@ -68,18 +74,24 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
-            android:background="#2b3176"
+            android:background="@drawable/ripple_circle"
             android:padding="10dp"
-            android:src="@drawable/ic_shopping_cart" />
+            android:src="@drawable/ic_shopping_cart"
+            android:focusable="true"
+            android:clickable="true"
+            />
 
         <ImageView
             android:id="@+id/filter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
-            android:background="#2b3176"
+            android:background="@drawable/ripple_circle"
             android:padding="10dp"
-            android:src="@drawable/ic_filter_24" />
+            android:src="@drawable/ic_filter_24"
+            android:focusable="true"
+            android:clickable="true"
+            />
 
     </LinearLayout>
 
