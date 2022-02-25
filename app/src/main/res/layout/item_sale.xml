@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="0.1dp"
+    android:layout_marginBottom="0.1dp"
+    android:background="@drawable/ripple_item"
+    android:clickable="true"
+    android:focusable="true"
+    >
+
+    <ImageView
+        android:id="@+id/image_item"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="15dp"
+        />
+
+    <TextView
+        android:id="@+id/name_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="alalalalal"
+        android:textColor="#D8000000"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/id_item"
+        app:layout_constraintLeft_toRightOf="@id/image_item"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="alalalalal"
+        android:textColor="#C9737373"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/price_item"
+        app:layout_constraintLeft_toRightOf="@id/image_item"
+        app:layout_constraintTop_toBottomOf="@id/name_item" />
+
+    <TextView
+        android:id="@+id/price_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="alalalalal"
+        android:textColor="#E62B3176"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/image_item"
+
+        app:layout_constraintTop_toBottomOf="@+id/id_item" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
