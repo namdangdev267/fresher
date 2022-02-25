@@ -2,7 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_90">
+    android:layout_height="@dimen/dp_90"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/custom_rippel">
 
     <ImageView
         android:id="@+id/ivProduct"
