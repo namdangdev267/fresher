@@ -19,13 +19,13 @@ class RcvAdapter : RecyclerView.Adapter<RcvAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = list[position]
-        holder.itemView.tvProductId.text = currentItem.id
-        holder.itemView.tvProductName.text = currentItem.name
-        holder.itemView.tvProductPrice.text = currentItem.price.toString()
-        holder.itemView.ivProduct.setImageResource(currentItem.img)
+        holder.itemView.apply {
+            tvProductId.text=currentItem.id
+            tvProductName.text = currentItem.name
+            tvProductPrice.text = currentItem.price.toString()
+            ivProduct.setImageResource(currentItem.img)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount() = list.size
 }

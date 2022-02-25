@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/llMenuSearch"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_60"
         android:background="@color/purple_700"
         android:orientation="horizontal"
         android:weightSum="10"
@@ -27,7 +27,7 @@
         <ImageView
             android:id="@+id/ivSearch"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/bg_roud1"
@@ -37,18 +37,18 @@
         <EditText
             android:id="@+id/edSearch"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center_vertical"
             android:layout_weight="3"
             android:background="@color/white"
             android:ellipsize="end"
-            android:hint="Nhập tên, mã SKU "
+            android:hint="@string/search_hint"
             android:maxLines="1" />
 
         <ImageButton
             android:id="@+id/btnQrCode"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center_vertical"
             android:layout_weight="1.5"
             android:background="@drawable/bg_round3"
@@ -67,7 +67,7 @@
         <ImageButton
             android:id="@+id/btnFilter"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/dp_60"
             android:layout_weight="1.5"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_filter1"
@@ -78,7 +78,7 @@
     <LinearLayout
         android:id="@+id/llContactCalender"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/dp_48"
         android:background="@color/white"
         android:gravity="left"
         android:orientation="horizontal"
@@ -87,21 +87,21 @@
 
         <ImageView
             android:id="@+id/ivContact"
-            android:layout_width="24dp"
+            android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_person" />
 
         <TextView
             android:id="@+id/tvContact"
-            android:layout_width="24dp"
+            android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:ellipsize="end"
             android:gravity="center"
-            android:hint="Tên khách hàng, số điện thoại"
+            android:hint="@string/contact_hint"
             android:maxLines="1"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp_18" />
 
         <ImageView
             android:id="@+id/ivCalender"
@@ -113,21 +113,22 @@
         <TextView
             android:id="@+id/tvCalender"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_weight="2.7"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_vertical"
-            android:text="   Không chọn"
+            android:paddingLeft="@dimen/dp_24"
+            android:text="@string/calender_text"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_18"
             android:textStyle="normal" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llTachDong"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/dp_50"
         android:background="@color/pink"
         android:orientation="horizontal"
         android:weightSum="12"
@@ -144,12 +145,13 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_weight="6"
             android:gravity="center_vertical"
-            android:text="  Tách dòng"
+            android:text="@string/switch_text"
+            android:paddingStart="@dimen/dp_24"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_18"
             android:textStyle="normal" />
     </LinearLayout>
 
@@ -169,10 +171,10 @@
     <LinearLayout
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/dp_60"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:paddingStart="4dp"
+        android:paddingStart="@dimen/dp_4"
         android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,37 +184,38 @@
         <ImageButton
             android:id="@+id/btnReset"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_weight="1.3"
             android:background="@drawable/oval_button"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/app_name"
             android:rotation="90"
             android:src="@drawable/ic_loop1" />
 
         <Button
             android:id="@+id/btnItemCount"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
-            android:layout_marginLeft="9dp"
+            android:layout_marginLeft="@dimen/dp_9"
             android:layout_weight="1.5"
             android:background="@drawable/bg_round"
-            android:text="1"
+            android:text="@string/total_items"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnTotalPrice"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_marginLeft="1dp"
             android:layout_weight="6.9"
             android:background="@drawable/bg_round4"
-            android:text="Tổng 1,1"
-            android:textColor="@color/white" />
+            android:text="@string/total_price"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
