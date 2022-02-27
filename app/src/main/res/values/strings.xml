@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Freshers Application</string>
+    <string name="customer_name_tele">Tên khách hàng, số điện thoại</string>
+    <string name="not_selected">Không chọn</string>
+    <string name="split_row">Tách dòng</string>
+
+    <string name="sale">Bán hàng</string>
+    <string name="shipping">Sổ bán hàng</string>
+    <string name="insert_name_etc">Nhập tên, mã…hhhhhhhhhhhhhhhhhhhhhhhhh</string>
+    <string name="support_tele">Hỗ trợ: 1900 8677</string>
 </resources>

@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FreshersApplication" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FreshersApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.FreshersApplication.Switch" parent="Theme.FreshersApplication">
+        <!--        &lt;!&ndash; active thumb & track color (30% transparency) &ndash;&gt;-->
+        <!--        <item name="colorControlActivated">@color/colorPrimary</item>-->
+
+        <!--        &lt;!&ndash; inactive thumb color &ndash;&gt;-->
+        <!--        <item name="colorSwitchThumbNormal">#f1f1f1-->
+        <!--        </item>-->
+
+        <!--        &lt;!&ndash; inactive track color (30% transparency) &ndash;&gt;-->
+        <!--        <item name="android:colorForeground">#42221f1f-->
+        <!--        </item>-->
+        <item name="colorSecondary">@color/colorPrimary</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Toolbar" parent="Theme.FreshersApplication">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 </resources>

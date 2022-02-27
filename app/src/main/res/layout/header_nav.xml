@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ly_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimary"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:paddingTop="48dp"
+        android:paddingHorizontal="24dp"
+        android:paddingBottom="24dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/image_avatar"
+            android:layout_height="@dimen/image_avatar"
+            app:cardCornerRadius="1000dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_avatar"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="vertical"
+
+            android:layout_marginStart="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sample name"
+                android:textColor="@color/primaryTextInPrimary"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sample shop"
+                android:textColor="@color/primaryTextInPrimary"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/selector_button"
+        android:text="@string/support_tele"
+        android:textAllCaps="false"
+        android:textColor="@color/primaryTextInPrimary"
+        app:icon="@drawable/ic_call"
+        app:iconGravity="textStart"
+
+        app:layout_constraintTop_toBottomOf="@id/ly_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_margin="24dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="line_customer">48dp</dimen>
+    <dimen name="line_cart">56dp</dimen>
+    <dimen name="button_in_cart">48dp</dimen>
+    <dimen name="botton_height">64dp</dimen>
+    <dimen name="image_product">72dp</dimen>
+    <dimen name="image_avatar">72dp</dimen>
+</resources>
