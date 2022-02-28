@@ -1,4 +1,6 @@
 # fresher
 fresher2022
 
-<img width="200" alt="Capture" src="https://user-images.githubusercontent.com/58630186/155915317-abf95d72-41b0-4464-a12f-b91c038b7243.jpg"><img width="200" alt="Screenshot" src="https://user-images.githubusercontent.com/58630186/155915326-32d22a25-e82a-4ef6-87d8-f84a882d2884.jpg">
+
+![sale fragment](https://user-images.githubusercontent.com/58630186/155916528-fd2dc414-51f1-4414-9c32-40738c234474.jpg)
+![sale fragment bound](https://user-images.githubusercontent.com/58630186/155916531-2f142d47-796f-473f-a8a9-46227eee5dfa.jpg)
