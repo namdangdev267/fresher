@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_anhSP"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tv_tenSP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_anhSP"
+        android:text="Ten San Pham"
+        android:textColor="@color/color_den"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_maSP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tenSP"
+        android:layout_toRightOf="@id/img_anhSP"
+        android:text="Ma San Pham"
+        android:textColor="@color/color_nau"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_giaSP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_maSP"
+        android:layout_toRightOf="@id/img_anhSP"
+        android:text="Gia San Pham"
+        android:textColor="@color/color_den"
+        android:textSize="20dp" />
+    <LinearLayout
+        android:layout_below="@id/tv_giaSP"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_nau">
+    </LinearLayout>
+</RelativeLayout>
