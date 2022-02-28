@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_item_recyclerview.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_reset.xml" value="0.1535" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_switch_thumb.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_switch_track.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_toolbar.xml" value="0.2115" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/custom_tv.xml" value="0.2115" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_loop_24.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2115" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1455" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_product.xml" value="0.12" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2115" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
