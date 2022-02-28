@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_circle_light.xml" value="0.228125" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left.xml" value="0.15989583333333332" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left_light.xml" value="0.22870370370370371" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_right.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_right_light.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_calendar.xml" value="0.26614583333333336" />
@@ -16,8 +18,9 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_item.xml" value="0.1625" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle.xml" value="0.2640625" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/activity_main.xml" value="0.23333333333333334" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.21197916666666666" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_sale.xml" value="0.22" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.25" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_shipping_information.xml" value="0.25" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_sale.xml" value="0.25" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

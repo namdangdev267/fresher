@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Views.Fragments.ShippingInformationFragment"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_infomation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#2b3176"
+        app:tabSelectedTextColor="#2b3176"
+        app:tabTextColor="#FFFFFF"
+        >
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        style="@style/LinearLayout_Bottom">
+        <Button
+            style="@style/ButtonFont"
+            android:background="@drawable/bg_rounded_all"
+            android:text="@string/save"
+            />
+    </LinearLayout>
+</LinearLayout>

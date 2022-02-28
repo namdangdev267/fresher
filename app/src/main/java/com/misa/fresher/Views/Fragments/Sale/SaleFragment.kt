@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,13 +31,11 @@ class SaleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        saleViewModel = ViewModelProvider(this).get(SaleViewModel::class.java)
+//        saleViewModel = ViewModelProvider(this).get(SaleViewModel::class.java)
+        saleViewModel = SaleViewModel()
         recyclerView = view.findViewById(R.id.recyclerview)
         recyclerView.layoutManager= LinearLayoutManager(view.context)
-        recyclerView.adapter= SaleAdapter(saleViewModel.getListItem())
-
-
+        recyclerView.adapter= SaleAdapter(saleViewModel.listItem)
 
     }
 

@@ -31,9 +31,7 @@ class SaleAdapter(private val listItem:MutableList<Item>):RecyclerView.Adapter<S
         holder.tvPrice.text = listItem[position].price.toString()
     }
 
-    override fun getItemCount(): Int {
-        return listItem.size
-    }
+    override fun getItemCount() = listItem.size
 }
 
 

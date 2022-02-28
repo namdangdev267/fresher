@@ -10,7 +10,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/dp_50"
             android:weightSum="8"
             >
 
@@ -19,35 +19,38 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="8dp"
+                android:padding="@dimen/dp_8"
                 android:src="@drawable/ic_person_24" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
+                android:maxLength="18"
                 android:text="@string/customer_information_sale_fragment"
-                android:textColor="#8C8C8C"
-
-                />
+                android:textColor="#DC8C8C8C" />
 
             <ImageView
                 android:id="@+id/voucher"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="8dp"
+                android:padding="@dimen/dp_8"
                 android:src="@drawable/ic_calendar" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
-                android:text="None"
-                android:textColor="#D8000000" />
+                android:text="@string/none"
+                android:textColor="#D8000000"
+                android:textFontWeight="400"
+                />
 
 
         </LinearLayout>
@@ -55,28 +58,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingBottom="@dimen/dp_4"
             android:background="#ECEBEB"
             >
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="20dp"
+                android:paddingLeft="@dimen/dp_20"
                 android:theme="@style/Widget.AppCompat.CompoundButton.Switch"
-                android:padding="5dp"
-
+                android:padding="@dimen/dp_5"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
-                android:text="Split row"
-
-
+                android:text="@string/split_row"
+                android:textFontWeight="400"
                 android:textColor="#99000000" />
 
         </LinearLayout>
@@ -91,15 +92,15 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.2dp"
+            android:layout_height="@dimen/dp_0.2"
             android:background="#F1F1F1"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/dp_55"
             android:orientation="horizontal"
-            android:padding="5dp"
+            android:padding="@dimen/dp_5"
             android:weightSum="8"
             >
 
@@ -108,34 +109,38 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_refresh"
-                android:padding="10dp"
+                android:padding="@dimen/dp_10"
                 android:background="@drawable/bg_circle_light"
+
                 />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:background="@drawable/bg_rounded_left"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="16dp"
-                android:layout_marginLeft="10dp"
                 android:textColor="#99000000"
+                android:textSize="@dimen/dp_16"
+                android:textFontWeight="400"
+
                 />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
+                android:layout_marginLeft="@dimen/dp_1"
                 android:layout_weight="6"
                 android:background="@drawable/bg_rounded_right"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:text="Not yet selected item"
+                android:text="@string/not_yet_selected_item"
+                android:textFontWeight="400"
                 android:textColor="#99000000"
-                android:textSize="16dp" />
+                android:textSize="@dimen/dp_16" />
         </LinearLayout>
 
 
