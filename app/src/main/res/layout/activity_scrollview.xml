@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_long"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="2349839058039458034956809568056986830568959056806805683068956890-68595588956895689580-5680-568585680-0-568968956956895689568965456456546456456456546456456"/>
+
+        <Button
+            android:id="@+id/btn_act"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="View"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="2349839058039458034956809568056986830568959056806805683068956890-68595588956895689580-5680-568585680-0-568968956956895689568965456456546456456456546456456"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="View"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="2349839058039458034956809568056986830568959056806805683068956890-68595588956895689580-5680-568585680-0-568968956956895689568965456456546456456456546456456"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="View"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="View"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="2349839058039458034956809568056986830568959056806805683068956890-68595588956895689580-5680-568585680-0-568968956956895689568965456456546456456456546456456"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="View"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="2349839058039458034956809568056986830568959056806805683068956890-68595588956895689580-5680-568585680-0-568968956956895689568965456456546456456456546456456"/>
+
+
+    </LinearLayout>
+</ScrollView>
