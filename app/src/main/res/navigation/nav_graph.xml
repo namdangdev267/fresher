@@ -15,4 +15,9 @@
         android:name="com.misa.fresher.ui.shipping.ShippingFragment"
         android:label=""
         tools:layout="@layout/fragment_shipping"/>
+<!--    <fragment-->
+<!--        android:id="@+id/test_fragment"-->
+<!--        android:name="com.misa.fresher.ui.test.TestFragment"-->
+<!--        android:label=""-->
+<!--        tools:layout="@layout/layout_test_scroll"/>-->
 </navigation>

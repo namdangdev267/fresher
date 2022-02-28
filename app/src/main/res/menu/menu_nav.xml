@@ -8,5 +8,9 @@
         android:id="@+id/shipping_fragment"
         android:icon="@drawable/ic_shipping"
         android:title="@string/shipping" />
+<!--    <item-->
+<!--        android:id="@+id/test_fragment"-->
+<!--        android:icon="@drawable/ic_photo"-->
+<!--        android:title="@string/test" />-->
 
 </menu>

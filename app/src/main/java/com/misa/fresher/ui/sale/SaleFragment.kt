@@ -4,26 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.R
+import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.model.Product
 import com.misa.fresher.ui.sale.adapter.ProductListAdapter
 import com.misa.fresher.util.toCurrency
 
 class SaleFragment: Fragment() {
 
-    private lateinit var rv: RecyclerView
-    private lateinit var btnRefresh: AppCompatImageButton
-    private lateinit var tvCount: TextView
-    private lateinit var tvInfo: TextView
-    private lateinit var btnInfo: LinearLayout
-
-    private lateinit var adapter: ProductListAdapter
+    private var binding: FragmentSaleBinding? = null
+    private var adapter: ProductListAdapter? = null
 
     private var itemSelectedCount = 0
     private var total = 0f
@@ -32,40 +24,32 @@ class SaleFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_sale, container, false)
+    ): View {
+        binding = FragmentSaleBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        rv = view.findViewById(R.id.rv)
-        btnRefresh = view.findViewById(R.id.btn_refresh)
-        tvCount = view.findViewById(R.id.tv_count)
-        tvInfo = view.findViewById(R.id.tv_info)
-        btnInfo = view.findViewById(R.id.btn_info)
-
         updateSelectedItem()
 
-        adapter = object: ProductListAdapter() {
-            override fun onItemClick(product: Product) {
-                itemSelectedCount++
-                total += product.price
-                updateSelectedItem()
-            }
+        adapter = ProductListAdapter {
+            itemSelectedCount++
+            total += it.price
+            updateSelectedItem()
         }
-
-        btnRefresh.setOnClickListener {
+        binding!!.btnRefresh.setOnClickListener {
             itemSelectedCount = 0
             total = 0f
             updateSelectedItem()
         }
 
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.setHasFixedSize(true)
-        rv.adapter = adapter
+        binding!!.rvProduct.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//        rv.setHasFixedSize(true)
+        binding!!.rvProduct.adapter = adapter
+        binding!!.rvProduct.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        adapter.updateProduct(fakeData())
+        adapter?.updateProduct(fakeData())
     }
 
     private fun fakeData(): MutableList<Product> {
@@ -90,15 +74,15 @@ class SaleFragment: Fragment() {
     }
 
     private fun updateSelectedItem() {
-        tvCount.text = "$itemSelectedCount"
+        binding!!.tvCount.text = "$itemSelectedCount"
         if (itemSelectedCount > 0) {
-            btnRefresh.isEnabled = true
-            btnInfo.isEnabled = true
-            tvInfo.text = "Tổng ${total.toCurrency()}"
+            binding!!.btnRefresh.isEnabled = true
+            binding!!.btnInfo.isEnabled = true
+            binding!!.tvInfo.text = "Tổng ${total.toCurrency()}"
         } else {
-            btnRefresh.isEnabled = false
-            btnInfo.isEnabled = false
-            tvInfo.text = "Chưa chọn hàng"
+            binding!!.btnRefresh.isEnabled = false
+            binding!!.btnInfo.isEnabled = false
+            binding!!.tvInfo.text = "Chưa chọn hàng"
         }
     }
 }

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="line_customer">48dp</dimen>
-    <dimen name="line_cart">56dp</dimen>
-    <dimen name="button_in_cart">48dp</dimen>
-    <dimen name="botton_height">64dp</dimen>
-    <dimen name="image_product">72dp</dimen>
-    <dimen name="image_avatar">72dp</dimen>
+    <dimen name="product_image_size">56dp</dimen>
+    <dimen name="avatar_size">72dp</dimen>
+    <dimen name="search_bar_height">40dp</dimen>
+    <dimen name="navigation_drawer_width">350dp</dimen>
+    <dimen name="basic_line_height">48dp</dimen>
+    <dimen name="high_line_height">56dp</dimen>
+    <dimen name="margin_start">12dp</dimen>
+    <dimen name="margin_end">16dp</dimen>
+    <dimen name="between_element">8dp</dimen>
+    <dimen name="between_element_half">4dp</dimen>
+    <dimen name="font_size_med">16sp</dimen>
+    <dimen name="font_size_big">20sp</dimen>
+    <dimen name="drawer_header_top">48dp</dimen>
+    <dimen name="drawer_header_around">24dp</dimen>
 </resources>

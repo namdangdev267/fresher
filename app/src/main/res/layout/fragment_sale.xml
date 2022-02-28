@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/ly_customer"
+        android:id="@+id/ll_customer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_customer"
+        android:layout_height="@dimen/basic_line_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
 
@@ -17,80 +17,82 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="12dp"
+            android:drawablePadding="@dimen/between_element"
             android:lines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
+            android:ellipsize="end"
             android:text="@string/customer_name_tele"
-            android:textColor="@color/secondaryTextInWhite"
+            android:textColor="@color/secondary_text_in_white"
             app:drawableStartCompat="@drawable/ic_person"
-            app:drawableTint="@color/colorPrimary" />
+            app:drawableTint="@color/primary"
+
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/between_element_half"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="12dp"
+            android:drawablePadding="@dimen/between_element"
             android:lines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
             android:text="@string/not_selected"
             android:textColor="@color/black"
             app:drawableStartCompat="@drawable/ic_calendar"
-            app:drawableTint="@color/colorPrimary" />
+            app:drawableTint="@color/primary"
+
+            android:layout_marginStart="@dimen/between_element_half"
+            android:layout_marginEnd="@dimen/margin_end"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ly_split_row"
+        android:id="@+id/ll_split_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:background="@color/gray_200"
+        android:background="@color/odd_line"
 
-        app:layout_constraintTop_toBottomOf="@id/ly_customer">
+        app:layout_constraintTop_toBottomOf="@id/ll_customer">
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/Theme.FreshersApplication.Switch"/>
+            android:theme="@style/Theme.FreshersApplication.Switch"
+
+            android:layout_marginStart="@dimen/margin_start"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/split_row"
 
-            android:layout_marginStart="12dp"/>
+            android:layout_marginStart="@dimen/between_element"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+        android:id="@+id/rv_product"
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        app:layout_constraintTop_toBottomOf="@id/ly_split_row"
-        app:layout_constraintBottom_toTopOf="@id/ly_cart"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_split_row"
+        app:layout_constraintBottom_toTopOf="@id/ll_cart"/>
 
     <LinearLayout
-        android:id="@+id/ly_cart"
+        android:id="@+id/ll_cart"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_cart"
+        android:layout_height="@dimen/high_line_height"
         android:orientation="horizontal"
 
         app:layout_constraintBottom_toBottomOf="parent"
-
-        android:padding="4dp">
+        android:padding="@dimen/between_element_half">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_refresh"
-            android:layout_width="@dimen/button_in_cart"
+            android:layout_width="@dimen/basic_line_height"
             android:layout_height="match_parent"
             android:background="@drawable/selecter_button_round"
             android:scaleType="centerInside"
-
             android:src="@drawable/ic_refresh"
             android:tint="@color/white"
-
             android:padding="12dp"/>
 
         <LinearLayout
@@ -102,15 +104,15 @@
             android:layout_weight="1"
             android:clickable="true"
 
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/between_element"
             android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_count"
-                android:layout_width="@dimen/button_in_cart"
+                android:layout_width="@dimen/basic_line_height"
                 android:layout_height="match_parent"
                 android:text="1"
-                android:textSize="20sp"
+                android:textSize="@dimen/font_size_big"
                 android:textColor="@color/white"
                 android:gravity="center"/>
 
@@ -125,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Chua chon hang"
-                android:textSize="20sp"
+                android:textSize="@dimen/font_size_big"
                 android:textColor="@color/white"
                 android:gravity="center"/>
         </LinearLayout>

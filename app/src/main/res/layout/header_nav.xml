@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -11,17 +11,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
 
-        app:layout_constraintTop_toTopOf="parent"
-
-        android:paddingTop="48dp"
-        android:paddingHorizontal="24dp"
-        android:paddingBottom="24dp">
+        android:paddingTop="@dimen/drawer_header_top"
+        android:paddingHorizontal="@dimen/drawer_header_around"
+        android:paddingBottom="@dimen/drawer_header_around">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/image_avatar"
-            android:layout_height="@dimen/image_avatar"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
             app:cardCornerRadius="1000dp">
 
             <ImageView
@@ -37,36 +35,32 @@
             android:gravity="start"
             android:orientation="vertical"
 
-            android:layout_marginStart="24dp">
+            android:layout_marginStart="@dimen/margin_start">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sample name"
-                android:textColor="@color/primaryTextInPrimary"
-                android:textSize="20sp"/>
+                android:textColor="@color/primary_text_in_primary"
+                android:textSize="@dimen/font_size_big"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sample shop"
-                android:textColor="@color/primaryTextInPrimary"
-                android:textSize="14sp" />
+                android:textColor="@color/primary_text_in_primary" />
         </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="@dimen/basic_line_height"
         android:background="@drawable/selector_button"
         android:text="@string/support_tele"
         android:textAllCaps="false"
-        android:textColor="@color/primaryTextInPrimary"
+        android:textColor="@color/primary_text_in_primary"
         app:icon="@drawable/ic_call"
         app:iconGravity="textStart"
 
-        app:layout_constraintTop_toBottomOf="@id/ly_info"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        android:layout_margin="24dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_margin="@dimen/drawer_header_around"/>
+</LinearLayout>

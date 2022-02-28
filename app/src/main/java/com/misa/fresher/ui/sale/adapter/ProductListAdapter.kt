@@ -1,17 +1,15 @@
 package com.misa.fresher.ui.sale.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.R
+import com.misa.fresher.databinding.ItemProductBinding
 import com.misa.fresher.model.Product
 import com.misa.fresher.util.toCurrency
 
-abstract class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.DataViewHolder>() {
+class ProductListAdapter(
+    private val onClickListener: (Product) -> Unit
+) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
     private var products = mutableListOf<Product>()
 
@@ -20,37 +18,38 @@ abstract class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.Data
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
-        return DataViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder =
+        ProductViewHolder(
+            ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onClickListener
+        )
 
-    override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.lyItem.setOnClickListener {
-            onItemClick(products[position])
-        }
-
-        holder.tvName.text = products[position].name
-        holder.tvId.text = products[position].id
-
-        var price = products[position].price.toCurrency()
-        products[position].maxPrice?.let {
-            price += " ~ ${it.toCurrency()}"
-        }
-        holder.tvPrice.text = price
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bindData(products[position])
     }
 
     override fun getItemCount(): Int {
         return products.size
     }
 
-    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val lyItem: ConstraintLayout = itemView.findViewById(R.id.btn_item)
-        val ivProduct: ImageView = itemView.findViewById(R.id.iv_product)
-        val tvName: TextView = itemView.findViewById(R.id.tv_name)
-        val tvId: TextView = itemView.findViewById(R.id.tv_id)
-        val tvPrice: TextView = itemView.findViewById(R.id.tv_price)
-    }
+    class ProductViewHolder(
+        private val itemBinding: ItemProductBinding,
+        private val onClickListener: (Product) -> Unit
+    ): RecyclerView.ViewHolder(itemBinding.root) {
 
-    abstract fun onItemClick(product: Product)
+        fun bindData(product: Product) {
+            itemBinding.root.setOnClickListener {
+                onClickListener(product)
+            }
+
+            itemBinding.tvName.text = product.name
+            itemBinding.tvId.text = product.id
+
+            var price = product.price.toCurrency()
+            product.maxPrice?.let {
+                price += " ~ ${it.toCurrency()}"
+            }
+            itemBinding.tvPrice.text = price
+        }
+    }
 }

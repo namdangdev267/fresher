@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.FreshersApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -25,12 +25,12 @@
         <!--        &lt;!&ndash; inactive track color (30% transparency) &ndash;&gt;-->
         <!--        <item name="android:colorForeground">#42221f1f-->
         <!--        </item>-->
-        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/primary</item>
     </style>
 
     <style name="Theme.FreshersApplication.Toolbar" parent="Theme.FreshersApplication">
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
-        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/primary_text_in_primary</item>
+        <item name="android:textColorSecondary">@color/primary_text_in_primary</item>
+        <item name="actionMenuTextColor">@color/primary_text_in_primary</item>
     </style>
 </resources>

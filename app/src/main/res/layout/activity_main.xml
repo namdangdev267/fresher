@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ly_drawer"
+    android:id="@+id/dl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -23,13 +23,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/search_bar_height"
                 android:background="@drawable/box_round"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="12dp">
+                android:paddingHorizontal="@dimen/between_element">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -40,15 +40,15 @@
                     android:maxLines="1"
 
                     android:drawableStart="@drawable/ic_search"
-                    android:drawableTint="@color/secondaryTextInWhite"
-                    android:drawablePadding="8dp"/>
+                    android:drawableTint="@color/secondary_text_in_white"
+                    android:drawablePadding="@dimen/between_element"/>
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="40dp"
+                <ImageButton
+                    android:layout_width="@dimen/search_bar_height"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_qr_scanner"
-                    android:tint="@color/secondaryTextInWhite"
-                    android:background="#00ffffff"/>
+                    android:background="@color/transparent"
+                    app:tint="@color/secondary_text_in_white" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
         <!--    android:theme="?attr/actionBarTheme"-->
@@ -66,7 +66,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="350dp"
+        android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu_nav"
