@@ -28,7 +28,7 @@
 
     <TextView
         android:id="@+id/name_item"
-        style="@style/TextFont"
+        style="@style/TextViewFont"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_2"
         android:layout_toRightOf="@id/image_item"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/id_item"
-        style="@style/TextFont"
+        style="@style/TextViewFont"
         android:textColor="#C9737373"
         android:textSize="@dimen/dp_14"
         android:layout_below="@id/name_item"
@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/price_item"
-        style="@style/TextFont"
+        style="@style/TextViewFont"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="@dimen/dp_8"
         android:textColor="#E62B3176"

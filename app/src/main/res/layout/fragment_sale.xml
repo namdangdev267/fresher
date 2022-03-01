@@ -8,6 +8,91 @@
     android:orientation="vertical"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#2b3176"
+        android:orientation="horizontal"
+        android:weightSum="20"
+        >
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/ic_menu_24"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/ripple_circle"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_weight="2"
+            android:background="@drawable/bg_rounded_left_light"
+            android:padding="@dimen/dp_4"
+            android:src="@drawable/ic_search_24" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_weight="9"
+            android:background="@color/white"
+            android:src="@drawable/ic_barcode"
+            android:hint="@string/search_view"
+            android:textColor="#8C8C8C"
+            android:paddingTop="@dimen/dp_3"
+            android:paddingBottom="@dimen/dp_3"
+            android:textSize="@dimen/dp_15" />
+
+        <ImageView
+            android:id="@+id/scan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_weight="1.5"
+            android:background="@drawable/bg_rounded_right_light"
+            android:paddingTop="@dimen/dp_3"
+            android:paddingRight="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_3"
+            android:src="@drawable/ic_barcode"
+            />
+
+        <ImageView
+            android:id="@+id/imageview_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@drawable/ripple_circle"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/ic_shopping_cart"
+            android:focusable="true"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:id="@+id/imageview_filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@drawable/ripple_circle"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/ic_filter_24"
+            android:focusable="true"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
@@ -15,7 +100,7 @@
             >
 
             <ImageView
-                android:id="@+id/customer"
+                android:id="@+id/imageview_customer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -34,7 +119,7 @@
                 android:textColor="#DC8C8C8C" />
 
             <ImageView
-                android:id="@+id/voucher"
+                android:id="@+id/imageview_voucher"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -83,7 +168,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/recyclerview_sale_fragment"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="0dp"
@@ -120,7 +205,6 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:background="@drawable/bg_rounded_left"
-                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="#99000000"
@@ -130,12 +214,12 @@
                 />
 
             <TextView
+                android:id="@+id/textview_total"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_1"
                 android:layout_weight="6"
                 android:background="@drawable/bg_rounded_right"
-                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/not_yet_selected_item"
                 android:textFontWeight="400"

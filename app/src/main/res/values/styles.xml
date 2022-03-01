@@ -3,7 +3,22 @@
     <style name="TextViewFont">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>
-        <item name="fontWeight">800</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="EditTextFontSelect">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:hint">Touch to select</item>
+    </style>
+
+    <style name="EditTextFontEnter">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:hint">Touch to enter</item>
     </style>
 
     <style name="ButtonFont">
@@ -11,8 +26,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white</item>
-
-
     </style>
 
     <style name="LinearLayout_Bottom">

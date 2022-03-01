@@ -1,4 +1,4 @@
-package com.misa.fresher.Views.Fragments
+package com.misa.fresher.Views.Fragments.ShippingInfomation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.misa.fresher.R
 
-class ShippingInformationFragment : Fragment() {
-
+class PackageFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shipping_information, container, false)
+        return inflater.inflate(R.layout.fragment_package, container, false)
     }
 
 }

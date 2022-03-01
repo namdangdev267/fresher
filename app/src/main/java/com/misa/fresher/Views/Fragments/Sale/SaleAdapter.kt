@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.Item
+import com.misa.fresher.Models.ItemSale
 import com.misa.fresher.R
 
-class SaleAdapter(private val listItem:MutableList<Item>):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
+class SaleAdapter(private val listItemSale:MutableList<ItemSale>):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         var tvName = view.findViewById<TextView>(R.id.name_item)
@@ -26,12 +26,12 @@ class SaleAdapter(private val listItem:MutableList<Item>):RecyclerView.Adapter<S
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imvImage.setImageResource(R.drawable.ic_shopping_bag)
-        holder.tvName.text = listItem[position].name
-        holder.tvID.text = listItem[position].id
-        holder.tvPrice.text = listItem[position].price.toString()
+        holder.tvName.text = listItemSale[position].name
+        holder.tvID.text = listItemSale[position].id
+        holder.tvPrice.text = listItemSale[position].price.toString()
     }
 
-    override fun getItemCount() = listItem.size
+    override fun getItemCount() = listItemSale.size
 }
 
 
