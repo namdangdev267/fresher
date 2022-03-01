@@ -13,6 +13,7 @@ import com.misa.fresher.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
+
     private var appBarConfiguration: AppBarConfiguration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding!!.toolbar)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph, binding!!.dlMain)
 

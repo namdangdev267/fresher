@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.misa.fresher.R
 
-class ShippingFragment: Fragment() {
+class ShippingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

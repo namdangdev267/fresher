@@ -9,13 +9,39 @@
         android:id="@+id/sale_fragment"
         android:name="com.misa.fresher.ui.sale.SaleFragment"
         android:label=""
-        tools:layout="@layout/fragment_sale"/>
+        tools:layout="@layout/fragment_sale">
+        <action
+            android:id="@+id/action_sale_fragment_to_bill_fragment"
+            app:destination="@id/bill_fragment"
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left" />
+    </fragment>
     <fragment
         android:id="@+id/shipping_fragment"
         android:name="com.misa.fresher.ui.shipping.ShippingFragment"
         android:label=""
         tools:layout="@layout/fragment_shipping"/>
-<!--    <fragment-->
+    <fragment
+        android:id="@+id/bill_fragment"
+        android:name="com.misa.fresher.ui.sale.bill.BillFragment"
+        android:label=""
+        tools:layout="@layout/fragment_bill">
+        <action
+            android:id="@+id/action_bill_fragment_to_delivery_info_fragment"
+            app:destination="@id/delivery_info_fragment"
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"  />
+    </fragment>
+    <fragment
+        android:id="@+id/delivery_info_fragment"
+        android:name="com.misa.fresher.ui.sale.deliveryinfo.DeliveryInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_delivery_info"/>
+    <!--    <fragment-->
 <!--        android:id="@+id/test_fragment"-->
 <!--        android:name="com.misa.fresher.ui.test.TestFragment"-->
 <!--        android:label=""-->

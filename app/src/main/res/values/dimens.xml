@@ -10,8 +10,12 @@
     <dimen name="margin_end">16dp</dimen>
     <dimen name="between_element">8dp</dimen>
     <dimen name="between_element_half">4dp</dimen>
-    <dimen name="font_size_med">16sp</dimen>
-    <dimen name="font_size_big">20sp</dimen>
     <dimen name="drawer_header_top">48dp</dimen>
     <dimen name="drawer_header_around">24dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_padding">12dp</dimen>
+
+    <dimen name="font_size_normal">14sp</dimen>
+    <dimen name="font_size_med">16sp</dimen>
+    <dimen name="font_size_big">20sp</dimen>
 </resources>

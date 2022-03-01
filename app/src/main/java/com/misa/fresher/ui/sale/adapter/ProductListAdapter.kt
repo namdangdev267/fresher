@@ -35,7 +35,7 @@ class ProductListAdapter(
     class ProductViewHolder(
         private val itemBinding: ItemProductBinding,
         private val onClickListener: (Product) -> Unit
-    ): RecyclerView.ViewHolder(itemBinding.root) {
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bindData(product: Product) {
             itemBinding.root.setOnClickListener {
