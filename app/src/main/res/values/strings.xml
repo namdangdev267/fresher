@@ -10,4 +10,15 @@
     <string name="nameProduct_example">tui xach</string>
     <string name="idProduct_example">ABC1</string>
     <string name="priceProduct_example">10000,0</string>
+
+    <string name="shipping_tittle">Thông tin giao hàng</string>
+    <string name="receiver_tabs">Người nhận</string>
+    <string name="ship_tabs">Giao Hàng</string>
+    <string name="package_tabs">Gói Hàng</string>
+    <string name="receiverTv1">Người nhận </string>
+    <string name="receiverHint1">Chạm để chọn</string>
+    <string name="phoneNum">Số điện thoại </string>
+    <string name="phoneNumHint">Chạm để nhập</string>
+    <string name="notNullField">*</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_60"
+    android:layout_marginTop="@dimen/dp_0.5"
+    android:layout_marginBottom="@dimen/dp_0.5"
+    android:background="@color/white"
+    android:paddingStart="@dimen/dp_9"
+    android:paddingEnd="@dimen/dp_9">
+
+    <TextView
+        android:id="@+id/tvReceiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/receiverTv1"
+        android:textColor="@color/purple_600"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvNotNull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_toRightOf="@+id/tvReceiver"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_16" />
+
+    <LinearLayout
+        android:id="@+id/llShippingItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvReceiver"
+        android:layout_marginTop="@dimen/dp_4"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tvReceiverHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvReceiver"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_weight="9.4"
+            android:hint="@string/receiverHint1"
+            android:textSize="@dimen/sp_16" />
+
+        <ImageButton
+            android:id="@+id/ibtnShipping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvReceiverHint"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name" />
+    </LinearLayout>
+
+
+</RelativeLayout>
