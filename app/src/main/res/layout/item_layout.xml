@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="105dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="100dp">
+        <ImageView
+            android:id="@+id/product_Image"
+            android:layout_width="50dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"/>
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <TextView
+                android:id="@+id/product_name"
+                android:textSize="20sp"
+                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
+                android:text="Sản phẩm 1"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/product_abb_name"
+                android:textSize="20sp"
+                android:text="Sản phẩm 1"
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/product_count"
+                android:textSize="20sp"
+                android:text="0.0"
+                android:textColor="@color/purple_700"
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#19A6A4A4"></TableRow>
+
+</LinearLayout>
