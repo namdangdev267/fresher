@@ -22,7 +22,7 @@
             android:layout_weight="1.5"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_back" />/>
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="0dp"
@@ -57,11 +57,13 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:background="@color/purple_700"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_9"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/bg_btn_round_white"
         android:contentDescription="@string/app_name"
         app:layout_constraintTop_toBottomOf="@id/llShippingTittle"
-        app:tabIndicatorAnimationMode="linear"
         app:tabIndicatorColor="@color/white"
         app:tabMode="fixed"
         app:tabTextColor="@color/white"
@@ -87,7 +89,7 @@
         android:layout_marginRight="@dimen/dp_9"
         android:layout_marginBottom="@dimen/dp_9"
         android:background="@drawable/bg_round5"
-        android:text="Lưu"
+        android:text="@string/tbnSave"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
