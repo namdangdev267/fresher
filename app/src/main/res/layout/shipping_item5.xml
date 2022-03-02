@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_60"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dp_9"
+    android:paddingTop="@dimen/dp_9"
+    android:paddingBottom="@dimen/dp_9"
+    android:weightSum="10">
+
+    <RadioButton
+        android:checked="true"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        android:buttonTint="@color/purple_600" />
+
+    <TextView
+        android:id="@+id/tvShip1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="3.7"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <RadioButton
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        android:buttonTint="@color/purple_600" />
+
+    <TextView
+        android:id="@+id/tvShip2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="3.7"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+</LinearLayout>

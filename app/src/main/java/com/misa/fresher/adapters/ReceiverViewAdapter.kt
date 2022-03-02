@@ -21,7 +21,10 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             0 -> R.layout.shipping_item1
             1 -> R.layout.shipping_item2
             2 -> R.layout.shipping_item3
-            else -> R.layout.shipping_item4
+            3 -> R.layout.shipping_item4
+            4 -> R.layout.shipping_item5
+            else -> R.layout.shipping_item6
+
         }
         val context = parent.context
         val inflater = LayoutInflater.from(context)
@@ -41,6 +44,8 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             is ShippingView.type2 -> 1
             is ShippingView.type3 -> 2
             is ShippingView.type4 -> 3
+            is ShippingView.type5 -> 4
+            is ShippingView.type6 -> 5
         }
     }
 
@@ -59,7 +64,9 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         private fun bindType2(item: ShippingView.type2) {
             itemView.findViewById<TextView>(R.id.tvReceiverType2).text = item.tittle
             itemView.findViewById<TextView>(R.id.tvReceiverHintType2).text = item.hint
-            itemView.findViewById<ImageButton>(R.id.ibtnShippingType2).setImageResource(item.img)
+            if(item.img!=null){
+                itemView.findViewById<ImageButton>(R.id.ibtnShippingType2).setImageResource(item.img)
+            }
         }
 
         private fun bindType3(item: ShippingView.type3) {
@@ -74,6 +81,16 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         private fun bindType4(item: ShippingView.type4) {
             itemView.findViewById<TextView>(R.id.tvType4).text = item.context
         }
+        private fun bindType5(item: ShippingView.type5) {
+            itemView.findViewById<TextView>(R.id.tvShip1).text = item.context
+            itemView.findViewById<TextView>(R.id.tvShip2).text = item.context1
+        }
+        private fun bindType6(item: ShippingView.type6) {
+            itemView.findViewById<TextView>(R.id.tvPackage1).text = item.context
+            itemView.findViewById<TextView>(R.id.tvPackage2).text = item.context1
+            itemView.findViewById<TextView>(R.id.tvPackage3).text = item.context2
+            itemView.findViewById<TextView>(R.id.tvPackage4).text = item.context3
+        }
 
         fun bind(dataModel: ShippingView) {
             when (dataModel) {
@@ -81,6 +98,8 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
                 is ShippingView.type2 -> bindType2(dataModel)
                 is ShippingView.type3 -> bindType3(dataModel)
                 is ShippingView.type4 -> bindType4(dataModel)
+                is ShippingView.type5 -> bindType5(dataModel)
+                is ShippingView.type6 -> bindType6(dataModel)
             }
         }
     }
