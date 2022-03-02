@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
@@ -64,8 +63,9 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         private fun bindType2(item: ShippingView.type2) {
             itemView.findViewById<TextView>(R.id.tvReceiverType2).text = item.tittle
             itemView.findViewById<TextView>(R.id.tvReceiverHintType2).text = item.hint
-            if(item.img!=null){
-                itemView.findViewById<ImageButton>(R.id.ibtnShippingType2).setImageResource(item.img)
+            if (item.img != null) {
+                itemView.findViewById<ImageButton>(R.id.ibtnShippingType2)
+                    .setImageResource(item.img)
             }
         }
 
@@ -81,10 +81,12 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         private fun bindType4(item: ShippingView.type4) {
             itemView.findViewById<TextView>(R.id.tvType4).text = item.context
         }
+
         private fun bindType5(item: ShippingView.type5) {
             itemView.findViewById<TextView>(R.id.tvShip1).text = item.context
             itemView.findViewById<TextView>(R.id.tvShip2).text = item.context1
         }
+
         private fun bindType6(item: ShippingView.type6) {
             itemView.findViewById<TextView>(R.id.tvPackage1).text = item.context
             itemView.findViewById<TextView>(R.id.tvPackage2).text = item.context1
@@ -103,5 +105,4 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             }
         }
     }
-
 }
