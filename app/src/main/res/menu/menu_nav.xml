@@ -3,23 +3,23 @@
     <item
         android:id="@+id/nav_BanHang"
         android:icon="@drawable/euro"
-        android:title="Bán hàng" />
+        android:title="Sale" />
     <item
         android:id="@+id/nav_SoGiaoHang"
         android:icon="@drawable/car"
-        android:title="Sổ giao hàng" />
-    <item
-        android:id="@+id/nav_DSachHoaDon"
-        android:icon="@drawable/receipt"
-        android:title="Danh sách hóa đơn" />
-    <item
-        android:id="@+id/nav_LSuDonHang"
-        android:icon="@drawable/clock"
-        android:title="Lịch sử đơn hàng" />
-    <item
-        android:id="@+id/nav_DoanhThu"
-        android:icon="@drawable/timeadd"
-        android:title="Doanh thu theo mặt hàng" />
+        android:title="Shipping book" />
+<!--    <item-->
+<!--        android:id="@+id/nav_DSachHoaDon"-->
+<!--        android:icon="@drawable/receipt"-->
+<!--        android:title="Danh sách hóa đơn" />-->
+<!--    <item-->
+<!--        android:id="@+id/nav_LSuDonHang"-->
+<!--        android:icon="@drawable/clock"-->
+<!--        android:title="Lịch sử đơn hàng" />-->
+<!--    <item-->
+<!--        android:id="@+id/nav_DoanhThu"-->
+<!--        android:icon="@drawable/timeadd"-->
+<!--        android:title="Doanh thu theo mặt hàng" />-->
 
     <!--    <item tools:ignore="MenuTitle">-->
     <!--        <menu>-->
