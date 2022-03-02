@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:background="@color/purple_700"
-        app:layout_constraintBottom_toTopOf="@+id/viewPage"
+        app:layout_constraintBottom_toTopOf="@+id/viewPage2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llShippingTittle" />
@@ -61,16 +61,16 @@
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_9"
         android:layout_marginRight="@dimen/dp_15"
-        android:background="@drawable/bg_btn_round_white"
+        android:background="@drawable/tab_backgr"
         android:contentDescription="@string/app_name"
         app:layout_constraintTop_toBottomOf="@id/llShippingTittle"
-        app:tabIndicatorColor="@color/white"
-        app:tabMode="fixed"
-        app:tabTextColor="@color/white"
-        tools:layout_editor_absoluteX="9dp" />
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/purple_700"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/white" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPage"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPage2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/app_name"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view">
 
-    </androidx.viewpager.widget.ViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
     <Button
         android:id="@+id/btnSave"

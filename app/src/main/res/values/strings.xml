@@ -10,7 +10,7 @@
     <string name="nameProduct_example">tui xach</string>
     <string name="idProduct_example">ABC1</string>
     <string name="priceProduct_example">10000,0</string>
-
+    <string name="tbnSave">Lưu</string>
     <string name="shipping_tittle">Thông tin giao hàng</string>
     <string name="receiver_tabs">Người nhận</string>
     <string name="ship_tabs">Giao Hàng</string>

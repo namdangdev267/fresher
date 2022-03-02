@@ -8,4 +8,9 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">@color/rvc_edge</item>
     </style>
+    <style name="tabLayout" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="trackColorActive">@color/purple_700</item>
+        <item name="android:colorForeground">@color/purple_700</item>
+    </style>
 </resources>
