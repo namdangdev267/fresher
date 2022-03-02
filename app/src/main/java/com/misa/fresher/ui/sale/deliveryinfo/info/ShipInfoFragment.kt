@@ -15,7 +15,9 @@ import com.misa.fresher.util.enum.InputType
 
 class ShipInfoFragment : Fragment() {
 
-    private var binding: FragmentShipInfoBinding? = null
+    private var _binding: FragmentShipInfoBinding? = null
+    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
+    private val binding get() = _binding!!
     private var adapter: ReceiverInputAdapter? = null
 
     override fun onCreateView(
@@ -23,17 +25,17 @@ class ShipInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShipInfoBinding.inflate(inflater, container, false)
-        return binding!!.root
+        _binding = FragmentShipInfoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = context?.let { ReceiverInputAdapter(fakeData(), it) }
-        binding!!.rcvShipInput.layoutManager = LinearLayoutManager(context)
-        binding!!.rcvShipInput.adapter = adapter
-        binding!!.rcvShipInput.addItemDecoration(
+        binding.rcvShipInput.layoutManager = LinearLayoutManager(context)
+        binding.rcvShipInput.adapter = adapter
+        binding.rcvShipInput.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
@@ -41,8 +43,8 @@ class ShipInfoFragment : Fragment() {
         )
     }
 
-    private fun fakeData(): Array<InputInfo> {
-        return arrayOf(
+    private fun fakeData(): Array<InputInfo> =
+        arrayOf(
             InputInfo("", false, InputType.DELIVERY_TYPE),
             InputInfo(
                 "Đối tác giao hàng", false, InputType.SPINNER, null, arrayOf(), arrayOf(
@@ -72,5 +74,9 @@ class ShipInfoFragment : Fragment() {
             ),
             InputInfo("Ngày giao hàng", false, InputType.TAP_ACTION) {},
         )
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

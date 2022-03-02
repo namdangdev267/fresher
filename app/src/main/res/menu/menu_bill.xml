@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/btn_cart"
+        android:icon="@drawable/ic_cart"
+        android:title="@string/cart"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/btn_staff"
+        android:icon="@drawable/ic_staff"
+        android:title="@string/staff"
+        app:showAsAction="never"/>
+    <item android:id="@+id/btn_coupon"
+        android:icon="@drawable/ic_coupon"
+        android:title="@string/coupon"
+        app:showAsAction="never"/>
+    <item android:id="@+id/btn_note"
+        android:icon="@drawable/ic_note"
+        android:title="@string/note"
+        app:showAsAction="never"/>
+    <item android:id="@+id/btn_save"
+        android:icon="@drawable/ic_save"
+        android:title="@string/temporary_save"
+        app:showAsAction="never"/>
+    <item android:id="@+id/btn_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete_bill"
+        app:showAsAction="never"/>
+</menu>

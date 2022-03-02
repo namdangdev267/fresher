@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentReceiverInfoBinding
 import com.misa.fresher.model.InputInfo
-import com.misa.fresher.model.Product
 import com.misa.fresher.ui.sale.adapter.ReceiverInputAdapter
 import com.misa.fresher.util.enum.InputType
 
 class ReceiverInfoFragment : Fragment() {
 
-    private var binding: FragmentReceiverInfoBinding? = null
+    private var _binding: FragmentReceiverInfoBinding? = null
+    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
+    private val binding get() = _binding!!
     private var adapter: ReceiverInputAdapter? = null
 
     override fun onCreateView(
@@ -25,17 +25,17 @@ class ReceiverInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentReceiverInfoBinding.inflate(inflater, container, false)
-        return binding!!.root
+        _binding = FragmentReceiverInfoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = context?.let { ReceiverInputAdapter(fakeData(), it) }
-        binding!!.rcvReceiverInput.layoutManager = LinearLayoutManager(context)
-        binding!!.rcvReceiverInput.adapter = adapter
-        binding!!.rcvReceiverInput.addItemDecoration(
+        binding.rcvReceiverInput.layoutManager = LinearLayoutManager(context)
+        binding.rcvReceiverInput.adapter = adapter
+        binding.rcvReceiverInput.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
@@ -43,8 +43,8 @@ class ReceiverInfoFragment : Fragment() {
         )
     }
 
-    private fun fakeData(): Array<InputInfo> {
-        return arrayOf(
+    private fun fakeData(): Array<InputInfo> =
+        arrayOf(
             InputInfo(
                 "Người nhận",
                 true,
@@ -101,6 +101,9 @@ class ReceiverInfoFragment : Fragment() {
             ),
             InputInfo("Thu COD", false, InputType.CHECK_BOX),
         )
-    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

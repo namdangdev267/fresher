@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/tb_bill"
+        layout="@layout/toolbar_text"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <LinearLayout
         android:id="@+id/ll_bill"
         android:layout_width="match_parent"

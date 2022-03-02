@@ -5,56 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <com.google.android.material.tabs.TabLayout-->
-    <!--        android:id="@+id/tl_delivery_info"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/primary"-->
+    <include
+        android:id="@+id/tb_delivery_info"
+        layout="@layout/toolbar_text"
 
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/vp_delivery_info"/>-->
-    <RadioGroup
-        android:id="@+id/tl_delivery_info"
+    <FrameLayout
+        android:id="@+id/fl_delivery_info"
         android:layout_width="match_parent"
         android:layout_height="@dimen/basic_line_height"
         android:background="@color/primary"
-        android:orientation="horizontal"
 
         android:padding="@dimen/between_element_half"
-        app:layout_constraintBottom_toTopOf="@id/vp_delivery_info"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tb_delivery_info"
+        app:layout_constraintBottom_toTopOf="@id/vp_delivery_info">
 
-        <RadioButton
-            android:id="@+id/rb_receiver"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_button_tab_left"
-            android:button="@null"
-            android:text="@string/receiver"
-            android:textAlignment="center" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_delivery_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            app:tabTextColor="@color/primary_text_in_primary"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextAppearance="@style/Theme.FreshersApplication.TabText"
+            app:tabMode="fixed"/>
+    </FrameLayout>
+<!--    <RadioGroup-->
+<!--        android:id="@+id/tl_delivery_info"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/basic_line_height"-->
+<!--        android:background="@color/primary"-->
+<!--        android:orientation="horizontal"-->
 
-        <RadioButton
-            android:id="@+id/rb_ship"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_button_tab_center"
-            android:button="@null"
-            android:text="@string/ship"
-            android:textAlignment="center" />
+<!--        android:padding="@dimen/between_element_half"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/vp_delivery_info"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <RadioButton
-            android:id="@+id/rb_package"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_button_tab_right"
-            android:button="@null"
-            android:text="@string/_package"
-            android:textAlignment="center" />
-    </RadioGroup>
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_receiver"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/selector_button_tab_left"-->
+<!--            android:button="@null"-->
+<!--            android:text="@string/receiver"-->
+<!--            android:textAlignment="center" />-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_ship"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/selector_button_tab_center"-->
+<!--            android:button="@null"-->
+<!--            android:text="@string/ship"-->
+<!--            android:textAlignment="center" />-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_package"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/selector_button_tab_right"-->
+<!--            android:button="@null"-->
+<!--            android:text="@string/_package"-->
+<!--            android:textAlignment="center" />-->
+<!--    </RadioGroup>-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_delivery_info"
@@ -62,7 +79,7 @@
         android:layout_height="0dp"
 
         app:layout_constraintBottom_toTopOf="@id/btn_save"
-        app:layout_constraintTop_toBottomOf="@id/tl_delivery_info" />
+        app:layout_constraintTop_toBottomOf="@id/fl_delivery_info" />
 
     <Button
         android:id="@+id/btn_save"
@@ -72,8 +89,8 @@
         android:background="@drawable/selector_button"
         android:text="@string/save"
         android:textAllCaps="false"
-
         android:textSize="@dimen/font_size_big"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vp_delivery_info" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,9 @@ import com.misa.fresher.ui.sale.deliveryinfo.info.ShipInfoFragment
 class DeliveryInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 3
 
-    override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> ReceiverInfoFragment()
-            1 -> ShipInfoFragment()
-            else -> PackageInfoFragment()
-        }
+    override fun createFragment(position: Int): Fragment = when (position) {
+        0 -> ReceiverInfoFragment()
+        1 -> ShipInfoFragment()
+        else -> PackageInfoFragment()
     }
 }

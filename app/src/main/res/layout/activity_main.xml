@@ -8,65 +8,17 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/Theme.FreshersApplication.Toolbar">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/search_bar_height"
-                android:background="@drawable/box_round"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="@dimen/between_element">
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="@string/insert_name_etc"
-                    android:background="@null"
-                    android:textColor="@color/black"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawableTint="@color/secondary_text_in_white"
-                    android:drawablePadding="@dimen/between_element"/>
-
-                <ImageButton
-                    android:layout_width="@dimen/search_bar_height"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_qr_scanner"
-                    android:background="@color/transparent"
-                    app:tint="@color/secondary_text_in_white" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-        <!--    android:theme="?attr/actionBarTheme"-->
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
-    </LinearLayout>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu_nav"

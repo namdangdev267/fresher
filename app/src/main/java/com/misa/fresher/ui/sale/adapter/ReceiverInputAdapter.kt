@@ -15,8 +15,8 @@ class ReceiverInputAdapter(
     private val inputArr: Array<InputInfo>,
     private val context: Context
 ) : RecyclerView.Adapter<BaseViewHolder<InputInfo>>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<InputInfo> {
-        return when (viewType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<InputInfo> =
+        when (viewType) {
             InputType.TAP_ACTION.ordinal -> TapActionViewHolder(
                 ItemTapActionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
@@ -41,7 +41,6 @@ class ReceiverInputAdapter(
                 this
             )
         }
-    }
 
     override fun onBindViewHolder(holder: BaseViewHolder<InputInfo>, position: Int) =
         holder.bindData(inputArr[position])
@@ -50,8 +49,8 @@ class ReceiverInputAdapter(
 
     override fun getItemViewType(position: Int): Int = inputArr[position].type.ordinal
 
-    fun onCreateViewHolder(viewType: Int): BaseViewHolder<InputInfo> {
-        return when (viewType) {
+    fun onCreateViewHolder(viewType: Int): BaseViewHolder<InputInfo> =
+        when (viewType) {
             InputType.TAP_ACTION.ordinal -> TapActionViewHolder(
                 ItemTapActionBinding.inflate(LayoutInflater.from(context))
             )
@@ -76,7 +75,6 @@ class ReceiverInputAdapter(
                 this
             )
         }
-    }
 
     class TapActionViewHolder(
         private val itemBinding: ItemTapActionBinding,

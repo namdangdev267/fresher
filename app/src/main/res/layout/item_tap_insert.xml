@@ -51,6 +51,9 @@
             android:layout_marginTop="@dimen/between_element"
             android:background="@color/transparent"
             android:hint="@string/tap_insert"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
             android:textSize="@dimen/font_size_normal" />
     </LinearLayout>
 </FrameLayout>

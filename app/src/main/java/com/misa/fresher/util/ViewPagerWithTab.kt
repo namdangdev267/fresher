@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.widget.CompoundButton
 import androidx.core.view.size
 import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.min
 
 class ViewPagerWithTab {
     companion object {
@@ -13,35 +14,23 @@ class ViewPagerWithTab {
             normalTextColor: ColorStateList,
             selectedTextColor: ColorStateList
         ) {
-            val size = if (viewPager.size >= arrayButton.size) {
-                viewPager.size
-            } else {
-                arrayButton.size
-            }
+            val size = min(viewPager.size, arrayButton.size)
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    arrayButton.map {
+                    arrayButton.forEach {
                         it.setTextColor(normalTextColor)
                     }
-                    if (position < size) {
-                        arrayButton[position].isChecked = true
-                        arrayButton[position].setTextColor(selectedTextColor)
-                    } else {
-                        arrayButton[size - 1].isChecked = true
-                        arrayButton[size - 1].setTextColor(selectedTextColor)
-                    }
+                    val pos = if (position < size) position else (size - 1)
+                    arrayButton[pos].isChecked = true
+                    arrayButton[pos].setTextColor(selectedTextColor)
                 }
             })
 
-            for (i in arrayButton.indices) {
-                arrayButton[i].setOnCheckedChangeListener { _, b ->
+            arrayButton.forEachIndexed { index, compoundButton ->
+                compoundButton.setOnCheckedChangeListener { _, b ->
                     if (b) {
-                        if (i < size) {
-                            viewPager.currentItem = i
-                        } else {
-                            viewPager.currentItem = size - 1
-                        }
+                        viewPager.currentItem = if (index < size) index else (size - 1)
                     }
                 }
             }

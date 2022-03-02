@@ -3,6 +3,7 @@ package com.misa.fresher.ui.sale.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.core.BaseViewHolder
 import com.misa.fresher.databinding.ItemProductBinding
 import com.misa.fresher.model.Product
 import com.misa.fresher.util.toCurrency
@@ -35,18 +36,18 @@ class ProductListAdapter(
     class ProductViewHolder(
         private val itemBinding: ItemProductBinding,
         private val onClickListener: (Product) -> Unit
-    ) : RecyclerView.ViewHolder(itemBinding.root) {
+    ) : BaseViewHolder<Product>(itemBinding.root) {
 
-        fun bindData(product: Product) {
+        override fun bindData(data: Product) {
             itemBinding.root.setOnClickListener {
-                onClickListener(product)
+                onClickListener(data)
             }
 
-            itemBinding.tvName.text = product.name
-            itemBinding.tvId.text = product.id
+            itemBinding.tvName.text = data.name
+            itemBinding.tvId.text = data.id
 
-            var price = product.price.toCurrency()
-            product.maxPrice?.let {
+            var price = data.price.toCurrency()
+            data.maxPrice?.let {
                 price += " ~ ${it.toCurrency()}"
             }
             itemBinding.tvPrice.text = price

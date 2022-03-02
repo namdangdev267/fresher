@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/btn_cart"
         android:icon="@drawable/ic_cart"
-        android:title="cart"
+        android:title="@string/cart"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/btn_filter"
         android:icon="@drawable/ic_filter"
-        android:title="filter"
+        android:title="@string/filter"
         app:showAsAction="ifRoom"/>
 </menu>

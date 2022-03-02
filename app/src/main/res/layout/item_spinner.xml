@@ -4,12 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/between_element">
+    android:paddingVertical="@dimen/between_element"
+    android:paddingEnd="@dimen/between_element"
+    android:paddingStart="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/between_element">
 
         <TextView
             android:id="@+id/tv_header"

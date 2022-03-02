@@ -3,6 +3,7 @@ package com.misa.fresher
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,26 +13,26 @@ import com.misa.fresher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
+    private var _binding: ActivityMainBinding? = null
+    // Chỉ sử dụng ở giữa onCreate và onDestroy
+    private val binding get() = _binding!!
 
     private var appBarConfiguration: AppBarConfiguration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
-
-        setSupportActionBar(binding!!.toolbar)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController.graph, binding!!.dlMain)
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.dlMain)
 
         appBarConfiguration?.let {
-            binding!!.toolbar.setupWithNavController(navController, it)
-            binding!!.navView.setupWithNavController(navController)
+//            binding.toolbar.setupWithNavController(navController, it)
+            binding.navView.setupWithNavController(navController)
         }
     }
 
@@ -43,8 +44,12 @@ class MainActivity : AppCompatActivity() {
         } == true || super.onSupportNavigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    fun openDrawer() {
+        binding.root.openDrawer(GravityCompat.START)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

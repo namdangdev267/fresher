@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/tb_sale"
+        layout="@layout/toolbar_search"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <LinearLayout
         android:id="@+id/ll_customer"
         android:layout_width="match_parent"
@@ -11,7 +17,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
 
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tb_sale">
 
         <TextView
             android:layout_width="0dp"
@@ -86,7 +92,7 @@
             android:layout_width="@dimen/basic_line_height"
             android:layout_height="match_parent"
             android:background="@drawable/selecter_button_round"
-            android:padding="12dp"
+            android:padding="@dimen/icon_padding"
             android:scaleType="centerInside"
             android:src="@drawable/ic_refresh"
             android:tint="@color/white" />

@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
-fun Float.toCurrency(): String {
+fun Double.toCurrency(): String {
     val symbols = DecimalFormatSymbols()
     symbols.decimalSeparator = ','
     symbols.groupingSeparator = '.'

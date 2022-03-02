@@ -16,5 +16,13 @@
     <string name="receiver">Người nhận</string>
     <string name="ship">Giao hàng</string>
     <string name="_package">Gói hàng</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="filter">Lọc kết quả</string>
+    <string name="staff">Nhân viên bán hàng</string>
+    <string name="coupon">Mã ưu đãi</string>
+    <string name="note">Ghi chú</string>
+    <string name="temporary_save">Lưu tạm</string>
+    <string name="delete_bill">Xóa đơn</string>
+    <string name="delete_delivery_info">Xóa thông tin giao hàng</string>
 <!--    <string name="test">Test</string>-->
 </resources>
