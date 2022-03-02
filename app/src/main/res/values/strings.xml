@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">Freshers Application</string>
+
+    <!-- shipping book activity -->
+    <string name="shipping_activity_name">Shipping Information</string>
+    <string name="receiver_fragment_name">Receiver</string>
+    <string name="shipping_fragment_name">Ship</string>
+    <string name="package_fragment_name">Package</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="toolbar_search_hint">Enter name, SKU code, …</string>
+    <string name="btn_customer_hint">Customer name, phone number</string>
+    <string name="btn_calendar_hint">None</string>
+    <string name="switch_split_row_hint">Split row</string>
+    <string name="btn_product_count">0</string>
+    <string name="btn_product_selected">Not yet selected item</string>
 </resources>

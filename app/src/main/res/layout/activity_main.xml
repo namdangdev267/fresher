@@ -6,30 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:context=".MainActivity">
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        >
-        <include layout="@layout/left_drawer" />
-    </com.google.android.material.navigation.NavigationView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/violet_dark"
-
-            app:layout_constraintBottom_toTopOf="@id/linearLayout"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/violet_dark">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +34,7 @@
                     android:drawablePadding="5dp"
                     android:drawableTint="@color/grey_dark"
                     android:ellipsize="end"
-                    android:hint="Enter name, SKU code, ..."
+                    android:hint="@string/toolbar_search_hint"
                     android:maxLines="1"
                     android:padding="6dp"
                     android:textSize="13sp" />
@@ -75,128 +63,103 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            android:weightSum="2">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:text="@string/btn_customer_hint"
+                app:drawableStartCompat="@drawable/ic_person" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_person" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:drawablePadding="16dp"
-                    android:enabled="false"
-                    android:hint="Customer name, phone number"
-                    android:singleLine="true"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_calendar" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="None"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:text="@string/btn_calendar_hint"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/ic_calendar" />
         </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/split_row_switch"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey_light"
-            android:padding="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-        <TextView
-            android:id="@+id/split_row_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_light"
-            android:padding="10dp"
-            android:text="Split row"
-            app:layout_constraintLeft_toRightOf="@id/split_row_switch"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+            android:background="@color/light_purple"
+            android:layoutDirection="rtl"
+            android:padding="8dp"
+            android:text="@string/switch_split_row_hint"
+            app:switchPadding="10dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_product_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/clear_btn"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/split_row_text"
+            android:layout_weight="1"
             tools:itemCount="4"
             tools:listitem="@layout/product_item">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <ImageButton
-            android:id="@+id/clear_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="6dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/bg_circle"
-            android:padding="10dp"
-            android:src="@drawable/ic_rotate"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/number_btn"
-            app:tint="@color/white" />
+        <LinearLayout
+            android:id="@+id/product_selected"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/number_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/bg_btn_round_left"
-            android:text="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/clear_btn"
-            app:layout_constraintRight_toLeftOf="@id/price_btn" />
+            <ImageButton
+                android:id="@+id/clear_btn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_circle"
+                android:src="@drawable/ic_rotate"
+                app:tint="@color/white" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/price_btn"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/bg_btn_round_right"
-            android:text="Not yet selected item"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/number_btn"
-            app:layout_constraintRight_toRightOf="parent" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/number_btn"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/bg_btn_round_left"
+                android:text="@string/btn_product_count"
+                android:focusable="true"
+                android:clickable="true"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/price_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_round_right"
+                android:text="@string/btn_product_selected"
+                android:textAllCaps="false"
+                android:focusable="true"
+                android:clickable="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
+
+        <include layout="@layout/left_drawer" />
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
