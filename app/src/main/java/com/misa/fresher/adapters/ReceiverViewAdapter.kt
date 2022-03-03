@@ -18,12 +18,12 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         viewType: Int
     ): ReceiverViewAdapter.ViewHolder {
         val layout = when (viewType) {
-            0 -> R.layout.shipping_item1
-            1 -> R.layout.shipping_item2
-            2 -> R.layout.shipping_item3
-            3 -> R.layout.shipping_item4
-            4 -> R.layout.shipping_item5
-            else -> R.layout.shipping_item6
+            0 -> R.layout.shipping_info_touch_tv
+            1 -> R.layout.shipping_info_touch_ed
+            2 -> R.layout.shipping_info_two_col
+            3 -> R.layout.shipping_info_cb
+            4 -> R.layout.shipping_info_radiogroup
+            else -> R.layout.shipping_info_three_col
 
         }
         val context = parent.context
@@ -40,17 +40,17 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (adapterData[position]) {
-            is ShippingView.type1 -> 0
-            is ShippingView.type2 -> 1
-            is ShippingView.type3 -> 2
-            is ShippingView.type4 -> 3
-            is ShippingView.type5 -> 4
-            is ShippingView.type6 -> 5
+            is ShippingView.TouchTextView -> 0
+            is ShippingView.TouchEditText -> 1
+            is ShippingView.TwoCol -> 2
+            is ShippingView.CheckBox -> 3
+            is ShippingView.RadionGroup -> 4
+            is ShippingView.ThreeCol -> 5
         }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindType1(item: ShippingView.type1) {
+        private fun bindTouchTextView(item: ShippingView.TouchTextView) {
             itemView.findViewById<TextView>(R.id.tvReceiver).text = item.tittle
             itemView.findViewById<TextView>(R.id.tvReceiverHint).text = item.hint
             if (item.asterisk != null) {
@@ -61,7 +61,7 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             }
         }
 
-        private fun bindType2(item: ShippingView.type2) {
+        private fun bindTouchEditText(item: ShippingView.TouchEditText) {
             itemView.findViewById<TextView>(R.id.tvReceiverType2).text = item.tittle
             itemView.findViewById<TextView>(R.id.tvReceiverHintType2).text = item.hint
             if (item.img != null) {
@@ -70,39 +70,39 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             }
         }
 
-        private fun bindType3(item: ShippingView.type3) {
-            itemView.findViewById<TextView>(R.id.tvReceiverType3_method).text = item.context1
-            itemView.findViewById<TextView>(R.id.tvReceiverType3_deposit).text = item.context2
+        private fun bindTwoCol(item: ShippingView.TwoCol) {
+            itemView.findViewById<TextView>(R.id.tvReceiverType3_method).text = item.tittlecol1
+            itemView.findViewById<TextView>(R.id.tvReceiverType3_deposit).text = item.hintCol1
             itemView.findViewById<TextView>(R.id.tvReceiverType3_method_context).text =
-                item.context3
-            itemView.findViewById<TextView>(R.id.tvReceiverType3_deposit_value).text = item.context4
+                item.tittleCol2
+            itemView.findViewById<TextView>(R.id.tvReceiverType3_deposit_value).text = item.hintCol2
             itemView.findViewById<ImageButton>(R.id.ibtnReceiverType3).setImageResource(item.img)
         }
 
-        private fun bindType4(item: ShippingView.type4) {
+        private fun bindCheckBox(item: ShippingView.CheckBox) {
             itemView.findViewById<CheckBox>(R.id.cbType4).text = item.context
         }
 
-        private fun bindType5(item: ShippingView.type5) {
-            itemView.findViewById<TextView>(R.id.rbShipType1).text = item.context
-            itemView.findViewById<TextView>(R.id.rbShipType2).text = item.context1
+        private fun bindRadionGroup(item: ShippingView.RadionGroup) {
+            itemView.findViewById<TextView>(R.id.rbShipType1).text = item.radionBtn1
+            itemView.findViewById<TextView>(R.id.rbShipType2).text = item.radionBtn2
         }
 
-        private fun bindType6(item: ShippingView.type6) {
-            itemView.findViewById<TextView>(R.id.tvPackage1).text = item.context
-            itemView.findViewById<TextView>(R.id.tvPackage2).text = item.context1
-            itemView.findViewById<TextView>(R.id.tvPackage3).text = item.context2
-            itemView.findViewById<TextView>(R.id.tvPackage4).text = item.context3
+        private fun bindThreeCol(item: ShippingView.ThreeCol) {
+            itemView.findViewById<TextView>(R.id.tvPackage1).text = item.tittleCol1
+            itemView.findViewById<TextView>(R.id.tvPackage2).text = item.hintCol1
+            itemView.findViewById<TextView>(R.id.tvPackage3).text = item.hintCol1
+            itemView.findViewById<TextView>(R.id.tvPackage4).text = item.hintCol3
         }
 
         fun bind(dataModel: ShippingView) {
             when (dataModel) {
-                is ShippingView.type1 -> bindType1(dataModel)
-                is ShippingView.type2 -> bindType2(dataModel)
-                is ShippingView.type3 -> bindType3(dataModel)
-                is ShippingView.type4 -> bindType4(dataModel)
-                is ShippingView.type5 -> bindType5(dataModel)
-                is ShippingView.type6 -> bindType6(dataModel)
+                is ShippingView.TouchTextView -> bindTouchTextView(dataModel)
+                is ShippingView.TouchEditText -> bindTouchEditText(dataModel)
+                is ShippingView.TwoCol -> bindTwoCol(dataModel)
+                is ShippingView.CheckBox -> bindCheckBox(dataModel)
+                is ShippingView.RadionGroup -> bindRadionGroup(dataModel)
+                is ShippingView.ThreeCol -> bindThreeCol(dataModel)
             }
         }
     }

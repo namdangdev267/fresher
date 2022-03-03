@@ -25,8 +25,8 @@ class PackageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val rcv = view.findViewById<RecyclerView>(R.id.rcvShippingView_package)
         val list = mutableListOf<ShippingView>(
-            ShippingView.type2("Trọng lượng (g)", "300", null),
-            ShippingView.type6("Kích thước (cm)", "10", "10", "10")
+            ShippingView.TouchEditText("Trọng lượng (g)", "300", null),
+            ShippingView.ThreeCol("Kích thước (cm)", "10", "10", "10")
         )
         val adapter = ReceiverViewAdapter(list)
         rcv.adapter = adapter

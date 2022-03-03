@@ -1,31 +1,31 @@
 package com.misa.fresher.model
 
 sealed class ShippingView {
-    data class type1(
+    data class TouchTextView(
         val tittle: String,
         val asterisk: String?,
         val hint: String,
         val img: Int?
     ) : ShippingView()
 
-    data class type2(
+    data class TouchEditText(
         val tittle: String,
         val hint: String,
         val img: Int?
     ) : ShippingView()
 
-    data class type3(
-        val context1: String,
-        val context2: String,
-        val context3: String,
-        val context4: String,
+    data class TwoCol(
+        val tittlecol1: String,
+        val hintCol1: String,
+        val tittleCol2: String,
+        val hintCol2: String,
         val img: Int
     ) : ShippingView()
 
-    data class type4(val context: String) : ShippingView()
-    data class type5(val context: String, val context1: String) : ShippingView()
-    data class type6(
-        val context: String, val context1: String,
-        val context2: String, val context3: String
+    data class CheckBox(val context: String) : ShippingView()
+    data class RadionGroup(val radionBtn1: String, val radionBtn2: String) : ShippingView()
+    data class ThreeCol(
+        val tittleCol1: String, val hintCol1: String,
+        val hintCol2: String, val hintCol3: String
     ) : ShippingView()
 }

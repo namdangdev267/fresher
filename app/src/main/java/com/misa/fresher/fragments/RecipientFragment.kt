@@ -27,21 +27,21 @@ class RecipientFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val rcv = view.findViewById<RecyclerView>(R.id.rcvShippingView)
         val list = mutableListOf<ShippingView>(
-            ShippingView.type1("Người nhận", "*", "Chạm để chọn", R.drawable.ic_add),
-            ShippingView.type1("Số điện thoại", "*", "Chạm để nhập", null),
-            ShippingView.type1("Địa chỉ", "*", "Chạm để nhập", null),
-            ShippingView.type1("Khu vực", null, "Chạm để chọn", R.drawable.ic_forward),
-            ShippingView.type1("Phường, xã", null, "Chạm để chọn", R.drawable.ic_forward),
-            ShippingView.type2("Phí giao hàng thu khách", "0,0", R.drawable.ic_calculator),
-            ShippingView.type3(
+            ShippingView.TouchTextView("Người nhận", "*", "Chạm để chọn", R.drawable.ic_add),
+            ShippingView.TouchTextView("Số điện thoại", "*", "Chạm để nhập", null),
+            ShippingView.TouchTextView("Địa chỉ", "*", "Chạm để nhập", null),
+            ShippingView.TouchTextView("Khu vực", null, "Chạm để chọn", R.drawable.ic_forward),
+            ShippingView.TouchTextView("Phường, xã", null, "Chạm để chọn", R.drawable.ic_forward),
+            ShippingView.TouchEditText("Phí giao hàng thu khách", "0,0", R.drawable.ic_calculator),
+            ShippingView.TwoCol(
                 "Hình thức đặt cọc",
                 "Số tiền cọc",
                 "Chuyển khoản",
                 "0,0",
                 R.drawable.ic_down
             ),
-            ShippingView.type1("Kênh bán hàng", null, "Chạm để chọn", R.drawable.ic_down),
-            ShippingView.type4("Thu COD (456)")
+            ShippingView.TouchTextView("Kênh bán hàng", null, "Chạm để chọn", R.drawable.ic_down),
+            ShippingView.CheckBox("Thu COD (456)")
         )
         val adapter = ReceiverViewAdapter(list)
         rcv.adapter = adapter
