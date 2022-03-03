@@ -5,3 +5,4 @@ fresher2022
 ![fragment_delivery](https://user-images.githubusercontent.com/90123690/156624260-7f260438-6deb-4bb0-9eb2-a06390423f53.png)
 ![fragment_package](https://user-images.githubusercontent.com/90123690/156624267-bec30cc8-5282-4748-9e20-af7ce93463a4.png)
 ![fragment_recipient](https://user-images.githubusercontent.com/90123690/156624269-5facd62d-6b36-4d49-8f98-fc2765f51e9c.png)
+<a href="https://user-images.githubusercontent.com/90123690/156624269-5facd62d-6b36-4d49-8f98-fc2765f51e9c.png" align="left" width="400" height="790" ></a>
