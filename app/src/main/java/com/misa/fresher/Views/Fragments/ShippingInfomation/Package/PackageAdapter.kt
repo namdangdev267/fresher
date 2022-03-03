@@ -1,4 +1,4 @@
-package com.misa.fresher.Views.Fragments.ShippingInfomation.Ship
+package com.misa.fresher.Views.Fragments.ShippingInfomation.Package
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.ItemShip
 import com.misa.fresher.R
 
-class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
-    RecyclerView.Adapter<ShipAdapter.ShipAdapterViewHolder>() {
+class PackageAdapter(private val adapterData: MutableList<ItemShip>) :
+    RecyclerView.Adapter<PackageAdapter.PackageAdapterViewHolder>() {
 
     companion object {
         private const val ITEM_TOUCH = 0
-        private const val ITEM_CALCULATOR = 1
-        private const val ITEM_RADIO_BUTTON = 2
+        private const val ITEM_3COL =1
     }
 
-    class ShipAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PackageAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindItemTouch(item: ItemShip.ItemTouch) {
             itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
             itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
@@ -30,40 +29,35 @@ class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
             itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
         }
 
-        private fun bindItemCalculator(item: ItemShip.ItemCalculator) {
-            itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
-            itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
+        private fun bindItem3Col(item: ItemShip.Item3Col) {
+            itemView.findViewById<TextView>(R.id.textview_package_size).text = item.title
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1).hint = item.content1
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2).hint = item.content2
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3).hint = item.content3
         }
 
-        private fun bindItemRadioButton(item: ItemShip.ItemRadioButton) {
-            itemView.findViewById<TextView>(R.id.radio_option1).text = item.option1
-            itemView.findViewById<TextView>(R.id.radio_option2).text = item.option2
-
-        }
 
         fun bind(itemShip: ItemShip) {
             when (itemShip) {
                 is ItemShip.ItemTouch -> bindItemTouch(itemShip)
-                is ItemShip.ItemCalculator -> bindItemCalculator(itemShip)
-                is ItemShip.ItemRadioButton -> bindItemRadioButton(itemShip)
-                is ItemShip.ItemTouch -> bindItemTouch(itemShip)
+                is ItemShip.Item3Col -> bindItem3Col(itemShip)
+
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShipAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PackageAdapterViewHolder {
         val layout = when (viewType) {
             ITEM_TOUCH -> R.layout.item_ship_touch
-            ITEM_CALCULATOR -> R.layout.item_ship_calculator
-            ITEM_RADIO_BUTTON -> R.layout.item_ship_radiobutton
+            ITEM_3COL -> R.layout.item_ship_3col
             else -> R.layout.item_ship_touch
         }
 
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return ShipAdapterViewHolder(view)
+        return PackageAdapterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ShipAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PackageAdapterViewHolder, position: Int) {
         holder.bind(adapterData[position])
     }
 
@@ -72,8 +66,7 @@ class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
     override fun getItemViewType(position: Int): Int {
         return when (adapterData[position]) {
             is ItemShip.ItemTouch -> ITEM_TOUCH
-            is ItemShip.ItemCalculator -> ITEM_CALCULATOR
-            is ItemShip.ItemRadioButton -> ITEM_RADIO_BUTTON
+            is ItemShip.Item3Col -> ITEM_3COL
             else -> 0
         }
     }

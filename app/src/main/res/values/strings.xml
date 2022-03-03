@@ -10,6 +10,7 @@
     <string name="save">Save</string>
 
     //Shipping Information
+    //Receiver
     <string name="shipping_information">Shipping information</string>
     <string name="receiver">Receiver</string>
     <string name="tel">Tel</string>
@@ -24,5 +25,20 @@
     <string name="transfer">Transfer</string>
     <string name="sale_channel">Sale channel</string>
     <string name="collect_COD">Collect COD</string>
+
+    //Ship
+    <string name="organization">Organization</string>
+    <string name="personal">Personal</string>
+    <string name="shipping_partner">Shipping partner</string>
+    <string name="service_type">Service type</string>
+    <string name="shipping_cost_paid_to_partner">Shipping cost paid to partner</string>
+    <string name="tracking_no">Tracking No.</string>
+    <string name="notes">Notes</string>
+    <string name="shipping_date">Shipping date</string>
+
+    //Package
+    <string name="weight">Weight(g)</string>
+    <string name="size">Size(cm)</string>
+
 
 </resources>

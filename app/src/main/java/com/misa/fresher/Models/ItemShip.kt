@@ -7,7 +7,7 @@ sealed class ItemShip{
         var title:String,
         var hintContent:String,
         var imageResourcce:Int?,
-        var asterisk:String?
+        var require:String?
     ):ItemShip()
 
     data class ItemCalculator(
@@ -28,6 +28,18 @@ sealed class ItemShip{
 
     data class ItemCheck(
         var title:String
+    ):ItemShip()
+
+    data class ItemRadioButton(
+        var option1:String,
+        var option2:String
+    ):ItemShip()
+
+    data class Item3Col(
+        var title:String,
+        var content1:String,
+        var content2:String,
+        var content3:String
     ):ItemShip()
 
 

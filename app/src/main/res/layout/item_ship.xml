@@ -18,7 +18,7 @@
 
     <TextView
         android:paddingLeft="@dimen/dp_3"
-        android:id="@+id/textview_touch_asterisk"
+        android:id="@+id/textview_touch_require"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/textview_touch_title"

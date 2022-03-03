@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
+import com.misa.fresher.Views.Fragments.ShippingInfomation.Package.PackageFragment
 import com.misa.fresher.Views.Fragments.ShippingInfomation.Receiver.ReceiverFragment
 import com.misa.fresher.Views.Fragments.ShippingInfomation.Ship.ShipFragment
 
@@ -29,75 +29,57 @@ class ShippingInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var indicator = view.findViewById<View>(R.id.indicator)
-        var tabLayout = view.findViewById<TabLayout>(R.id.tablayout_shipping_infomation)
-        var viewPager = view.findViewById<ViewPager>(R.id.viewpager_shipping_infomation)
-        setUpViewPager(viewPager)
-        tabLayout.setupWithViewPager(viewPager)
-
-        tabLayout.post({
-            val indicatorWidth  = tabLayout.getWidth() / tabLayout.getTabCount()
-            val indicatorParams = indicator.getLayoutParams() as FrameLayout.LayoutParams
-            indicatorParams.width = indicatorWidth
-            indicator.setLayoutParams(indicatorParams)
-        })
+//        var indicator = view.findViewById<View>(R.id.indicator)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tablayout_shipping_infomation)
+        val viewPager = view.findViewById<ViewPager2>(R.id.viewpager_shipping_infomation)
 
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                var indicatorWidth  = tabLayout.getWidth() / tabLayout.getTabCount()
-                val params = indicator.getLayoutParams() as FrameLayout.LayoutParams
+        val viewPagerAdapter = ViewPagerAdapter(this)
+        viewPagerAdapter.addFragment(ReceiverFragment(),"Receiver")
+        viewPagerAdapter.addFragment(ShipFragment(),"Ship")
+        viewPagerAdapter.addFragment(PackageFragment(),"Package")
+        viewPager.adapter = viewPagerAdapter
 
-                val translationOffset: Float = (positionOffset + position) * indicatorWidth
-                params.leftMargin = translationOffset.toInt()
-                indicator.setLayoutParams(params)
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = viewPagerAdapter.getPageTitle(position)
+            if(!tab.isSelected) {
+                when (position) {
+                    0 -> {
+                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_left)
+                    }
+                    2 -> {
+                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_right)
+                    }
+                    1 -> {
+                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_middle)
+                    }
+                }
             }
-
-            override fun onPageSelected(position: Int) {
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-        })
+        }.attach()
 
     }
 
 
-    fun setUpViewPager(viewPager: ViewPager){
-        var adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(ReceiverFragment(),"Receiver")
-        adapter.addFragment(ShipFragment(),"Ship")
-        adapter.addFragment(PackageFragment(),"Package")
-        viewPager.adapter = adapter
 
-    }
-
-    inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+    inner class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
-        }
-
-        override fun getCount(): Int {
-            return mFragmentList.size
-        }
 
         fun addFragment(fragment: Fragment, title: String) {
             mFragmentList.add(fragment)
             mFragmentTitleList.add(title)
         }
 
-        override fun getPageTitle(position: Int): CharSequence {
+        override fun getItemCount(): Int = mFragmentList.size
+
+        override fun createFragment(position: Int): Fragment = mFragmentList[position]
+
+        fun getPageTitle(position: Int): String
+        {
             return mFragmentTitleList[position]
         }
-
     }
 
 }

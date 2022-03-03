@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Views.Fragments.ShippingInfomation.ShippingInformationFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Views.Fragments.ShippingInfomation.ShippingInformationFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:background="#2b3176"
-        >
+        android:background="#2b3176">
 
         <ImageView
             android:id="@+id/menu"
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
+            android:background="@drawable/ripple_circle"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="@dimen/dp_10"
             android:src="@drawable/ic_arrow_left_24"
-            android:focusable="true"
-            android:clickable="true"
-            android:background="@drawable/ripple_circle"
 
             />
 
@@ -30,84 +29,61 @@
 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/delete"
+            android:layout_toRightOf="@+id/menu"
             android:layout_weight="3"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:textSize="@dimen/dp_20"
-            android:layout_toRightOf="@+id/menu"
-            android:layout_toLeftOf="@+id/delete"
             android:text="@string/shipping_information"
-            android:textColor="#DCFFFFFF" />
+            android:textColor="#DCFFFFFF"
+            android:textSize="@dimen/dp_20" />
 
         <ImageView
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginBottom="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
             android:layout_weight="2"
             android:background="#2b3176"
             android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_baseline_delete_24"
-            android:layout_alignParentRight="true"
-            />
+            android:src="@drawable/ic_baseline_delete_24" />
 
     </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/dp_3"
-        android:paddingBottom="@dimen/dp_3"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:background="#2b3176"
-        >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@drawable/bg_rounded_all"
-            />
-
-        <View
-            android:id="@+id/indicator"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:background="@drawable/bg_item_tablayout"/>
+        android:clipToPadding="false"
+        android:paddingLeft="10dp"
+        android:paddingTop="@dimen/dp_3"
+        android:paddingRight="10dp"
+        android:paddingBottom="@dimen/dp_3">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout_shipping_infomation"
+            style="@style/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@drawable/bg_tablayout"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/white"
-            app:tabSelectedTextColor="#2b3176"
-            app:tabIndicatorColor="#00FFFFFF"
-            app:tabRippleColor="#00FFFFFF"
-            />
+            android:layout_height="25dp" />
 
 
     </FrameLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager_shipping_infomation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
-    <LinearLayout
-        style="@style/LinearLayout_Bottom">
+    <LinearLayout style="@style/LinearLayout_Bottom">
+
         <Button
             style="@style/ButtonFont"
             android:background="@drawable/bg_rounded_all"
-            android:text="@string/save"
-            />
+            android:text="@string/save" />
     </LinearLayout>
 </LinearLayout>

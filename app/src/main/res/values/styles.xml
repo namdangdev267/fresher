@@ -36,5 +36,20 @@
         <item name="android:weightSum">8</item>
     </style>
 
+    <style name="tab_layout"
+        parent="Widget.Design.TabLayout"
+        >
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabTextAppearance">@android:style/TextAppearance.Widget.TabWidget</item>
+        <item name="tabSelectedTextColor">#2b3176</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@drawable/bg_tablayout</item>
+
+    </style>
+
 
 </resources>

@@ -18,19 +18,22 @@
 
     <TextView
         android:paddingLeft="@dimen/dp_3"
-        android:id="@+id/textview_touch_asterisk"
+        android:id="@+id/textview_touch_require"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/textview_touch_title"
         android:textColor="#FF0000" />
 
-    <TextView
-        android:id="@+id/textview_touch_hint_content"
+    <EditText
+        android:id="@+id/edittext_touch_hint_content"
         style="@style/TextViewFont"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="30dp"
-        android:text="@string/search_view"
-        android:textColor="#C9737373" />
+        android:hint="@string/touch_to_enter"
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
+        android:background="@color/transparent"
+
+        />
 
     <ImageView
         android:id="@+id/imageview_touch"

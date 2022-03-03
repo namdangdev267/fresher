@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_item_recyclerview"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/textview_package_size"
+        style="@style/TextViewFont"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/search_view"
+        android:textColor="#2b3176" />
+
+
+    <EditText
+        android:id="@+id/edittext_package_size_content_1"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:hint="@string/touch_to_enter"
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_percent="0.33"
+
+        />
+
+    <EditText
+        android:id="@+id/edittext_package_size_content_2"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:hint="@string/touch_to_enter"
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
+        android:background="@color/transparent"
+        app:layout_constraintBaseline_toBaselineOf="@id/edittext_package_size_content_1"
+        app:layout_constraintLeft_toRightOf="@id/edittext_package_size_content_1"
+        app:layout_constraintRight_toLeftOf="@id/edittext_package_size_content_3"
+        app:layout_constraintWidth_percent="0.33"
+        />
+
+    <EditText
+        android:id="@+id/edittext_package_size_content_3"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:hint="@string/touch_to_enter"
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
+        android:background="@color/transparent"
+        app:layout_constraintBaseline_toBaselineOf="@id/edittext_package_size_content_1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.33"
+
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
