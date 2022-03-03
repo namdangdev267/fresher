@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_60"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_0.5"
     android:layout_marginBottom="@dimen/dp_0.5"
     android:background="@color/white"
-    android:paddingStart="@dimen/dp_9"
-    android:paddingEnd="@dimen/dp_9">
+    android:paddingStart="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingEnd="@dimen/dp_8">
 
     <TextView
         android:id="@+id/tvReceiverType2"
@@ -14,8 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/receiverTv1"
         android:textColor="@color/purple_600"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold" />
+        android:textSize="@dimen/sp_16" />
 
     <LinearLayout
         android:id="@+id/llShippingItemType2"
@@ -45,6 +45,5 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name" />
     </LinearLayout>
-
 
 </RelativeLayout>

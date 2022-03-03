@@ -3,6 +3,7 @@ package com.misa.fresher.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -79,12 +80,12 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
         }
 
         private fun bindType4(item: ShippingView.type4) {
-            itemView.findViewById<TextView>(R.id.tvType4).text = item.context
+            itemView.findViewById<CheckBox>(R.id.cbType4).text = item.context
         }
 
         private fun bindType5(item: ShippingView.type5) {
-            itemView.findViewById<TextView>(R.id.tvShip1).text = item.context
-            itemView.findViewById<TextView>(R.id.tvShip2).text = item.context1
+            itemView.findViewById<TextView>(R.id.rbShipType1).text = item.context
+            itemView.findViewById<TextView>(R.id.rbShipType2).text = item.context1
         }
 
         private fun bindType6(item: ShippingView.type6) {

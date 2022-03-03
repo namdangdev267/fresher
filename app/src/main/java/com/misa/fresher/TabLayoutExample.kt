@@ -3,6 +3,7 @@ package com.misa.fresher
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -33,13 +34,13 @@ class TabLayoutExample : AppCompatActivity() {
             if (tab.isSelected) {
                 when (position) {
                     0 -> {
-                        tab.view.background = resources.getDrawable(R.drawable.tab_selected_left)
+                        tab.view.background = AppCompatResources.getDrawable(this,R.drawable.tab_selected_left)
                     }
                     2 -> {
-                        tab.view.background = resources.getDrawable(R.drawable.tab_selected_right)
+                        tab.view.background = AppCompatResources.getDrawable(this,R.drawable.tab_selected_right)
                     }
                     else -> {
-                        tab.view.background = resources.getDrawable(R.drawable.tab_selected_middle)
+                        tab.view.background = AppCompatResources.getDrawable(this,R.drawable.tab_selected_middle)
                     }
                 }
             }
