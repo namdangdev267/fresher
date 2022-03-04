@@ -64,7 +64,7 @@ class ShipFragment: Fragment() {
                 "Shipping cost paid to partner",
                 false,
                 InputType.TAP_INSERT,
-                resources.getDrawable(R.drawable.ic_baseline_calculate_24, null)
+                resources.getDrawable(R.drawable.calculator, null)
             ),
             InputReceiver(
                 "Tracking No.",

@@ -146,7 +146,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="@id/glNgang1"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -218,15 +218,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
-                android:layout_weight="0.35">
+                android:layout_weight="0.3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/custom_button_none"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/glDoc1"
@@ -251,8 +251,7 @@
                     <LinearLayout
                         android:id="@+id/linearQuantity"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/custom_background_none"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -261,14 +260,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="45dp"
                             android:layout_height="match_parent"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
                             android:gravity="center"
                             android:text="0"
                             android:textColor="#676767"
-                            android:textSize="25sp" />
+                            android:textSize="22sp" />
 
                         <View
                             android:layout_width="1.5dp"
@@ -282,7 +281,7 @@
                             android:gravity="center"
                             android:text="Not yet selected item"
                             android:textColor="#676767"
-                            android:textSize="25sp" />
+                            android:textSize="22sp" />
 
                     </LinearLayout>
 

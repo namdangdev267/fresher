@@ -18,7 +18,7 @@
             android:layout_marginRight="18dp">
 
             <ImageView
-                android:id="@+id/imgBackMain"
+                android:id="@+id/imgBackPayment"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
@@ -51,8 +51,9 @@
                 android:layout_below="@id/tvInforShip"
                 android:layout_margin="10dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                app:cardCornerRadius="8dp"
+
+                app:strokeWidth="1.5dp"
+                app:cardCornerRadius="3dp"
                 android:layout_centerInParent="true">
 
                 <com.google.android.material.tabs.TabLayout
@@ -66,45 +67,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_below="@id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <androidx.constraintlayout.widget.Guideline-->
-<!--            android:id="@+id/glHorizontal1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintGuide_percent="0.92" />-->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpPager"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginVertical="8dp"-->
-<!--            android:layout_marginHorizontal="10dp"-->
-<!--            android:background="@drawable/custom_background"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/glHorizontal1">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Save"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="20sp" />-->
-
-<!--        </RelativeLayout>-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </RelativeLayout>

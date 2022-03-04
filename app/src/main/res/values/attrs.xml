@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EditText">
+        <attr name="hint" format="string"/>
+        <attr name="imageStart" format="reference"/>
+        <attr name="imageEnd" format="reference"/>
+    </declare-styleable>
+</resources>

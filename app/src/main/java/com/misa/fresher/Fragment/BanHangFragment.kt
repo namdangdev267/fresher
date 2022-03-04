@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.misa.fresher.Adapter.ProductAdapter
-import com.misa.fresher.Fragment.ReceiverFragment
 
 class BanHangFragment : Fragment() {
 
@@ -48,8 +46,13 @@ class BanHangFragment : Fragment() {
         mainActivity = activity as MainActivity?
 
         linearQuantity.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity, ViewPagerActivity::class.java)
+            val intent = Intent(activity, PaymentActivity::class.java)
             startActivity(intent)
+            activity?.overridePendingTransition(
+                R.anim.slide_in_from_right,
+                R.anim.slide_out_to_left
+            )
+
         })
     }
 

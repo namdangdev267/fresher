@@ -8,22 +8,31 @@
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/button_normal.xml" value="0.1495" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_background.xml" value="0.1495" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_background_none.xml" value="0.1245" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_background_top.xml" value="0.2385" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_button.xml" value="0.2225" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_button_none.xml" value="0.1245" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_calculate_background.xml" value="0.2385" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_calculate_edittext.xml" value="0.2385" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_checkbox.xml" value="0.2585" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_quantity.xml" value="0.2225" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_searchview.xml" value="0.2225" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/custom_ship.xml" value="0.2225" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/edit_text_main.xml" value="0.1" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/ic_baseline_calculate_24.xml" value="0.3355" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.2705" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.1" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1515" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/selector_button.xml" value="0.1495" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/drawable/tab_color_selector.xml" value="0.1" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/activity_main2.xml" value="0.21" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/activity_payment.xml" value="0.2898550724637681" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/activity_view_pager.xml" value="0.22" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/custom_number_background_calculate.xml" value="0.3390625" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/edit_text_main.xml" value="0.5" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_ban_hang.xml" value="0.25" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_ban_hang2.xml" value="0.25" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_calculate.xml" value="0.33" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_d_sach_hoa_don.xml" value="0.2223731884057971" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_d_sach_hoa_don2.xml" value="0.1" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_giao_hang.xml" value="0.1" />
@@ -31,21 +40,23 @@
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_l_su_don_hang.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_nguoi_nhan.xml" value="0.18" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_package.xml" value="0.23867753623188406" />
-        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_receiver.xml" value="0.1" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_receiver.xml" value="0.25" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_ship.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_shipment_detail.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/fragment_so_giao_hang.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_check_box.xml" value="0.21693840579710144" />
-        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_delivery_type.xml" value="0.1" />
-        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_package_size.xml" value="0.18" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_day.xml" value="0.22418478260869565" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_delivery_type.xml" value="0.18" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_package_size.xml" value="0.25" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_receiver.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_receiver2.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_recycle_view.xml" value="0.25" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_selected.xml" value="0.22418478260869565" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_spinner.xml" value="0.20018115942028986" />
-        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_tab_action.xml" value="0.25" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_tab_action.xml" value="0.33" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_tab_insert.xml" value="0.33" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_tap_insert.xml" value="0.22" />
-        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_text_spinner.xml" value="0.20018115942028986" />
+        <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_text_spinner.xml" value="0.33" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/item_two_column.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/layout/layout_header_nav.xml" value="0.223731884057971" />
         <entry key="..\:/Users/T480s/Documents/GitHub/fresher/app/src/main/res/menu/menu_main.xml" value="0.24444444444444444" />

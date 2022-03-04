@@ -38,30 +38,43 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:layout_constraintGuide_percent="0.89"
-                            android:orientation="vertical"/>
+                            android:orientation="vertical" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/glVertical2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:layout_constraintGuide_percent="0.78"
-                            android:orientation="vertical"/>
+                            android:orientation="vertical" />
 
-                        <EditText
+                        <com.misa.fresher.EditTextCustom
                             android:id="@+id/edt"
                             android:layout_width="0dp"
                             android:layout_height="32dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="@id/glVertical2"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:background="@drawable/custom_searchview"
-                            android:drawableStart="@drawable/ic_baseline_search_24"
-                            android:drawableEnd="@drawable/ic_baseline_qr_code_scanner_24"
-                            android:hint="Enter name, SKU code, S......."
-                            android:textColor="@color/black"
-                            android:textColorHint="#B5B5B5"
-                            android:textSize="15sp" />
+                            app:layout_constraintEnd_toEndOf="@id/glVertical2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+<!--                                                                        <EditText-->
+<!--                                                                            android:paddingHorizontal="5dp"-->
+<!--                                                                            android:id="@+id/edt"-->
+<!--                                                                            android:layout_width="0dp"-->
+<!--                                                                            android:layout_height="32dp"-->
+<!--                                                                            android:background="@drawable/custom_searchview"-->
+<!--                                                                            android:drawableStart="@drawable/ic_baseline_search_24"-->
+<!--                                                                            android:drawableEnd="@drawable/ic_baseline_qr_code_scanner_24"-->
+<!--                                                                            android:hint="Enter name, SKU code, S......."-->
+<!--                                                                            android:textColor="@color/black"-->
+<!--                                                                            android:textColorHint="#B5B5B5"-->
+<!--                                                                            android:textSize="15sp"-->
+<!--                                                                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                                                            app:layout_constraintEnd_toEndOf="@id/glVertical2"-->
+<!--                                                                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                                                                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                                                                            android:ellipsize="end"-->
+<!--                                                                            android:maxLines="1"-->
+                                                                            android:drawablePadding="8dp"/>
 
                         <ImageView
                             android:id="@+id/imgCart"

@@ -62,13 +62,13 @@ class ReceiverFragment : Fragment() {
                 "Area",
                 false,
                 InputType.TAP_ACTION,
-                resources.getDrawable(R.drawable.angleright, null)
+                resources.getDrawable(R.drawable.ic_baseline_keyboard_arrow_right_24, null)
             ) {},
             InputReceiver(
                 "Ward, Commune",
                 false,
                 InputType.TAP_ACTION,
-                resources.getDrawable(R.drawable.angleright, null)
+                resources.getDrawable(R.drawable.ic_baseline_keyboard_arrow_right_24, null)
             ) {},
             InputReceiver(
                 "Ship paid by cust",

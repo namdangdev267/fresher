@@ -6,10 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -35,6 +32,14 @@ class ViewPagerActivity : AppCompatActivity() {
 
         vpPager = findViewById<ViewPager>(R.id.vpPager)
         tabLayout = findViewById<TabLayout>(R.id.tabLayout_Shipping)
+
+        var imgBackPayment = findViewById<ImageView>(R.id.imgBackPayment)
+
+        imgBackPayment.setOnClickListener(View.OnClickListener {
+            val intent = Intent(baseContext, PaymentActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right)
+        })
 
         adapterViewPager = MyPagerAdapter(
             supportFragmentManager

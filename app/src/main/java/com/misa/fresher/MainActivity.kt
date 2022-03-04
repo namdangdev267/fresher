@@ -14,15 +14,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val Fragment_BanHang = 0
-    val Fragment_SoGiaoHang = 1
-    var currentFragment = Fragment_BanHang
-    var checkFragment: Fragment = BanHangFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTitle("")
         setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
         toolbar.hideOverflowMenu()
         val toggle = ActionBarDrawerToggle(
             this,
@@ -40,17 +36,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-//        if (id == R.id.nav_BanHang) {
-//            if (currentFragment != Fragment_BanHang) {
-//                replaceFragment(BanHangFragment())
-//                currentFragment = Fragment_BanHang
-//            }
-//        } else if (id == R.id.nav_SoGiaoHang) {
-//            if (currentFragment != Fragment_SoGiaoHang) {
-//                replaceFragment(SoGiaoHangFragment())
-//                currentFragment = Fragment_SoGiaoHang
-//            }
-//        }
         if (id == R.id.nav_BanHang) {
             replaceFragment(BanHangFragment())
         } else if (id == R.id.nav_SoGiaoHang) {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="32dp"
+        android:background="@drawable/custom_searchview">
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:padding="7dp"
+            android:src="@drawable/search2" />
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_toLeftOf="@id/imgScan"
+            android:layout_toRightOf="@id/imgSearch"
+            android:background="@null"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="#B5B5B5"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imgScan"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_qr_code_scanner_24" />
+
+    </RelativeLayout>
+
+</merge>

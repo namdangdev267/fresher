@@ -22,7 +22,6 @@ class ReceiverAdapter(private val inputArr: Array<InputReceiver>,
             ItemTabInsertBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
             InputType.SPINNER.ordinal -> SpinnerViewHolder(
-//                ItemSpinnerBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 ItemSpinnerBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 context
             )
