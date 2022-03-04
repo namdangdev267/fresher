@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+        <attr name="menuBtnTittle" format="string" />
+        <attr name="menuBtnSrc" format="reference" />
+        <attr name="ivSearchSrc" format="reference" />
+        <attr name="ivSearchSrcBg" format="reference" />
+        <attr name="edSearchBg" format="reference" />
+        <attr name="edSearchHint" format="string" />
+        <attr name="btnQrCodeBg" format="reference" />
+        <attr name="btnQrCodeSrc" format="reference" />
+        <attr name="btnCartSrc" format="reference" />
+
+        <attr name="btnFilterSrc" format="reference" />
+    </declare-styleable>
+</resources>
+
+
