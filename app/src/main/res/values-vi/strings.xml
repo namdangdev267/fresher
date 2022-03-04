@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customer_infor">Tên khách hàng,số</string>
+    <string name="hint_search">Nhập tên</string>
+    <string name="none">Không chọn</string>
+    <string name="split_row">Tách dòng</string>
+    <string name="not_select">Chưa chọn hàng</string>
+    <string name="ship_infor">Thông tin giao hàng</string>
+    <string name="receiver">Người nhận</string>
+</resources>

@@ -13,7 +13,7 @@
        <TextView
            android:text="Trọng lượng (g)"
            android:textSize="20sp"
-           android:textColor="@color/purple_700"
+           android:textColor="@color/violet_dark"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"/>
       <TextView
@@ -32,7 +32,7 @@
            android:layout_width="match_parent"
            android:text="Kích thước (cm)"
            android:textSize="20sp"
-           android:textColor="@color/purple_700"
+           android:textColor="@color/violet_dark"
            android:layout_height="wrap_content"/>
        <LinearLayout
            android:layout_marginTop="10dp"

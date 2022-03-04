@@ -6,162 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/tool_bar"
+    <LinearLayout
+        android:id="@+id/layout_cus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/purple_700"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/image_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_baseline_menu_24" />
-
-        <LinearLayout
-            android:id="@+id/search_bar"
-            android:layout_width="260dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/image_icon"
-            android:layout_toRightOf="@id/image_icon"
-            android:background="@drawable/border_layout"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_baseline_search_24" />
-
-            <EditText
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_search_24"
-                android:hint="Nhập tên,mã...." />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/ic_baseline_qr_code_scanner_24" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/cart_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignBaseline="@id/image_icon"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:onClick="action_ViewPager"
-            android:layout_marginBottom="5dp"
-            android:layout_toRightOf="@id/search_bar"
-            android:background="@drawable/ic_baseline_shopping_cart_24" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignBaseline="@id/image_icon"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toRightOf="@id/cart_icon"
-            android:background="@drawable/ic_baseline_filter_alt_24" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:id="@+id/layout_cus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tool_bar">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@mipmap/ic_user" />
-
-        <TextView
+            android:src="@drawable/ic__users"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.6"
-            android:drawableStart="@drawable/ic_baseline_filter_alt_24"
-            android:text="Tên khách hàng,số"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:ellipsize="end"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:lines="1"
+            android:gravity="center_vertical"
+            android:hint="@string/customer_infor"
+            android:textColorHint="@color/colorLightGrey"
             android:textColor="#8A8383"
             android:textSize="20sp" />
-
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_baseline_calendar_month_24" />
-
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_baseline_calendar_month_24"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="0.4"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:gravity="center"
-            android:text="Không chọn"
+            android:gravity="center_vertical"
+            android:text="@string/none"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relative_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#A195A6"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorGrayCommon"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_cus">
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_split"
-            style="@style/SCBSwitch"
-            android:gravity="center"
+            android:theme="@style/SCBSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/switch_split"
-            android:gravity="left|center"
-            android:text="Tách dòng"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/split_row"
             android:textSize="20sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ryvProduct"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/layout_header"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relative_1">
+        app:layout_constraintTop_toBottomOf="@id/relative_1"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_layout" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ryvProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layout_header"
@@ -177,18 +111,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/border_button">
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_baseline_refresh_24" />
-            </LinearLayout>
+                android:layout_marginStart="10dp"
+                android:background="@drawable/border_button"
+                android:src="@drawable/ic_baseline_refresh_24" />
 
             <TextView
                 android:layout_width="50dp"
@@ -196,7 +125,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="#A19C9C"
+                android:background="@color/colorLightGray"
                 android:gravity="center"
                 android:text="0"
                 android:textSize="20sp" />
@@ -205,9 +134,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="#A19C9C"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorLightGray"
                 android:gravity="center"
-                android:text="Chưa chọn hàng"
+                android:onClick="actionOpen"
+                android:text="@string/not_select"
                 android:textSize="20sp" />
 
         </LinearLayout>

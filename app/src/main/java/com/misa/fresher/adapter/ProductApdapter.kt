@@ -1,37 +1,42 @@
 package com.misa.fresher.adapter
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.model.Product
 
 class ProductApdapter(private val mProducts: List<Product>) :
-    RecyclerView.Adapter<ProductApdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val product_image = itemView.findViewById<ImageView>(R.id.product_Image)
-        val product_name = itemView.findViewById<TextView>(R.id.product_name)
-        val product_abb_name = itemView.findViewById<TextView>(R.id.product_abb_name)
-        val product_price = itemView.findViewById<TextView>(R.id.product_count)
+    RecyclerView.Adapter<ProductApdapter.ViewHolder>()
+{
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
+        fun bind(product: Product)
+        {
+            itemView.findViewById<ImageView>(R.id.product_Image).setImageResource(R.drawable.giay)
+            itemView.findViewById<TextView>(R.id.product_name).text = product.product_name
+            itemView.findViewById<TextView>(R.id.product_abb_name).text = product.product_abb_name
+            itemView.findViewById<TextView>(R.id.product_count).text =
+                product.product_price.toString()
+            itemView.setOnClickListener {}
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+    {
         val context = parent.context
         val li = LayoutInflater.from(context)
         val contactView = li.inflate(R.layout.item_layout, parent, false)
         return ViewHolder(contactView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.product_image.setImageResource(R.drawable.giay)
-        holder.product_name.text = mProducts[position].product_name
-        holder.product_abb_name.text = mProducts[position].product_abb_name
-        holder.product_price.text = mProducts[position].product_price.toString()
+    override fun onBindViewHolder(holder: ViewHolder, position: Int)
+    {
+        holder.bind(mProducts[position])
     }
 
-    override fun getItemCount(): Int {
-        return mProducts.size
-    }
+    override fun getItemCount() = mProducts.size
 }
+

@@ -3,4 +3,12 @@
     <string name="app_name">fresher</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_search">Enter name,SKU code,Serial/IMEI</string>
+    <string name="customer_infor">Customer ID,name,phone number</string>
+    <string name="none">None</string>
+    <string name="split_row">Split row</string>
+    <string name="not_select">Not yet selected item</string>
+    <string name="ship_infor">Shipping information</string>
+    <string name="receiver">Receiver</string>
+    <string name="tel">Tel</string>
 </resources>

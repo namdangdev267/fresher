@@ -22,19 +22,21 @@
             android:weightSum="2">
 
             <RadioButton
+                android:theme="@style/SCBSwitch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Tổ chức"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <RadioButton
+                android:theme="@style/SCBSwitch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cá nhân"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -58,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Đối tác giao hàng"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <TextView
@@ -91,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Loại dịch vụ"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <TextView
@@ -122,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phí giao hàng trả đối tác"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <TextView
@@ -155,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mã vận đơn"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <EditText
@@ -187,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ghi chú giao hàng"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <EditText
@@ -219,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ngày giao hàng"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:textSize="20sp" />
 
             <TextView

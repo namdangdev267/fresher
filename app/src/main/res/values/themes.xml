@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FreshersApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.FreshersApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,16 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
-    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
-        <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">@color/purple_700</item>
-
-        <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">@color/black</item>
-
-        <!-- inactive track color (30% transparency) -->
-        <item name="android:colorForeground">#42221f1f
-        </item>
+        <item name="android:colorControlHighlight">#bfaae4</item>
     </style>
 </resources>

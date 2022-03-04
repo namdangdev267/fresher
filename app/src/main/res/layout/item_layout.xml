@@ -5,6 +5,7 @@
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/linear"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="100dp">
@@ -37,7 +38,7 @@
                 android:id="@+id/product_count"
                 android:textSize="20sp"
                 android:text="0.0"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/violet_dark"
                 android:layout_margin="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
