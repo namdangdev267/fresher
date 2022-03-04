@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FresherMobile">
         <activity
+            android:name=".fragment.calculatorfragment.CalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeliveryActivity"
             android:exported="false" />
         <activity

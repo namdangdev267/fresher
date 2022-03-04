@@ -22,11 +22,14 @@
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1455" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1455" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/activity_calculator.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/activity_delivery.xml" value="0.25" />
-        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_calculate.xml" value="0.25" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_customer_info.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_detail_delivery.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_detail_package.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_display.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/fragment_recipient_info.xml" value="0.22" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_delivery.xml" value="0.33" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_enter_tv.xml" value="0.20416666666666666" />
@@ -39,6 +42,7 @@
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_recipient3.xml" value="0.33" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_recipient_checkbox.xml" value="0.25" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/item_size_delivery_package.xml" value="0.25" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/layout/searchview_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2115" />
       </map>
     </option>

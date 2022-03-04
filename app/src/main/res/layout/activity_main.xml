@@ -22,40 +22,15 @@
             android:backgroundTint="@color/violet_dark"
             android:src="@drawable/ic_baseline_menu_24" />
 
-        <LinearLayout
+        <com.example.freshermobile.SearchView
             android:layout_width="@dimen/dp_260"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/dp_7"
             android:layout_marginStart="@dimen/dp_10"
-            android:background="@drawable/custom_toolbar">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp_5"
-                android:src="@drawable/ic_baseline_search_24" />
-
-            <EditText
-                android:id="@+id/edt_ten_sp"
-                android:layout_width="@dimen/dp_180"
-                android:layout_height="@dimen/dp_30"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp_5"
-                android:background="@color/white"
-                android:ellipsize="end"
-                android:hint="@string/enter_to_search"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="@dimen/sp_18" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dp_35"
-                android:layout_height="@dimen/dp_35"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:src="@drawable/sku_icon" />
-        </LinearLayout>
+            android:background="@drawable/custom_toolbar"
+            app:hint="@string/enter_to_search"
+            app:imageSearch="@drawable/ic_baseline_search_24"
+            app:imageSKU="@drawable/sku_icon"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/button_cart"

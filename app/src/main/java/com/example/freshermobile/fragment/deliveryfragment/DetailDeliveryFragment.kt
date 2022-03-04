@@ -1,4 +1,4 @@
-package com.example.freshermobile.deliveryfragment
+package com.example.freshermobile.fragment.deliveryfragment
 
 import android.os.Build
 import android.os.Bundle
