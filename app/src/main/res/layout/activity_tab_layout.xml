@@ -88,7 +88,7 @@
         android:layout_marginLeft="@dimen/dp_9"
         android:layout_marginRight="@dimen/dp_9"
         android:layout_marginBottom="@dimen/dp_9"
-        android:background="@drawable/bg_round5"
+        android:background="@drawable/bg_round_all"
         android:text="@string/tbnSave"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
