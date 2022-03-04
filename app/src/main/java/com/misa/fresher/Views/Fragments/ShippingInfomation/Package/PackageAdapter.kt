@@ -21,8 +21,8 @@ class PackageAdapter(private val adapterData: MutableList<ItemShip>) :
     class PackageAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindItemTouch(item: ItemShip.ItemTouch) {
             itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
-                item.hintContent
+            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).setText(
+                item.hintContent)
             item.imageResourcce?.let {
                 itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
             }
@@ -30,10 +30,10 @@ class PackageAdapter(private val adapterData: MutableList<ItemShip>) :
         }
 
         private fun bindItem3Col(item: ItemShip.Item3Col) {
-            itemView.findViewById<TextView>(R.id.textview_package_size).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1).hint = item.content1
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2).hint = item.content2
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3).hint = item.content3
+            itemView.findViewById<TextView>(R.id.textview_package_size).text= item.title
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1).setText(item.content1)
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2).setText(item.content2)
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3).setText( item.content3)
         }
 
 
