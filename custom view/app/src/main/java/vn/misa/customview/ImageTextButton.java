@@ -28,11 +28,11 @@ public class ImageTextButton extends LinearLayout {
         setBackgroundResource(R.drawable.bg_btn_image_text);
         setPadding(0, 8, 0, 8);
 
-        LayoutInflater.from(context).inflate(R.layout.btn_image_text, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.btn_image_text, this, true);
 
-        TextView title = findViewById(R.id.title);
+        TextView title = view.findViewById(R.id.title);
         title.setText(titleText);
-        ImageView image = findViewById(R.id.image);
+        ImageView image = view.findViewById(R.id.image);
         image.setImageResource(resourceId);
     }
 }
