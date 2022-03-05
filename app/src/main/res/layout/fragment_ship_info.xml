@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".ShippingBookActivity">
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +12,7 @@
         android:background="@color/violet_dark">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/ship_book_toolbar"
+            android:id="@+id/ship_information_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/violet_dark">
@@ -32,7 +30,7 @@
                     android:gravity="center"
                     android:text="@string/shipping_activity_name"
                     android:textColor="@color/white"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -45,13 +43,14 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/ship_book_tab_layout"
+            android:id="@+id/ship_information_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/bg_btn_round_white"
+            app:tabGravity="fill"
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/violet_dark"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
@@ -60,7 +59,7 @@
 
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/ship_book_view_pager"
+        android:id="@+id/ship_information_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

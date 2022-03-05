@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/radio_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="fill"
+    android:background="@drawable/bg_ship_information_item"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <RadioButton
+        android:id="@+id/radio_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Organization" />
+
+    <RadioButton
+        android:id="@+id/radio_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Personal" />
+
+</RadioGroup>

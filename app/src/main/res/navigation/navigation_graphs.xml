@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graphs"
+    app:startDestination="@id/fragment_sale">
+
+    <fragment
+        android:id="@+id/fragment_sale"
+        android:name="com.misa.fresher.fragment.SaleFragment"
+        android:label="fragment_1"
+        tools:layout="@layout/fragment_sale" >
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_ship_info"
+            app:destination="@id/fragment_ship_info"
+            app:enterAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/slide_wait"
+            app:exitAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpTo="@id/fragment_sale" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_ship_info"
+        android:name="com.misa.fresher.fragment.ShipInfoFragment"
+        android:label="fragment_ship_info"
+        tools:layout="@layout/fragment_ship_info" />
+</navigation>
