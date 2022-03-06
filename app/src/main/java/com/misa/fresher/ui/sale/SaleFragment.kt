@@ -18,9 +18,7 @@ import com.misa.fresher.util.toCurrency
 
 class SaleFragment : Fragment() {
 
-    private var _binding: FragmentSaleBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentSaleBinding.inflate(layoutInflater) }
 
     private var adapter: ProductListAdapter? = null
 
@@ -31,7 +29,7 @@ class SaleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSaleBinding.inflate(inflater, container, false)
+//        binding = FragmentSaleBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -112,11 +110,6 @@ class SaleFragment : Fragment() {
             binding.btnBill.isEnabled = false
             binding.tvInfo.text = "Chưa chọn hàng"
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

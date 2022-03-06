@@ -151,7 +151,7 @@ class ReceiverInputAdapter(
     ) : BaseViewHolder<InputInfo>(itemBinding.root) {
 
         override fun bindData(data: InputInfo) {
-            itemBinding.rbGroup.isChecked = true
+            itemBinding.rbOrganization.isChecked = true
         }
     }
 

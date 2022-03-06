@@ -15,9 +15,7 @@ import com.misa.fresher.util.enum.InputType
 
 class ShipInfoFragment : Fragment() {
 
-    private var _binding: FragmentShipInfoBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentShipInfoBinding.inflate(layoutInflater) }
     private var adapter: ReceiverInputAdapter? = null
 
     override fun onCreateView(
@@ -25,7 +23,6 @@ class ShipInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentShipInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -74,9 +71,4 @@ class ShipInfoFragment : Fragment() {
             ),
             InputInfo("Ngày giao hàng", false, InputType.TAP_ACTION) {},
         )
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

@@ -12,9 +12,7 @@ import com.misa.fresher.model.Product
 
 class BillFragment : Fragment() {
 
-    private var _binding: FragmentBillBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentBillBinding.inflate(layoutInflater) }
 
     private val bill: MutableList<Product> by lazy { arguments?.get("bill") as MutableList<Product> }
 
@@ -23,7 +21,6 @@ class BillFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBillBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,10 +41,5 @@ class BillFragment : Fragment() {
         binding.tbBill.btnNav.setOnClickListener {
             activity?.onBackPressed()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

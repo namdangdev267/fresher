@@ -15,9 +15,7 @@ import com.misa.fresher.util.enum.InputType
 
 class ReceiverInfoFragment : Fragment() {
 
-    private var _binding: FragmentReceiverInfoBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentReceiverInfoBinding.inflate(layoutInflater) }
     private var adapter: ReceiverInputAdapter? = null
 
     override fun onCreateView(
@@ -25,7 +23,6 @@ class ReceiverInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentReceiverInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -101,9 +98,4 @@ class ReceiverInfoFragment : Fragment() {
             ),
             InputInfo("Thu COD", false, InputType.CHECK_BOX),
         )
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

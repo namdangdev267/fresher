@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/between_element"
     android:theme="@style/Theme.FreshersApplication.Switch">
 
     <RadioButton
-        android:id="@+id/rb_group"
+        android:id="@+id/rb_organization"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="@string/group" />
 
     <RadioButton
+        android:id="@+id/rb_personal"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

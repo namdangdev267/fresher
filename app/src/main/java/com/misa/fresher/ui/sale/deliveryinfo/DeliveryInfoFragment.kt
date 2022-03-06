@@ -12,16 +12,14 @@ import com.misa.fresher.ui.sale.adapter.DeliveryInfoAdapter
 
 class DeliveryInfoFragment : Fragment() {
 
-    private var _binding: FragmentDeliveryInfoBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentDeliveryInfoBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDeliveryInfoBinding.inflate(inflater, container, false)
+//        _binding = FragmentDeliveryInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -110,10 +108,5 @@ class DeliveryInfoFragment : Fragment() {
         binding.tbDeliveryInfo.btnNav.setOnClickListener {
             activity?.onBackPressed()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

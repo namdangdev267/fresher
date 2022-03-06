@@ -14,9 +14,7 @@ import com.misa.fresher.util.enum.InputType
 
 class PackageInfoFragment : Fragment() {
 
-    private var _binding: FragmentPackageInfoBinding? = null
-    // Chỉ sử dụng ở giữa onCreateView và onDestroyView
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentPackageInfoBinding.inflate(layoutInflater) }
     private var adapter: ReceiverInputAdapter? = null
 
     override fun onCreateView(
@@ -24,7 +22,6 @@ class PackageInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPackageInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,9 +44,4 @@ class PackageInfoFragment : Fragment() {
             InputInfo("Trọng lượng (g)", false, InputType.TAP_INSERT),
             InputInfo("Kích thước (cm)", false, InputType.PACKAGE_SIZE),
         )
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
