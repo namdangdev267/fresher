@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/search_bar_height"
+    android:background="@drawable/box_round"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/between_element">
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:textColor="@color/black"
+        android:ellipsize="end"
+        android:maxLines="1"
+
+        android:drawableTint="@color/secondary_text_in_white"
+        android:drawablePadding="@dimen/between_element"/>
+
+    <ImageButton
+        android:id="@+id/btn_input"
+        android:layout_width="@dimen/search_bar_height"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        app:tint="@color/secondary_text_in_white" />
+</LinearLayout>
