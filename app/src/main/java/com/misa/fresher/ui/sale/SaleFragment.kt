@@ -1,40 +1,28 @@
 package com.misa.fresher.ui.sale
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
+import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.model.Product
 import com.misa.fresher.ui.sale.adapter.ProductListAdapter
 import com.misa.fresher.util.toCurrency
 
-class SaleFragment : Fragment() {
+class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
-    private val binding by lazy { FragmentSaleBinding.inflate(layoutInflater) }
+    override val getInflater: (inflater: LayoutInflater) -> FragmentSaleBinding =
+        FragmentSaleBinding::inflate
 
     private var adapter: ProductListAdapter? = null
 
     private var bill = mutableListOf<Product>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-//        binding = FragmentSaleBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initUI() {
         updateSelectedItem()
         setupToolbar()
 
@@ -76,7 +64,12 @@ class SaleFragment : Fragment() {
     private fun fakeData(): MutableList<Product> =
         mutableListOf(
             Product("ao", "a01", 1200000.0),
-            Product("ao quanhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", "a01", 120000.0, 500.0),
+            Product(
+                "ao quanhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+                "a01",
+                120000.0,
+                500.0
+            ),
             Product("ao", "a01", 120000.0),
             Product("ao", "a01", 1020.0, 7000.0),
             Product("ao vay", "a01", 120.0),

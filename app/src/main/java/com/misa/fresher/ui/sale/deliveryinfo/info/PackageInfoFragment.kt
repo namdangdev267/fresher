@@ -1,33 +1,21 @@
 package com.misa.fresher.ui.sale.deliveryinfo.info
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.databinding.FragmentPackageInfoBinding
 import com.misa.fresher.model.InputInfo
 import com.misa.fresher.ui.sale.adapter.ReceiverInputAdapter
 import com.misa.fresher.util.enum.InputType
 
-class PackageInfoFragment : Fragment() {
+class PackageInfoFragment : BaseFragment<FragmentPackageInfoBinding>() {
 
-    private val binding by lazy { FragmentPackageInfoBinding.inflate(layoutInflater) }
+    override val getInflater: (inflater: LayoutInflater) -> FragmentPackageInfoBinding =
+        FragmentPackageInfoBinding::inflate
     private var adapter: ReceiverInputAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initUI() {
         adapter = context?.let { ReceiverInputAdapter(fakeData(), it) }
         binding.rcvPackageInput.layoutManager = LinearLayoutManager(context)
         binding.rcvPackageInput.adapter = adapter

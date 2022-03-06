@@ -1,31 +1,20 @@
 package com.misa.fresher.ui.sale.bill
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.misa.fresher.R
+import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.model.Product
 
-class BillFragment : Fragment() {
+class BillFragment : BaseFragment<FragmentBillBinding>() {
 
-    private val binding by lazy { FragmentBillBinding.inflate(layoutInflater) }
+    override val getInflater: (inflater: LayoutInflater) -> FragmentBillBinding =
+        FragmentBillBinding::inflate
 
     private val bill: MutableList<Product> by lazy { arguments?.get("bill") as MutableList<Product> }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initUI() {
         setupToolbar()
 
         binding.tvCount.text = "${bill.size}"
