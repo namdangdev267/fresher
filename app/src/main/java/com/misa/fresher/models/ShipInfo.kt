@@ -9,8 +9,8 @@ sealed class ShipInfo(val type: Enums.ShipInfo) {
         var isRequired: Boolean = false,
         var content: String = "",
         var hint: String = "",
-        var inputType: Int = InputType.TYPE_NULL,
-        var endIcon: Int? = null
+        var inputType: Int = 0,
+        var endIcon: Int = 0
     ) : ShipInfo(Enums.ShipInfo.BASIC)
 
     data class Checkbox(

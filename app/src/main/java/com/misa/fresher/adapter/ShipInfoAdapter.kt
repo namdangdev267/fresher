@@ -69,7 +69,7 @@ class ShipInfoAdapter(
                     content.setText(shipInfo.content)
                     isRequired.text = if (shipInfo.isRequired) "*" else ""
                     content.inputType = shipInfo.inputType
-                    shipInfo.endIcon?.let { endAction.setImageResource(it) }
+                    shipInfo.endIcon.let { endAction.setImageResource(it) }
                 }
             }
         }

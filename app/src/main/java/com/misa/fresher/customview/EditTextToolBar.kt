@@ -5,37 +5,44 @@ import android.content.res.TypedArray
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import com.misa.fresher.R
 
 
-class EditTextToolBar: AppCompatEditText {
-    constructor(context: Context) : super(context, null)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        array = context.obtainStyledAttributes(attrs, R.styleable.EditTextToolBar, 0, 0)
-    }
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        array = context.obtainStyledAttributes(attrs, R.styleable.EditTextToolBar, defStyleAttr, 0)
-    }
+class EditTextToolBar(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
-    private var array : TypedArray? = null
+    private val scale: Float = context.resources.displayMetrics.density
+    private fun dpToPx(dp: Int): Int = (dp * scale + 0.5f).toInt()
+
     var iconStart: Int = R.drawable.ic_search
+        set(value) {
+            field = value
+            setCompoundDrawablesWithIntrinsicBounds(
+                AppCompatResources.getDrawable(context, iconStart), null,
+                AppCompatResources.getDrawable(context, iconEnd), null)
+        }
     var iconEnd: Int = R.drawable.ic_qr_scan
+        set(value) {
+            field = value
+            setCompoundDrawablesWithIntrinsicBounds(
+                AppCompatResources.getDrawable(context, iconStart), null,
+                AppCompatResources.getDrawable(context, iconEnd), null)
+        }
 
     init {
-        array?.apply {
+        context.obtainStyledAttributes(attrs, R.styleable.EditTextToolBar, 0, 0).apply {
             iconStart = getResourceId(R.styleable.EditTextToolBar_startIcon, R.drawable.ic_search)
             iconEnd = getResourceId(R.styleable.EditTextToolBar_startIcon, R.drawable.ic_qr_scan)
-        }
+        }.recycle()
 
         background = AppCompatResources.getDrawable(context, R.drawable.bg_search)
         maxLines = 1
         ellipsize = TextUtils.TruncateAt.END
+        gravity = Gravity.CENTER
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-        setCompoundDrawablesWithIntrinsicBounds(
-            AppCompatResources.getDrawable(context, iconStart), null,
-            AppCompatResources.getDrawable(context, iconEnd), null)
-        compoundDrawablePadding = 10
+        compoundDrawablePadding = dpToPx(4)
     }
 }

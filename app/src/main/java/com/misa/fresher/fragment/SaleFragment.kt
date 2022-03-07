@@ -49,6 +49,9 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(
         binding.priceBtn.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_sale_to_fragment_ship_info)
         }
+        binding.numberBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_sale_to_fragment_calculator)
+        }
         fakeProductData()
     }
 
