@@ -43,6 +43,7 @@
             android:src="@drawable/ic_baseline_shopping_cart_24" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/button_filter"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:layout_gravity="center"

@@ -64,6 +64,7 @@
         android:background="@drawable/custom_tab_layout"
         app:layout_constraintTop_toBottomOf="@id/view_header"
         app:tabGravity="center"
+        app:tabBackground="@drawable/custom_tab"
         app:tabIndicator="@drawable/custom_tab"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorGravity="stretch"

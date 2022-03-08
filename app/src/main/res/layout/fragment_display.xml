@@ -5,20 +5,19 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/gray"
     android:layout_marginVertical="@dimen/dp_15"
     tools:context=".fragment.calculatorfragment.DisplayFragment">
     <TextView
         android:id="@+id/text_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/number_0"
         android:textSize="30sp"/>
     <TextView
         android:id="@+id/text_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/line_split"
+        android:text="@string/number_0"
         android:layout_marginTop="@dimen/dp_5"
         android:gravity="end|center_vertical"
         android:textSize="30sp"/>
