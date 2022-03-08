@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Product
+import com.misa.fresher.Model.Product
 import com.misa.fresher.R
 
 open class ProductAdapter(var productList: List<Product>) :

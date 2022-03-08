@@ -8,12 +8,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.misa.fresher.Fragment.PackageFragment
 import com.misa.fresher.Fragment.ReceiverFragment
@@ -68,6 +66,19 @@ class ViewPagerActivity : AppCompatActivity() {
         })
     }
 
+    fun backToUserFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val receiverFragment = ReceiverFragment.newInstance()
+//        fragmentTransaction.replace(R.id.body_container, receiverFragment)
+        fragmentTransaction.commit()
+    }
+
+    fun replaceFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameCalculate, fragment)
+        transaction.commit()
+    }
+
     private fun setTabDividers() {
         val root: View = tabLayout.getChildAt(0)
         if (root is LinearLayout) {
@@ -83,7 +94,7 @@ class ViewPagerActivity : AppCompatActivity() {
 
 class MyPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager!!) {
-    override fun getCount(): Int {
+        override fun getCount(): Int {
         return 3
     }
 
@@ -110,4 +121,17 @@ class MyPagerAdapter(fragmentManager: FragmentManager) :
         return title
     }
 
+//    private var fragmentList: ArrayList<Fragment> = ArrayList()
+//    private var fragmentTitleList: ArrayList<String> = ArrayList()
+//
+//    override fun getItemCount(): Int = fragmentList.size
+//
+//    override fun createFragment(position: Int): Fragment = fragmentList[position]
+//
+//    fun getFragmentTitle(position: Int): String = fragmentTitleList[position]
+//
+//    fun addFragment(fragment: Fragment, title: String) {
+//        fragmentList.add(fragment)
+//        fragmentTitleList.add(title)
+//    }
 }

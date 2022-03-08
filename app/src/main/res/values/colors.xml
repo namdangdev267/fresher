@@ -15,4 +15,9 @@
     <color name="background_track_custom">#9D93FF</color>
     <color name="background_switch">#D3D6E1</color>
     <color name="SwitchCompat">#919191</color>
+    <color name="background_calculate">#E3E3E3</color>
+    <color name="violetLight">#766ff8</color>
+    <color name="orange">#FF8c00</color>
+    <color name="light_purple">#EEEDF5</color>
+
 </resources>

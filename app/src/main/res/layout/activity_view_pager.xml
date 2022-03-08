@@ -69,8 +69,24 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpPager"
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"/>
+
+    <FrameLayout
+        android:id="@+id/frameReceive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/frameCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>
