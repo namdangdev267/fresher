@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import com.misa.fresher.Activity.MainActivity
 import com.misa.fresher.Adapter.ProductAdapter
+import com.misa.fresher.Model.Product
 
 class BanHangFragment : Fragment() {
 

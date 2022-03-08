@@ -1,9 +1,11 @@
 package com.misa.fresher.Fragment
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import com.misa.fresher.Adapter.ReceiverAdapter
 import com.misa.fresher.InputShip.InputReceiver
 import com.misa.fresher.InputShip.InputType
 import com.misa.fresher.R
+import com.misa.fresher.ViewPagerActivity
 import com.misa.fresher.databinding.FragmentReceiverBinding
 
 class ReceiverFragment : Fragment() {
@@ -18,6 +21,8 @@ class ReceiverFragment : Fragment() {
     private var title: String? = null
     private var page = 0
     private var adapter: ReceiverAdapter?= null
+    var viewPagerActivity: ViewPagerActivity? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,8 @@ class ReceiverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewPagerActivity = activity as ViewPagerActivity?
+
         adapter = context?.let { ReceiverAdapter(createData(), it) }
         binding!!.rcvReceive.layoutManager = LinearLayoutManager(context)
         binding!!.rcvReceive.adapter = adapter
@@ -46,6 +53,13 @@ class ReceiverFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+
+        binding!!.relativeBtnSave.setOnClickListener(View.OnClickListener {
+            Toast.makeText(activity, "Cong", Toast.LENGTH_LONG).show()
+            viewPagerActivity?.replaceFragment(CalculatorFragment())
+//            openCalculateFragment()
+        })
+
     }
 
     fun createData(): Array<InputReceiver> {
@@ -117,11 +131,18 @@ class ReceiverFragment : Fragment() {
 
 
     companion object {
-        fun newInstance(page: Int, title: String): ReceiverFragment {
+//        fun newInstance(page: Int, title: String): ReceiverFragment {
+//            val fragmentReceiver = ReceiverFragment()
+//            val args = Bundle()
+//            args.putInt("receiverPage", page)
+//            args.putString("receiverTitle", title)
+//            fragmentReceiver.arguments = args
+//            return fragmentReceiver
+//        }
+
+        fun newInstance(): ReceiverFragment {
             val fragmentReceiver = ReceiverFragment()
             val args = Bundle()
-            args.putInt("receiverPage", page)
-            args.putString("receiverTitle", title)
             fragmentReceiver.arguments = args
             return fragmentReceiver
         }

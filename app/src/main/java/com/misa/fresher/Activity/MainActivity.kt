@@ -1,4 +1,4 @@
-package com.misa.fresher
+package com.misa.fresher.Activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +9,9 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
+import com.misa.fresher.BanHangFragment
+import com.misa.fresher.R
+import com.misa.fresher.SoGiaoHangFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 

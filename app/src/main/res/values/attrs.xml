@@ -5,4 +5,10 @@
         <attr name="imageStart" format="reference"/>
         <attr name="imageEnd" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="BtnCalculatorKey">
+        <attr name="value" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="isActive" format="boolean" />
+    </declare-styleable>
 </resources>

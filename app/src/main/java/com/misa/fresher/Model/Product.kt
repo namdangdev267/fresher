@@ -1,4 +1,6 @@
-package com.misa.fresher
+package com.misa.fresher.Model
+
+import com.misa.fresher.R
 
 class Product(
     val imgProduct: Int,
