@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/violet_dark"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-            <com.misa.fresher.CustomToolbar
+            <com.misa.fresher.custom.CustomToolbar
                 app:imgSerch="@drawable/ic_baseline_search_24"
                 app:searchHint="@string/hint_search"
                 app:imgBarcode="@drawable/ic_baseline_qr_code_scanner_24"
