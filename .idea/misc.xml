@@ -3,54 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bd_item_recyclerview.xml" value="0.37864583333333335" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_circle_light.xml" value="0.228125" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_gradient.xml" value="0.37864583333333335" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_recyclerview.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout.xml" value="0.26205128205128203" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_left.xml" value="0.19947916666666668" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_middle.xml" value="0.19947916666666668" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_right.xml" value="0.19947916666666668" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_white.xml" value="0.2203125" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_keyboard_calculator.xml" value="1.121875" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all.xml" value="0.37864583333333335" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left.xml" value="0.15989583333333332" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left_light.xml" value="0.22870370370370371" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_right.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_right_light.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_tablayout.xml" value="0.171875" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_arrow_left_24.xml" value="0.37864583333333335" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.37864583333333335" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_calendar.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_filter_24.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.26614583333333336" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_circle.xml" value="0.2640625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_item.xml" value="0.1625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle.xml" value="0.2640625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/bg_item_tablayout_select.xml" value="0.234375" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_calculator.xml" value="0.2" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_keyboard_calculator.xml" value="0.215625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_package.xml" value="0.3625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_receiver.xml" value="0.22" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.2" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_ship.xml" value="0.2947916666666667" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_shipping_information.xml" value="0.22" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_show.xml" value="0.209375" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_sale.xml" value="0.25" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship.xml" value="0.3625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_3col.xml" value="0.25" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_calculator.xml" value="0.25" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_check.xml" value="0.3625" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_multicontent.xml" value="0.33" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_multitype.xml" value="0.3421875" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_radiobutton.xml" value="0.25729166666666664" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_touch.xml" value="0.25" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/search_view.xml" value="0.12364130434782608" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_board_calculator.xml" value="0.1" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_calculator.xml" value="0.19375" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_package.xml" value="0.234375" />
       </map>
     </option>
   </component>
