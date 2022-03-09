@@ -24,5 +24,5 @@
     <string name="temporary_save">Lưu tạm</string>
     <string name="delete_bill">Xóa đơn</string>
     <string name="delete_delivery_info">Xóa thông tin giao hàng</string>
-<!--    <string name="test">Test</string>-->
+    <!--    <string name="test">Test</string>-->
 </resources>

@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_delivery_info"/>
     <!--    <fragment-->
 <!--        android:id="@+id/test_fragment"-->
-<!--        android:name="com.misa.fresher.ui.test.TestFragment"-->
+<!--        android:name="com.misa.fresher.test.TestFragment"-->
 <!--        android:label=""-->
 <!--        tools:layout="@layout/layout_test_scroll"/>-->
 </navigation>

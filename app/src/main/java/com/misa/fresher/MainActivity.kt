@@ -1,22 +1,17 @@
 package com.misa.fresher
 
-import android.os.Bundle
+import android.os.*
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.forEach
-import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.databinding.ActivityMainBinding
-import com.misa.fresher.model.DrawerItem
-import com.misa.fresher.ui.adapter.DrawerAdapter
-import com.misa.fresher.util.getColorById
+import com.misa.fresher.test.TestCoroutine
+import com.misa.fresher.util.toCurrency
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,6 +52,15 @@ class MainActivity : AppCompatActivity() {
 //        binding.navView.itemTextColor = resources.getColorById(R.color.red)
 //        binding.navView.
         binding.navView.setItemTextAppearance(R.style.Theme_FreshersApplication_Nav_TextItem)
+
+
+        // example thread
+//        countNumber()
+        // example async task
+//        CountTask().execute(13)
+        TestCoroutine().run()
+        val a = 5.0
+        a.toCurrency()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -65,6 +69,36 @@ class MainActivity : AppCompatActivity() {
         return appBarConfiguration?.let {
             navController.navigateUp(it)
         } == true || super.onSupportNavigateUp()
+    }
+
+    private fun countNumber() {
+        val handler = Handler(Looper.getMainLooper()) { msg ->
+            when (msg.what) {
+                0 -> {
+                    Log.e("count", "${msg.arg1}")
+                    true
+                }
+                1 -> {
+                    Log.e("Done", "")
+                    true
+                }
+                else -> false
+            }
+        }
+
+        Thread {
+            for (i in 0..10) {
+                handler.sendMessage(Message().also {
+                    it.what = 0
+                    it.arg1 = i
+                })
+
+                Thread.sleep(1000)
+            }
+            handler.sendMessage(Message().also {
+                it.what = 1
+            })
+        }.start()
     }
 
     fun openDrawer() {
@@ -96,4 +130,27 @@ class MainActivity : AppCompatActivity() {
 //        super.onDestroy()
 //        _binding = null
 //    }
+
+    class CountTask: AsyncTask<Int, Int, String>() {
+        override fun doInBackground(vararg p0: Int?): String {
+            p0[0]?.let {
+                for (i in 0..it) {
+                    publishProgress(i)
+
+                    Thread.sleep(1000)
+                }
+            }
+            return ""
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            Log.e("Done", "")
+        }
+
+        override fun onProgressUpdate(vararg values: Int?) {
+            super.onProgressUpdate(*values)
+            Log.e("count", "${values[0]}")
+        }
+    }
 }

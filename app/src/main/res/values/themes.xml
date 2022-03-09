@@ -40,6 +40,11 @@
         <item name="android:textColor">@color/primary_text_in_white</item>
     </style>
 
+    <style name="Theme.FreshersApplication.Nav.TextItem" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/primary_text_in_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="Theme.FreshersApplication.TabText" parent="Theme.FreshersApplication">
         <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
