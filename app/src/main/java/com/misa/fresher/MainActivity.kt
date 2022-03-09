@@ -13,4 +13,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    fun setUpViews() {}
+
 }
