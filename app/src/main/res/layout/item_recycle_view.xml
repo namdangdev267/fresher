@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="?attr/selectableItemBackground">
+    android:background="@drawable/item_selected_rcv"
+    android:clickable="true"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/imgProduct"
