@@ -4,32 +4,42 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.2109375" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_btn_divide.xml" value="0.1525" />
+        <entry key="app/src/main/res/drawable/bg_btn_round_border_violet.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/bg_btn_round_left.xml" value="0.192" />
         <entry key="app/src/main/res/drawable/bg_btn_round_light.xml" value="0.142" />
         <entry key="app/src/main/res/drawable/bg_btn_round_right.xml" value="0.192" />
         <entry key="app/src/main/res/drawable/bg_btn_round_violet.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/bg_btn_round_white.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/bg_calculator_key.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/bg_calculator_key_active.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_circle.xml" value="0.154" />
         <entry key="app/src/main/res/drawable/bg_circle_active.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/bg_item.xml" value="0.258" />
         <entry key="app/src/main/res/drawable/bg_keyboard_btn.xml" value="0.3465" />
         <entry key="app/src/main/res/drawable/bg_product_item.xml" value="0.207" />
+        <entry key="app/src/main/res/drawable/bg_round_transparent.xml" value="0.258" />
         <entry key="app/src/main/res/drawable/bg_search.xml" value="0.1425" />
         <entry key="app/src/main/res/drawable/bg_ship_information_item.xml" value="0.258" />
         <entry key="app/src/main/res/drawable/bg_support_drawer.xml" value="0.251" />
         <entry key="app/src/main/res/drawable/bg_tab_selected.xml" value="0.207" />
+        <entry key="app/src/main/res/drawable/bg_tab_selected_middle.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_tab_selected_round_left.xml" value="0.117" />
         <entry key="app/src/main/res/drawable/bg_tab_selected_round_right.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/bg_white_round_border.xml" value="0.3465" />
         <entry key="app/src/main/res/drawable/ic_arrow_forward_black.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1425" />
         <entry key="app/src/main/res/drawable/ic_delete_white.xml" value="0.207" />
+        <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_nav.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.154" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.21" />
         <entry key="app/src/main/res/layout-v23/activity_main.xml" value="0.39010416666666664" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20533333333333334" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/layout/activity_shipping.xml" value="0.3463541666666667" />
         <entry key="app/src/main/res/layout/activity_shipping_book.xml" value="0.25" />
@@ -48,14 +58,17 @@
         <entry key="app/src/main/res/layout/fragment_calculator2.xml" value="0.3202223172295853" />
         <entry key="app/src/main/res/layout/fragment_calculator_keyboard.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_calculator_screen.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.18683197947840957" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22760416666666666" />
+        <entry key="app/src/main/res/layout/fragment_host.xml" value="0.28430953398888414" />
         <entry key="app/src/main/res/layout/fragment_package.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_receiver.xml" value="0.3463541666666667" />
-        <entry key="app/src/main/res/layout/fragment_sale.xml" value="0.28430953398888414" />
+        <entry key="app/src/main/res/layout/fragment_sale.xml" value="0.3202223172295853" />
         <entry key="app/src/main/res/layout/fragment_ship.xml" value="0.3463541666666667" />
         <entry key="app/src/main/res/layout/fragment_ship_info.xml" value="0.31616715913887716" />
         <entry key="app/src/main/res/layout/fragment_ship_info_receiver.xml" value="0.15091919623770841" />
+        <entry key="app/src/main/res/layout/fragment_ship_info_ship.xml" value="0.18683197947840957" />
         <entry key="app/src/main/res/layout/fragment_shipping.xml" value="0.28430953398888414" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/layout/item_calculator_key.xml" value="0.28430953398888414" />

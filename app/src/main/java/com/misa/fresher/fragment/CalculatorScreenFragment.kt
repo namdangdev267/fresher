@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
-import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentCalculatorScreenBinding
 

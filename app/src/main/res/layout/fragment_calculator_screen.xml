@@ -13,7 +13,7 @@
         android:text="@string/calculator_title"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:background="@color/violet_dark"
+        android:background="@color/purpleDark"
         android:padding="10dp"
         app:drawableEndCompat="@drawable/ic_close_white"
         android:clickable="true"

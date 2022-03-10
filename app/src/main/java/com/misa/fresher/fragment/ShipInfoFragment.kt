@@ -2,13 +2,9 @@ package com.misa.fresher.fragment
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
@@ -41,10 +37,10 @@ class ShipInfoFragment : BaseFragment<FragmentShipInfoBinding>(
 
         (activity as AppCompatActivity).apply {
             setSupportActionBar(toolbar)
-            supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(true)
-                setHomeAsUpIndicator(R.drawable.ic_arrow_back)
-            }
+//            supportActionBar?.apply {
+//                setDisplayHomeAsUpEnabled(true)
+//                setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+//            }
         }
 
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
@@ -168,7 +164,7 @@ class ShipInfoFragment : BaseFragment<FragmentShipInfoBinding>(
                 "0,0",
                 "",
                 InputType.TYPE_NULL,
-                R.drawable.ic_calculate_violet_dark
+                R.drawable.ic_calculate_purple_dark
             )
 
             val depositMethood = ShipInfo.Basic(
@@ -253,7 +249,7 @@ class ShipInfoFragment : BaseFragment<FragmentShipInfoBinding>(
                 "0,0",
                 "",
                 InputType.TYPE_NULL,
-                R.drawable.ic_calculate_violet_dark
+                R.drawable.ic_calculate_purple_dark
             )
             val trackingNo = ShipInfo.Basic(
                 "Tracking No.",

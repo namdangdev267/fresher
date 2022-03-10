@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:background="@color/grey_light"
+    android:background="@color/greyLight"
     android:paddingLeft="48dp"
     android:paddingRight="48dp"
     android:gravity="center">

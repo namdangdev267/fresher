@@ -1,6 +1,7 @@
 package com.misa.fresher.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
@@ -11,9 +12,12 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(
 ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.calculator_screen, CalculatorScreenFragment())
-            .replace(R.id.calculator_keyboard, CalculatorKeyFragment())
-            .commit()
+        view.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .add(R.id.calculator_screen, CalculatorScreenFragment())
+                .add(R.id.calculator_keyboard, CalculatorKeyFragment())
+                .commit()
+        }
     }
+
 }

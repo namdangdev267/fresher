@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="small">10sp</dimen>
-    <dimen name="medium">12sp</dimen>
-    <dimen name="large">14sp</dimen>
+    <dimen name="txt_small">13sp</dimen>
+    <dimen name="txt_medium">14sp</dimen>
+    <dimen name="txt_large">16sp</dimen>
+
+    <dimen name="pad_tiny">4dp</dimen>
+    <dimen name="pad_small">6dp</dimen>
+    <dimen name="pad_medium">8dp</dimen>
+    <dimen name="pad_large">10dp</dimen>
+    <dimen name="pad_extra">12dp</dimen>
+
+    <dimen name="bar_size">50dp</dimen>
 </resources>
