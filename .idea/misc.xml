@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_board_calculator.xml" value="0.1" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_calculator.xml" value="0.19375" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_package.xml" value="0.234375" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.21240942028985507" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_sale.xml" value="0.19972826086956522" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_3col.xml" value="0.21240942028985507" />
       </map>
     </option>
   </component>

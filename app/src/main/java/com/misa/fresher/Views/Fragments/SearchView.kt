@@ -4,15 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.get
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import com.misa.fresher.R
 
 class SearchView: LinearLayout {
     constructor(context: Context) : super(context)
+
+    lateinit var hint:EditText
+
     @SuppressLint("ResourceAsColor")
     constructor(context: Context, attrs:AttributeSet): super(context,attrs)
     {
@@ -30,8 +37,7 @@ class SearchView: LinearLayout {
 
         LayoutInflater.from(context).inflate(R.layout.search_view,this,true)
 
-
-        var hint = findViewById<EditText>(R.id.edittext_search_hint)
+        hint = findViewById<EditText>(R.id.edittext_search_hint)
         hint.hint =  title
 
         var search_icon1:ImageView = findViewById(R.id.imageview_search_icon1)
@@ -45,5 +51,11 @@ class SearchView: LinearLayout {
 
     }
 
+    fun setEditTextClick(listener: (string:String)->Unit)
+    {
+        hint.doAfterTextChanged {
+            listener(hint.text.toString())
+        }
+    }
 
 }

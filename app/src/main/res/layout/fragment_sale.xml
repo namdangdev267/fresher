@@ -16,13 +16,13 @@
         >
 
         <com.misa.fresher.Views.Fragments.SearchView
+            android:id="@+id/search_view_sale"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="@string/search_view"
             app:icon1="@drawable/ic_menu_24"
             app:icon2="@drawable/ic_shopping_cart"
             app:icon3="@drawable/ic_filter_24"
-
             />
 
 
