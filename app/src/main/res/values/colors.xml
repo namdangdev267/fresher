@@ -4,14 +4,16 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_600">#2B3385</color>
     <color name="purple_700">#2b3173</color>
-    <color name="purple_800">#2A2F5A</color>
+    <color name="purple_800">#272B4E</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#F3ECEC</color>
-    <color name="rvc_edge">#A5A0A0</color>
+    <color name="switchSale">#eeedf3</color>
+    <color name="rcv_boder">#DCDBDB</color>
     <color name="rcv_effect">#BFAAE4</color>
     <color name="gray">#B9BEC1</color>
     <color name="red">#E91E63</color>
+    <color name="lightGray">#c0c0c9</color>
 </resources>

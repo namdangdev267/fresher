@@ -3,8 +3,9 @@ package com.misa.fresher.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.misa.fresher.fragments.ShipInforFragment
 
-class ViewPager2Adapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+class ViewPager2Adapter(fragment: ShipInforFragment) : FragmentStateAdapter(fragment) {
     private val mFragmentList = ArrayList<Fragment>()
 
     private val mFragmentTittle = ArrayList<String>()

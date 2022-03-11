@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.SaleFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablSale"
+        android:layout_width="match_parent"
+        android:background="@color/purple_700"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbSale"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple_700"
+            android:theme="@style/ToolbarStyle">
+            <com.misa.fresher.customViews.CustomToolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:btnCartSrc="@drawable/ic_cart"
+                app:btnFilterSrc="@drawable/ic_filter"
+                app:btnQrCodeBg="@drawable/bg_round_right"
+                app:btnQrCodeSrc="@drawable/ic_qr"
+                app:edSearchBg="@color/white"
+                app:edSearchHint="@string/search_hint"
+                app:ivSearchSrc="@drawable/ic_search"
+                app:ivSearchSrcBg="@drawable/bg_roud_left"
+                app:menuBtnSrc="@drawable/ic_baseline_menu_24" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/context_sale" />
+</LinearLayout>

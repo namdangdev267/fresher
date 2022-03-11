@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/purple_700">
-
-    <ImageButton
-        android:id="@+id/btnMenu"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1.5"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/app_name" />
+    android:layout_height="@dimen/dp_50"
+    android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/ivSearch"
@@ -18,6 +10,7 @@
         android:layout_height="@dimen/dp_48"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/app_name" />
 
     <EditText
@@ -25,16 +18,18 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
         android:layout_gravity="center_vertical"
-        android:layout_weight="3"
+        android:layout_weight="5"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray" />
 
     <ImageButton
         android:id="@+id/btnQrCode"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:contentDescription="@string/app_name" />
 
     <ImageButton
@@ -42,14 +37,14 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:background="@drawable/ripple_button_effect"
         android:contentDescription="@string/app_name" />
 
     <ImageButton
         android:id="@+id/btnFilter"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="match_parent"
         android:layout_weight="1.5"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:background="@drawable/ripple_button_effect"
         android:contentDescription="@string/app_name" />
 </LinearLayout>

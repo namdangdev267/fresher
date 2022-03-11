@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llContactCalender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivContact"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_person" />
+
+        <TextView
+            android:id="@+id/tvContact"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/contact_hint"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/ivCalender"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_calender" />
+
+        <TextView
+            android:id="@+id/tvCalender"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_48"
+            android:layout_weight="2.5"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_24"
+            android:text="@string/calender_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTachDong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
+        android:orientation="horizontal"
+        android:weightSum="12"
+        app:layout_constraintTop_toBottomOf="@+id/llContactCalender">
+
+        <Switch
+            android:id="@+id/swTachDong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:theme="@style/SCBSwitch" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_weight="6"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_24"
+            android:text="@string/switch_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListProduct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/llBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTachDong"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_4"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:background="@drawable/oval_button_base"
+            android:contentDescription="@string/app_name"
+            android:rotation="90"
+            android:src="@drawable/ic_loop1" />
+
+        <Button
+            android:id="@+id/btnItemCount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_9"
+            android:layout_weight="1.5"
+            android:background="@drawable/item_amount_bg_base"
+            android:text="@string/total_items"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"/>
+
+        <Button
+            android:id="@+id/btnTotalPrice"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="7"
+            android:background="@drawable/total_price_base"
+            android:text="@string/total_price"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
