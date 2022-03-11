@@ -61,7 +61,7 @@
         <LinearLayout
             android:id="@+id/ll_split_row"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/basic_line_height"
             android:background="@color/odd_line"
             android:gravity="center_vertical"
 
@@ -71,6 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/between_element"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
                 android:theme="@style/Theme.FreshersApplication.Switch" />
 
             <TextView
@@ -87,7 +89,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
-            android:id="@+id/ll_bill"
+            android:id="@+id/ll_cart"
             android:layout_width="match_parent"
             android:layout_height="@dimen/high_line_height"
             android:orientation="horizontal"
@@ -103,10 +105,10 @@
                 android:padding="@dimen/icon_padding"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_refresh"
-                android:tint="@color/white" />
+                android:tint="@drawable/selector_button_text_color" />
 
             <LinearLayout
-                android:id="@+id/btn_bill"
+                android:id="@+id/btn_cart"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/between_element"
@@ -121,7 +123,7 @@
                     android:layout_width="@dimen/basic_line_height"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
+                    android:textColor="@drawable/selector_button_text_color"
                     android:textSize="@dimen/font_size_big"
                     tools:text="@tools:sample/us_zipcodes" />
 
@@ -136,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
+                    android:textColor="@drawable/selector_button_text_color"
                     android:textSize="@dimen/font_size_big"
                     tools:text="@tools:sample/lorem" />
             </LinearLayout>

@@ -6,11 +6,12 @@ package com.misa.fresher.data.entity
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/9/2022: Tạo class
+ * @updated 3/12/2022: Kế thừa từ lớp [com.misa.fresher.data.entity.ProductType]
  */
 data class ProductColor(
-    val id: Long,
-    val name: String,
+    override val id: Long,
+    override val name: String,
     val code: String,
-)
+) : ProductType(id, name)

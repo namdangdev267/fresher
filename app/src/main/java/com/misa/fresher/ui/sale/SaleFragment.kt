@@ -2,21 +2,20 @@ package com.misa.fresher.ui.sale
 
 import android.graphics.Color
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.core.BaseFragment
-import com.misa.fresher.data.entity.ProductItem
+import com.misa.fresher.data.model.CartItem
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
 import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.getDrawableById
+import com.misa.fresher.util.toCurrency
 
 /**
  * Màn hình bán hàng
@@ -24,8 +23,9 @@ import com.misa.fresher.util.getDrawableById
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/9/2022: Tạo class
+ * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
  */
 class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
@@ -33,32 +33,69 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         get() = FragmentSaleBinding::inflate
 
     private var productAdapter: ProductAdapter? = null
+    private var selectedItems = mutableListOf<CartItem>()
 
     override fun initUI() {
         configToolbar()
         configFilterDrawer()
         configProductRcv()
-        configCustomerSelect()
+        configOtherView()
 
         initProductList()
+        updateSelectedItem()
     }
 
     /**
-     * Cài đặt chức năng chọn khách hàng, sử dụng dữ liệu giả không đúng với thực tế
+     * Cập nhật các sản phẩm đã chọn lên giao diện
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/11/2022
+     *
+     * @version 1
+     * @updated 3/11/2022: Tạo function
+     */
+    private fun updateSelectedItem() {
+        if (selectedItems.isEmpty()) {
+            binding.btnRefresh.isEnabled = false
+            binding.btnCart.isEnabled = false
+            binding.tvCount.isEnabled = false
+            binding.tvInfo.isEnabled = false
+            binding.tvCount.text = "0"
+            binding.tvInfo.text = getString(R.string.no_item_selected)
+        } else {
+            binding.btnRefresh.isEnabled = true
+            binding.btnCart.isEnabled = true
+            binding.tvCount.isEnabled = true
+            binding.tvInfo.isEnabled = true
+
+            val total = selectedItems.sumOf { it.item.price * it.quantity }
+            binding.tvCount.text = "${selectedItems.size}"
+            binding.tvInfo.text = total.toCurrency()
+        }
+
+    }
+
+    /**
+     * Cài đặt các nút và view phụ khác
      *
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: Đổi từ chỉ "config nút chọn khách hàng" thành "config các view phụ khác"
      */
-    private fun configCustomerSelect() {
+    private fun configOtherView() {
         binding.tvCustomer.setOnClickListener {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
             binding.tvCustomer.text = FakeData.customers[FakeData.rd.nextInt(FakeData.customers.size)]
             binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
+        }
+        binding.btnRefresh.setOnClickListener {
+            selectedItems.clear()
+            updateSelectedItem()
         }
     }
 
@@ -81,12 +118,18 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: Cập nhật vào giỏ hàng khi lựa chọn xong hàng muốn mua
      */
     private fun configProductRcv() {
         productAdapter = ProductAdapter(mutableListOf(), requireContext()) { item, quantity ->
-            Log.d("selected", "${item.toString()}, so luong: $quantity")
+            selectedItems.find { it.item == item }?.let {
+                it.quantity += quantity
+            } ?: run {
+                selectedItems.add(CartItem(item, quantity))
+            }
+            updateSelectedItem()
         }
         binding.rcvProduct.layoutManager = LinearLayoutManager(context)
         binding.rcvProduct.adapter = productAdapter

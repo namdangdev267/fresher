@@ -3,7 +3,6 @@ package com.misa.fresher.ui.sale.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import com.misa.fresher.core.BaseRecyclerAdapter
 import com.misa.fresher.data.entity.Product
 import com.misa.fresher.data.entity.ProductItem
@@ -23,8 +22,7 @@ class ProductAdapter(
     items: MutableList<Product>,
     private val context: Context,
     private val onProductItemSelectedListener: (item: ProductItem, quantity: Int) -> Unit
-) :
-    BaseRecyclerAdapter<Product, ProductViewHolder>(items) {
+) : BaseRecyclerAdapter<Product, ProductViewHolder>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder =
         ProductViewHolder(

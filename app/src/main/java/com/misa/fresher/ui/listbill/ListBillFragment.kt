@@ -13,7 +13,7 @@ import com.misa.fresher.databinding.FragmentListBillBinding
  * @version 1
  * @updated 3/9/2022: Tạo class
  */
-class ListBillFragment: BaseFragment<FragmentListBillBinding>() {
+class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
 
     override val getInflater: (LayoutInflater) -> FragmentListBillBinding
         get() = FragmentListBillBinding::inflate

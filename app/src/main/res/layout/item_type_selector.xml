@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_checkbox_round"
+    android:button="@color/transparent"
+    android:gravity="center"
+    android:minWidth="@dimen/basic_line_height"
+    android:minHeight="@dimen/basic_line_height"
+    android:padding="@dimen/between_element"
+    android:textColor="@drawable/selector_checkbox_text_color"
+    tools:text="@tools:sample/lorem"
+    android:layout_marginEnd="@dimen/between_element"/>

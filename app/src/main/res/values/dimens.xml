@@ -8,8 +8,11 @@
     <dimen name="circle_round_corner">1000dp</dimen>
     <dimen name="between_element_half">4dp</dimen>
     <dimen name="high_line_height">56dp</dimen>
-    <dimen name="font_size_big">20sp</dimen>
     <dimen name="icon_padding">12dp</dimen>
-    <dimen name="font_size_med">16sp</dimen>
     <dimen name="product_image_size">56dp</dimen>
+    <dimen name="between_element_narrow">2dp</dimen>
+
+    <dimen name="font_size_med">16sp</dimen>
+    <dimen name="font_size_big">20sp</dimen>
+    <dimen name="small_img_button_size">40dp</dimen>
 </resources>

@@ -9,4 +9,9 @@
     <string name="not_selected">Không chọn</string>
     <string name="split_row">Tách dòng</string>
     <string name="sample_description">Sample description</string>
+    <string name="color">Màu sắc</string>
+    <string name="size">Kích thước</string>
+    <string name="unit">Đơn vị</string>
+    <string name="quantity_must_be_bigger_than_0">Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại.</string>
+    <string name="no_item_selected">Chưa chọn hàng</string>
 </resources>

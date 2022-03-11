@@ -3,7 +3,6 @@ package com.misa.fresher.util
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.os.Build
 import androidx.core.content.res.ResourcesCompat
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -49,4 +48,34 @@ fun Double.toCurrency(): String {
  */
 fun Resources.getColorById(colorId: Int): ColorStateList? {
     return ResourcesCompat.getColorStateList(this, colorId, null)
+}
+
+/**
+ * Tương tự ?.let nhưng hoạt động với 2 biến
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/11/2022
+ *
+ * @version 1
+ * @updated 3/11/2022: Tạo function
+ */
+fun guard(variable1: Any?, variable2: Any?, function: (Any, Any) -> Unit) {
+    if (variable1 != null && variable2 != null) {
+        function(variable1, variable2)
+    }
+}
+
+/**
+ * Tương tự ?.let nhưng hoạt động với 3 biến
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/11/2022
+ *
+ * @version 1
+ * @updated 3/11/2022: Tạo function
+ */
+fun guard(variable1: Any?, variable2: Any?, variable3: Any?, function: (Any, Any, Any) -> Unit) {
+    if (variable1 != null && variable2 != null && variable3 != null) {
+        function(variable1, variable2, variable3)
+    }
 }

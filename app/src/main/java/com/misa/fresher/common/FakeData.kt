@@ -9,8 +9,9 @@ import java.util.*
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/10/2022: Tạo class
+ * @updated 3/12/2022: Bổ sung một số sản phẩm giả
  */
 object FakeData {
 
@@ -80,16 +81,22 @@ object FakeData {
         )),
         Product(4L, "Áo liền quần", "ALQ", category[0], listOf(
             ProductItem(18L, colors[8], sizes[2], units[0], 170000.0, 100, generateTime()),
+            ProductItem(28L, colors[4], sizes[2], units[0], 250000.0, 100, generateTime()),
+            ProductItem(29L, colors[8], sizes[2], units[2], 250000.0, 100, generateTime()),
             ProductItem(19L, colors[4], sizes[2], units[2], 250000.0, 100, generateTime()),
         )),
         Product(5L, "Váy 2 ống", "VHO", category[0], listOf(
             ProductItem(20L, colors[2], sizes[2], units[0], 450000.0, 23, generateTime()),
+            ProductItem(30L, colors[3], sizes[2], units[0], 470000.0, 0, generateTime()),
+            ProductItem(31L, colors[4], sizes[2], units[0], 215000.0, 47, generateTime()),
             ProductItem(21L, colors[3], sizes[2], units[1], 470000.0, 0, generateTime()),
             ProductItem(22L, colors[4], sizes[2], units[1], 215000.0, 47, generateTime()),
             ProductItem(23L, colors[2], sizes[2], units[1], 570000.0, 11, generateTime()),
         )),
         Product(6L, "Nón đeo tay", "NDT", category[0], listOf(
             ProductItem(24L, colors[7], sizes[1], units[0], 960000.0, 120, generateTime()),
+            ProductItem(32L, colors[3], sizes[1], units[0], 1200000.0, 20, generateTime()),
+            ProductItem(33L, colors[7], sizes[3], units[0], 1200000.0, 20, generateTime()),
             ProductItem(25L, colors[3], sizes[3], units[0], 1200000.0, 20, generateTime()),
         )),
         Product(7L, "Điện thoại mạ kim cương", "DTMKC", category[0], listOf(
@@ -103,6 +110,10 @@ object FakeData {
         "Hoàng Thanh Long (015444523)",
         "Nguyễn Thái Bảo (0932653132)",
         "Lưu Thành Đạt (03266564)",
+        "Nguyễn Cảnh Phúc (09273127632)",
+        "Trương Trung Kiên (0812737123)",
+        "Hoàng Đức Minh (01217632487263)",
+        "Hoàng Gia Long (08374172364)",
     )
 
     /**

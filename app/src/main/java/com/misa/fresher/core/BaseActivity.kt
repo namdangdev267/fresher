@@ -33,7 +33,7 @@ abstract class BaseActivity<BD: ViewBinding>: AppCompatActivity() {
      * @author Nguyễn Công Chính
      * @since 3/9/2022
      *
-     * @version 1.0.0
+     * @version 1
      * @updated 3/9/2022: Tạo function
      */
     open fun initUI() {}
