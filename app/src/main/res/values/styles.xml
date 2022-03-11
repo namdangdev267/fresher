@@ -47,7 +47,10 @@
         <item name="tabMode">fixed</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:background">@drawable/bg_tablayout</item>
-
     </style>
+
+
+
+
 
 </resources>

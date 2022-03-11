@@ -43,7 +43,7 @@
             android:layout_marginBottom="@dimen/dp_8"
             android:layout_weight="9"
             android:background="@color/white"
-            android:textColor="#8C8C8C"
+            android:textColor="#000000"
             android:paddingTop="@dimen/dp_3"
             android:paddingBottom="@dimen/dp_3"
             android:textSize="@dimen/dp_15" />

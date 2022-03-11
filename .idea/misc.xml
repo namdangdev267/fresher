@@ -3,13 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_left.xml" value="0.26614583333333336" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all.xml" value="0.26614583333333336" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_add_circle.xml" value="0.26614583333333336" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_circle.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle.xml" value="0.37864583333333335" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/bottom_sheet_itemsale.xml" value="0.264" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_board_calculator.xml" value="0.1" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_calculator.xml" value="0.19375" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_package.xml" value="0.234375" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.21240942028985507" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_show.xml" value="0.25" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_sale.xml" value="0.19972826086956522" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_3col.xml" value="0.21240942028985507" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_touch.xml" value="0.17844202898550723" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/search_view.xml" value="0.1" />
       </map>
     </option>
   </component>
