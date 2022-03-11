@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Freshers Application</string>
+    <string name="sale">Bán hàng</string>
+    <string name="list_bill">Danh sách hóa đơn</string>
+    <string name="temp_bill">Đơn lưu tạm</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="input_name_code_etc">Nhập tên, mã sản phẩm,…</string>
+    <string name="customer_name_tele">Tên khách hàng, số điện thoại,…</string>
+    <string name="not_selected">Không chọn</string>
+    <string name="split_row">Tách dòng</string>
+    <string name="sample_description">Sample description</string>
 </resources>

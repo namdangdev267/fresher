@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="@style/Theme.FreshersApplication.Toolbar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btn_nav"
+            android:layout_width="@dimen/basic_line_height"
+            android:layout_height="@dimen/basic_line_height"
+            android:src="@drawable/ic_menu"
+            android:background="@drawable/selector_button_round"
+            android:contentDescription="@string/sample_description"
+            app:tint="@color/primary_text_in_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:background="@drawable/box_round"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/between_element"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/between_element">
+
+            <EditText
+                android:id="@+id/et_input"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="@color/black"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:hint="@string/input_name_code_etc"
+                android:inputType="text"
+
+                app:drawableStartCompat="@drawable/ic_search"
+                app:drawableTint="@color/secondary_text_in_white"
+                android:drawablePadding="@dimen/between_element"/>
+
+            <ImageButton
+                android:id="@+id/btn_input"
+                android:layout_width="@dimen/search_bar_height"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_qr_code_scanner"
+                app:tint="@color/secondary_text_in_white"
+                android:contentDescription="@string/sample_description"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>

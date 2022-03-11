@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="basic_line_height">48dp</dimen>
+    <dimen name="basic_round_corner">4dp</dimen>
+    <dimen name="search_bar_height">40dp</dimen>
+    <dimen name="between_element">8dp</dimen>
+    <dimen name="circle_round_corner">1000dp</dimen>
+    <dimen name="between_element_half">4dp</dimen>
+    <dimen name="high_line_height">56dp</dimen>
+    <dimen name="font_size_big">20sp</dimen>
+    <dimen name="icon_padding">12dp</dimen>
+    <dimen name="font_size_med">16sp</dimen>
+    <dimen name="product_image_size">56dp</dimen>
+</resources>
