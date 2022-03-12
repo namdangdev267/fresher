@@ -56,10 +56,11 @@ fun Resources.getColorById(colorId: Int): ColorStateList? {
  * @author Nguyễn Công Chính
  * @since 3/11/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/11/2022: Tạo function
+ * @updated 3/12/2022: Thêm generic cho hàm
  */
-fun guard(variable1: Any?, variable2: Any?, function: (Any, Any) -> Unit) {
+fun <T1, T2>guard(variable1: T1?, variable2: T2?, function: (T1, T2) -> Unit) {
     if (variable1 != null && variable2 != null) {
         function(variable1, variable2)
     }
@@ -71,10 +72,11 @@ fun guard(variable1: Any?, variable2: Any?, function: (Any, Any) -> Unit) {
  * @author Nguyễn Công Chính
  * @since 3/11/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/11/2022: Tạo function
+ * @updated 3/12/2022: Thêm generic cho hàm
  */
-fun guard(variable1: Any?, variable2: Any?, variable3: Any?, function: (Any, Any, Any) -> Unit) {
+fun <T1, T2, T3> guard(variable1: T1?, variable2: T2?, variable3: T3?, function: (T1, T2, T3) -> Unit) {
     if (variable1 != null && variable2 != null && variable3 != null) {
         function(variable1, variable2, variable3)
     }
