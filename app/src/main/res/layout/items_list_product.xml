@@ -10,17 +10,19 @@
     <ImageView
         android:id="@+id/ivProduct"
         android:layout_width="@dimen/dp_60"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerVertical="true"
         app:srcCompat="@drawable/ic_shopping_bag" />
 
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_toRightOf="@+id/ivProduct"
+        android:paddingStart="@dimen/dp_15"
+        android:layout_toEndOf="@+id/ivProduct"
         android:text="@string/nameProduct_example"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_18" />
@@ -29,22 +31,22 @@
         android:id="@+id/tvProductId"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_below="@+id/tvProductName"
+        android:paddingStart="@dimen/dp_15"
+        android:layout_toEndOf="@+id/ivProduct"
         android:text="@string/idProduct_example"
-        android:textSize="@dimen/sp_18"
-        android:layout_toRightOf="@+id/ivProduct"
-        android:layout_below="@+id/tvProductName"/>
+        android:textSize="@dimen/sp_18" />
 
     <TextView
         android:id="@+id/tvProductPrice"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_below="@+id/tvProductId"
+        android:paddingStart="@dimen/dp_15"
+        android:layout_toEndOf="@+id/ivProduct"
         android:text="@string/priceProduct_example"
-        android:textSize="@dimen/sp_18"
         android:textColor="@color/purple_700"
-        android:layout_toRightOf="@+id/ivProduct"
-        android:layout_below="@+id/tvProductId"/>
+        android:textSize="@dimen/sp_18" />
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"

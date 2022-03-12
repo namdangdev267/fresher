@@ -18,6 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
         android:layout_gravity="center_vertical"
+        android:inputType="text"
         android:layout_weight="5"
         android:ellipsize="end"
         android:maxLines="1"

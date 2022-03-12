@@ -4,26 +4,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_bg"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/bottom_sheet_text"
+    android:orientation="vertical"
+    android:weightSum="4">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/bottom_sheet_text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test2"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/bottom_sheet_text3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test3"
-        android:padding="10dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8">
+
+        <TextView
+            android:id="@+id/tvProductNameDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="text1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18" />
+
+        <TextView
+            android:id="@+id/tvProductIdDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvProductNameDialog"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="text2"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/ivRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_toStartOf="@id/tvProductAmontDialog"
+            android:paddingTop="@dimen/dp_4"
+            android:src="@drawable/ic_remove_circle" />
+
+        <TextView
+            android:id="@+id/tvProductAmontDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@id/ivAdd"
+            android:layout_toRightOf="@+id/ivRemove"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="@dimen/dp_4"
+            android:src="@drawable/ic_add_circle" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:layout_below="@+id/tvProductIdDialog" />
+    </RelativeLayout>
 </LinearLayout>

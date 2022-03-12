@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,14 +13,16 @@
         android:gravity="left"
         android:orientation="horizontal"
         android:weightSum="10"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded">
 
         <ImageView
             android:id="@+id/ivContact"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_person" />
+            android:src="@drawable/ic_person"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvContact"
@@ -37,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_calender" />
+            android:src="@drawable/ic_calender"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvCalender"
@@ -47,11 +51,12 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_24"
+            android:paddingStart="@dimen/dp_24"
             android:text="@string/calender_text"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
     <LinearLayout
@@ -69,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1.5"
-            android:theme="@style/SCBSwitch" />
+            android:theme="@style/SCBSwitch"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
             android:layout_width="0dp"
@@ -80,7 +86,8 @@
             android:text="@string/switch_text"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -107,7 +114,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry">
 
         <ImageButton
             android:id="@+id/btnReset"
@@ -125,24 +133,24 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/dp_9"
+            android:layout_marginStart="@dimen/dp_9"
             android:layout_weight="1.5"
             android:background="@drawable/item_amount_bg_base"
             android:text="@string/total_items"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18"/>
+            android:textSize="@dimen/sp_18" />
 
         <Button
             android:id="@+id/btnTotalPrice"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_weight="7"
             android:background="@drawable/total_price_base"
             android:text="@string/total_price"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18"
-            android:textAllCaps="false"/>
+            android:textSize="@dimen/sp_18" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

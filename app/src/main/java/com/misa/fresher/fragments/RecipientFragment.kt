@@ -1,5 +1,6 @@
 package com.misa.fresher.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class RecipientFragment : Fragment() {
         configRecyclerView()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun configRecyclerView() {
         rcv = globalView?.findViewById(R.id.rcvShippingView)
         val adapter = ReceiverViewAdapter(list)

@@ -21,7 +21,7 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             0 -> R.layout.shipping_info_touch_tv
             1 -> R.layout.shipping_info_touch_ed
             2 -> R.layout.shipping_info_two_col
-            3 -> R.layout.shipping_info_cb
+            3 -> R.layout.shipping_info_checkbox
             4 -> R.layout.shipping_info_radiogroup
             else -> R.layout.shipping_info_three_col
 

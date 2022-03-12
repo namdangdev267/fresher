@@ -28,7 +28,10 @@ class SaleFragment : Fragment() {
     private var globleView: View? = null
     private var fakeData = createProductsList(20)
     var rcv: RecyclerView? = null
-    var bill = mutableListOf<Product>()
+    var listItems = mutableListOf<Product>()
+    var bottomSheetView: View? = null
+    var amount = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,18 +45,20 @@ class SaleFragment : Fragment() {
         globleView = view
         configToolBar()
         configRecyclerView()
-        onClickEvent()
+        updateItemSelected()
         searchEvent()
-        billEvent()
+        resetEvent()
+        navigateEvent()
     }
 
-    private fun billEvent() {
+
+    @SuppressLint("SetTextI18n")
+    private fun resetEvent() {
         globleView?.findViewById<ImageButton>(R.id.btnReset)?.setOnClickListener {
-            bill.clear()
+            listItems.clear()
             it.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_base)
             val btnItemCount = globleView?.findViewById<Button>(R.id.btnItemCount)
-            var price = 0.0
             btnItemCount?.let {
                 it.text = "0"
                 it.background = AppCompatResources.getDrawable(
@@ -65,7 +70,10 @@ class SaleFragment : Fragment() {
             btnTotalPrice?.let {
                 it.text = "Chưa nhập hàng"
                 it.background =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.total_price_base)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.total_price_base
+                    )
             }
         }
     }
@@ -77,17 +85,26 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun onClickEvent() {
+    private fun navigateEvent() {
         globleView?.findViewById<Button>(R.id.btnTotalPrice)?.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_sale_to_nav_shipInfor)
+            if (listItems.size > 0) {
+                findNavController().navigate(R.id.action_nav_sale_to_nav_shipInfor)
+            }
         }
-
+        globleView?.findViewById<Button>(R.id.btnItemCount)?.setOnClickListener {
+            if (listItems.size > 0) {
+                findNavController().navigate(R.id.action_nav_sale_to_nav_shipInfor)
+            }
+        }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateList(string: String) {
-        var list = mutableListOf<Product>()
+        val list = mutableListOf<Product>()
         for (i in fakeData) {
-            if (i.name.contains(string)) {
+            if (i.name.uppercase().contains(string.uppercase()) ||
+                i.id.uppercase().contains(string.uppercase())
+            ) {
                 list.add(i)
             }
         }
@@ -107,8 +124,9 @@ class SaleFragment : Fragment() {
         toggle.syncState()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun configRecyclerView() {
-        var adapter = ProductsAdapter(fakeData, { productItemClick(it) })
+        val adapter = ProductsAdapter(fakeData, { productItemClick(it) })
         adapter.notifyDataSetChanged()
         rcv = globleView?.findViewById(R.id.rcvListProduct)
         rcv?.adapter = adapter
@@ -116,43 +134,71 @@ class SaleFragment : Fragment() {
     }
 
     private fun productItemClick(product: Product) {
-        bill.add(product)
-//        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-//        val bottomSheetView: View = LayoutInflater.from(requireContext()).inflate(
-//            R.layout.bottom_sheet_product,
-//            globleView as LinearLayout, false
-//        )
-//        bottomSheetView.findViewById<TextView>(R.id.bottom_sheet_text).text = product.name
-//        bottomSheetDialog.setContentView(bottomSheetView)
-//        bottomSheetDialog.show()
-        updateItemSelected()
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+        bottomSheetView = LayoutInflater.from(requireContext()).inflate(
+            R.layout.bottom_sheet_product,
+            globleView as LinearLayout, false
+        )
+        bottomSheetView?.findViewById<TextView>(R.id.tvProductNameDialog)?.text = product.name
+        bottomSheetView?.findViewById<TextView>(R.id.tvProductIdDialog)?.text = product.id
+        bottomSheetDialog.setContentView(bottomSheetView!!)
+        bottomSheetDialog.show()
+        changeItemAmount()
+        bottomSheetDialog.setOnDismissListener {
+            for (i in 1..amount) {
+                listItems.add(product)
+            }
+            updateItemSelected()
+        }
+
     }
 
-    @SuppressLint("ResourceAsColor")
+    private fun changeItemAmount() {
+        val btnRemove = bottomSheetView?.findViewById<ImageView>(R.id.ivRemove)
+        val btnAdd = bottomSheetView?.findViewById<ImageView>(R.id.ivAdd)
+        val tvAmount = bottomSheetView?.findViewById<TextView>(R.id.tvProductAmontDialog)
+        amount = tvAmount?.text.toString().toInt()
+        btnRemove?.setOnClickListener {
+            if (tvAmount?.text == "1") {
+            } else {
+                amount--
+                tvAmount?.text = "$amount"
+            }
+        }
+        btnAdd?.setOnClickListener {
+            amount++
+            tvAmount?.text = "$amount"
+        }
+    }
+
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     private fun updateItemSelected() {
         val btnItemCount = globleView?.findViewById<Button>(R.id.btnItemCount)
         var price = 0.0
-        btnItemCount?.let {
-            it.text = "${bill.size}"
-            it.background = AppCompatResources.getDrawable(
-                requireContext(),
-                R.drawable.item_amount_bg_selected
-            )
-
-        }
-        val btnTotalPrice = globleView?.findViewById<Button>(R.id.btnTotalPrice)
-        for (i in bill) {
-            price += i.price
-        }
-        btnTotalPrice?.let {
-            it.text = "Tổng $price"
-            it.background =
-                AppCompatResources.getDrawable(requireContext(), R.drawable.total_price_selected)
-        }
-        if (bill.size != null) {
+        if (listItems.size > 0) {
+            btnItemCount?.let {
+                it.text = "${listItems.size}"
+                it.background = AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.item_amount_bg_selected
+                )
+            }
+            val btnTotalPrice = globleView?.findViewById<Button>(R.id.btnTotalPrice)
+            for (i in listItems) {
+                price += i.price
+            }
+            btnTotalPrice?.let {
+                it.text = "Tổng $price"
+                it.background =
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.total_price_selected
+                    )
+            }
             globleView?.findViewById<ImageButton>(R.id.btnReset)?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button)
         }
+
     }
 
 }

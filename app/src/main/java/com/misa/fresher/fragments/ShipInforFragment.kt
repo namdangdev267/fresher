@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.fragment.findNavController
@@ -29,10 +28,10 @@ class ShipInforFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         globalView = view
         configUi()
-        buttonEvent()
+        backEvent()
     }
 
-    private fun buttonEvent() {
+    private fun backEvent() {
         globalView.findViewById<ImageButton>(R.id.btnBack).setOnClickListener{
             findNavController().navigate(R.id.action_shipInforFragment_to_saleFragment)
         }
