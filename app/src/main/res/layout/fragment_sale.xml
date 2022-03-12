@@ -147,9 +147,14 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_filter"
-        android:layout_width="@dimen/drawer_width"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_marginTop="?attr/actionBarSize"
-        android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true" >
+
+        <include
+            android:id="@+id/ll_filter"
+            layout="@layout/drawer_filter"/>
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

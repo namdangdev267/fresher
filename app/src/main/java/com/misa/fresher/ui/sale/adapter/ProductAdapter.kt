@@ -15,8 +15,9 @@ import com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/10/2022: Tạo class
+ * @updated 3/12/2022: Sửa tham số truyền vào hàm [updateProductList]
  */
 class ProductAdapter(
     items: MutableList<Product>,
@@ -36,15 +37,16 @@ class ProductAdapter(
         )
 
     /**
-     * Cập nhật toàn bộ danh sách sản phẩm
+     * Hàm cập nhật toàn bộ danh sách sản phẩm
      *
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: [list] truyền vào không có nhu cầu thay đổi, do vậy chuyển từ mutablelist -> list
      */
-    fun updateProductList(list: MutableList<Product>) {
+    fun updateProductList(list: List<Product>) {
         val tempSize = items.size
         items.clear()
         notifyItemRangeRemoved(0, tempSize)

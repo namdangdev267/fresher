@@ -14,4 +14,21 @@
     <string name="unit">Đơn vị</string>
     <string name="quantity_must_be_bigger_than_0">Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại.</string>
     <string name="no_item_selected">Chưa chọn hàng</string>
+    <string name="product_has_quantity_more_than_0"><![CDATA[Hàng hóa còn hàng (SL > 0)]]></string>
+    <string name="grouping_product">Nhóm hàng hóa</string>
+    <string name="sorting">Sắp xếp theo</string>
+    <string name="name">Tên</string>
+    <string name="new_product">Hàng mới về</string>
+    <string name="quantity_in_inventory">Số lượng trong kho</string>
+    <string name="remove_filter">Bỏ lọc</string>
+    <string name="done">Xong</string>
+    <string name="all">Tất cả</string>
+
+    <string-array name="test_arr">
+        <item>ajhdfads</item>
+        <item>ajhdfasfadds</item>
+        <item>ajhdfwqerqads</item>
+        <item>ajhdf244ads</item>
+        <item>ajhdfasdfasdads</item>
+    </string-array>
 </resources>

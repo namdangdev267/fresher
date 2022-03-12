@@ -8,8 +8,9 @@ import java.util.Calendar
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/9/2022: Tạo class
+ * @updated 3/12/2022: Bổ sung 2 thuộc tính tên và mã sản phẩm
  */
 data class ProductItem(
     val id: Long,
@@ -19,4 +20,7 @@ data class ProductItem(
     val price: Double,
     val quantity: Int,
     val createdAt: Calendar,
-)
+) {
+    var name: String = ""
+    var code: String = ""
+}

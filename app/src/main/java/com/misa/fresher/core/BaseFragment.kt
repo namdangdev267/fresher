@@ -13,14 +13,18 @@ import androidx.viewbinding.ViewBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/9/2022: Tạo class
+ * @updated 3/12/2022: Vì nav component luôn tạo lại view kể cả khi back trở lại.
+ * Vì vậy [isInit] sẽ kiểm tra nếu đã khởi tạo rồi thì không chạy lại hàm khởi tạo nữa.
  */
 abstract class BaseFragment<BD: ViewBinding> : Fragment() {
 
     protected val binding by lazy { getInflater(layoutInflater) }
 
     protected abstract val getInflater: (LayoutInflater) -> BD
+
+    private var isInit = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +35,10 @@ abstract class BaseFragment<BD: ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initUI()
+        if (!isInit) {
+            initUI()
+            isInit = true
+        }
     }
 
     /**

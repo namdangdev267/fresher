@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item android:drawable="@drawable/box_round_outline" />
+            <item android:drawable="@drawable/ic_arrow_down"
+                android:right="@dimen/between_element"
+                android:gravity="end|center_vertical" />
+        </layer-list>
+    </item>
+</selector>

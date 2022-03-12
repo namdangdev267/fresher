@@ -4,15 +4,21 @@ import android.graphics.Color
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.core.BaseFragment
-import com.misa.fresher.data.model.CartItem
+import com.misa.fresher.data.model.CartItemModel
+import com.misa.fresher.data.model.FilterProductModel
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
+import com.misa.fresher.util.enum.ProductSortType
 import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.getDrawableById
 import com.misa.fresher.util.toCurrency
@@ -23,9 +29,10 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
+ * @updated 3/12/2022: Thêm chức năng lọc sản phẩm, tìm kiếm sản phẩm theo tên, mã
  */
 class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
@@ -33,7 +40,8 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         get() = FragmentSaleBinding::inflate
 
     private var productAdapter: ProductAdapter? = null
-    private var selectedItems = mutableListOf<CartItem>()
+    private var selectedItems = mutableListOf<CartItemModel>()
+    private val filter = FilterProductModel()
 
     override fun initUI() {
         configToolbar()
@@ -105,11 +113,13 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: Ngay khi khởi tạo danh sách mặc định sẽ lọc theo tên sản phẩm
      */
     private fun initProductList() {
-        productAdapter?.updateProductList(FakeData.products)
+        val filterItems = filter.filter(FakeData.products)
+        productAdapter?.updateProductList(filterItems)
     }
 
     /**
@@ -127,7 +137,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             selectedItems.find { it.item == item }?.let {
                 it.quantity += quantity
             } ?: run {
-                selectedItems.add(CartItem(item, quantity))
+                selectedItems.add(CartItemModel(item, quantity))
             }
             updateSelectedItem()
         }
@@ -147,11 +157,62 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: Bổ sung chức năng lọc sản phẩm
      */
     private fun configFilterDrawer() {
         binding.root.setScrimColor(Color.TRANSPARENT)
+        binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
+
+        binding.llFilter.swQuantity.setOnCheckedChangeListener { _, b ->
+            filter.isQuantityMoreThanZero = b
+        }
+
+        val groupItem = mutableListOf(getString(R.string.all))
+        groupItem.addAll(FakeData.category.map { it.name })
+        val groupAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            groupItem
+        )
+        binding.llFilter.spnGrouping.adapter = groupAdapter
+        binding.llFilter.spnGrouping.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                if (position == 0) {
+                    filter.selectedCategory = null
+                } else {
+                    filter.selectedCategory = FakeData.category[position - 1]
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+
+        binding.llFilter.rbName.setOnCheckedChangeListener { _, b ->
+            if (b) filter.sortBy = ProductSortType.NAME
+        }
+        binding.llFilter.rbNew.setOnCheckedChangeListener { _, b ->
+            if (b) filter.sortBy = ProductSortType.NEW_PRODUCT
+        }
+        binding.llFilter.rbQuantity.setOnCheckedChangeListener { _, b ->
+            if (b) filter.sortBy = ProductSortType.QUANTITY
+        }
+        binding.llFilter.rbName.isChecked = true
+
+        binding.llFilter.btnDone.setOnClickListener {
+            val filterItems = filter.filter(FakeData.products)
+            productAdapter?.updateProductList(filterItems)
+            toggleDrawer(binding.nvFilter)
+        }
+
+        binding.llFilter.btnReset.setOnClickListener {
+            binding.tbSale.etInput.text.clear()
+            filter.keyword = ""
+            binding.llFilter.swQuantity.isChecked = false
+            binding.llFilter.spnGrouping.setSelection(0)
+            binding.llFilter.rbName.isChecked = true
+        }
     }
 
     /**
@@ -160,11 +221,11 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/10/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/10/2022: Tạo function
+     * @updated 3/12/2022: Bổ sung chức năng tìm kiếm sản phẩm bằng tên hoặc mã
      */
     private fun configToolbar() {
-        binding.tbSale.root.menu.clear()
         binding.tbSale.root.inflateMenu(R.menu.menu_sale)
         binding.tbSale.btnNav.setImageDrawable(resources.getDrawableById(R.drawable.ic_menu))
         binding.tbSale.btnNav.setOnClickListener {
@@ -177,6 +238,14 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
                 }
             }
             true
+        }
+        binding.tbSale.etInput.setOnEditorActionListener { textView, i, _ ->
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                filter.keyword = textView.text.toString()
+                val filterItems = filter.filter(FakeData.products)
+                productAdapter?.updateProductList(filterItems)
+            }
+            false
         }
     }
 
