@@ -2,6 +2,7 @@ package com.misa.fresher.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,18 +20,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
+import com.misa.fresher.adapters.ProductAdapter
 import com.misa.fresher.adapters.ProductsAdapter
+import com.misa.fresher.data.FakeData
 import com.misa.fresher.model.Product
-import com.misa.fresher.model.Product.Companion.createProductsList
+import com.misa.fresher.model.Products
+import com.misa.fresher.model.Products.Companion.createProductsList
 
 class SaleFragment : Fragment() {
 
     private var globleView: View? = null
-    private var fakeData = createProductsList(20)
     var rcv: RecyclerView? = null
-    var listItems = mutableListOf<Product>()
+    var listItems = mutableListOf<Products>()
     var bottomSheetView: View? = null
     var amount = 1
+    private var fakedata = createProductsList(20)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +51,22 @@ class SaleFragment : Fragment() {
         configRecyclerView()
         updateItemSelected()
         searchEvent()
+        configFilterDrawer()
         resetEvent()
         navigateEvent()
+    }
+
+    @SuppressLint("RtlHardcoded")
+    private fun configFilterDrawer() {
+        val mDrawer = globleView?.findViewById<DrawerLayout>(R.id.dlSaleFilter)
+        mDrawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        globleView?.findViewById<ImageButton>(R.id.btnFilter)?.setOnClickListener {
+            mDrawer?.openDrawer(Gravity.RIGHT)
+        }
+        val btnSave = globleView?.findViewById<Button>(R.id.btnFilterSave)
+        btnSave?.setOnClickListener {
+            mDrawer?.closeDrawer(Gravity.RIGHT)
+        }
     }
 
 
@@ -100,8 +118,8 @@ class SaleFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateList(string: String) {
-        val list = mutableListOf<Product>()
-        for (i in fakeData) {
+        val list = mutableListOf<Products>()
+        for (i in fakedata) {
             if (i.name.uppercase().contains(string.uppercase()) ||
                 i.id.uppercase().contains(string.uppercase())
             ) {
@@ -126,27 +144,27 @@ class SaleFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun configRecyclerView() {
-        val adapter = ProductsAdapter(fakeData, { productItemClick(it) })
+        val adapter = ProductsAdapter(fakedata, { productItemClick(it) })
         adapter.notifyDataSetChanged()
         rcv = globleView?.findViewById(R.id.rcvListProduct)
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun productItemClick(product: Product) {
+    private fun productItemClick(products: Products) {
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(requireContext()).inflate(
             R.layout.bottom_sheet_product,
-            globleView as LinearLayout, false
+            globleView as DrawerLayout, false
         )
-        bottomSheetView?.findViewById<TextView>(R.id.tvProductNameDialog)?.text = product.name
-        bottomSheetView?.findViewById<TextView>(R.id.tvProductIdDialog)?.text = product.id
+        bottomSheetView?.findViewById<TextView>(R.id.tvProductNameDialog)?.text = products.name
+        bottomSheetView?.findViewById<TextView>(R.id.tvProductIdDialog)?.text = products.id
         bottomSheetDialog.setContentView(bottomSheetView!!)
         bottomSheetDialog.show()
         changeItemAmount()
         bottomSheetDialog.setOnDismissListener {
             for (i in 1..amount) {
-                listItems.add(product)
+                listItems.add(products)
             }
             updateItemSelected()
         }

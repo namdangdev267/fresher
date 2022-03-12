@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/dp_8"
+        tools:ignore="RtlSymmetry,UselessParent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_4">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginTop="@dimen/dp_4"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:theme="@style/SCBSwitch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@string/filterSaleSwitchText"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/sw_quantity"
+                app:layout_constraintStart_toEndOf="@id/sw_quantity"
+                app:layout_constraintTop_toTopOf="@id/sw_quantity" />
+
+            <TextView
+                android:id="@+id/tv_grouping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@string/filterCategoryTextViewText"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sw_quantity" />
+
+            <Spinner
+                android:id="@+id/spn_grouping"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginTop="@dimen/dp_4"
+                android:overlapAnchor="false"
+                android:padding="@dimen/dp_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_grouping" />
+
+            <TextView
+                android:id="@+id/tv_sorting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@string/filterViewbyText"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spn_grouping" />
+
+            <RadioGroup
+                android:id="@+id/rg_sorting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sorting">
+
+                <RadioButton
+                    android:id="@+id/rb_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:text="a"
+                    android:theme="@style/SCBSwitch" />
+
+                <RadioButton
+                    android:id="@+id/rb_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:text="product"
+                    android:theme="@style/SCBSwitch" />
+
+                <RadioButton
+                    android:id="@+id/rb_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:text="10"
+                    android:theme="@style/SCBSwitch" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_8"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnFilterClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_weight="1"
+            android:background="@drawable/filter_btn_clear"
+            android:text="Bỏ lọc"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="@dimen/sp_18" />
+
+        <Button
+            android:id="@+id/btnFilterSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:text="Xong"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/filter_btn_save"
+            android:textSize="@dimen/sp_18" />
+    </LinearLayout>
+</LinearLayout>
