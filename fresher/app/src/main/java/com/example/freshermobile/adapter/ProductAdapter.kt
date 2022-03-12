@@ -1,4 +1,4 @@
-package com.example.freshermobile
+package com.example.freshermobile.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshermobile.R
 import com.example.freshermobile.model.ProductModel
 
 class ProductAdapter(private val listProduct: MutableList<ProductModel>) :

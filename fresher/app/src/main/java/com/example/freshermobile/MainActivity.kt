@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshermobile.adapter.ProductAdapter
 import com.example.freshermobile.fragment.calculatorfragment.CalculatorActivity
 import com.example.freshermobile.model.ProductModel
 

@@ -1,4 +1,4 @@
-package com.example.freshermobile.adapter
+package kma.longhoang.beta.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.freshermobile.R
-import com.example.freshermobile.model.DeliveryModel
+import kma.longhoang.beta.R
+import kma.longhoang.beta.model.DeliveryModel
 
 class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
     RecyclerView.Adapter<DeliveryAdapter.DeliveryHolder>() {
-
     inner class DeliveryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun enterEditText(item: DeliveryModel.EnterEditText) {
             itemView.findViewById<TextView>(R.id.text_title).text = item.title
@@ -59,7 +58,7 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
         }
 
         private fun checkbox(item: DeliveryModel.Checkbox) {
-            itemView.findViewById<CheckBox>(R.id.checkbox_recipient_item).text = item.title
+            itemView.findViewById<CheckBox>(R.id.checkbox_delivery).text = item.title
         }
 
         private fun packageSize(item: DeliveryModel.PackageSize) {
@@ -75,8 +74,8 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
             } else {
                 itemView.findViewById<TextView>(R.id.text_title).isVisible = false
             }
-            itemView.findViewById<RadioButton>(R.id.radio_1).text = item.radText1
-            itemView.findViewById<RadioButton>(R.id.radio_2).text = item.radText2
+            itemView.findViewById<RadioButton>(R.id.radio_delivery_1).text = item.radText1
+            itemView.findViewById<RadioButton>(R.id.radio_delivery_2).text = item.radText2
         }
 
         fun bind(dataModel: DeliveryModel) {
@@ -93,12 +92,12 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliveryHolder {
         val layout = when (viewType) {
-            0 -> R.layout.item_enter_edittext
-            1 -> R.layout.item_2_column
-            2 -> R.layout.item_enter_tv
-            3 -> R.layout.item_recipient_checkbox
-            4 -> R.layout.item_size_delivery_package
-            else -> R.layout.item_radiobutton
+            0 -> R.layout.delivery_layout_edittext
+            1 -> R.layout.delivery_layout_2_column
+            2 -> R.layout.delivery_layout_text
+            3 -> R.layout.delivery_layout_checkbox
+            4 -> R.layout.delivery_layout_package_size
+            else -> R.layout.delivery_layout_radio_button
         }
         return DeliveryHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }

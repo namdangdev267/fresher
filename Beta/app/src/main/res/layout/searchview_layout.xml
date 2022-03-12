@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_search"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_5"/>
+        <EditText
+            android:id="@+id/edt_ten_sp"
+            android:layout_width="@dimen/dp_180"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_5"
+            android:background="@color/white"
+            android:ellipsize="end"
+            android:hint="@string/enter_to_search"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_SKU"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:src="@drawable/sku_icon" />
+    </LinearLayout>
+
+</merge>

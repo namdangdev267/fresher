@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Beta</string>
+    <string name="not_selected_yet">Chưa chọn hàng</string>
+    <string name="not_selected">Không chọn</string>
+    <string name="enter_to_search">Nhập tên, mã SKU,mã qr mã này kia các thứ</string>
+    <string name="customer_name">Tên khách hàng, Tên sản phẩm, số điện thoại</string>
+    <string name="delivery_info">Thông tin giao hàng</string>
+    <string name="product_name">Tên sản phẩm</string>
+    <string name="product_price">Giá sản phẩm</string>
+    <string name="product_amount">Số lượng</string>
+    <string name="number_0">0</string>
+    <string name="line_split">Tách dòng</string>
+    <string name="recipient">Người nhận</string>
+    <string name="delivery">Giao hàng</string>
+    <string name="delivery_package">Gói hàng</string>
+    <string name="address">Địa chỉ</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="area">Khu vực</string>
+    <string name="wards">Phường, xã</string>
+    <string name="channel">Kênh bán hàng</string>
+    <string name="shipping_cost">Phí giao hàng thu khách</string>
+    <string name="deposit_form">Hình thức đặt cọc</string>
+    <string name="deposit_money">Số tiền đặt cọc</string>
+    <string name="save">Lưu</string>
+    <string name="size">Kích thước (cm)</string>
+    <string name="weight">Trọng lượng (g)</string>
+    <string name="star">*</string>
+    <string name="tap_to_select">Chạm để chọn</string>
+    <string name="tap_to_enter">Chạm để nhập</string>
+    <string name="nav_sale">Bán hàng</string>
+    <string name="nav_delivery">Sổ giao hàng</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

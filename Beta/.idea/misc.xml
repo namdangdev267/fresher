@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_amount_tv.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_background_delivery_tab.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_delivery_tablayout.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_reset.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_sale_button_reset.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_sale_tv.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/custom_toolbar.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_assignment_24.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1555" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_local_shipping_24.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_loop_24.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.17" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/ic_baseline_sale_24.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/drawable/layout_nav_header.xml" value="0.1445" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/activity_delivery.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_2_column.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_checkbox.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_edittext.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_package_size.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_radio_button.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/delivery_layout_text.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/dialog_select_sale_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_delivery.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_delivery_list.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_order_detail.xml" value="0.1" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_package.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_recipient.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/fragment_sale.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/item_product.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/nav_header.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/layout/searchview_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/FresherMobile/Beta/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
