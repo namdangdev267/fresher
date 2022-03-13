@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.Fragments.Sale.SaleFragment"
-    android:orientation="vertical"
     >
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="#2b3176"
         android:orientation="horizontal"
         >
 
-        <com.misa.fresher.Views.Fragments.SearchView
+            <com.misa.fresher.Views.CustomViews.CustomSearchView
             android:id="@+id/search_view_sale"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,8 +30,7 @@
             app:icon3="@drawable/ic_filter_24"
             />
 
-
-    </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,66 +106,84 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_sale_fragment"
-            android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_sale_fragment"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:background="#F1F1F1"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0.2"
+        android:background="#F1F1F1"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:weightSum="8"
+        >
+
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="0dp"
-            android:background="#F1F1F1"
+            android:src="@drawable/ic_refresh"
+            android:padding="@dimen/dp_10"
+            android:background="@drawable/bg_circle_light"
             />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0.2"
-            android:background="#F1F1F1"
+        <TextView
+            android:id="@+id/tv_amount_item_selected"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rounded_left"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_16"
+            android:textFontWeight="400"
+
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_55"
-            android:orientation="horizontal"
-            android:padding="@dimen/dp_5"
-            android:weightSum="8"
-            >
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_1"
+            android:layout_weight="6"
+            android:background="@drawable/bg_rounded_right"
+            android:gravity="center"
+            android:text="@string/not_yet_selected_item"
+            android:textFontWeight="400"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_16" />
+    </LinearLayout>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_refresh"
-                android:padding="@dimen/dp_10"
-                android:background="@drawable/bg_circle_light"
+    </LinearLayout>
 
-                />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_filter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginTop="50dp"
+        android:fitsSystemWindows="true">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_weight="1"
-                android:background="@drawable/bg_rounded_left"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#99000000"
-                android:textSize="@dimen/dp_16"
-                android:textFontWeight="400"
-
-                />
-
-            <TextView
-                android:id="@+id/textview_total"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_1"
-                android:layout_weight="6"
-                android:background="@drawable/bg_rounded_right"
-                android:gravity="center"
-                android:text="@string/not_yet_selected_item"
-                android:textFontWeight="400"
-                android:textColor="#99000000"
-                android:textSize="@dimen/dp_16" />
-        </LinearLayout>
+        <include
+            android:id="@+id/layout_filter"
+            layout="@layout/drawer_filter"
+            />
+    </com.google.android.material.navigation.NavigationView>
 
 
 
-</LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SearchView">
+    <declare-styleable name="CustomSearchView">
         <attr name="title" format="string" />
         <attr name="icon1" format="reference"/>
         <attr name="icon2" format="reference"/>
         <attr name="icon3" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomRecyclerView">
+        <attr name="title1" format="string"/>
     </declare-styleable>
 </resources>

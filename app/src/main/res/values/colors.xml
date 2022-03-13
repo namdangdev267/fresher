@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="background">#2b3176</color>
+    <color name="background1">#F7EEEDF3</color>
+    <color name="background_button_light">#BCBCBC</color>
+    <color name="text_black_blur">#99000000</color>
+    <color name="test">#FFFFFF</color>
 </resources>

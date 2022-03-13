@@ -1,4 +1,4 @@
-package com.misa.fresher.Views.Fragments
+package com.misa.fresher.Views.CustomViews
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.widget.doAfterTextChanged
 import com.misa.fresher.R
 
-class SearchView: LinearLayout {
+class CustomSearchView: LinearLayout {
     constructor(context: Context) : super(context)
 
     lateinit var editText:EditText
@@ -19,18 +18,18 @@ class SearchView: LinearLayout {
     constructor(context: Context, attrs:AttributeSet): super(context,attrs)
     {
         val array = context.obtainStyledAttributes(attrs,
-            R.styleable.SearchView,0,0)
-        val title = array.getString(R.styleable.SearchView_title)
-        var icon1 = array.getResourceId(R.styleable.SearchView_icon1,0)
-        var icon2 = array.getResourceId(R.styleable.SearchView_icon2,0)
-        var icon3 = array.getResourceId(R.styleable.SearchView_icon3,0)
+            R.styleable.CustomSearchView,0,0)
+        val title = array.getString(R.styleable.CustomSearchView_title)
+        var icon1 = array.getResourceId(R.styleable.CustomSearchView_icon1,0)
+        var icon2 = array.getResourceId(R.styleable.CustomSearchView_icon2,0)
+        var icon3 = array.getResourceId(R.styleable.CustomSearchView_icon3,0)
 //        val resourceId = array.getResourceId(R.styleable.SearchView_image,0)
         array.recycle()
 
         setBackgroundColor(R.color.background)
         orientation= HORIZONTAL
 
-        LayoutInflater.from(context).inflate(R.layout.search_view,this,true)
+        LayoutInflater.from(context).inflate(R.layout.custom_search_view,this,true)
 
         editText = findViewById<EditText>(R.id.edittext_search_hint)
         editText.hint =  title

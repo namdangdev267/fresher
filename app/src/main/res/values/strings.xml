@@ -42,4 +42,19 @@
     <string name="size">Size(cm)</string>
 
 
+    <string-array name="item_category">
+        <item>All</item>
+        <item>Shirt</item>
+        <item>Trouser</item>
+        <item>Electronic device</item>
+    </string-array>
+
+    <string-array name="color">
+        <item>All</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+    </string-array>
+
 </resources>

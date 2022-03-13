@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.ItemSale
 import com.misa.fresher.R
 
-class SaleAdapter(private val listItemSale:MutableList<ItemSale>, val listener: (itemSale:ItemSale)->Unit):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
+class SaleAdapter(private var listItemSale:MutableList<ItemSale>, val listener: (itemSale:ItemSale)->Unit):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View, val listener: (itemSale: ItemSale) -> Unit): RecyclerView.ViewHolder(itemView){
         fun bind(itemSale: ItemSale)

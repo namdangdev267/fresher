@@ -16,7 +16,6 @@ sealed class ItemShip{
         var imageResourcce:Int = R.drawable.ic_calculator
     ):ItemShip()
 
-
     data class ItemMultiContent(
         var title1:String,
         var title2:String,
@@ -24,7 +23,6 @@ sealed class ItemShip{
         var content2:String,
         var imageResource:Int
     ):ItemShip()
-
 
     data class ItemCheck(
         var title:String
@@ -41,6 +39,7 @@ sealed class ItemShip{
         var content2:String,
         var content3:String
     ):ItemShip()
+
 
 
 }

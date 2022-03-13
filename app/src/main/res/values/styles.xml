@@ -49,6 +49,13 @@
         <item name="android:background">@drawable/bg_tablayout</item>
     </style>
 
+    <style name="spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_45</item>
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+
 
 
 
