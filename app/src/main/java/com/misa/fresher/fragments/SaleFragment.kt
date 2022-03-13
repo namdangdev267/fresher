@@ -2,6 +2,7 @@ package com.misa.fresher.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,9 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductAdapter
 import com.misa.fresher.adapters.ProductsAdapter
+import com.misa.fresher.data.DataForTest
 import com.misa.fresher.data.FakeData
+import com.misa.fresher.model.FilterProducts
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.Products
 import com.misa.fresher.model.Products.Companion.createProductsList
@@ -34,7 +37,7 @@ class SaleFragment : Fragment() {
     var listItems = mutableListOf<Products>()
     var bottomSheetView: View? = null
     var amount = 1
-    private var fakedata = createProductsList(20)
+    private var fakedata = DataForTest.listProduct
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,12 +64,90 @@ class SaleFragment : Fragment() {
         val mDrawer = globleView?.findViewById<DrawerLayout>(R.id.dlSaleFilter)
         mDrawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         globleView?.findViewById<ImageButton>(R.id.btnFilter)?.setOnClickListener {
+            configFilterSpinner()
             mDrawer?.openDrawer(Gravity.RIGHT)
         }
         val btnSave = globleView?.findViewById<Button>(R.id.btnFilterSave)
         btnSave?.setOnClickListener {
+            filterItems(getFilter())
             mDrawer?.closeDrawer(Gravity.RIGHT)
         }
+    }
+
+    private fun getFilter():FilterProducts {
+        val radioGroup = globleView?.findViewById<RadioGroup>(R.id.rg_sorting)
+        val selected = radioGroup?.checkedRadioButtonId
+        val radioButtonText = selected?.let { globleView?.findViewById<RadioButton>(it)?.text }
+        val mColorSpinner = globleView?.findViewById<Spinner>(R.id.spnColor)
+        val mSizeSpinner = globleView?.findViewById<Spinner>(R.id.spnSize)
+        val colorSelected = mColorSpinner?.selectedItem.toString()
+        val sizeSelected = mSizeSpinner?.selectedItem.toString()
+        val filterProducts = FilterProducts(radioButtonText.toString(),colorSelected,sizeSelected)
+        return filterProducts
+    }
+
+    private fun configFilterSpinner() {
+        val spnColor = globleView?.findViewById<Spinner>(R.id.spnColor)
+        val spnSize = globleView?.findViewById<Spinner>(R.id.spnSize)
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.colorArray,
+            android.R.layout.simple_spinner_item
+
+        ).also { arrayAdapter ->
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnColor?.adapter=arrayAdapter
+        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.sizeArray,
+            android.R.layout.simple_spinner_item
+
+        ).also { arrayAdapter ->
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnSize?.adapter=arrayAdapter
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filterItems(filter:FilterProducts) {
+        var sortList = mutableListOf<Products>()
+        if(filter.sortBy == "Tên"){
+            sortList = fakedata.sortedWith(compareBy(Products::name)) as MutableList<Products>
+        }else if(filter.sortBy == "Giá"){
+            sortList = fakedata.sortedWith(compareBy(Products::price)) as MutableList<Products>
+        }
+        var sortListWithColor = mutableListOf<Products>()
+        var sortListWithSize = mutableListOf<Products>()
+        if(filter.coler!="cham de chon"){
+            for (i in sortList){
+                if(i.color==filter.coler){
+                    sortListWithColor.add(i)
+                }
+            }
+            if (filter.size!="cham de chon"){
+                for (i in sortListWithColor){
+                    if(i.size==filter.size){
+                        sortListWithSize.add(i)
+                    }
+                }
+            }else{
+                sortListWithSize=sortListWithColor
+            }
+        } else {
+            sortListWithColor=sortList
+            if (filter.size!="cham de chon"){
+                for (i in sortListWithColor){
+                    if(i.size==filter.size){
+                        sortListWithSize.add(i)
+                    }
+                }
+            }else{
+                sortListWithSize=sortListWithColor
+            }
+        }
+        rcv?.adapter = ProductsAdapter(sortListWithSize,{ productItemClick(it) })
+        (rcv?.adapter)?.notifyDataSetChanged()
     }
 
 

@@ -86,25 +86,47 @@
 
                 <RadioButton
                     android:id="@+id/rb_name"
+                    android:checked="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_48"
-                    android:text="a"
+                    android:text="Tên"
                     android:theme="@style/SCBSwitch" />
 
                 <RadioButton
                     android:id="@+id/rb_new"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_48"
-                    android:text="product"
-                    android:theme="@style/SCBSwitch" />
-
-                <RadioButton
-                    android:id="@+id/rb_quantity"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
-                    android:text="10"
+                    android:text="Giá"
                     android:theme="@style/SCBSwitch" />
             </RadioGroup>
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/rg_sorting"
+                android:text="Màu sắc"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"/>
+            <Spinner
+                android:id="@+id/spnColor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                app:layout_constraintTop_toBottomOf="@+id/tvColor"/>
+            <TextView
+                android:id="@+id/tvSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/spnColor"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"/>
+            <Spinner
+                android:id="@+id/spnSize"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                app:layout_constraintTop_toBottomOf="@+id/tvSize"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

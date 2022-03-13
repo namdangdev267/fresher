@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colorArray">
+        <item>cham de chon</item>
+        <item>Do</item>
+        <item>Xanh</item>
+        <item>Xam</item>
+        <item>Tim</item>
+    </string-array>
+    <string-array name="sizeArray">
+        <item>cham de chon</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+    </string-array>
+</resources>
