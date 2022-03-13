@@ -68,13 +68,19 @@ class SaleFragment : Fragment() {
             mDrawer?.openDrawer(Gravity.RIGHT)
         }
         val btnSave = globleView?.findViewById<Button>(R.id.btnFilterSave)
+        val btnClear = globleView?.findViewById<Button>(R.id.btnFilterClear)
         btnSave?.setOnClickListener {
             filterItems(getFilter())
             mDrawer?.closeDrawer(Gravity.RIGHT)
         }
+        btnClear?.setOnClickListener {
+            globleView?.findViewById<Spinner>(R.id.spnColor)?.setSelection(0)
+            globleView?.findViewById<Spinner>(R.id.spnSize)?.setSelection(0)
+            globleView?.findViewById<RadioButton>(R.id.rb_name)?.isChecked = true
+        }
     }
 
-    private fun getFilter():FilterProducts {
+    private fun getFilter(): FilterProducts {
         val radioGroup = globleView?.findViewById<RadioGroup>(R.id.rg_sorting)
         val selected = radioGroup?.checkedRadioButtonId
         val radioButtonText = selected?.let { globleView?.findViewById<RadioButton>(it)?.text }
@@ -82,7 +88,7 @@ class SaleFragment : Fragment() {
         val mSizeSpinner = globleView?.findViewById<Spinner>(R.id.spnSize)
         val colorSelected = mColorSpinner?.selectedItem.toString()
         val sizeSelected = mSizeSpinner?.selectedItem.toString()
-        val filterProducts = FilterProducts(radioButtonText.toString(),colorSelected,sizeSelected)
+        val filterProducts = FilterProducts(radioButtonText.toString(), colorSelected, sizeSelected)
         return filterProducts
     }
 
@@ -96,7 +102,7 @@ class SaleFragment : Fragment() {
 
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spnColor?.adapter=arrayAdapter
+            spnColor?.adapter = arrayAdapter
         }
         ArrayAdapter.createFromResource(
             requireContext(),
@@ -105,51 +111,50 @@ class SaleFragment : Fragment() {
 
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spnSize?.adapter=arrayAdapter
+            spnSize?.adapter = arrayAdapter
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun filterItems(filter:FilterProducts) {
+    private fun filterItems(filter: FilterProducts) {
         var sortList = mutableListOf<Products>()
-        if(filter.sortBy == "Tên"){
+        if (filter.sortBy == "Tên") {
             sortList = fakedata.sortedWith(compareBy(Products::name)) as MutableList<Products>
-        }else if(filter.sortBy == "Giá"){
+        } else if (filter.sortBy == "Giá") {
             sortList = fakedata.sortedWith(compareBy(Products::price)) as MutableList<Products>
         }
         var sortListWithColor = mutableListOf<Products>()
         var sortListWithSize = mutableListOf<Products>()
-        if(filter.coler!="cham de chon"){
-            for (i in sortList){
-                if(i.color==filter.coler){
+        if (filter.coler != "cham de chon") {
+            for (i in sortList) {
+                if (i.color == filter.coler) {
                     sortListWithColor.add(i)
                 }
             }
-            if (filter.size!="cham de chon"){
-                for (i in sortListWithColor){
-                    if(i.size==filter.size){
+            if (filter.size != "cham de chon") {
+                for (i in sortListWithColor) {
+                    if (i.size == filter.size) {
                         sortListWithSize.add(i)
                     }
                 }
-            }else{
-                sortListWithSize=sortListWithColor
+            } else {
+                sortListWithSize = sortListWithColor
             }
         } else {
-            sortListWithColor=sortList
-            if (filter.size!="cham de chon"){
-                for (i in sortListWithColor){
-                    if(i.size==filter.size){
+            sortListWithColor = sortList
+            if (filter.size != "cham de chon") {
+                for (i in sortListWithColor) {
+                    if (i.size == filter.size) {
                         sortListWithSize.add(i)
                     }
                 }
-            }else{
-                sortListWithSize=sortListWithColor
+            } else {
+                sortListWithSize = sortListWithColor
             }
         }
-        rcv?.adapter = ProductsAdapter(sortListWithSize,{ productItemClick(it) })
+        rcv?.adapter = ProductsAdapter(sortListWithSize, { productItemClick(it) })
         (rcv?.adapter)?.notifyDataSetChanged()
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun resetEvent() {
