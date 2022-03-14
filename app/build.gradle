@@ -1,15 +1,14 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.misa.fresher"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -29,6 +28,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+//    dataBinding{
+//        enabled = true
+//    }
+    dataBinding {
+        enabled true
+    }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -40,4 +49,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
