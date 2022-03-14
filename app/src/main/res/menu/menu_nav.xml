@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_sale"
+        android:title="Sale" />
+    <item
+        android:id="@+id/nav_SoGiaoHang"
+        android:title="Shipping book" />
+<!--    <item-->
+<!--        android:id="@+id/nav_DSachHoaDon"-->
+<!--        android:icon="@drawable/receipt"-->
+<!--        android:title="Danh sách hóa đơn" />-->
+<!--    <item-->
+<!--        android:id="@+id/nav_LSuDonHang"-->
+<!--        android:icon="@drawable/clock"-->
+<!--        android:title="Lịch sử đơn hàng" />-->
+<!--    <item-->
+<!--        android:id="@+id/nav_DoanhThu"-->
+<!--        android:icon="@drawable/timeadd"-->
+<!--        android:title="Doanh thu theo mặt hàng" />-->
+
+    <!--    <item tools:ignore="MenuTitle">-->
+    <!--        <menu>-->
+    <!--            <item android:id="@+id/nav_GioiThieu"-->
+    <!--                android:title="Giới thiệu cho bạn bè"-->
+    <!--                android:icon="@drawable/euro"/>-->
+    <!--            <item android:id="@+id/nav_DanhGia"-->
+    <!--                android:title="Đánh giá ứng dụng"-->
+    <!--                android:icon="@drawable/car"/>-->
+    <!--            <item android:id="@+id/nav_ThongTin"-->
+    <!--                android:title="Thông tin sản phẩm"-->
+    <!--                android:icon="@drawable/receipt"/>-->
+    <!--            <item android:id="@+id/nav_BaoMat"-->
+    <!--                android:title="Chính sách bảo mật"-->
+    <!--                android:icon="@drawable/clock"/>-->
+    <!--            <item-->
+    <!--                android:id="@+id/nav_ThongBaoLoi"-->
+    <!--                android:icon="@drawable/timeadd"-->
+    <!--                android:title="Gửi thông báo lỗi" />-->
+    <!--        </menu>-->
+    <!--    </item>-->
+
+    <!--    <item tools:ignore="MenuTitle">-->
+    <!--        <menu>-->
+    <!--            <item android:id="@+id/nav_CaiDat"-->
+    <!--                android:title="Cài đặt"-->
+    <!--                android:icon="@drawable/euro"/>-->
+    <!--            <item android:id="@+id/nav_DongBo"-->
+    <!--                android:title="Đồng bộ dữ liệu"-->
+    <!--                android:icon="@drawable/car"/>-->
+    <!--            <item android:id="@+id/nav_ThongBao"-->
+    <!--                android:title="Thông báo"-->
+    <!--                android:icon="@drawable/receipt"/>-->
+    <!--        </menu>-->
+    <!--    </item>-->
+
+    <!--    <item tools:ignore="MenuTitle">-->
+    <!--        <menu>-->
+    <!--            <item android:id="@+id/nav_DangXuat"-->
+    <!--                android:title="Đăng xuất"-->
+    <!--                android:icon="@drawable/euro"/>-->
+    <!--        </menu>-->
+    <!--    </item>-->
+</menu>
