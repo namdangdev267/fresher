@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabBackground">@drawable/tab_color_selector</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabTextAppearance">@android:style/TextAppearance.Widget.TabWidget</item>
+        <item name="tabSelectedTextColor">@color/background</item>
+        <item name="tabIndicatorGravity">stretch</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="background">@drawable/custom_ship</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Switch" parent="Theme.FreshersApplication">
+        <!--        &lt;!&ndash; active thumb & track color (30% transparency) &ndash;&gt;-->
+        <!--        <item name="colorControlActivated">@color/colorPrimary</item>-->
+
+        <!--        &lt;!&ndash; inactive thumb color &ndash;&gt;-->
+        <!--        <item name="colorSwitchThumbNormal">#f1f1f1-->
+        <!--        </item>-->
+
+        <!--        &lt;!&ndash; inactive track color (30% transparency) &ndash;&gt;-->
+        <!--        <item name="android:colorForeground">#42221f1f-->
+        <!--        </item>-->
+        <item name="colorSecondary">@color/background</item>
+    </style>
+
+    <style name="customTextCalculate">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>
