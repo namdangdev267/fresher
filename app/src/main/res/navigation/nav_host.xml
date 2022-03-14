@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/fragment_sale">
+
+    <fragment
+        android:id="@+id/fragment_sale"
+        android:name="com.misa.fresher.Fragment.SaleFragment"
+        android:label="fragment_sale"
+        tools:layout="@layout/fragment_sale" >
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_package"
+            app:destination="@id/fragment_package" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_package"
+        android:name="com.misa.fresher.Fragment.PackageFragment"
+        android:label="fragment_package"
+        tools:layout="@layout/fragment_package" >
+        <action
+            android:id="@+id/action_fragment_package_to_fragment_ship"
+            app:destination="@id/fragment_ship" />
+        <action
+            android:id="@+id/action_fragment_package_to_fragment_sale"
+            app:destination="@id/fragment_sale" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_ship"
+        android:name="com.misa.fresher.Fragment.ShipFragment"
+        android:label="fragment_ship"
+        tools:layout="@layout/fragment_ship" >
+        <action
+            android:id="@+id/action_fragment_ship_to_fragment_package"
+            app:destination="@id/fragment_package" />
+    </fragment>
+</navigation>
