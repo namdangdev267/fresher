@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Freshers Application</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="item_arr">
+        <item>All</item>
+        <item>oiafoisfaf</item>
+        <item>oiafoisfaf</item>
+        <item>oiafoisfaf</item>
+        <item>oiafoisfaf</item>
+    </string-array>
 </resources>
