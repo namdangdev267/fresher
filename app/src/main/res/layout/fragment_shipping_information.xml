@@ -13,8 +13,8 @@
         android:background="#2b3176">
 
         <ImageView
-            android:id="@+id/menu"
-            android:layout_width="45dp"
+            android:id="@+id/iv_ship_infor_back"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
             android:background="@drawable/ripple_circle"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/delete"
-            android:layout_toRightOf="@+id/menu"
+            android:layout_toRightOf="@+id/iv_ship_infor_back"
             android:layout_weight="3"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
@@ -83,7 +83,7 @@
 
         <Button
             style="@style/ButtonFont"
-            android:background="@drawable/bg_rounded_all"
+            android:background="@drawable/bg_rounded_all_dark"
             android:text="@string/save" />
     </LinearLayout>
 </LinearLayout>

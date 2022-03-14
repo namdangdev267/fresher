@@ -12,12 +12,40 @@
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale" >
         <action
-            android:id="@+id/action_saleFragment_to_shippingInformationFragment"
-            app:destination="@id/shippingInformationFragment" />
+            android:id="@+id/action_saleFragment_to_billDetailFragment"
+            app:destination="@id/billDetailFragment"
+            app:enterAnim="@anim/animation_slide_in_left"
+            app:exitAnim="@anim/animation_slide_out_right"
+
+            />
     </fragment>
     <fragment
         android:id="@+id/shippingInformationFragment"
         android:name="com.misa.fresher.Views.Fragments.ShippingInfomation.ShippingInformationFragment"
         android:label="fragment_shipping_information"
-        tools:layout="@layout/fragment_shipping_information" />
+        tools:layout="@layout/fragment_shipping_information" >
+        <action
+            android:id="@+id/action_shippingInformationFragment_to_billDetailFragment"
+            app:destination="@id/billDetailFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/billDetailFragment"
+        android:name="com.misa.fresher.Views.Fragments.BillDetail.BillDetailFragment"
+        android:label="fragment_bill_detail"
+        tools:layout="@layout/fragment_bill_detail" >
+        <action
+            android:id="@+id/action_billDetailFragment_to_shippingInformationFragment"
+            app:destination="@id/shippingInformationFragment"
+            app:enterAnim="@anim/animation_slide_in_left"
+            app:exitAnim="@anim/animation_slide_out_right"
+            />
+        <action
+            android:id="@+id/action_billDetailFragment_to_saleFragment"
+            app:destination="@id/saleFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"/>
+    </fragment>
 </navigation>

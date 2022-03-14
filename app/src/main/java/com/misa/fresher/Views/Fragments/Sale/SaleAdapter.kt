@@ -6,36 +6,41 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemSale
+import com.misa.fresher.Models.ItemProduct
 import com.misa.fresher.R
 
-class SaleAdapter(private var listItemSale:MutableList<ItemSale>, val listener: (itemSale:ItemSale)->Unit):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
+class SaleAdapter(private var listItemProduct:MutableList<ItemProduct>, val listener: (itemProduct:ItemProduct)->Unit):RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View, val listener: (itemSale: ItemSale) -> Unit): RecyclerView.ViewHolder(itemView){
-        fun bind(itemSale: ItemSale)
+    class ViewHolder(itemView: View, val listener: (itemProduct: ItemProduct) -> Unit): RecyclerView.ViewHolder(itemView){
+        fun bind(itemProduct: ItemProduct)
         {
-            itemView.findViewById<TextView>(R.id.name_item).text = itemSale.name
-            itemView.findViewById<TextView>(R.id.id_item).text = itemSale.id
-            itemView.findViewById<TextView>(R.id.price_item).text = itemSale.price.toString()
+            itemView.findViewById<ImageView>(R.id.iv_item_add).visibility = View.GONE
+            itemView.findViewById<ImageView>(R.id.iv_item_remove).visibility = View.GONE
+            itemView.findViewById<TextView>(R.id.tv_item_quantity).visibility = View.GONE
+            itemView.findViewById<TextView>(R.id.tv_item_total_price).visibility = View.GONE
+
+            itemView.findViewById<TextView>(R.id.name_item).text = itemProduct.name
+            itemView.findViewById<TextView>(R.id.id_item).text = itemProduct.id
+            itemView.findViewById<TextView>(R.id.price_item).text = itemProduct.price.toString()
             itemView.findViewById<ImageView>(R.id.image_item).setImageResource(R.drawable.ic_shopping_bag)
             itemView.setOnClickListener {
-                listener(itemSale)
+                listener(itemProduct)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_sale, parent, false)
+            .inflate(R.layout.item_sale_and_bill_detail, parent, false)
 
         return ViewHolder(view,listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listItemSale[position])
+        holder.bind(listItemProduct[position])
     }
 
-    override fun getItemCount() = listItemSale.size
+    override fun getItemCount() = listItemProduct.size
 }
 
 

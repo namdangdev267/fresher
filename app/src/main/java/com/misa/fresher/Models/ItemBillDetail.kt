@@ -1,22 +1,22 @@
 package com.misa.fresher.Models
 
 class ItemBillDetail(
-    var itemSale: ItemSale,
+    var itemProduct: ItemProduct,
     var name: String,
     var id: String,
-    var amount: Int
+    var quantity: Int
 ) {
     init {
-        this.name = itemSale.name + "(" + itemSale.color.name + ")"
-        this.id = itemSale.id + "-" + itemSale.color.name
+        this.name = itemProduct.name + "(" + itemProduct.color.name + ")"
+        this.id = itemProduct.id + "-" + itemProduct.color.name
     }
 
     fun getAllPrice(): Float {
-        return amount * itemSale.price
+        return quantity * itemProduct.price
     }
 
-    fun updateAmount(num: Int) {
-        this.amount += num
+    fun updateQuantity(num: Int) {
+        this.quantity += num
     }
 }
 

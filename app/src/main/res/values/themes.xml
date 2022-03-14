@@ -15,16 +15,18 @@
         <item name="fontFamily"> sans-serif-medium </item>
         <item name="android:textAllCaps">false</item>
 
-
     </style>
 
 
 
     <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:layout_margin">@dimen/dp_2</item>
-
+        <item name="bottomSheetStyle">@style/BottomSheetModalStyle</item>
     </style>
 
+    <style name="BottomSheetModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_rounded_all_light</item>
+    </style>
 
 
 </resources>

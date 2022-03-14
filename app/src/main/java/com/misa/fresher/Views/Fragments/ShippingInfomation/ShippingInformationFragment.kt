@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -13,21 +14,30 @@ import com.misa.fresher.R
 import com.misa.fresher.Views.Fragments.ShippingInfomation.Package.PackageFragment
 import com.misa.fresher.Views.Fragments.ShippingInfomation.Receiver.ReceiverFragment
 import com.misa.fresher.Views.Fragments.ShippingInfomation.Ship.ShipFragment
+import com.misa.fresher.databinding.FragmentBillDetailBinding
+import com.misa.fresher.databinding.FragmentShippingInformationBinding
 
 class ShippingInformationFragment : Fragment() {
 
+    lateinit var binding: FragmentShippingInformationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shipping_information, container, false)
+        binding = FragmentShippingInformationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ivShipInforBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)
+        }
 
 //        var indicator = view.findViewById<View>(R.id.indicator)
         val tabLayout = view.findViewById<TabLayout>(R.id.tablayout_shipping_infomation)

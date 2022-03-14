@@ -37,11 +37,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_remove_circle"
-            android:layout_toStartOf="@id/tv_amount"
+            android:layout_toStartOf="@id/tv_quantity"
             />
 
         <TextView
-            android:id="@+id/tv_amount"
+            android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="0"
