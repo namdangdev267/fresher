@@ -8,6 +8,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseActivity
+import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.databinding.ActivityMainBinding
 
 /**
@@ -16,8 +17,9 @@ import com.misa.fresher.databinding.ActivityMainBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/9/2022: Tạo class
+ * @updated 3/15/2022: Thêm biến chung [tempCustomer] để sử dụng giữa các fragment
  */
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -25,6 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         get() = ActivityMainBinding::inflate
 
     private var appBarConfiguration: AppBarConfiguration? = null
+
+    var tempCustomer: Customer? = null
 
     override fun initUI() {
         configDrawer()

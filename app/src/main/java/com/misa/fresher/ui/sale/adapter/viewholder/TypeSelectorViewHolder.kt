@@ -18,7 +18,7 @@ class TypeSelectorViewHolder<T : ProductType>(
     private val onCheckedChangeListener: (data: T) -> Unit,
 ) : BaseViewHolder<T>(binding.root) {
 
-    override fun bindData(data: T) {
+    override fun bindData(data: T, index: Int) {
         binding.root.text = data.name
         binding.root.setOnCheckedChangeListener { _, b ->
             if (b) {

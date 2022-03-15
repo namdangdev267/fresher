@@ -23,6 +23,14 @@
     <string name="remove_filter">Bỏ lọc</string>
     <string name="done">Xong</string>
     <string name="all">Tất cả</string>
+    <string name="buy_more">Mua thêm</string>
+    <string name="receivable">Còn phải thu</string>
+    <string name="get_payment">Thu tiền</string>
+    <string name="seller">Nhân viên bán hàng</string>
+    <string name="coupon">Mã ưu đãi</string>
+    <string name="note">Ghi chú</string>
+    <string name="temp_save">Lưu tạm</string>
+    <string name="delete_bill">Xóa đơn</string>
 
     <string-array name="test_arr">
         <item>ajhdfads</item>

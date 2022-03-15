@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/10/2022: Tạo class
+ * @updated 3/15/2022: Truyền thêm index qua hàm [bindData] cho nó thêm phần long trọng
  */
 abstract class BaseViewHolder<T>(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -23,5 +24,5 @@ abstract class BaseViewHolder<T>(itemView: View): RecyclerView.ViewHolder(itemVi
      * @version 1
      * @updated 3/10/2022: Tạo function
      */
-    abstract fun bindData(data: T)
+    abstract fun bindData(data: T, index: Int)
 }

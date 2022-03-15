@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tb_bill"
+        layout="@layout/toolbar_text" />
+
+    <LinearLayout
+        android:id="@+id/ll_customer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_line_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_customer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/between_element"
+            android:layout_marginEnd="@dimen/between_element_half"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/between_element"
+            android:ellipsize="end"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/customer_name_tele"
+            android:textColor="@color/secondary_text_in_white"
+            app:drawableStartCompat="@drawable/ic_person"
+            app:drawableTint="@color/primary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/between_element_half"
+            android:layout_marginEnd="@dimen/between_element"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/between_element"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="@string/not_selected"
+            android:textColor="@color/black"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            app:drawableTint="@color/primary" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/between_element_half"
+        android:background="@color/odd_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_line_height"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_buy_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/between_element"
+            android:paddingEnd="@dimen/between_element_half"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/between_element"
+            android:ellipsize="end"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:text="@string/buy_more"
+            android:textColor="@color/primary"
+            app:drawableStartCompat="@drawable/ic_add"
+            app:drawableTint="@color/primary"
+            android:background="?attr/selectableItemBackground" />
+
+        <ImageButton
+            android:id="@+id/btn_scan"
+            android:layout_width="@dimen/basic_line_height"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_qr_code_scanner"
+            app:tint="@color/secondary_text_in_white"
+            android:contentDescription="@string/sample_description"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/between_element_half"
+        android:background="@color/odd_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_line_height"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_receivable"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/between_element"
+            android:paddingEnd="@dimen/between_element_half"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/between_element"
+            android:gravity="center_vertical"
+            android:text="@string/receivable"
+            android:textColor="@color/primary_text_in_white"
+            app:drawableStartCompat="@drawable/ic_money"
+            app:drawableTint="@color/primary" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/between_element"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/between_element_half"
+            android:paddingEnd="@dimen/between_element"
+            android:textColor="@color/primary"
+            app:drawableEndCompat="@drawable/ic_arrow_right"
+            app:drawableTint="@color/secondary_text_in_white"
+            tools:text="@tools:sample/us_zipcodes" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_line_height"
+        android:orientation="horizontal"
+        android:padding="@dimen/between_element_half">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_ship_info"
+            android:layout_width="@dimen/basic_line_height"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_button_round"
+            android:padding="@dimen/icon_padding"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_shipping"
+            android:tint="@drawable/selector_button_text_color" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_gift"
+            android:layout_width="@dimen/basic_line_height"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_button_round"
+            android:padding="@dimen/icon_padding"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_giftcard"
+            android:tint="@drawable/selector_button_text_color"
+            android:layout_marginStart="@dimen/between_element"/>
+
+        <LinearLayout
+            android:id="@+id/btn_payment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/between_element"
+            android:layout_weight="1"
+            android:background="@drawable/selector_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_count"
+                tools:text="@tools:sample/us_zipcodes"
+                android:layout_width="@dimen/basic_line_height"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@drawable/selector_button_text_color"
+                android:textSize="@dimen/font_size_big" />
+
+            <View
+                android:id="@+id/v_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@drawable/selector_button_text_color"
+                android:textSize="@dimen/font_size_big"
+                android:text="@string/get_payment"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

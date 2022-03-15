@@ -3,6 +3,7 @@ package com.misa.fresher.util
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import androidx.core.content.res.ResourcesCompat
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -80,4 +81,23 @@ fun <T1, T2, T3> guard(variable1: T1?, variable2: T2?, variable3: T3?, function:
     if (variable1 != null && variable2 != null && variable3 != null) {
         function(variable1, variable2, variable3)
     }
+}
+
+/**
+ * Hàm lấy dữ liệu trong bundle, nếu không thành công, trả về default value
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/14/2022
+ *
+ * @version 1
+ * @updated 3/14/2022: Tạo function
+ */
+inline fun <reified T: Any> Bundle?.get(name: String, defaultValue: T): T {
+    this?.let {
+        val result = this.get(name)
+        if (result != null && result is T) {
+            return result
+        }
+    }
+    return defaultValue
 }
