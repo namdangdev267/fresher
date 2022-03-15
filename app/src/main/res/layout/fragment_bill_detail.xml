@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.BillDetailFragment">
+
+    <LinearLayout
+        android:id="@+id/llBillDetailId"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:background="@color/purple_700"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvBillId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5.5"
+            android:gravity="center"
+            android:text="1000123"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnCart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_cart" />
+
+        <ImageButton
+            android:id="@+id/btnOptions"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_more_vert" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBillDetailContactCalender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@+id/llBillDetailId"
+        tools:ignore="RtlHardcoded">
+
+        <ImageView
+            android:id="@+id/ivContact"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_person"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvContact"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/contact_hint"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/ivCalender"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_calender"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvCalender"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_48"
+            android:layout_weight="2.5"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_24"
+            android:text="@string/calender_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="normal"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llByMore"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@+id/llBillDetailContactCalender">
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/ic_add" />
+
+        <TextView
+            android:id="@+id/tvBuyMore"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7.5"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_4"
+            android:clickable="true"
+            android:text="@string/billDetailByMore"
+            android:textColor="@color/purple_700"
+            android:textSize="@dimen/sp_16" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/white"
+            android:src="@drawable/ic_qr_navy" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/white"
+        android:id="@+id/rcvListItem"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/llTotalprice"
+        app:layout_constraintTop_toBottomOf="@+id/llByMore" />
+
+    <LinearLayout
+        android:id="@+id/llTotalprice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@drawable/bill_detail_receivable"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/llBillDetailGetPayment">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/purple_700"
+            android:paddingStart="@dimen/dp_8"
+            android:layout_gravity="center_vertical"
+            android:text="$"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:paddingStart="@dimen/dp_8"
+            android:layout_gravity="center_vertical"
+            android:text="Còn phải thu"/>
+        <TextView
+            android:id="@+id/tvTotalPrice_bill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:paddingStart="@dimen/dp_8"
+            android:layout_gravity="center_vertical"
+            android:text="1233321"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/purple_700"
+            android:paddingStart="@dimen/dp_8"
+            android:src="@drawable/ic_forward"
+            android:layout_gravity="center_vertical"
+            android:text="$"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBillDetailGetPayment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_4"
+        android:paddingTop="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_4"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/ivShipInfor"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:background="@drawable/oval_button"
+            android:src="@drawable/ic_ship_white" />
+
+        <ImageButton
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:background="@drawable/oval_button"
+            android:src="@drawable/ic_gift" />
+
+        <Button
+            android:id="@+id/btnAmountBills"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:textSize="@dimen/sp_16"
+            android:text="1"
+            android:textColor="@color/white"
+            android:layout_weight="1.5"
+            android:background="@drawable/item_amount_bg_selected" />
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:background="@color/white"
+            android:layout_height="@dimen/dp_48"/>
+
+        <Button
+            android:id="@+id/btnTotalPriceBill"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:textSize="@dimen/sp_16"
+            android:text="Thu tiền"
+            android:textAllCaps="false"
+            android:layout_weight="8.5"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:background="@drawable/total_price_selected" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

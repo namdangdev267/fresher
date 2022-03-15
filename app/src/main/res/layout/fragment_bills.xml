@@ -5,17 +5,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.BillsFragment">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abBills"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tbBills"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/purple_700"
-            android:theme="@style/ToolbarStyle">
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 </LinearLayout>

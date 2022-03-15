@@ -6,7 +6,7 @@
     <string name="switch_text">Tách dòng</string>
     <string name="total_items">0</string>
     <string name="total_price">Chưa chọn hàng</string>
-    <string name="saleTittle">Bán Hàng</string>
+    <string name="saleTittle">Bán hàng</string>
     <string name="billTittle">Danh sách hóa đơn</string>
     <string name="nameProduct_example">tui xach</string>
     <string name="idProduct_example">ABC1</string>
@@ -24,5 +24,6 @@
     <string name="filterSaleSwitchText">HÀNG HÓA CÒN HÀNG (SL >0)</string>
     <string name="filterCategoryTextViewText">NHÓM HÀNG HÓA</string>
     <string name="filterViewbyText">XEM THEO</string>
+    <string name="billDetailByMore">Mua thêm</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

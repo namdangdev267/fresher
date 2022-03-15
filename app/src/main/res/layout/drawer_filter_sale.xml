@@ -114,7 +114,8 @@
                 android:id="@+id/spnColor"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"
-                app:layout_constraintTop_toBottomOf="@+id/tvColor" />
+                app:layout_constraintTop_toBottomOf="@+id/tvColor"
+                tools:layout_editor_absoluteX="4dp" />
 
             <TextView
                 android:id="@+id/tvSize"

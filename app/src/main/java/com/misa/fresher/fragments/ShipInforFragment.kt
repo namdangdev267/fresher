@@ -33,7 +33,7 @@ class ShipInforFragment : Fragment() {
 
     private fun backEvent() {
         globalView.findViewById<ImageButton>(R.id.btnBack).setOnClickListener{
-            findNavController().navigate(R.id.action_shipInforFragment_to_saleFragment)
+            activity?.onBackPressed()
         }
     }
 

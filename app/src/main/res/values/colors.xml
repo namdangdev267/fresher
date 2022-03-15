@@ -11,6 +11,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#F3ECEC</color>
     <color name="switchSale">#eeedf3</color>
+    <color name="bgPink">#ECEBEB</color>
     <color name="rcv_boder">#DCDBDB</color>
     <color name="rcv_effect">#BFAAE4</color>
     <color name="gray">#B9BEC1</color>

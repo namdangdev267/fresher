@@ -63,7 +63,7 @@
         android:id="@+id/llTachDong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pink"
+        android:background="@color/bgPink"
         android:orientation="horizontal"
         android:weightSum="12"
         app:layout_constraintTop_toBottomOf="@+id/llContactCalender">
@@ -119,10 +119,9 @@
 
         <ImageButton
             android:id="@+id/btnReset"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_48"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
-            android:layout_weight="1.3"
             android:background="@drawable/oval_button_base"
             android:contentDescription="@string/app_name"
             android:rotation="90"
@@ -146,7 +145,7 @@
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_marginStart="1dp"
-            android:layout_weight="7"
+            android:layout_weight="8"
             android:background="@drawable/total_price_base"
             android:text="@string/total_price"
             android:textAllCaps="false"

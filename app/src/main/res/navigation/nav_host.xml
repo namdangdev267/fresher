@@ -10,11 +10,15 @@
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale">
         <action
-            android:id="@+id/action_nav_sale_to_nav_shipInfor"
-            app:destination="@id/nav_shipInfor" />
-        <action
             android:id="@+id/action_nav_sale_to_billsFragment"
             app:destination="@id/nav_bills"
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left" />
+        <action
+            android:id="@+id/action_nav_sale_to_nav_billDetail"
+            app:destination="@id/nav_billDetail"
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
             app:popEnterAnim="@anim/anim_slide_in_right"
@@ -24,19 +28,20 @@
         android:id="@+id/nav_shipInfor"
         android:name="com.misa.fresher.fragments.ShipInforFragment"
         android:label="fragment_ship_infor"
-        tools:layout="@layout/fragment_ship_infor">
-        <action
-            android:id="@+id/action_shipInforFragment_to_saleFragment"
-            app:destination="@id/nav_sale" />
-    </fragment>
+        tools:layout="@layout/fragment_ship_infor"/>
     <fragment
         android:id="@+id/nav_bills"
         android:name="com.misa.fresher.fragments.BillsFragment"
         android:label="fragment_bills"
-        tools:layout="@layout/fragment_bills">
+        tools:layout="@layout/fragment_bills"/>
+    <fragment
+        android:id="@+id/nav_billDetail"
+        android:name="com.misa.fresher.fragments.BillDetailFragment"
+        android:label="fragment_bill_detail"
+        tools:layout="@layout/fragment_bill_detail" >
         <action
-            android:id="@+id/action_nav_bills_to_nav_sale"
-            app:destination="@id/nav_sale"
+            android:id="@+id/action_nav_billDetail_to_nav_shipInfor"
+            app:destination="@id/nav_shipInfor"
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
             app:popEnterAnim="@anim/anim_slide_in_right"

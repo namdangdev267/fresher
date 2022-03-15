@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_50"
+    android:layout_height="@dimen/dp_48"
     android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/ivSearch"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_48"
+        android:layout_height="@dimen/dp_40"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -16,7 +16,7 @@
     <EditText
         android:id="@+id/edSearch"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_48"
+        android:layout_height="@dimen/dp_40"
         android:layout_gravity="center_vertical"
         android:inputType="text"
         android:layout_weight="5"
@@ -28,7 +28,7 @@
     <ImageButton
         android:id="@+id/btnQrCode"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_48"
+        android:layout_height="@dimen/dp_40"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:contentDescription="@string/app_name" />

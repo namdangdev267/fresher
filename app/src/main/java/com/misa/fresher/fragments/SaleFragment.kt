@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
@@ -21,23 +22,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
-import com.misa.fresher.adapters.ProductAdapter
 import com.misa.fresher.adapters.ProductsAdapter
+import com.misa.fresher.customViews.CustomToast
 import com.misa.fresher.data.DataForTest
-import com.misa.fresher.data.FakeData
+import com.misa.fresher.model.SelectedProducts
 import com.misa.fresher.model.FilterProducts
-import com.misa.fresher.model.Product
 import com.misa.fresher.model.Products
-import com.misa.fresher.model.Products.Companion.createProductsList
 
 class SaleFragment : Fragment() {
 
     private var globleView: View? = null
-    var rcv: RecyclerView? = null
-    var listItems = mutableListOf<Products>()
-    var bottomSheetView: View? = null
-    var amount = 1
+    private var rcv: RecyclerView? = null
+    private var bottomSheetView: View? = null
+    private var amount = 1
     private var fakedata = DataForTest.listProduct
+    private var productsSelected = mutableListOf<SelectedProducts>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,14 +56,14 @@ class SaleFragment : Fragment() {
         configFilterDrawer()
         resetEvent()
         navigateEvent()
+
     }
 
-    @SuppressLint("RtlHardcoded")
     private fun configFilterDrawer() {
+        configFilterSpinner()
         val mDrawer = globleView?.findViewById<DrawerLayout>(R.id.dlSaleFilter)
         mDrawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         globleView?.findViewById<ImageButton>(R.id.btnFilter)?.setOnClickListener {
-            configFilterSpinner()
             mDrawer?.openDrawer(Gravity.RIGHT)
         }
         val btnSave = globleView?.findViewById<Button>(R.id.btnFilterSave)
@@ -156,10 +155,9 @@ class SaleFragment : Fragment() {
         (rcv?.adapter)?.notifyDataSetChanged()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun resetEvent() {
         globleView?.findViewById<ImageButton>(R.id.btnReset)?.setOnClickListener {
-            listItems.clear()
+            productsSelected.clear()
             it.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_base)
             val btnItemCount = globleView?.findViewById<Button>(R.id.btnItemCount)
@@ -191,13 +189,19 @@ class SaleFragment : Fragment() {
 
     private fun navigateEvent() {
         globleView?.findViewById<Button>(R.id.btnTotalPrice)?.setOnClickListener {
-            if (listItems.size > 0) {
-                findNavController().navigate(R.id.action_nav_sale_to_nav_shipInfor)
+            if (productsSelected.size > 0) {
+                findNavController().navigate(
+                    R.id.action_nav_sale_to_nav_billDetail,
+                    bundleOf("items" to productsSelected)
+                )
             }
         }
         globleView?.findViewById<Button>(R.id.btnItemCount)?.setOnClickListener {
-            if (listItems.size > 0) {
-                findNavController().navigate(R.id.action_nav_sale_to_nav_shipInfor)
+            if (productsSelected.size > 0) {
+                findNavController().navigate(
+                    R.id.action_nav_sale_to_nav_billDetail,
+                    bundleOf("items" to productsSelected)
+                )
             }
         }
     }
@@ -249,8 +253,10 @@ class SaleFragment : Fragment() {
         bottomSheetDialog.show()
         changeItemAmount()
         bottomSheetDialog.setOnDismissListener {
-            for (i in 1..amount) {
-                listItems.add(products)
+            productsSelected.find { it.product == products }?.let {
+                it.amonut += amount
+            } ?: run {
+                productsSelected.add(SelectedProducts(amount, products))
             }
             updateItemSelected()
         }
@@ -264,6 +270,11 @@ class SaleFragment : Fragment() {
         amount = tvAmount?.text.toString().toInt()
         btnRemove?.setOnClickListener {
             if (tvAmount?.text == "1") {
+                CustomToast.makeText(
+                    requireContext(),
+                    "Số lượng phải lớn hơn 0. Vui Lòng kiểm tra lại",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 amount--
                 tvAmount?.text = "$amount"
@@ -278,21 +289,21 @@ class SaleFragment : Fragment() {
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     private fun updateItemSelected() {
         val btnItemCount = globleView?.findViewById<Button>(R.id.btnItemCount)
-        var price = 0.0
-        if (listItems.size > 0) {
+        val amount = productsSelected.sumOf { it.amonut }
+        val totalPrice = productsSelected.sumOf { it.amonut * it.product.price }
+
+        if (productsSelected.size > 0) {
             btnItemCount?.let {
-                it.text = "${listItems.size}"
+                it.text = "$amount"
                 it.background = AppCompatResources.getDrawable(
                     requireContext(),
                     R.drawable.item_amount_bg_selected
                 )
             }
+            Log.d("test", productsSelected[0].toString())
             val btnTotalPrice = globleView?.findViewById<Button>(R.id.btnTotalPrice)
-            for (i in listItems) {
-                price += i.price
-            }
             btnTotalPrice?.let {
-                it.text = "Tổng $price"
+                it.text = "Tổng $totalPrice"
                 it.background =
                     AppCompatResources.getDrawable(
                         requireContext(),
@@ -302,7 +313,5 @@ class SaleFragment : Fragment() {
             globleView?.findViewById<ImageButton>(R.id.btnReset)?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button)
         }
-
     }
-
 }
