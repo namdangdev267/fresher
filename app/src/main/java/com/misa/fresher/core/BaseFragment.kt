@@ -14,11 +14,12 @@ import androidx.viewbinding.ViewBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Vì nav component luôn tạo lại view kể cả khi back trở lại.
  * Vì vậy [isInit] sẽ kiểm tra nếu đã khởi tạo rồi thì không chạy lại hàm khởi tạo nữa.
  * @updated 3/15/2022: Thêm biến [navigation] để có thể navigate từ fragment này sang fragment khác
+ * @updated 3/15/2022: Bổ sung hàm [updateUI]
  */
 abstract class BaseFragment<BD: ViewBinding> : Fragment() {
 
@@ -42,6 +43,7 @@ abstract class BaseFragment<BD: ViewBinding> : Fragment() {
             initUI()
             isInit = true
         }
+        updateUI()
     }
 
     /**
@@ -54,4 +56,15 @@ abstract class BaseFragment<BD: ViewBinding> : Fragment() {
      * @updated 3/9/2022: Tạo function
      */
     open fun initUI() { }
+
+    /**
+     * Cập nhật UI cho Fragment
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/15/2022
+     *
+     * @version 1
+     * @updated 3/15/2022: Tạo function
+     */
+    open fun updateUI() { }
 }

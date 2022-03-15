@@ -38,11 +38,12 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 4
+ * @version 5
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
  * @updated 3/12/2022: Thêm chức năng lọc sản phẩm, tìm kiếm sản phẩm theo tên, mã
  * @updated 3/15/2022: Chuyển nhà các hàm trong [configTypeSelectorDialog] từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
+ * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  */
 class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
@@ -70,7 +71,30 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         configOtherView()
 
         initProductList()
+    }
+
+    override fun updateUI() {
+        updateCustomer()
         updateSelectedItem()
+    }
+
+    /**
+     * Cập nhật khách hàng mỗi lần màn hình được mở
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/15/2022
+     *
+     * @version 1
+     * @updated 3/15/2022: Tạo function
+     */
+    private fun updateCustomer() {
+        (activity as MainActivity).tempCustomer?.let {
+            binding.tvCustomer.marqueeRepeatLimit = 1
+            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
+            binding.tvCustomer.text = it.toString()
+            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
+            binding.tvCustomer.isSelected = true
+        }
     }
 
     /**

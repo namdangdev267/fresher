@@ -22,8 +22,9 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/13/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/13/2022: Tạo class
+ * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  */
 class BillFragment: BaseFragment<FragmentBillBinding>() {
 
@@ -41,6 +42,29 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
 
         initProductItems()
         updateTotalAmount()
+    }
+
+    override fun updateUI() {
+        updateCustomer()
+    }
+
+    /**
+     * Cập nhật khách hàng mỗi lần màn hình được mở
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/15/2022
+     *
+     * @version 1
+     * @updated 3/15/2022: Tạo function
+     */
+    private fun updateCustomer() {
+        (activity as MainActivity).tempCustomer?.let {
+            binding.tvCustomer.marqueeRepeatLimit = 1
+            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
+            binding.tvCustomer.text = it.toString()
+            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
+            binding.tvCustomer.isSelected = true
+        }
     }
 
     /**
@@ -101,13 +125,6 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
      * @updated 3/14/2022: Tạo function
      */
     private fun configOtherView() {
-        (activity as MainActivity).tempCustomer?.let {
-            binding.tvCustomer.marqueeRepeatLimit = 1
-            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
-            binding.tvCustomer.text = it.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
-            binding.tvCustomer.isSelected = true
-        }
         binding.tvCustomer.setOnClickListener {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
