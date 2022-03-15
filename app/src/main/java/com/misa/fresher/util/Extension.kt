@@ -84,6 +84,22 @@ fun <T1, T2, T3> guard(variable1: T1?, variable2: T2?, variable3: T3?, function:
 }
 
 /**
+ * Hàm check null, nếu null sẽ trả về giá trị mặc định
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/15/2022
+ *
+ * @version 1
+ * @updated 3/15/2022: Tạo function
+ */
+fun <T> default(variable: T?, defaultValue: T): T {
+    if (variable != null) {
+        return variable
+    }
+    return defaultValue
+}
+
+/**
  * Hàm lấy dữ liệu trong bundle, nếu không thành công, trả về default value
  *
  * @author Nguyễn Công Chính

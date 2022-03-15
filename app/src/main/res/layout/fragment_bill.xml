@@ -154,7 +154,7 @@
         android:padding="@dimen/between_element_half">
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_ship_info"
+            android:id="@+id/btn_delivery_info"
             android:layout_width="@dimen/basic_line_height"
             android:layout_height="match_parent"
             android:background="@drawable/selector_button_round"
@@ -175,7 +175,7 @@
             android:layout_marginStart="@dimen/between_element"/>
 
         <LinearLayout
-            android:id="@+id/btn_payment"
+            android:id="@+id/ll_payment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/between_element"

@@ -27,5 +27,18 @@
         android:id="@+id/fragment_bill"
         android:name="com.misa.fresher.ui.sale.bill.BillFragment"
         android:label=""
-        tools:layout="@layout/fragment_bill"/>
+        tools:layout="@layout/fragment_bill">
+        <action
+            android:id="@+id/action_fragment_bill_to_fragment_delivery_info"
+            app:destination="@id/fragment_delivery_info"
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_delivery_info"
+        android:name="com.misa.fresher.ui.sale.bill.deliveryinfo.DeliveryInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_delivery_info"/>
 </navigation>

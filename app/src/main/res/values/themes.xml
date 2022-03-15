@@ -31,4 +31,10 @@
     <style name="Theme.FreshersApplication.BottomDialog" parent="Theme.Design.BottomSheetDialog">
         <item name="android:layout_margin">@dimen/between_element_narrow</item>
     </style>
+
+    <style name="Theme.FreshersApplication.TabText" parent="Theme.FreshersApplication">
+        <item name="android:textSize">@dimen/font_size_normal</item>
+    </style>
+
+    <dimen name="font_size_normal">14sp</dimen>
 </resources>

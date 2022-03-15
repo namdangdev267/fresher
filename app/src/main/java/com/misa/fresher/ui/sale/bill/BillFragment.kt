@@ -2,12 +2,14 @@ package com.misa.fresher.ui.sale.bill
 
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
 import com.misa.fresher.core.BaseFragment
+import com.misa.fresher.data.entity.Bill
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.ui.MainActivity
@@ -15,6 +17,7 @@ import com.misa.fresher.ui.sale.bill.adapter.ProductBillAdapter
 import com.misa.fresher.util.get
 import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.toCurrency
+import java.util.*
 
 /**
  * Màn hình thanh toán đơn hàng (bill)
@@ -121,8 +124,9 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/14/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/14/2022: Tạo function
+     * @updated 3/16/2022: Đặt sự kiện cho nút thanh toán
      */
     private fun configOtherView() {
         binding.tvCustomer.setOnClickListener {
@@ -135,6 +139,27 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
         }
         binding.tvBuyMore.setOnClickListener {
             activity?.onBackPressed()
+        }
+        binding.btnDeliveryInfo.setOnClickListener {
+            navigation.navigate(R.id.action_fragment_bill_to_fragment_delivery_info)
+        }
+        binding.llPayment.setOnClickListener {
+            (activity as MainActivity).tempCustomer?.let {
+                val bill = Bill(
+                    binding.tbBill.tvTitle.text.toString().toLong(),
+                    it,
+                    selectedItems,
+                    Calendar.getInstance()
+                )
+                FakeData.bills.add(bill)
+                Toast.makeText(requireContext(), getString(R.string.save_bill_success), Toast.LENGTH_SHORT).show()
+
+                (activity as MainActivity).tempCustomer = null
+                selectedItems.clear()
+                activity?.onBackPressed()
+            } ?: run {
+                Toast.makeText(requireContext(), getString(R.string.please_select_receiver), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

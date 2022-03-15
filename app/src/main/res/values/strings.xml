@@ -31,6 +31,20 @@
     <string name="note">Ghi chú</string>
     <string name="temp_save">Lưu tạm</string>
     <string name="delete_bill">Xóa đơn</string>
+    <string name="save">Lưu</string>
+    <string name="delivery_info">Thông tin giao hàng</string>
+    <string name="receiver">Người nhận</string>
+    <string name="ship">Giao hàng</string>
+    <string name="_package">Gói hàng</string>
+    <string name="tap_action">Chạm để chọn</string>
+    <string name="tap_insert">Chạm để nhập</string>
+    <string name="organization">Tổ chức</string>
+    <string name="personal">Cá nhân</string>
+    <string name="length">Chiều dài</string>
+    <string name="width">Chiều rộng</string>
+    <string name="height">Chiều cao</string>
+    <string name="please_select_receiver">Vui lòng chọn người nhận.</string>
+    <string name="save_bill_success">Lưu đơn hàng thành công</string>
 
     <string-array name="test_arr">
         <item>ajhdfads</item>
