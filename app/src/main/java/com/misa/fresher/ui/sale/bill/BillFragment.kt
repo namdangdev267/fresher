@@ -8,7 +8,7 @@ import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
 import com.misa.fresher.core.BaseFragment
-import com.misa.fresher.data.model.CartItemModel
+import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.adapter.ProductBillAdapter
@@ -31,7 +31,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
     override val getInflater: (LayoutInflater) -> FragmentBillBinding
         get() = FragmentBillBinding::inflate
 
-    private val selectedItems by lazy { arguments.get("items", mutableListOf<CartItemModel>()) }
+    private val selectedItems by lazy { arguments.get("items", mutableListOf<ProductItemBill>()) }
 
     private var productAdapter: ProductBillAdapter? = null
 

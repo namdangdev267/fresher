@@ -20,7 +20,7 @@ import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.*
-import com.misa.fresher.data.model.CartItemModel
+import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.data.model.FilterProductModel
 import com.misa.fresher.databinding.DialogProductTypeSelectorBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
@@ -56,7 +56,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     }
     private val dialogBinding by lazy { DialogProductTypeSelectorBinding.inflate(layoutInflater) }
 
-    private var selectedItems = mutableListOf<CartItemModel>()
+    private var selectedItems = mutableListOf<ProductItemBill>()
     private val filter = FilterProductModel()
     private var quantity = 1
     private var color: ProductColor? = null
@@ -127,7 +127,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
                     selectedItems.find { it.item == item }?.let {
                         it.quantity += quantity
                     } ?: run {
-                        selectedItems.add(CartItemModel(item, quantity))
+                        selectedItems.add(ProductItemBill(item, quantity))
                     }
                     updateSelectedItem()
                 }
