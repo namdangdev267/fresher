@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="EditTextToolBar">
-        <attr name="startIcon" format="reference" />
-        <attr name="endIcon" format="reference" />
-    </declare-styleable>
+    <attr name="value" format="string" />
+    <attr name="icon" format="reference" />
+    <attr name="isActive" format="boolean" />
 
     <declare-styleable name="BtnCalculatorKey">
-        <attr name="value" format="string" />
-        <attr name="icon" format="reference" />
-        <attr name="isActive" format="boolean" />
+        <attr name="value" />
+        <attr name="icon" />
+        <attr name="isActive" />
+    </declare-styleable>
+
+    <declare-styleable name="BtnRound">
+        <attr name="value" />
+        <attr name="icon" />
+        <attr name="isActive" />
+    </declare-styleable>
+
+    <declare-styleable name="ItemSaleProductView">
+        <attr name="image" format="reference" />
+        <attr name="name" format="string" />
+        <attr name="code" format="string" />
+        <attr name="price" format="string" />
+        <attr name="amount" format="integer" />
+        <attr name="isUnitSelect" format="boolean" />
     </declare-styleable>
 </resources>

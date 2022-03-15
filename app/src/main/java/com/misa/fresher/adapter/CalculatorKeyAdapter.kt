@@ -9,7 +9,7 @@ import com.misa.fresher.models.CalculatorKey
 
 class CalculatorKeyAdapter(
     override var items: ArrayList<CalculatorKey>,
-    override var clickItemListener: (CalculatorKey) -> Unit
+    override var clickItemListener: (CalculatorKey, Int) -> Unit
 ) : BaseAdapter<CalculatorKey, CalculatorKeyAdapter.CalculatorKeyViewHolder>() {
 
 
@@ -20,11 +20,10 @@ class CalculatorKeyAdapter(
 
     class CalculatorKeyViewHolder(
         private val binding: ItemCalculatorKeyBinding,
-        override var clickItemListener: (CalculatorKey) -> Unit
+        override var clickItemListener: (CalculatorKey, Int) -> Unit
     ) : BaseViewHolder<CalculatorKey>(binding.root) {
-
-        override fun bindingData(item: CalculatorKey) {
-            super.bindingData(item)
+        override fun bindingData(item: CalculatorKey, position: Int) {
+            super.bindingData(item, position)
             binding.root.apply {
                 value = item.value
                 icon = item.icon

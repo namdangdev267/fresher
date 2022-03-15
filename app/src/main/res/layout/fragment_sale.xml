@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_sale"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bar_size"
+            android:layout_height="@dimen/toolbar_height"
             android:background="@color/purpleDark"
             android:contentInsetStart="0dp"
             app:contentInsetStart="0dp">
@@ -28,12 +29,13 @@
                     android:id="@+id/toggle_drawer_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_btn_round_transparent"
+                    android:background="@drawable/bg_btn_oval_violet"
                     android:contentDescription="@string/button_icon_desc"
                     android:padding="@dimen/pad_extra"
                     android:src="@drawable/ic_dehaze_white" />
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/text_search"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -53,7 +55,7 @@
                     android:id="@+id/cart_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_btn_round_transparent"
+                    android:background="@drawable/bg_btn_oval_violet"
                     android:contentDescription="@string/button_icon_desc"
                     android:padding="@dimen/pad_medium"
                     android:src="@drawable/ic_cart"
@@ -63,7 +65,7 @@
                     android:id="@+id/filter_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_btn_round_transparent"
+                    android:background="@drawable/bg_btn_oval_violet"
                     android:clickable="true"
                     android:contentDescription="@string/button_icon_desc"
                     android:focusable="true"
@@ -125,37 +127,48 @@
                 android:textColor="@color/black" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_product_rec_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_sale_product" />
+            android:orientation="horizontal">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/pad_extra"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_product_rec_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_sale_product" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/product_selected"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <ImageButton
+            <com.misa.fresher.customview.BtnRound
                 android:id="@+id/clear_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/bg_circle"
-                android:contentDescription="@string/button_icon_desc"
-                android:src="@drawable/ic_rotate" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_rotate"
+                app:isActive="false"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/number_btn"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="2dp"
+                android:layout_marginStart="@dimen/pad_tiny"
+                android:layout_marginEnd="1dp"
+                android:textSize="@dimen/txt_large"
                 android:background="@drawable/bg_btn_round_left"
                 android:clickable="true"
                 android:focusable="true"
@@ -166,6 +179,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textSize="@dimen/txt_large"
                 android:background="@drawable/bg_btn_round_right"
                 android:clickable="true"
                 android:focusable="true"
@@ -179,8 +193,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:layout_marginTop="@dimen/bar_size">
-        <include layout="@layout/drawer_right_main" />
+        android:layout_marginTop="@dimen/toolbar_height">
+        <include
+            android:id="@+id/drawer_sale_filter"
+            layout="@layout/drawer_sale_filter" />
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

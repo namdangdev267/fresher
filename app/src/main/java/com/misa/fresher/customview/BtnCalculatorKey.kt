@@ -13,7 +13,7 @@ class BtnCalculatorKey(context: Context, attrs: AttributeSet) : AppCompatTextVie
         set(value) {
             field = value
             text = value
-            if(field == "") {
+            if(value == "") {
                 measure(0, 0)
                 setPadding( measuredWidth - 12, 0, measuredWidth - 12,  0)
             }

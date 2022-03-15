@@ -11,7 +11,7 @@ import com.misa.fresher.utils.Enums
 
 class ShipInfoAdapter(
     override var items: ArrayList<ArrayList<ShipInfo>>,
-    override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+    override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
 ) : BaseAdapter<ArrayList<ShipInfo>, ShipInfoAdapter.ShipInfoViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -59,7 +59,8 @@ class ShipInfoAdapter(
     }
 
 
-    abstract class ShipInfoViewHolder(view: View) : BaseViewHolder<ArrayList<ShipInfo>>(view) {
+    abstract class ShipInfoViewHolder(view: View)
+        : BaseViewHolder<ArrayList<ShipInfo>>(view) {
 
         fun onBindBasicData(shipInfo: ShipInfo, binding: ItemShipInfoBasicBinding) {
             if (shipInfo is ShipInfo.Basic) {
@@ -93,20 +94,20 @@ class ShipInfoAdapter(
 
     class BasicViewHolder(
         private val binding: ItemShipInfoBasicBinding,
-        override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+        override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
     ) : ShipInfoViewHolder(binding.root) {
-
-        override fun bindingData(item: ArrayList<ShipInfo>) {
-            super.bindingData(item)
+        override fun bindingData(item: ArrayList<ShipInfo>, position: Int) {
+            super.bindingData(item, position)
             onBindBasicData(item[0], binding)
         }
     }
 
     class TwoColumnsViewHolder(
         private val binding: ItemShipInfoTwoBinding,
-        override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+        override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
     ) : ShipInfoViewHolder(binding.root) {
-        override fun bindingData(item: ArrayList<ShipInfo>) {
+        override fun bindingData(item: ArrayList<ShipInfo>, position: Int) {
+            super.bindingData(item, position)
             listOf(binding.col1, binding.col2).forEachIndexed { i, col ->
                 onBindBasicData(item[i], col)
             }
@@ -116,11 +117,12 @@ class ShipInfoAdapter(
 
     class ThreeColumnsViewHolder(
         private val binding: ItemShipInfoThreeBinding,
-        override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+        override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
     ) :
         ShipInfoViewHolder(binding.root) {
 
-        override fun bindingData(item: ArrayList<ShipInfo>) {
+        override fun bindingData(item: ArrayList<ShipInfo>, position: Int) {
+            super.bindingData(item, position)
             listOf(binding.col1, binding.col2, binding.col3).forEachIndexed { i, col ->
                 onBindBasicData(item[i], col)
             }
@@ -129,20 +131,22 @@ class ShipInfoAdapter(
 
     class CheckboxViewHolder(
         private val binding: ItemShipInfoCheckboxBinding,
-        override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+        override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
     ) :
         ShipInfoViewHolder(binding.root) {
-        override fun bindingData(item: ArrayList<ShipInfo>) {
+        override fun bindingData(item: ArrayList<ShipInfo>, position: Int) {
+            super.bindingData(item, position)
             onBindCheckboxData(item[0], binding)
         }
     }
 
     class RadioViewHolder(
         private val binding: ItemShipInfoRadioBinding,
-        override var clickItemListener: (ArrayList<ShipInfo>) -> Unit
+        override var clickItemListener: (ArrayList<ShipInfo>, Int) -> Unit
     ) :
         ShipInfoViewHolder(binding.root) {
-        override fun bindingData(item: ArrayList<ShipInfo>) {
+        override fun bindingData(item: ArrayList<ShipInfo>, position: Int) {
+            super.bindingData(item, position)
             onBindRadioData(item[0], binding)
         }
     }

@@ -14,29 +14,40 @@
             android:id="@+id/ship_information_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purpleDark">
+            android:background="@color/purpleDark"
+            app:contentInsetStart="@dimen/pad_small"
+            app:contentInsetEnd="@dimen/pad_small">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="8dp">
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_oval_violet"
+                    android:src="@drawable/ic_arrow_back"
+                    android:padding="@dimen/pad_medium"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/shipping_activity_name"
+                    android:text="@string/ship_info_fragment_name"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/txt_extra"
                     android:textStyle="bold" />
 
                 <ImageButton
+                    android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/bg_btn_oval_violet"
                     android:src="@drawable/ic_delete"
+                    android:padding="@dimen/pad_medium"
                     app:tint="@color/white" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
