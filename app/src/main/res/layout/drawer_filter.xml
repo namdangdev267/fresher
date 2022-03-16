@@ -23,7 +23,6 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
 
-                android:theme="@style/Theme.FreshersApplication.Switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,22 +90,19 @@
                     android:id="@+id/rb_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:theme="@style/Theme.FreshersApplication.Switch"/>
+                    android:text="@string/name"/>
 
                 <RadioButton
                     android:id="@+id/rb_new"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/new_product"
-                    android:theme="@style/Theme.FreshersApplication.Switch"/>
+                    android:text="@string/new_product"/>
 
                 <RadioButton
                     android:id="@+id/rb_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/quantity_in_inventory"
-                    android:theme="@style/Theme.FreshersApplication.Switch"/>
+                    android:text="@string/quantity_in_inventory"/>
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

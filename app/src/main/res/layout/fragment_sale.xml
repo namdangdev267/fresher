@@ -68,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/between_element"
                 android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:theme="@style/Theme.FreshersApplication.Switch" />
+                android:minHeight="0dp" />
 
             <TextView
                 android:layout_width="wrap_content"

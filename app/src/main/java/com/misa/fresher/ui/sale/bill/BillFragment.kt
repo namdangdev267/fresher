@@ -148,7 +148,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
                 val bill = Bill(
                     binding.tbBill.tvTitle.text.toString().toLong(),
                     it,
-                    selectedItems,
+                    selectedItems.toList(),
                     Calendar.getInstance()
                 )
                 FakeData.bills.add(bill)

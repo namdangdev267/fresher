@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/primary</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -22,10 +22,6 @@
 
     <style name="Theme.FreshersApplication.Toolbar.TextItem" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
         <item name="android:textColor">@color/primary_text_in_white</item>
-    </style>
-
-    <style name="Theme.FreshersApplication.Switch" parent="Theme.FreshersApplication">
-        <item name="colorSecondary">@color/primary</item>
     </style>
 
     <style name="Theme.FreshersApplication.BottomDialog" parent="Theme.Design.BottomSheetDialog">

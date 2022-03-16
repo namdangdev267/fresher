@@ -1,7 +1,6 @@
 package com.misa.fresher.common
 
 import com.misa.fresher.data.entity.*
-import java.util.*
 
 /**
  * Lớp chứa dữ liệu giả cho ứng dụng

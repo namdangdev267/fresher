@@ -11,8 +11,9 @@ import com.misa.fresher.databinding.ItemTapActionInputBinding
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/16/2022: Đổi từ 1 textview + imageview -> 1 textview với drawable
  */
 class TapActionViewHolder(
     private val binding: ItemTapActionInputBinding
@@ -26,7 +27,8 @@ class TapActionViewHolder(
         binding.tvHeader.text = data.title
         binding.tvRequired.text = if (data.isRequired) "*" else ""
         data.icon?.let {
-            binding.ivIcon.setImageDrawable(it)
+            it.setBounds(0, 0, it.intrinsicWidth, it.intrinsicHeight)
+            binding.tvInput.setCompoundDrawablesRelative(null, null, it, null)
         }
         binding.tvInput.text = data.input
     }

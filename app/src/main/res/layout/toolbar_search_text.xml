@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
@@ -24,13 +25,15 @@
             app:tint="@color/primary_text_in_primary" />
 
         <LinearLayout
+            android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             android:background="@drawable/box"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/between_element"
             android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/between_element">
+            android:paddingHorizontal="@dimen/between_element"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/et_input"
@@ -48,15 +51,15 @@
                 android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/ic_search"
                 app:drawableTint="@color/secondary_text_in_white" />
-
-            <ImageButton
-                android:id="@+id/btn_input"
-                android:layout_width="@dimen/search_bar_height"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:src="@drawable/ic_qr_code_scanner"
-                app:tint="@color/secondary_text_in_white"
-                android:contentDescription="@string/sample_description"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/primary_text_in_primary"
+            android:textSize="@dimen/font_size_big"
+            tools:text="@tools:sample/cities" />
     </LinearLayout>
 </androidx.appcompat.widget.Toolbar>

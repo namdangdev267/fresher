@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:padding="@dimen/between_element"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/between_element">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_header"
+            android:id="@+id/tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primary_text_in_white"
             tools:text="@tools:sample/cities" />
 
         <TextView
-            android:id="@+id/tv_required"
+            android:id="@+id/tv_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/between_element"
-            android:textColor="@color/red"
-            tools:text="@tools:sample/us_zipcodes" />
+            android:layout_marginTop="@dimen/between_element_half"
+            tools:text="@tools:sample/full_names" />
+
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_input"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/tap_action"
-        android:textSize="@dimen/font_size_normal"
         android:textColor="@color/primary_text_in_white"
-        android:gravity="center_vertical"
-        app:drawableTint="@color/primary" />
+        tools:text="@tools:sample/us_zipcodes" />
+
+    <ImageView
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginStart="@dimen/between_element"
+        android:contentDescription="@string/sample_description"
+        android:src="@drawable/ic_arrow_right" />
 </LinearLayout>
