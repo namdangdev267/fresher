@@ -117,7 +117,6 @@
                 android:id="@+id/split_row_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="true"
                 android:padding="@dimen/pad_medium" />
 
             <TextView

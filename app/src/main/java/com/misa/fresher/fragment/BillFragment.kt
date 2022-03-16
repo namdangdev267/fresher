@@ -3,7 +3,9 @@ package com.misa.fresher.fragment
 import android.view.Gravity
 import android.widget.Toast
 import androidx.core.view.get
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.misa.fresher.R
 import com.misa.fresher.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentBillBinding
@@ -17,9 +19,19 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
         initListProductRecViewUI()
     }
 
+    override fun updateUI() {
+        super.updateUI()
+        updateTotalPriceUI()
+        updateSelectedItemsCountUI()
+    }
+
     override fun initListener() {
         super.initListener()
         initToolbarListener()
+        binding.btnBuyMore.setOnClickListener { activity?.onBackPressed() }
+        binding.btnNavToShipInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_bill_to_fragment_ship_info)
+        }
     }
 
     fun initToolbarListener() {
@@ -37,7 +49,12 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
         binding.listProductRecView.post {
             selectedItems.forEachIndexed { pos, product ->
                 (binding.listProductRecView.findViewHolderForAdapterPosition(pos) as SaleProductAdapter.ProductItemViewHolder).itemSaleProductView.run {
-                    binding.btnAdd.setOnClickListener { amount = ++product.items[0].amount }
+                    binding.btnAdd.setOnClickListener {
+                        amount = ++product.items[0].amount
+                        updateTotalPriceUI()
+                        updateSelectedItemsCountUI()
+
+                    }
                     binding.btnMinus.setOnClickListener {
                         if(product.items[0].amount == 1) {
                             val toast = Toast.makeText(
@@ -45,18 +62,20 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
                             )
                             toast.setGravity(Gravity.TOP, 0, 120)
                             toast.show()
-                        } else amount = --product.items[0].amount
+                        } else {
+                            amount = --product.items[0].amount
+                            updateTotalPriceUI()
+                            updateSelectedItemsCountUI()
+                        }
                     }
                 }
             }
         }
     }
-
-    private fun removeItem (pos: Int) {
-        selectedItems.removeAt(pos)
-        (binding.listProductRecView.adapter as SaleProductAdapter).run {
-            notifyItemMoved(pos, pos)
-        }
+    private fun updateTotalPriceUI() {
+        binding.txtTotalPrice.text = selectedItems.sumOf { it.getTotalPrice() }.toString()
     }
-
+    private fun updateSelectedItemsCountUI() {
+        binding.productItemCountBtn.text = selectedItems.sumOf { it.getAmount() }.toString()
+    }
 }

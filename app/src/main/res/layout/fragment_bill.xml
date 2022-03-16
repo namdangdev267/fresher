@@ -97,6 +97,38 @@
         android:layout_height="@dimen/pad_small"
         android:background="@color/purpleLight"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/btn_buy_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/pad_small"
+            android:gravity="center_vertical"
+            android:padding="@dimen/pad_medium"
+            android:textColor="@color/purpleDark"
+            android:background="@drawable/bg_product_item"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Buy more"
+            app:drawableTint="@color/purpleDark"
+            app:drawableStartCompat="@drawable/ic_add_black" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_qr_scan"
+            android:paddingStart="@dimen/pad_extra"
+            android:paddingEnd="@dimen/pad_extra"
+            android:background="@drawable/bg_btn_round_white"
+            app:tint="@color/purpleDark" />
+
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_product_rec_view"
         android:layout_width="match_parent"
@@ -127,6 +159,7 @@
             app:drawableStartCompat="@drawable/ic_money_black" />
 
         <TextView
+            android:id="@+id/txt_total_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -144,11 +177,12 @@
         android:padding="@dimen/pad_medium">
 
         <com.misa.fresher.customview.BtnRound
+            android:id="@+id/btn_nav_to_ship_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/pad_tiny"
             app:drawableTint="@color/white"
-            app:icon="@drawable/ic_cart"
+            app:icon="@drawable/ic_shipping_white"
             app:isActive="true" />
 
         <com.misa.fresher.customview.BtnRound
@@ -156,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/pad_tiny"
             app:drawableTint="@color/white"
-            app:icon="@drawable/ic_cart"
+            app:icon="@drawable/ic_giftcard_white"
             app:isActive="true" />
 
         <androidx.appcompat.widget.AppCompatButton

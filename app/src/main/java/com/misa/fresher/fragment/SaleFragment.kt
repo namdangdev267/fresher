@@ -1,8 +1,5 @@
 package com.misa.fresher.fragment
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -29,7 +24,6 @@ import com.misa.fresher.models.product.*
 import com.misa.fresher.utils.Enums
 import com.misa.fresher.utils.Utils
 import kotlinx.coroutines.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate) {
@@ -45,7 +39,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     private var displayedItems = filteredItems
     private var selectedItems = arrayListOf<Product>()
 
-    var timer: Timer? = null
     object FilterConfig {
         var viewMode = Enums.Product.MODEL
         var textSearch = ""
@@ -366,7 +359,9 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
                         unit = product.units.find { it.name == items[checked] }!!
                     }
 
-                    val selectedItem = selectedItems.find { it.code == product.code && it.items[0].size == size && it.items[0].color == color && it.unit == unit }
+                    var selectedItem: Product? = null
+                    val isSplitRow = binding.splitRowSwitch.isChecked
+                    if(!isSplitRow) selectedItem = selectedItems.find { it.code == product.code && it.items[0].size == size && it.items[0].color == color && it.unit == unit }
 
                     if (selectedItem != null) selectedItem.items[0].amount += itemSaleProductView.amount
                     else product.items.find { it.color == color && it.size == size }?.let { item ->

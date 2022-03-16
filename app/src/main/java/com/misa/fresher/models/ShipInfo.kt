@@ -1,6 +1,5 @@
 package com.misa.fresher.models
 
-import android.text.InputType
 import com.misa.fresher.utils.Enums
 
 sealed class ShipInfo(val type: Enums.ShipInfo) {
