@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_BanHang"
-        android:icon="@drawable/euro"
+        android:id="@+id/fragment_sale"
         android:title="Sale" />
     <item
         android:id="@+id/nav_SoGiaoHang"
-        android:icon="@drawable/car"
         android:title="Shipping book" />
 <!--    <item-->
 <!--        android:id="@+id/nav_DSachHoaDon"-->
