@@ -4,7 +4,7 @@ sealed class ShippingView {
     data class TouchTextView(
         val tittle: String,
         val asterisk: String?,
-        val hint: String,
+        var hint: String,
         val img: Int?
     ) : ShippingView()
 

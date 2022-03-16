@@ -1,7 +1,6 @@
 package com.misa.fresher.adapters
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.misa.fresher.fragments.ShipInforFragment
 
@@ -23,4 +22,5 @@ class ViewPager2Adapter(fragment: ShipInforFragment) : FragmentStateAdapter(frag
         mFragmentList.add(fragment)
         mFragmentTittle.add(tittle)
     }
+    fun getFragment(position: Int): Fragment = mFragmentList[position]
 }

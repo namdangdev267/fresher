@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/llShippingTittle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_50"
         android:background="@color/purple_700"
         android:orientation="horizontal"
         android:weightSum="10"

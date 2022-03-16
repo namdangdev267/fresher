@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_48"
+    android:weightSum="10"
     android:background="@android:color/transparent">
 
     <ImageView
@@ -17,7 +18,9 @@
         android:id="@+id/edSearch"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_40"
-        android:layout_gravity="center_vertical"
+        android:gravity="bottom"
+        android:layout_gravity="center"
+        android:paddingStart="@dimen/dp_4"
         android:inputType="text"
         android:layout_weight="5"
         android:ellipsize="end"

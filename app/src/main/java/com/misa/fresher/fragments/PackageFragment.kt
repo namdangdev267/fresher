@@ -34,10 +34,16 @@ class PackageFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun configRecyclerView() {
         rcv = globalView?.findViewById(R.id.rcvShippingView_package)
-        val adapter = ReceiverViewAdapter(list)
+        val adapter = ReceiverViewAdapter(list,{
+
+        })
         adapter.notifyDataSetChanged()
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun getData(it: ShippingView) {
+
     }
 
     private fun initData() {

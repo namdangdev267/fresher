@@ -1,9 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.BillsFragment">
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/llListBills"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/purple_700">
+        <ImageButton
+            android:id="@+id/btnMenuBills"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_menu_24"
+            android:background="@color/purple_700"/>
+        <TextView
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Danh sách hóa đơn"
+            android:layout_weight="8"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_search_white" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llSpinner"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/llListBills"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="@dimen/dp_48">
+        <Spinner
+            android:id="@+id/spnDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <Spinner
+            android:id="@+id/spnPayStatus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llTotal"
+        app:layout_constraintTop_toBottomOf="@+id/llSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:paddingStart="@dimen/dp_8"
+        android:background="@color/bgPink"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Total"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_8"
+            android:textSize="@dimen/sp_16"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvTotalPriceBills"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingEnd="@dimen/dp_4"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListBills"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTotal"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/llBillDetailId"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/purple_700"
         android:orientation="horizontal"
         android:weightSum="10"
@@ -74,12 +74,13 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tvContact"
+            android:id="@+id/tvContactBillsDetail"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:ellipsize="end"
             android:gravity="center"
+            android:textColor="@color/black"
             android:hint="@string/contact_hint"
             android:maxLines="1"
             android:textSize="@dimen/sp_18" />

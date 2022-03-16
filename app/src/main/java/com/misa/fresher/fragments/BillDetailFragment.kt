@@ -9,80 +9,100 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductSelectedAdapter
-import com.misa.fresher.model.Products
+import com.misa.fresher.model.Bill
 import com.misa.fresher.model.SelectedProducts
+import com.misa.fresher.viewModel.ShareViewModel
+import com.misa.fresher.viewModel.ShipInforViewModel
 
 class BillDetailFragment : Fragment() {
-    private var globalView : View ?=null
     private var listFromSale = mutableListOf<SelectedProducts>()
+    val rnds = (1000..9999).random()
+    var bill = Bill(listFromSale,rnds,null)
+    var viewModel: ShareViewModel?= null
+    var shipInforviewModel: ShipInforViewModel?= null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(requireActivity()).get(ShareViewModel::class.java)
+        shipInforviewModel = ViewModelProvider(requireActivity()).get(ShipInforViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bill_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        globalView = view
-        listFromSale=getDataFromSaleFragment()
-        configListSelectedItem(listFromSale)
-
-        configRecyclerView()
-        navigaEvent()
-
+        view.findViewById<TextView>(R.id.tvBillId).text=rnds.toString()
+        listFromSale = getDataFromSaleFragment()
+        configListSelectedItem(listFromSale, view)
+        configRecyclerView(view)
+        navigaEvent(view)
+        updateReceiver(view)
     }
 
-    private fun configRecyclerView() {
-        val rcv = globalView?.findViewById<RecyclerView>(R.id.rcvListItem)
-        val adpter = ProductSelectedAdapter(listFromSale,{changeAmountSelectedProduct(it)})
-        rcv?.adapter=adpter
-        rcv?.layoutManager=LinearLayoutManager(requireContext())
+    private fun updateReceiver(view: View) {
+        shipInforviewModel?.receiver?.observe(viewLifecycleOwner, Observer {
+            view.findViewById<TextView>(R.id.tvContactBillsDetail).text=it.name+"("+it.phoneNumber+")"
+            bill.receiver=it
+        })
     }
 
-    private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts)
-    {
-        Log.e("amount selected",selectedProducts.amonut.toString())
-        for(i in listFromSale){
-            if (i.product==selectedProducts.product){
-                i.amonut=selectedProducts.amonut
+    private fun configRecyclerView(view: View) {
+        val rcv = view.findViewById<RecyclerView>(R.id.rcvListItem)
+        val adpter = ProductSelectedAdapter(listFromSale, { changeAmountSelectedProduct(it, view) })
+        rcv?.adapter = adpter
+        rcv?.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts, view: View) {
+        Log.e("amount selected", selectedProducts.amonut.toString())
+        for (i in listFromSale) {
+            if (i.product == selectedProducts.product) {
+                i.amonut = selectedProducts.amonut
             }
         }
-        configListSelectedItem(listFromSale)
+        configListSelectedItem(listFromSale, view)
 
     }
 
-    private fun configListSelectedItem(list : MutableList<SelectedProducts>) {
+    private fun configListSelectedItem(list: MutableList<SelectedProducts>, view: View) {
         val amount = list.sumOf { it.amonut }
-        val totalPrice = list.sumOf { it.amonut*it.product.price }
-        globalView?.findViewById<Button>(R.id.btnAmountBills)?.text= amount.toString()
-        globalView?.findViewById<TextView>(R.id.tvTotalPrice_bill)?.text= totalPrice.toString()
+        val totalPrice = list.sumOf { it.amonut * it.product.price }
+        view.findViewById<Button>(R.id.btnAmountBills)?.text = amount.toString()
+        view.findViewById<TextView>(R.id.tvTotalPrice_bill)?.text = totalPrice.toString()
     }
 
     private fun getDataFromSaleFragment(): MutableList<SelectedProducts> {
         val list = arguments?.get("items").let {
             it as MutableList<SelectedProducts>
         }
-        Log.d("test1",list[0].toString())
         return list
     }
 
-    private fun navigaEvent() {
-        globalView?.findViewById<ImageButton>(R.id.ivShipInfor)?.setOnClickListener {
+    private fun navigaEvent(view: View) {
+        view.findViewById<ImageButton>(R.id.ivShipInfor)?.setOnClickListener {
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_shipInfor)
         }
-        globalView?.findViewById<ImageButton>(R.id.btnBack)?.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnBack)?.setOnClickListener {
             activity?.onBackPressed()
         }
-        globalView?.findViewById<TextView>(R.id.tvBuyMore)?.setOnClickListener {
+        view.findViewById<TextView>(R.id.tvBuyMore)?.setOnClickListener {
             activity?.onBackPressed()
+        }
+        view.findViewById<Button>(R.id.btnTotalPriceBill).setOnClickListener {
+            bill.listSelectedProduct=listFromSale
+            Log.d("test1", bill.toString())
+            viewModel?.addBill(bill)
+            findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
+            Toast.makeText(requireContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show()
         }
     }
 }

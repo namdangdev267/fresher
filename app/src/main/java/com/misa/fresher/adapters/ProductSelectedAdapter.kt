@@ -1,12 +1,16 @@
 package com.misa.fresher.adapters
 
+import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.customViews.CustomToast
 import com.misa.fresher.model.Products
 import com.misa.fresher.model.SelectedProducts
 
@@ -23,7 +27,7 @@ class ProductSelectedAdapter(
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         val v = inflater.inflate(R.layout.item_bill_detail, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(v, context)
     }
 
     override fun onBindViewHolder(holder: ProductSelectedAdapter.ViewHolder, position: Int) {
@@ -32,7 +36,8 @@ class ProductSelectedAdapter(
 
     override fun getItemCount() = mSelectedProducts.size
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, val contextVH: Context) :
+        RecyclerView.ViewHolder(itemView) {
         fun bind(selectedProducts: SelectedProducts) {
             itemView.findViewById<TextView>(R.id.tvProductId).text = selectedProducts.product.id
             itemView.findViewById<TextView>(R.id.tvProductName).text = selectedProducts.product.name
@@ -55,11 +60,15 @@ class ProductSelectedAdapter(
                     tvAmount.text = selectedProducts.amonut.toString()
                     tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
                     updateTotalPrice(selectedProducts)
+                } else {
+                    var tost = Toast.makeText(
+                        contextVH, "Số lượng phải lớn hơn 0. Vui lòng nhập lại",
+                        Toast.LENGTH_SHORT
+                    )
+                    tost.setGravity(Gravity.TOP,0,0)
+                    tost.show()
                 }
             }
-
         }
-
-
     }
 }

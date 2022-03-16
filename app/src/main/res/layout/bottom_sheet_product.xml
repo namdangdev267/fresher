@@ -37,8 +37,8 @@
 
         <ImageView
             android:id="@+id/ivRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
             android:layout_marginRight="@dimen/dp_8"
             android:layout_toStartOf="@id/tvProductAmontDialog"
             android:paddingTop="@dimen/dp_4"
@@ -46,11 +46,12 @@
 
         <TextView
             android:id="@+id/tvProductAmontDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/dp_8"
             android:layout_marginBottom="5dp"
+            android:gravity="center"
             android:layout_toStartOf="@id/ivAdd"
             android:layout_toRightOf="@+id/ivRemove"
             android:text="1"
@@ -59,8 +60,8 @@
 
         <ImageView
             android:id="@+id/ivAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
             android:layout_alignParentEnd="true"
             android:paddingTop="@dimen/dp_4"
             android:src="@drawable/ic_add_circle" />

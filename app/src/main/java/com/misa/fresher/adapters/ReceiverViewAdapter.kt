@@ -6,11 +6,16 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.model.Receiver
 import com.misa.fresher.model.ShippingView
 
-class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
+class ReceiverViewAdapter(
+    private val adapterData: MutableList<ShippingView>,
+    private val clickView : (ship: ShippingView) -> Unit
+) :
     RecyclerView.Adapter<ReceiverViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -52,18 +57,24 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindTouchTextView(item: ShippingView.TouchTextView) {
             itemView.findViewById<TextView>(R.id.tvReceiver).text = item.tittle
-            itemView.findViewById<TextView>(R.id.tvReceiverHint).text = item.hint
+            val edReceiver = itemView.findViewById<TextView>(R.id.edReceiverHint)
+            edReceiver.hint = item.hint
             if (item.asterisk != null) {
                 itemView.findViewById<TextView>(R.id.tvNotNull).text = item.asterisk
             }
             if (item.img != null) {
                 itemView.findViewById<ImageButton>(R.id.ibtnShipping).setImageResource(item.img)
             }
+            edReceiver.doAfterTextChanged {
+                item.hint=edReceiver.text.toString()
+                clickView(item)
+            }
+
         }
 
         private fun bindTouchEditText(item: ShippingView.TouchEditText) {
             itemView.findViewById<TextView>(R.id.tvReceiverType2).text = item.tittle
-            itemView.findViewById<TextView>(R.id.tvReceiverHintType2).text = item.hint
+            itemView.findViewById<TextView>(R.id.edReceiverHintType2).hint = item.hint
             if (item.img != null) {
                 itemView.findViewById<ImageButton>(R.id.ibtnShippingType2)
                     .setImageResource(item.img)

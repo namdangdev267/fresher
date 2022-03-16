@@ -15,7 +15,7 @@
         <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
-        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="contentInsetStartWithNavigation">5dp</item>
         <item name="android:textAppearance">@style/ToolbarStyle.Text</item>
     </style>
     <style name="ToolbarStyle.Text" >

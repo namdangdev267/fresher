@@ -9,23 +9,4 @@ data class Products(
     val img: Int,
     val color: String,
     val size: String
-) {
-    companion object {
-        fun createProductsList(numProduct: Int): MutableList<Products> {
-            val products = ArrayList<Products>()
-            for (i in 1..numProduct) {
-                products.add(
-                    Products(
-                        "ABC$i",
-                        "tui xach $i",
-                        1222.0 - i * 10,
-                        R.drawable.ic_shopping_bag,
-                        "Do",
-                        "S"
-                    )
-                )
-            }
-            return products
-        }
-    }
-}
+)
