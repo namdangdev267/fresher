@@ -2,7 +2,7 @@ package com.misa.fresher.Fragment.ShipInformation
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.ItemShipInfor
+import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
 
 class ShipInforViewModel(context: Context): ViewModel() {
