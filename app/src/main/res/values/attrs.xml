@@ -14,4 +14,8 @@
     <declare-styleable name="NavInclude">
         <attr format="reference" name="graph"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomRecyclerView">
+        <attr name="title1" format="string"/>
+    </declare-styleable>
 </resources>

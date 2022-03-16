@@ -11,4 +11,40 @@
         <item>oiafoisfaf</item>
         <item>oiafoisfaf</item>
     </string-array>
+
+    <style name="TextViewFont">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <string name="organization">Organization</string>
+    <string name="personal">Personal</string>
+    <string name="shipping_partner">Shipping partner</string>
+    <string name="service_type">Service type</string>
+    <string name="shipping_cost_paid_to_partner">Shipping cost paid to partner</string>
+    <string name="tracking_no">Tracking No.</string>
+    <string name="notes">Notes</string>
+    <string name="shipping_date">Shipping date</string>
+
+    <string name="weight">Weight(g)</string>
+    <string name="size">Size(cm)</string>
+
+    <string name="search_view">Enter name, SKU...</string>
+
+    <string name="shipping_information">Shipping information</string>
+    <string name="receiver">Receiver</string>
+    <string name="tel">Tel</string>
+    <string name="address">Address</string>
+    <string name="touch_to_enter">Touch to enter</string>
+    <string name="area">Area</string>
+    <string name="touch_to_select">Touch to select</string>
+    <string name="ward_commune">Ward, Commune</string>
+    <string name="ship_paid_by_cust">Ship paid by cust.</string>
+    <string name="deposit_method">Deposit method</string>
+    <string name="deposit">Deposit</string>
+    <string name="transfer">Transfer</string>
+    <string name="sale_channel">Sale channel</string>
+    <string name="collect_COD">Collect COD</string>
 </resources>
