@@ -1,0 +1,174 @@
+package com.misa.fresher
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.misa.fresher.Models.Enum.BillStatus
+import com.misa.fresher.Models.InforShip
+import com.misa.fresher.Models.ItemBill
+import com.misa.fresher.Models.PackageProduct
+import com.misa.fresher.Models.Product
+
+class PublicViewModel: ViewModel() {
+    private val _listBill = MutableLiveData<MutableList<ItemBill>>()
+    val listBill: LiveData<MutableList<ItemBill>>
+        get() = _listBill
+
+    private val _billHandling = MutableLiveData<ItemBill>()
+    val billHandling: LiveData<ItemBill>
+        get() = _billHandling
+
+    private val _inforShip = MutableLiveData<InforShip>()
+    val inforShip: LiveData<InforShip>
+        get() = _inforShip
+
+    private val _itemSelected = MutableLiveData<PackageProduct>()
+    val itemSelected: LiveData<PackageProduct>
+        get() = _itemSelected
+
+    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
+    val listItemSelected: LiveData<MutableList<PackageProduct>>
+        get() = _listItemSelected
+
+    init {
+        _itemSelected.postValue(
+            PackageProduct(
+                Product(R.drawable.ic_launcher_foreground, "", "", 0f, 10),
+                "",
+                "",
+                1
+            )
+        )
+        _listItemSelected.postValue(mutableListOf())
+        _billHandling.postValue(
+            ItemBill(
+                (1000000..2000000).random().toString(),
+                mutableListOf(),
+                null,
+                BillStatus.Handling
+            )
+        )
+        _listBill.postValue(mutableListOf())
+    }
+
+    /**
+     * item selected
+     */
+
+    fun updateItemSelected(itemProduct: Product) {
+        var itemSelected: PackageProduct =
+            PackageProduct(itemProduct, itemProduct.nameProduct, itemProduct.codeProduct, 1)
+        _listItemSelected.value?.let {
+            for (i in it) {
+                if (i.product.equals(itemProduct)) {
+                    itemSelected = i
+                }
+            }
+        }
+
+        _itemSelected.postValue(itemSelected)
+    }
+
+    fun updateItemSelectedQuantity(num: Int) {
+        var itemSelected = _itemSelected.value?.let {
+            PackageProduct(
+                it?.product, "", "", it.countPackage + num
+            )
+        }
+
+        _itemSelected.postValue(itemSelected!!)
+    }
+
+    /**
+     * List item selected
+     */
+
+    fun updateListItemSelected() {
+
+        val listSelected = _listItemSelected.value
+        var check = false
+
+        listSelected?.let {
+            for (i in listSelected) {
+                if (i.product == _itemSelected.value?.product) {
+                    i.countPackage = _itemSelected.value!!.countPackage
+                    check = true
+                }
+            }
+        }
+        if (!check) {
+            _itemSelected.value?.let { listSelected?.add(it) }
+        }
+
+        _listItemSelected.postValue(listSelected!!)
+
+    }
+
+    fun clearListItemSelected() {
+//        _listItemSelected.value?.clear()
+        _listItemSelected.postValue(mutableListOf())
+        _billHandling.postValue(
+            ItemBill(
+                (1000000..2000000).random().toString(),
+                mutableListOf(),
+                null,
+                BillStatus.Handling
+            )
+        )
+    }
+
+    fun getTotalPrice(): Float {
+        var totalPrice = 0f
+        _listItemSelected.value?.let {
+            for (i in _listItemSelected.value!!) {
+                totalPrice += i.product.priceProduct * i.countPackage
+            }
+        }
+        return totalPrice
+    }
+
+    fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
+        if (itemBillDetail.countPackage == 0) {
+            var selectedList = mutableListOf<PackageProduct>()
+            for (i in selectedList) {
+                if (i.product == itemBillDetail.product) {
+
+                } else {
+                    selectedList.add(i)
+                }
+            }
+            _listItemSelected.postValue(selectedList)
+        } else {
+            var selectedList = _listItemSelected.value
+            selectedList?.let {
+                for (i in selectedList) {
+                    if (i.product == itemBillDetail.product) {
+                        i.countPackage = itemBillDetail.countPackage
+                        _listItemSelected.postValue(selectedList!!)
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * shipping information
+     */
+
+
+    /**
+     * bill
+     */
+
+    fun addBillToListBill() {
+        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
+        _billHandling.postValue(_billHandling.value)
+
+        _billHandling.value?.let { _listBill.value?.add(it) }
+
+        _listBill.postValue(_listBill.value)
+        clearListItemSelected()
+        var i = 0
+    }
+}
