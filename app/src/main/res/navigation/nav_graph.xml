@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_sale">
+
+    <fragment
+        android:id="@+id/fragment_sale"
+        android:name="com.misa.fresher.ui.sale.SaleFragment"
+        android:label=""
+        tools:layout="@layout/fragment_sale">
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_bill"
+            app:destination="@id/fragment_bill"
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_list_bill"
+        android:name="com.misa.fresher.ui.listbill.ListBillFragment"
+        android:label=""
+        tools:layout="@layout/fragment_list_bill"/>
+    <fragment
+        android:id="@+id/fragment_bill"
+        android:name="com.misa.fresher.ui.sale.bill.BillFragment"
+        android:label=""
+        tools:layout="@layout/fragment_bill"/>
+</navigation>

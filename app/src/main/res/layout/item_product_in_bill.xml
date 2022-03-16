@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/between_element"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+
+            android:layout_alignParentEnd="true">
+
+            <ImageButton
+                android:id="@+id/btn_minus"
+                android:layout_width="@dimen/small_img_button_size"
+                android:layout_height="@dimen/small_img_button_size"
+                android:layout_marginEnd="@dimen/between_element"
+                android:background="@drawable/selector_button_round"
+                android:contentDescription="@string/sample_description"
+                android:padding="@dimen/icon_padding"
+                android:src="@drawable/ic_minus"
+                app:tint="@color/primary_text_in_primary" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/between_element"
+                android:textColor="@color/primary_text_in_white"
+                tools:text="@tools:sample/us_zipcodes" />
+
+            <ImageButton
+                android:id="@+id/btn_plus"
+                android:layout_width="@dimen/small_img_button_size"
+                android:layout_height="@dimen/small_img_button_size"
+                android:background="@drawable/selector_button_round"
+                android:contentDescription="@string/sample_description"
+                android:padding="@dimen/icon_padding"
+                android:src="@drawable/ic_plus"
+                app:tint="@color/primary_text_in_primary" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/ll_quantity"
+
+            android:textColor="@color/black"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/us_zipcodes"
+
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/ll_quantity"
+            android:layout_below="@id/tv_name"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/primary_dark"
+            tools:text="@tools:sample/us_phones"/>
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text_in_white"
+            android:textStyle="bold"
+            tools:text="@tools:sample/us_phones"/>
+    </LinearLayout>
+</LinearLayout>
