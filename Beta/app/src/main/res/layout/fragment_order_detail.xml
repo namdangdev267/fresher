@@ -81,14 +81,14 @@
             android:paddingEnd="@dimen/dp_0">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_user_outline"
+                android:id="@+id/image_customer"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_person_outline_24" />
 
             <TextView
-                android:id="@+id/text_user_name"
+                android:id="@+id/text_customer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ellipsize="end"

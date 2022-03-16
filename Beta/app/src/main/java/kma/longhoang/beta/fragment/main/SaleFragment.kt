@@ -24,6 +24,7 @@ import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SharedViewModel
 import kma.longhoang.beta.adapter.ProductAdapter
+import kma.longhoang.beta.fragment.customer.CustomerListFragment
 import kma.longhoang.beta.fragment.delivery.OrderDetailFragment
 import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
@@ -45,6 +46,8 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var navFilter: NavigationView? = null
     private var drawerSale: DrawerLayout? = null
     private var btnFilter: ImageButton? = null
+    private var tvCustomer: TextView? = null
+    private var imgCustomer: ImageView? = null
     private var conditionStyle: String = ""
     private val sharedViewModel: SharedViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +55,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         initView(view)
         navMenu()
         navFilter()
+        customerInfo()
         setupRecyclerView()
         searchItem()
         resetOrder()
@@ -76,6 +80,8 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         btnFilter = view.findViewById(R.id.button_filter)
         navFilter = view.findViewById(R.id.nav_filter)
         drawerSale = view.findViewById(R.id.drawer_sale)
+        tvCustomer = view.findViewById(R.id.text_customer)
+        imgCustomer = view.findViewById(R.id.image_customer)
     }
 
 
@@ -94,6 +100,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    //lọc sp
     private fun filterProduct() {
         val spinnerStyle = navFilter?.findViewById<Spinner>(R.id.filter_spinner_style)
         val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
@@ -119,6 +126,28 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         btnDone?.setOnClickListener {
             drawerSale?.closeDrawer(GravityCompat.END)
             filterByProductStyle(conditionStyle)
+        }
+    }
+
+    //itemSelect của spinner filter
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        conditionStyle = p0?.getItemAtPosition(p2).toString()
+    }
+
+    //itemClick của spinner filter
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+
+
+    private fun customerInfo() {
+        sharedViewModel.customer.observe(viewLifecycleOwner, Observer {
+            tvCustomer?.text = StringBuilder(it.name).append(" (").append(it.phone).append(")")
+        })
+        tvCustomer?.setOnClickListener {
+            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
+        }
+        imgCustomer?.setOnClickListener {
+            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
         }
     }
 
@@ -415,13 +444,6 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        conditionStyle = p0?.getItemAtPosition(p2).toString()
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-    }
-
     // lọc product
     private fun filterByProductStyle(style: String) {
         when (style) {
@@ -450,6 +472,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    //show lại product đang chọn
     override fun onResume() {
         super.onResume()
         sharedViewModel.listOrder.observe(viewLifecycleOwner, Observer {
@@ -464,6 +487,9 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 tvOrderAmount?.text = amount.toString()
                 btnTotal?.text = total.toString()
                 changeButtonState()
+            } else {
+                tvCustomer?.text = ""
+                tvCustomer?.hint = getString(R.string.customer_name)
             }
         })
     }

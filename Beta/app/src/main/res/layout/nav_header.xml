@@ -49,13 +49,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_90"
         android:padding="@dimen/dp_15">
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_background_delivery_tab"
             android:text="@string/app_name"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

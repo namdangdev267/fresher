@@ -61,12 +61,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // thay thế fragment
     fun backStackReplaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.exit_to_left, R.anim.slide_in_left, R.anim.exit_to_right)
+        fragmentManager.beginTransaction().setCustomAnimations(
+            R.anim.slide_in_right,
+            R.anim.exit_to_left,
+            R.anim.slide_in_left,
+            R.anim.exit_to_right
+        )
             .replace(R.id.fragment_view, fragment).addToBackStack(null).commit()
     }
+
     fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left,R.anim.exit_to_right)
+        fragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_left, R.anim.exit_to_right)
             .replace(R.id.fragment_view, fragment).commit()
     }
 
