@@ -68,15 +68,12 @@ class ShippingInformationFragment : Fragment() {
                 }
             }
         }.attach()
-
-
     }
 
 
     inner class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
-
 
         fun addFragment(fragment: Fragment, title: String) {
             mFragmentList.add(fragment)

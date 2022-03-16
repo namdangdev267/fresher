@@ -11,6 +11,7 @@ import com.misa.fresher.Models.ItemBill
 import com.misa.fresher.Models.ItemBillDetail
 import com.misa.fresher.Models.ItemProduct
 import java.lang.Math.random
+import java.util.*
 
 class SharedViewModel : ViewModel() {
 
@@ -49,7 +50,8 @@ class SharedViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling
+                BillStatus.Handling,
+                Calendar.getInstance().time
             )
         )
         _listBill.postValue(mutableListOf())
@@ -69,7 +71,6 @@ class SharedViewModel : ViewModel() {
                 }
             }
         }
-
         _itemSelected.postValue(itemSelected)
     }
 
@@ -79,7 +80,6 @@ class SharedViewModel : ViewModel() {
                 it?.itemProduct, "", "", it.quantity + num
             )
         }
-
         _itemSelected.postValue(itemSelected!!)
     }
 
@@ -88,7 +88,6 @@ class SharedViewModel : ViewModel() {
      */
 
     fun updateListItemSelected() {
-
         val listSelected = _listItemSelected.value
         var check = false
 
@@ -103,9 +102,7 @@ class SharedViewModel : ViewModel() {
         if (!check) {
             _itemSelected.value?.let { listSelected?.add(it) }
         }
-
         _listItemSelected.postValue(listSelected!!)
-
     }
 
     fun clearListItemSelected() {
@@ -116,7 +113,8 @@ class SharedViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling
+                BillStatus.Handling,
+                Calendar.getInstance().time
             )
         )
     }
@@ -174,5 +172,18 @@ class SharedViewModel : ViewModel() {
         _listBill.postValue(_listBill.value)
         clearListItemSelected()
         var i = 0
+    }
+
+    fun getTotalPriceListBill():Float
+    {
+        var res=0f
+        _listBill.value?.let {
+            for(i in _listBill.value!!)
+            {
+                res += i.getPrice()
+            }
+        }
+        return res
+
     }
 }

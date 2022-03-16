@@ -7,31 +7,27 @@
     android:orientation="vertical"
     tools:context=".Views.Fragments.ShippingInfomation.ShippingInformationFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="#2b3176">
 
         <ImageView
             android:id="@+id/iv_ship_infor_back"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/ripple_circle"
             android:clickable="true"
             android:focusable="true"
-            android:padding="@dimen/dp_10"
+            android:padding="13dp"
             android:src="@drawable/ic_arrow_left_24"
 
             />
 
         <TextView
-
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/delete"
-            android:layout_toRightOf="@+id/iv_ship_infor_back"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
@@ -41,18 +37,13 @@
 
         <ImageView
             android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
-            android:layout_marginBottom="@dimen/dp_8"
-            android:layout_weight="2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="#2b3176"
-            android:padding="@dimen/dp_4"
+            android:padding="13dp"
             android:src="@drawable/ic_baseline_delete_24" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -82,6 +73,7 @@
     <LinearLayout style="@style/LinearLayout_Bottom">
 
         <Button
+            android:id="@+id/bt_shipping_infor_save"
             style="@style/ButtonFont"
             android:background="@drawable/bg_rounded_all_dark"
             android:text="@string/save" />

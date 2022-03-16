@@ -10,8 +10,8 @@ data class InforShip (
     var area:String?,
     var ward:String?,
     var shipPaid:Float,
-    var depositMethod: DepositMethod,
+    var depositMethod: DepositMethod?,
     var deposit:Float,
-    var saleChannel:SaleChannel,
+    var saleChannel:SaleChannel?,
     var collectCOD:Boolean
 )

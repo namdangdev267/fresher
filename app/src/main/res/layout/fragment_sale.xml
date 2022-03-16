@@ -76,7 +76,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/back_ground_light"
+            android:background="@color/background_light"
             android:paddingTop="@dimen/dp_4"
             android:paddingBottom="@dimen/dp_4">
 
@@ -116,44 +116,55 @@
             android:layout_height="@dimen/dp_55"
             android:orientation="horizontal"
             android:padding="@dimen/dp_5"
-            android:weightSum="8">
+            >
 
             <ImageView
                 android:id="@+id/iv_refresh"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@drawable/bg_circle_light"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_refresh" />
 
-            <TextView
-                android:id="@+id/tv_quantity_item_selected"
+            <LinearLayout
+                android:id="@+id/ll_get_bill_detail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
-                android:background="@drawable/bg_rounded_left"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@color/white"
-                android:textFontWeight="400"
-                android:textSize="@dimen/dp_16"
+                android:weightSum="7"
+                >
 
-                />
+                <TextView
+                    android:id="@+id/tv_quantity_item_selected"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_left"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/dp_16"
 
-            <TextView
-                android:id="@+id/tv_total_price"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_1"
-                android:layout_weight="6"
-                android:background="@drawable/bg_rounded_right"
-                android:gravity="center"
-                android:text="@string/not_yet_selected_item"
-                android:textColor="@color/white"
-                android:textFontWeight="400"
-                android:textSize="@dimen/dp_16" />
+                    />
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_1"
+                    android:layout_weight="6"
+                    android:background="@drawable/bg_rounded_right"
+                    android:gravity="center"
+                    android:text="@string/not_yet_selected_item"
+                    android:textColor="@color/white"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/dp_16" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </LinearLayout>

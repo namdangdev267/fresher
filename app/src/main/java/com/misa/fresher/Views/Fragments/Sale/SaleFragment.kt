@@ -61,7 +61,7 @@ class SaleFragment : Fragment() {
     }
 
     private fun transitionFragment(view: View) {
-        binding.tvTotalPrice.setOnClickListener {
+        binding.llGetBillDetail.setOnClickListener {
             if (sharedViewModel.listItemSelected.value?.size!! > 0)
                 Navigation.findNavController(view)
                     .navigate(R.id.action_saleFragment_to_billDetailFragment)

@@ -30,10 +30,12 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_drawer_main"
         app:headerLayout="@layout/drawer_header"
+        app:itemTextColor="@color/black"
         >
 
         <include
             android:id="@+id/layout_menu"
-            layout="@layout/drawer_menu" />
+            layout="@layout/drawer_menu"
+            />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

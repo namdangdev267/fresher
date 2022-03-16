@@ -48,7 +48,9 @@ class BillFragment : Fragment() {
     }
 
     private fun configOtherView() {
+        binding.tvBillTotalQuantity.text = sharedViewModel.listBill.value?.size.toString()
 
+        binding.tvBillTotalPrice.text  = sharedViewModel.getTotalPriceListBill().toString()
     }
 
     private fun configToolbar() {

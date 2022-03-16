@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.Models.InforShip
 import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
+import kotlinx.coroutines.delay
 
-class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
+class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,var inforShip: InforShip) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
     companion object {
@@ -20,15 +23,25 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
         private const val ITEM_CHECK = 3
     }
 
-    class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
-            itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
-                item.hintContent
+
+            val tvTitle = itemView.findViewById<TextView>(R.id.textview_touch_title)
+            val editText = itemView.findViewById<EditText>(R.id.edittext_touch_hint_content)
+            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
             item.imageResourcce?.let {
                 itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
             }
-            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
+
+            tvTitle.text = item.title
+            editText.hint = item.hintContent
+
+            editText.doAfterTextChanged {
+                if(item.title == "Receiver")
+                {
+                    inforShip.receiver = it.toString()
+                }
+            }
         }
 
         private fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator) {

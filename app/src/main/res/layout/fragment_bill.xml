@@ -44,9 +44,10 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="@dimen/dp_10"
-            android:src="@drawable/ic_search_light" />
+            android:src="@drawable/ic_search_light"
+            android:background="@drawable/ripple_circle"
+            />
 
-        >
     </LinearLayout>
 
     <LinearLayout
@@ -60,14 +61,18 @@
             android:id="@+id/spin_filter_day"
             style="@style/spinner"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:entries="@array/day"
+            />
 
         <Spinner
             android:id="@+id/spin_filter_status"
             style="@style/spinner"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_spinner" />
+            android:background="@drawable/bg_spinner"
+            android:entries="@array/status"
+            />
 
     </LinearLayout>
 
@@ -76,14 +81,18 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
         android:layout_below="@id/ll_bill_filter"
-        android:padding="@dimen/dp_10">
+        android:padding="@dimen/dp_10"
+        android:background="@color/background_light"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Total"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
         <TextView
             android:id="@+id/tv_bill_total_quantity"
@@ -92,7 +101,9 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:gravity="center_vertical"
             android:text="a"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/background"
+            />
 
         <TextView
             android:id="@+id/tv_bill_total_price"
@@ -101,7 +112,9 @@
             android:layout_weight="1"
             android:gravity="right|center_vertical"
             android:text="0.0"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
 
     </LinearLayout>
@@ -115,11 +128,11 @@
 
     <ImageView
         android:id="@+id/iv_bill_buy_more"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/dp_15"
+        android:layout_margin="@dimen/dp_20"
         android:background="@drawable/bg_circle_dark"
         android:padding="13dp"
         android:src="@drawable/ic_shopping_cart" />

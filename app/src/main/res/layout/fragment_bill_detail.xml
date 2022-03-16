@@ -18,8 +18,11 @@
             android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
-            android:padding="@dimen/dp_12"
-            android:src="@drawable/ic_arrow_left_24" />
+            android:padding="13dp"
+            android:src="@drawable/ic_arrow_left_24"
+            android:background="@drawable/ripple_circle"
+
+            />
 
         <TextView
             android:id="@+id/tv_bill_detail_id"
@@ -39,7 +42,7 @@
             android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
-            android:padding="@dimen/dp_12"
+            android:padding="13dp"
             android:src="@drawable/ic_shopping_cart" />
 
         <ImageView
@@ -48,10 +51,9 @@
             android:layout_height="@dimen/dp_50"
             android:clickable="true"
             android:focusable="true"
-            android:padding="@dimen/dp_12"
+            android:padding="13dp"
             android:src="@drawable/ic_more_vert" />
 
-        >
     </LinearLayout>
 
     <LinearLayout
@@ -101,7 +103,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/back_ground_light"
+        android:background="@color/background_light"
         />
 
     <LinearLayout
@@ -166,7 +168,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/back_ground_light"
+        android:background="@color/background_light"
         />
 
     <LinearLayout
@@ -174,7 +176,10 @@
         android:layout_height="50dp"
         android:background="@drawable/ripple_rectangle_stroke"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:clickable="true"
+        android:focusable="true"
+        >
 
         <ImageView
             android:layout_width="wrap_content"

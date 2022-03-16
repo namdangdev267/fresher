@@ -43,7 +43,7 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_receiver.xml" value="0.18704710144927536" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.125" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_ship.xml" value="0.15172101449275363" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_shipping_information.xml" value="0.15172101449275363" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_shipping_information.xml" value="0.22" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_show.xml" value="0.25" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_bill.xml" value="0.25" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_bill_detail.xml" value="0.234375" />
@@ -58,6 +58,7 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_radiobutton.xml" value="0.18704710144927536" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/item_ship_touch.xml" value="0.17844202898550723" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/search_view.xml" value="0.1" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/menu/menu_drawer_main.xml" value="0.225" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/menu/menu_main.xml" value="0.234375" />
       </map>
     </option>

@@ -67,7 +67,7 @@ class SaleViewModel : ViewModel() {
      */
 
     fun clearFilter() {
-        filter.sortBy = null
+        filter.sortBy = SortBy.name_item
         filter.category = null
         filter.color = null
         filter.available = false
@@ -100,17 +100,12 @@ class SaleViewModel : ViewModel() {
         }
         var res = mutableListOf<ItemProduct>()
         for (i in showList) {
-            Log.e(
-                this.javaClass.simpleName,
-                "listItemShow--" + filter.color?.name + "--" + i.color.name
-            )
-            if (filter.category != null && filter.category != i.category) {
+            val filterCategory = (filter.category != null && filter.category != i.category)
+            val filterColor = (filter.color != null && filter.color != i.color)
+            val filterAvailable = (filter.available == true && i.availableQuantity <= 0)
 
-            } else if (filter.color != null && filter.color != i.color) {
-
-            } else if (filter.available == true && i.availableQuantity <= 0) {
-
-            } else {
+            if(!filterAvailable && !filterColor && !filterCategory)
+            {
                 res.add(i)
             }
         }
