@@ -2,145 +2,26 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawre_layout"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
-    tools:openDrawer="end">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/background"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content">-->
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/glVertical1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintGuide_percent="0.89"
-                            android:orientation="vertical" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/glVertical2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintGuide_percent="0.78"
-                            android:orientation="vertical" />
-
-                        <com.misa.fresher.EditTextCustom
-                            android:id="@+id/edt"
-                            android:layout_width="0dp"
-                            android:layout_height="32dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@id/glVertical2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-<!--                                                                        <EditText-->
-<!--                                                                            android:paddingHorizontal="5dp"-->
-<!--                                                                            android:id="@+id/edt"-->
-<!--                                                                            android:layout_width="0dp"-->
-<!--                                                                            android:layout_height="32dp"-->
-<!--                                                                            android:background="@drawable/custom_searchview"-->
-<!--                                                                            android:drawableStart="@drawable/ic_baseline_search_24"-->
-<!--                                                                            android:drawableEnd="@drawable/ic_baseline_qr_code_scanner_24"-->
-<!--                                                                            android:hint="Enter name, SKU code, S......."-->
-<!--                                                                            android:textColor="@color/black"-->
-<!--                                                                            android:textColorHint="#B5B5B5"-->
-<!--                                                                            android:textSize="15sp"-->
-<!--                                                                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                                                                            app:layout_constraintEnd_toEndOf="@id/glVertical2"-->
-<!--                                                                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                                                                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                                                                            android:ellipsize="end"-->
-<!--                                                                            android:maxLines="1"-->
-                                                                            android:drawablePadding="8dp"/>
-
-                        <ImageView
-                            android:id="@+id/imgCart"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            app:layout_constraintStart_toStartOf="@id/glVertical2"
-                            app:layout_constraintEnd_toEndOf="@id/glVertical1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:src="@drawable/cart" />
-
-                        <ImageView
-                            android:id="@+id/imgFilter"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            app:layout_constraintStart_toStartOf="@id/glVertical1"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:src="@drawable/filter" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/edt"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:layout_alignParentLeft="true"-->
-<!--                        android:layout_centerInParent="true"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        android:background="@drawable/custom_searchview"-->
-<!--                        android:drawableStart="@drawable/ic_baseline_search_24"-->
-<!--                        android:drawableEnd="@drawable/ic_baseline_qr_code_scanner_24"-->
-<!--                        android:hint="Enter name, SKU code, S......."-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textColorHint="#B5B5B5"-->
-<!--                        android:textSize="15sp" />-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/imgFilter"-->
-<!--                        android:layout_width="22dp"-->
-<!--                        android:layout_toRightOf="@id/edt"-->
-<!--                        android:layout_height="22dp"-->
-<!--                        android:layout_alignParentRight="true"-->
-<!--                        android:layout_centerInParent="true"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:src="@drawable/filter" />-->
-<!--                </RelativeLayout>-->
-
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
-
-    </LinearLayout>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_host" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navSaleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/layout_header_nav"
         app:menu="@menu/menu_nav" />
 
