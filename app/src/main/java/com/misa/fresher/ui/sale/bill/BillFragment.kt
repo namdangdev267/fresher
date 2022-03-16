@@ -57,16 +57,19 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/15/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/15/2022: Tạo function
+     * @updated 3/16/2022: Cập nhật thêm trường hợp nếu tempCustomer null
      */
     private fun updateCustomer() {
         (activity as MainActivity).tempCustomer?.let {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
             binding.tvCustomer.text = it.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
+        } ?: run {
+            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.END
+            binding.tvCustomer.text = ""
         }
     }
 

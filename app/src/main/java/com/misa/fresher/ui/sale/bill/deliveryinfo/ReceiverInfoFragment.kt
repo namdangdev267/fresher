@@ -7,10 +7,13 @@ import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
 import com.misa.fresher.core.BaseFragment
+import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.data.model.*
 import com.misa.fresher.databinding.FragmentReceiverInfoBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
+import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.viewholder.TapActionViewHolder
+import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.viewholder.TapInsertViewHolder
 import com.misa.fresher.util.default
 import com.misa.fresher.util.getDrawableById
 
@@ -20,8 +23,9 @@ import com.misa.fresher.util.getDrawableById
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/16/2022: Bổ sung hàm [collectData] để thu dữ liệu từ recycler view, parent có thể gọi hàm này để nhận được dữ liệu
  */
 class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
 
@@ -106,4 +110,20 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
             )
         )
     }
+
+    /**
+     * Hàm thu thập dữ liệu từ recycler view
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/16/2022
+     *
+     * @version 1
+     * @updated 3/16/2022: Tạo function
+     */
+    fun collectData(): Customer = Customer(
+        0L,
+        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(0) as TapActionViewHolder).collectData(),
+        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(1) as TapInsertViewHolder).collectData(),
+        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(2) as TapInsertViewHolder).collectData(),
+    )
 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseFragment
+import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.databinding.FragmentDeliveryInfoBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInfoAdapter
@@ -15,8 +16,9 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/16/2022: Nút lưu sẽ lưu lại các giá trị đã nhập thay vì làm cảnh như trước
  */
 class DeliveryInfoFragment: BaseFragment<FragmentDeliveryInfoBinding>() {
 
@@ -37,10 +39,20 @@ class DeliveryInfoFragment: BaseFragment<FragmentDeliveryInfoBinding>() {
      *
      * @version 1
      * @updated 3/15/2022: Tạo function
+     * @updated 3/16/2022: Khi nhấn lưu sẽ thu thập dữ liệu từ các fragment và lưu lại
      */
     private fun configOtherView() {
         binding.btnSave.setOnClickListener {
             (activity as MainActivity).tempCustomer?.let {
+                val receiver =
+                    (childFragmentManager.findFragmentByTag("f${binding.vpDeliveryInfo.currentItem}") as ReceiverInfoFragment)
+                val data = receiver.collectData()
+                (activity as MainActivity).tempCustomer = Customer(
+                    it.id,
+                    it.name,
+                    data.tel,
+                    data.address
+                )
                 activity?.onBackPressed()
             } ?: run {
                 toast(requireContext(), R.string.please_select_receiver)

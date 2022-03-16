@@ -11,9 +11,10 @@ import com.misa.fresher.databinding.ItemTapActionInputBinding
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/15/2022: Tạo class
  * @updated 3/16/2022: Đổi từ 1 textview + imageview -> 1 textview với drawable
+ * @updated 3/16/2022: Thêm hàm lấy dữ liệu đã chọn
  */
 class TapActionViewHolder(
     private val binding: ItemTapActionInputBinding
@@ -32,4 +33,15 @@ class TapActionViewHolder(
         }
         binding.tvInput.text = data.input
     }
+
+    /**
+     * Hàm lấy dữ liệu đã chọn
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/16/2022
+     *
+     * @version 1
+     * @updated 3/16/2022: Tạo function
+     */
+    fun collectData(): String = binding.tvInput.text.toString()
 }

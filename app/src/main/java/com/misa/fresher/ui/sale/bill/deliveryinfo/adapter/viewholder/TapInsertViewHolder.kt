@@ -11,8 +11,9 @@ import com.misa.fresher.databinding.ItemTapInsertInputBinding
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/16/2022: Thêm hàm lấy dữ liệu đã nhập
  */
 class TapInsertViewHolder(
     private val binding: ItemTapInsertInputBinding
@@ -28,4 +29,15 @@ class TapInsertViewHolder(
         binding.etInput.inputType = data.inputType
         binding.etInput.setText(data.input)
     }
+
+    /**
+     * Hàm lấy dữ liệu đã nhập
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/16/2022
+     *
+     * @version 1
+     * @updated 3/16/2022: Tạo function
+     */
+    fun collectData(): String = binding.etInput.text.toString()
 }
