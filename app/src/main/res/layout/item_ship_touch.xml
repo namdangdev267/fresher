@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@drawable/bg_item_recyclerview"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_10"
+    >
+
+    <TextView
+        android:id="@+id/textview_touch_title"
+        style="@style/TextViewFont"
+        android:layout_alignParentTop="true"
+        android:text="@string/search_view"
+        android:textColor="#2b3176" />
+
+    <TextView
+        android:paddingLeft="@dimen/dp_3"
+        android:id="@+id/textview_touch_require"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/textview_touch_title"
+        android:textColor="#FF0000" />
+
+    <EditText
+        android:id="@+id/edittext_touch_hint_content"
+        style="@style/TextViewFont"
+        android:layout_alignParentBottom="true"
+        android:hint="@string/touch_to_enter"
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
+        android:background="@color/transparent"
+
+
+        />
+
+    <ImageView
+        android:id="@+id/imageview_touch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

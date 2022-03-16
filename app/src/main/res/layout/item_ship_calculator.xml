@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@drawable/bg_item_recyclerview"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_10"
+    >
+
+    <TextView
+        android:id="@+id/textview_calculator_title"
+        style="@style/TextViewFont"
+        android:textColor="#2b3176"
+        android:text="@string/search_view"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/textview_calculator_content"
+        style="@style/TextViewFont"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/search_view"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/imageview_calculator"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:foregroundGravity="right"
+        android:src="@drawable/calculator"
+
+        />
+
+</RelativeLayout>

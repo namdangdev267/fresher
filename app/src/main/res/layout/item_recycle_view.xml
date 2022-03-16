@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@drawable/item_selected_rcv"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/imgProduct"
@@ -16,8 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/clothes" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvNameProduct"
