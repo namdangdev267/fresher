@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -186,13 +187,14 @@ class SaleFragment : Fragment() {
             tvItemId.text = it.codePackage
         })
 
-        sharedViewModel.updateListItemSelected()
-        bottomSheetDialog.dismiss()
+
+        bottomSheetView.findViewById<Button>(R.id.btnDismiss).setOnClickListener {
+            bottomSheetDialog.dismiss()
+            sharedViewModel.updateListItemSelected()
+        }
 
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
-
-        sharedViewModel.updateItemSelected(itemProduct)
 
     }
 
