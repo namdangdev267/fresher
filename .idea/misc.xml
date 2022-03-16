@@ -12,6 +12,7 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_item_tablayout_left.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all_dark.xml" value="0.37864583333333335" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all_dark_1.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_all_stroke.xml" value="0.28541666666666665" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left.xml" value="0.328125" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/bg_rounded_left_dark.xml" value="0.328125" />
@@ -26,6 +27,7 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ic_remove_circle.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_circle.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle.xml" value="0.2" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle_rounded_dark.xml" value="0.20833333333333334" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/drawable/ripple_rectangle_stroke.xml" value="0.26614583333333336" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/activity_main.xml" value="0.15172101449275363" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/bottom_sheet_itemsale.xml" value="0.264" />
@@ -35,7 +37,7 @@
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/drawer_filter.xml" value="0.25" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/drawer_header.xml" value="0.234375" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/drawer_menu.xml" value="0.1875" />
-        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_bill.xml" value="0.176" />
+        <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_bill.xml" value="0.5" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_bill_detail.xml" value="0.264" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_board_calculator.xml" value="0.1" />
         <entry key="..\:/Android/Misa/fresher/app/src/main/res/layout/fragment_key_calculator.xml" value="0.19375" />

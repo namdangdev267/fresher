@@ -218,6 +218,10 @@ class SaleFragment : Fragment() {
         binding.ivRefresh.setOnClickListener {
             sharedViewModel.clearListItemSelected()
         }
+
+//        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+//            binding.tvInforCustomer.text = sharedViewModel.inforShip.value?.receiver
+//        })
     }
 
     fun clearFilter() {

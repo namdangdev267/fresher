@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.databinding.FragmentPackageBinding
+import com.misa.fresher.databinding.FragmentSaleBinding
 
 class PackageFragment : Fragment() {
-
+    lateinit var binding:FragmentPackageBinding
     lateinit var recyclerView: RecyclerView
-    lateinit var listItemRecyclerView: MutableList<ItemRecyclerView>
     lateinit var packageViewModel: PackageViewModel
 
     override fun onAttach(context: Context) {
@@ -30,16 +31,20 @@ class PackageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_package, container, false)
+
+        binding = FragmentPackageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configListView()
+    }
 
-        recyclerView = view.findViewById(R.id.recyclerview_shipping_package)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = PackageAdapter(packageViewModel.listItemRecyclerView)
+    private fun configListView() {
+        binding.recyclerviewShippingPackage.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerviewShippingPackage.adapter = PackageAdapter(packageViewModel.listItemRecyclerView)
     }
 
 }

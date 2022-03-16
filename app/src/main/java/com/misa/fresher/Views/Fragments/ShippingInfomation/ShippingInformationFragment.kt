@@ -30,16 +30,22 @@ class ShippingInformationFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        transitionFragment(view)
+        configTabLayout()
+        configOtherView()
+    }
+
+    private fun transitionFragment(view: View) {
         binding.ivShipInforBack.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)
         }
+    }
 
-
+    private fun configTabLayout() {
         val tabLayout = binding.tablayoutShippingInfomation
         val viewPager = binding.viewpagerShippingInfomation
 
@@ -68,6 +74,12 @@ class ShippingInformationFragment : Fragment() {
                 }
             }
         }.attach()
+    }
+
+    private fun configOtherView() {
+        binding.btShippingInforSave.setOnClickListener {
+            
+        }
     }
 
 

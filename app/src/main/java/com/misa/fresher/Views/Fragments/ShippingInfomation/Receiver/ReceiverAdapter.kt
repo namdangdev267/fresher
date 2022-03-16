@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.InforShip
 import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
-import kotlinx.coroutines.delay
 
-class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,var inforShip: InforShip) :
+class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val changeEditText: (inforShip:InforShip) -> Unit) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
     companion object {
@@ -36,12 +35,15 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,var
             tvTitle.text = item.title
             editText.hint = item.hintContent
 
-            editText.doAfterTextChanged {
-                if(item.title == "Receiver")
-                {
-                    inforShip.receiver = it.toString()
-                }
-            }
+            var inforShip = InforShip("","","","","",0f,null,0f,null,false)
+
+//            editText.doAfterTextChanged {
+//                if(item.title == "Receiver")
+//                {
+//                    inforShip.receiver = it.toString()
+//                    changeEditText(inforShip)
+//                }
+//            }
         }
 
         private fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator) {

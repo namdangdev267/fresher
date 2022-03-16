@@ -42,6 +42,7 @@
                 android:src="@drawable/ic_person_24" />
 
             <TextView
+                android:id="@+id/tv_infor_customer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"

@@ -72,10 +72,13 @@
 
     <LinearLayout style="@style/LinearLayout_Bottom">
 
-        <Button
-            android:id="@+id/bt_shipping_infor_save"
-            style="@style/ButtonFont"
-            android:background="@drawable/bg_rounded_all_dark"
-            android:text="@string/save" />
+    <TextView
+        android:id="@+id/bt_shipping_infor_save"
+        style="@style/ButtonFont"
+        android:background="@drawable/ripple_rectangle_rounded_dark"
+        android:text="@string/save"
+        android:clickable="true"
+        android:focusable="true"
+        />
     </LinearLayout>
 </LinearLayout>

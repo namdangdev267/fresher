@@ -158,6 +158,22 @@ class SharedViewModel : ViewModel() {
      * shipping information
      */
 
+    fun updateInforShip(inforShip: InforShip) {
+//        if(inforShip.receiver!=null)
+//        {
+//            _inforShip.value?.receiver = inforShip.receiver
+//        }
+//        else if(inforShip.tel!=null)
+//        {
+//            _inforShip.value?.tel = inforShip.tel
+//        }
+//        else if(inforShip.address!=null)
+//        {
+//            _inforShip.value?.address = inforShip.address
+//        }
+//        _inforShip.postValue(_inforShip.value)
+    }
+
 
     /**
      * bill
@@ -186,4 +202,6 @@ class SharedViewModel : ViewModel() {
         return res
 
     }
+
+
 }

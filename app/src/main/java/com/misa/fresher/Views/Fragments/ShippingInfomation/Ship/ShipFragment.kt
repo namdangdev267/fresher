@@ -13,7 +13,6 @@ import com.misa.fresher.R
 class ShipFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
-    lateinit var listItemRecyclerView: MutableList<ItemRecyclerView>
     lateinit var shipViewModel: ShipViewModel
 
     override fun onCreateView(
@@ -32,6 +31,4 @@ class ShipFragment : Fragment() {
 
 
     }
-
-
 }
