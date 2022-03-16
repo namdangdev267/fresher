@@ -1,42 +1,40 @@
 package com.misa.fresher.adapter
 
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.base.BaseAdapter
+import com.misa.fresher.base.BaseViewHolder
 import com.misa.fresher.model.Product
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
-class ProductApdapter(private val mProducts: List<Product>) :
-    RecyclerView.Adapter<ProductApdapter.ViewHolder>()
-{
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-        fun bind(product: Product)
-        {
-            itemView.findViewById<ImageView>(R.id.product_Image).setImageResource(R.drawable.giay)
-            itemView.findViewById<TextView>(R.id.product_name).text = product.product_name
-            itemView.findViewById<TextView>(R.id.product_abb_name).text = product.product_abb_name
-            itemView.findViewById<TextView>(R.id.product_count).text =
-                product.product_price.toString()
-            itemView.setOnClickListener {}
+class ProductApdapter(
+    override var items: ArrayList<Product>,
+    override var clickItemListener: (Product) -> Unit
+) : BaseAdapter<Product, ProductApdapter.ProductViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false),
+        clickItemListener
+    )
+
+    class ProductViewHolder(itemView: View, override var clickItemListener: (Product) -> Unit) :
+        BaseViewHolder<Product>(itemView) {
+        override fun bindData(item: Product) {
+            super.bindData(item)
+            itemView.apply {
+                this.findViewById<ImageView>(R.id.imgProductImage).setImageResource(R.drawable.giay)
+                this.findViewById<TextView>(R.id.tvProductName).text = item.productName
+                this.findViewById<TextView>(R.id.tvProductSKU).text = item.productSKU
+                val decimalFormat=DecimalFormat("0,000.00")
+                this.findViewById<TextView>(R.id.tvProductPrice).text = decimalFormat.format(item.productPrice).toString()
+            }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
-    {
-        val context = parent.context
-        val li = LayoutInflater.from(context)
-        val contactView = li.inflate(R.layout.item_layout, parent, false)
-        return ViewHolder(contactView)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-    {
-        holder.bind(mProducts[position])
-    }
-
-    override fun getItemCount() = mProducts.size
 }
 

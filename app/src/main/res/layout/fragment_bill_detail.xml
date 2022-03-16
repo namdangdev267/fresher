@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.BillDetailFragment">
+
+    <LinearLayout
+        android:id="@+id/llToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/violet_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:text="2203500001"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:contentDescription="@string/none"
+            android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_baseline_more_vert_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/layout_cus"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d50"
+        android:layout_below="@id/llToolbar"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageButton
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic__users" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="4"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/customer_infor"
+            android:lines="1"
+            android:textColor="#8A8383"
+            android:textColorHint="@color/colorLightGrey"
+            android:textSize="@dimen/ts16" />
+
+        <ImageButton
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_calendar_month_24" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="@string/none"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts16" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vSpace"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d5"
+        android:layout_below="@id/layout_cus"
+        android:background="@color/colorLightGray" />
+
+    <LinearLayout
+        android:id="@+id/llBuyMore"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d50"
+        android:layout_below="@id/vSpace"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvBuyMore"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4.5"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_add"
+            android:gravity="center_vertical"
+            android:text="@string/buy_more"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <ImageButton
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/white"
+            android:src="@drawable/ic_qr_code" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSelectedProduct"
+        android:layout_above="@id/llTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llBuyMore" />
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/llBottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="@dimen/d50"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/d5"
+            android:background="@drawable/border_delivery">
+
+            <ImageView
+                android:id="@+id/ivShipping"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/de10"
+                android:src="@drawable/ic_delivery" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/d50"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/d5"
+            android:background="@drawable/border_delivery">
+
+            <ImageView
+                android:layout_width="@dimen/d30"
+                android:layout_height="@dimen/d30"
+                android:layout_margin="@dimen/de10"
+                android:src="@drawable/ic_gift" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTotalSelectedProduct"
+            android:layout_width="45dp"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginEnd="@dimen/d1"
+            android:layout_marginBottom="@dimen/d5"
+            android:background="@drawable/border_left_corner"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="@dimen/ts16" />
+
+        <TextView
+            android:id="@+id/tvTotalBillPrice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/de10"
+            android:background="@drawable/border_right_corner"
+            android:gravity="center"
+            android:hint="@string/not_select"
+            android:textSize="@dimen/ts16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTotal"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_above="@id/llBottomToolbar"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
+            android:layout_weight="1"
+            android:src="@drawable/ic_money" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:hint="@string/receivable"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts16" />
+
+        <TextView
+            android:id="@+id/tvTotalMoney"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="right|center"
+            android:text="0,0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts16" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+    </LinearLayout>
+</RelativeLayout>

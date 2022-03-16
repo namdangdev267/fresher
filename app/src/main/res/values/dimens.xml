@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="de10">10dp</dimen>
-    <dimen name="size20">20sp</dimen>
+    <dimen name="ts20">20sp</dimen>
+    <dimen name="d55">55dp</dimen>
+    <dimen name="d5">5dp</dimen>
+    <dimen name="d45">45dp</dimen>
+    <dimen name="d60">60dp</dimen>
+    <dimen name="d50">50dp</dimen>
+    <dimen name="d3">3dp</dimen>
+    <dimen name="d2">2dp</dimen>
+    <dimen name="d1">1dp</dimen>
+    <dimen name="d7">7dp</dimen>
+    <dimen name="ts16">16sp</dimen>
+    <dimen name="d100">100dp</dimen>
+    <dimen name="d15">15dp</dimen>
+    <dimen name="d20">20dp</dimen>
+    <dimen name="d25">25dp</dimen>
+    <dimen name="d30">30dp</dimen>
+    <dimen name="d16">16dp</dimen>
+    <dimen name="d40">40dp</dimen>
 </resources>

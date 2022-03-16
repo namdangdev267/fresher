@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="105dp"
+    android:layout_height="101dp"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/linear"
@@ -10,43 +10,51 @@
         android:orientation="horizontal"
         android:layout_height="100dp">
         <ImageView
-            android:id="@+id/product_Image"
-            android:layout_width="50dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:layout_height="50dp"/>
+            android:id="@+id/imgProductImage"
+            android:layout_width="70dp"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_marginEnd="@dimen/d5"
+            android:layout_gravity="center_vertical"
+            android:layout_height="70dp"/>
         <LinearLayout
-            android:layout_marginLeft="10dp"
             android:orientation="vertical"
+            android:weightSum="3"
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <TextView
-                android:id="@+id/product_name"
-                android:textSize="20sp"
-                android:layout_marginLeft="3dp"
-                android:layout_width="match_parent"
+                android:id="@+id/tvProductName"
+                android:textSize="@dimen/ts16"
+                android:layout_width="wrap_content"
                 android:text="Sản phẩm 1"
-                android:layout_height="30dp"/>
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="0dp"/>
             <TextView
-                android:id="@+id/product_abb_name"
-                android:textSize="20sp"
+                android:id="@+id/tvProductSKU"
+                android:textSize="@dimen/ts16"
+                android:textColor="@color/color_SKU"
                 android:text="Sản phẩm 1"
-                android:layout_margin="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="0dp"/>
             <TextView
-                android:id="@+id/product_count"
-                android:textSize="20sp"
+                android:id="@+id/tvProductPrice"
+                android:textSize="@dimen/ts16"
                 android:text="0.0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:textColor="@color/violet_dark"
-                android:layout_margin="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"/>
         </LinearLayout>
     </LinearLayout>
-    <TableRow
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#19A6A4A4"></TableRow>
+        android:background="#19A6A4A4"></View>
 
 </LinearLayout>
