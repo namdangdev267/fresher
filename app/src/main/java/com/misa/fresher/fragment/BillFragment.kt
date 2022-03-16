@@ -19,12 +19,6 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
         initListProductRecViewUI()
     }
 
-    override fun updateUI() {
-        super.updateUI()
-        updateTotalPriceUI()
-        updateSelectedItemsCountUI()
-    }
-
     override fun initListener() {
         super.initListener()
         initToolbarListener()
@@ -34,11 +28,17 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
         }
     }
 
-    fun initToolbarListener() {
+    override fun updateUI() {
+        super.updateUI()
+        updateTotalPriceUI()
+        updateSelectedItemsCountUI()
+    }
+
+    private fun initToolbarListener() {
         binding.btnBack.setOnClickListener { activity?.onBackPressed() }
     }
 
-    fun initProductItems() {
+    private fun initProductItems() {
         selectedItems = try { arguments?.get("selected_items") as ArrayList<Product> }
         catch (e: Exception) { arrayListOf() }
     }

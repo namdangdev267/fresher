@@ -4,7 +4,6 @@ import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
@@ -20,11 +19,11 @@ import com.misa.fresher.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.DialogBottomSheetBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
+import com.misa.fresher.global.FakeData
 import com.misa.fresher.models.product.*
 import com.misa.fresher.utils.Enums
 import com.misa.fresher.utils.Utils
 import kotlinx.coroutines.*
-import kotlin.collections.ArrayList
 
 class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate) {
 
@@ -34,7 +33,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     private val bottomSheetDialog get() = _bottomSheetDialog!!
     private val bottomSheetDialogBinding get() = _bottomSheetDialogBinding!!
 
-    private var totalItems = fakeProductList()
+    private var totalItems = FakeData.products
     private var filteredItems = totalItems
     private var displayedItems = filteredItems
     private var selectedItems = arrayListOf<Product>()
@@ -115,34 +114,26 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     }
 
     private fun updateProductSelectedUI() {
-        val textColorWhite = ContextCompat.getColor(requireContext(), R.color.white)
-        val textColorBlack = ContextCompat.getColor(requireContext(), R.color.black)
-        val bgBtnRoundLeftActive = AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_left_violet)
-        val bgBtnRoundLeft = AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_left)
-        val bgBtnRoundRightActive =
-            AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_right_violet)
-        val bgBtnRoundRight = AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_right)
-
         val itemAmount = selectedItems.sumOf { it.getAmount() }
         val totalPrice = "Total ${selectedItems.sumOf { it.getTotalPrice() }}"
         binding.apply {
             numberBtn.text = itemAmount.toString()
             if (itemAmount > 0) {
-                numberBtn.background = bgBtnRoundLeftActive
-                numberBtn.setTextColor(textColorWhite)
+                numberBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_left_violet)
+                numberBtn.setTextColor(Utils.getColor(context, R.color.white))
 
-                priceBtn.background = bgBtnRoundRightActive
+                priceBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_right_violet)
                 priceBtn.text = totalPrice
-                priceBtn.setTextColor(textColorWhite)
+                priceBtn.setTextColor(Utils.getColor(context, R.color.white))
 
                 clearBtn.isActive = true
             } else {
-                numberBtn.background = bgBtnRoundLeft
-                numberBtn.setTextColor(textColorBlack)
+                numberBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_left)
+                numberBtn.setTextColor(Utils.getColor(context, R.color.black))
 
-                priceBtn.background = bgBtnRoundRight
+                priceBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_right)
                 priceBtn.text = getString(R.string.btn_product_selected)
-                priceBtn.setTextColor(textColorBlack)
+                priceBtn.setTextColor(Utils.getColor(context, R.color.black))
 
                 clearBtn.isActive = false
             }
@@ -205,25 +196,20 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         }
     }
     private fun initSaleFilterDrawerListener() {
-        val textColorWhite = ContextCompat.getColor(requireContext(), R.color.white)
-        val textColorPurple = ContextCompat.getColor(requireContext(), R.color.purpleDark)
-        val bgBtnActive = AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_violet)
-        val bgBtn = AppCompatResources.getDrawable(requireContext(), R.drawable.bg_btn_round_border_violet)
-
         binding.drawerSaleFilter.run {
             btnModel.setOnClickListener {
                 FilterConfig.viewMode = Enums.Product.MODEL
-                btnModel.background = bgBtnActive
-                btnModel.setTextColor(textColorWhite)
-                btnItem.background = bgBtn
-                btnItem.setTextColor(textColorPurple)
+                btnModel.background = Utils.getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnModel.setTextColor(Utils.getColor(context, R.color.white))
+                btnItem.background = Utils.getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnItem.setTextColor(Utils.getColor(context, R.color.purpleDark))
             }
             btnItem.setOnClickListener {
                 FilterConfig.viewMode = Enums.Product.ITEM
-                btnItem.background = bgBtnActive
-                btnItem.setTextColor(textColorWhite)
-                btnModel.background = bgBtn
-                btnModel.setTextColor(textColorPurple)
+                btnItem.background = Utils.getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnItem.setTextColor(Utils.getColor(context, R.color.white))
+                btnModel.background = Utils.getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnModel.setTextColor(Utils.getColor(context, R.color.purpleDark))
             }
             btnClear.setOnClickListener {
                 FilterConfig.viewMode = Enums.Product.MODEL
@@ -387,39 +373,5 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             }
         }
         bottomSheetDialog.show()
-    }
-
-    private fun fakeProductList(): ArrayList<Product> {
-        val items1: ArrayList<ProductItem> = arrayListOf(
-            ProductItem("A", "red", 1000.0, 10),
-            ProductItem("L", "red", 3000.0, 10),
-            ProductItem("M", "red", 3000.0, 10),
-        )
-        val items2: ArrayList<ProductItem> = arrayListOf(
-            ProductItem("B", "black", 1600.0, 0),
-            ProductItem("I", "black", 2600.0, 0),
-            ProductItem("H", "black", 3600.0, 0),
-        )
-        val items3: ArrayList<ProductItem> = arrayListOf(
-            ProductItem("S", "blue", 1000.0, 0),
-            ProductItem("L", "blue", 3200.0, 12),
-            ProductItem("K", "blue", 1600.0, 0),
-            ProductItem("I", "blue", 2600.0, 3),
-        )
-
-        val units: ArrayList<ProductUnit> = arrayListOf(ProductUnit("Piece", 1), ProductUnit("Pair", 2), ProductUnit("Set", 3), ProductUnit("Dozen", 12))
-
-        val products: ArrayList<Product> = arrayListOf()
-        for (i in 5 downTo 1) products.add(
-            Product("name $i", "code$i", "type${i / 2}", i * 1000L, R.drawable.ic_product, items1, units, units[0])
-        )
-
-        for (i in 15 downTo 10) products.add(
-            Product("name $i", "code$i", "type${i / 4}", i * 1000L, R.drawable.ic_product, items3, units, units[0])
-        )
-        for (i in 10 downTo 5) products.add(
-            Product("name $i", "code$i", "type${i / 3}", i * 1000L, R.drawable.ic_product, items2, units, units[0])
-        )
-        return products
     }
 }
