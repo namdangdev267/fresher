@@ -2,36 +2,40 @@ package com.misa.fresher
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
+import com.misa.fresher.Models.Product
 import com.misa.fresher.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
     var appBarConfiguration: AppBarConfiguration? = null
-    var binding: ActivityMainBinding? = null
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         configureXML()
     }
 
     fun toggleDrawer(){
-//        if (binding?.drawerLayout?.isDrawerOpen(binding!!.navSaleFragment))
-        if (binding!!.drawerLayout.isDrawerOpen(binding!!.navSaleFragment)){
-            binding!!.drawerLayout.closeDrawer(binding!!.navSaleFragment)
+        if (binding.root.isDrawerOpen(binding.navSaleFragment)){
+            binding.root.closeDrawer(binding.navSaleFragment)
         } else{
-            binding!!.drawerLayout.openDrawer(binding!!.navSaleFragment)
+            binding.root.openDrawer(binding.navSaleFragment)
         }
+    }
+
+    private fun putBundle(product: MutableList<Product>){
+        val bundle = Bundle()
+//        bundle.putSerializable("object_manga", product)
+        bundleOf()
     }
 
     private fun configureXML() {
@@ -43,9 +47,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<DrawerLayout>(R.id.drawerLayout)
         )
         appBarConfiguration.let {
-            (findViewById(R.id.navSaleFragment) as NavigationView).setupWithNavController(
-                navController
-            )
+            binding.navSaleFragment.setupWithNavController(navController)
         }
     }
 
@@ -54,5 +56,13 @@ class MainActivity : AppCompatActivity() {
         return appBarConfiguration?.let {
             navController.navigateUp(it)
         } == true || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        if (binding.root.isDrawerOpen(binding.navSaleFragment)){
+            toggleDrawer()
+        } else{
+            super.onBackPressed()
+        }
     }
 }
