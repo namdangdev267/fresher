@@ -1,4 +1,4 @@
-package com.misa.fresher.InputShip
+package com.misa.fresher.Input
 
 import android.graphics.drawable.Drawable
 

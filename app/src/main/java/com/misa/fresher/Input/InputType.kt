@@ -1,4 +1,4 @@
-package com.misa.fresher.InputShip
+package com.misa.fresher.Input
 
 enum class InputType {
     TAP_ACTION,
