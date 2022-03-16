@@ -28,7 +28,6 @@ import com.misa.fresher.model.Products
 class SaleFragment : Fragment() {
 
     private var rcv: RecyclerView? = null
-    private var bottomSheetView: View? = null
     private var amount = 1
     private var fakedata = DataForTest.listProduct
     private var productsSelected = mutableListOf<SelectedProducts>()
@@ -107,6 +106,7 @@ class SaleFragment : Fragment() {
             spnSize.adapter = arrayAdapter
         }
     }
+
     private fun filterItems(filter: FilterProducts, view: View) {
         var sortList = mutableListOf<Products>()
         if (filter.sortBy == "Tên") {
@@ -230,7 +230,7 @@ class SaleFragment : Fragment() {
 
     private fun productItemClick(products: Products, view: View) {
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-        bottomSheetView = LayoutInflater.from(requireContext()).inflate(
+        val bottomSheetView = LayoutInflater.from(requireContext()).inflate(
             R.layout.bottom_sheet_product,
             view as DrawerLayout, false
         )
@@ -238,7 +238,7 @@ class SaleFragment : Fragment() {
         bottomSheetView?.findViewById<TextView>(R.id.tvProductIdDialog)?.text = products.id
         bottomSheetDialog.setContentView(bottomSheetView!!)
         bottomSheetDialog.show()
-        changeItemAmount()
+        changeItemAmount(bottomSheetView)
         bottomSheetDialog.setOnDismissListener {
             productsSelected.find { it.product == products }?.let {
                 it.amonut += amount
@@ -250,10 +250,10 @@ class SaleFragment : Fragment() {
 
     }
 
-    private fun changeItemAmount() {
-        val btnRemove = bottomSheetView?.findViewById<ImageView>(R.id.ivRemove)
-        val btnAdd = bottomSheetView?.findViewById<ImageView>(R.id.ivAdd)
-        val tvAmount = bottomSheetView?.findViewById<TextView>(R.id.tvProductAmontDialog)
+    private fun changeItemAmount(bottomSheetView: View) {
+        val btnRemove = bottomSheetView.findViewById<ImageView>(R.id.ivRemove)
+        val btnAdd = bottomSheetView.findViewById<ImageView>(R.id.ivAdd)
+        val tvAmount = bottomSheetView.findViewById<TextView>(R.id.tvProductAmontDialog)
         amount = tvAmount?.text.toString().toInt()
         btnRemove?.setOnClickListener {
             if (tvAmount?.text == "1") {
