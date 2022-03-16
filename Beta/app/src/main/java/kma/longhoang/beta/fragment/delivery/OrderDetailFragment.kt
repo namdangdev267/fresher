@@ -9,15 +9,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SharedViewModel
 import kma.longhoang.beta.adapter.OrderDetailAdapter
 import kma.longhoang.beta.adapter.ProductAdapter
+import kma.longhoang.beta.fragment.main.DeliveryListFragment
+import kma.longhoang.beta.fragment.main.SaleFragment
 import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
@@ -25,27 +29,31 @@ import kma.longhoang.beta.model.ProductModel
 class OrderDetailFragment : Fragment() {
 
     private val orderViewModel: SharedViewModel by activityViewModels()
-    private var listOrder = mutableListOf<OrderModel>()
     private var recyclerView: RecyclerView? = null
     private var tvTotalAmount: TextView?= null
     private var tvTotalPrice: TextView?= null
     private var btnCash: Button?= null
     private var btnBack: ImageButton?= null
     private var btnDeliveryInfo: ImageButton?= null
+    private var addOrder: View?= null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(view)
         setupRecyclerView()
-        
+        showTotal()
+        buyMore()
+        deliveryInfo()
+        cashOrder()
     }
 
-    private fun initView() {
-        recyclerView = view?.findViewById(R.id.recycler_order_detail_list)
-        tvTotalAmount = view?.findViewById(R.id.text_total_amount)
-        tvTotalPrice = view?.findViewById(R.id.text_total_price)
-        btnBack = view?.findViewById(R.id.button_back)
-        btnCash = view?.findViewById(R.id.button_cash)
-        btnDeliveryInfo = view?.findViewById(R.id.button_delivery_info)
+    private fun initView(view: View) {
+        recyclerView = view.findViewById(R.id.recycler_order_detail_list)
+        tvTotalAmount = view.findViewById(R.id.text_total_amount)
+        tvTotalPrice = view.findViewById(R.id.text_total_price)
+        btnBack = view.findViewById(R.id.button_back)
+        btnCash = view.findViewById(R.id.button_cash)
+        btnDeliveryInfo = view.findViewById(R.id.button_delivery_info)
+        addOrder = view.findViewById(R.id.view_add_order)
     }
 
     private fun setupRecyclerView() {
@@ -67,5 +75,41 @@ class OrderDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_order_detail, container, false)
+    }
+
+    private fun showTotal() {
+        orderViewModel.listOrder.observe(viewLifecycleOwner, Observer {
+            var totalPrice = 0.0
+            var totalAmount = 0
+            for(i in 0 until it.size){
+                totalPrice += (it[i].amount * it[i].price)
+                totalAmount += it[i].amount
+            }
+            tvTotalPrice?.text = totalPrice.toString()
+            tvTotalAmount?.text = totalAmount.toString()
+        })
+    }
+
+    private fun buyMore(){
+        addOrder?.setOnClickListener {
+            (activity as MainActivity).replaceFragment(SaleFragment())
+        }
+    }
+
+    private fun deliveryInfo(){
+        btnDeliveryInfo?.setOnClickListener {
+            (activity as MainActivity).backStackReplaceFragment(DeliveryInfoFragment())
+        }
+    }
+
+    private fun cashOrder(){
+        tvTotalAmount?.setOnClickListener {
+            Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
+            (activity as MainActivity).replaceFragment(SaleFragment())
+        }
+        btnCash?.setOnClickListener {
+            Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
+            (activity as MainActivity).replaceFragment(SaleFragment())
+        }
     }
 }

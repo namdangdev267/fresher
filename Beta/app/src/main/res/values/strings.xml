@@ -4,7 +4,8 @@
     <string name="not_selected">Không chọn</string>
     <string name="search_sale">Nhập tên, mã SKU,mã qr mã này kia các thứ</string>
     <string name="search_order">Số đơn, mã hàng, khách hàng, v.v</string>
-    <string name="customer_name">Tên khách hàng, Tên sản phẩm, số điện thoại</string>
+    <string name="customer_name">Tên khách hàng, Mã KH, số điện thoại, Mã thành viên</string>
+    <string name="customer">Khách hàng</string>
     <string name="delivery_info">Thông tin giao hàng</string>
     <string name="product_name">Tên sản phẩm</string>
     <string name="product_price">Giá sản phẩm</string>

@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +62,6 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sale, container, false)
     }
 
@@ -127,22 +127,118 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setupRecyclerView() {
         listProduct.addAll(
             listOf<ProductModel>(
-                ProductModel("Áo thun cotton nam", "AT01", 175000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.BLACK),
-                ProductModel("Áo polo", "ACT01", 135000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.WHITE),
-                ProductModel("Váy ngắn", "VN01", 120000F, FilterProduct.Style.SHORTDRESS, FilterProduct.Color.RED),
-                ProductModel("Váy xòe", "VN02", 146000F, FilterProduct.Style.SHORTDRESS, FilterProduct.Color.BLUE),
-                ProductModel("Áo Somi nam", "ACT01", 132000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.WHITE),
-                ProductModel("Áo Sơ mi nữ", "ACT02", 120000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.WHITE),
-                ProductModel("Áo thun cotton nữ", "AT02", 176000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.BLUE),
-                ProductModel("Áo sơ mi cách điệu", "ACT03", 200000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.RED),
-                ProductModel("Quần Jean Nam", "QJ01", 230000F, FilterProduct.Style.JEAN, FilterProduct.Color.BLUE),
-                ProductModel("Quần Jean Nữ", "QJ02", 270000F, FilterProduct.Style.JEAN, FilterProduct.Color.BLACK),
-                ProductModel("Quần Jean nam rách", "QJ03", 340000F, FilterProduct.Style.JEAN, FilterProduct.Color.WHITE),
-                ProductModel("Áo thun cotton", "AT04", 200000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.WHITE),
-                ProductModel("Áo thun cotton A2", "AT05", 150000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.BLACK),
-                ProductModel("Quần nam", "Q01", 220000F, FilterProduct.Style.SHORT, FilterProduct.Color.BLUE),
-                ProductModel("Quần short nam", "Q02", 250000F, FilterProduct.Style.SHORT, FilterProduct.Color.BLACK),
-                ProductModel("Áo thun", "AT05", 140000F, FilterProduct.Style.TSHIRT, FilterProduct.Color.RED),
+                ProductModel(
+                    "Áo thun cotton nam",
+                    "AT01",
+                    175000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.BLACK
+                ),
+                ProductModel(
+                    "Áo polo",
+                    "ACT01",
+                    135000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.WHITE
+                ),
+                ProductModel(
+                    "Váy ngắn",
+                    "VN01",
+                    120000F,
+                    FilterProduct.Style.SHORTDRESS,
+                    FilterProduct.Color.RED
+                ),
+                ProductModel(
+                    "Váy xòe",
+                    "VN02",
+                    146000F,
+                    FilterProduct.Style.SHORTDRESS,
+                    FilterProduct.Color.BLUE
+                ),
+                ProductModel(
+                    "Áo Somi nam",
+                    "ACT01",
+                    132000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.WHITE
+                ),
+                ProductModel(
+                    "Áo Sơ mi nữ",
+                    "ACT02",
+                    120000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.WHITE
+                ),
+                ProductModel(
+                    "Áo thun cotton nữ",
+                    "AT02",
+                    176000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.BLUE
+                ),
+                ProductModel(
+                    "Áo sơ mi cách điệu",
+                    "ACT03",
+                    200000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.RED
+                ),
+                ProductModel(
+                    "Quần Jean Nam",
+                    "QJ01",
+                    230000F,
+                    FilterProduct.Style.JEAN,
+                    FilterProduct.Color.BLUE
+                ),
+                ProductModel(
+                    "Quần Jean Nữ",
+                    "QJ02",
+                    270000F,
+                    FilterProduct.Style.JEAN,
+                    FilterProduct.Color.BLACK
+                ),
+                ProductModel(
+                    "Quần Jean nam rách",
+                    "QJ03",
+                    340000F,
+                    FilterProduct.Style.JEAN,
+                    FilterProduct.Color.WHITE
+                ),
+                ProductModel(
+                    "Áo thun cotton",
+                    "AT04",
+                    200000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.WHITE
+                ),
+                ProductModel(
+                    "Áo thun cotton A2",
+                    "AT05",
+                    150000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.BLACK
+                ),
+                ProductModel(
+                    "Quần nam",
+                    "Q01",
+                    220000F,
+                    FilterProduct.Style.SHORT,
+                    FilterProduct.Color.BLUE
+                ),
+                ProductModel(
+                    "Quần short nam",
+                    "Q02",
+                    250000F,
+                    FilterProduct.Style.SHORT,
+                    FilterProduct.Color.BLACK
+                ),
+                ProductModel(
+                    "Áo thun",
+                    "AT05",
+                    140000F,
+                    FilterProduct.Style.TSHIRT,
+                    FilterProduct.Color.RED
+                ),
             )
         )
         recyclerView?.layoutManager = LinearLayoutManager(context)
@@ -282,8 +378,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val listProductSearch = listProduct
         val list = mutableListOf<ProductModel>()
         for (product in listProductSearch) {
-            if (product.style == style)
-            {
+            if (product.style == style) {
                 list.add(product)
             }
         }
@@ -295,7 +390,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     @SuppressLint("ResourceAsColor")
     private fun resetOrder() {
         btnReset?.setOnClickListener {
-            orderList = mutableListOf()
+            orderList = mutableListOf<OrderModel>()
             btnReset?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_gray)
             btnTotal?.background =
@@ -316,6 +411,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     R.color.black
                 )
             )
+
         }
     }
 
@@ -328,7 +424,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // lọc product
     private fun filterByProductStyle(style: String) {
-        when(style){
+        when (style) {
             "T-Shirt" -> updateItemList(FilterProduct.Style.TSHIRT)
             "Quần Short" -> updateItemList(FilterProduct.Style.SHORT)
             "Quần Jean" -> updateItemList(FilterProduct.Style.JEAN)
@@ -339,14 +435,36 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun moveToOrderDetail(){
-        sharedViewModel.setListOrder(orderList)
+    private fun moveToOrderDetail() {
         tvOrderAmount?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(OrderDetailFragment())
+            if (orderList.isNotEmpty()) {
+                sharedViewModel.setListOrder(orderList)
+                (activity as MainActivity).backStackReplaceFragment(OrderDetailFragment())
+            }
         }
         btnTotal?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(OrderDetailFragment())
+            if (orderList.isNotEmpty()) {
+                sharedViewModel.setListOrder(orderList)
+                (activity as MainActivity).backStackReplaceFragment(OrderDetailFragment())
+            }
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.listOrder.observe(viewLifecycleOwner, Observer {
+            orderList = it
+            if (orderList.isNotEmpty()) {
+                var amount = 0
+                var total = 0.0
+                for (i in 0 until orderList.size) {
+                    amount += orderList[i].amount
+                    total += (orderList[i].amount * orderList[0].price)
+                }
+                tvOrderAmount?.text = amount.toString()
+                btnTotal?.text = total.toString()
+                changeButtonState()
+            }
+        })
+    }
 }

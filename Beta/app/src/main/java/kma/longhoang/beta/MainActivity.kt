@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
-        val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().replace(R.id.fragment_view, SaleFragment()).commit()
+        replaceFragment(SaleFragment())
     }
 
     private fun initView() {
@@ -60,9 +59,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     // thay thế fragment
+    fun backStackReplaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.exit_to_left, R.anim.slide_in_left, R.anim.exit_to_right)
+            .replace(R.id.fragment_view, fragment).addToBackStack(null).commit()
+    }
     fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().replace(R.id.fragment_view, fragment).addToBackStack(null).commit()
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left,R.anim.exit_to_right)
+            .replace(R.id.fragment_view, fragment).commit()
     }
 
     override fun onBackPressed() {
