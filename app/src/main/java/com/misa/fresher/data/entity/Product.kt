@@ -1,15 +1,18 @@
 package com.misa.fresher.data.entity
 
+import java.io.Serializable
+
 /**
  * Lớp dữ liệu chứa thông tin của 1 sản phẩm
  *
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Cài đặt tên, mã cho các item mỗi khi khởi tạo đối tượng.
  * Thêm constructor(Product, List<ProductItem>) để sử dụng cho chức năng lọc.
+ * @updated 3/16/2022: Fix lỗi serialize, khi truyền qua bundle
  */
 data class Product(
     val id: Long,
@@ -17,7 +20,7 @@ data class Product(
     val code: String,
     val category: Category,
     val items: List<ProductItem>,
-) {
+) : Serializable {
     init {
         items.forEach {
             it.name = "$name (${it.color.name}/${it.size.name})"
