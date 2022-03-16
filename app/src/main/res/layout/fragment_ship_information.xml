@@ -49,9 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@id/tvInforShip"
-                android:layout_margin="10dp"
+                android:layout_margin="6dp"
                 app:strokeColor="@color/white"
-
                 app:strokeWidth="1.5dp"
                 app:cardCornerRadius="3dp"
                 android:layout_centerInParent="true">
@@ -67,26 +66,30 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"/>
-
-    <FrameLayout
-        android:id="@+id/frameReceive"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_above="@id/btnSave"
         android:layout_below="@id/toolbar" />
 
-    <FrameLayout
-        android:id="@+id/frameCalculate"
+    <RelativeLayout
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
