@@ -236,8 +236,8 @@
                             android:layout_centerVertical="true"
                             android:gravity="center"
                             android:text="0"
-                            android:textColor="#676767"
-                            android:textSize="22sp" />
+                            android:textColor="@color/SwitchCompat"
+                            android:textSize="20sp" />
 
                         <View
                             android:layout_width="1.5dp"
@@ -250,8 +250,8 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Not yet selected item"
-                            android:textColor="#676767"
-                            android:textSize="22sp" />
+                            android:textColor="@color/SwitchCompat"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -266,10 +266,10 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/layout_header_nav"
-        app:menu="@menu/menu_nav">
+        android:fitsSystemWindows="true"
+        android:layout_gravity="end">
 
         <include
             android:id="@+id/filterDrawer"

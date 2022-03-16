@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_dialog"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/custom_searchview"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/bottom_sheet_text"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/InforProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvNameProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Name product"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvCodeProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNameProduct"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingTop="5dp"
+            android:paddingBottom="@dimen/dp_8"
+            android:text="Code product"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearClickQuantity"
+        android:layout_toRightOf="@id/InforProduct"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgRemove"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="15dp"
+            android:src="@drawable/ic_baseline_remove_circle_24"/>
+
+        <TextView
+            android:id="@+id/tvCountProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="15dp"
+            android:src="@drawable/ic_baseline_add_circle_24"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/bottom_sheet_text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test2"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/bottom_sheet_text3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test3"
-        android:padding="10dp"/>
-</LinearLayout>
+        android:layout_below="@+id/InforProduct"
+        android:orientation="vertical">
+
+        <com.misa.fresher.CustomView.CustomRecyclerView
+            android:id="@+id/cv_rcv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title1="" />
+    </LinearLayout>
+</RelativeLayout>
