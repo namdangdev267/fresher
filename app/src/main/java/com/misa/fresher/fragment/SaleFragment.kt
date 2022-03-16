@@ -1,14 +1,21 @@
 package com.misa.fresher.fragment
 
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
@@ -22,6 +29,8 @@ import com.misa.fresher.models.product.*
 import com.misa.fresher.utils.Enums
 import com.misa.fresher.utils.Utils
 import kotlinx.coroutines.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate) {
 
@@ -36,9 +45,12 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     private var displayedItems = filteredItems
     private var selectedItems = arrayListOf<Product>()
 
+    var timer: Timer? = null
     object FilterConfig {
         var viewMode = Enums.Product.MODEL
+        var textSearch = ""
     }
+
 
     override fun initUI() {
         initListProductRecViewUI()
@@ -46,8 +58,14 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         initSaleFilterDrawerUI()
     }
 
+    override fun updateUI() {
+        super.updateUI()
+        updateProductSelectedUI()
+    }
+
     override fun initListener() {
         initToolbarListener()
+        initBottomButtonListener()
         initBottomSheetDialogListener()
         initSaleFilterDrawerListener()
     }
@@ -147,23 +165,37 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     private fun initToolbarListener() {
         binding.toggleDrawerBtn.setOnClickListener { (activity as MainActivity).toggleDrawer() }
         binding.filterBtn.setOnClickListener { binding.root.openDrawer(GravityCompat.END) }
+
+        var job: Job? = null
+        binding.textSearch.doAfterTextChanged {
+            val txtSearch = binding.textSearch.text.toString().lowercase()
+            if(txtSearch != FilterConfig.textSearch) {
+                FilterConfig.textSearch = txtSearch
+                job?.cancel()
+                job = CoroutineScope(Dispatchers.Main).launch {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.listProductRecView.visibility = View.GONE
+                    delay(300)
+                    productSaleSearch()
+                    updateProductListUI()
+                    binding.progressBar.visibility = View.GONE
+                    binding.listProductRecView.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+    private fun initBottomButtonListener() {
         binding.clearBtn.setOnClickListener {
             selectedItems = arrayListOf()
             updateProductSelectedUI()
         }
-        var job: Job? = null
-        binding.textSearch.doAfterTextChanged {
-            job?.cancel()
-            job = CoroutineScope(Dispatchers.Main).launch {
-                binding.progressBar.visibility = View.VISIBLE
-                binding.listProductRecView.visibility = View.GONE
-                delay(300)
-                productSaleSearch()
-                updateProductListUI()
-                binding.progressBar.visibility = View.GONE
-                binding.listProductRecView.visibility = View.VISIBLE
+        val navToBillFragment: (View) -> Unit = {
+            if(selectedItems.size > 0) {
+                findNavController().navigate(R.id.action_fragment_sale_to_fragment_bill, bundleOf("selected_items" to selectedItems))
             }
         }
+        binding.numberBtn.setOnClickListener(navToBillFragment)
+        binding.priceBtn.setOnClickListener(navToBillFragment)
     }
     private fun initBottomSheetDialogListener() {
         bottomSheetDialogBinding.itemSaleProductView.run {
@@ -224,14 +256,11 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         }
     }
 
-
     private suspend fun productSaleSearch() {
         withContext(Dispatchers.Default) {
-            val txtSearch = binding.textSearch.text.toString().lowercase()
             displayedItems =
-                if(txtSearch == "") filteredItems
-                else Utils.listToArrayList(filteredItems.filter { it.name.lowercase().contains(txtSearch) })
-
+                if(FilterConfig.textSearch == "") filteredItems
+                else Utils.listToArrayList(filteredItems.filter { it.name.lowercase().contains(FilterConfig.textSearch) })
         }
     }
 
@@ -337,8 +366,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
                         unit = product.units.find { it.name == items[checked] }!!
                     }
 
-                    val selectedItem =
-                        selectedItems.find { it.code == product.code && it.items[0].size == size && it.items[0].color == color && it.unit == unit }
+                    val selectedItem = selectedItems.find { it.code == product.code && it.items[0].size == size && it.items[0].color == color && it.unit == unit }
 
                     if (selectedItem != null) selectedItem.items[0].amount += itemSaleProductView.amount
                     else product.items.find { it.color == color && it.size == size }?.let { item ->

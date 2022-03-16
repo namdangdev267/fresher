@@ -1,6 +1,7 @@
 package com.misa.fresher.models.product
 
 import com.misa.fresher.utils.Utils
+import java.io.Serializable
 
 data class Product(
     var name: String,
@@ -12,7 +13,7 @@ data class Product(
     var units: ArrayList<ProductUnit>,
     var unit: ProductUnit = ProductUnit("", 1),
     var isUnitSelect: Boolean = false
-) {
+): Serializable {
     fun quantity() = items.sumOf { it.quantity }
     fun getAmount() = items.sumOf { it.amount }
     fun getColors() = Utils.listToArrayList(items.map { it.color }.distinct())

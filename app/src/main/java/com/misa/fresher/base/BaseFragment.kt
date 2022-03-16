@@ -31,5 +31,8 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingInflater: (infl
             initListener()
             isNotYetInit = false
         }
+        updateUI()
     }
+
+    open fun updateUI() {}
 }

@@ -14,6 +14,7 @@
     <dimen name="pad_extra">12dp</dimen>
 
     <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="default_button_height">50dp</dimen>
 
     <dimen name="product_item_height">70dp</dimen>
     <dimen name="product_img_width">50dp</dimen>

@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_bill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/ship_information_toolbar"
+        android:id="@+id/bill_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purpleDark"
-        app:contentInsetStart="@dimen/pad_small"
-        app:contentInsetEnd="@dimen/pad_small">
+        app:contentInsetEnd="@dimen/pad_small"
+        app:contentInsetStart="@dimen/pad_small">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_btn_oval_violet"
-                android:src="@drawable/ic_arrow_back"
                 android:padding="@dimen/pad_medium"
+                android:src="@drawable/ic_arrow_back"
                 app:tint="@color/white" />
 
             <TextView
@@ -43,12 +44,140 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_btn_oval_violet"
-                android:src="@drawable/ic_cart"
                 android:padding="@dimen/pad_medium"
+                android:src="@drawable/ic_cart"
+                app:tint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_btn_oval_violet"
+                android:padding="@dimen/pad_medium"
+                android:src="@drawable/ic_menu_three_dot"
                 app:tint="@color/white" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="@string/btn_customer_hint"
+            app:drawableStartCompat="@drawable/ic_person" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="@string/btn_calendar_hint"
+            android:textSize="13sp"
+            app:drawableStartCompat="@drawable/ic_calendar" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pad_small"
+        android:background="@color/purpleLight"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_product_rec_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pad_small"
+        android:background="@color/purpleLight"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_product_item"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/pad_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/pad_extra"
+            android:drawableTint="@color/purpleDark"
+            android:gravity="center"
+            android:text="Receivable"
+            android:textColor="@color/black"
+            app:drawableStartCompat="@drawable/ic_money_black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/pad_medium"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/black"
+            android:text="200,000.0"
+            app:drawableEndCompat="@drawable/ic_arrow_forward_black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/pad_medium">
+
+        <com.misa.fresher.customview.BtnRound
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/pad_tiny"
+            app:drawableTint="@color/white"
+            app:icon="@drawable/ic_cart"
+            app:isActive="true" />
+
+        <com.misa.fresher.customview.BtnRound
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/pad_tiny"
+            app:drawableTint="@color/white"
+            app:icon="@drawable/ic_cart"
+            app:isActive="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/product_item_count_btn"
+            android:layout_width="@dimen/default_button_height"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginEnd="1dp"
+            android:textSize="@dimen/txt_large"
+            android:background="@drawable/bg_btn_round_left_violet"
+            android:textColor="@color/white"
+            android:text="0" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/payment_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/txt_large"
+            android:background="@drawable/bg_btn_round_right_violet"
+            android:textColor="@color/white"
+            android:text="Get payment"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>

@@ -164,7 +164,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/number_btn"
-                android:layout_width="50dp"
+                android:layout_width="@dimen/default_button_height"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/pad_tiny"
                 android:layout_marginEnd="1dp"

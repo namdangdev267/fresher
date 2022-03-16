@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import com.misa.fresher.base.BaseAdapter
 import com.misa.fresher.base.BaseViewHolder
 import com.misa.fresher.customview.ItemSaleProductView
+import com.misa.fresher.databinding.ItemSaleProductBinding
 import com.misa.fresher.models.product.Product
 import com.misa.fresher.utils.Enums
 
@@ -35,7 +36,8 @@ class SaleProductAdapter(
     }
 
     class ProductModelViewHolder(
-        private val itemSaleProductView: ItemSaleProductView, override var clickItemListener: (Product, Int) -> Unit
+        val itemSaleProductView: ItemSaleProductView,
+        override var clickItemListener: (Product, Int) -> Unit
     ) : BaseViewHolder<Product>(itemSaleProductView) {
         override fun bindingData(item: Product, position: Int) {
             itemSaleProductView.apply {
@@ -54,27 +56,28 @@ class SaleProductAdapter(
     }
 
     class ProductItemViewHolder(
-        private val itemSaleProductView: ItemSaleProductView, override var clickItemListener: (Product, Int) -> Unit
+        val itemSaleProductView: ItemSaleProductView, override var clickItemListener: (Product, Int) -> Unit
     ) : BaseViewHolder<Product>(itemSaleProductView) {
 
-        override fun bindingData(item: Product, position: Int) {
+        override fun bindingData(product: Product, position: Int) {
+            val productItem = product.items[0]
             itemSaleProductView.apply {
-                image = item.image
-                name = item.name
-                code = item.code
-                price = item.getPrice()
-                unit = item.unit
-                amount = 0
-                isUnitSelect = item.isUnitSelect
+                image = product.image
+                name = "${product.name } (${productItem.color}/${productItem.size})"
+                code = product.code
+                price = productItem.price.toString()
+                unit = product.unit
+                amount = productItem.amount
+                isUnitSelect = product.isUnitSelect
             }
             itemSaleProductView.binding.root.setOnClickListener {
-                clickItemListener(item, position)
+                clickItemListener(product, position)
             }
         }
     }
 
     class ProductItemSelectedViewHolder(
-        private val itemSaleProductView: ItemSaleProductView, override var clickItemListener: (Product, Int) -> Unit
+        val itemSaleProductView: ItemSaleProductView, override var clickItemListener: (Product, Int) -> Unit
     ) : BaseViewHolder<Product>(itemSaleProductView) {
         override fun bindingData(item: Product, position: Int) {
             itemSaleProductView.apply {
