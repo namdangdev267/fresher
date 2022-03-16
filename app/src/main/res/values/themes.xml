@@ -15,4 +15,23 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:layout_marginBottom">@dimen/dp_8</item>
+        <item name="android:layout_marginHorizontal">@dimen/dp_2</item>
+        <item name="bottomSheetStyle">@style/BottomSheetModalStyle</item>
+    </style>
+    <style name="BottomSheetModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/custom_searchview</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Toolbar" parent="Theme.FreshersApplication">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:itemTextAppearance">@style/Theme.FreshersApplication.Toolbar.TextItem</item>
+    </style>
+    w
+    <style name="Theme.FreshersApplication.Toolbar.TextItem" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
