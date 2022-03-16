@@ -2,9 +2,7 @@ package com.misa.fresher.ui.sale.bill
 
 import android.text.TextUtils
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
@@ -13,10 +11,12 @@ import com.misa.fresher.data.entity.Bill
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.sale.SaleFragment
 import com.misa.fresher.ui.sale.bill.adapter.ProductBillAdapter
 import com.misa.fresher.util.get
 import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.toCurrency
+import com.misa.fresher.util.toast
 import java.util.*
 
 /**
@@ -34,7 +34,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
     override val getInflater: (LayoutInflater) -> FragmentBillBinding
         get() = FragmentBillBinding::inflate
 
-    private val selectedItems by lazy { arguments.get("items", mutableListOf<ProductItemBill>()) }
+    private val selectedItems by lazy { arguments.get(SaleFragment.SELECTED_ITEMS, mutableListOf<ProductItemBill>()) }
 
     private var productAdapter: ProductBillAdapter? = null
 
@@ -108,7 +108,6 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
      */
     private fun configProductRcv() {
         productAdapter = ProductBillAdapter(mutableListOf(), requireContext(), this::updateTotalAmount)
-        binding.rcvProduct.layoutManager = LinearLayoutManager(context)
         binding.rcvProduct.adapter = productAdapter
         binding.rcvProduct.addItemDecoration(
             DividerItemDecoration(
@@ -152,13 +151,13 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
                     Calendar.getInstance()
                 )
                 FakeData.bills.add(bill)
-                Toast.makeText(requireContext(), getString(R.string.save_bill_success), Toast.LENGTH_SHORT).show()
+                toast(requireContext(), R.string.save_bill_success)
 
                 (activity as MainActivity).tempCustomer = null
                 selectedItems.clear()
                 activity?.onBackPressed()
             } ?: run {
-                Toast.makeText(requireContext(), getString(R.string.please_select_receiver), Toast.LENGTH_SHORT).show()
+                toast(requireContext(), R.string.please_select_receiver)
             }
         }
     }

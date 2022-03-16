@@ -7,11 +7,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,6 +29,7 @@ import com.misa.fresher.util.enum.ProductSortType
 import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.guard
 import com.misa.fresher.util.toCurrency
+import com.misa.fresher.util.toast
 
 /**
  * Màn hình bán hàng
@@ -164,8 +163,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         }
         dialogBinding.btnMinus.setOnClickListener {
             if (quantity == 1) {
-                Toast.makeText(context, R.string.quantity_must_be_bigger_than_0, Toast.LENGTH_SHORT)
-                    .show()
+                toast(requireContext(), R.string.quantity_must_be_bigger_than_0)
             } else {
                 quantity--
                 dialogBinding.tvQuantity.text = quantity.toString()
@@ -276,7 +274,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         binding.btnCart.setOnClickListener {
             navigation.navigate(
                 R.id.action_fragment_sale_to_fragment_bill, bundleOf(
-                    "items" to selectedItems
+                    SELECTED_ITEMS to selectedItems
                 )
             )
         }
@@ -309,7 +307,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      */
     private fun configProductRcv() {
         productAdapter = ProductAdapter(mutableListOf(), this::showTypeSelectorDialog)
-        binding.rcvProduct.layoutManager = LinearLayoutManager(context)
         binding.rcvProduct.adapter = productAdapter
         binding.rcvProduct.addItemDecoration(
             DividerItemDecoration(
@@ -433,5 +430,9 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         } else {
             binding.root.openDrawer(menu)
         }
+    }
+
+    companion object {
+        const val SELECTED_ITEMS = "items"
     }
 }

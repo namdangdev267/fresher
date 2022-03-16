@@ -5,7 +5,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.core.BaseFragment
@@ -69,7 +68,6 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
      */
     private fun configBillRcv() {
         billAdapter = BillAdapter(mutableListOf())
-        binding.rcvListBill.layoutManager = LinearLayoutManager(context)
         binding.rcvListBill.adapter = billAdapter
     }
 

@@ -1,9 +1,11 @@
 package com.misa.fresher.util
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -116,4 +118,38 @@ inline fun <reified T: Any> Bundle?.get(name: String, defaultValue: T): T {
         }
     }
     return defaultValue
+}
+
+/**
+ * Hiển thị toast với đầu vào là string
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/16/2022
+ *
+ * @version 1
+ * @updated 3/16/2022: Tạo function
+ */
+fun toast(context: Context, text: String, isLong: Boolean = false) {
+    Toast.makeText(
+        context,
+        text,
+        if (isLong) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+    ).show()
+}
+
+/**
+ * Hiển thị toast với đầu vào là string id
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/16/2022
+ *
+ * @version 1
+ * @updated 3/16/2022: Tạo function
+ */
+fun toast(context: Context, textId: Int, isLong: Boolean = false) {
+    Toast.makeText(
+        context,
+        context.getString(textId),
+        if (isLong) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+    ).show()
 }

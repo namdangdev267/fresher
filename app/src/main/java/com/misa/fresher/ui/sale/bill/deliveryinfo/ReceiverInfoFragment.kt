@@ -3,7 +3,6 @@ package com.misa.fresher.ui.sale.bill.deliveryinfo
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
@@ -99,7 +98,6 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
             )),
             SingleCheckBoxInputModel("Thu COD")
         ), requireContext())
-        binding.rcvReceiverInput.layoutManager = LinearLayoutManager(context)
         binding.rcvReceiverInput.adapter = adapter
         binding.rcvReceiverInput.addItemDecoration(
             DividerItemDecoration(

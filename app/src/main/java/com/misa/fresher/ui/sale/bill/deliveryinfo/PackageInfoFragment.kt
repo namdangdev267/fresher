@@ -3,7 +3,6 @@ package com.misa.fresher.ui.sale.bill.deliveryinfo
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.model.*
 import com.misa.fresher.databinding.FragmentPackageInfoBinding
@@ -43,7 +42,6 @@ class PackageInfoFragment: BaseFragment<FragmentPackageInfoBinding>() {
                 null, InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL),
             PackageSizeInputModel("Kích thước (cm)", false)
         ), requireContext())
-        binding.rcvPackageInput.layoutManager = LinearLayoutManager(context)
         binding.rcvPackageInput.adapter = adapter
         binding.rcvPackageInput.addItemDecoration(
             DividerItemDecoration(

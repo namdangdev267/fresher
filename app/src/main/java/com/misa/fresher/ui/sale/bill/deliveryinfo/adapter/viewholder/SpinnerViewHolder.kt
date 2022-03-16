@@ -6,7 +6,6 @@ import com.misa.fresher.R
 import com.misa.fresher.core.BaseViewHolder
 import com.misa.fresher.data.model.InputInfoModel
 import com.misa.fresher.data.model.SpinnerInputModel
-import com.misa.fresher.data.model.TapInsertInputModel
 import com.misa.fresher.databinding.ItemSpinnerInputBinding
 
 /**

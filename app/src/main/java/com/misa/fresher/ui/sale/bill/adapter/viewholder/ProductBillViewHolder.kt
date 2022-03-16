@@ -1,12 +1,12 @@
 package com.misa.fresher.ui.sale.bill.adapter.viewholder
 
 import android.content.Context
-import android.widget.Toast
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseViewHolder
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.ItemProductInBillBinding
 import com.misa.fresher.util.toCurrency
+import com.misa.fresher.util.toast
 
 /**
  * View holder cho mỗi sản phẩm trong màn hình thanh toán đơn hàng
@@ -32,7 +32,7 @@ class ProductBillViewHolder(
 
         binding.btnMinus.setOnClickListener {
             if (data.quantity <= 1) {
-                Toast.makeText(context, R.string.quantity_must_be_bigger_than_0, Toast.LENGTH_SHORT).show()
+                toast(context, R.string.quantity_must_be_bigger_than_0)
             } else {
                 data.quantity--
                 binding.tvQuantity.text = data.quantity.toString()

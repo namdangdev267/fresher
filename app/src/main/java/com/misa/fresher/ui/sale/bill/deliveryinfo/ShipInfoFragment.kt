@@ -3,7 +3,6 @@ package com.misa.fresher.ui.sale.bill.deliveryinfo
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.model.*
@@ -59,7 +58,6 @@ class ShipInfoFragment: BaseFragment<FragmentShipInfoBinding>() {
                 null, InputType.TYPE_CLASS_TEXT),
             TapActionInputModel("Ngày giao hàng", false, null) {},
         ), requireContext())
-        binding.rcvShipInput.layoutManager = LinearLayoutManager(context)
         binding.rcvShipInput.adapter = adapter
         binding.rcvShipInput.addItemDecoration(
             DividerItemDecoration(

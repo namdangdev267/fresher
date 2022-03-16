@@ -1,13 +1,13 @@
 package com.misa.fresher.ui.sale.bill.deliveryinfo
 
 import android.view.LayoutInflater
-import android.widget.Toast
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.databinding.FragmentDeliveryInfoBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInfoAdapter
+import com.misa.fresher.util.toast
 
 /**
  * Màn hình thông tin giao hàng
@@ -43,7 +43,7 @@ class DeliveryInfoFragment: BaseFragment<FragmentDeliveryInfoBinding>() {
             (activity as MainActivity).tempCustomer?.let {
                 activity?.onBackPressed()
             } ?: run {
-                Toast.makeText(requireContext(), getString(R.string.please_select_receiver), Toast.LENGTH_SHORT).show()
+                toast(requireContext(), R.string.please_select_receiver)
             }
         }
     }
