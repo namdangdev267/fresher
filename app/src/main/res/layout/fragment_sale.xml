@@ -1,85 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawre_layout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
+    tools:context=".MainActivity"
     tools:openDrawer="end">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical">-->
+        <LinearLayout
+            android:id="@+id/linearToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-<!--            <com.google.android.material.appbar.AppBarLayout-->
-<!--                android:id="@+id/appBar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-<!--                <androidx.appcompat.widget.Toolbar-->
-<!--                    android:id="@+id/toolbar"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="?attr/actionBarSize"-->
-<!--                    android:background="@color/background"-->
-<!--                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">-->
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/background"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent">-->
+                    <include
+                        android:id="@+id/toolbarSale"
+                        layout="@layout/search_view" />
 
-<!--                        <androidx.constraintlayout.widget.Guideline-->
-<!--                            android:id="@+id/glVertical1"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:orientation="vertical"-->
-<!--                            app:layout_constraintGuide_percent="0.85" />-->
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
 
-<!--                        <EditText-->
-<!--                            android:id="@+id/edt"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="32dp"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            android:layout_marginLeft="5dp"-->
-<!--                            android:background="@drawable/custom_searchview"-->
-<!--                            android:drawableStart="@drawable/ic_baseline_search_24"-->
-<!--                            android:drawableEnd="@drawable/ic_baseline_qr_code_scanner_24"-->
-<!--                            android:hint="Enter name, SKU code, S......."-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textColorHint="#B5B5B5"-->
-<!--                            android:textSize="15sp"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="@id/glVertical1"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                        <ImageView-->
-<!--                            android:id="@+id/imgFilter"-->
-<!--                            android:layout_width="22dp"-->
-<!--                            android:layout_height="22dp"-->
-<!--                            android:layout_marginLeft="10dp"-->
-<!--                            android:layout_toRightOf="@id/edt"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            android:src="@drawable/filter"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="@id/glVertical1"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--                </androidx.appcompat.widget.Toolbar>-->
-<!--            </com.google.android.material.appbar.AppBarLayout>-->
-
-<!--        </LinearLayout>-->
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/linearToolbar"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -158,8 +121,8 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/user2" />
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/ic_baseline_person_24" />
 
                         <EditText
                             android:id="@+id/etSearch"
@@ -168,9 +131,15 @@
                             android:layout_marginHorizontal="10dp"
                             android:layout_marginVertical="5dp"
                             android:background="@null"
+                            android:clickable="true"
+                            android:ellipsize="end"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
                             android:hint="Customer name, phone n           "
                             android:lines="1"
                             android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
                             android:textSize="12sp" />
 
                         <RelativeLayout
@@ -209,7 +178,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/glNgang2" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </RelativeLayout>
@@ -217,7 +185,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="8dp"
+                android:layout_marginHorizontal="8dp"
                 android:layout_weight="0.3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -225,6 +193,7 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
+                        android:id="@+id/btnRefresh"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:background="@drawable/custom_button_none"
@@ -260,14 +229,15 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:id="@+id/tvCountProduct"
                             android:layout_width="45dp"
                             android:layout_height="match_parent"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
                             android:gravity="center"
                             android:text="0"
-                            android:textColor="#676767"
-                            android:textSize="22sp" />
+                            android:textColor="@color/SwitchCompat"
+                            android:textSize="20sp" />
 
                         <View
                             android:layout_width="1.5dp"
@@ -275,13 +245,13 @@
                             android:background="@color/white" />
 
                         <TextView
-                            android:id="@+id/tvQuantity"
+                            android:id="@+id/tvBillProduct"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Not yet selected item"
-                            android:textColor="#676767"
-                            android:textSize="22sp" />
+                            android:textColor="@color/SwitchCompat"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -291,18 +261,18 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
-
-
-
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/layout_header_nav"
-        app:menu="@menu/menu_nav" />
+        android:fitsSystemWindows="true"
+        android:layout_gravity="end">
 
+        <include
+            android:id="@+id/filterDrawer"
+            layout="@layout/filter_drawer" />
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
