@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.ItemShipInfor
+import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
 
 class PackageAdapter(private val adapterData: MutableList<ItemShipInfor>) :
