@@ -8,34 +8,34 @@
 
     <fragment
         android:id="@+id/fragment_sale"
-        android:name="com.misa.fresher.Fragment.SaleFragment"
+        android:name="com.misa.fresher.Fragment.Sale.SaleFragment"
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale" >
         <action
-            android:id="@+id/action_fragment_sale_to_fragment_package"
-            app:destination="@id/fragment_package" />
+            android:id="@+id/action_fragment_sale_to_fragment_payment"
+            app:destination="@id/fragment_payment" />
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_package"
-        android:name="com.misa.fresher.Fragment.PackageFragment"
-        android:label="fragment_package"
-        tools:layout="@layout/fragment_package" >
+        android:id="@+id/fragment_payment"
+        android:name="com.misa.fresher.Fragment.Payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
         <action
-            android:id="@+id/action_fragment_package_to_fragment_ship"
+            android:id="@+id/action_fragment_payment_to_fragment_ship"
             app:destination="@id/fragment_ship" />
         <action
-            android:id="@+id/action_fragment_package_to_fragment_sale"
+            android:id="@+id/action_fragment_payment_to_fragment_sale"
             app:destination="@id/fragment_sale" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_ship"
-        android:name="com.misa.fresher.Fragment.ShipFragment"
+        android:name="com.misa.fresher.Fragment.ShipInformation.ShipInformationFragment"
         android:label="fragment_ship"
-        tools:layout="@layout/fragment_ship" >
+        tools:layout="@layout/fragment_ship_information" >
         <action
-            android:id="@+id/action_fragment_ship_to_fragment_package"
-            app:destination="@id/fragment_package" />
+            android:id="@+id/action_fragment_ship_to_fragment_payment"
+            app:destination="@id/fragment_payment" />
     </fragment>
 </navigation>
