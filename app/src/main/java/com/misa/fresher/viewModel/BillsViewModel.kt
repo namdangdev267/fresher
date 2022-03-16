@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.misa.fresher.model.Bill
 import com.misa.fresher.model.Receiver
 
-class ShareViewModel:ViewModel() {
+class BillsViewModel:ViewModel() {
     private var _listBill = MutableLiveData<MutableList<Bill>>()
     val listBill : LiveData<MutableList<Bill>> get() = _listBill
 

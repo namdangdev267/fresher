@@ -41,7 +41,6 @@ class ProductSelectedAdapter(
         fun bind(selectedProducts: SelectedProducts) {
             itemView.findViewById<TextView>(R.id.tvProductId).text = selectedProducts.product.id
             itemView.findViewById<TextView>(R.id.tvProductName).text = selectedProducts.product.name
-            itemView.findViewById<TextView>(R.id.tvProductId).text = selectedProducts.product.id
             itemView.findViewById<TextView>(R.id.tvProductPrice).text =
                 "${selectedProducts.product.price}/cai"
             val tvAmount = itemView.findViewById<TextView>(R.id.tvProductAmont)
@@ -61,11 +60,11 @@ class ProductSelectedAdapter(
                     tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
                     updateTotalPrice(selectedProducts)
                 } else {
-                    var tost = Toast.makeText(
+                    val tost = Toast.makeText(
                         contextVH, "Số lượng phải lớn hơn 0. Vui lòng nhập lại",
                         Toast.LENGTH_SHORT
                     )
-                    tost.setGravity(Gravity.TOP,0,0)
+                    tost.setGravity(Gravity.TOP, 0, 0)
                     tost.show()
                 }
             }

@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.Products
-
+/**
+* tạo ProductsAdapter để recyclerView màn sale sử dụng
+* @Auther : NTBao
+* @date : 3/16/2022
+**/
 class ProductsAdapter(
     private val mProducts: List<Products>,
     val clickItemListener: (products: Products) -> Unit
@@ -27,10 +31,9 @@ class ProductsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val v = inflater.inflate(R.layout.items_list_product, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.items_list_product, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

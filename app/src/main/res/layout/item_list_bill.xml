@@ -7,8 +7,10 @@
         android:id="@+id/tvIdBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:gravity="center"
         android:paddingStart="@dimen/dp_14"
+        android:paddingTop="@dimen/dp_8"
         android:text="12123"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
@@ -17,10 +19,10 @@
         android:id="@+id/tvReceiver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvIdBill"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:paddingStart="@dimen/dp_14"
+        android:paddingBottom="@dimen/dp_8"
         android:text="12123"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
@@ -44,10 +46,11 @@
         android:src="@drawable/ic_forward"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/rcv_boder"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@color/rcv_boder" />
 
 </RelativeLayout>

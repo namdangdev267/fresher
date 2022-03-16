@@ -25,7 +25,7 @@ import com.misa.fresher.model.Receiver
 import com.misa.fresher.viewModel.ShipInforViewModel
 
 class ShipInforFragment : Fragment() {
-    private var viewModel : ShipInforViewModel ? =null
+    private var viewModel: ShipInforViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +51,7 @@ class ShipInforFragment : Fragment() {
     }
 
     private fun backEvent(view: View) {
-        view.findViewById<ImageButton>(R.id.btnBack).setOnClickListener{
+        view.findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             activity?.onBackPressed()
         }
     }

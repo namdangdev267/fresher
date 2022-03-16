@@ -22,8 +22,8 @@ import com.misa.fresher.viewModel.ShipInforViewModel
 class RecipientFragment : Fragment() {
     private var rcv: RecyclerView? = null
     private var list = mutableListOf<ShippingView>()
-    private var receiver = Receiver("","","","","","","","","")
-    private val viewModel : ShipInforViewModel by activityViewModels()
+    private var receiver = Receiver("", "", "", "", "", "", "", "", "")
+    private val viewModel: ShipInforViewModel by activityViewModels()
     var name = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,11 +39,10 @@ class RecipientFragment : Fragment() {
         initData()
         configRecyclerView(view)
     }
-    @SuppressLint("NotifyDataSetChanged")
-    private fun configRecyclerView(view : View) {
+
+    private fun configRecyclerView(view: View) {
         rcv = view.findViewById(R.id.rcvShippingView)
-        val adapter = ReceiverViewAdapter(list,{getData(it)})
-        adapter.notifyDataSetChanged()
+        val adapter = ReceiverViewAdapter(list, { getData(it) })
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
 
@@ -51,20 +50,20 @@ class RecipientFragment : Fragment() {
 
     private fun getData(it: ShippingView) {
         it as ShippingView.TouchTextView
-        if (it.tittle=="Người nhận"){
-            receiver.name=it.hint
+        if (it.tittle == "Người nhận") {
+            receiver.name = it.hint
         }
-        if (it.tittle=="Số điện thoại"){
-            receiver.phoneNumber=it.hint
+        if (it.tittle == "Số điện thoại") {
+            receiver.phoneNumber = it.hint
         }
-        if (it.tittle=="Địa chỉ"){
-            receiver.address=it.hint
+        if (it.tittle == "Địa chỉ") {
+            receiver.address = it.hint
         }
-        if (it.tittle=="Khu vực"){
-            receiver.area=it.hint
+        if (it.tittle == "Khu vực") {
+            receiver.area = it.hint
         }
-        if (it.tittle=="Phường, xã"){
-            receiver.ward=it.hint
+        if (it.tittle == "Phường, xã") {
+            receiver.ward = it.hint
         }
         viewModel.add(receiver)
 

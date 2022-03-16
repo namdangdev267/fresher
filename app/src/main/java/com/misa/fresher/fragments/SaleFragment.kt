@@ -63,7 +63,7 @@ class SaleFragment : Fragment() {
         val btnSave = view.findViewById<Button>(R.id.btnFilterSave)
         val btnClear = view.findViewById<Button>(R.id.btnFilterClear)
         btnSave.setOnClickListener {
-            filterItems(getFilter(view),view)
+            filterItems(getFilter(view), view)
             mDrawer?.closeDrawer(Gravity.RIGHT)
         }
         btnClear.setOnClickListener {
@@ -107,9 +107,7 @@ class SaleFragment : Fragment() {
             spnSize.adapter = arrayAdapter
         }
     }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun filterItems(filter: FilterProducts,view: View) {
+    private fun filterItems(filter: FilterProducts, view: View) {
         var sortList = mutableListOf<Products>()
         if (filter.sortBy == "Tên") {
             sortList = fakedata.sortedWith(compareBy(Products::name)) as MutableList<Products>
@@ -145,27 +143,27 @@ class SaleFragment : Fragment() {
                 sortListWithSize = sortListWithColor
             }
         }
-        rcv?.adapter = ProductsAdapter(sortListWithSize, { productItemClick(it,view) })
+        rcv?.adapter = ProductsAdapter(sortListWithSize, { productItemClick(it, view) })
         (rcv?.adapter)?.notifyDataSetChanged()
     }
 
     private fun resetEvent(view: View) {
+        val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
+        val btnTotalPrice = view.findViewById<Button>(R.id.btnTotalPrice)
         view.findViewById<ImageButton>(R.id.btnReset)?.setOnClickListener {
             productsSelected.clear()
             it.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_base)
-            val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
-            btnItemCount.let {
-                it.text = "0"
-                it.background = AppCompatResources.getDrawable(
+            btnItemCount.apply {
+                this.text = "0"
+                this.background = AppCompatResources.getDrawable(
                     requireContext(),
                     R.drawable.item_amount_bg_base
                 )
             }
-            val btnTotalPrice = view.findViewById<Button>(R.id.btnTotalPrice)
-            btnTotalPrice.let {
-                it.text = "Chưa nhập hàng"
-                it.background =
+            btnTotalPrice.apply {
+                this.text = "Chưa nhập hàng"
+                this.background =
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.total_price_base
@@ -177,7 +175,7 @@ class SaleFragment : Fragment() {
     private fun searchEvent(view: View) {
         val edSearch = view.findViewById<EditText>(R.id.edSearch)
         edSearch?.doAfterTextChanged {
-            updateList(edSearch.text.toString(),view)
+            updateList(edSearch.text.toString(), view)
         }
     }
 
@@ -201,7 +199,7 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateList(string: String,view: View) {
+    private fun updateList(string: String, view: View) {
         val list = mutableListOf<Products>()
         for (i in fakedata) {
             if (i.name.uppercase().contains(string.uppercase()) ||
@@ -210,7 +208,7 @@ class SaleFragment : Fragment() {
                 list.add(i)
             }
         }
-        rcv?.adapter = ProductsAdapter(list, { productItemClick(it,view) })
+        rcv?.adapter = ProductsAdapter(list, { productItemClick(it, view) })
         (rcv?.adapter)?.notifyDataSetChanged()
     }
 
@@ -222,15 +220,15 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun configRecyclerView(view :View) {
-        val adapter = ProductsAdapter(fakedata, { productItemClick(it,view) })
-        adapter.notifyDataSetChanged()
+    private fun configRecyclerView(view: View) {
+        val adapter = ProductsAdapter(fakedata, { productItemClick(it, view) })
         rcv = view.findViewById(R.id.rcvListProduct)
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
+        adapter.notifyDataSetChanged()
     }
 
-    private fun productItemClick(products: Products,view: View) {
+    private fun productItemClick(products: Products, view: View) {
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(requireContext()).inflate(
             R.layout.bottom_sheet_product,
@@ -278,7 +276,7 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
-    private fun updateItemSelected(view : View) {
+    private fun updateItemSelected(view: View) {
         val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
         val amount = productsSelected.sumOf { it.amonut }
         val totalPrice = productsSelected.sumOf { it.amonut * it.product.price }

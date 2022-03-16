@@ -19,33 +19,37 @@ import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductSelectedAdapter
 import com.misa.fresher.model.Bill
 import com.misa.fresher.model.SelectedProducts
-import com.misa.fresher.viewModel.ShareViewModel
+import com.misa.fresher.viewModel.BillsViewModel
 import com.misa.fresher.viewModel.ShipInforViewModel
 
 class BillDetailFragment : Fragment() {
     private var listFromSale = mutableListOf<SelectedProducts>()
     val rnds = (1000..9999).random()
     var bill = Bill(listFromSale,rnds,null)
-    var viewModel: ShareViewModel?= null
+    var viewModel: BillsViewModel ?= null
     var shipInforviewModel: ShipInforViewModel?= null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(ShareViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
         shipInforviewModel = ViewModelProvider(requireActivity()).get(ShipInforViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bill_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.tvBillId).text=rnds.toString()
+        getBillId(view)
         listFromSale = getDataFromSaleFragment()
-        configListSelectedItem(listFromSale, view)
+        configListSelectedItem(view)
         configRecyclerView(view)
         navigaEvent(view)
         updateReceiver(view)
+    }
+
+    private fun getBillId(view : View) {
+        view.findViewById<TextView>(R.id.tvBillId).text=rnds.toString()
     }
 
     private fun updateReceiver(view: View) {
@@ -64,18 +68,18 @@ class BillDetailFragment : Fragment() {
 
     private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts, view: View) {
         Log.e("amount selected", selectedProducts.amonut.toString())
-        for (i in listFromSale) {
-            if (i.product == selectedProducts.product) {
-                i.amonut = selectedProducts.amonut
+        for (selectedPro in listFromSale) {
+            if (selectedPro.product == selectedProducts.product) {
+                selectedPro.amonut = selectedProducts.amonut
             }
         }
-        configListSelectedItem(listFromSale, view)
+        configListSelectedItem(view)
 
     }
 
-    private fun configListSelectedItem(list: MutableList<SelectedProducts>, view: View) {
-        val amount = list.sumOf { it.amonut }
-        val totalPrice = list.sumOf { it.amonut * it.product.price }
+    private fun configListSelectedItem(view: View) {
+        val amount = listFromSale.sumOf { it.amonut }
+        val totalPrice = listFromSale.sumOf { it.amonut * it.product.price }
         view.findViewById<Button>(R.id.btnAmountBills)?.text = amount.toString()
         view.findViewById<TextView>(R.id.tvTotalPrice_bill)?.text = totalPrice.toString()
     }
@@ -99,7 +103,6 @@ class BillDetailFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.btnTotalPriceBill).setOnClickListener {
             bill.listSelectedProduct=listFromSale
-            Log.d("test1", bill.toString())
             viewModel?.addBill(bill)
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
             Toast.makeText(requireContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show()

@@ -18,16 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
-import com.misa.fresher.viewModel.ShareViewModel
+import com.misa.fresher.viewModel.BillsViewModel
 
 class BillsFragment : Fragment() {
-    var viewModel: ShareViewModel?=null
+    var viewModel: BillsViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(ShareViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bills, container, false)
     }
 
@@ -65,15 +65,16 @@ class BillsFragment : Fragment() {
         val rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
         val total = view.findViewById<TextView>(R.id.tvTotal)
         val totalPrice = view.findViewById<TextView>(R.id.tvTotalPriceBills)
-        rcv.layoutManager=LinearLayoutManager(view.context)
+        rcv.layoutManager = LinearLayoutManager(view.context)
         viewModel?.listBill?.observe(viewLifecycleOwner, Observer {
-            total.text=it.size.toString()
+            total.text = it.size.toString()
             val adapter = BillsAdapter(it)
-            rcv.adapter=adapter
+            rcv.adapter = adapter
         })
-        totalPrice.text=viewModel?.getTotalPrice().toString()
+        totalPrice.text = viewModel?.getTotalPrice().toString()
     }
-    private fun configToolbar(view : View) {
+
+    private fun configToolbar(view: View) {
         val dlBills = (activity as MainActivity).findViewById<DrawerLayout>(R.id.drawerLayout)
         view.findViewById<ImageView>(R.id.btnMenuBills).setOnClickListener {
             dlBills.openDrawer(Gravity.LEFT)

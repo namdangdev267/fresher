@@ -14,7 +14,7 @@ import com.misa.fresher.model.ShippingView
 
 class ReceiverViewAdapter(
     private val adapterData: MutableList<ShippingView>,
-    private val clickView : (ship: ShippingView) -> Unit
+    private val clickView: (ship: ShippingView) -> Unit
 ) :
     RecyclerView.Adapter<ReceiverViewAdapter.ViewHolder>() {
 
@@ -66,7 +66,7 @@ class ReceiverViewAdapter(
                 itemView.findViewById<ImageButton>(R.id.ibtnShipping).setImageResource(item.img)
             }
             edReceiver.doAfterTextChanged {
-                item.hint=edReceiver.text.toString()
+                item.hint = edReceiver.text.toString()
                 clickView(item)
             }
 

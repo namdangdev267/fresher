@@ -15,7 +15,6 @@ import com.misa.fresher.model.ShippingView
 class ShipFragment : Fragment() {
     private var list = mutableListOf<ShippingView>()
     private var rcv: RecyclerView? = null
-    private var globalView: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,26 +25,18 @@ class ShipFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        globalView = view
         initData()
-        configRecyclerView()
+        configRecyclerView(view)
     }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun configRecyclerView() {
-        rcv = globalView?.findViewById(R.id.rcvShippingView_ship)
-        val adpter = ReceiverViewAdapter(list,{})
-        adpter.notifyDataSetChanged()
+    private fun configRecyclerView(view: View) {
+        rcv = view.findViewById(R.id.rcvShippingView_ship)
+        val adpter = ReceiverViewAdapter(list, {})
         rcv?.adapter = adpter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun getData(it: ShippingView) {
-
-    }
-
     private fun initData() {
-        list = mutableListOf<ShippingView>(
+        list = mutableListOf(
             ShippingView.RadionGroup("Tổ chức", "Cá nhân"),
             ShippingView.TouchTextView(
                 "Đối tác giao hàng",

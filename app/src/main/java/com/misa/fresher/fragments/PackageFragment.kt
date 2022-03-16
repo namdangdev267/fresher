@@ -1,6 +1,5 @@
 package com.misa.fresher.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,21 +30,14 @@ class PackageFragment : Fragment() {
         configRecyclerView()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private fun configRecyclerView() {
         rcv = globalView?.findViewById(R.id.rcvShippingView_package)
         val adapter = ReceiverViewAdapter(list,{
-
         })
-        adapter.notifyDataSetChanged()
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
-
-    private fun getData(it: ShippingView) {
-
-    }
-
     private fun initData() {
         list = mutableListOf(
             ShippingView.TouchEditText("Trọng lượng (g)", "300", null),

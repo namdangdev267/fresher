@@ -30,7 +30,6 @@
             android:layout_height="match_parent"
             android:layout_weight="5.5"
             android:gravity="center"
-            android:text="1000123"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
@@ -80,9 +79,9 @@
             android:layout_weight="5"
             android:ellipsize="end"
             android:gravity="center"
-            android:textColor="@color/black"
             android:hint="@string/contact_hint"
             android:maxLines="1"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_18" />
 
         <ImageView
@@ -131,9 +130,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7.5"
+            android:clickable="true"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/dp_4"
-            android:clickable="true"
             android:text="@string/billDetailByMore"
             android:textColor="@color/purple_700"
             android:textSize="@dimen/sp_16" />
@@ -147,10 +146,10 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/white"
         android:id="@+id/rcvListItem"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/llTotalprice"
         app:layout_constraintTop_toBottomOf="@+id/llByMore" />
 
@@ -164,41 +163,45 @@
         android:focusable="true"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/llBillDetailGetPayment">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/purple_700"
-            android:paddingStart="@dimen/dp_8"
             android:layout_gravity="center_vertical"
-            android:text="$"/>
+            android:paddingStart="@dimen/dp_8"
+            android:text="$"
+            android:textColor="@color/purple_700"
+            android:textSize="@dimen/sp_18" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/black"
-            android:paddingStart="@dimen/dp_8"
             android:layout_gravity="center_vertical"
-            android:text="Còn phải thu"/>
+            android:layout_weight="1"
+            android:paddingStart="@dimen/dp_8"
+            android:text="Còn phải thu"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18" />
+
         <TextView
             android:id="@+id/tvTotalPrice_bill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/black"
-            android:paddingStart="@dimen/dp_8"
             android:layout_gravity="center_vertical"
-            android:text="1233321"/>
+            android:paddingStart="@dimen/dp_8"
+            android:text="1233321"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/purple_700"
+            android:layout_gravity="center_vertical"
             android:paddingStart="@dimen/dp_8"
             android:src="@drawable/ic_forward"
-            android:layout_gravity="center_vertical"
-            android:text="$"/>
+            android:text="$"
+            android:textColor="@color/purple_700"
+            android:textSize="@dimen/sp_18" />
     </LinearLayout>
 
     <LinearLayout
@@ -235,15 +238,16 @@
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_4"
-            android:textSize="@dimen/sp_16"
+            android:layout_weight="1.5"
+            android:background="@drawable/item_amount_bg_selected"
             android:text="1"
             android:textColor="@color/white"
-            android:layout_weight="1.5"
-            android:background="@drawable/item_amount_bg_selected" />
+            android:textSize="@dimen/sp_16" />
+
         <View
             android:layout_width="@dimen/dp_1"
-            android:background="@color/white"
-            android:layout_height="@dimen/dp_48"/>
+            android:layout_height="@dimen/dp_48"
+            android:background="@color/white" />
 
         <Button
             android:id="@+id/btnTotalPriceBill"
@@ -251,12 +255,12 @@
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_4"
-            android:textSize="@dimen/sp_16"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_weight="8.5"
+            android:background="@drawable/total_price_selected"
             android:text="Thu tiền"
             android:textAllCaps="false"
-            android:layout_weight="8.5"
             android:textColor="@color/white"
-            android:layout_marginEnd="@dimen/dp_4"
-            android:background="@drawable/total_price_selected" />
+            android:textSize="@dimen/sp_16" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
