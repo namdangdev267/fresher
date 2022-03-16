@@ -98,6 +98,7 @@
                         app:layout_constraintGuide_percent="0.15" />
 
                     <LinearLayout
+                        android:id="@+id/btnBuyMore"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:orientation="horizontal"
@@ -111,7 +112,7 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="5dp"
-                            android:src="@drawable/plus" />
+                            android:src="@drawable/ic_baseline_add_24" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -167,7 +168,7 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="5dp"
-                            android:src="@drawable/user2" />
+                            android:src="@drawable/ic_baseline_person_24" />
 
                         <EditText
                             android:id="@+id/etSearch"
@@ -268,8 +269,6 @@
                             android:layout_alignParentRight="true"
                             android:src="@drawable/angleright"/>
 
-
-
                     </RelativeLayout>
 
                     <View
@@ -282,7 +281,7 @@
                         app:layout_constraintTop_toTopOf="@id/glViewBottom1" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcvProduct"
+                        android:id="@+id/rcvPackage"
                         android:layout_width="0dp"
                         android:layout_margin="5dp"
                         android:layout_height="0dp"
@@ -308,6 +307,7 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
+                        android:id="@+id/btnGoToShipFragment"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:background="@drawable/custom_button"
@@ -369,6 +369,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:id="@+id/tvCountPackage"
                             android:layout_width="45dp"
                             android:layout_height="match_parent"
                             android:layout_centerHorizontal="true"
