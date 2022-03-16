@@ -11,8 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.CustomView.ToastCustom
-import com.misa.fresher.PackageProduct
+import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentPaymentBinding

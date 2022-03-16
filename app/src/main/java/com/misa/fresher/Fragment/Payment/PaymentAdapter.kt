@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.PackageProduct
+import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.R
 
 class PaymentAdapter(
