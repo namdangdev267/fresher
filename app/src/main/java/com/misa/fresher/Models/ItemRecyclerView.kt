@@ -2,19 +2,19 @@ package com.misa.fresher.Models
 
 import com.misa.fresher.R
 
-sealed class ItemShip{
+sealed class ItemRecyclerView{
     data class ItemTouch(
         var title:String,
         var hintContent:String,
         var imageResourcce:Int?,
         var require:String?
-    ):ItemShip()
+    ):ItemRecyclerView()
 
     data class ItemCalculator(
         var title:String,
         var content:String,
         var imageResourcce:Int = R.drawable.ic_calculator
-    ):ItemShip()
+    ):ItemRecyclerView()
 
     data class ItemMultiContent(
         var title1:String,
@@ -22,23 +22,23 @@ sealed class ItemShip{
         var content1:String,
         var content2:String,
         var imageResource:Int
-    ):ItemShip()
+    ):ItemRecyclerView()
 
     data class ItemCheck(
         var title:String
-    ):ItemShip()
+    ):ItemRecyclerView()
 
     data class ItemRadioButton(
         var option1:String,
         var option2:String
-    ):ItemShip()
+    ):ItemRecyclerView()
 
     data class Item3Col(
         var title:String,
         var content1:String,
         var content2:String,
         var content3:String
-    ):ItemShip()
+    ):ItemRecyclerView()
 
 
 

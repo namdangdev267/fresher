@@ -16,25 +16,22 @@ class CustomRecyclerView : LinearLayout {
     constructor(context: Context) : super(context)
 
     @SuppressLint("ResourceAsColor")
-    constructor(context: Context, attrs: AttributeSet): super(context,attrs)
-    {
-        val array = context.obtainStyledAttributes(attrs,
-            R.styleable.CustomRecyclerView,0,0)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        val array = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.CustomRecyclerView, 0, 0
+        )
         val title = array.getString(R.styleable.CustomRecyclerView_title1)
-        Log.e(this.javaClass.simpleName,title.toString())
+        Log.e(this.javaClass.simpleName, title.toString())
 
         array.recycle()
 
 
-        LayoutInflater.from(context).inflate(R.layout.custom_recycler_view,this,true)
+        LayoutInflater.from(context).inflate(R.layout.custom_recycler_view, this, true)
 
 
         var titleRcv: TextView = findViewById(R.id.cv_rcv_title)
         titleRcv.text = title.toString()
-
-
-
-
 
 
     }

@@ -9,5 +9,6 @@ data class ItemProduct(
     var id:String,
     var color: Color,
     var category: Category,
-    var quantity:Int
+    var availableQuantity:Int,
+    var dateArrival:String
     )

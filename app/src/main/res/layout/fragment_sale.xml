@@ -4,39 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Fragments.Sale.SaleFragment"
-    >
+    tools:context=".Views.Fragments.Sale.SaleFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:background="#2b3176"
-        android:orientation="horizontal"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="#2b3176"
+            android:orientation="horizontal">
 
             <com.misa.fresher.Views.CustomViews.CustomSearchView
-            android:id="@+id/search_view_sale"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:title="@string/search_view"
-            app:icon1="@drawable/ic_menu_24"
-            app:icon2="@drawable/ic_shopping_cart"
-            app:icon3="@drawable/ic_filter_24"
-            />
+                android:id="@+id/search_view_sale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:icon1="@drawable/ic_menu_24"
+                app:icon2="@drawable/ic_shopping_cart"
+                app:icon3="@drawable/ic_filter_24"
+                app:title="@string/search_view" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:weightSum="8"
-            >
+            android:weightSum="8">
 
             <ImageView
                 android:id="@+id/imageview_customer"
@@ -73,8 +68,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/none"
                 android:textColor="#D8000000"
-                android:textFontWeight="400"
-                />
+                android:textFontWeight="400" />
 
 
         </LinearLayout>
@@ -82,19 +76,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/back_ground_light"
             android:paddingTop="@dimen/dp_4"
-            android:paddingBottom="@dimen/dp_4"
-            android:background="#ECEBEB"
-            >
+            android:paddingBottom="@dimen/dp_4">
 
             <Switch
                 android:id="@+id/sw_"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/dp_20"
-                android:theme="@style/Widget.AppCompat.CompoundButton.Switch"
                 android:padding="@dimen/dp_5"
-                />
+                android:paddingLeft="@dimen/dp_20"
+                android:theme="@style/Widget.AppCompat.CompoundButton.Switch" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,71 +94,67 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
                 android:text="@string/split_row"
-                android:textFontWeight="400"
-                android:textColor="#99000000" />
+                android:textColor="#99000000"
+                android:textFontWeight="400" />
 
         </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_sale_fragment"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:background="#F1F1F1"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0.2"
-        android:background="#F1F1F1"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_55"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:weightSum="8"
-        >
-
-        <ImageView
-            android:id="@+id/iv_refresh"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_sale_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_refresh"
-            android:padding="@dimen/dp_10"
-            android:background="@drawable/bg_circle_light"
-            />
+            android:background="@color/white" />
 
-        <TextView
-            android:id="@+id/tv_quantity_item_selected"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rounded_left"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dp_16"
-            android:textFontWeight="400"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.2"
+            android:background="#F1F1F1" />
 
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_55"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_5"
+            android:weightSum="8">
 
-        <TextView
-            android:id="@+id/tv_total_price"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_1"
-            android:layout_weight="6"
-            android:background="@drawable/bg_rounded_right"
-            android:gravity="center"
-            android:text="@string/not_yet_selected_item"
-            android:textFontWeight="400"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dp_16" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_circle_light"
+                android:padding="@dimen/dp_10"
+                android:src="@drawable/ic_refresh" />
+
+            <TextView
+                android:id="@+id/tv_quantity_item_selected"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_left"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textFontWeight="400"
+                android:textSize="@dimen/dp_16"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_1"
+                android:layout_weight="6"
+                android:background="@drawable/bg_rounded_right"
+                android:gravity="center"
+                android:text="@string/not_yet_selected_item"
+                android:textColor="@color/white"
+                android:textFontWeight="400"
+                android:textSize="@dimen/dp_16" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -175,18 +163,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:fitsSystemWindows="true">
 
         <include
             android:id="@+id/layout_filter"
-            layout="@layout/drawer_filter"
-            />
+            layout="@layout/drawer_filter" />
     </com.google.android.material.navigation.NavigationView>
-
-
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

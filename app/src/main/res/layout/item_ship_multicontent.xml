@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="@dimen/dp_15"
-    android:paddingBottom="@dimen/dp_10"
-    android:paddingLeft="@dimen/dp_5"
-    android:paddingRight="@dimen/dp_10"
     android:background="@drawable/bg_item_recyclerview"
-    >
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingRight="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
     <TextView
         android:id="@+id/textview_multicontent_title1"
         style="@style/TextViewFont"
@@ -21,34 +21,31 @@
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_begin="@dimen/dp_200"
         android:orientation="vertical"
-        ></androidx.constraintlayout.widget.Guideline>
+        app:layout_constraintGuide_begin="@dimen/dp_200"></androidx.constraintlayout.widget.Guideline>
 
     <TextView
         android:id="@+id/textview_multicontent_title2"
         style="@style/TextViewFont"
-        android:textColor="#2b3176"
         android:text="@string/deposit"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#2b3176"
         app:layout_constraintLeft_toLeftOf="@id/guideline"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textview_multicontent_content1"
         style="@style/TextViewFont"
         android:text="@string/transfer"
         android:textColor="#000000"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:id="@+id/imageview_multicontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@id/guideline"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"
 
         />
 
@@ -57,12 +54,10 @@
         style="@style/TextViewFont"
         android:text="0,0"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/textview_multicontent_title2"
         app:layout_constraintBaseline_toBaselineOf="@+id/textview_multicontent_content1"
+        app:layout_constraintStart_toStartOf="@+id/textview_multicontent_title2"
 
         />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

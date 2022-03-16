@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/saleFragment"
+        android:title="Sale"
+        android:icon="@drawable/ic_list_px"
+        />
+    <item
+        android:id="@+id/billFragment"
+        android:title="bill"
+        />
+
+
+</menu>

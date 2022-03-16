@@ -1,5 +1,5 @@
 package com.misa.fresher.Models.Enum
 
 enum class BillStatus {
-    Deleted,Done
+    Deleted,Done,Handling
 }

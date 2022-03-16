@@ -7,10 +7,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShip
+import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
 
-class ReceiverAdapter(private val adapterData: MutableList<ItemShip>) :
+class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
     companion object {
@@ -21,7 +21,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShip>) :
     }
 
     class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemShip.ItemTouch) {
+        private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
             itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
             itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
                 item.hintContent
@@ -31,13 +31,13 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShip>) :
             itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
         }
 
-        private fun bindItemCalculator(item: ItemShip.ItemCalculator) {
+        private fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator) {
             itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
             itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
 //            itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(R.drawable.ic_calculator)
         }
 
-        private fun bindItemMulticontent(item: ItemShip.ItemMultiContent) {
+        private fun bindItemMulticontent(item: ItemRecyclerView.ItemMultiContent) {
             itemView.findViewById<TextView>(R.id.textview_multicontent_title1).text = item.title1
             itemView.findViewById<TextView>(R.id.textview_multicontent_title2).text = item.title2
             itemView.findViewById<TextView>(R.id.textview_multicontent_content1).text =
@@ -48,16 +48,16 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShip>) :
                 .setImageResource(item.imageResource)
         }
 
-        private fun bindItemcheck(item: ItemShip.ItemCheck) {
+        private fun bindItemcheck(item: ItemRecyclerView.ItemCheck) {
             itemView.findViewById<TextView>(R.id.textview_check_title).text = item.title
         }
 
-        fun bind(itemShip: ItemShip) {
-            when (itemShip) {
-                is ItemShip.ItemTouch -> bindItemTouch(itemShip)
-                is ItemShip.ItemCalculator -> bindItemCalculator(itemShip)
-                is ItemShip.ItemMultiContent -> bindItemMulticontent(itemShip)
-                is ItemShip.ItemCheck -> bindItemcheck(itemShip)
+        fun bind(itemRecyclerView: ItemRecyclerView) {
+            when (itemRecyclerView) {
+                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
+                is ItemRecyclerView.ItemCalculator -> bindItemCalculator(itemRecyclerView)
+                is ItemRecyclerView.ItemMultiContent -> bindItemMulticontent(itemRecyclerView)
+                is ItemRecyclerView.ItemCheck -> bindItemcheck(itemRecyclerView)
             }
         }
     }
@@ -83,10 +83,10 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShip>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (adapterData[position]) {
-            is ItemShip.ItemTouch -> ITEM_TOUCH
-            is ItemShip.ItemCalculator -> ITEM_CALCULATOR
-            is ItemShip.ItemMultiContent -> ITEM_MULTICONTENT
-            is ItemShip.ItemCheck -> ITEM_CHECK
+            is ItemRecyclerView.ItemTouch -> ITEM_TOUCH
+            is ItemRecyclerView.ItemCalculator -> ITEM_CALCULATOR
+            is ItemRecyclerView.ItemMultiContent -> ITEM_MULTICONTENT
+            is ItemRecyclerView.ItemCheck -> ITEM_CHECK
             else -> 0
         }
     }

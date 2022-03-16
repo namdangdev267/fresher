@@ -18,5 +18,6 @@ class ItemBillDetail(
     fun updateQuantity(num: Int) {
         this.quantity += num
     }
+
 }
 

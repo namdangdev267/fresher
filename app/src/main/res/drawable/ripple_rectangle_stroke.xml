@@ -8,6 +8,9 @@
             android:shape="rectangle">
             <solid android:color="#FFFFFF"
                 />
+            <stroke android:width="0.05dp"
+                android:color="#F1F1F1"
+                />
             <size
                 android:width="@dimen/dp_200"
                 android:height="@dimen/dp_250"/>
@@ -16,3 +19,4 @@
 
 
 </ripple>
+

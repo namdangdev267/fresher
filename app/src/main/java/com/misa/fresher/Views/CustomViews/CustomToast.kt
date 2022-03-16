@@ -8,11 +8,11 @@ import com.misa.fresher.R
 import android.view.Gravity
 
 
-class CustomToast(context: Context) : Toast(context) {
-     fun makeText(context: Context, message: String, duration: Int): Toast {
-        var toast = Toast(context)
-        var layout = LayoutInflater.from(context).inflate(R.layout.custom_toast, null, false)
-        var tvToastMessage = layout.findViewById<TextView>(R.id.tv_toast_message)
+object CustomToast {
+    fun makeText(context: Context, message: String, duration: Int): Toast {
+        val toast = Toast(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.custom_toast, null, false)
+        val tvToastMessage = layout.findViewById<TextView>(R.id.tv_toast_message)
         tvToastMessage.text = message
 
         toast.duration = duration

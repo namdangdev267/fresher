@@ -2,6 +2,7 @@ package com.misa.fresher.Views.Fragments.BillDetail
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,11 @@ class BillDetailFragment : Fragment() {
     lateinit var sharedViewModel: SharedViewModel
     lateinit var billDetailViewModel: BillDetailViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        initViewModel()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,11 +39,6 @@ class BillDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentBillDetailBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        initViewModel()
     }
 
     private fun initViewModel() {
@@ -48,6 +49,25 @@ class BillDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        transitionFragment(view)
+        configToolbar()
+        configListView()
+        configOtherView(view)
+    }
+
+    private fun configToolbar() {
+        binding.tvBillDetailId.text = sharedViewModel.billHandling.value?.id
+    }
+
+    private fun transitionFragment(view: View) {
+        binding.llGetPayment.setOnClickListener {
+
+            Navigation.findNavController(view)
+                .navigate(R.id.action_billDetailFragment_to_saleFragment)
+            sharedViewModel.addBillToListBill()
+
+            CustomToast.makeText(requireContext(), "Paid Successfully", Toast.LENGTH_SHORT).show()
+        }
 
         binding.imBillDetailBack.setOnClickListener {
             Navigation.findNavController(view)
@@ -63,25 +83,31 @@ class BillDetailFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
         }
+    }
 
-        binding.recyclerviewBillDetail.layoutManager = LinearLayoutManager(this.context)
-
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
-            binding.recyclerviewBillDetail.adapter = BillDetailAdapter(it,{it->clickItemBillDetail(it)} )
-            binding.tvBillDetailTotalQuantity.text = sharedViewModel.listItemSelected.value?.size.toString()
-            binding.tvBillDetailTotalPrice.text = sharedViewModel.getTotalPrice().toString()
-        })
-
+    private fun configOtherView(view: View) {
 
     }
 
-    fun clickItemBillDetail(itemBillDetail: ItemBillDetail)
-    {
-        if(itemBillDetail.quantity==1)
-        {
-            var customToast = CustomToast(requireContext())
-            customToast.makeText(requireContext(),"Quantity must be more than 0. Please check again",
-                Toast.LENGTH_SHORT).show()
+    private fun configListView() {
+        binding.recyclerviewBillDetail.layoutManager = LinearLayoutManager(this.context)
+
+        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
+            binding.recyclerviewBillDetail.adapter =
+                BillDetailAdapter(it, { it -> clickItemBillDetail(it) })
+            binding.tvBillDetailTotalQuantity.text =
+                sharedViewModel.listItemSelected.value?.size.toString()
+            binding.tvBillDetailTotalPrice.text = sharedViewModel.getTotalPrice().toString()
+        })
+    }
+
+    fun clickItemBillDetail(itemBillDetail: ItemBillDetail) {
+        if (itemBillDetail.quantity == 1) {
+
+            CustomToast.makeText(
+                requireContext(), "Quantity must be more than 0. Please check again",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         sharedViewModel.updateQuantityOfItemBillDetail(itemBillDetail)
 

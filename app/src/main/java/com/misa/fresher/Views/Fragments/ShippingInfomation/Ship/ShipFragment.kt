@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShip
+import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.Views.Fragments.ShippingInfomation.Receiver.ReceiverAdapter
-import com.misa.fresher.Views.Fragments.ShippingInfomation.Receiver.ReceiverViewModel
 
 class ShipFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
-    lateinit var listItemShip: MutableList<ItemShip>
+    lateinit var listItemRecyclerView: MutableList<ItemRecyclerView>
     lateinit var shipViewModel: ShipViewModel
 
     override fun onCreateView(
@@ -30,11 +28,10 @@ class ShipFragment : Fragment() {
         shipViewModel = ShipViewModel(view.context)
         recyclerView = view.findViewById(R.id.recyclerview_shipping_ship)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = ShipAdapter(shipViewModel.listItemShip)
+        recyclerView.adapter = ShipAdapter(shipViewModel.listItemRecyclerView)
 
 
     }
-
 
 
 }

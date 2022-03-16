@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.Enum.Color
 import com.misa.fresher.R
 
-class CustomRecyclerViewAdapter(private val listData: List<Color>, val clickColor: (color: Color) -> Unit):RecyclerView.Adapter<CustomRecyclerViewAdapter.ViewHolder>() {
+class CustomRecyclerViewAdapter(
+    private val listData: List<Color>,
+    val clickColor: (color: Color) -> Unit
+) : RecyclerView.Adapter<CustomRecyclerViewAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View,val clickColor: (color: Color) -> Unit): RecyclerView.ViewHolder(itemView){
-        fun bind(color: Color)
-        {
+    class ViewHolder(itemView: View, val clickColor: (color: Color) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
+        fun bind(color: Color) {
             itemView.findViewById<TextView>(R.id.tv_cv_rcv_title).text = color.name
             itemView.setOnClickListener {
                 clickColor(color)
@@ -21,8 +24,9 @@ class CustomRecyclerViewAdapter(private val listData: List<Color>, val clickColo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_custom_recyclerview, parent, false)
-        return ViewHolder(view,clickColor)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_custom_recyclerview, parent, false)
+        return ViewHolder(view, clickColor)
     }
 
     override fun onBindViewHolder(holder: CustomRecyclerViewAdapter.ViewHolder, position: Int) {

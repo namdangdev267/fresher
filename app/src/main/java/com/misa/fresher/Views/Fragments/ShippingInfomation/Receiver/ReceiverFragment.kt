@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShip
+import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
 
 class ReceiverFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
-    lateinit var listItemShip: MutableList<ItemShip>
+    lateinit var listItemRecyclerView: MutableList<ItemRecyclerView>
     lateinit var receiverViewModel: ReceiverViewModel
 
     override fun onCreateView(
@@ -31,7 +29,7 @@ class ReceiverFragment : Fragment() {
         receiverViewModel = ReceiverViewModel(view.context)
         recyclerView = view.findViewById(R.id.recyclerview_shipping_receiver)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = ReceiverAdapter(receiverViewModel.listItemShip)
+        recyclerView.adapter = ReceiverAdapter(receiverViewModel.listItemRecyclerView)
 
 
     }

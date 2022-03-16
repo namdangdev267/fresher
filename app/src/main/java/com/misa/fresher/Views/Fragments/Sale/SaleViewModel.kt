@@ -23,14 +23,6 @@ class SaleViewModel : ViewModel() {
     val listItemShow: LiveData<MutableList<ItemProduct>>
         get() = _listItemShow
 
-    private val _itemSelected = MutableLiveData<ItemBillDetail>()
-    val itemSelected: LiveData<ItemBillDetail>
-        get() = _itemSelected
-
-    private val _listItemSelected = MutableLiveData<MutableList<ItemBillDetail>>()
-    val listItemSelected: LiveData<MutableList<ItemBillDetail>>
-        get() = _listItemSelected
-
     data class Filter(
         var category: Category?,
         var color: Color?,
@@ -41,15 +33,6 @@ class SaleViewModel : ViewModel() {
     fun initData() {
         fakeData()
         _listItemShow.postValue(listItemProduct)
-        _itemSelected.postValue(
-            ItemBillDetail(
-                ItemProduct("", 0f, "", Color.red, Category.Shirt, 10),
-                "",
-                "",
-                1
-            )
-        )
-        _listItemSelected.postValue(mutableListOf())
     }
 
     private fun fakeData() {
@@ -57,68 +40,37 @@ class SaleViewModel : ViewModel() {
         for (i in 1..20) {
             listItemProduct.add(
                 ItemProduct(
-                    i.toString() + "shirt" + i, (i * 1.01).toFloat(), i.toString() + "AA",
-                    Color.yellow, Category.Shirt, 10
+                    i.toString() + "trouser" + i, (i * 1.01).toFloat(), i.toString() + "AA",
+                    Color.red, Category.Trouser, i, "5/10/2011"
                 )
             )
         }
+
         for (i in 1..20) {
             listItemProduct.add(
                 ItemProduct(
-                    i.toString() + "trouser" + i, (i * 1.01).toFloat(), i.toString() + "AA",
-                    Color.red, Category.Trouser, 20
+                    i.toString() + "shirt" + i, (i * 1.01).toFloat(), i.toString() + "AA",
+                    Color.yellow, Category.Shirt, i, "11/11/2011"
                 )
             )
         }
 
-    }
+        listItemProduct = listItemProduct.sortedWith { p1, p2 ->
+            Collator.getInstance().compare(p1.name, p2.name)
+        } as MutableList<ItemProduct>
 
+
+    }
 
     /**
-     * List selected item
+     * Filter
      */
 
-    fun updateItemSelected(itemProduct: ItemProduct) {
-        var itemSelected: ItemBillDetail = ItemBillDetail(itemProduct, itemProduct.name, itemProduct.id, 1)
-        _listItemSelected.value?.let {
-            for (i in it) {
-                if (i.itemProduct.equals(itemProduct)) {
-                    itemSelected = i
-                }
-            }
-        }
-
-        _itemSelected.postValue(itemSelected)
-    }
-
-    fun updateItemSelectedQuantity(num: Int) {
-        var itemSelected = _itemSelected.value?.let {
-            ItemBillDetail(
-                it?.itemProduct, "", "", it.quantity + num
-            )
-        }
-
-        _itemSelected.postValue(itemSelected!!)
-    }
-
-    fun updateListItemSelected() {
-        _itemSelected.value?.let { _listItemSelected.value?.apply { add(it) } }
-        _listItemSelected.postValue(_listItemSelected.value)
-    }
-
-    fun clearListItemSelected() {
-        _listItemSelected.value?.clear()
-        _listItemSelected.postValue(_listItemSelected.value)
-    }
-
-    fun getTotalPrice(): Float {
-        var totalPrice = 0f
-        _listItemSelected.value?.let {
-            for (i in _listItemSelected.value!!) {
-                totalPrice += i.itemProduct.price * i.quantity
-            }
-        }
-        return totalPrice
+    fun clearFilter() {
+        filter.sortBy = null
+        filter.category = null
+        filter.color = null
+        filter.available = false
     }
 
 
@@ -156,32 +108,35 @@ class SaleViewModel : ViewModel() {
 
             } else if (filter.color != null && filter.color != i.color) {
 
-            } else if (filter.available == true && i.quantity <= 0) {
+            } else if (filter.available == true && i.availableQuantity <= 0) {
 
             } else {
                 res.add(i)
             }
         }
 
-        if(res.size!=0)
-        {
-            when (filter.sortBy) {
+        Log.e(this.javaClass.simpleName, res.toString())
+
+        if (res.size != 0) {
+            res = when (filter.sortBy) {
                 SortBy.name_item -> res.sortedWith { p1, p2 ->
                     Collator.getInstance().compare(p1.name, p2.name)
-                }
+                } as MutableList<ItemProduct>
+                SortBy.new_arrival -> res.sortedWith { p1, p2 ->
+                    Collator.getInstance().compare(p1.dateArrival, p2.dateArrival)
+                } as MutableList<ItemProduct>
                 else -> res.sortedByDescending {
-                    it.quantity
-                }
+                    it.availableQuantity
+                } as MutableList<ItemProduct>
             }
         }
+        Log.e(this.javaClass.simpleName + "after sort: ", res.toString())
 
 
         Log.e(this.javaClass.simpleName, showList.size.toString() + "--" + listItemProduct.size)
         _listItemShow.postValue(res)
 
     }
-
-
 
 
     fun getColorOf(itemProduct: ItemProduct): List<Color> {

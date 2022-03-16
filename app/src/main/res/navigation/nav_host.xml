@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host"
@@ -10,7 +9,7 @@
         android:id="@+id/saleFragment"
         android:name="com.misa.fresher.Views.Fragments.Sale.SaleFragment"
         android:label="fragment_sale"
-        tools:layout="@layout/fragment_sale" >
+        tools:layout="@layout/fragment_sale">
         <action
             android:id="@+id/action_saleFragment_to_billDetailFragment"
             app:destination="@id/billDetailFragment"
@@ -23,29 +22,36 @@
         android:id="@+id/shippingInformationFragment"
         android:name="com.misa.fresher.Views.Fragments.ShippingInfomation.ShippingInformationFragment"
         android:label="fragment_shipping_information"
-        tools:layout="@layout/fragment_shipping_information" >
+        tools:layout="@layout/fragment_shipping_information">
         <action
             android:id="@+id/action_shippingInformationFragment_to_billDetailFragment"
             app:destination="@id/billDetailFragment"
             app:enterAnim="@anim/animation_slide_in_right"
-            app:exitAnim="@anim/animation_slide_out_left"
-            />
+            app:exitAnim="@anim/animation_slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/billDetailFragment"
         android:name="com.misa.fresher.Views.Fragments.BillDetail.BillDetailFragment"
         android:label="fragment_bill_detail"
-        tools:layout="@layout/fragment_bill_detail" >
+        tools:layout="@layout/fragment_bill_detail">
         <action
             android:id="@+id/action_billDetailFragment_to_shippingInformationFragment"
             app:destination="@id/shippingInformationFragment"
             app:enterAnim="@anim/animation_slide_in_left"
-            app:exitAnim="@anim/animation_slide_out_right"
-            />
+            app:exitAnim="@anim/animation_slide_out_right" />
         <action
             android:id="@+id/action_billDetailFragment_to_saleFragment"
             app:destination="@id/saleFragment"
             app:enterAnim="@anim/animation_slide_in_right"
-            app:exitAnim="@anim/animation_slide_out_left"/>
+            app:exitAnim="@anim/animation_slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/billFragment"
+        android:name="com.misa.fresher.Views.Fragments.Bill.BillFragment"
+        android:label="fragment_bill"
+        tools:layout="@layout/fragment_bill">
+        <action
+            android:id="@+id/action_billFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
 </navigation>

@@ -7,10 +7,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShip
+import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
 
-class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
+class ShipAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<ShipAdapter.ShipAdapterViewHolder>() {
 
     companion object {
@@ -20,7 +20,7 @@ class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
     }
 
     class ShipAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemShip.ItemTouch) {
+        private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
             itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
             itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
                 item.hintContent
@@ -30,23 +30,23 @@ class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
             itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
         }
 
-        private fun bindItemCalculator(item: ItemShip.ItemCalculator) {
+        private fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator) {
             itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
             itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
         }
 
-        private fun bindItemRadioButton(item: ItemShip.ItemRadioButton) {
+        private fun bindItemRadioButton(item: ItemRecyclerView.ItemRadioButton) {
             itemView.findViewById<TextView>(R.id.radio_option1).text = item.option1
             itemView.findViewById<TextView>(R.id.radio_option2).text = item.option2
 
         }
 
-        fun bind(itemShip: ItemShip) {
-            when (itemShip) {
-                is ItemShip.ItemTouch -> bindItemTouch(itemShip)
-                is ItemShip.ItemCalculator -> bindItemCalculator(itemShip)
-                is ItemShip.ItemRadioButton -> bindItemRadioButton(itemShip)
-                is ItemShip.ItemTouch -> bindItemTouch(itemShip)
+        fun bind(itemRecyclerView: ItemRecyclerView) {
+            when (itemRecyclerView) {
+                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
+                is ItemRecyclerView.ItemCalculator -> bindItemCalculator(itemRecyclerView)
+                is ItemRecyclerView.ItemRadioButton -> bindItemRadioButton(itemRecyclerView)
+                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
             }
         }
     }
@@ -71,9 +71,9 @@ class ShipAdapter(private val adapterData: MutableList<ItemShip>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (adapterData[position]) {
-            is ItemShip.ItemTouch -> ITEM_TOUCH
-            is ItemShip.ItemCalculator -> ITEM_CALCULATOR
-            is ItemShip.ItemRadioButton -> ITEM_RADIO_BUTTON
+            is ItemRecyclerView.ItemTouch -> ITEM_TOUCH
+            is ItemRecyclerView.ItemCalculator -> ITEM_CALCULATOR
+            is ItemRecyclerView.ItemRadioButton -> ITEM_RADIO_BUTTON
             else -> 0
         }
     }

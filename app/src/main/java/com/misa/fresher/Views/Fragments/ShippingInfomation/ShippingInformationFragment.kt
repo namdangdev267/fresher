@@ -39,37 +39,38 @@ class ShippingInformationFragment : Fragment() {
                 .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)
         }
 
-//        var indicator = view.findViewById<View>(R.id.indicator)
-        val tabLayout = view.findViewById<TabLayout>(R.id.tablayout_shipping_infomation)
-        val viewPager = view.findViewById<ViewPager2>(R.id.viewpager_shipping_infomation)
 
+        val tabLayout = binding.tablayoutShippingInfomation
+        val viewPager = binding.viewpagerShippingInfomation
 
         val viewPagerAdapter = ViewPagerAdapter(this)
-        viewPagerAdapter.addFragment(ReceiverFragment(),"Receiver")
-        viewPagerAdapter.addFragment(ShipFragment(),"Ship")
-        viewPagerAdapter.addFragment(PackageFragment(),"Package")
+        viewPagerAdapter.addFragment(ReceiverFragment(), "Receiver")
+        viewPagerAdapter.addFragment(ShipFragment(), "Ship")
+        viewPagerAdapter.addFragment(PackageFragment(), "Package")
         viewPager.adapter = viewPagerAdapter
-
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = viewPagerAdapter.getPageTitle(position)
-            if(!tab.isSelected) {
+            if (!tab.isSelected) {
                 when (position) {
                     0 -> {
-                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_left)
+                        tab.view.background =
+                            resources.getDrawable(R.drawable.bg_item_tablayout_left)
                     }
                     2 -> {
-                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_right)
+                        tab.view.background =
+                            resources.getDrawable(R.drawable.bg_item_tablayout_right)
                     }
                     1 -> {
-                        tab.view.background = resources.getDrawable(R.drawable.bg_item_tablayout_middle)
+                        tab.view.background =
+                            resources.getDrawable(R.drawable.bg_item_tablayout_middle)
                     }
                 }
             }
         }.attach()
 
-    }
 
+    }
 
 
     inner class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -86,8 +87,7 @@ class ShippingInformationFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment = mFragmentList[position]
 
-        fun getPageTitle(position: Int): String
-        {
+        fun getPageTitle(position: Int): String {
             return mFragmentTitleList[position]
         }
     }

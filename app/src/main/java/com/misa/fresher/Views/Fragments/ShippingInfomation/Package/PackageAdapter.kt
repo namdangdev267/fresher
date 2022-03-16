@@ -7,40 +7,44 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShip
+import com.misa.fresher.Models.ItemRecyclerView
 import com.misa.fresher.R
 
-class PackageAdapter(private val adapterData: MutableList<ItemShip>) :
+class PackageAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<PackageAdapter.PackageAdapterViewHolder>() {
 
     companion object {
         private const val ITEM_TOUCH = 0
-        private const val ITEM_3COL =1
+        private const val ITEM_3COL = 1
     }
 
     class PackageAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemShip.ItemTouch) {
+        private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
             itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
             itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).setText(
-                item.hintContent)
+                item.hintContent
+            )
             item.imageResourcce?.let {
                 itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
             }
             itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
         }
 
-        private fun bindItem3Col(item: ItemShip.Item3Col) {
-            itemView.findViewById<TextView>(R.id.textview_package_size).text= item.title
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1).setText(item.content1)
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2).setText(item.content2)
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3).setText( item.content3)
+        private fun bindItem3Col(item: ItemRecyclerView.Item3Col) {
+            itemView.findViewById<TextView>(R.id.textview_package_size).text = item.title
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1)
+                .setText(item.content1)
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2)
+                .setText(item.content2)
+            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3)
+                .setText(item.content3)
         }
 
 
-        fun bind(itemShip: ItemShip) {
-            when (itemShip) {
-                is ItemShip.ItemTouch -> bindItemTouch(itemShip)
-                is ItemShip.Item3Col -> bindItem3Col(itemShip)
+        fun bind(itemRecyclerView: ItemRecyclerView) {
+            when (itemRecyclerView) {
+                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
+                is ItemRecyclerView.Item3Col -> bindItem3Col(itemRecyclerView)
 
             }
         }
@@ -65,8 +69,8 @@ class PackageAdapter(private val adapterData: MutableList<ItemShip>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (adapterData[position]) {
-            is ItemShip.ItemTouch -> ITEM_TOUCH
-            is ItemShip.Item3Col -> ITEM_3COL
+            is ItemRecyclerView.ItemTouch -> ITEM_TOUCH
+            is ItemRecyclerView.Item3Col -> ITEM_3COL
             else -> 0
         }
     }
