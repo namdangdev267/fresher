@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_sale"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_sale"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/violet_dark"
+            android:paddingTop="@dimen/dp_10"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_menu"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_10"
+                android:backgroundTint="@color/violet_dark"
+                android:gravity="start|top"
+                android:src="@drawable/ic_baseline_menu_24" />
+
+            <kma.longhoang.beta.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="@dimen/dp_260"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginStart="@dimen/dp_10"
+                android:background="@drawable/custom_toolbar"
+                android:paddingVertical="@dimen/dp_10"
+                app:hint="@string/search_sale"
+                app:imageSKU="@drawable/sku_icon"
+                app:imageSearch="@drawable/ic_baseline_search_24" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_cart"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_10"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_filter"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_10"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@color/violet_dark"
+                android:src="@drawable/ic_baseline_filter_alt_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@+id/menu">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_0">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_customer"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_person_outline_24" />
+
+                <TextView
+                    android:id="@+id/text_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="fill_vertical"
+                    android:hint="@string/customer_name"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_0">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_table_price"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_assignment_24" />
+
+                <TextView
+                    android:id="@+id/text_table_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="fill_vertical"
+                    android:paddingStart="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_0"
+                    android:text="@string/not_selected"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_split"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="#EFEFEF"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/user_layout">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sale_switch"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginStart="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:theme="@style/SaleSwitch" />
+
+            <TextView
+                android:id="@+id/text_line_split"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_10"
+                android:text="@string/line_split"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_Sale"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_split" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/button_reset"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="@dimen/dp_5"
+            android:background="@drawable/oval_button_gray"
+            android:rotation="90"
+            android:src="@drawable/ic_baseline_loop_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/text_amount"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="@dimen/dp_5"
+            android:background="@drawable/rectangle_button_gray"
+            android:gravity="center"
+            android:text="@string/number_0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_reset" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_total"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginVertical="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_2"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/rectangle_button_gray"
+            android:text="@string/not_selected_yet"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_amount" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dp_60">
+
+        <include layout="@layout/filter_layout" />
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
