@@ -24,7 +24,7 @@ class SearchView : LinearLayout{
         LayoutInflater.from(context).inflate(R.layout.searchview_layout, this, true)
         val imgViewSearch = findViewById<ImageView>(R.id.img_search)
         val imgViewSKU = findViewById<ImageView>(R.id.img_SKU)
-        val edtTextSearch = findViewById<EditText>(R.id.edt_ten_sp)
+        val edtTextSearch = findViewById<EditText>(R.id.edt_search_sp)
         imgViewSearch.setImageResource(imgSearchId)
         imgViewSKU.setImageResource(imgSKUid)
         edtTextSearch.hint = editTextHint

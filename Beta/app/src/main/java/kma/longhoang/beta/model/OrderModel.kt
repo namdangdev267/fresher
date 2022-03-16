@@ -1,9 +1,8 @@
 package kma.longhoang.beta.model
 
-data class ProductModel(
+data class OrderModel (
     var name: String,
     var code: String,
     var price: Float,
-    var style: FilterProduct.Style,
-    var color: FilterProduct.Color,
+    var amount: Int,
 )

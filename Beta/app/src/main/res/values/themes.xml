@@ -26,4 +26,10 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#A0A0A0</item>
     </style>
+    <style name="BottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:background">@android:color/white</item>
+    </style>
 </resources>

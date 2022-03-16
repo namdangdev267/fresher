@@ -12,14 +12,14 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/dp_5"/>
         <EditText
-            android:id="@+id/edt_ten_sp"
+            android:id="@+id/edt_search_sp"
             android:layout_width="@dimen/dp_180"
             android:layout_height="@dimen/dp_30"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/dp_5"
             android:background="@color/white"
             android:ellipsize="end"
-            android:hint="@string/enter_to_search"
+            android:hint="@string/search_sale"
             android:inputType="text"
             android:maxLines="1"
             android:textSize="@dimen/sp_18" />

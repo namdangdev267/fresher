@@ -2,7 +2,8 @@
     <string name="app_name">Beta</string>
     <string name="not_selected_yet">Chưa chọn hàng</string>
     <string name="not_selected">Không chọn</string>
-    <string name="enter_to_search">Nhập tên, mã SKU,mã qr mã này kia các thứ</string>
+    <string name="search_sale">Nhập tên, mã SKU,mã qr mã này kia các thứ</string>
+    <string name="search_order">Số đơn, mã hàng, khách hàng, v.v</string>
     <string name="customer_name">Tên khách hàng, Tên sản phẩm, số điện thoại</string>
     <string name="delivery_info">Thông tin giao hàng</string>
     <string name="product_name">Tên sản phẩm</string>
@@ -29,8 +30,35 @@
     <string name="tap_to_enter">Chạm để nhập</string>
     <string name="nav_sale">Bán hàng</string>
     <string name="nav_delivery">Sổ giao hàng</string>
+    <string name="nav_filter">Lọc</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="buy_more">Mua thêm</string>
+    <string name="cash">Thu tiền</string>
+    <string name="money_receivable">Còn phải thu</string>
+    <string name="today">Hôm nay</string>
+    <string name="total">Tổng</string>
+    <string name="waiting">Chờ giao/lấy hàng</string>
+    <string name="product_group">Nhóm hàng hóa</string>
+    <string name="arrange_by">Sắp xếp theo</string>
+    <string name="name">Tên</string>
+    <string name="product_new">Hàng mới về</string>
+    <string name="product_seller">Hàng bán chạy</string>
+    <string name="select_color">Màu sắc</string>
+    <string name="color_red">Đỏ</string>
+    <string name="color_blue">Xanh dương</string>
+    <string name="color_black">Đen</string>
+    <string name="color_white">Trắng</string>
+    <string name="cancel_filer">Bỏ lọc</string>
+    <string name="done">Xong</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filter_all">Tất cả</string>
+    <string-array name="filter_style">
+        <item>Tất cả</item>
+        <item>T-Shirt</item>
+        <item>Quần Short</item>
+        <item>Quần Jean</item>
+        <item>Váy ngắn</item>
+        <item>Váy dài</item>
+    </string-array>
 </resources>

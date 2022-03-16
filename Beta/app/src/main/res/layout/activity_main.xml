@@ -5,74 +5,21 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:openDrawer="start">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/fragment_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/menu"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60"
-            android:background="@color/violet_dark"
-            android:paddingTop="@dimen/dp_10"
-            app:layout_constraintTop_toTopOf="parent">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginVertical="@dimen/dp_10"
-                android:backgroundTint="@color/white"/>
-                <kma.longhoang.beta.SearchView
-                    android:layout_width="@dimen/dp_260"
-                    android:layout_height="@dimen/dp_40"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:background="@drawable/custom_toolbar"
-                    app:hint="@string/enter_to_search"
-                    app:imageSKU="@drawable/sku_icon"
-                    app:imageSearch="@drawable/ic_baseline_search_24" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/button_cart"
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_baseline_shopping_cart_24" />
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/button_filter"
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:backgroundTint="@color/violet_dark"
-                    android:src="@drawable/ic_baseline_filter_alt_24" />
-        </LinearLayout>
-        <FrameLayout
-            android:id="@+id/fragment_view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            tools:layout="@layout/fragment_sale"
-            app:layout_constraintTop_toBottomOf="@id/menu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu" />
+        tools:layout="@layout/fragment_sale" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/nav_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

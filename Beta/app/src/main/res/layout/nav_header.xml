@@ -17,7 +17,7 @@
             android:id="@+id/image_user"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_60"
-            android:background="@drawable/custom_sale_button_reset"
+            android:background="@drawable/oval_button_gray"
             android:src="@drawable/ic_baseline_person_outline_24" />
 
         <LinearLayout
