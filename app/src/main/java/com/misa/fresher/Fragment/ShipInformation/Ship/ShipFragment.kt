@@ -1,50 +1,37 @@
-package com.misa.fresher.Fragment
+package com.misa.fresher.Fragment.ShipInformation.Ship
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.Adapter.ReceiverAdapter
-import com.misa.fresher.InputShip.InputReceiver
-import com.misa.fresher.InputShip.InputType
+import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.Input.InputReceiver
+import com.misa.fresher.Input.InputType
+import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
-import com.misa.fresher.databinding.FragmentShipBinding
 
 class ShipFragment: Fragment() {
-    private var title: String?= null
-    private var page = 0
-    private var binding: FragmentShipBinding?= null
-    private var adapter: ReceiverAdapter?= null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        page = arguments?.getInt("shipPage", 0) ?: 0
-        title = arguments?.getString("shipTitle")
-    }
+    lateinit var recyclerView: RecyclerView
+    lateinit var listItemShip: MutableList<ItemShipInfor>
+    lateinit var shipViewModel: ShipViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentShipBinding.inflate(inflater, container, false)
-        return binding!!.root
+        return inflater.inflate(R.layout.fragment_ship, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = context?.let { ReceiverAdapter(createData(), it) }
-        binding!!.rcvShip.layoutManager = LinearLayoutManager(context)
-        binding!!.rcvShip.adapter = adapter
-        binding!!.rcvShip.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        shipViewModel = ShipViewModel(view.context)
+        recyclerView = view.findViewById(R.id.recyclerview_shipping_ship)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = ShipAdapter(shipViewModel.listItemShip)
+
+
     }
 
     private fun createData(): Array<InputReceiver> {
