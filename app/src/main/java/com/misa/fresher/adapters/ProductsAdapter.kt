@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.model.Product
 import com.misa.fresher.model.Products
 /**
 * tạo ProductsAdapter để recyclerView màn sale sử dụng
