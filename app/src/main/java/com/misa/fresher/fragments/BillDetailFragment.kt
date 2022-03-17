@@ -67,7 +67,6 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts, view: View) {
-        Log.e("amount selected", selectedProducts.amonut.toString())
         for (selectedPro in listFromSale) {
             if (selectedPro.product == selectedProducts.product) {
                 selectedPro.amonut = selectedProducts.amonut
@@ -85,7 +84,7 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun getDataFromSaleFragment(): MutableList<SelectedProducts> {
-        val list = arguments?.get("items").let {
+        val list = arguments?.get(SELECTED_ITEMS).let {
             it as MutableList<SelectedProducts>
         }
         return list
@@ -107,5 +106,8 @@ class BillDetailFragment : Fragment() {
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
             Toast.makeText(requireContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show()
         }
+    }
+    companion object {
+        const val SELECTED_ITEMS = "items"
     }
 }

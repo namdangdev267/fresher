@@ -186,7 +186,7 @@ class SaleFragment : Fragment() {
             if (productsSelected.size > 0) {
                 findNavController().navigate(
                     R.id.action_nav_sale_to_nav_billDetail,
-                    bundleOf("items" to productsSelected)
+                    bundleOf(SELECTED_ITEMS to productsSelected)
                 )
             }
         }
@@ -194,7 +194,7 @@ class SaleFragment : Fragment() {
             if (productsSelected.size > 0) {
                 findNavController().navigate(
                     R.id.action_nav_sale_to_nav_billDetail,
-                    bundleOf("items" to productsSelected)
+                    bundleOf(SELECTED_ITEMS to productsSelected)
                 )
             }
         }
@@ -303,5 +303,8 @@ class SaleFragment : Fragment() {
             view.findViewById<ImageButton>(R.id.btnReset)?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button)
         }
+    }
+    companion object {
+        const val SELECTED_ITEMS = "items"
     }
 }
