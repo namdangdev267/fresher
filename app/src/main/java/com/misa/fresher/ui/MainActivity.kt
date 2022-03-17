@@ -41,8 +41,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/9/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/9/2022: Tạo function
+     * @updated 3/17/2022: Thêm header cho drawer
      */
     private fun configDrawer() {
         val navHostFragment =
