@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/btnBill"
-        android:icon="@drawable/cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Bill"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/btnFilter"
-        android:icon="@drawable/filter"
+        android:icon="@drawable/ic_baseline_filter_alt_24"
         android:title="Filter"
         app:showAsAction="ifRoom"/>
 </menu>
