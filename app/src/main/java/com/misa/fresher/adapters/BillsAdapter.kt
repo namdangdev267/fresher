@@ -12,7 +12,7 @@ import com.misa.fresher.model.Bill
 * @Auther : NTBao
 * @date : 3/16/2022
 **/
-class BillsAdapter(private val mBills: MutableList<Bill>) :
+class BillsAdapter(var mBills: MutableList<Bill>) :
     RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillsAdapter.ViewHolder {
         return ViewHolder(
@@ -28,8 +28,10 @@ class BillsAdapter(private val mBills: MutableList<Bill>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Bill) {
             itemView.findViewById<TextView>(R.id.tvIdBill).text = item.id.toString()
-            itemView.findViewById<TextView>(R.id.tvReceiver).text =
-                item.receiver?.name + " - " + item.receiver?.phoneNumber
+            if(item.receiver!=null){
+                itemView.findViewById<TextView>(R.id.tvReceiver).text =
+                    item.receiver?.name + " - " + item.receiver?.phoneNumber
+            }
             itemView.findViewById<TextView>(R.id.tvTotalPriceBill).text =
                 "${item.listSelectedProduct?.sumOf { it.amonut * it.product.price }}"
         }

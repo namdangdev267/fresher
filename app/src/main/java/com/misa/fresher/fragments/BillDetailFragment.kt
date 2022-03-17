@@ -1,7 +1,6 @@
 package com.misa.fresher.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,12 +66,14 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts, view: View) {
+
         for (selectedPro in listFromSale) {
             if (selectedPro.product == selectedProducts.product) {
                 selectedPro.amonut = selectedProducts.amonut
             }
         }
         configListSelectedItem(view)
+
     }
 
     private fun configListSelectedItem(view: View) {
@@ -83,7 +84,7 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun getDataFromSaleFragment(): MutableList<SelectedProducts> {
-        val list = arguments?.get(SELECTED_ITEMS).let {
+        val list = arguments?.get("items").let {
             it as MutableList<SelectedProducts>
         }
         return list
@@ -105,8 +106,5 @@ class BillDetailFragment : Fragment() {
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
             Toast.makeText(requireContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show()
         }
-    }
-    companion object {
-        const val SELECTED_ITEMS = "items"
     }
 }

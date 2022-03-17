@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.model.Receiver
 import com.misa.fresher.model.ShippingView
 
 class ReceiverViewAdapter(
     private val adapterData: MutableList<ShippingView>,
-    private val clickView: (ship: ShippingView) -> Unit
+    private val getDataChange: (ship: ShippingView) -> Unit
 ) :
     RecyclerView.Adapter<ReceiverViewAdapter.ViewHolder>() {
 
@@ -67,7 +66,7 @@ class ReceiverViewAdapter(
             }
             edReceiver.doAfterTextChanged {
                 item.hint = edReceiver.text.toString()
-                clickView(item)
+                getDataChange(item)
             }
 
         }

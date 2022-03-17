@@ -1,6 +1,7 @@
 package com.misa.fresher.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,16 +20,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
+import com.misa.fresher.model.Bill
 import com.misa.fresher.viewModel.BillsViewModel
 
 class BillsFragment : Fragment() {
-    var viewModel: BillsViewModel? = null
+    private val viewModel: BillsViewModel by activityViewModels()
+    private var list = mutableListOf<Bill>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bills, container, false)
     }
 
@@ -65,13 +68,15 @@ class BillsFragment : Fragment() {
         val rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
         val total = view.findViewById<TextView>(R.id.tvTotal)
         val totalPrice = view.findViewById<TextView>(R.id.tvTotalPriceBills)
+        val adapter = BillsAdapter(list)
+        rcv.adapter = adapter
         rcv.layoutManager = LinearLayoutManager(view.context)
-        viewModel?.listBill?.observe(viewLifecycleOwner, Observer {
+        viewModel.listBill.observe(viewLifecycleOwner, Observer {
             total.text = it.size.toString()
-            val adapter = BillsAdapter(it)
-            rcv.adapter = adapter
+            adapter.mBills=it
         })
-        totalPrice.text = viewModel?.getTotalPrice().toString()
+        adapter.notifyDataSetChanged()
+        totalPrice.text = viewModel.getTotalPrice().toString()
     }
 
     private fun configToolbar(view: View) {

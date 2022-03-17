@@ -2,6 +2,7 @@ package com.misa.fresher.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -57,6 +58,7 @@ class SaleFragment : Fragment() {
     private fun configFilterDrawer(view: View) {
         configFilterSpinner(view)
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlSaleFilter)
+        mDrawer.setScrimColor(Color.TRANSPARENT)
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         view.findViewById<ImageButton>(R.id.btnFilter)?.setOnClickListener {
             mDrawer.openDrawer(Gravity.RIGHT)

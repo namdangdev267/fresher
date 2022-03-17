@@ -16,7 +16,7 @@ import com.misa.fresher.model.SelectedProducts
 
 
 class ProductSelectedAdapter(
-    private val mSelectedProducts: MutableList<SelectedProducts>,
+    var mSelectedProducts: MutableList<SelectedProducts>,
     val updateTotalPrice: (products: SelectedProducts) -> Unit
 ) :
     RecyclerView.Adapter<ProductSelectedAdapter.ViewHolder>() {
@@ -24,7 +24,8 @@ class ProductSelectedAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ProductSelectedAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_bill_detail, parent, false)
+        val v =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_bill_detail, parent, false)
         return ViewHolder(v, parent.context)
     }
 
@@ -42,8 +43,8 @@ class ProductSelectedAdapter(
             itemView.findViewById<TextView>(R.id.tvProductPrice).text =
                 "${selectedProducts.product.price}/cai"
             val tvAmount = itemView.findViewById<TextView>(R.id.tvProductAmont)
-            tvAmount.text = selectedProducts.amonut.toString()
             val tvTotalPrice = itemView.findViewById<TextView>(R.id.tvTotalPrice)
+            tvAmount.text = selectedProducts.amonut.toString()
             tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
             itemView.findViewById<ImageView>(R.id.ivAdd).setOnClickListener {
                 selectedProducts.amonut++
@@ -54,16 +55,15 @@ class ProductSelectedAdapter(
             itemView.findViewById<ImageView>(R.id.ivRemove).setOnClickListener {
                 if (selectedProducts.amonut > 1) {
                     selectedProducts.amonut--
-                    tvAmount.text = selectedProducts.amonut.toString()
-                    tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
                     updateTotalPrice(selectedProducts)
                 } else {
-                    showToast(contextVH,"Số lượng phải lớn hơn 0. Vui Lòng kiểm tra lại")
+                    showToast(contextVH, "Số lượng phải lớn hơn 0. Vui Lòng kiểm tra lại")
                 }
             }
         }
     }
-    fun showToast(contextVH: Context,string: String){
+
+    fun showToast(contextVH: Context, string: String) {
         val toast = Toast.makeText(
             contextVH, string,
             Toast.LENGTH_SHORT
