@@ -32,7 +32,7 @@ class SaleFragment : Fragment() {
     private var amount = 1
     private var fakedata = DataForTest.listProduct
     private var productsSelected = mutableListOf<SelectedProducts>()
-    private var rcvAdapter : ProductsAdapter ? = null
+    private var rcvAdapter: ProductsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,12 +120,14 @@ class SaleFragment : Fragment() {
         var sortListWithColor = mutableListOf<Products>()
         var sortListWithSize = mutableListOf<Products>()
         if (filter.coler != "cham de chon") {
+            // nếu trùng với phần tử đầu tiên của arrayColor thì không xử lý
             for (i in sortList) {
                 if (i.color == filter.coler) {
                     sortListWithColor.add(i)
                 }
             }
             if (filter.size != "cham de chon") {
+                // nếu trùng với phần tử đầu tiên của arraySize thì không xử lý
                 for (i in sortListWithColor) {
                     if (i.size == filter.size) {
                         sortListWithSize.add(i)
@@ -146,7 +148,7 @@ class SaleFragment : Fragment() {
                 sortListWithSize = sortListWithColor
             }
         }
-        rcvAdapter?.mProducts=sortListWithSize
+        rcvAdapter?.mProducts = sortListWithSize
         rcvAdapter?.notifyDataSetChanged()
     }
 
@@ -211,7 +213,7 @@ class SaleFragment : Fragment() {
                 list.add(data)
             }
         }
-        rcvAdapter?.mProducts=list
+        rcvAdapter?.mProducts = list
         rcvAdapter?.notifyDataSetChanged()
     }
 
@@ -259,7 +261,7 @@ class SaleFragment : Fragment() {
         amount = tvAmount?.text.toString().toInt()
         btnRemove?.setOnClickListener {
             if (tvAmount?.text == "1") {
-                showToast(requireContext(),"Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
+                showToast(requireContext(), "Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
             } else {
                 amount--
                 tvAmount?.text = "$amount"
@@ -309,6 +311,7 @@ class SaleFragment : Fragment() {
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button)
         }
     }
+
     companion object {
         const val SELECTED_ITEMS = "items"
     }
