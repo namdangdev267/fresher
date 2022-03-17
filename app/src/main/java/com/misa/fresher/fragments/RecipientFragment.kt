@@ -1,15 +1,12 @@
 package com.misa.fresher.fragments
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,9 +19,8 @@ import com.misa.fresher.viewModel.ShipInforViewModel
 class RecipientFragment : Fragment() {
     private var rcv: RecyclerView? = null
     private var list = mutableListOf<ShippingView>()
-    private var receiver = Receiver("", "", "", "", "", "", "", "", "")
+    private var receiver = getReceiver()
     private val viewModel: ShipInforViewModel by activityViewModels()
-    var name = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,22 +45,27 @@ class RecipientFragment : Fragment() {
     }
 
     private fun getData(it: ShippingView) {
-        it as ShippingView.TouchTextView
-        if (it.tittle == "Người nhận") {
-            receiver.name = it.hint
+        when(it){
+            is ShippingView.TouchTextView -> {
+                if (it.tittle == "Người nhận") {
+                    receiver.name = it.hint
+                }
+                if (it.tittle == "Số điện thoại") {
+                    receiver.phoneNumber = it.hint
+                }
+                if (it.tittle == "Địa chỉ") {
+                    receiver.address = it.hint
+                }
+                if (it.tittle == "Khu vực") {
+                    receiver.area = it.hint
+                }
+                if (it.tittle == "Phường, xã") {
+                    receiver.ward = it.hint
+                }
+            }
+            is ShippingView.TouchEditText -> {} // chưa làm xong
         }
-        if (it.tittle == "Số điện thoại") {
-            receiver.phoneNumber = it.hint
-        }
-        if (it.tittle == "Địa chỉ") {
-            receiver.address = it.hint
-        }
-        if (it.tittle == "Khu vực") {
-            receiver.area = it.hint
-        }
-        if (it.tittle == "Phường, xã") {
-            receiver.ward = it.hint
-        }
+
         viewModel.add(receiver)
 
     }
@@ -87,5 +88,30 @@ class RecipientFragment : Fragment() {
             ShippingView.TouchTextView("Kênh bán hàng", null, "Chạm để chọn", R.drawable.ic_down),
             ShippingView.CheckBox("Thu COD (456)")
         )
+    }
+
+    private fun getReceiver(
+        name: String = "",
+        phoneNum: String = "",
+        adress: String = "",
+        area: String = "",
+        ward: String = "",
+        shipPayByCust: String = "",
+        depositMethod: String = "",
+        deposit: String = "",
+        saleChannel: String = "",
+    ): Receiver {
+        val receiver = Receiver(
+            name,
+            phoneNum,
+            adress,
+            area,
+            ward,
+            shipPayByCust,
+            depositMethod,
+            deposit,
+            saleChannel
+        )
+        return receiver
     }
 }
