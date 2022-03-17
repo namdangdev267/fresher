@@ -15,7 +15,7 @@ import com.misa.fresher.model.Products
 * @date : 3/16/2022
 **/
 class ProductsAdapter(
-    private val mProducts: List<Products>,
+    var mProducts: List<Products>,
     val clickItemListener: (products: Products) -> Unit
 ) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -31,6 +31,7 @@ class SaleFragment : Fragment() {
     private var amount = 1
     private var fakedata = DataForTest.listProduct
     private var productsSelected = mutableListOf<SelectedProducts>()
+    private var rcvAdapter : ProductsAdapter ? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,6 +108,7 @@ class SaleFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun filterItems(filter: FilterProducts, view: View) {
         var sortList = mutableListOf<Products>()
         if (filter.sortBy == "Tên") {
@@ -143,8 +145,8 @@ class SaleFragment : Fragment() {
                 sortListWithSize = sortListWithColor
             }
         }
-        rcv?.adapter = ProductsAdapter(sortListWithSize, { productItemClick(it, view) })
-        (rcv?.adapter)?.notifyDataSetChanged()
+        rcvAdapter?.mProducts=sortListWithSize
+        rcvAdapter?.notifyDataSetChanged()
     }
 
     private fun resetEvent(view: View) {
@@ -208,8 +210,8 @@ class SaleFragment : Fragment() {
                 list.add(i)
             }
         }
-        rcv?.adapter = ProductsAdapter(list, { productItemClick(it, view) })
-        (rcv?.adapter)?.notifyDataSetChanged()
+        rcvAdapter?.mProducts=list
+        rcvAdapter?.notifyDataSetChanged()
     }
 
     private fun configBtnMenu(view: View) {
@@ -221,11 +223,10 @@ class SaleFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun configRecyclerView(view: View) {
-        val adapter = ProductsAdapter(fakedata, { productItemClick(it, view) })
+        rcvAdapter = ProductsAdapter(fakedata, { productItemClick(it, view) })
         rcv = view.findViewById(R.id.rcvListProduct)
-        rcv?.adapter = adapter
+        rcv?.adapter = rcvAdapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
-        adapter.notifyDataSetChanged()
     }
 
     private fun productItemClick(products: Products, view: View) {
