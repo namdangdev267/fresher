@@ -50,4 +50,18 @@
     <string name="name_product">Name product</string>
     <string name="code_product">Code product</string>
     <string name="price_type_product">Price, Type product</string>
+    <string name="not_selected_item">Not yet selected item</string>
+
+
+    <string name="switch_name_filter">AVAILABLE ITEMS (QTY > 0)</string>
+    <string name="item_name_filter">ITEM CATEGORY</string>
+    <string name="clear_filter">Clear filter</string>
+    <string name="done_filter">Done</string>
+
+    <string name="get_payment">Get payment</string>
+    <string name="receivable">Receivable</string>
+    <string name="none">None</string>
+    <string name="customer_name_phone_number">Customer name, phone number</string>
+    <string name="buy_more">Buy morer</string>
+    <string name="Sale_split_row">Split row</string>
 </resources>
