@@ -12,7 +12,6 @@ import com.misa.fresher.adapters.ReceiverViewAdapter
 import com.misa.fresher.model.ShippingView
 
 class PackageFragment : Fragment() {
-    private var globalView: View? = null
     private var rcv: RecyclerView? = null
     private var list = mutableListOf<ShippingView>()
     override fun onCreateView(
@@ -25,14 +24,13 @@ class PackageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        globalView = view
         initData()
-        configRecyclerView()
+        configRecyclerView(view)
     }
 
 
-    private fun configRecyclerView() {
-        rcv = globalView?.findViewById(R.id.rcvShippingView_package)
+    private fun configRecyclerView(view :View) {
+        rcv = view.findViewById(R.id.rcvShippingView_package)
         val adapter = ReceiverViewAdapter(list,{
         })
         rcv?.adapter = adapter

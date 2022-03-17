@@ -33,7 +33,7 @@ class SaleFragment : Fragment() {
     private var amount = 1
     private var fakedata = DataForTest.listProduct
     private var productsSelected = mutableListOf<SelectedProducts>()
-    private var rcvAdapter: ProductsAdapter? = null
+    private lateinit var rcvAdapter : ProductsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +66,7 @@ class SaleFragment : Fragment() {
         val btnSave = view.findViewById<Button>(R.id.btnFilterSave)
         val btnClear = view.findViewById<Button>(R.id.btnFilterClear)
         btnSave.setOnClickListener {
-            filterItems(getFilter(view), view)
+            filterItems(getFilter(view))
             mDrawer?.closeDrawer(Gravity.RIGHT)
         }
         btnClear.setOnClickListener {
@@ -112,7 +112,7 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun filterItems(filter: FilterProducts, view: View) {
+    private fun filterItems(filter: FilterProducts) {
         var sortList = mutableListOf<Products>()
         if (filter.sortBy == "Tên") {
             sortList = fakedata.sortedWith(compareBy(Products::name)) as MutableList<Products>
@@ -141,6 +141,7 @@ class SaleFragment : Fragment() {
         } else {
             sortListWithColor = sortList
             if (filter.size != "cham de chon") {
+                // nếu trùng với phần tử đầu tiên của arraySize thì không xử lý
                 for (i in sortListWithColor) {
                     if (i.size == filter.size) {
                         sortListWithSize.add(i)
@@ -150,8 +151,8 @@ class SaleFragment : Fragment() {
                 sortListWithSize = sortListWithColor
             }
         }
-        rcvAdapter?.mProducts = sortListWithSize
-        rcvAdapter?.notifyDataSetChanged()
+        rcvAdapter.mProducts = sortListWithSize
+        rcvAdapter.notifyDataSetChanged()
     }
 
     private fun resetEvent(view: View) {
@@ -215,8 +216,8 @@ class SaleFragment : Fragment() {
                 list.add(data)
             }
         }
-        rcvAdapter?.mProducts = list
-        rcvAdapter?.notifyDataSetChanged()
+        rcvAdapter.mProducts = list
+        rcvAdapter.notifyDataSetChanged()
     }
 
     private fun configBtnMenu(view: View) {
