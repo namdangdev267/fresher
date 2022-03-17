@@ -46,7 +46,13 @@ class PaymentFragment: Fragment() {
         transitionFragment(view)
         configToolbar()
         configureListView()
-        configureOtherView(view)
+        configureGetPayment()
+    }
+
+    private fun configureGetPayment() {
+        binding.linearQuantity.setOnClickListener {
+
+        }
     }
 
     private fun configToolbar() {
@@ -69,10 +75,6 @@ class PaymentFragment: Fragment() {
         binding.linearQuantity.setOnClickListener {
             sharedViewModel.addBillToListBill()
         }
-    }
-
-    private fun configureOtherView(view: View) {
-
     }
 
     private fun configureListView() {
