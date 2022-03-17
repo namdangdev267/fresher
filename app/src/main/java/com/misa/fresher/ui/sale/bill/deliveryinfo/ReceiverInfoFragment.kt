@@ -44,14 +44,15 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/15/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/15/2022: Tạo function
+     * @updated 3/17/2022: Sử dụng toán tử elvis thay cho [default]
      */
     private fun configRcv() {
         adapter = DeliveryInputAdapter(listOf(
             TapActionInputModel("Người nhận", true,
                 resources.getDrawableById(R.drawable.ic_plus),
-                default((activity as MainActivity).tempCustomer?.name, "")
+                (activity as MainActivity).tempCustomer?.name ?: ""
             ) {
                 (activity as MainActivity).tempCustomer =
                     FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
@@ -64,11 +65,11 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
             },
             TapInsertInputModel("Số điện thoại", true,
                 null, InputType.TYPE_CLASS_PHONE,
-                default((activity as MainActivity).tempCustomer?.tel, "")
+                (activity as MainActivity).tempCustomer?.tel ?: ""
             ),
             TapInsertInputModel("Địa chỉ", true,
                 null, InputType.TYPE_CLASS_TEXT,
-                default((activity as MainActivity).tempCustomer?.address, "")
+                (activity as MainActivity).tempCustomer?.address ?: ""
             ),
             TapActionInputModel("Khu vực", false,
                 resources.getDrawableById(R.drawable.ic_arrow_right)) {},

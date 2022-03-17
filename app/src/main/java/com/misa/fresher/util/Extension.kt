@@ -91,9 +91,11 @@ fun <T1, T2, T3> guard(variable1: T1?, variable2: T2?, variable3: T3?, function:
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo function
+ * @updated 3/17/2022: Không sử dụng nữa do đã có sẵn toán tử elvis (?:)
  */
+@Deprecated(message = "Sử dụng toán tử elvis thay thế")
 fun <T> default(variable: T?, defaultValue: T): T {
     if (variable != null) {
         return variable
