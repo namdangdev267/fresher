@@ -13,15 +13,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="@dimen/dp_8">
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
+                android:layout_marginTop="@dimen/dp_8"
+                android:minWidth="@dimen/dp_0"
+                android:minHeight="@dimen/dp_0"
                 android:theme="@style/Theme.FreshersApplication.Switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -29,10 +29,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="AVAILABLE ITEMS (QTY > 0)"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@string/switch_name_filter"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="@dimen/dp_16"
                 app:layout_constraintBottom_toBottomOf="@id/sw_quantity"
                 app:layout_constraintStart_toEndOf="@id/sw_quantity"
                 app:layout_constraintTop_toTopOf="@id/sw_quantity" />
@@ -42,11 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
-                android:text="ITEM CATEGORY"
+                android:text="@string/item_name_filter"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sw_quantity" />
 
@@ -54,12 +53,11 @@
                 android:id="@+id/spn_grouping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/dp_8"
                 android:background="@drawable/custom_filter_spinner"
                 android:entries="@array/item_arr"
-                android:padding="8dp"
+                android:padding="@dimen/dp_8"
                 android:overlapAnchor="false"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_grouping" />
 
@@ -79,7 +77,7 @@
                 android:id="@+id/rg_sorting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/dp_8"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/tv_sorting"
                 app:layout_constraintStart_toStartOf="parent">
@@ -115,26 +113,26 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_reset"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/dp_8"
             android:layout_weight="1"
             android:background="@drawable/custom_background_filter"
-            android:text="Clear filter"
+            android:text="@string/clear_filter"
             android:textColor="@color/background"
             android:textAllCaps="false"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/textSize_18"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_done"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/dp_8"
             android:layout_weight="1"
             android:background="@drawable/custom_background"
-            android:text="Done"
+            android:text="@string/done_filter"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/textSize_18"/>
     </LinearLayout>
 </LinearLayout>
