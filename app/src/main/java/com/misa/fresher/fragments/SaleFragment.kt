@@ -1,6 +1,7 @@
 package com.misa.fresher.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -258,13 +259,7 @@ class SaleFragment : Fragment() {
         amount = tvAmount?.text.toString().toInt()
         btnRemove?.setOnClickListener {
             if (tvAmount?.text == "1") {
-                val toast = Toast.makeText(
-                    requireContext(),
-                    "Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại",
-                    Toast.LENGTH_SHORT
-                )
-                toast.setGravity(Gravity.TOP, 0, 0)
-                toast.show()
+                showToast(requireContext(),"Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
             } else {
                 amount--
                 tvAmount?.text = "$amount"
@@ -274,6 +269,16 @@ class SaleFragment : Fragment() {
             amount++
             tvAmount?.text = "$amount"
         }
+    }
+
+    private fun showToast(requireContext: Context, s: String) {
+        val toast = Toast.makeText(
+            requireContext,
+            s,
+            Toast.LENGTH_SHORT
+        )
+        toast.setGravity(Gravity.TOP, 0, 0)
+        toast.show()
     }
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")

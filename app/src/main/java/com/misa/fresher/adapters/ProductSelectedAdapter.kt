@@ -58,14 +58,17 @@ class ProductSelectedAdapter(
                     tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
                     updateTotalPrice(selectedProducts)
                 } else {
-                    val tost = Toast.makeText(
-                        contextVH, "Số lượng phải lớn hơn 0. Vui lòng nhập lại",
-                        Toast.LENGTH_SHORT
-                    )
-                    tost.setGravity(Gravity.TOP, 0, 0)
-                    tost.show()
+                    showToast(contextVH,"Số lượng phải lớn hơn 0. Vui Lòng kiểm tra lại")
                 }
             }
         }
+    }
+    fun showToast(contextVH: Context,string: String){
+        val toast = Toast.makeText(
+            contextVH, string,
+            Toast.LENGTH_SHORT
+        )
+        toast.setGravity(Gravity.TOP, 0, 0)
+        toast.show()
     }
 }

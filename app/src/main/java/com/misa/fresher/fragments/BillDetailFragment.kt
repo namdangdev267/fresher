@@ -73,7 +73,6 @@ class BillDetailFragment : Fragment() {
             }
         }
         configListSelectedItem(view)
-
     }
 
     private fun configListSelectedItem(view: View) {
