@@ -1,5 +1,10 @@
 package com.misa.fresher.recyclerview
 
+/**
+ * Contact được lấy từ device
+ * @Author: DHNam
+ * @Date: 09/03/2022
+ **/
 class Contact(val name: String, val isOnline: Boolean) {
 
     companion object {

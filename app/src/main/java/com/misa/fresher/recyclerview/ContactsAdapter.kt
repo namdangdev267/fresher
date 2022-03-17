@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 
 
-
+/**
+ * khởi tạo dữ liệu
+ * @Author: DHNam
+ * @Date: 09/03/2022
+ **/
 class ContactsAdapter(private val mContacts: List<Contact>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
