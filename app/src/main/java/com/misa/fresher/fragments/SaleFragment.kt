@@ -156,14 +156,14 @@ class SaleFragment : Fragment() {
             productsSelected.clear()
             it.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_base)
-            btnItemCount.apply {
+            btnItemCount.run {
                 this.text = "0"
                 this.background = AppCompatResources.getDrawable(
                     requireContext(),
                     R.drawable.item_amount_bg_base
                 )
             }
-            btnTotalPrice.apply {
+            btnTotalPrice.run {
                 this.text = "Chưa nhập hàng"
                 this.background =
                     AppCompatResources.getDrawable(
