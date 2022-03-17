@@ -48,6 +48,7 @@
     <string name="search">Tìm kiếm</string>
     <string name="close">Đóng</string>
     <string name="total">Tổng</string>
+    <string name="support_tele">Hỗ trợ: 1900 8677</string>
     <string-array name="filter_time">
         <item>Hôm nay</item>
         <item>Hôm qua</item>

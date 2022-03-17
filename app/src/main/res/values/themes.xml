@@ -32,5 +32,4 @@
         <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 
-    <dimen name="font_size_normal">14sp</dimen>
 </resources>
