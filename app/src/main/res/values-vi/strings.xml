@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fresher</string>
+    <string name="customer_infor">Tên khách hàng,số</string>
+    <string name="hint_search">Nhập tên</string>
+    <string name="none">Không chọn</string>
+    <string name="split_row">Tách dòng</string>
+    <string name="not_select">Chưa chọn hàng</string>
+    <string name="ship_infor">Thông tin giao hàng</string>
+    <string name="receiver">Người nhận</string>
+    <string name="tel">Số điện thoại</string>
+    <string name="sale">Bán hàng</string>
+    <string name="shipping_book">Sổ giao hàng</string>
+    <string name="list_of_bill">Danh sách hóa đơn</string>
+    <string name="support">Hỗ trợ: 1900 8677</string>
+    <string name="get_payment">Thu tiền</string>
+    <string name="all">Tổng </string>
+    <string name="receivable">Còn phải thu</string>
+    <string name="buy_more">Mua thêm</string>
+    <string-array name="spnDay">
+        <item>Hôm nay</item>
+        <item>Hôm qua</item>
+        <item>Hôm kia</item>
+        <item>Tuần này</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="spnPayment">
+        <item>Tất cả</item>
+        <item>Đã thu tiền</item>
+        <item>Ghi nợ</item>
+        <item>Đã  hủy</item>
+    </string-array>
+</resources>

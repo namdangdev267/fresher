@@ -1,3 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Freshers Application</string>
+    <string name="app_name">fresher</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hint_search">Enter name,SKU code,Serial/IMEI</string>
+    <string name="customer_infor">Customer ID,name,phone number</string>
+    <string name="none">None</string>
+    <string name="split_row">Split row</string>
+    <string name="not_select">Not yet selected item</string>
+    <string name="ship_infor">Shipping information</string>
+    <string name="receiver">Receiver</string>
+    <string name="tel">Tel</string>
+    <string name="sale">Sale</string>
+    <string name="shipping_book">Shipping book</string>
+    <string name="list_of_bill">List of bills</string>
+    <string name="support">Support: 1900 8677</string>
+    <string name="all">Total </string>
+    <string name="receivable">Receivable</string>
+    <string name="get_payment">Get payment</string>
+    <string name="buy_more">Buy more</string>
+    <string-array name="spnDay">
+       <item>Today</item>
+        <item>Yesterday</item>
+        <item>Before yesterday</item>
+        <item>This week</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="spnPayment">
+        <item>All</item>
+        <item>Got payment</item>
+        <item>Debit</item>
+        <item>Deleted</item>
+    </string-array>
 </resources>

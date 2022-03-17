@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    tools:openDrawer="end"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".fragment.SaleFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/violet_dark"
+            app:popupTheme="@style/ToolbarStyle">
+            <ImageButton
+                android:id="@+id/ibMenu"
+                android:layout_width="@dimen/d50"
+                android:layout_height="@dimen/d50"
+                android:background="@color/violet_dark"
+                android:src="@drawable/ic_baseline_menu_24"
+                tools:ignore="ContentDescription" />
+            <com.misa.fresher.custom.CustomToolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/d7"
+                android:layout_marginBottom="@dimen/d7"
+                android:background="@color/violet_dark"
+                android:orientation="horizontal"
+                app:imgBarcode="@drawable/ic_baseline_qr_code_scanner_24"
+                app:imgCart="@drawable/ic_baseline_shopping_cart_24"
+                app:imgFilter="@drawable/ic_baseline_filter_alt_24"
+                app:imgSerch="@drawable/ic_baseline_search_24"
+                app:searchHint="@string/hint_search" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/layout_cus"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d40"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/d5"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic__users"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/d5"
+                    android:layout_weight="4"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/customer_infor"
+                    android:lines="1"
+                    android:textColor="#8A8383"
+                    android:textColorHint="@color/colorLightGrey"
+                    android:textSize="@dimen/ts16" />
+
+                <ImageButton
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/d5"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_calendar_month_24"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/d5"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:text="@string/none"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts16" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/relative_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d30"
+                android:background="@color/colorGrayCommon"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintTop_toBottomOf="@id/layout_cus">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_split"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:theme="@style/SCBSwitch" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:gravity="center_vertical"
+                    android:text="@string/split_row"
+                    android:textSize="@dimen/ts16" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvProduct"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/layout_header"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relative_1"
+                app:layout_constraintVertical_bias="1.0"
+                tools:listitem="@layout/item_layout" />
+
+
+            <LinearLayout
+                android:id="@+id/layout_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d60">
+
+                    <LinearLayout
+                        android:id="@+id/llRefresh"
+                        android:layout_width="@dimen/d50"
+                        android:layout_height="@dimen/d50"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/de10"
+                        android:background="@drawable/border_button">
+
+                        <ImageView
+                            android:id="@+id/ivRefresh"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="@dimen/de10"
+                            android:src="@drawable/ic_baseline_refresh_24" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvProductAmount"
+                        android:layout_width="45dp"
+                        android:layout_height="@dimen/d50"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/d5"
+                        android:layout_marginEnd="@dimen/d1"
+                        android:background="@drawable/border_left_corner"
+                        android:gravity="center"
+                        android:hint="0"
+                        android:textSize="@dimen/ts16" />
+
+                    <TextView
+                        android:id="@+id/tvTotalPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/d50"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/de10"
+                        android:background="@drawable/border_right_corner"
+                        android:gravity="center"
+                        android:hint="@string/not_select"
+                        android:textSize="@dimen/ts16" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nvFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+        <include layout="@layout/fragment_filter" />
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

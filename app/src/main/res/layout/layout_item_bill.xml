@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginStart="@dimen/d5"
+        android:layout_marginEnd="@dimen/d5"
+        android:id="@+id/llAbove"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="test"
+                android:id="@+id/tvBillProductName"
+                android:textSize="@dimen/ts16"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="test"
+                android:id="@+id/tvBillProductSKU"
+                android:textColor="@color/colorLightGray"
+                android:textSize="@dimen/ts16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/d5"
+            android:layout_marginEnd="@dimen/d5"
+            android:gravity="end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <ImageButton
+                android:id="@+id/ibSubtractAmount"
+                android:layout_width="@dimen/d30"
+                android:layout_height="@dimen/d30"
+                android:background="@drawable/border_button_bottomsheet"
+                android:src="@drawable/ic_subtract"
+                android:textColor="@color/white"
+                android:textSize="@dimen/ts16"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvAmountProduct"
+                android:layout_width="@dimen/d30"
+                android:layout_height="@dimen/d30"
+                android:gravity="center"
+                android:text="1" />
+
+            <ImageButton
+                android:id="@+id/ibAddAmount"
+                android:layout_width="@dimen/d30"
+                android:layout_height="@dimen/d30"
+                android:background="@drawable/border_button_bottomsheet"
+                android:gravity="center"
+                android:src="@drawable/ic_baseline_add_24"
+                android:textColor="@color/white"
+                android:textSize="@dimen/ts16"
+                android:textStyle="bold"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/d5"
+        android:layout_marginEnd="@dimen/d5"
+        android:layout_width="match_parent"
+        android:id="@+id/llItemPrice"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llAbove"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvBillProductPrice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0,0"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+        <TextView
+            android:id="@+id/tvBillTotalPrice"
+            android:layout_width="0dp"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0,0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts16" />
+    </LinearLayout>
+    <View
+        android:layout_below="@id/llItemPrice"
+        android:layout_width="match_parent"
+        android:background="@color/color_Refresh"
+        android:layout_height="2dp"/>
+</RelativeLayout>

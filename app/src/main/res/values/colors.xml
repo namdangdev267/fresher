@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="violet">#665eff</color>
+    <color name="violetLight">#766ff8</color>
+    <color name="violet_dark">#2b3173</color>
+    <color name="colorLightGray">#c0c0c9</color>
+    <color name="colorGrayCommon">#eeedf3</color>
+    <color name="colorLightGrey">#cbcbcb</color>
+    <color name="color_SKU">#C5C5C5</color>
+    <color name="color_Refresh">#EDEDF7</color>
 </resources>

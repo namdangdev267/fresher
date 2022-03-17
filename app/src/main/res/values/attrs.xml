@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+        <attr name="imgSerch" format="reference" />
+        <attr name="searchHint" format="string" />
+        <attr name="imgBarcode" format="reference"/>
+        <attr name="imgCart" format="reference"/>
+        <attr name="imgFilter" format="reference"/>
+    </declare-styleable>
+</resources>

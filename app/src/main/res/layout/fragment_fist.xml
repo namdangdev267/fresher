@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".viewpager.FirstFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/textview_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Người nhận"
+                    android:textColor="@color/violet_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="*"
+                    android:textColor="#EC0D0D" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textview_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Chạm để chọn"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_1" />
+
+            <TableRow
+                android:id="@+id/tablerow1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_2" />
+
+            <LinearLayout
+                android:id="@+id/textview_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tablerow1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
+                    android:textColor="@color/violet_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="*"
+                    android:textColor="#EC0D0D" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/edit_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:hint="Chạm để nhập"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_3" />
+
+            <TableRow
+                android:id="@+id/tablerow2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_phone" />
+
+            <LinearLayout
+                android:id="@+id/textview_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tablerow2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ"
+                    android:textColor="@color/violet_dark"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tablerow2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="*"
+                    android:textColor="#EC0D0D" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:hint="Chạm để nhập"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_4" />
+
+            <TableRow
+                android:id="@+id/tablerow3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_address" />
+
+            <TextView
+                android:id="@+id/textview_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Khu vực"
+                android:textColor="@color/violet_dark"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tablerow3" />
+
+            <TextView
+                android:id="@+id/textview_area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:hint="Chạm để chọn"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_5" />
+
+            <TableRow
+                android:id="@+id/tablerow4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_area" />
+
+            <TextView
+                android:id="@+id/textview_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phường, xã"
+                android:textColor="@color/violet_dark"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tablerow4" />
+
+            <TextView
+                android:id="@+id/textview_village"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:hint="Chạm để chọn"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_6" />
+
+            <TableRow
+                android:id="@+id/tablerow5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_village" />
+
+            <TextView
+                android:id="@+id/textview_fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phí giao hàng thu khách"
+                android:textColor="@color/violet_dark"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/tablerow5" />
+
+            <TextView
+                android:id="@+id/txt_Fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@drawable/ic_baseline_calculate_24"
+                android:text="0,0"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/textview_fee" />
+
+            <TableRow
+                android:id="@+id/tablerow6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_Fee" />
+
+            <LinearLayout
+                android:id="@+id/layout_fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@id/tablerow6">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hình thức đặt cọc"
+                        android:textColor="@color/violet_dark"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawableEnd="@android:drawable/arrow_down_float"
+                        android:text="Chuyển khoản"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Số tiền đặt cọc"
+                        android:textColor="@color/violet_dark"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="0,0"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TableRow
+                android:id="@+id/tablerow7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_fee" />
+
+            <TextView
+                android:id="@+id/textview_chanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kênh bán hàng"
+                android:textColor="@color/violet_dark"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/tablerow7" />
+
+            <TextView
+                android:id="@+id/txt_chanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:hint="Chạm để chọn"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/textview_chanel" />
+
+            <TableRow
+                android:id="@+id/tablerow8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#19A6A4A4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_chanel" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tablerow8">
+
+                <CheckBox
+                    android:checked="true"
+                    android:theme="@style/SCBSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="Thu COD"
+                    android:textColor="@color/violet_dark"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>
