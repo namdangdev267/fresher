@@ -1,6 +1,7 @@
 package com.misa.fresher.data.entity
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 /**
  * Lớp dữ liệu chứa loại sản phẩm. VD: áo, quần, giày,...
@@ -8,11 +9,13 @@ import java.io.Serializable
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/9/2022: Tạo class
  * @updated 3/16/2022: Fix lỗi serialize, khi truyền qua bundle
+ * @updated 3/17/2022: Thay serialize bằng parcelable
  */
+@Parcelize
 data class Category(
     val id: Long,
     val name: String,
-) : Serializable
+) : Parcelable
