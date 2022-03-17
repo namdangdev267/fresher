@@ -177,7 +177,7 @@ class SaleFragment : Fragment() {
     private fun searchEvent(view: View) {
         val edSearch = view.findViewById<EditText>(R.id.edSearch)
         edSearch?.doAfterTextChanged {
-            updateList(edSearch.text.toString(), view)
+            updateList(edSearch.text.toString())
         }
     }
 
@@ -201,13 +201,13 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateList(string: String, view: View) {
+    private fun updateList(string: String) {
         val list = mutableListOf<Products>()
-        for (i in fakedata) {
-            if (i.name.uppercase().contains(string.uppercase()) ||
-                i.id.uppercase().contains(string.uppercase())
+        for (data in fakedata) {
+            if (data.name.uppercase().contains(string.uppercase()) ||
+                data.id.uppercase().contains(string.uppercase())
             ) {
-                list.add(i)
+                list.add(data)
             }
         }
         rcvAdapter?.mProducts=list
