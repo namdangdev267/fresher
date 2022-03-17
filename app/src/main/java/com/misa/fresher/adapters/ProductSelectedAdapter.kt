@@ -24,10 +24,8 @@ class ProductSelectedAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ProductSelectedAdapter.ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val v = inflater.inflate(R.layout.item_bill_detail, parent, false)
-        return ViewHolder(v, context)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_bill_detail, parent, false)
+        return ViewHolder(v, parent.context)
     }
 
     override fun onBindViewHolder(holder: ProductSelectedAdapter.ViewHolder, position: Int) {
