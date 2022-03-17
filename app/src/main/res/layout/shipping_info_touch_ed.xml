@@ -26,14 +26,14 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <TextView
-            android:id="@+id/tvReceiverHintType2"
+        <EditText
+            android:id="@+id/edReceiverHintType2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvReceiver"
             android:layout_marginTop="@dimen/dp_4"
             android:layout_weight="9.4"
-            android:text="@string/app_name"
+            android:background="#00FFFFFF"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
 
@@ -41,7 +41,7 @@
             android:id="@+id/ibtnShippingType2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tvReceiverHintType2"
+            android:layout_toRightOf="@+id/edReceiverHintType2"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name" />
     </LinearLayout>

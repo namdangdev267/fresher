@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.ShippingView
 
-class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
+class ReceiverViewAdapter(
+    private val adapterData: MutableList<ShippingView>,
+    private val getDataChange: (ship: ShippingView) -> Unit
+) :
     RecyclerView.Adapter<ReceiverViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -21,7 +25,7 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
             0 -> R.layout.shipping_info_touch_tv
             1 -> R.layout.shipping_info_touch_ed
             2 -> R.layout.shipping_info_two_col
-            3 -> R.layout.shipping_info_cb
+            3 -> R.layout.shipping_info_checkbox
             4 -> R.layout.shipping_info_radiogroup
             else -> R.layout.shipping_info_three_col
 
@@ -52,18 +56,24 @@ class ReceiverViewAdapter(private val adapterData: MutableList<ShippingView>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindTouchTextView(item: ShippingView.TouchTextView) {
             itemView.findViewById<TextView>(R.id.tvReceiver).text = item.tittle
-            itemView.findViewById<TextView>(R.id.tvReceiverHint).text = item.hint
+            val edReceiver = itemView.findViewById<TextView>(R.id.edReceiverHint)
+            edReceiver.hint = item.hint
             if (item.asterisk != null) {
                 itemView.findViewById<TextView>(R.id.tvNotNull).text = item.asterisk
             }
             if (item.img != null) {
                 itemView.findViewById<ImageButton>(R.id.ibtnShipping).setImageResource(item.img)
             }
+            edReceiver.doAfterTextChanged {
+                item.hint = edReceiver.text.toString()
+                getDataChange(item)
+            }
+
         }
 
         private fun bindTouchEditText(item: ShippingView.TouchEditText) {
             itemView.findViewById<TextView>(R.id.tvReceiverType2).text = item.tittle
-            itemView.findViewById<TextView>(R.id.tvReceiverHintType2).text = item.hint
+            itemView.findViewById<TextView>(R.id.edReceiverHintType2).hint = item.hint
             if (item.img != null) {
                 itemView.findViewById<ImageButton>(R.id.ibtnShippingType2)
                     .setImageResource(item.img)

@@ -1,4 +1,5 @@
-<img width="198" alt="Capture" src="https://user-images.githubusercontent.com/84784260/155888879-d66544bb-5f4c-4a41-99ad-480d168d912c.PNG"><img width="197" alt="Screenshot" src="https://user-images.githubusercontent.com/84784260/155889004-2a36c940-01f7-4e59-8175-01c25d91b4ab.PNG">
-<img width="202" alt="ShippingCapture" src="https://user-images.githubusercontent.com/84784260/156335476-0e1274e8-e9f7-469c-939d-608ba2cc4c0e.PNG">
-<img width="194" alt="ShipCapture" src="https://user-images.githubusercontent.com/84784260/156335498-d29409d7-fbac-4c29-a6f5-58a27cff01a7.PNG">
-<img width="199" alt="PackageCapture" src="https://user-images.githubusercontent.com/84784260/156335523-f900f874-8f45-4171-9518-6822396bce00.PNG">
+![saleFragment](https://user-images.githubusercontent.com/84784260/158055235-f9774a66-de52-47aa-a434-3d66f177dc5f.png)
+![saleFragmentClickedItem](https://user-images.githubusercontent.com/84784260/158055238-d0f412c8-0acd-4215-b70a-f8c034b06d28.png)
+![saleFragmentAfterClickItem](https://user-images.githubusercontent.com/84784260/158055237-08375902-94ae-4df8-adb2-052c73204fc4.png)
+![saleFragmentFilter](https://user-images.githubusercontent.com/84784260/158055319-472ba0a8-d5e1-4b57-a30b-25d6291bb9e7.png)
+![saleFragmentAfterFilter](https://user-images.githubusercontent.com/84784260/158055322-44f7de61-0c66-4584-8fbb-1179061ba909.png)

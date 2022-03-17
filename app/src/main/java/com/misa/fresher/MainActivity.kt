@@ -2,20 +2,41 @@ package com.misa.fresher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.adapters.ProductsAdapter
-import com.misa.fresher.model.Product.Companion.createProductsList
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
-
+    var appBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val rcv = findViewById<RecyclerView>(R.id.rcvListProduct)
-        val adapter = ProductsAdapter(createProductsList(20))
-        rcv.adapter=adapter
-        rcv.layoutManager=LinearLayoutManager(this)
+        configUi()
     }
+
+    private fun configUi() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(
+            navController.graph,
+            findViewById<DrawerLayout>(R.id.drawerLayout)
+        )
+        appBarConfiguration.let {
+            (findViewById(R.id.navSale) as NavigationView).setupWithNavController(navController)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragmentContainerView)
+        return appBarConfiguration?.let {
+            navController.navigateUp(it)
+        } == true || super.onSupportNavigateUp()
+    }
+
 }

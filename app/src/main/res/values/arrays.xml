@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colorArray">
+        <item>cham de chon</item>
+        <item>Do</item>
+        <item>Xanh</item>
+        <item>Xam</item>
+        <item>Tim</item>
+    </string-array>
+    <string-array name="sizeArray">
+        <item>cham de chon</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+    </string-array>
+    <string-array name="DayArray">
+        <item>Hôm nay</item>
+        <item>Hôm qua</item>
+        <item>Hôm kia</item>
+        <item>Tuần này</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="payStatusArray">
+        <item>Tất cả</item>
+        <item>Đã thu tiền</item>
+        <item>Ghi nợ</item>
+        <item>Đã hủy</item>
+    </string-array>
+</resources>

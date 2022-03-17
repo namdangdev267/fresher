@@ -12,7 +12,8 @@ import com.misa.fresher.adapters.ReceiverViewAdapter
 import com.misa.fresher.model.ShippingView
 
 class PackageFragment : Fragment() {
-
+    private var rcv: RecyclerView? = null
+    private var list = mutableListOf<ShippingView>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,13 +24,22 @@ class PackageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rcv = view.findViewById<RecyclerView>(R.id.rcvShippingView_package)
-        val list = mutableListOf<ShippingView>(
+        initData()
+        configRecyclerView(view)
+    }
+
+
+    private fun configRecyclerView(view :View) {
+        rcv = view.findViewById(R.id.rcvShippingView_package)
+        val adapter = ReceiverViewAdapter(list,{
+        })
+        rcv?.adapter = adapter
+        rcv?.layoutManager = LinearLayoutManager(requireContext())
+    }
+    private fun initData() {
+        list = mutableListOf(
             ShippingView.TouchEditText("Trọng lượng (g)", "300", null),
             ShippingView.ThreeCol("Kích thước (cm)", "10", "10", "10")
         )
-        val adapter = ReceiverViewAdapter(list)
-        rcv.adapter = adapter
-        rcv.layoutManager = LinearLayoutManager(requireContext())
     }
 }

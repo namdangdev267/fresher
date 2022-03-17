@@ -7,4 +7,5 @@
     android:text="@string/receiverTv1"
     android:textColor="@color/black"
     android:background="@color/white"
+    android:checked="true"
     android:textSize="@dimen/sp_16" />

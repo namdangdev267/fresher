@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabLayoutExample">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ShipInforFragment">
 
     <LinearLayout
         android:id="@+id/llShippingTittle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_50"
         android:background="@color/purple_700"
         android:orientation="horizontal"
         android:weightSum="10"
@@ -88,12 +88,13 @@
         android:layout_marginLeft="@dimen/dp_9"
         android:layout_marginRight="@dimen/dp_9"
         android:layout_marginBottom="@dimen/dp_9"
-        android:background="@drawable/bg_round_all"
+        android:background="@drawable/ship_infor_btn_save"
         android:text="@string/tbnSave"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
-        android:textStyle="bold"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

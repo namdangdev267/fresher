@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dlSaleFilter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="end">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragments.SaleFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple_700"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/btnMenuSale"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_menu_bg"
+                android:src="@drawable/ic_baseline_menu_24"/>
+            <com.misa.fresher.customViews.CustomToolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:btnCartSrc="@drawable/ic_cart"
+                app:btnFilterSrc="@drawable/ic_filter"
+                app:btnQrCodeBg="@drawable/bg_round_right"
+                app:btnQrCodeSrc="@drawable/ic_qr"
+                app:edSearchBg="@color/white"
+                app:edSearchHint="@string/search_hint"
+                app:ivSearchSrc="@drawable/ic_search"
+                app:ivSearchSrcBg="@drawable/bg_roud_left"
+                app:menuBtnSrc="@drawable/ic_baseline_menu_24" />
+        </LinearLayout>
+
+
+        <include layout="@layout/context_sale" />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/drawer_filter_sale" />
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
