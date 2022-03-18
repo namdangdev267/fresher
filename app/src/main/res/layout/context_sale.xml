@@ -20,32 +20,34 @@
             android:id="@+id/ivContact"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_weight="1"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/ic_user"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvContact"
-            android:clickable="true"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="6"
+            android:clickable="true"
             android:ellipsize="marquee"
+            android:focusable="true"
             android:gravity="center"
             android:hint="@string/contact_hint"
-            android:singleLine="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textSize="@dimen/sp_18" />
 
         <ImageView
             android:id="@+id/ivCalender"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_48"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
             android:layout_gravity="center"
-            android:src="@drawable/ic_calender"
-            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:src="@drawable/ic_price_policy"
             tools:ignore="ContentDescription" />
 
         <TextView

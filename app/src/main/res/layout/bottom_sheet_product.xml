@@ -9,8 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/dp_90"
         android:paddingStart="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_8"
         android:paddingTop="@dimen/dp_8">
@@ -66,9 +65,5 @@
             android:paddingTop="@dimen/dp_4"
             android:src="@drawable/ic_add_circle" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"
-            android:layout_below="@+id/tvProductIdDialog" />
     </RelativeLayout>
 </LinearLayout>

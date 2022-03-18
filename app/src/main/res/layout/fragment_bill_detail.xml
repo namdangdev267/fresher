@@ -65,11 +65,13 @@
         tools:ignore="RtlHardcoded">
 
         <ImageView
-            android:id="@+id/ivContact"
+            android:id="@+id/ivContactBillDetail"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_person"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_user"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -91,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_calender"
+            android:src="@drawable/ic_price_policy"
             tools:ignore="ContentDescription" />
 
         <TextView

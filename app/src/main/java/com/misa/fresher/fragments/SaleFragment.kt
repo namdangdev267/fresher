@@ -1,7 +1,7 @@
 package com.misa.fresher.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
+import androidx.lifecycle.Observer
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -56,12 +56,25 @@ class SaleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         configBtnMenu(view)
         configRecyclerView(view)
+        updateReceiver(view)
         updateProductSelected(view)
         searchEvent(view)
         configFilterDrawer(view)
         resetEvent(view)
         navigateEvent(view)
         setCustomer(view)
+    }
+    /**
+    * Cập nhật khách hàng
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
+    private fun updateReceiver(view: View) {
+        customerViewModel.customer.observe(viewLifecycleOwner, Observer {
+            val cus = view.findViewById<TextView>(R.id.tvContact)
+            cus.text = it.name + "(" + it.number + ")"
+            cus.isSelected = true
+        })
     }
 
     /**
@@ -71,7 +84,14 @@ class SaleFragment : Fragment() {
      **/
     private fun setCustomer(view: View) {
         val tvCus = view.findViewById<TextView>(R.id.tvContact)
+        val ivCus = view.findViewById<ImageView>(R.id.ivContact)
         tvCus.setOnClickListener {
+            cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
+            tvCus.text = "${cus?.name} (${cus?.number})"
+            tvCus.isSelected = true
+            customerViewModel.addCustomer(cus!!)
+        }
+        ivCus.setOnClickListener {
             cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
             tvCus.text = "${cus?.name} (${cus?.number})"
             tvCus.isSelected = true

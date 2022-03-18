@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductSelectedAdapter
+import com.misa.fresher.data.DataForTest
 import com.misa.fresher.model.Bill
+import com.misa.fresher.model.Customer
 import com.misa.fresher.model.SelectedProducts
 import com.misa.fresher.showToast
 import com.misa.fresher.viewModel.BillsViewModel
@@ -29,10 +31,11 @@ import com.misa.fresher.viewModel.CustomerViewModel
  **/
 class BillDetailFragment : Fragment() {
     private var listFromSale = mutableListOf<SelectedProducts>()
-    val rnds = (1000..9999).random()
-    var bill = Bill(listFromSale, rnds, null)
-    val viewModel: BillsViewModel by activityViewModels()
-    val customerViewModel: CustomerViewModel by activityViewModels()
+    private val rnds = (1000..9999).random()
+    private var bill = Bill(listFromSale, rnds, null)
+    private val viewModel: BillsViewModel by activityViewModels()
+    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private var cus: Customer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +53,7 @@ class BillDetailFragment : Fragment() {
         configRecyclerView(view)
         navigaEvent(view)
         updateReceiver(view)
+        setCustomer(view)
     }
 
     /**
@@ -141,6 +145,27 @@ class BillDetailFragment : Fragment() {
             viewModel.addBill(bill)
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
             requireContext().showToast("Thanh toán thành công")
+        }
+    }
+    /**
+    * Lấy random 1 khách hàng trong list
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
+    private fun setCustomer(view: View) {
+        val tvCus = view.findViewById<TextView>(R.id.tvContactBillsDetail)
+        val ivCus = view.findViewById<ImageView>(R.id.ivContactBillDetail)
+        tvCus.setOnClickListener {
+            cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
+            tvCus.text = "${cus?.name} (${cus?.number})"
+            tvCus.isSelected = true
+            customerViewModel.addCustomer(cus!!)
+        }
+        ivCus.setOnClickListener {
+            cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
+            tvCus.text = "${cus?.name} (${cus?.number})"
+            tvCus.isSelected = true
+            customerViewModel.addCustomer(cus!!)
         }
     }
     companion object {
