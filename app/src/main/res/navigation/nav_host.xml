@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/saleFragment"
-        android:name="com.misa.fresher.Views.Fragments.Sale.SaleFragment"
+        android:name="com.misa.fresher.views.fragments.sale.SaleFragment"
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/shippingInformationFragment"
-        android:name="com.misa.fresher.Views.Fragments.ShippingInfomation.ShippingInformationFragment"
+        android:name="com.misa.fresher.views.fragments.shippingInfomation.ShippingInformationFragment"
         android:label="fragment_shipping_information"
         tools:layout="@layout/fragment_shipping_information">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/billDetailFragment"
-        android:name="com.misa.fresher.Views.Fragments.BillDetail.BillDetailFragment"
+        android:name="com.misa.fresher.views.fragments.billDetail.BillDetailFragment"
         android:label="fragment_bill_detail"
         tools:layout="@layout/fragment_bill_detail">
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/billFragment"
-        android:name="com.misa.fresher.Views.Fragments.Bill.BillFragment"
+        android:name="com.misa.fresher.views.fragments.bill.BillFragment"
         android:label="fragment_bill"
         tools:layout="@layout/fragment_bill">
         <action

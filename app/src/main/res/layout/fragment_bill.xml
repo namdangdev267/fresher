@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Views.Fragments.Bill.BillFragment">
+    tools:context=".views.fragments.bill.BillFragment">
 
     <LinearLayout
         android:id="@+id/toolbar_bill"

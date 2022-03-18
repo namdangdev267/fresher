@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Views.Fragments.BillDetail.BillDetailFragment">
+    tools:context=".views.fragments.billDetail.BillDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,6 +70,7 @@
             android:src="@drawable/ic_person_24" />
 
         <TextView
+            android:id="@+id/tv_bill_detail_customer_infor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -78,7 +79,11 @@
             android:gravity="center_vertical"
             android:maxLength="18"
             android:text="@string/customer_information_sale_fragment"
-            android:textColor="#DC8C8C8C" />
+            android:textColor="#99000000"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:singleLine="true"
+            />
 
         <ImageView
             android:id="@+id/imageview_voucher"

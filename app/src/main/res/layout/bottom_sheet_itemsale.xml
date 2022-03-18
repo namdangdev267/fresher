@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.misa.fresher.Views.CustomViews.CustomRecyclerView
+        <com.misa.fresher.views.customViews.CustomRecyclerView
             android:id="@+id/cv_rcv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

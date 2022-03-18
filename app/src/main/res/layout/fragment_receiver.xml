@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Fragments.ShippingInfomation.Receiver.ReceiverFragment">
+    tools:context=".views.fragments.shippingInfomation.Receiver.ReceiverFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_shipping_receiver"

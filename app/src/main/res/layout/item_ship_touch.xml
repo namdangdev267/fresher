@@ -31,6 +31,9 @@
         android:hint="@string/touch_to_enter"
         android:textColorHint="#C9737373"
         android:textSize="14dp"
+        android:focusableInTouchMode="true"
+        android:maxLength="40"
+        android:singleLine="true"
 
 
         />

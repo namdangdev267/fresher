@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Fragments.Sale.SaleFragment">
+    tools:context=".views.fragments.sale.SaleFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:background="#2b3176"
             android:orientation="horizontal">
 
-            <com.misa.fresher.Views.CustomViews.CustomSearchView
+            <com.misa.fresher.views.customViews.CustomSearchView
                 android:id="@+id/search_view_sale"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,12 +46,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:ellipsize="end"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
                 android:maxLength="18"
                 android:text="@string/customer_information_sale_fragment"
-                android:textColor="#DC8C8C8C" />
+                android:textColor="#99000000"
+                android:scrollHorizontally="true"
+                android:focusable="true"
+                android:singleLine="true"
+                />
 
             <ImageView
                 android:id="@+id/imageview_voucher"
