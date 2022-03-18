@@ -81,7 +81,5 @@ class ViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment  = fragmentList[position]
 
-    fun getPageTitle(position: Int): String{
-        return fragmentTitleList[position]
-    }
+    fun getPageTitle(position: Int): String = fragmentTitleList[position]
 }
