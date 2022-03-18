@@ -7,7 +7,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="@color/background"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
@@ -15,16 +15,17 @@
             android:id="@+id/check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/textSize_18">
+            android:layout_marginEnd="@dimen/textSize_18">
 
             <ImageView
                 android:id="@+id/imgBackPayment"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/dp_5"
-                android:src="@drawable/back" />
+                android:src="@drawable/back"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvInforShip"
