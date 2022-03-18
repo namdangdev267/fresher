@@ -1,6 +1,6 @@
 package com.misa.fresher.data.model
 
-import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 import com.misa.fresher.util.enum.InputInfoType
 
 /**
@@ -9,12 +9,15 @@ import com.misa.fresher.util.enum.InputInfoType
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/18/2022: Đổi trường [icon] từ Drawable -> Int, thêm trường [input] để nhận giá trị trả về từ item
  */
 open class InputInfoModel(
     open val type: InputInfoType = InputInfoType.TAP_ACTION,
     open val title: String = "",
     open val isRequired: Boolean = false,
-    open val icon: Drawable? = null,
+    @DrawableRes
+    open val icon: Int? = null,
+    open var input: Any? = null,
 )

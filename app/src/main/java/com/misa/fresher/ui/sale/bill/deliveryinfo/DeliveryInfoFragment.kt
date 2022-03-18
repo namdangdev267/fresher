@@ -8,6 +8,7 @@ import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.databinding.FragmentDeliveryInfoBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInfoAdapter
+import com.misa.fresher.util.guard
 import com.misa.fresher.util.toast
 
 /**
@@ -37,25 +38,26 @@ class DeliveryInfoFragment: BaseFragment<FragmentDeliveryInfoBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/15/2022
      *
-     * @version 1
+     * @version 3
      * @updated 3/15/2022: Tạo function
      * @updated 3/16/2022: Khi nhấn lưu sẽ thu thập dữ liệu từ các fragment và lưu lại
+     * @updated 3/18/2022: Sử dụng [guard] để check null thay cho 2 vòng [let]
      */
     private fun configOtherView() {
         binding.btnSave.setOnClickListener {
-            (activity as MainActivity).tempCustomer?.let {
-                val receiver =
-                    (childFragmentManager.findFragmentByTag("f${binding.vpDeliveryInfo.currentItem}") as ReceiverInfoFragment)
-                val data = receiver.collectData()
+            val receiver =
+                (childFragmentManager.findFragmentByTag("f${binding.vpDeliveryInfo.currentItem}") as ReceiverInfoFragment)
+            val data = receiver.collectData()
+            guard((activity as MainActivity).tempCustomer, data) { customer, da ->
                 (activity as MainActivity).tempCustomer = Customer(
-                    it.id,
-                    it.name,
-                    data.tel,
-                    data.address
+                    customer.id,
+                    customer.name,
+                    da.tel,
+                    da.address
                 )
                 activity?.onBackPressed()
             } ?: run {
-                toast(requireContext(), R.string.please_select_receiver)
+                toast(requireContext(), R.string.please_fill_required_field)
             }
         }
     }

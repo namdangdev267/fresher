@@ -25,8 +25,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_text_in_white"
-                android:textStyle="bold"
+                android:textAppearance="@style/Theme.FreshersApplication.Text.Bold"
                 tools:text="@tools:sample/full_names" />
 
             <TextView
@@ -83,8 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/color"
-            android:textColor="@color/primary_text_in_white"
-            android:textStyle="bold"/>
+            android:textAppearance="@style/Theme.FreshersApplication.Text.Bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_color"
@@ -108,8 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/size"
-            android:textColor="@color/primary_text_in_white"
-            android:textStyle="bold"/>
+            android:textAppearance="@style/Theme.FreshersApplication.Text.Bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_size"
@@ -133,8 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/unit"
-            android:textColor="@color/primary_text_in_white"
-            android:textStyle="bold"/>
+            android:textAppearance="@style/Theme.FreshersApplication.Text.Bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_unit"

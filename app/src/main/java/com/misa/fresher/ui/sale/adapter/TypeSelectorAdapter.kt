@@ -16,8 +16,9 @@ import kotlinx.coroutines.launch
  * @author Nguyễn Công Chính
  * @since 3/11/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/11/2022: Tạo class
+ * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha
  */
 class TypeSelectorAdapter<T : ProductType>(
     items: MutableList<T>,
@@ -52,4 +53,10 @@ class TypeSelectorAdapter<T : ProductType>(
         super.onBindViewHolder(holder, position)
         holder.setChecked(checkedPos == position)
     }
+
+    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
+        oldItem.equals(newItem)
+
+    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
+        oldItem.id == newItem.id
 }

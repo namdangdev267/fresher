@@ -41,8 +41,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_text_in_primary"
-                android:textSize="@dimen/font_size_big"
+                android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
                 tools:text="@tools:sample/full_names" />
 
             <TextView
@@ -60,8 +59,8 @@
         android:layout_margin="@dimen/between_element_double"
         android:background="@drawable/selector_button"
         android:text="@string/support_tele"
-        android:textAllCaps="false"
-        android:textColor="@color/primary_text_in_primary"
+        android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
+        android:textSize="@dimen/font_size_med"
         app:icon="@drawable/ic_call"
         app:iconGravity="textStart" />
 </LinearLayout>

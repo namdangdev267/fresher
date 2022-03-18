@@ -13,9 +13,10 @@ import com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/10/2022: Tạo class
  * @updated 3/12/2022: Sửa tham số truyền vào hàm [updateProductList]
+ * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha, không sử dụng hàm updateProductList nữa, dùng updateData thay thế
  */
 class ProductAdapter(
     items: MutableList<Product>,
@@ -32,21 +33,9 @@ class ProductAdapter(
             onItemClickListener
         )
 
-    /**
-     * Hàm cập nhật toàn bộ danh sách sản phẩm
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/10/2022
-     *
-     * @version 2
-     * @updated 3/10/2022: Tạo function
-     * @updated 3/12/2022: [list] truyền vào không có nhu cầu thay đổi, do vậy chuyển từ mutablelist -> list
-     */
-    fun updateProductList(list: List<Product>) {
-        val tempSize = items.size
-        items.clear()
-        notifyItemRangeRemoved(0, tempSize)
-        items.addAll(list)
-        notifyItemRangeInserted(0, items.size)
-    }
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+        oldItem.equals(newItem)
+
+    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+        oldItem.id == newItem.id
 }

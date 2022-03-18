@@ -16,8 +16,9 @@ import com.misa.fresher.util.enum.InputInfoType
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha, thêm hàm để cập nhật và lấy dữ liệu tại item xác định
  */
 class DeliveryInputAdapter(
     val inputItems: List<InputInfoModel>,
@@ -29,7 +30,8 @@ class DeliveryInputAdapter(
         viewType: Int
     ): BaseViewHolder<InputInfoModel> = when (viewType) {
         InputInfoType.TAP_ACTION.ordinal -> TapActionViewHolder(
-            ItemTapActionInputBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemTapActionInputBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            context
         )
         InputInfoType.TAP_INSERT.ordinal -> TapInsertViewHolder(
             ItemTapInsertInputBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -53,9 +55,41 @@ class DeliveryInputAdapter(
             ItemPackageSizeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
         else -> TapActionViewHolder(
-            ItemTapActionInputBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemTapActionInputBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            context
         )
     }
 
     override fun getItemViewType(position: Int): Int = inputItems[position].type.ordinal
+
+    override fun areContentsTheSame(oldItem: InputInfoModel, newItem: InputInfoModel): Boolean = false
+
+    override fun areItemsTheSame(oldItem: InputInfoModel, newItem: InputInfoModel): Boolean = false
+
+    /**
+     * Hàm cập nhật [input] cho item tại vị trí [index]
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/18/2022
+     *
+     * @version 1
+     * @updated 3/18/2022: Tạo function
+     */
+    fun updateData(index: Int, input: Any) {
+        if (index >= 0 && index < items.size) {
+            items[index].input = input
+            notifyItemChanged(index)
+        }
+    }
+
+    /**
+     * Hàm thu thập dữ liệu từ item thứ [index], trả về kiểu [Any] cho tự đi mà cast, generic rối lắm
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/18/2022
+     *
+     * @version 1
+     * @updated 3/18/2022: Tạo function
+     */
+    fun collectData(index: Int): Any? = items[index].input
 }

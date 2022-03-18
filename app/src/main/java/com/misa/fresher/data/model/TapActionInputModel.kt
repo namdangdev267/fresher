@@ -1,6 +1,6 @@
 package com.misa.fresher.data.model
 
-import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 import com.misa.fresher.util.enum.InputInfoType
 
 /**
@@ -9,13 +9,15 @@ import com.misa.fresher.util.enum.InputInfoType
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/18/2022: Sửa đối override trường [icon], [input] tương ứng với lớp cha
  */
 data class TapActionInputModel(
     override val title: String,
     override val isRequired: Boolean,
-    override val icon: Drawable?,
-    var input: String = "",
+    @DrawableRes
+    override val icon: Int?,
+    override var input: Any? = null,
     val onClickListener: () -> Unit = {}
-) : InputInfoModel(InputInfoType.TAP_ACTION, title, isRequired, icon)
+) : InputInfoModel(InputInfoType.TAP_ACTION, title, isRequired, icon, input)

@@ -2,6 +2,7 @@ package com.misa.fresher.data.model
 
 import com.misa.fresher.data.entity.Bill
 import com.misa.fresher.util.enum.TimeFilterType
+import com.misa.fresher.util.toCalendar
 import java.util.*
 
 /**
@@ -23,11 +24,12 @@ class FilterBillModel {
      * @author Nguyễn Công Chính
      * @since 3/16/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/16/2022: Tạo function
+     * @updated 3/18/2022: Vì lớp thực thể có trường đổi từ Calendar -> Date, phần xử lí cần cập nhật theo
      */
-    fun filter(input: MutableList<Bill>): List<Bill> {
-        var result = input.toList()
+    fun filter(input: List<Bill>): List<Bill> {
+        var result = input
 
         // Lọc theo tên khách hàng, số điện thoại hoặc mã hóa đơn
         result = result.filter {
@@ -37,32 +39,34 @@ class FilterBillModel {
         }
 
         // Lọc theo thời gian
-        result = result.filter {
-            when (time) {
-                TimeFilterType.TODAY -> {
-                    val now = Calendar.getInstance()
-                    now.get(Calendar.DAY_OF_YEAR) == it.createdAt.get(Calendar.DAY_OF_YEAR)
-                            && now.get(Calendar.YEAR) == it.createdAt.get(Calendar.YEAR)
-                }
-                TimeFilterType.YESTERDAY -> {
-                    val yesterday = Calendar.getInstance()
-                    yesterday.add(Calendar.DATE, -1)
-                    yesterday.get(Calendar.DAY_OF_YEAR) == it.createdAt.get(Calendar.DAY_OF_YEAR)
-                            && yesterday.get(Calendar.YEAR) == it.createdAt.get(Calendar.YEAR)
-                }
-                TimeFilterType.BEFORE_YESTERDAY -> {
-                    val beforeYesterday = Calendar.getInstance()
-                    beforeYesterday.add(Calendar.DATE, -2)
-                    beforeYesterday.get(Calendar.DAY_OF_YEAR) == it.createdAt.get(Calendar.DAY_OF_YEAR)
-                            && beforeYesterday.get(Calendar.YEAR) == it.createdAt.get(Calendar.YEAR)
-                }
-                TimeFilterType.THIS_WEEK -> {
-                    val now = Calendar.getInstance()
-                    now.get(Calendar.WEEK_OF_YEAR) == it.createdAt.get(Calendar.WEEK_OF_YEAR)
-                            && now.get(Calendar.YEAR) == it.createdAt.get(Calendar.YEAR)
-                }
-                TimeFilterType.OTHER -> {
-                    true
+        result = result.filter { bill ->
+            bill.createdAt.toCalendar().let {
+                when (time) {
+                    TimeFilterType.TODAY -> {
+                        val now = Calendar.getInstance()
+                        now.get(Calendar.DAY_OF_YEAR) == it.get(Calendar.DAY_OF_YEAR)
+                                && now.get(Calendar.YEAR) == it.get(Calendar.YEAR)
+                    }
+                    TimeFilterType.YESTERDAY -> {
+                        val yesterday = Calendar.getInstance()
+                        yesterday.add(Calendar.DATE, -1)
+                        yesterday.get(Calendar.DAY_OF_YEAR) == it.get(Calendar.DAY_OF_YEAR)
+                                && yesterday.get(Calendar.YEAR) == it.get(Calendar.YEAR)
+                    }
+                    TimeFilterType.BEFORE_YESTERDAY -> {
+                        val beforeYesterday = Calendar.getInstance()
+                        beforeYesterday.add(Calendar.DATE, -2)
+                        beforeYesterday.get(Calendar.DAY_OF_YEAR) == it.get(Calendar.DAY_OF_YEAR)
+                                && beforeYesterday.get(Calendar.YEAR) == it.get(Calendar.YEAR)
+                    }
+                    TimeFilterType.THIS_WEEK -> {
+                        val now = Calendar.getInstance()
+                        now.get(Calendar.WEEK_OF_YEAR) == it.get(Calendar.WEEK_OF_YEAR)
+                                && now.get(Calendar.YEAR) == it.get(Calendar.YEAR)
+                    }
+                    TimeFilterType.OTHER -> {
+                        true
+                    }
                 }
             }
         }

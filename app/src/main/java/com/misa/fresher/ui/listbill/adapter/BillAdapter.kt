@@ -13,8 +13,9 @@ import com.misa.fresher.ui.listbill.adapter.viewholder.BillViewHolder
  * @author Nguyễn Công Chính
  * @since 3/16/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/16/2022: Tạo class
+ * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha, loại bỏ hàm updateProductList, chuyển qua dùng updateData
  */
 class BillAdapter(
     items: MutableList<Bill>
@@ -25,20 +26,9 @@ class BillAdapter(
             ItemBillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
-    /**
-     * Hàm cập nhật toàn bộ danh sách hóa đơn
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/16/2022
-     *
-     * @version 1
-     * @updated 3/16/2022: Tạo function
-     */
-    fun updateProductList(list: List<Bill>) {
-        val tempSize = items.size
-        items.clear()
-        notifyItemRangeRemoved(0, tempSize)
-        items.addAll(list)
-        notifyItemRangeInserted(0, items.size)
-    }
+    override fun areContentsTheSame(oldItem: Bill, newItem: Bill): Boolean =
+        oldItem.equals(newItem)
+
+    override fun areItemsTheSame(oldItem: Bill, newItem: Bill): Boolean =
+        oldItem.id == newItem.id
 }

@@ -49,6 +49,7 @@
     <string name="close">Đóng</string>
     <string name="total">Tổng</string>
     <string name="support_tele">Hỗ trợ: 1900 8677</string>
+    <string name="please_fill_required_field">Vui lòng nhập thông tin người nhận.</string>
     <string-array name="filter_time">
         <item>Hôm nay</item>
         <item>Hôm qua</item>
@@ -57,12 +58,12 @@
         <item>Khác</item>
     </string-array>
     <string-array name="filter_bill_status">
-    <item>Tất cả</item>
-    <item>Đã thu tiền</item>
-    <item>Ghi nợ</item>
-    <item>Đã hủy</item>
-    <item>Khác</item>
-</string-array>
+        <item>Tất cả</item>
+        <item>Đã thu tiền</item>
+        <item>Ghi nợ</item>
+        <item>Đã hủy</item>
+        <item>Khác</item>
+    </string-array>
 
     <string-array name="test_arr">
         <item>ajhdfads</item>

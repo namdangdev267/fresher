@@ -14,7 +14,6 @@ import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.SaleFragment
 import com.misa.fresher.ui.sale.bill.adapter.ProductBillAdapter
 import com.misa.fresher.util.get
-import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.toCurrency
 import com.misa.fresher.util.toast
 import java.util.*
@@ -34,7 +33,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
     override val getInflater: (LayoutInflater) -> FragmentBillBinding
         get() = FragmentBillBinding::inflate
 
-    private val selectedItems by lazy { arguments.get(SaleFragment.SELECTED_ITEMS, mutableListOf<ProductItemBill>()) }
+    private val selectedItems by lazy { arguments.get(SaleFragment.ARGUMENT_SELECTED_ITEMS, mutableListOf<ProductItemBill>()) }
 
     private var productAdapter: ProductBillAdapter? = null
 
@@ -97,7 +96,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
      * @updated 3/14/2022: Tạo function
      */
     private fun initProductItems() {
-        productAdapter?.updateProductList(selectedItems)
+        productAdapter?.updateData(selectedItems)
     }
 
     /**
@@ -136,7 +135,6 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
             (activity as MainActivity).tempCustomer = FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
             binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
         }
         binding.tvBuyMore.setOnClickListener {
@@ -151,7 +149,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
                     binding.tbBill.tvTitle.text.toString().toLong(),
                     it,
                     selectedItems.toList(),
-                    Calendar.getInstance()
+                    Date()
                 )
                 FakeData.bills.add(bill)
                 toast(requireContext(), R.string.save_bill_success)
@@ -180,6 +178,6 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
         binding.tbBill.btnNav.setOnClickListener {
             activity?.onBackPressed()
         }
-        binding.tbBill.tvTitle.text = Rand.generateBillCode().toString()
+        binding.tbBill.tvTitle.text = FakeData.getId(FakeData.BILL_ID).toString()
     }
 }

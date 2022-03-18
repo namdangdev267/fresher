@@ -8,7 +8,6 @@ import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.model.*
 import com.misa.fresher.databinding.FragmentShipInfoBinding
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
-import com.misa.fresher.util.getDrawableById
 
 /**
  * Màn nhập thông tin liên quan đến giao vận
@@ -49,8 +48,7 @@ class ShipInfoFragment: BaseFragment<FragmentShipInfoBinding>() {
                 "GHN",
             )),
             TapActionInputModel("Loại dịch vụ", false, null) {},
-            TapInsertInputModel("Phí giao hàng trả đối tác", false,
-                resources.getDrawableById(R.drawable.ic_calculator),
+            TapInsertInputModel("Phí giao hàng trả đối tác", false, R.drawable.ic_calculator,
                 InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL),
             TapInsertInputModel("Mã vận đơn", false,
                 null, InputType.TYPE_CLASS_TEXT),

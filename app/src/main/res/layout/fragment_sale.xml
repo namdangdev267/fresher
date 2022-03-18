@@ -23,20 +23,20 @@
 
             <TextView
                 android:id="@+id/tv_customer"
+                style="@style/Theme.FreshersApplication.ClickableItem"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:drawablePadding="@dimen/between_element"
                 android:ellipsize="end"
-                android:focusable="true"
                 android:gravity="center_vertical"
                 android:hint="@string/customer_name_tele"
                 android:paddingStart="@dimen/between_element"
                 android:paddingEnd="@dimen/between_element_half"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColor="@color/secondary_text_in_white"
+                android:text=""
+                android:textColor="@color/primary_text_in_white"
                 app:drawableStartCompat="@drawable/ic_person"
                 app:drawableTint="@color/primary" />
 
@@ -117,8 +117,7 @@
                     android:layout_width="@dimen/basic_line_height"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@drawable/selector_button_text_color"
-                    android:textSize="@dimen/font_size_big"
+                    android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <View
@@ -132,8 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@drawable/selector_button_text_color"
-                    android:textSize="@dimen/font_size_big"
+                    android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
                     tools:text="@tools:sample/lorem" />
             </LinearLayout>
         </LinearLayout>

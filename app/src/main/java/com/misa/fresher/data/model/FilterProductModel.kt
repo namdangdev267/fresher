@@ -62,7 +62,7 @@ class FilterProductModel {
                 Collator.getInstance(Locale("vi", "VN")).compare(p1.name, p2.name)
             }
             ProductSortType.NEW_PRODUCT -> result.sortedByDescending { product ->
-                product.items.maxOf { it.createdAt.timeInMillis }
+                product.items.maxOf { it.createdAt.time }
             }
             else -> result.sortedByDescending { product ->
                 product.items.sumOf { it.quantityAvailable }

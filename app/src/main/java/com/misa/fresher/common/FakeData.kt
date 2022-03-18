@@ -8,12 +8,13 @@ import com.misa.fresher.data.entity.*
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 5
+ * @version 6
  * @updated 3/10/2022: Tạo class
  * @updated 3/12/2022: Bổ sung một số sản phẩm giả
  * @updated 3/12/2022: Đổi từ mutablelist -> list do không có nhu cầu sửa chữa
  * @updated 3/15/2022: Đổi từ public -> private do không có nhu cầu gọi từ bên ngoài, đổi list [customers] từ list string -> list [Customer]
  * @updated 3/16/2022: thêm trường [bills]
+ * @updated 3/18/2022: Thêm hàm [getId] để lấy Id mà không lo bị trùng
  */
 object FakeData {
     private val colors = listOf(
@@ -116,4 +117,13 @@ object FakeData {
     )
 
     val bills = mutableListOf<Bill>()
+
+    private var billId = 21210010000L
+
+    fun getId(type: Int): Long = when (type) {
+        BILL_ID -> ++billId
+        else -> 0
+    }
+
+    const val BILL_ID = 1
 }

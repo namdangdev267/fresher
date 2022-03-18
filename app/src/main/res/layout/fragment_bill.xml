@@ -19,13 +19,12 @@
 
         <TextView
             android:id="@+id/tv_customer"
+            style="@style/Theme.FreshersApplication.ClickableItem"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clickable="true"
             android:drawablePadding="@dimen/between_element"
             android:ellipsize="end"
-            android:focusable="true"
             android:gravity="center_vertical"
             android:hint="@string/customer_name_tele"
             android:paddingStart="@dimen/between_element"
@@ -72,14 +71,12 @@
             android:layout_weight="1"
             android:drawablePadding="@dimen/between_element"
             android:ellipsize="end"
-            android:clickable="true"
-            android:focusable="true"
+            style="@style/Theme.FreshersApplication.ClickableItem"
             android:gravity="center_vertical"
             android:text="@string/buy_more"
             android:textColor="@color/primary"
             app:drawableStartCompat="@drawable/ic_add"
-            app:drawableTint="@color/primary"
-            android:background="?attr/selectableItemBackground" />
+            app:drawableTint="@color/primary" />
 
         <ImageButton
             android:id="@+id/btn_scan"
@@ -111,9 +108,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/basic_line_height"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
+        style="@style/Theme.FreshersApplication.ClickableItem"
         android:orientation="horizontal">
 
         <TextView
@@ -183,8 +178,7 @@
             android:layout_marginStart="@dimen/between_element"
             android:layout_weight="1"
             android:background="@drawable/selector_button"
-            android:clickable="true"
-            android:focusable="true"
+            style="@style/Theme.FreshersApplication.ClickableItem"
             android:orientation="horizontal">
 
             <TextView

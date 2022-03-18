@@ -32,4 +32,28 @@
         <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 
+    <style name="Theme.FreshersApplication.Text" parent="TextAppearance.Material3.BodyMedium"/>
+
+    <style name="Theme.FreshersApplication.Text.Bold" parent="Theme.FreshersApplication.Text">
+        <item name="android:textColor">@color/primary_text_in_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Text.BottomButton" parent="Theme.FreshersApplication.Text">
+        <item name="android:textColor">@color/primary_text_in_primary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/font_size_big</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Text.Bold.Cap" parent="Theme.FreshersApplication.Text.Bold">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.ClickableItem">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

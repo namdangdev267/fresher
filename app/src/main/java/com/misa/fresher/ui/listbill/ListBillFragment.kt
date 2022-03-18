@@ -119,7 +119,7 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
      */
     private fun updateListBill() {
         val filterItems = filter.filter(FakeData.bills)
-        billAdapter?.updateProductList(filterItems)
+        billAdapter?.updateData(filterItems.toMutableList())
         binding.tvCount.text = filterItems.size.toString()
         binding.tvTotal.text = filterItems.sumOf { item ->
             item.items.sumOf { it.item.price * it.quantity }

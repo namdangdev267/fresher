@@ -46,8 +46,7 @@
         android:layout_margin="@dimen/between_element_half"
         android:background="@drawable/selector_button"
         android:text="@string/save"
-        android:textAllCaps="false"
-        android:textSize="@dimen/font_size_big"
+        android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vp_delivery_info" />

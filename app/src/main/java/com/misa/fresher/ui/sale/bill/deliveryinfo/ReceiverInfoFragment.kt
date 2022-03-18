@@ -12,10 +12,7 @@ import com.misa.fresher.data.model.*
 import com.misa.fresher.databinding.FragmentReceiverInfoBinding
 import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
-import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.viewholder.TapActionViewHolder
-import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.viewholder.TapInsertViewHolder
-import com.misa.fresher.util.default
-import com.misa.fresher.util.getDrawableById
+import com.misa.fresher.util.guard
 
 /**
  * Màn nhập các thông tin liên quan đến người nhận
@@ -46,21 +43,19 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
      *
      * @version 2
      * @updated 3/15/2022: Tạo function
-     * @updated 3/17/2022: Sử dụng toán tử elvis thay cho [default]
+     * @updated 3/17/2022: Sử dụng toán tử elvis thay cho default
      */
     private fun configRcv() {
         adapter = DeliveryInputAdapter(listOf(
-            TapActionInputModel("Người nhận", true,
-                resources.getDrawableById(R.drawable.ic_plus),
+            TapActionInputModel("Người nhận", true, R.drawable.ic_plus,
                 (activity as MainActivity).tempCustomer?.name ?: ""
             ) {
                 (activity as MainActivity).tempCustomer =
                     FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
                 (activity as MainActivity).tempCustomer?.let {
-                    (adapter?.inputItems?.get(0) as? TapActionInputModel)?.input = it.name
-                    (adapter?.inputItems?.get(1) as? TapInsertInputModel)?.input = it.tel
-                    (adapter?.inputItems?.get(2) as? TapInsertInputModel)?.input = it.address
-                    adapter?.notifyItemRangeChanged(0, 3)
+                    adapter?.updateData(0, it.name)
+                    adapter?.updateData(1, it.tel)
+                    adapter?.updateData(2, it.address)
                 }
             },
             TapInsertInputModel("Số điện thoại", true,
@@ -71,12 +66,9 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
                 null, InputType.TYPE_CLASS_TEXT,
                 (activity as MainActivity).tempCustomer?.address ?: ""
             ),
-            TapActionInputModel("Khu vực", false,
-                resources.getDrawableById(R.drawable.ic_arrow_right)) {},
-            TapActionInputModel("Phường xã", false,
-                resources.getDrawableById(R.drawable.ic_arrow_right)) {},
-            TapInsertInputModel("Phí giao hàng thu khách", false,
-                resources.getDrawableById(R.drawable.ic_calculator),
+            TapActionInputModel("Khu vực", false, R.drawable.ic_arrow_right) {},
+            TapActionInputModel("Phường xã", false, R.drawable.ic_arrow_right) {},
+            TapInsertInputModel("Phí giao hàng thu khách", false, R.drawable.ic_calculator,
                 InputType.TYPE_CLASS_NUMBER),
             TwoColumnInputModel(
                 SpinnerInputModel("Hình thức đặt cọc", false, listOf(
@@ -118,13 +110,19 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/16/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/16/2022: Tạo function
+     * @updated 3/18/2022: Sử dụng guard check null, áp dụng hàm collectData để lấy dữ liệu trong item
      */
-    fun collectData(): Customer = Customer(
-        0L,
-        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(0) as TapActionViewHolder).collectData(),
-        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(1) as TapInsertViewHolder).collectData(),
-        (binding.rcvReceiverInput.findViewHolderForAdapterPosition(2) as TapInsertViewHolder).collectData(),
-    )
+    fun collectData(): Customer? {
+        var customer: Customer? = null
+        guard(
+            adapter?.collectData(0),
+            adapter?.collectData(1),
+            adapter?.collectData(2)
+        ) { name, tel, address ->
+            customer = Customer(0L, name as String, tel as String, address as String)
+        }
+        return customer
+    }
 }

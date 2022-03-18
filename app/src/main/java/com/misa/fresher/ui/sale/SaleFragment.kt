@@ -26,7 +26,6 @@ import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
 import com.misa.fresher.ui.sale.adapter.TypeSelectorAdapter
 import com.misa.fresher.util.enum.ProductSortType
-import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.guard
 import com.misa.fresher.util.toCurrency
 import com.misa.fresher.util.toast
@@ -267,7 +266,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             (activity as MainActivity).tempCustomer =
                 FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
             binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
         }
         binding.btnRefresh.setOnClickListener {
@@ -277,7 +275,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         binding.btnCart.setOnClickListener {
             navigation.navigate(
                 R.id.action_fragment_sale_to_fragment_bill, bundleOf(
-                    SELECTED_ITEMS to selectedItems
+                    ARGUMENT_SELECTED_ITEMS to selectedItems
                 )
             )
         }
@@ -295,7 +293,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      */
     private fun initProductList() {
         val filterItems = filter.filter(FakeData.products)
-        productAdapter?.updateProductList(filterItems)
+        productAdapter?.updateData(filterItems.toMutableList())
     }
 
     /**
@@ -371,7 +369,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
         binding.llFilter.btnDone.setOnClickListener {
             val filterItems = filter.filter(FakeData.products)
-            productAdapter?.updateProductList(filterItems)
+            productAdapter?.updateData(filterItems.toMutableList())
             toggleDrawer(binding.nvFilter)
         }
 
@@ -412,7 +410,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 filter.keyword = textView.text.toString()
                 val filterItems = filter.filter(FakeData.products)
-                productAdapter?.updateProductList(filterItems)
+                productAdapter?.updateData(filterItems.toMutableList())
             }
             false
         }
@@ -436,6 +434,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     }
 
     companion object {
-        const val SELECTED_ITEMS = "items"
+        const val ARGUMENT_SELECTED_ITEMS = "items"
     }
 }
