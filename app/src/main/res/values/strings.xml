@@ -6,10 +6,10 @@
 
     <string-array name="item_arr">
         <item>All</item>
-        <item>oiafoisfaf</item>
-        <item>oiafoisfaf</item>
-        <item>oiafoisfaf</item>
-        <item>oiafoisfaf</item>
+        <item>orators</item>
+        <item>orators</item>
+        <item>orators</item>
+        <item>orators</item>
     </string-array>
 
     <style name="TextViewFont">
@@ -31,7 +31,7 @@
     <string name="weight">Weight(g)</string>
     <string name="size">Size(cm)</string>
 
-    <string name="search_view">Enter name, SKU...</string>
+    <string name="search_view">Enter name, SKU code, S…</string>
 
     <string name="shipping_information">Shipping information</string>
     <string name="receiver">Receiver</string>
@@ -58,6 +58,21 @@
     <string name="clear_filter">Clear filter</string>
     <string name="done_filter">Done</string>
 
+    <string-array name="day">
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Before yesterday</item>
+        <item>This week</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>All</item>
+        <item>Got payment</item>
+        <item>Debit</item>
+        <item>Deleted</item>
+    </string-array>
+
     <string name="get_payment">Get payment</string>
     <string name="receivable">Receivable</string>
     <string name="none">None</string>
@@ -67,4 +82,11 @@
     <string name="code_payment">Code Payment</string>
     <string name="todo">TODO</string>
     <string name="_0">0</string>
+    <string name="list_of_bills">List of bills</string>
+    <string name="total">Total</string>
+    <string name="_0_0">0.0</string>
+    <string name="sale">Sale</string>
+    <string name="shipping_book">Shipping book</string>
+    <string name="nam_dang">Nam Dang</string>
+    <string name="namfashionhn">namfashionhn</string>
 </resources>
