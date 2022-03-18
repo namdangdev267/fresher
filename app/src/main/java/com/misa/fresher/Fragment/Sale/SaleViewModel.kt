@@ -10,7 +10,7 @@ import java.text.Collator
 class SaleViewModel : ViewModel() {
     var search: String = ""
 
-    var listItemProduct: MutableList<Product> = mutableListOf()
+    private var listItemProduct: MutableList<Product> = mutableListOf()
 
     private val _listItemShow = MutableLiveData<MutableList<Product>>()
     val listItemShow: LiveData<MutableList<Product>>
@@ -53,7 +53,7 @@ class SaleViewModel : ViewModel() {
     fun updateListItemShow(searchString: String) {
         search = searchString
         _listItemShow.postValue(listItemProduct)
-        var showList = listItemProduct.filter { it.nameProduct.contains(searchString, true) }
+        val showList = listItemProduct.filter { it.nameProduct.contains(searchString, true) }
         _listItemShow.postValue(showList as MutableList<Product>?)
     }
 }

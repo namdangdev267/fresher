@@ -24,6 +24,7 @@ import com.misa.fresher.Models.Product
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentSaleBinding
+import kotlinx.android.synthetic.main.sale_context.view.*
 import kotlinx.android.synthetic.main.search_view.view.*
 
 class SaleFragment : Fragment() {
@@ -56,11 +57,11 @@ class SaleFragment : Fragment() {
     }
 
     private fun transitionFragment(view: View) {
-        binding?.linearQuantity?.setOnClickListener {
+
+        binding?.root?.linearQuantity?.setOnClickListener {
             if (sharedViewModel?.listItemSelected?.value!!.size > 0) {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_fragment_sale_to_fragment_payment)
-    //                findNavController().navigate(R.id.action_fragment_sale_to_fragment_payment)
             }
         }
     }
@@ -171,7 +172,7 @@ class SaleFragment : Fragment() {
 
         btRemove.setOnClickListener {
             if (sharedViewModel?.itemSelected?.value?.countPackage == 1) {
-                var customToast = ToastCustom(requireContext())
+                var customToast = ToastCustom
                 customToast.makeToast(
                     requireContext(),
                     "Quantity must be more than 0. Please check again",
