@@ -1,5 +1,6 @@
 package com.misa.fresher
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -67,19 +68,21 @@ class PublicViewModel : ViewModel() {
         _itemSelected.postValue(itemSelected)
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun updateItemSelectedQuantity(num: Int) {
         var itemSelected = _itemSelected.value?.let {
             PackageProduct(
                 it.product, "", "", it.countPackage + num
             )
         }
-        _itemSelected.postValue(itemSelected!!)
+        _itemSelected.postValue(itemSelected)
     }
 
     /**
      * List item selected
      */
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun updateListItemSelected() {
         val listSelected = _listItemSelected.value
         var check = false
@@ -95,11 +98,11 @@ class PublicViewModel : ViewModel() {
         if (!check) {
             _itemSelected.value?.let { listSelected?.add(it) }
         }
-        _listItemSelected.postValue(listSelected!!)
+        _listItemSelected.postValue(listSelected)
     }
 
     fun clearListItemSelected() {
-//        _listItemSelected.value?.clear()
+        _listItemSelected.value?.clear()
         _listItemSelected.postValue(mutableListOf())
         _billHandling.postValue(
             ItemBill(
@@ -111,19 +114,14 @@ class PublicViewModel : ViewModel() {
         )
     }
 
-    fun getTotalPrice(): Float {
-        var totalPrice = 0f
-        _listItemSelected.value?.let {
-            for (i in _listItemSelected.value!!) {
-                totalPrice += i.product.priceProduct * i.countPackage
-            }
-        }
-        return totalPrice
-    }
+    fun getTotalPrice() =
+        _listItemSelected.value?.map { it.product.priceProduct * it.countPackage }?.sum()
+
+    var selectedList = mutableListOf<PackageProduct>()
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
         if (itemBillDetail.countPackage == 0) {
-            var selectedList = mutableListOf<PackageProduct>()
+
             for (i in selectedList) {
                 if (i.product == itemBillDetail.product) {
 
@@ -146,14 +144,8 @@ class PublicViewModel : ViewModel() {
         }
     }
 
-    /**
-     * shipping information
-     */
-
-
-    /**
-     * bill
-     */
+    fun getCount() =
+        selectedList.size.toString()
 
     fun addBillToListBill() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
@@ -166,16 +158,6 @@ class PublicViewModel : ViewModel() {
         var i = 0
     }
 
-    fun getTotalPriceListBill():Float
-    {
-        var res=0f
-        _listBill.value?.let {
-            for(i in _listBill.value!!)
-            {
-                res += i.getPrice()
-            }
-        }
-        return res
+    fun getTotalPriceListBill() = _listBill.value?.map { it.getPrice() }
 
-    }
 }
