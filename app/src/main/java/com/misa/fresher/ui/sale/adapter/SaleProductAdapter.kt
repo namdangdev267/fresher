@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import com.misa.fresher.base.BaseAdapter
 import com.misa.fresher.base.BaseViewHolder
 import com.misa.fresher.customview.ViewProduct
-import com.misa.fresher.models.product.Product
+import com.misa.fresher.data.model.product.Product
 import com.misa.fresher.utils.showToast
 
 class SaleProductAdapter(
@@ -25,19 +25,17 @@ class SaleProductAdapter(
         override fun bindingData(item: Product, position: Int) {
             super.bindingData(item, position)
             viewProduct.product = item
-            viewProduct.binding.run {
-                btnMinus.setOnClickListener {
-                    if(item.amount == 1) itemView.context.showToast("Quantity must be more than 0. Please check again.")
-                    else {
-                        txtAmount.text = (--item.amount).toString()
-                        onAmountChanged()
-                    }
-
-                }
-                btnAdd.setOnClickListener {
-                    txtAmount.text = (++item.amount).toString()
+            viewProduct.binding.btnMinus.setOnClickListener {
+                if (viewProduct.amount == 1) itemView.context.showToast("Quantity must be more than 0. Please check again.")
+                else {
+                    viewProduct.amount--
                     onAmountChanged()
                 }
+
+            }
+            viewProduct.binding.btnAdd.setOnClickListener {
+                viewProduct.amount++
+                onAmountChanged()
             }
         }
     }

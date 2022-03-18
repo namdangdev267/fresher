@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.misa.fresher.R
 import com.misa.fresher.databinding.ItemSaleProductBinding
-import com.misa.fresher.models.product.Product
-import com.misa.fresher.models.product.ProductItem
-import com.misa.fresher.models.product.ProductUnit
+import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.data.model.product.ProductItem
+import com.misa.fresher.data.model.product.ProductUnit
 import com.misa.fresher.utils.getDimension
 import com.misa.fresher.utils.getDrawable
 

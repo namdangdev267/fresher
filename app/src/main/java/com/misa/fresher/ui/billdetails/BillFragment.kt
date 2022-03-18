@@ -7,74 +7,62 @@ import com.misa.fresher.ui.sale.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.global.FakeData
-import com.misa.fresher.models.product.Product
-import com.misa.fresher.models.product.ProductBill
+import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.ui.sale.SaleFragment
 import com.misa.fresher.utils.showToast
 
-class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::inflate) {
-    private var selectedItems = arrayListOf<Product>()
+class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::inflate), BillContract.View {
+    private var presenter: BillPresenter? = null
 
-    override fun initUI() {
-        initToolbarUI()
-        initProductItems()
-        initListProductRecViewUI()
+    override fun initPresenter() {
+        presenter = BillPresenter().also { it.attach(this) }
+        presenter?.getSelectedProducts(arguments)
     }
 
-    override fun initListener() {
-        super.initListener()
-        initToolbarListener()
+    override fun initUI() {
+        initPresenter()
+        initToolbarUI()
+
         binding.btnBuyMore.setOnClickListener { activity?.onBackPressed() }
         binding.btnNavToShipInfo.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_bill_to_fragment_ship_info)
         }
-        binding.btnPayment.setOnClickListener {
-            val products = ArrayList<Product>(selectedItems)
-            selectedItems.clear()
-            FakeData.productBills.add(
-                ProductBill(
-                    date = System.currentTimeMillis(),
-                    customer = "test customer",
-                    products =  products
-                )
-            )
-            activity?.onBackPressed()
-            context?.showToast(products.size.toString())
-        }
+        binding.btnPayment.setOnClickListener { presenter?.payProducts() }
     }
+
 
     override fun updateUI() {
         super.updateUI()
-        updateTotalPriceUI()
-        updateSelectedItemsCountUI()
+        presenter?.getSelectedProductsStatistic()
     }
 
     private fun initToolbarUI() {
         binding.txtBillId.text = ProductBill._id.toString()
-    }
-    private fun initToolbarListener() {
         binding.btnBack.setOnClickListener { activity?.onBackPressed() }
     }
 
-    private fun initProductItems() {
-        selectedItems =arguments?.get(SaleFragment.BUNDLE_SELECTED_ITEMS) as? ArrayList<Product> ?: arrayListOf()
-    }
 
-    private fun initListProductRecViewUI() {
+    override fun updateListProductRecViewUI(products: ArrayList<Product>) {
         binding.listProductRecView.adapter = SaleProductAdapter(
-            selectedItems,
-            onAmountChanged = {
-                updateTotalPriceUI()
-                updateSelectedItemsCountUI()
-            },
+            products,
+            onAmountChanged = { presenter?.getSelectedProductsStatistic() },
             clickItemListener = {_, _ ->}
         )
-        binding.listProductRecView.layoutManager = LinearLayoutManager(context)
     }
-    private fun updateTotalPriceUI() {
-        binding.txtTotalPrice.text = selectedItems.sumOf { it.price }.toString()
+    override fun updateSelectedProductsStatisticUI(totalPrice: Double, totalAmount: Int) {
+        binding.txtTotalPrice.text = totalPrice.toString()
+        binding.btnProductItemCount.text = totalAmount.toString()
     }
-    private fun updateSelectedItemsCountUI() {
-        binding.btnProductItemCount.text = selectedItems.sumOf { it.amount }.toString()
+
+
+    override fun productPaid() {
+        activity?.onBackPressed()
+        context?.showToast("paid successful")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter?.detach()
     }
 }

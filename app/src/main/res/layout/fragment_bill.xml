@@ -135,7 +135,8 @@
         android:id="@+id/list_product_rec_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/pad_small"

@@ -1,4 +1,4 @@
-package com.misa.fresher.models.product
+package com.misa.fresher.data.model.product
 
 import java.io.Serializable
 

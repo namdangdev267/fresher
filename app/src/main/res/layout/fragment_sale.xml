@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_sale"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -131,6 +132,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
@@ -142,6 +144,7 @@
                 android:id="@+id/list_product_rec_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="4"
                 tools:listitem="@layout/item_sale_product" />
         </LinearLayout>
@@ -159,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_rotate"
-                app:isActive="false"/>
+                app:isActive="false" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/number_btn"
@@ -167,23 +170,23 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/pad_tiny"
                 android:layout_marginEnd="1dp"
-                android:textSize="@dimen/txt_large"
                 android:background="@drawable/bg_btn_round_left"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/btn_product_count" />
+                android:text="@string/btn_product_count"
+                android:textSize="@dimen/txt_large" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/price_btn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="@dimen/txt_large"
                 android:background="@drawable/bg_btn_round_right"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/btn_product_selected"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="@dimen/txt_large" />
         </LinearLayout>
     </LinearLayout>
 
@@ -193,6 +196,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/toolbar_height">
+
         <include
             android:id="@+id/drawer_sale_filter"
             layout="@layout/drawer_sale_filter" />

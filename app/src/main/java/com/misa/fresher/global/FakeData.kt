@@ -1,10 +1,10 @@
 package com.misa.fresher.global
 
 import com.misa.fresher.R
-import com.misa.fresher.models.product.Product
-import com.misa.fresher.models.product.ProductBill
-import com.misa.fresher.models.product.ProductItem
-import com.misa.fresher.models.product.ProductUnit
+import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.data.model.product.ProductBill
+import com.misa.fresher.data.model.product.ProductItem
+import com.misa.fresher.data.model.product.ProductUnit
 
 object FakeData {
     private var _products: ArrayList<Product>? = null

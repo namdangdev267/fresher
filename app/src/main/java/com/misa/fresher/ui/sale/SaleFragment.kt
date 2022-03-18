@@ -20,22 +20,16 @@ import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.DialogBottomSheetBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.global.FakeData
-import com.misa.fresher.models.product.*
+import com.misa.fresher.data.model.product.*
 import com.misa.fresher.utils.*
 import kotlinx.coroutines.*
 
-class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate) {
+class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate), SaleContract.View {
 
-    private var _bottomSheetDialog: BottomSheetDialog? = null
-    private var _bottomSheetDialogBinding: DialogBottomSheetBinding? = null
+    private val bottomSheetDialog by lazy { BottomSheetDialog(requireContext()) }
+    private val bottomSheetDialogBinding by lazy { DialogBottomSheetBinding.inflate(layoutInflater) }
 
-    private val bottomSheetDialog get() = _bottomSheetDialog!!
-    private val bottomSheetDialogBinding get() = _bottomSheetDialogBinding!!
-
-    private var totalItems = FakeData.products
-    private var filteredItems = totalItems
-    private var displayedItems = filteredItems
-    private var selectedItems = arrayListOf<Product>()
+    private var presenter: SalePresenter? = null
 
     object FilterConfig {
         var viewMode = Enums.Product.MODEL
@@ -43,111 +37,27 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     }
 
     override fun initUI() {
-        initListProductRecViewUI()
+        initPresenter()
+        initToolbarUI()
+        initProductRecViewUI()
         initBottomSheetDialogUI()
         initSaleFilterDrawerUI()
+
+        binding.clearBtn.setOnClickListener { presenter?.clearSelectedProducts() }
+        binding.numberBtn.setOnClickListener { presenter?.checkSelectedProducts() }
+        binding.priceBtn.setOnClickListener { presenter?.checkSelectedProducts() }
     }
 
     override fun updateUI() {
         super.updateUI()
-        updateProductSelectedUI()
+        presenter?.getSelectedProductStatistic()
     }
 
-    override fun initListener() {
-        initToolbarListener()
-        initBottomButtonListener()
-        initBottomSheetDialogListener()
-        initSaleFilterDrawerListener()
+    override fun initPresenter() {
+        presenter = SalePresenter().also { it.attach(this) }
     }
 
-
-    private fun initSaleFilterDrawerUI() {
-        val drawerLayout = binding.root
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.END)
-        drawerLayout.setScrimColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
-
-        val categories = arrayListOf("all")
-        val colors = arrayListOf("all")
-        val sizes = arrayListOf("all")
-        totalItems.forEach { p ->
-            categories.add(p.category)
-            p.items.forEach { item ->
-                colors.add(item.color)
-                sizes.add(item.size)
-            }
-        }
-
-        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, categories.distinct())
-        categoryAdapter.setDropDownViewResource(R.layout.item_spinner_item)
-
-        val colorAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, colors.distinct())
-        colorAdapter.setDropDownViewResource(R.layout.item_spinner_item)
-
-        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, sizes.distinct())
-        sizeAdapter.setDropDownViewResource(R.layout.item_spinner_item)
-
-        binding.drawerSaleFilter.run {
-            spinnerCategory.adapter = categoryAdapter
-            spinnerColor.adapter = colorAdapter
-            spinnerSize.adapter = sizeAdapter
-        }
-    }
-
-    private fun initBottomSheetDialogUI() {
-        context?.let { ct ->
-            _bottomSheetDialog = BottomSheetDialog(ct)
-            _bottomSheetDialogBinding = DialogBottomSheetBinding.inflate(layoutInflater)
-
-            bottomSheetDialog.setContentView(bottomSheetDialogBinding.root)
-
-            bottomSheetDialogBinding.run {
-                colorRecView.layoutManager = LinearLayoutManager(ct, LinearLayoutManager.HORIZONTAL, false)
-                sizeRecView.layoutManager = LinearLayoutManager(ct, LinearLayoutManager.HORIZONTAL, false)
-                unitRecView.layoutManager = LinearLayoutManager(ct, LinearLayoutManager.HORIZONTAL, false)
-            }
-        }
-    }
-
-    private fun initListProductRecViewUI() {
-        binding.listProductRecView.adapter = SaleProductAdapter(displayedItems, showBottomSheetDialog)
-        binding.listProductRecView.layoutManager = LinearLayoutManager(context)
-    }
-
-    private fun updateProductSelectedUI() {
-        val itemAmount = selectedItems.sumOf { it.amount }
-        val totalPrice = "Total ${selectedItems.sumOf { it.price }}"
-        binding.apply {
-            numberBtn.text = itemAmount.toString()
-            if (itemAmount > 0) {
-                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left_violet)
-                numberBtn.setTextColor(getColor(context, R.color.white))
-
-                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right_violet)
-                priceBtn.text = totalPrice
-                priceBtn.setTextColor(getColor(context, R.color.white))
-
-                clearBtn.isActive = true
-            } else {
-                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left)
-                numberBtn.setTextColor(getColor(context, R.color.black))
-
-                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right)
-                priceBtn.text = getString(R.string.btn_product_selected)
-                priceBtn.setTextColor(getColor(context, R.color.black))
-
-                clearBtn.isActive = false
-            }
-        }
-    }
-
-    private fun updateProductListUI() {
-        (binding.listProductRecView.adapter as SaleProductAdapter).run {
-            items = displayedItems
-            notifyDataSetChanged()
-        }
-    }
-
-    private fun initToolbarListener() {
+    private fun initToolbarUI() {
         binding.toggleDrawerBtn.setOnClickListener { (activity as MainActivity).toggleDrawer() }
         binding.filterBtn.setOnClickListener { binding.root.openDrawer(GravityCompat.END) }
 
@@ -161,8 +71,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
                     binding.progressBar.visibility = View.VISIBLE
                     binding.listProductRecView.visibility = View.GONE
                     delay(300)
-                    productSaleSearch()
-                    updateProductListUI()
+                    presenter?.searchProducts(txtSearch)
                     binding.progressBar.visibility = View.GONE
                     binding.listProductRecView.visibility = View.VISIBLE
                 }
@@ -170,133 +79,50 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         }
     }
 
-    private fun initBottomButtonListener() {
-        binding.clearBtn.setOnClickListener {
-            selectedItems = arrayListOf()
-            updateProductSelectedUI()
-        }
-        val navToBillFragment: (View) -> Unit = {
-            if (selectedItems.size > 0) {
-                findNavController().navigate(
-                    R.id.action_fragment_sale_to_fragment_bill, bundleOf(BUNDLE_SELECTED_ITEMS to selectedItems)
-                )
-            }
-        }
-        binding.numberBtn.setOnClickListener(navToBillFragment)
-        binding.priceBtn.setOnClickListener(navToBillFragment)
+    private fun initProductRecViewUI() {
+        binding.listProductRecView.adapter = SaleProductAdapter(arrayListOf(), showBottomSheetDialog)
+        presenter?.getDisplayProducts()
     }
 
-    private fun initBottomSheetDialogListener() {
+    private fun initBottomSheetDialogUI() {
+        bottomSheetDialog.setContentView(bottomSheetDialogBinding.root)
         bottomSheetDialogBinding.itemSaleProductView.run {
             binding.btnAdd.setOnClickListener { product.amount += 1 }
             binding.btnMinus.setOnClickListener {
-                if (product.amount == 1) {
-                    val toast = Toast.makeText(
-                        context, "Quantity must be more than 0. Please check again.", Toast.LENGTH_LONG
-                    )
-                    toast.setGravity(Gravity.TOP, 0, 120)
-                    toast.show()
-                } else product.amount -= 1
+                if (product.amount == 1) context.showToast("Quantity must be more than 0. Please check again.")
+                else product.amount -= 1
             }
         }
     }
 
-    private fun initSaleFilterDrawerListener() {
-        binding.drawerSaleFilter.run {
-            btnModel.setOnClickListener {
-                FilterConfig.viewMode = Enums.Product.MODEL
-                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_violet)
-                btnModel.setTextColor(getColor(context, R.color.white))
-                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
-                btnItem.setTextColor(getColor(context, R.color.purpleDark))
-            }
-            btnItem.setOnClickListener {
-                FilterConfig.viewMode = Enums.Product.ITEM
-                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_violet)
-                btnItem.setTextColor(getColor(context, R.color.white))
-                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
-                btnModel.setTextColor(getColor(context, R.color.purpleDark))
-            }
-            btnClear.setOnClickListener {
-                spinnerCategory.setSelection(0)
-                radioSortBy.clearCheck()
-                spinnerColor.setSelection(0)
-                spinnerSize.setSelection(0)
-            }
+    private fun initSaleFilterDrawerUI() {
+        presenter?.getFilterOptions()
+    }
 
-            btnDone.setOnClickListener {
-                CoroutineScope(Dispatchers.Main).launch {
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.listProductRecView.visibility = View.GONE
-                    delay(300)
-                    productSaleFilter()
-                    productSaleSearch()
-                    updateProductListUI()
-                    binding.progressBar.visibility = View.GONE
-                    binding.listProductRecView.visibility = View.VISIBLE
-                }
-                binding.root.closeDrawer(GravityCompat.END)
-            }
+    /**
+     * - method purpose: update list product of recycle view after search or filter
+     *
+     * @author HTLong
+     * @edit_at 2022-03-18
+     */
+    override fun updateProductRecViewUI(products: ArrayList<Product>) {
+        (binding.listProductRecView.adapter as SaleProductAdapter).run {
+            items = products
+            notifyDataSetChanged()
         }
     }
 
-    private suspend fun productSaleSearch() {
-        withContext(Dispatchers.Default) {
-            displayedItems = if (FilterConfig.textSearch == "") filteredItems
-            else filteredItems.filter {
-                it.name.lowercase().contains(FilterConfig.textSearch)
-            }.toArrayList()
-        }
-    }
-
-    private suspend fun productSaleFilter() {
-        withContext(Dispatchers.Default) {
-            binding.drawerSaleFilter.run {
-                val isCheckAvailableQTY = swAvailableQuantity.isChecked
-                val category = spinnerCategory.selectedItem.toString()
-                val viewMode = FilterConfig.viewMode
-                val sortBy = radioSortBy.checkedRadioButtonId
-                val color = spinnerColor.selectedItem.toString()
-                val size = spinnerSize.selectedItem.toString()
-
-                if (viewMode == Enums.Product.MODEL) {
-                    filteredItems = totalItems
-                    if (category != "all") filteredItems = filteredItems.filter {
-                        it.category == category
-                    }.toArrayList()
-                    if (color != "all") filteredItems = filteredItems.filter { prod ->
-                        prod.items.map { it.color }.contains(color)
-                    }.toArrayList()
-                    if (size != "all") filteredItems = filteredItems.filter { prod ->
-                        prod.items.map { it.size }.contains(size)
-                    }.toArrayList()
-                    if (isCheckAvailableQTY) filteredItems = filteredItems.filter {
-                        it.quantity > 0
-                    }.toArrayList()
-
-                } else if (viewMode == Enums.Product.ITEM) {
-                    filteredItems = arrayListOf()
-                    for (product in totalItems) {
-                        if (category != "all" && product.category != category) continue
-                        for (item in product.items) {
-                            if ((color == "all" || item.color == color) && (size == "all" || item.size == size) && (!isCheckAvailableQTY || item.quantity > 0)) {
-                                filteredItems.add(product.copy(items = arrayListOf(item)))
-                            }
-                        }
-                    }
-                }
-
-                if (sortBy == R.id.sort_by_name) filteredItems.sortBy { it.name }
-                else if (sortBy == R.id.sort_by_date) filteredItems.sortBy { it.date }
-            }
-        }
+    override fun navToBillFragment(products: ArrayList<Product>) {
+        findNavController().navigate(
+            R.id.action_fragment_sale_to_fragment_bill, bundleOf(BUNDLE_SELECTED_ITEMS to products)
+        )
     }
 
     private val showBottomSheetDialog: (prod: Product, pos: Int) -> Unit = { prod, _ ->
         val copyProd = prod.copy(amount = 1, image = 0)
         val checkedIndex = if (prod.items.size == 1) 0 else -1
 
-        bottomSheetDialogBinding.run {2
+        bottomSheetDialogBinding.run {
             itemSaleProductView.run {
                 product = copyProd
                 binding.btnAdd.setOnClickListener { amount += 1 }
@@ -360,36 +186,118 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             }
         }
         bottomSheetDialog.setOnDismissListener {
-            bottomSheetDialogBinding.run {
-                val curColor = itemSaleProductView.color
-                val curSize = itemSaleProductView.size
-
-                if (curColor != null && curSize != null) {
-                    val curProd = itemSaleProductView.product.copy(items = itemSaleProductView.items.toArrayList())
-                    try {
-                        var selectedItem: Product? = null
-                        val isSplitRow = binding.splitRowSwitch.isChecked
-                        if (!isSplitRow) {
-                            selectedItem = selectedItems.find {
-                                it.name == curProd.name && it.code == curProd.code && it.items == curProd.items
-                            }
-                        }
-
-                        if (selectedItem != null) selectedItem.amount += curProd.amount
-                        else selectedItems.add(curProd)
-
-                        Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
-                        updateProductSelectedUI()
-                    } catch (e: Exception) {
-                        Toast.makeText(context, "FAIL", Toast.LENGTH_SHORT).show()
-                    }
+            val isSplit = binding.splitRowSwitch.isChecked
+            bottomSheetDialogBinding.itemSaleProductView.run {
+                if (color != null && size != null) {
+                    presenter?.selectProduct(isSplit, product.copy(items = items.toArrayList()))
                 }
             }
         }
         bottomSheetDialog.show()
     }
 
+    /**
+     * - method's purpose: update total quantity, price ui of selected products
+     *
+     * @author HTLong
+     * @edit_at 2022-03-18
+     */
+    override fun updateProductSelectedUI(totalAmount: Int, totalPrice: Double) {
+        binding.apply {
+            numberBtn.text = totalAmount.toString()
+            if (totalAmount > 0) {
+                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left_violet)
+                numberBtn.setTextColor(getColor(context, R.color.white))
+
+                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right_violet)
+                priceBtn.text = "Total $totalPrice"
+                priceBtn.setTextColor(getColor(context, R.color.white))
+
+                clearBtn.isActive = true
+            } else {
+                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left)
+                numberBtn.setTextColor(getColor(context, R.color.black))
+
+                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right)
+                priceBtn.text = getString(R.string.btn_product_selected)
+                priceBtn.setTextColor(getColor(context, R.color.black))
+
+                clearBtn.isActive = false
+            }
+        }
+    }
+
+    override fun updateSaleFilterDrawerUI(colors: List<String>, sizes: List<String>, categories: List<String>) {
+        val drawerLayout = binding.root
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.END)
+        drawerLayout.setScrimColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
+
+        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, categories.distinct())
+        categoryAdapter.setDropDownViewResource(R.layout.item_spinner_item)
+
+        val colorAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, colors.distinct())
+        colorAdapter.setDropDownViewResource(R.layout.item_spinner_item)
+
+        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, sizes.distinct())
+        sizeAdapter.setDropDownViewResource(R.layout.item_spinner_item)
+
+        binding.drawerSaleFilter.run {
+            spinnerCategory.adapter = categoryAdapter
+            spinnerColor.adapter = colorAdapter
+            spinnerSize.adapter = sizeAdapter
+
+            btnModel.setOnClickListener {
+                FilterConfig.viewMode = Enums.Product.MODEL
+                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnModel.setTextColor(getColor(context, R.color.white))
+                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnItem.setTextColor(getColor(context, R.color.purpleDark))
+            }
+            btnItem.setOnClickListener {
+                FilterConfig.viewMode = Enums.Product.ITEM
+                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnItem.setTextColor(getColor(context, R.color.white))
+                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnModel.setTextColor(getColor(context, R.color.purpleDark))
+            }
+            btnClear.setOnClickListener {
+                spinnerCategory.setSelection(0)
+                radioSortBy.clearCheck()
+                spinnerColor.setSelection(0)
+                spinnerSize.setSelection(0)
+            }
+
+            btnDone.setOnClickListener {
+                CoroutineScope(Dispatchers.Main).launch {
+                    val isCheckQTY = swAvailableQuantity.isChecked
+                    val category = spinnerCategory.selectedItem.toString()
+                    val viewMode = FilterConfig.viewMode
+                    val sortBy = when (radioSortBy.checkedRadioButtonId) {
+                        R.id.sort_by_name -> "name"
+                        else -> "date"
+                    }
+                    val color = spinnerColor.selectedItem.toString()
+                    val size = spinnerSize.selectedItem.toString()
+                    val txtSearch = FilterConfig.textSearch
+
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.listProductRecView.visibility = View.GONE
+                    delay(300)
+                    presenter?.filterProducts(isCheckQTY, category, viewMode, sortBy, color, size, txtSearch)
+                    binding.progressBar.visibility = View.GONE
+                    binding.listProductRecView.visibility = View.VISIBLE
+                }
+                binding.root.closeDrawer(GravityCompat.END)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter?.detach()
+    }
+
     companion object {
-        const val  BUNDLE_SELECTED_ITEMS = "selected_items"
+        const val BUNDLE_SELECTED_ITEMS = "selected_items"
     }
 }

@@ -1,4 +1,4 @@
-package com.misa.fresher.models
+package com.misa.fresher.data.model
 
 import com.misa.fresher.utils.Enums
 
