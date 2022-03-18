@@ -53,9 +53,9 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
                 (activity as MainActivity).tempCustomer =
                     FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
                 (activity as MainActivity).tempCustomer?.let {
-                    adapter?.updateData(0, it.name)
-                    adapter?.updateData(1, it.tel)
-                    adapter?.updateData(2, it.address)
+                    adapter?.updateData(ROW_CUSTOMER_NAME, it.name)
+                    adapter?.updateData(ROW_CUSTOMER_TEL, it.tel)
+                    adapter?.updateData(ROW_CUSTOMER_ADDRESS, it.address)
                 }
             },
             TapInsertInputModel("Số điện thoại", true,
@@ -117,12 +117,18 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
     fun collectData(): Customer? {
         var customer: Customer? = null
         guard(
-            adapter?.collectData(0),
-            adapter?.collectData(1),
-            adapter?.collectData(2)
+            adapter?.collectData(ROW_CUSTOMER_NAME),
+            adapter?.collectData(ROW_CUSTOMER_TEL),
+            adapter?.collectData(ROW_CUSTOMER_ADDRESS)
         ) { name, tel, address ->
             customer = Customer(0L, name as String, tel as String, address as String)
         }
         return customer
+    }
+
+    companion object {
+        const val ROW_CUSTOMER_NAME = 0
+        const val ROW_CUSTOMER_TEL = 1
+        const val ROW_CUSTOMER_ADDRESS = 2
     }
 }
