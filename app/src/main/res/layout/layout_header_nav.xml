@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,36 +17,38 @@
             android:id="@+id/imgAvatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:background="@color/white"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="@string/todo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/imgAvatar">
+            android:layout_toEndOf="@id/imgAvatar">
 
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nam Dang"
+                android:text="@string/nam_dang"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dp_25"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
 
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvName"
-                android:text="namfashionhn"
+                android:text="@string/namfashionhn"
                 android:textColor="@color/white"
-                android:textSize="@dimen/textSize_18" />
+                android:textSize="@dimen/textSize_18"
+                tools:ignore="SpUsage" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -53,7 +56,7 @@
     <RelativeLayout
         android:id="@+id/relative_Contact"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="@dimen/dp_45"
         android:layout_below="@id/relativeMain"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="11dp"
@@ -64,11 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_20"
             android:layout_centerInParent="true"
-            android:drawableStart="@drawable/ic_baseline_call_24"
             android:text="Support: 1900 8677"
             android:textAllCaps="false"
+            android:drawablePadding="@dimen/dp_8"
             android:textColor="@color/white"
-            android:textSize="@dimen/textSize_18" />
+            android:textSize="@dimen/textSize_18"
+            app:drawableStartCompat="@drawable/ic_baseline_call_24"
+            tools:ignore="HardcodedText,SpUsage" />
 
     </RelativeLayout>
 
