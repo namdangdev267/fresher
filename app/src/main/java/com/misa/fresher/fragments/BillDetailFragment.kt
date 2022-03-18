@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -54,6 +55,23 @@ class BillDetailFragment : Fragment() {
         navigaEvent(view)
         updateReceiver(view)
         setCustomer(view)
+        deleteCustomer(view)
+    }
+    /**
+    * Delete Customer
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
+    private fun deleteCustomer(view: View) {
+        val ivCancel = view.findViewById<ImageView>(R.id.ivCancelBillDetail)
+        val tvCustomer = view.findViewById<TextView>(R.id.tvContactBillsDetail)
+        ivCancel.setOnClickListener {
+            customerViewModel.deleteCustomer()
+            ivCancel.isVisible=false
+            tvCustomer.hint = "Tên khách hàng, số điện thoại"
+            tvCustomer.text = ""
+            tvCustomer.isSelected=false
+        }
     }
 
     /**
@@ -71,11 +89,16 @@ class BillDetailFragment : Fragment() {
      * @date : 3/18/2022
      **/
     private fun updateReceiver(view: View) {
+        val tvCustomer = view.findViewById<TextView>(R.id.tvContactBillsDetail)
+        val ivCancel = view.findViewById<ImageView>(R.id.ivCancelBillDetail)
+        tvCustomer.isSelected=true
         customerViewModel.customer.observe(viewLifecycleOwner, Observer {
-            val cus = view.findViewById<TextView>(R.id.tvContactBillsDetail)
-            cus.text = it.name + "(" + it.number + ")"
-            cus.isSelected = true
-            bill.customer = it
+            if(it!=null){
+                tvCustomer.text = it.name + "(" + it.number + ")"
+                tvCustomer.isSelected = true
+                bill.customer = it
+                ivCancel.isVisible=true
+            }
         })
 
     }

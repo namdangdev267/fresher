@@ -20,9 +20,9 @@
             android:id="@+id/ivContact"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:layout_weight="1"
             android:src="@drawable/ic_user"
             tools:ignore="ContentDescription" />
 
@@ -39,7 +39,17 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/ivCancelSale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:src="@drawable/ic_cancel"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/ivCalender"

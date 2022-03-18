@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
@@ -63,17 +64,41 @@ class SaleFragment : Fragment() {
         resetEvent(view)
         navigateEvent(view)
         setCustomer(view)
+        deleteCustomer(view)
     }
+    /**
+    * Delete Customer
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
+    private fun deleteCustomer(view: View) {
+        val ivCancel = view.findViewById<ImageView>(R.id.ivCancelSale)
+        val tvCustomer = view.findViewById<TextView>(R.id.tvContact)
+        ivCancel.setOnClickListener {
+            customerViewModel.deleteCustomer()
+            ivCancel.isVisible=false
+            tvCustomer.hint = "Tên khách hàng, số điện thoại"
+            tvCustomer.text = ""
+            tvCustomer.isSelected=false
+        }
+    }
+
     /**
     * Cập nhật khách hàng
     * @Auther : NTBao
     * @date : 3/18/2022
     **/
     private fun updateReceiver(view: View) {
+        val ivCancel = view.findViewById<ImageView>(R.id.ivCancelSale)
+        val tvCustomer = view.findViewById<TextView>(R.id.tvContact)
         customerViewModel.customer.observe(viewLifecycleOwner, Observer {
-            val cus = view.findViewById<TextView>(R.id.tvContact)
-            cus.text = it.name + "(" + it.number + ")"
-            cus.isSelected = true
+            if(it==null){
+                ivCancel.isVisible=false
+            }else{
+                ivCancel.isVisible=true
+                tvCustomer.text = it?.name + "(" + it?.number + ")"
+                tvCustomer.isSelected = true
+            }
         })
     }
 
@@ -85,17 +110,20 @@ class SaleFragment : Fragment() {
     private fun setCustomer(view: View) {
         val tvCus = view.findViewById<TextView>(R.id.tvContact)
         val ivCus = view.findViewById<ImageView>(R.id.ivContact)
+        val ivCancel = view.findViewById<ImageView>(R.id.ivCancelSale)
         tvCus.setOnClickListener {
             cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
             tvCus.text = "${cus?.name} (${cus?.number})"
             tvCus.isSelected = true
             customerViewModel.addCustomer(cus!!)
+            ivCancel.isVisible=true
         }
         ivCus.setOnClickListener {
             cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
             tvCus.text = "${cus?.name} (${cus?.number})"
             tvCus.isSelected = true
             customerViewModel.addCustomer(cus!!)
+            ivCancel.isVisible=true
         }
     }
 
