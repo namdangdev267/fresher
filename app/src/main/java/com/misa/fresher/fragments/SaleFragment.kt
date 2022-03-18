@@ -109,19 +109,19 @@ class SaleFragment : Fragment() {
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlSaleFilter)
         mDrawer.setScrimColor(Color.TRANSPARENT)
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        view.findViewById<ImageButton>(R.id.btnFilter)?.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnFilter).setOnClickListener {
             mDrawer.openDrawer(Gravity.RIGHT)
         }
         val btnSave = view.findViewById<Button>(R.id.btnFilterSave)
         val btnClear = view.findViewById<Button>(R.id.btnFilterClear)
         btnSave.setOnClickListener {
             filterItems(getFilter(view))
-            mDrawer?.closeDrawer(Gravity.RIGHT)
+            mDrawer.closeDrawer(Gravity.RIGHT)
         }
         btnClear.setOnClickListener {
-            view.findViewById<Spinner>(R.id.spnColor)?.setSelection(0)
-            view.findViewById<Spinner>(R.id.spnSize)?.setSelection(0)
-            view.findViewById<RadioButton>(R.id.rb_name)?.isChecked = true
+            view.findViewById<Spinner>(R.id.spnColor).setSelection(0)
+            view.findViewById<Spinner>(R.id.spnSize).setSelection(0)
+            view.findViewById<RadioButton>(R.id.rb_name).isChecked = true
         }
     }
 
@@ -133,7 +133,7 @@ class SaleFragment : Fragment() {
     private fun getFilter(view: View): FilterProducts {
         val radioGroup = view.findViewById<RadioGroup>(R.id.rg_sorting)
         val selected = radioGroup.checkedRadioButtonId
-        val radioButtonText = selected.let { view.findViewById<RadioButton>(it)?.text }
+        val radioButtonText = selected.let { view.findViewById<RadioButton>(it).text }
         val mColorSpinner = view.findViewById<Spinner>(R.id.spnColor)
         val mSizeSpinner = view.findViewById<Spinner>(R.id.spnSize)
         val colorSelected = mColorSpinner.selectedItem.toString()
@@ -227,7 +227,7 @@ class SaleFragment : Fragment() {
     private fun resetEvent(view: View) {
         val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
         val btnTotalPrice = view.findViewById<Button>(R.id.btnTotalPrice)
-        view.findViewById<ImageButton>(R.id.btnReset)?.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnReset).setOnClickListener {
             productsSelected.clear()
             it.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_base)
@@ -256,7 +256,7 @@ class SaleFragment : Fragment() {
      **/
     private fun searchEvent(view: View) {
         val edSearch = view.findViewById<EditText>(R.id.edSearch)
-        edSearch?.doAfterTextChanged {
+        edSearch.doAfterTextChanged {
             updateList(edSearch.text.toString())
         }
     }
@@ -267,7 +267,7 @@ class SaleFragment : Fragment() {
      * @date : 3/18/2022
      **/
     private fun navigateEvent(view: View) {
-        view.findViewById<Button>(R.id.btnTotalPrice)?.setOnClickListener {
+        view.findViewById<Button>(R.id.btnTotalPrice).setOnClickListener {
             if (productsSelected.size > 0) {
                 findNavController().navigate(
                     R.id.action_nav_sale_to_nav_billDetail,
@@ -276,7 +276,7 @@ class SaleFragment : Fragment() {
                 Log.d("test", cus.toString())
             }
         }
-        view.findViewById<Button>(R.id.btnItemCount)?.setOnClickListener {
+        view.findViewById<Button>(R.id.btnItemCount).setOnClickListener {
             if (productsSelected.size > 0) {
                 findNavController().navigate(
                     R.id.action_nav_sale_to_nav_billDetail,
@@ -335,8 +335,8 @@ class SaleFragment : Fragment() {
             R.layout.bottom_sheet_product,
             view as DrawerLayout, false
         )
-        bottomSheetView?.findViewById<TextView>(R.id.tvProductNameDialog)?.text = products.name
-        bottomSheetView?.findViewById<TextView>(R.id.tvProductIdDialog)?.text = products.id
+        bottomSheetView.findViewById<TextView>(R.id.tvProductNameDialog)?.text = products.name
+        bottomSheetView.findViewById<TextView>(R.id.tvProductIdDialog).text = products.id
         bottomSheetDialog.setContentView(bottomSheetView!!)
         bottomSheetDialog.show()
         changeItemAmount(bottomSheetView)
@@ -360,18 +360,18 @@ class SaleFragment : Fragment() {
         val btnRemove = bottomSheetView.findViewById<ImageView>(R.id.ivRemove)
         val btnAdd = bottomSheetView.findViewById<ImageView>(R.id.ivAdd)
         val tvAmount = bottomSheetView.findViewById<TextView>(R.id.tvProductAmontDialog)
-        amount = tvAmount?.text.toString().toInt()
-        btnRemove?.setOnClickListener {
-            if (tvAmount?.text == "1") {
+        amount = tvAmount.text.toString().toInt()
+        btnRemove.setOnClickListener {
+            if (tvAmount.text == "1") {
                 requireContext().showToast("Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
             } else {
                 amount--
-                tvAmount?.text = "$amount"
+                tvAmount.text = "$amount"
             }
         }
-        btnAdd?.setOnClickListener {
+        btnAdd.setOnClickListener {
             amount++
-            tvAmount?.text = "$amount"
+            tvAmount.text = "$amount"
         }
     }
 
@@ -403,7 +403,7 @@ class SaleFragment : Fragment() {
                         R.drawable.total_price_selected
                     )
             }
-            view.findViewById<ImageButton>(R.id.btnReset)?.background =
+            view.findViewById<ImageButton>(R.id.btnReset).background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button)
         }
     }

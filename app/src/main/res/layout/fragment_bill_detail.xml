@@ -91,7 +91,9 @@
         <ImageView
             android:id="@+id/ivCalender"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:src="@drawable/ic_price_policy"
             tools:ignore="ContentDescription" />
@@ -123,6 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/llBillDetailContactCalender">
 
         <ImageButton
+            android:id="@+id/ivBuyMore"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -152,6 +155,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvListItem"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_8"
         android:layout_height="0dp"
         android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/llTotalprice"

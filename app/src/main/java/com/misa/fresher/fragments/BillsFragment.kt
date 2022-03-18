@@ -88,7 +88,6 @@ class BillsFragment : Fragment() {
         viewModel.listBill.observe(viewLifecycleOwner, Observer {
             adapter.mBills = it
             total.text = it.size.toString()
-            Log.d("test",it[0].date.toString())
         })
         adapter.notifyDataSetChanged()
         totalPrice.text = viewModel.getTotalPrice().toString()

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -23,13 +24,12 @@ import com.misa.fresher.viewModel.ShipInforViewModel
  * @date : 3/18/2022
  **/
 class ShipInforFragment : Fragment() {
-    private var viewModel: ShipInforViewModel? = null
+    private val viewModel: ShipInforViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(ShipInforViewModel::class.java)
         return inflater.inflate(R.layout.fragment_ship_infor, container, false)
     }
 
@@ -76,7 +76,7 @@ class ShipInforFragment : Fragment() {
         ViewAdapter.addFragment(ShipFragment(), "Giao hàng")
         ViewAdapter.addFragment(PackageFragment(), "Gói Hàng")
         val viewPager = view.findViewById<ViewPager2>(R.id.viewPage2)
-        viewPager?.adapter = ViewAdapter
+        viewPager.adapter = ViewAdapter
         val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = ViewAdapter.getFragmentTittle(position)

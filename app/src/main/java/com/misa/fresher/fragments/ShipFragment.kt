@@ -34,7 +34,7 @@ class ShipFragment : Fragment() {
     }
 
     /**
-     * config recycler view
+     * config recycler view, chưa xử lý call back
      * @Auther : NTBao
      * @date : 3/18/2022
      **/

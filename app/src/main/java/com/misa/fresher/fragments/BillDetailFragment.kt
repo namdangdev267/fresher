@@ -93,12 +93,12 @@ class BillDetailFragment : Fragment() {
                     selectedPro.amonut = it.amonut
                 }
             }
-            rcv?.adapter?.notifyDataSetChanged()
+            rcv.adapter?.notifyDataSetChanged()
             configListSelectedItem(view)
 
         }
-        rcv?.adapter = adpter
-        rcv?.layoutManager = LinearLayoutManager(requireContext())
+        rcv.adapter = adpter
+        rcv.layoutManager = LinearLayoutManager(requireContext())
     }
 
     /**
@@ -109,8 +109,8 @@ class BillDetailFragment : Fragment() {
     private fun configListSelectedItem(view: View) {
         val amount = listFromSale.sumOf { it.amonut }
         val totalPrice = listFromSale.sumOf { it.amonut * it.product.price }
-        view.findViewById<Button>(R.id.btnAmountBills)?.text = amount.toString()
-        view.findViewById<TextView>(R.id.tvTotalPrice_bill)?.text = totalPrice.toString()
+        view.findViewById<Button>(R.id.btnAmountBills).text = amount.toString()
+        view.findViewById<TextView>(R.id.tvTotalPrice_bill).text = totalPrice.toString()
     }
 
     /**
@@ -131,13 +131,16 @@ class BillDetailFragment : Fragment() {
      * @date : 3/18/2022
      **/
     private fun navigaEvent(view: View) {
-        view.findViewById<ImageButton>(R.id.ivShipInfor)?.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.ivShipInfor).setOnClickListener {
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_shipInfor)
         }
-        view.findViewById<ImageButton>(R.id.btnBack)?.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             activity?.onBackPressed()
         }
-        view.findViewById<TextView>(R.id.tvBuyMore)?.setOnClickListener {
+        view.findViewById<TextView>(R.id.tvBuyMore).setOnClickListener {
+            activity?.onBackPressed()
+        }
+        view.findViewById<ImageView>(R.id.ivBuyMore).setOnClickListener {
             activity?.onBackPressed()
         }
         view.findViewById<Button>(R.id.btnTotalPriceBill).setOnClickListener {
@@ -147,11 +150,12 @@ class BillDetailFragment : Fragment() {
             requireContext().showToast("Thanh toán thành công")
         }
     }
+
     /**
-    * Lấy random 1 khách hàng trong list
-    * @Auther : NTBao
-    * @date : 3/18/2022
-    **/
+     * Lấy random 1 khách hàng trong list
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun setCustomer(view: View) {
         val tvCus = view.findViewById<TextView>(R.id.tvContactBillsDetail)
         val ivCus = view.findViewById<ImageView>(R.id.ivContactBillDetail)
@@ -168,6 +172,7 @@ class BillDetailFragment : Fragment() {
             customerViewModel.addCustomer(cus!!)
         }
     }
+
     companion object {
         const val SELECTED_ITEMS = "items"
     }
