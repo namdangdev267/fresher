@@ -251,7 +251,7 @@ class SaleFragment : Fragment() {
                 binding.ivRefresh.background = this.context?.getDrawable(R.drawable.bg_circle_dark)
                 binding.tvTotalPrice.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
                 binding.tvQuantityItemSelected.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
-                binding.tvTotalPrice.text = sharedViewModel.getTotalPrice().toString()
+                binding.tvTotalPrice.text = "Total "+sharedViewModel.getTotalPrice().toString()
             } else {
                 binding.tvQuantityItemSelected.background =
                     this.context?.getDrawable(R.drawable.bg_rounded_left)

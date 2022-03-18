@@ -35,11 +35,10 @@ class SaleViewModel : ViewModel() {
     }
 
     private fun fakeData() {
-
         for (i in 1..20) {
             listItemProduct.add(
                 ItemProduct(
-                    i.toString() + "trouser" + i, (i * 1.01).toFloat(), i.toString() + "AA",
+                    i.toString() + "trouser" + i, (i * 10).toFloat(), i.toString() + "AA",
                     Color.RED, Category.TROUSER, i, "5/10/2011"
                 )
             )
@@ -48,7 +47,7 @@ class SaleViewModel : ViewModel() {
         for (i in 1..20) {
             listItemProduct.add(
                 ItemProduct(
-                    i.toString() + "shirt" + i, (i * 1.01).toFloat(), i.toString() + "AA",
+                    i.toString() + "shirt" + i, (i * 10).toFloat(), i.toString() + "AA",
                     Color.YELLOW, Category.SHIRT, i, "11/11/2011"
                 )
             )
@@ -57,8 +56,6 @@ class SaleViewModel : ViewModel() {
         listItemProduct = listItemProduct.sortedWith { p1, p2 ->
             Collator.getInstance().compare(p1.name, p2.name)
         } as MutableList<ItemProduct>
-
-
     }
 
     /**

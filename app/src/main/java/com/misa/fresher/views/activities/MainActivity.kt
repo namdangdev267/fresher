@@ -26,10 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-
         configDrawer()
-
-
     }
 
     override fun onBackPressed() {
