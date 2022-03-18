@@ -15,11 +15,12 @@ import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentPaymentBinding
+import kotlinx.android.synthetic.main.payment_context.view.*
 
 class PaymentFragment: Fragment() {
-    lateinit var binding: FragmentPaymentBinding
-    lateinit var sharedViewModel: PublicViewModel
-    lateinit var paymentViewModel: PaymentViewModel
+    var binding: FragmentPaymentBinding? = null
+    var sharedViewModel: PublicViewModel? = null
+    var paymentViewModel: PaymentViewModel? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,7 +32,7 @@ class PaymentFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPaymentBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     private fun initViewModel() {
@@ -46,56 +47,54 @@ class PaymentFragment: Fragment() {
         transitionFragment(view)
         configToolbar()
         configureListView()
-        configureGetPayment()
-    }
-
-    private fun configureGetPayment() {
-        binding.linearQuantity.setOnClickListener {
-
-        }
+        configureOtherView(view)
     }
 
     private fun configToolbar() {
-        binding.tvCodePayment.text = sharedViewModel.billHandling.value?.id
+        binding!!.tvCodePayment.text = sharedViewModel!!.billHandling.value?.id
     }
 
     private fun transitionFragment(view: View) {
-        binding.imgBackMain.setOnClickListener {
+        binding?.imgBackMain?.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        binding.btnBuyMore.setOnClickListener {
+        binding?.root?.btnBuyMore?.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        binding.btnGoToShipFragment.setOnClickListener {
+        binding?.root?.btnGoToShipFragment?.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_payment_to_fragment_ship)
         }
 
-        binding.linearQuantity.setOnClickListener {
-            sharedViewModel.addBillToListBill()
+        binding?.root?.linearQuantity?.setOnClickListener {
+            sharedViewModel?.addBillToListBill()
         }
     }
 
-    private fun configureListView() {
-        binding.rcvPackage.layoutManager = LinearLayoutManager(this.context)
+    private fun configureOtherView(view: View) {
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
-            binding.rcvPackage.adapter =
+    }
+
+    private fun configureListView() {
+        binding?.root?.rcvPackage?.layoutManager = LinearLayoutManager(this.context)
+
+        sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
+            binding?.root?.rcvPackage?.adapter =
                 PaymentAdapter(it, { it -> clickItemBillDetail(it) })
-            binding.tvCountPackage.text =
-                sharedViewModel.listItemSelected.value?.size.toString()
-            binding.tvMoneyReceivable.text = sharedViewModel.getTotalPrice().toString()
+            binding!!.root.tvCountPackage.text =
+                sharedViewModel!!.listItemSelected.value?.size.toString()
+            binding!!.root.tvMoneyReceivable.text = sharedViewModel!!.getTotalPrice().toString()
         })
     }
 
     fun clickItemBillDetail(itemBillDetail: PackageProduct) {
-        if (itemBillDetail.countPackage == 1) {
+        if (itemBillDetail.countPackage < 1) {
             Toast.makeText(requireContext(), "Quantity must be more than 0. Please check again",
                 Toast.LENGTH_SHORT
             ).show()
         }
-        sharedViewModel.updateQuantityOfItemBillDetail(itemBillDetail)
+        sharedViewModel?.updateQuantityOfItemBillDetail(itemBillDetail)
 
     }
 
