@@ -1,5 +1,6 @@
 package com.misa.fresher.Fragment.Payment
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class PaymentAdapter(
 
     class ViewHolder(itemView: View, val listener: (itemBillDetail: PackageProduct) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("SetTextI18n")
         fun bind(itemBillDetail: PackageProduct) {
             itemView.findViewById<TextView>(R.id.tvPriceProduct).text = itemBillDetail.getPrice().toString()
             itemView.findViewById<TextView>(R.id.tvCountProduct).text =

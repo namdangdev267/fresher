@@ -1,5 +1,6 @@
 package com.misa.fresher.Fragment.Payment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.misa.fresher.CustomView.ToastCustom
 import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
@@ -22,10 +24,14 @@ class PaymentFragment: Fragment() {
     private var sharedViewModel: PublicViewModel? = null
     private var paymentViewModel: PaymentViewModel? = null
 
+    private val chcek: FragmentPaymentBinding by lazy { getInflater(layoutInflater) }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         initViewModel()
     }
+
+    val getInflater: (LayoutInflater) -> FragmentPaymentBinding get() = FragmentPaymentBinding::inflate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +53,16 @@ class PaymentFragment: Fragment() {
         transitionFragment(view)
         configToolbar()
         configureListView()
+        configureOtherView(view)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun configureOtherView(view: View) {
+        sharedViewModel?.inforShip?.observe(viewLifecycleOwner, Observer {
+            if (it.receiver != null && it.tel != null) {
+                binding!!.root.etCustomer.text = it.receiver.toString() + " _ " + it.tel.toString()
+            }
+        })
     }
 
     private fun configToolbar() {
@@ -68,15 +84,21 @@ class PaymentFragment: Fragment() {
 
         binding?.root?.linearQuantity?.setOnClickListener {
             sharedViewModel?.addBillToListBill()
+
+            ToastCustom.makeToast(requireContext(), "Paid Successfully", Toast.LENGTH_LONG).show()
+
+//            findNavController().navigate(R.id.action_fragment_payment_to_fragment_list_bill)
+
+            activity?.onBackPressed()
         }
     }
 
     private fun configureListView() {
         binding?.root?.rcvPackage?.layoutManager = LinearLayoutManager(this.context)
 
-        sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
+        sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer { it ->
             binding?.root?.rcvPackage?.adapter =
-                PaymentAdapter(it) { it -> clickItemBillDetail(it) }
+                PaymentAdapter(it) { clickItemBillDetail(it) }
             binding!!.root.tvCountPackage.text =
                 sharedViewModel!!.getCount().toString()
             binding!!.root.tvMoneyReceivable.text = sharedViewModel!!.getTotalPrice().toString()
@@ -84,11 +106,6 @@ class PaymentFragment: Fragment() {
     }
 
     private fun clickItemBillDetail(itemBillDetail: PackageProduct) {
-        if (itemBillDetail.countPackage < 1) {
-            Toast.makeText(requireContext(), "Quantity must be more than 0. Please check again",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
         sharedViewModel?.updateQuantityOfItemBillDetail(itemBillDetail)
     }
 

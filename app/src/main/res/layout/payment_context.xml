@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -52,23 +54,26 @@
                         app:layout_constraintBottom_toBottomOf="@id/glNgang3"
                         app:layout_constraintEnd_toEndOf="@id/glDocCach"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/glNgang2">
+                        app:layout_constraintTop_toTopOf="@id/glNgang2"
+                        tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="@dimen/dp_25"
                             android:layout_height="@dimen/dp_25"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/dp_15"
-                            android:src="@drawable/ic_baseline_add_24" />
+                            android:layout_marginStart="@dimen/dp_15"
+                            android:src="@drawable/ic_baseline_add_24"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginStart="@dimen/dp_5"
                             android:gravity="center|left"
                             android:text="@string/buy_more"
                             android:textColor="@color/background"
-                            android:textSize="@dimen/textSize_18" />
+                            android:textSize="@dimen/textSize_18"
+                            tools:ignore="RtlHardcoded,SpUsage" />
 
                     </LinearLayout>
 
@@ -114,11 +119,12 @@
                             android:layout_width="@dimen/dp_25"
                             android:layout_height="@dimen/dp_25"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/dp_15"
-                            android:src="@drawable/ic_baseline_person_24" />
+                            android:layout_marginStart="@dimen/dp_15"
+                            android:src="@drawable/ic_baseline_person_24"
+                            android:contentDescription="@string/todo" />
 
-                        <EditText
-                            android:id="@+id/etSearch"
+                        <TextView
+                            android:id="@+id/etCustomer"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -126,8 +132,11 @@
                             android:background="@null"
                             android:hint="@string/customer_name_phone_number"
                             android:lines="1"
+                            android:gravity="center"
                             android:maxLines="1"
-                            android:textSize="@dimen/dp_14" />
+                            android:textSize="@dimen/dp_14"
+                            android:autofillHints=""
+                            tools:ignore="SpUsage" />
 
                         <RelativeLayout
                             android:id="@+id/relativeKhongChon"
@@ -138,20 +147,22 @@
                                 android:id="@+id/imgKhong"
                                 android:layout_width="@dimen/dp_25"
                                 android:layout_height="@dimen/dp_25"
-                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
                                 android:layout_centerInParent="true"
-                                android:layout_marginRight="@dimen/dp_5"
-                                android:src="@drawable/calendar" />
+                                android:layout_marginEnd="@dimen/dp_5"
+                                android:src="@drawable/calendar"
+                                android:contentDescription="@string/todo" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:layout_marginRight="@dimen/dp_5"
-                                android:layout_toRightOf="@id/imgKhong"
+                                android:layout_marginEnd="@dimen/dp_5"
+                                android:layout_toEndOf="@id/imgKhong"
                                 android:text="@string/none"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dp_15" />
+                                android:textSize="@dimen/dp_15"
+                                tools:ignore="SpUsage" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -185,35 +196,39 @@
                             android:layout_height="@dimen/dp_25"
                             android:src="@drawable/dollar"
                             android:layout_centerInParent="true"
-                            android:layout_alignParentLeft="true"/>
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/receivable"
-                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginStart="@dimen/dp_5"
                             android:textColor="@color/background"
                             android:textSize="@dimen/textSize_18"
                             android:layout_centerInParent="true"
-                            android:layout_toRightOf="@id/imgDollar"/>
+                            android:layout_toEndOf="@id/imgDollar"
+                            tools:ignore="SpUsage" />
 
                         <TextView
                             android:id="@+id/tvMoneyReceivable"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/dp_10"
-                            android:layout_toLeftOf="@id/imgSwitchReceivable"
+                            android:layout_marginEnd="@dimen/dp_10"
+                            android:layout_toStartOf="@id/imgSwitchReceivable"
                             android:textColor="@color/background"
-                            android:textSize="@dimen/textSize_18" />
+                            android:textSize="@dimen/textSize_18"
+                            tools:ignore="RelativeOverlap,SpUsage" />
 
                         <ImageView
                             android:id="@+id/imgSwitchReceivable"
                             android:layout_width="@dimen/dp_20"
                             android:layout_height="@dimen/dp_20"
                             android:layout_centerInParent="true"
-                            android:layout_alignParentRight="true"
-                            android:src="@drawable/angleright"/>
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/angleright"
+                            android:contentDescription="@string/todo" />
 
                     </RelativeLayout>
 
@@ -267,7 +282,8 @@
                             android:layout_height="@dimen/dp_20"
                             android:scaleType="fitCenter"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/truck" />
+                            android:src="@drawable/truck"
+                            android:contentDescription="@string/todo" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -284,7 +300,8 @@
                             android:layout_height="@dimen/dp_20"
                             android:scaleType="fitCenter"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/gift" />
+                            android:src="@drawable/gift"
+                            android:contentDescription="@string/todo" />
                     </RelativeLayout>
 
                     <androidx.constraintlayout.widget.Guideline
@@ -317,12 +334,11 @@
                             android:id="@+id/tvCountPackage"
                             android:layout_width="@dimen/dp_45"
                             android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
                             android:gravity="center"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_18" />
+                            android:textSize="@dimen/textSize_18"
+                            tools:ignore="SpUsage" />
 
                         <View
                             android:layout_width="1.5dp"
@@ -336,7 +352,8 @@
                             android:gravity="center"
                             android:text="@string/get_payment"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_18" />
+                            android:textSize="@dimen/textSize_18"
+                            tools:ignore="SpUsage" />
 
                     </LinearLayout>
 
