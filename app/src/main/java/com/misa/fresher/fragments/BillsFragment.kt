@@ -1,6 +1,7 @@
 package com.misa.fresher.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -87,6 +88,7 @@ class BillsFragment : Fragment() {
         viewModel.listBill.observe(viewLifecycleOwner, Observer {
             adapter.mBills = it
             total.text = it.size.toString()
+            Log.d("test",it[0].date.toString())
         })
         adapter.notifyDataSetChanged()
         totalPrice.text = viewModel.getTotalPrice().toString()
