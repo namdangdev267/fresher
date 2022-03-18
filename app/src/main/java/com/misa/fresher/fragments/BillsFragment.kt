@@ -14,8 +14,10 @@ import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
@@ -43,6 +45,17 @@ class BillsFragment : Fragment() {
         configToolbar(view)
         configRecyclerView(view)
         configSpinner(view)
+        navigationEvent(view)
+    }
+    /**
+    * Chuyển màn hình
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
+    private fun navigationEvent(view: View) {
+        view.findViewById<FloatingActionButton>(R.id.flbCart).setOnClickListener {
+            findNavController().navigate(R.id.action_nav_bills_to_nav_sale)
+        }
     }
 
     /**

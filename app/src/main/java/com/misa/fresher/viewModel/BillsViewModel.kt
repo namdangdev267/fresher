@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.misa.fresher.model.Bill
 import com.misa.fresher.model.Receiver
+import java.util.*
 
 class BillsViewModel:ViewModel() {
     private var _listBill = MutableLiveData<MutableList<Bill>>(mutableListOf())
     val listBill : LiveData<MutableList<Bill>> get() = _listBill
-
+    var billFiltered = _listBill
     fun addBill(bill: Bill){
         _listBill.value?.add(bill)
         _listBill.postValue(_listBill.value)
@@ -23,5 +24,14 @@ class BillsViewModel:ViewModel() {
             }?.toDouble() ?: 0.0
         }
     }
+//    fun filterBill(sortBy : String){
+//        when(sortBy){
+//            "Hôm nay" -> billFiltered.value?.let { Bills ->
+//                for (bill in Bills){
+//                    if(bill.date.)
+//                }
+//            }
+//        }
+//    }
 
 }
