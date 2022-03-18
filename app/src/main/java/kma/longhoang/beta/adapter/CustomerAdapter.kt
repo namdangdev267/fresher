@@ -13,7 +13,10 @@ import kma.longhoang.beta.R
 import kma.longhoang.beta.model.CustomerModel
 import java.util.*
 
-class CustomerAdapter(private val listCustomer: MutableList<CustomerModel>,private val itemClickListener: (customer: CustomerModel) -> Unit) :
+class CustomerAdapter(
+    private val listCustomer: MutableList<CustomerModel>,
+    private val itemClickListener: (customer: CustomerModel) -> Unit
+) :
     RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
     class CustomerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,20 +24,22 @@ class CustomerAdapter(private val listCustomer: MutableList<CustomerModel>,priva
         var tvCustomer: TextView = itemView.findViewById(R.id.tv_customer)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder{
-        return CustomerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_customer, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
+        return CustomerViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_customer, parent, false)
+        )
     }
 
-    override fun getItemCount(): Int {
-        return listCustomer.size
-    }
+    override fun getItemCount() = listCustomer.size
+
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
         val rnd = Random()
         val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
         holder.imgCustomer.setBackgroundColor(color)
-        holder.tvCustomer.text = StringBuilder(listCustomer[position].name).append(" - ").append(listCustomer[position].phone)
+        holder.tvCustomer.text = StringBuilder(listCustomer[position].name).append(" - ")
+            .append(listCustomer[position].phone)
         holder.itemView.setOnClickListener {
             itemClickListener(listCustomer[position])
         }

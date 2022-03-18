@@ -19,10 +19,12 @@ import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
 import kotlin.coroutines.coroutineContext
 
-class ProductAdapter(private var listProduct: MutableList<ProductModel>,val clickItemListener: (products: ProductModel) -> Unit) :
+class ProductAdapter(
+    private var listProduct: MutableList<ProductModel>,
+    val clickItemListener: (products: ProductModel) -> Unit
+) :
     RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
-    private val saleFragment = SaleFragment()
-    private val listProductSearch= listProduct
+
     class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgProduct: ImageView = itemView.findViewById(R.id.img_product)
         var tvProductName: TextView = itemView.findViewById(R.id.tv_product_name)
@@ -46,7 +48,5 @@ class ProductAdapter(private var listProduct: MutableList<ProductModel>,val clic
         }
     }
 
-    override fun getItemCount(): Int {
-        return listProduct.size
-    }
+    override fun getItemCount() = listProduct.size
 }

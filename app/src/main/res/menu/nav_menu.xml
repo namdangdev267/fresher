@@ -4,8 +4,8 @@
         <item android:id="@+id/nav_sale"
             android:title="@string/nav_sale"
             android:icon="@drawable/ic_baseline_sale_24"/>
-        <item android:id="@+id/nav_delivery_list"
-            android:title="@string/nav_delivery"
-            android:icon="@drawable/ic_baseline_local_shipping_24"/>
+        <item android:id="@+id/nav_bill_list"
+            android:title="@string/nav_bill_list"
+            android:icon="@drawable/ic_baseline_list_bill_24"/>
     </group>
 </menu>

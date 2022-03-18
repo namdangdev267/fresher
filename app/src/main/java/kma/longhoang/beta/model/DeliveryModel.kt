@@ -34,7 +34,7 @@ sealed class DeliveryModel {
         val height: Int,
     ) : DeliveryModel()
 
-    data class RadioModel(
+    data class RadioGroup(
         val title: String?= null,
         val radText1: String,
         val radText2: String,

@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import kma.longhoang.beta.R
 
-class DeliveryListFragment : Fragment() {
+class BillListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delivery_list, container, false)
+        return inflater.inflate(R.layout.fragment_bill_list, container, false)
     }
 
 }

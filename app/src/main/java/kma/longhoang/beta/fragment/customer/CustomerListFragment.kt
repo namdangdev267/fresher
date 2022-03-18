@@ -12,13 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
-import kma.longhoang.beta.SharedViewModel
+import kma.longhoang.beta.SaleViewModel
 import kma.longhoang.beta.adapter.CustomerAdapter
-import kma.longhoang.beta.fragment.main.SaleFragment
 import kma.longhoang.beta.model.CustomerModel
-import kma.longhoang.beta.model.ProductModel
 
 class CustomerListFragment : Fragment() {
 
@@ -27,7 +24,7 @@ class CustomerListFragment : Fragment() {
     private var imgAddCustomer: ImageView? = null
     private var recyclerCustomer: RecyclerView? = null
     private var listCustomer = mutableListOf<CustomerModel>()
-    private val customerViewModel: SharedViewModel by activityViewModels()
+    private val saleViewModel: SaleViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
@@ -73,13 +70,14 @@ class CustomerListFragment : Fragment() {
     }
 
     private fun customerItemClick(customerModel: CustomerModel) {
-        customerViewModel.setCustomer(customerModel)
-        (activity as MainActivity).replaceFragment(SaleFragment())
+        saleViewModel.setCustomer(customerModel)
+        activity?.onBackPressed()
     }
 
     private fun backFragment() {
         btnBack?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(SaleFragment())
+            activity?.onBackPressed()
         }
     }
+
 }

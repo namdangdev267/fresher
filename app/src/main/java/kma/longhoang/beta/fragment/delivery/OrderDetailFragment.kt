@@ -9,59 +9,32 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
-import kma.longhoang.beta.SharedViewModel
+import kma.longhoang.beta.SaleViewModel
 import kma.longhoang.beta.adapter.OrderDetailAdapter
-import kma.longhoang.beta.adapter.ProductAdapter
-import kma.longhoang.beta.fragment.customer.CustomerListFragment
-import kma.longhoang.beta.fragment.main.DeliveryListFragment
-import kma.longhoang.beta.fragment.main.SaleFragment
-import kma.longhoang.beta.model.CustomerModel
-import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
-import kma.longhoang.beta.model.ProductModel
 
 class OrderDetailFragment : Fragment() {
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private var recyclerView: RecyclerView? = null
-    private var tvTotalAmount: TextView? = null
-    private var tvTotalPrice: TextView? = null
-    private var btnCash: Button? = null
-    private var btnBack: ImageButton? = null
-    private var btnDeliveryInfo: ImageButton? = null
-    private var addOrder: View? = null
-    private var tvCustomer: TextView? = null
-    private var imgCustomer: ImageView? = null
+    private val saleViewModel: SaleViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView(view)
         setupRecyclerView()
-        customerInfo()
+        customerInfo(view)
         backFragment()
         showTotal()
         buyMore()
-        deliveryInfo()
+        deliveryInfo(view)
         cashOrder()
     }
 
-    private fun initView(view: View) {
-        recyclerView = view.findViewById(R.id.recycler_order_detail_list)
-        tvTotalAmount = view.findViewById(R.id.text_total_amount)
-        tvTotalPrice = view.findViewById(R.id.text_total_price)
-        btnBack = view.findViewById(R.id.button_back)
-        btnCash = view.findViewById(R.id.button_cash)
-        btnDeliveryInfo = view.findViewById(R.id.button_delivery_info)
-        addOrder = view.findViewById(R.id.view_add_order)
-        tvCustomer = view.findViewById(R.id.text_customer)
-        imgCustomer = view.findViewById(R.id.image_customer)
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupRecyclerView() {
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_order_detail_list)
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.setHasFixedSize(true)
         recyclerView?.addItemDecoration(
@@ -70,8 +43,8 @@ class OrderDetailFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        sharedViewModel.listOrder.observe(viewLifecycleOwner, Observer { it ->
-            recyclerView?.adapter = OrderDetailAdapter(it, sharedViewModel)
+        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer { it ->
+            recyclerView?.adapter = OrderDetailAdapter(it, saleViewModel)
         })
     }
 
@@ -82,59 +55,59 @@ class OrderDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_order_detail, container, false)
     }
 
-    private fun customerInfo() {
-        sharedViewModel.customer.observe(viewLifecycleOwner, Observer {
-            tvCustomer?.text = StringBuilder(it.name).append(" (").append(it.phone).append(")")
+    private fun customerInfo(view: View) {
+        saleViewModel.customer.observe(viewLifecycleOwner, Observer {
+            view.findViewById<TextView>(R.id.text_customer)?.text =
+                StringBuilder(it.name).append(" (").append(it.phone).append(")")
         })
-        tvCustomer?.setOnClickListener {
-            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
+        view.findViewById<TextView>(R.id.text_customer)?.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_orderDetailFragment_to_customerListFragment)
         }
-        imgCustomer?.setOnClickListener {
-            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
+        view.findViewById<ImageView>(R.id.image_customer)?.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_orderDetailFragment_to_customerListFragment)
         }
     }
 
     private fun showTotal() {
-        sharedViewModel.listOrder.observe(viewLifecycleOwner, Observer {
-            var totalPrice = 0.0
-            var totalAmount = 0
-            for (i in 0 until it.size) {
-                totalPrice += (it[i].amount * it[i].price)
-                totalAmount += it[i].amount
-            }
-            tvTotalPrice?.text = totalPrice.toString()
-            tvTotalAmount?.text = totalAmount.toString()
+        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer { list ->
+            val totalAmount = list.sumOf { it.amount }
+            val totalPrice = list.map { it.amount * it.price }.sum()
+            view?.findViewById<TextView>(R.id.text_total_price)?.text = totalPrice.toString()
+            view?.findViewById<TextView>(R.id.text_total_amount)?.text = totalAmount.toString()
         })
     }
 
     private fun buyMore() {
-        addOrder?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(SaleFragment())
+        view?.findViewById<View>(R.id.view_add_order)?.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 
-    private fun deliveryInfo() {
-        btnDeliveryInfo?.setOnClickListener {
-            (activity as MainActivity).backStackReplaceFragment(DeliveryInfoFragment())
+    private fun deliveryInfo(view: View) {
+        view.findViewById<ImageButton>(R.id.button_delivery_info).setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_orderDetailFragment_to_deliveryInfoFragment)
         }
     }
 
     private fun cashOrder() {
-        tvTotalAmount?.setOnClickListener {
+        view?.findViewById<TextView>(R.id.text_total_amount)?.setOnClickListener {
             Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
-            sharedViewModel.setListOrder(mutableListOf())
-            (activity as MainActivity).replaceFragment(SaleFragment())
+            saleViewModel.setListOrder(mutableListOf())
+            activity?.onBackPressed()
         }
-        btnCash?.setOnClickListener {
+        view?.findViewById<Button>(R.id.button_cash)?.setOnClickListener {
             Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
-            sharedViewModel.setListOrder(mutableListOf())
-            (activity as MainActivity).replaceFragment(SaleFragment())
+            saleViewModel.setListOrder(mutableListOf())
+            activity?.onBackPressed()
         }
     }
 
     private fun backFragment() {
-        btnBack?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(SaleFragment())
+        view?.findViewById<ImageButton>(R.id.button_back)?.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 }

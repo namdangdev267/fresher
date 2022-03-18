@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_sale">
+
+    <fragment
+        android:id="@+id/nav_sale"
+        android:name="kma.longhoang.beta.fragment.main.SaleFragment"
+        android:label="SaleFragment" >
+        <action
+            android:id="@+id/action_saleFragment_to_customerListFragment"
+            app:destination="@id/customerListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_saleFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_saleFragment_to_orderListFragment"
+            app:destination="@id/nav_bill_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerListFragment"
+        android:name="kma.longhoang.beta.fragment.customer.CustomerListFragment"
+        android:label="fragment_customer_list"
+        tools:layout="@layout/fragment_customer_list" />
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="kma.longhoang.beta.fragment.delivery.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <action
+            android:id="@+id/action_orderDetailFragment_to_deliveryInfoFragment"
+            app:destination="@id/deliveryInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_customerListFragment"
+            app:destination="@id/customerListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryInfoFragment"
+        android:name="kma.longhoang.beta.fragment.delivery.DeliveryInfoFragment"
+        android:label="fragment_delivery_info"
+        tools:layout="@layout/fragment_delivery_info" >
+    </fragment>
+    <fragment
+        android:id="@+id/nav_bill_list"
+        android:name="kma.longhoang.beta.fragment.main.BillListFragment"
+        android:label="fragment_bill_list"
+        tools:layout="@layout/fragment_bill_list" />
+</navigation>

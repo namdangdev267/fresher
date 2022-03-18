@@ -45,8 +45,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:backgroundTint="@color/white"
             android:hint="@string/tap_to_enter"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:theme="@style/TextBlack18style"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageButton

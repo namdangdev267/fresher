@@ -5,7 +5,7 @@
     android:id="@+id/fragment_delivery_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.main.DeliveryListFragment">
+    tools:context=".fragment.main.BillListFragment">
 
     <LinearLayout
         android:id="@+id/menu"
@@ -15,36 +15,16 @@
         android:paddingTop="@dimen/dp_10"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginVertical="@dimen/dp_10"
-            android:layout_marginStart="@dimen/dp_10"
-            android:backgroundTint="@color/white"
-            android:gravity="start|top" />
-
-        <kma.longhoang.beta.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="@dimen/dp_260"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginStart="@dimen/dp_10"
-            android:background="@drawable/custom_toolbar"
-            android:paddingVertical="@dimen/dp_10"
-            app:hint="@string/search_order"
-            app:imageSKU="@drawable/sku_icon"
-            app:imageSearch="@drawable/ic_baseline_search_24" />
-
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/button_refresh"
+            android:id="@+id/button_menu"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:layout_marginVertical="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_10"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:rotation="90"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_baseline_loop_24" />
+            android:backgroundTint="@color/violet_dark"
+            android:gravity="start|top"
+            android:src="@drawable/ic_baseline_menu_24" />
+
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/button_filter"

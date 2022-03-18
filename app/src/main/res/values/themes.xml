@@ -32,4 +32,8 @@
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
         <item name="android:background">@android:color/white</item>
     </style>
+    <style name="TextBlack18style" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
 </resources>

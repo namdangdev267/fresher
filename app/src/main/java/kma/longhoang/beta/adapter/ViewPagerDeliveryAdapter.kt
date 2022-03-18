@@ -4,10 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import kma.longhoang.beta.fragment.delivery.DeliveryFragment
+import kma.longhoang.beta.fragment.delivery.DeliveryInfoFragment
 import kma.longhoang.beta.fragment.delivery.PackageFragment
 import kma.longhoang.beta.fragment.delivery.RecipientFragment
-class ViewPagerDeliveryAdapter(fragmentActivity: FragmentActivity) :
+class ViewPagerDeliveryAdapter(fragmentActivity: DeliveryInfoFragment) :
     FragmentStateAdapter(fragmentActivity) {
+
     override fun getItemCount(): Int {
         return 3
     }

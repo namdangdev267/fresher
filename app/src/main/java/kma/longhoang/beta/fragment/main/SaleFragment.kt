@@ -1,6 +1,7 @@
 package kma.longhoang.beta.fragment.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +11,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,10 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
-import kma.longhoang.beta.SharedViewModel
+import kma.longhoang.beta.SaleViewModel
+import kma.longhoang.beta.ShowNote
 import kma.longhoang.beta.adapter.ProductAdapter
-import kma.longhoang.beta.fragment.customer.CustomerListFragment
-import kma.longhoang.beta.fragment.delivery.OrderDetailFragment
 import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
@@ -37,7 +36,6 @@ import kma.longhoang.beta.model.ProductModel
 class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var listProduct = mutableListOf<ProductModel>()
     private var recyclerView: RecyclerView? = null
-    private var btnMenu: ImageButton? = null
     private var tvOrderAmount: TextView? = null
     private var btnTotal: Button? = null
     private var btnReset: ImageButton? = null
@@ -45,21 +43,19 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var edtSearch: EditText? = null
     private var navFilter: NavigationView? = null
     private var drawerSale: DrawerLayout? = null
-    private var btnFilter: ImageButton? = null
     private var tvCustomer: TextView? = null
-    private var imgCustomer: ImageView? = null
     private var conditionStyle: String = ""
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val saleViewModel: SaleViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
         navMenu()
         navFilter()
-        customerInfo()
+        customerInfo(view)
         setupRecyclerView()
         searchItem()
         resetOrder()
-        moveToOrderDetail()
+        moveToOrderDetail(view)
     }
 
     override fun onCreateView(
@@ -71,29 +67,26 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     private fun initView(view: View) {
-        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_Sale)
         btnTotal = view.findViewById(R.id.button_total)
         btnReset = view.findViewById(R.id.button_reset)
         tvOrderAmount = view.findViewById(R.id.text_amount)
-        btnMenu = view.findViewById(R.id.button_menu)
         edtSearch = view.findViewById(R.id.edt_search_sp)
-        btnFilter = view.findViewById(R.id.button_filter)
         navFilter = view.findViewById(R.id.nav_filter)
         drawerSale = view.findViewById(R.id.drawer_sale)
         tvCustomer = view.findViewById(R.id.text_customer)
-        imgCustomer = view.findViewById(R.id.image_customer)
+        recyclerView = view.findViewById(R.id.recyclerView_Sale)
     }
 
 
     // setup navigation drawer + toolbar
     private fun navMenu() {
-        btnMenu?.setOnClickListener {
-            (activity as MainActivity).drawerView(R.id.nav_sale)
+        view?.findViewById<ImageButton>(R.id.button_menu)?.setOnClickListener {
+            (activity as MainActivity).drawerView()
         }
     }
 
     private fun navFilter() {
-        btnFilter?.setOnClickListener {
+        view?.findViewById<ImageButton>(R.id.button_filter)?.setOnClickListener {
             drawerSale?.setScrimColor(TRANSPARENT)
             drawerSale?.openDrawer(GravityCompat.END)
             filterProduct()
@@ -138,22 +131,25 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 
-
-    private fun customerInfo() {
-        sharedViewModel.customer.observe(viewLifecycleOwner, Observer {
+    private fun customerInfo(view: View) {
+        saleViewModel.customer.observe(viewLifecycleOwner, Observer {
             tvCustomer?.text = StringBuilder(it.name).append(" (").append(it.phone).append(")")
         })
         tvCustomer?.setOnClickListener {
-            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
+            Navigation.findNavController(view)
+                .navigate(R.id.action_saleFragment_to_customerListFragment)
         }
-        imgCustomer?.setOnClickListener {
-            (activity as MainActivity).backStackReplaceFragment(CustomerListFragment())
+        view.findViewById<ImageView>(R.id.image_customer)?.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_saleFragment_to_customerListFragment)
         }
     }
+
 
     // setup recyclerView
     @SuppressLint("NotifyDataSetChanged")
     private fun setupRecyclerView() {
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView_Sale)
         listProduct.addAll(
             listOf<ProductModel>(
                 ProductModel(
@@ -307,11 +303,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         tvAmount?.text = amountProduct.toString()
         btnMinus?.setOnClickListener {
             if (amountProduct == 1) {
-                Toast.makeText(
-                    context,
-                    "Số lượng phải lớn hơn 0. Hãy kiểm tra lại",
-                    Toast.LENGTH_SHORT
-                ).show()
+                ShowNote().toast(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
             } else {
                 amountProduct -= 1
                 tvAmount?.text = amountProduct.toString()
@@ -457,17 +449,19 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun moveToOrderDetail() {
+    private fun moveToOrderDetail(view: View) {
         tvOrderAmount?.setOnClickListener {
             if (orderList.isNotEmpty()) {
-                sharedViewModel.setListOrder(orderList)
-                (activity as MainActivity).backStackReplaceFragment(OrderDetailFragment())
+                saleViewModel.setListOrder(orderList)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_saleFragment_to_orderDetailFragment)
             }
         }
         btnTotal?.setOnClickListener {
             if (orderList.isNotEmpty()) {
-                sharedViewModel.setListOrder(orderList)
-                (activity as MainActivity).backStackReplaceFragment(OrderDetailFragment())
+                saleViewModel.setListOrder(orderList)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_saleFragment_to_orderDetailFragment)
             }
         }
     }
@@ -475,15 +469,11 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     //show lại product đang chọn
     override fun onResume() {
         super.onResume()
-        sharedViewModel.listOrder.observe(viewLifecycleOwner, Observer {
-            orderList = it
+        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer { list ->
+            orderList = list
             if (orderList.isNotEmpty()) {
-                var amount = 0
-                var total = 0.0
-                for (i in 0 until orderList.size) {
-                    amount += orderList[i].amount
-                    total += (orderList[i].amount * orderList[0].price)
-                }
+                val amount = orderList.sumOf { it.amount }
+                val total = orderList.map { it.price * it.amount }.sum()
                 tvOrderAmount?.text = amount.toString()
                 btnTotal?.text = total.toString()
                 changeButtonState()

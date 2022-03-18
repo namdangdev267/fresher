@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import kma.longhoang.beta.DeliveryItem
 import kma.longhoang.beta.R
 import kma.longhoang.beta.model.DeliveryModel
 
@@ -68,7 +69,7 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
             itemView.findViewById<EditText>(R.id.edit_height).setText(item.height.toString())
         }
 
-        private fun radioButtonView(item: DeliveryModel.RadioModel) {
+        private fun radioButtonView(item: DeliveryModel.RadioGroup) {
             if (item.title != null) {
                 itemView.findViewById<TextView>(R.id.text_title).text = item.title
             } else {
@@ -85,18 +86,18 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
                 is DeliveryModel.EnterTextView -> enterTextView(dataModel)
                 is DeliveryModel.Checkbox -> checkbox(dataModel)
                 is DeliveryModel.PackageSize -> packageSize(dataModel)
-                is DeliveryModel.RadioModel -> radioButtonView(dataModel)
+                is DeliveryModel.RadioGroup -> radioButtonView(dataModel)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliveryHolder {
         val layout = when (viewType) {
-            0 -> R.layout.delivery_layout_edittext
-            1 -> R.layout.delivery_layout_2_column
-            2 -> R.layout.delivery_layout_text
-            3 -> R.layout.delivery_layout_checkbox
-            4 -> R.layout.delivery_layout_package_size
+            DeliveryItem.EDITTEXT.ordinal -> R.layout.delivery_layout_edittext
+            DeliveryItem.TWO_COLUMN.ordinal -> R.layout.delivery_layout_2_column
+            DeliveryItem.TEXTVIEW.ordinal -> R.layout.delivery_layout_text
+            DeliveryItem.CHECKBOX.ordinal -> R.layout.delivery_layout_checkbox
+            DeliveryItem.PACKAGE_SIZE.ordinal -> R.layout.delivery_layout_package_size
             else -> R.layout.delivery_layout_radio_button
         }
         return DeliveryHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
@@ -106,18 +107,16 @@ class DeliveryAdapter(private val listItem: MutableList<DeliveryModel>) :
         holder.bind(listItem[position])
     }
 
-    override fun getItemCount(): Int {
-        return listItem.size
-    }
+    override fun getItemCount() = listItem.size
 
     override fun getItemViewType(position: Int): Int {
         return when (listItem[position]) {
-            is DeliveryModel.EnterEditText -> 0
-            is DeliveryModel.Enter2Column -> 1
-            is DeliveryModel.EnterTextView -> 2
-            is DeliveryModel.Checkbox -> 3
-            is DeliveryModel.PackageSize -> 4
-            is DeliveryModel.RadioModel -> 5
+            is DeliveryModel.EnterEditText -> DeliveryItem.EDITTEXT.ordinal
+            is DeliveryModel.Enter2Column -> DeliveryItem.TWO_COLUMN.ordinal
+            is DeliveryModel.EnterTextView -> DeliveryItem.TEXTVIEW.ordinal
+            is DeliveryModel.Checkbox -> DeliveryItem.CHECKBOX.ordinal
+            is DeliveryModel.PackageSize -> DeliveryItem.PACKAGE_SIZE.ordinal
+            is DeliveryModel.RadioGroup -> DeliveryItem.RADIO_GROUP.ordinal
         }
     }
 }

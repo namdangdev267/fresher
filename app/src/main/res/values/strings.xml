@@ -30,7 +30,7 @@
     <string name="tap_to_select">Chạm để chọn</string>
     <string name="tap_to_enter">Chạm để nhập</string>
     <string name="nav_sale">Bán hàng</string>
-    <string name="nav_delivery">Sổ giao hàng</string>
+    <string name="nav_bill_list">danh sách hóa đơn</string>
     <string name="nav_filter">Lọc</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
