@@ -11,8 +11,6 @@ import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
 
 class PackageFragment: Fragment() {
-
-    lateinit var recyclerView: RecyclerView
     lateinit var listItemShip: MutableList<ItemShipInfor>
     lateinit var packageViewModel: PackageViewModel
 
@@ -26,6 +24,9 @@ class PackageFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var recyclerView: RecyclerView
+
         packageViewModel = PackageViewModel(view.context)
         recyclerView = view.findViewById(R.id.recyclerview_shipping_package)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
