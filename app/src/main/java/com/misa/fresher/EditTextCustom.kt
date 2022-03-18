@@ -5,8 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 
 class EditTextCustom : RelativeLayout {
@@ -14,8 +12,8 @@ class EditTextCustom : RelativeLayout {
 
     @SuppressLint("ResourceColor")
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        val array = context.obtainStyledAttributes(attrs, R.styleable.EditText, 0, 0)
-        array.recycle()
+//        val array = context.obtainStyledAttributes(attrs, R.styleable.EditText, 0, 0)
+//        array.recycle()
 
         setBackgroundResource(R.drawable.custom_searchview)
 
