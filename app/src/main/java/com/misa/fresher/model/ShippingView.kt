@@ -1,5 +1,10 @@
 package com.misa.fresher.model
 
+/**
+ * tạo sealed class chứa các data class là các type của recycler view
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 sealed class ShippingView {
     data class TouchTextView(
         val tittle: String,

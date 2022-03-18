@@ -26,13 +26,16 @@
 
         <TextView
             android:id="@+id/tvContact"
+            android:clickable="true"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:gravity="center"
             android:hint="@string/contact_hint"
-            android:maxLines="1"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
             android:textSize="@dimen/sp_18" />
 
         <ImageView

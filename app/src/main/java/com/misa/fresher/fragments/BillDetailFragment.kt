@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,22 +18,27 @@ import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductSelectedAdapter
 import com.misa.fresher.model.Bill
 import com.misa.fresher.model.SelectedProducts
+import com.misa.fresher.showToast
 import com.misa.fresher.viewModel.BillsViewModel
-import com.misa.fresher.viewModel.ShipInforViewModel
+import com.misa.fresher.viewModel.CustomerViewModel
 
+/**
+ * Tạo BillDetail
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class BillDetailFragment : Fragment() {
     private var listFromSale = mutableListOf<SelectedProducts>()
     val rnds = (1000..9999).random()
-    var bill = Bill(listFromSale,rnds,null)
-    var viewModel: BillsViewModel ?= null
-    var shipInforviewModel: ShipInforViewModel?= null
+    var bill = Bill(listFromSale, rnds, null)
+    val viewModel: BillsViewModel by activityViewModels()
+    val customerViewModel: CustomerViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
-        shipInforviewModel = ViewModelProvider(requireActivity()).get(ShipInforViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bill_detail, container, false)
     }
 
@@ -47,35 +52,56 @@ class BillDetailFragment : Fragment() {
         updateReceiver(view)
     }
 
-    private fun getBillId(view : View) {
-        view.findViewById<TextView>(R.id.tvBillId).text=rnds.toString()
+    /**
+     * tạo fun để lấy random id cho Bill
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
+    private fun getBillId(view: View) {
+        view.findViewById<TextView>(R.id.tvBillId).text = rnds.toString()
     }
 
+    /**
+     * Lấy Customer từ màn trước(sale)
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun updateReceiver(view: View) {
-        shipInforviewModel?.receiver?.observe(viewLifecycleOwner, Observer {
-            view.findViewById<TextView>(R.id.tvContactBillsDetail).text=it.name+"("+it.phoneNumber+")"
-            bill.receiver=it
+        customerViewModel.customer.observe(viewLifecycleOwner, Observer {
+            val cus = view.findViewById<TextView>(R.id.tvContactBillsDetail)
+            cus.text = it.name + "(" + it.number + ")"
+            cus.isSelected = true
+            bill.customer = it
         })
+
     }
 
+    /**
+     * config ProductSelected Recycler View
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configRecyclerView(view: View) {
         val rcv = view.findViewById<RecyclerView>(R.id.rcvListItem)
-        val adpter = ProductSelectedAdapter(listFromSale, { changeAmountSelectedProduct(it, view) })
+        val adpter = ProductSelectedAdapter(listFromSale) {
+            for (selectedPro in listFromSale) {
+                if (selectedPro.product == it.product) {
+                    selectedPro.amonut = it.amonut
+                }
+            }
+            rcv?.adapter?.notifyDataSetChanged()
+            configListSelectedItem(view)
+
+        }
         rcv?.adapter = adpter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun changeAmountSelectedProduct(selectedProducts: SelectedProducts, view: View) {
-
-        for (selectedPro in listFromSale) {
-            if (selectedPro.product == selectedProducts.product) {
-                selectedPro.amonut = selectedProducts.amonut
-            }
-        }
-        configListSelectedItem(view)
-
-    }
-
+    /**
+     * Thay đổi Text cho Button số lượng + tv tổng giá
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configListSelectedItem(view: View) {
         val amount = listFromSale.sumOf { it.amonut }
         val totalPrice = listFromSale.sumOf { it.amonut * it.product.price }
@@ -83,13 +109,23 @@ class BillDetailFragment : Fragment() {
         view.findViewById<TextView>(R.id.tvTotalPrice_bill)?.text = totalPrice.toString()
     }
 
+    /**
+     * Lấy giá trị bundle từ sale
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun getDataFromSaleFragment(): MutableList<SelectedProducts> {
-        val list = arguments?.get("items").let {
+        val list = arguments?.get(SELECTED_ITEMS).let {
             it as MutableList<SelectedProducts>
         }
         return list
     }
 
+    /**
+     * Navigate các màn
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun navigaEvent(view: View) {
         view.findViewById<ImageButton>(R.id.ivShipInfor)?.setOnClickListener {
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_shipInfor)
@@ -101,10 +137,13 @@ class BillDetailFragment : Fragment() {
             activity?.onBackPressed()
         }
         view.findViewById<Button>(R.id.btnTotalPriceBill).setOnClickListener {
-            bill.listSelectedProduct=listFromSale
-            viewModel?.addBill(bill)
+            bill.listSelectedProduct = listFromSale
+            viewModel.addBill(bill)
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
-            Toast.makeText(requireContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show()
+            requireContext().showToast("Thanh toán thành công")
         }
+    }
+    companion object {
+        const val SELECTED_ITEMS = "items"
     }
 }

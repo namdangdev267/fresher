@@ -10,11 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.customViews.CustomToast
-import com.misa.fresher.model.Products
 import com.misa.fresher.model.SelectedProducts
+import com.misa.fresher.showToast
 
-
+/**
+ * Tạo Adapter dùng cho RecyclerView trong màn BillDetail
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class ProductSelectedAdapter(
     var mSelectedProducts: MutableList<SelectedProducts>,
     val updateTotalPrice: (products: SelectedProducts) -> Unit
@@ -48,8 +51,6 @@ class ProductSelectedAdapter(
             tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
             itemView.findViewById<ImageView>(R.id.ivAdd).setOnClickListener {
                 selectedProducts.amonut++
-                tvAmount.text = selectedProducts.amonut.toString()
-                tvTotalPrice.text = "${selectedProducts.let { it.product.price * it.amonut }}"
                 updateTotalPrice(selectedProducts)
             }
             itemView.findViewById<ImageView>(R.id.ivRemove).setOnClickListener {
@@ -57,18 +58,11 @@ class ProductSelectedAdapter(
                     selectedProducts.amonut--
                     updateTotalPrice(selectedProducts)
                 } else {
-                    showToast(contextVH, "Số lượng phải lớn hơn 0. Vui Lòng kiểm tra lại")
+                    contextVH.showToast("Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
                 }
             }
         }
     }
 
-    fun showToast(contextVH: Context, string: String) {
-        val toast = Toast.makeText(
-            contextVH, string,
-            Toast.LENGTH_SHORT
-        )
-        toast.setGravity(Gravity.TOP, 0, 0)
-        toast.show()
-    }
+
 }

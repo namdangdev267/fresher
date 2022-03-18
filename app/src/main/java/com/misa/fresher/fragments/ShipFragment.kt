@@ -1,6 +1,5 @@
 package com.misa.fresher.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.adapters.ReceiverViewAdapter
+import com.misa.fresher.adapters.ShipInforViewAdapter
 import com.misa.fresher.model.ShippingView
 
+/**
+ * tạo class hiển thị view = recycler view
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class ShipFragment : Fragment() {
     private var list = mutableListOf<ShippingView>()
     private var rcv: RecyclerView? = null
@@ -28,13 +32,24 @@ class ShipFragment : Fragment() {
         initData()
         configRecyclerView(view)
     }
+
+    /**
+     * config recycler view
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configRecyclerView(view: View) {
         rcv = view.findViewById(R.id.rcvShippingView_ship)
-        val adpter = ReceiverViewAdapter(list, {})
+        val adpter = ShipInforViewAdapter(list, {})
         rcv?.adapter = adpter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    /**
+     * tạo data dùng cho rcv
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun initData() {
         list = mutableListOf(
             ShippingView.RadionGroup("Tổ chức", "Cá nhân"),

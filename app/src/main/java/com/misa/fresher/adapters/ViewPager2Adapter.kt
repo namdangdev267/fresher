@@ -2,8 +2,12 @@ package com.misa.fresher.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.misa.fresher.fragments.ShipInforFragment
 
+/**
+ * Tạo view pager adapter dùng trong màn ShipInfor
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class ViewPager2Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     private val mFragmentList = ArrayList<Fragment>()
 

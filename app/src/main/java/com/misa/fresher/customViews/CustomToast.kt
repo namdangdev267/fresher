@@ -7,12 +7,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.misa.fresher.R
 
-
+/**
+* Tạo custom view cho toast
+* @Auther : NTBao
+* @date : 3/18/2022
+**/
 object CustomToast {
     fun makeText(context: Context, message: String, duration: Int): Toast {
-        var toast = Toast(context)
-        var layout = LayoutInflater.from(context).inflate(R.layout.custom_toast, null, false)
-        var tvToastMessage = layout.findViewById<TextView>(R.id.tv_toast_message)
+        val toast = Toast(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.custom_toast, null, false)
+        val tvToastMessage = layout.findViewById<TextView>(R.id.tv_toast_message)
         tvToastMessage.text = message
 
         toast.duration = duration

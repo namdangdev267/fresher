@@ -2,7 +2,6 @@ package com.misa.fresher.fragments
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
-import com.misa.fresher.adapters.ReceiverViewAdapter
+import com.misa.fresher.adapters.ShipInforViewAdapter
 import com.misa.fresher.model.Receiver
 import com.misa.fresher.model.ShippingView
 import com.misa.fresher.viewModel.ShipInforViewModel
-
+/**
+* tạo class
+* @Auther : NTBao
+* @date : 3/18/2022
+**/
 class RecipientFragment : Fragment() {
     private var rcv: RecyclerView? = null
     private var list = mutableListOf<ShippingView>()
@@ -35,10 +38,14 @@ class RecipientFragment : Fragment() {
         initData()
         configRecyclerView(view)
     }
-
+    /**
+    *
+    * @Auther : NTBao
+    * @date : 3/18/2022
+    **/
     private fun configRecyclerView(view: View) {
         rcv = view.findViewById(R.id.rcvShippingView)
-        val adapter = ReceiverViewAdapter(list, { getData(it) })
+        val adapter = ShipInforViewAdapter(list, { getData(it) })
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
 

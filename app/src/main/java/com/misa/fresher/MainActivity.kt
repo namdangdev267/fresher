@@ -19,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         configUi()
     }
 
+    /**
+     * confic app bar
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configUi() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -39,4 +44,14 @@ class MainActivity : AppCompatActivity() {
         } == true || super.onSupportNavigateUp()
     }
 
+    override fun onBackPressed() {
+        val mDrawer = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val mNav = findViewById<NavigationView>(R.id.navSale)
+        if (mDrawer.isDrawerOpen(mNav)) {
+            mDrawer.closeDrawer(mNav)
+        } else {
+            super.onBackPressed()
+        }
+
+    }
 }

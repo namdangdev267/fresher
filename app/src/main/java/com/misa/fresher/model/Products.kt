@@ -1,7 +1,9 @@
 package com.misa.fresher.model
-
-import com.misa.fresher.R
-
+/**
+* Tạo class Products lấy từ fake data
+* @Auther : NTBao
+* @date : 3/18/2022
+**/
 data class Products(
     val id: String,
     val name: String,

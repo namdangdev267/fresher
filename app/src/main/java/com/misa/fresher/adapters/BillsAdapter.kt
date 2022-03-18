@@ -28,9 +28,9 @@ class BillsAdapter(var mBills: MutableList<Bill>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Bill) {
             itemView.findViewById<TextView>(R.id.tvIdBill).text = item.id.toString()
-            if(item.receiver!=null){
+            if(item.customer!=null){
                 itemView.findViewById<TextView>(R.id.tvReceiver).text =
-                    item.receiver?.name + " - " + item.receiver?.phoneNumber
+                    item.customer?.name + " - " + item.customer?.number
             }
             itemView.findViewById<TextView>(R.id.tvTotalPriceBill).text =
                 "${item.listSelectedProduct?.sumOf { it.amonut * it.product.price }}"

@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,18 +24,26 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.ProductsAdapter
 import com.misa.fresher.data.DataForTest
+import com.misa.fresher.model.Customer
 import com.misa.fresher.model.SelectedProducts
 import com.misa.fresher.model.FilterProducts
 import com.misa.fresher.model.Products
+import com.misa.fresher.showToast
+import com.misa.fresher.viewModel.CustomerViewModel
 
+/**
+ * tạo class xử lý các hành động chọn sản phẩm, lọc, tìm sản phẩm, chuyển màn trong màn sale
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class SaleFragment : Fragment() {
-
     private var rcv: RecyclerView? = null
     private var amount = 1
     private var fakedata = DataForTest.listProduct
     private var productsSelected = mutableListOf<SelectedProducts>()
-    private lateinit var rcvAdapter : ProductsAdapter
-
+    private lateinit var rcvAdapter: ProductsAdapter
+    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private var cus: Customer? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,14 +56,34 @@ class SaleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         configBtnMenu(view)
         configRecyclerView(view)
-        updateItemSelected(view)
+        updateProductSelected(view)
         searchEvent(view)
         configFilterDrawer(view)
         resetEvent(view)
         navigateEvent(view)
-
+        setCustomer(view)
     }
 
+    /**
+     * Khi click vào tv tên khách hàng -> lấy ngấu nhiên 1 khách hàng trong list -> add vào CusViewModel
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
+    private fun setCustomer(view: View) {
+        val tvCus = view.findViewById<TextView>(R.id.tvContact)
+        tvCus.setOnClickListener {
+            cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
+            tvCus.text = "${cus?.name} (${cus?.number})"
+            tvCus.isSelected = true
+            customerViewModel.addCustomer(cus!!)
+        }
+    }
+
+    /**
+     * config drawer cho filter
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configFilterDrawer(view: View) {
         configFilterSpinner(view)
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlSaleFilter)
@@ -76,6 +105,11 @@ class SaleFragment : Fragment() {
         }
     }
 
+    /**
+     * Lấy filter để lọc cho list sản phẩm
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun getFilter(view: View): FilterProducts {
         val radioGroup = view.findViewById<RadioGroup>(R.id.rg_sorting)
         val selected = radioGroup.checkedRadioButtonId
@@ -88,6 +122,11 @@ class SaleFragment : Fragment() {
         return filterProducts
     }
 
+    /**
+     * Set giá trị cho spinner
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configFilterSpinner(view: View) {
         val spnColor = view.findViewById<Spinner>(R.id.spnColor)
         val spnSize = view.findViewById<Spinner>(R.id.spnSize)
@@ -111,6 +150,11 @@ class SaleFragment : Fragment() {
         }
     }
 
+    /**
+     * Lọc sản phẩm
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     @SuppressLint("NotifyDataSetChanged")
     private fun filterItems(filter: FilterProducts) {
         var sortList = mutableListOf<Products>()
@@ -155,6 +199,11 @@ class SaleFragment : Fragment() {
         rcvAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Set sự kiện cho nút reset sản phẩm
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun resetEvent(view: View) {
         val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
         val btnTotalPrice = view.findViewById<Button>(R.id.btnTotalPrice)
@@ -180,6 +229,11 @@ class SaleFragment : Fragment() {
         }
     }
 
+    /**
+     * Lấy giá trị text cần tìm kiếm
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun searchEvent(view: View) {
         val edSearch = view.findViewById<EditText>(R.id.edSearch)
         edSearch?.doAfterTextChanged {
@@ -187,6 +241,11 @@ class SaleFragment : Fragment() {
         }
     }
 
+    /**
+     * Chuyển màn
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun navigateEvent(view: View) {
         view.findViewById<Button>(R.id.btnTotalPrice)?.setOnClickListener {
             if (productsSelected.size > 0) {
@@ -194,6 +253,7 @@ class SaleFragment : Fragment() {
                     R.id.action_nav_sale_to_nav_billDetail,
                     bundleOf(SELECTED_ITEMS to productsSelected)
                 )
+                Log.d("test", cus.toString())
             }
         }
         view.findViewById<Button>(R.id.btnItemCount)?.setOnClickListener {
@@ -206,6 +266,11 @@ class SaleFragment : Fragment() {
         }
     }
 
+    /**
+     * Tìm kiếm sản phẩm theo tên, mã
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     @SuppressLint("NotifyDataSetChanged")
     private fun updateList(string: String) {
         val list = mutableListOf<Products>()
@@ -227,7 +292,11 @@ class SaleFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    /**
+     * config recycler view list product
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configRecyclerView(view: View) {
         rcvAdapter = ProductsAdapter(fakedata, { productItemClick(it, view) })
         rcv = view.findViewById(R.id.rcvListProduct)
@@ -235,6 +304,11 @@ class SaleFragment : Fragment() {
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    /**
+     * click sản phẩm -> show dialog -> dismiss -> add sản phẩm vào list -> update
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun productItemClick(products: Products, view: View) {
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
         val bottomSheetView = LayoutInflater.from(requireContext()).inflate(
@@ -252,11 +326,16 @@ class SaleFragment : Fragment() {
             } ?: run {
                 productsSelected.add(SelectedProducts(amount, products))
             }
-            updateItemSelected(view)
+            updateProductSelected(view)
         }
 
     }
 
+    /**
+     * Thay đổi số lượng sản phẩm
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun changeItemAmount(bottomSheetView: View) {
         val btnRemove = bottomSheetView.findViewById<ImageView>(R.id.ivRemove)
         val btnAdd = bottomSheetView.findViewById<ImageView>(R.id.ivAdd)
@@ -264,7 +343,7 @@ class SaleFragment : Fragment() {
         amount = tvAmount?.text.toString().toInt()
         btnRemove?.setOnClickListener {
             if (tvAmount?.text == "1") {
-                showToast(requireContext(), "Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
+                requireContext().showToast("Số lượng phải lớn hơn 0. Vui lòng kiểm tra lại")
             } else {
                 amount--
                 tvAmount?.text = "$amount"
@@ -276,18 +355,13 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun showToast(requireContext: Context, s: String) {
-        val toast = Toast.makeText(
-            requireContext,
-            s,
-            Toast.LENGTH_SHORT
-        )
-        toast.setGravity(Gravity.TOP, 0, 0)
-        toast.show()
-    }
-
+    /**
+     * update list product selected
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     @SuppressLint("ResourceAsColor", "SetTextI18n")
-    private fun updateItemSelected(view: View) {
+    private fun updateProductSelected(view: View) {
         val btnItemCount = view.findViewById<Button>(R.id.btnItemCount)
         val amount = productsSelected.sumOf { it.amonut }
         val totalPrice = productsSelected.sumOf { it.amonut * it.product.price }
@@ -300,7 +374,6 @@ class SaleFragment : Fragment() {
                     R.drawable.item_amount_bg_selected
                 )
             }
-            Log.d("test", productsSelected[0].toString())
             val btnTotalPrice = view.findViewById<Button>(R.id.btnTotalPrice)
             btnTotalPrice.let {
                 it.text = "Tổng $totalPrice"
@@ -318,4 +391,5 @@ class SaleFragment : Fragment() {
     companion object {
         const val SELECTED_ITEMS = "items"
     }
+
 }

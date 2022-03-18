@@ -1,7 +1,6 @@
 package com.misa.fresher.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.MainActivity
@@ -23,6 +21,11 @@ import com.misa.fresher.adapters.BillsAdapter
 import com.misa.fresher.model.Bill
 import com.misa.fresher.viewModel.BillsViewModel
 
+/**
+ * Màn ListBill
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class BillsFragment : Fragment() {
     private val viewModel: BillsViewModel by activityViewModels()
     private var list = mutableListOf<Bill>()
@@ -41,6 +44,11 @@ class BillsFragment : Fragment() {
         configSpinner(view)
     }
 
+    /**
+     * Set giá trị cho spinner
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configSpinner(view: View) {
         val spnDay = view.findViewById<Spinner>(R.id.spnDay)
         val spnPayStatus = view.findViewById<Spinner>(R.id.spnPayStatus)
@@ -64,6 +72,11 @@ class BillsFragment : Fragment() {
         }
     }
 
+    /**
+     * Config List bills recycler view
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configRecyclerView(view: View) {
         val rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
         val total = view.findViewById<TextView>(R.id.tvTotal)
@@ -72,13 +85,18 @@ class BillsFragment : Fragment() {
         rcv.adapter = adapter
         rcv.layoutManager = LinearLayoutManager(view.context)
         viewModel.listBill.observe(viewLifecycleOwner, Observer {
+            adapter.mBills = it
             total.text = it.size.toString()
-            adapter.mBills=it
         })
         adapter.notifyDataSetChanged()
         totalPrice.text = viewModel.getTotalPrice().toString()
     }
 
+    /**
+     * Set sự kiện khi click vào btn menu -> mở drawer
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configToolbar(view: View) {
         val dlBills = (activity as MainActivity).findViewById<DrawerLayout>(R.id.drawerLayout)
         view.findViewById<ImageView>(R.id.btnMenuBills).setOnClickListener {
