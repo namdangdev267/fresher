@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <Switch
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hàng hóa còn hàng(SL > 0)"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:textColor="@color/color_black"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhóm hàng hóa"
+            android:textAllCaps="true"
+            android:textColor="@color/color_black"
+            android:padding="10dp"
+            />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xem theo"
+            android:textAllCaps="true"
+            android:padding="10dp"
+            android:textColor="@color/color_black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

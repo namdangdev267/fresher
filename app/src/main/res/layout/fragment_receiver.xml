@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--        Người nhận-->
+        <RelativeLayout
+            android:id="@+id/relative_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_nguoinhan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nguời nhận"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_nguoinhan"
+                android:text="*"
+                android:textColor="@color/color_red" />
+
+            <TextView
+                android:id="@+id/tv_Chamdechon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nguoinhan"
+                android:layout_marginRight="5dp"
+                android:text="Chạm để chọn"
+                android:textSize="18dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_nguoinhan"
+                android:layout_alignParentRight="true"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"
+                android:layout_below="@id/tv_Chamdechon"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!--        Số điện thoại-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_SDT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_SDT"
+                android:text="*"
+                android:textColor="@color/color_red"/>
+
+            <EditText
+                android:id="@+id/et_Chamdechon_sdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_SDT"
+                android:layout_marginRight="5dp"
+                android:hint="Chạm để nhập"
+                android:background="@null"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"
+                android:layout_below="@id/et_Chamdechon_sdt"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!--        Địa chỉ-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_diachi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_diachi"
+                android:text="*"
+                android:textColor="@color/color_red" />
+
+            <EditText
+                android:id="@+id/et_Chamdechon_diachi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_diachi"
+                android:layout_marginRight="5dp"
+                android:hint="Chạm để nhập"
+                android:background="@null"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"
+                android:layout_below="@id/et_Chamdechon_diachi"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!--        Khu vực -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_khuvuc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Khu vực"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tv_Chamdechon_khuvuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_khuvuc"
+                android:layout_marginRight="5dp"
+                android:text="Chạm để chọn"
+                android:textSize="18dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_khuvuc"
+                android:layout_alignParentRight="true"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/tv_Chamdechon_khuvuc"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/color_grey"></LinearLayout>
+        </RelativeLayout>
+        <!--        Phường,xã-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_phuongxa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phường, xã"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tv_Chamdechon_phuongxa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_phuongxa"
+                android:layout_marginRight="5dp"
+                android:text="Chạm để chọn"
+                android:textSize="18dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_phuongxa"
+                android:layout_alignParentRight="true"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"
+                android:layout_below="@id/tv_Chamdechon_phuongxa"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+        </RelativeLayout>
+        <!--        Phí giao hàng-->
+        <RelativeLayout
+            android:id="@+id/relative_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/tv_phigiaohang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phí giao hàng thu khách"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="18dp" />
+
+
+            <TextView
+                android:id="@+id/tv_phi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_phigiaohang"
+                android:text="0,0"
+                android:textSize="18dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_phigiaohang"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+            <LinearLayout
+                android:layout_below="@id/tv_phi"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/color_grey"></LinearLayout>
+        </RelativeLayout>
+        <!--        Hình thức đặt cọc,số tiền đặt cọc-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_hinhthucdatcoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hình thức đặt cọc"
+                    android:textSize="18dp"
+                    android:textColor="@color/color_blue_purple"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_chuyenkhoan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chuyển khoản"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_plus" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số tiền đặt cọc"
+                    android:textSize="18dp"
+                    android:textColor="@color/color_blue_purple"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0,0"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--        Gạch dòng-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Kênh bán hàng-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kênh bán hàng"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chạm để nhập"
+                android:background="@null"
+                android:textColor="@color/color_black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+        </LinearLayout>
+        <!--        Thu COD-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu COD (456,0)"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
