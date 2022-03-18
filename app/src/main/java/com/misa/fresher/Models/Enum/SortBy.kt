@@ -1,5 +1,5 @@
 package com.misa.fresher.Models.Enum
 
 enum class SortBy {
-    name_item, new_arrival,quantity
+    NAME_ITEM, NEW_ARRIVAL, QUANTITY
 }

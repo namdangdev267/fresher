@@ -9,13 +9,5 @@ data class ItemBill (
     var status:BillStatus
 )
 {
-    fun getPrice():Float
-    {
-        var res=0f
-        for(i in listItemBillDetail)
-        {
-            res+= i.getPrice()
-        }
-        return res
-    }
+    fun getPrice() : Float = listItemBillDetail.map { it.getPrice() }.sum().toFloat()
 }

@@ -1,7 +1,5 @@
 package com.misa.fresher.Models
 
-import com.misa.fresher.Models.Product
-
 class PackageProduct(
     var product: Product,
     var namePackage: String,
@@ -13,9 +11,7 @@ init {
     this.codePackage = product.codeProduct
 }
 
-    fun getPrice(): Int{
-        return countPackage * product.priceProduct
-    }
+    fun getPrice(): Int = countPackage * product.priceProduct
 
     fun updateCount(quantity: Int){
         this.countPackage += quantity
