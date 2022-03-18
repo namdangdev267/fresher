@@ -10,6 +10,7 @@ import com.misa.fresher.Models.ItemBill
 import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.Models.Product
 
+
 class PublicViewModel : ViewModel() {
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
@@ -60,7 +61,7 @@ class PublicViewModel : ViewModel() {
             PackageProduct(itemProduct, itemProduct.nameProduct, itemProduct.codeProduct, 1)
         _listItemSelected.value?.let {
             for (i in it) {
-                if (i.product.equals(itemProduct)) {
+                if (i.product == itemProduct) {
                     itemSelected = i
                 }
             }
@@ -70,7 +71,7 @@ class PublicViewModel : ViewModel() {
 
     @SuppressLint("NullSafeMutableLiveData")
     fun updateItemSelectedQuantity(num: Int) {
-        var itemSelected = _itemSelected.value?.let {
+        val itemSelected = _itemSelected.value?.let {
             PackageProduct(
                 it.product, "", "", it.countPackage + num
             )
@@ -115,13 +116,14 @@ class PublicViewModel : ViewModel() {
     }
 
     fun getTotalPrice() =
-        _listItemSelected.value?.map { it.product.priceProduct * it.countPackage }?.sum()
+        _listItemSelected.value?.sumOf { it.product.priceProduct * it.countPackage }
 
-    var selectedList = mutableListOf<PackageProduct>()
+    fun getCount() = _listItemSelected.value?.sumOf { it.countPackage }
+
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
         if (itemBillDetail.countPackage == 0) {
-
+            val selectedList = mutableListOf<PackageProduct>()
             for (i in selectedList) {
                 if (i.product == itemBillDetail.product) {
 
@@ -131,21 +133,18 @@ class PublicViewModel : ViewModel() {
             }
             _listItemSelected.postValue(selectedList)
         } else {
-            var selectedList = _listItemSelected.value
+            val selectedList = _listItemSelected.value
             selectedList?.let {
-                for (i in selectedList) {
+                for (i in it) {
                     if (i.product == itemBillDetail.product) {
                         i.countPackage = itemBillDetail.countPackage
-                        _listItemSelected.postValue(selectedList!!)
+                        _listItemSelected.postValue(it)
                         break
                     }
                 }
             }
         }
     }
-
-    fun getCount() =
-        selectedList.size.toString()
 
     fun addBillToListBill() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
