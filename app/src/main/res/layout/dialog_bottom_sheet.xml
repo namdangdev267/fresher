@@ -10,7 +10,7 @@
     <com.misa.fresher.customview.ItemSaleProductView
         android:id="@+id/item_sale_product_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/product_item_height"
         tools:name="name"
         tools:code="code"
         tools:amount="2"

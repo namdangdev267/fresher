@@ -7,6 +7,9 @@
     <string name="shipping_fragment_name">Ship</string>
     <string name="package_fragment_name">Package</string>
 
+    <string name="list_bills_fragment_name">List of billa</string>
+    <string name="toolbar_list_bills_search_hint">Enter bill no., customer name and tel</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="toolbar_search_hint">Enter name, SKU code, Customer name</string>

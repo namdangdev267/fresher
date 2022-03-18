@@ -20,8 +20,8 @@ class CalculatorScreenFragment : BaseFragment<FragmentCalculatorScreenBinding>(F
             findNavController().navigateUp()
         }
 
-        setFragmentResultListener("calculator_key") { _, bundle ->
-            keyPress(bundle.getString("input"))
+        setFragmentResultListener(CalculatorFragment.FRAGMENT_CALCULATOR) { _, bundle ->
+            keyPress(bundle.getString(CalculatorKeyFragment.BUNDLE_CALCULATOR_INPUT))
         }
     }
 

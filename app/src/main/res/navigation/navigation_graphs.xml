@@ -25,6 +25,13 @@
             app:exitAnim="@anim/slide_wait"
             app:popEnterAnim="@anim/slide_wait"
             app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_list_bills"
+            app:destination="@id/fragment_list_bills"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/fragment_bill"
@@ -40,6 +47,11 @@
             app:popEnterAnim="@anim/slide_wait"
             app:popExitAnim="@anim/slide_right" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_list_bills"
+        android:name="com.misa.fresher.fragment.ListBillFragment"
+        android:label="fragment_list_bills"
+        tools:layout="@layout/fragment_list_bills" />
     <fragment
         android:id="@+id/fragment_ship_info"
         android:name="com.misa.fresher.fragment.ShipInfoFragment"

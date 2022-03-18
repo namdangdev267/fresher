@@ -30,6 +30,10 @@ class CalculatorKeyFragment : BaseFragment<FragmentCalculatorKeyboardBinding>(Fr
     }
 
     private fun onKeyClick(key: CalculatorKey) {
-        setFragmentResult("calculator_key", bundleOf("input" to key.value))
+        setFragmentResult("calculator", bundleOf("input" to key.value))
+    }
+
+    companion object {
+        const val BUNDLE_CALCULATOR_INPUT = "input"
     }
 }

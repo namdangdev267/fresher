@@ -2,6 +2,7 @@ package com.misa.fresher.global
 
 import com.misa.fresher.R
 import com.misa.fresher.models.product.Product
+import com.misa.fresher.models.product.ProductBill
 import com.misa.fresher.models.product.ProductItem
 import com.misa.fresher.models.product.ProductUnit
 
@@ -12,19 +13,21 @@ object FakeData {
             if (_products == null) {
                 val items1: ArrayList<ProductItem> = arrayListOf(
                     ProductItem("S", "red", 1000.0, 10),
-                    ProductItem("L", "red", 3000.0, 10),
+                    ProductItem("L", "black", 3000.0, 10),
                     ProductItem("M", "red", 3000.0, 10),
+                    ProductItem("M", "black", 3000.0, 10),
                 )
                 val items2: ArrayList<ProductItem> = arrayListOf(
                     ProductItem("XL", "black", 1600.0, 0),
-                    ProductItem("M", "black", 2600.0, 0),
+                    ProductItem("M", "blue", 2600.0, 0),
                     ProductItem("S", "black", 3600.0, 0),
+                    ProductItem("S", "red", 3600.0, 0),
                 )
                 val items3: ArrayList<ProductItem> = arrayListOf(
                     ProductItem("XXL", "blue", 1000.0, 0),
                     ProductItem("L", "blue", 3200.0, 12),
-                    ProductItem("S", "blue", 1600.0, 0),
-                    ProductItem("M", "blue", 2600.0, 3),
+                    ProductItem("S", "black", 1600.0, 0),
+                    ProductItem("M", "red", 2600.0, 3),
                 )
                 val units = arrayListOf(
                     ProductUnit("Piece", 1),
@@ -47,4 +50,6 @@ object FakeData {
             }
             return _products!!
         }
+
+    val productBills = arrayListOf<ProductBill>()
 }

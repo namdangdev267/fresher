@@ -114,6 +114,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/nav_to_sale_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/pad_small"
@@ -124,10 +125,11 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="Sale"
-                android:drawableTint="@android:color/holo_purple"
-                app:drawableLeftCompat="@drawable/ic_cart" />
+                app:drawableLeftCompat="@drawable/ic_cart"
+                app:drawableTint="@android:color/holo_purple" />
 
             <TextView
+                android:id="@+id/nav_to_shipping_book_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_product_item"
@@ -141,6 +143,7 @@
                 app:drawableTint="@color/purpleDark" />
 
             <TextView
+                android:id="@+id/nav_to_list_bill_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_product_item"

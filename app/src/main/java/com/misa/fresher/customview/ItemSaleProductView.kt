@@ -3,110 +3,125 @@ package com.misa.fresher.customview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import com.misa.fresher.R
 import com.misa.fresher.databinding.ItemSaleProductBinding
+import com.misa.fresher.models.product.Product
+import com.misa.fresher.models.product.ProductItem
 import com.misa.fresher.models.product.ProductUnit
+import com.misa.fresher.utils.getDimension
+import com.misa.fresher.utils.getDrawable
+import com.misa.fresher.utils.listToArrayList
 
-class ItemSaleProductView(context: Context, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
+class ItemSaleProductView(context: Context, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
 
     val binding = ItemSaleProductBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var image: Int = 0
+    var product: Product = Product()
         set(value) {
             field = value
-            binding.imgImage.apply {
-                if (value == 0) visibility = View.GONE
-                else {
-                    visibility = View.VISIBLE
-                    setImageResource(R.drawable.ic_product)
-                }
+            if(value.items.size == 1) {
+                color = value.items[0].color
+                size = value.items[0].size
+            } else {
+                color = null
+                size = null
             }
+            isUnitSelect = false
+            updateUI()
         }
 
-    var name: String = ""
-        set(value) {
-            field = value
-            binding.txtName.text = value
+    val name: String
+        get() {
+            return if(color != null && size != null) product.name + "(${color}/${size})"
+            else product.name
+        }
+    val code: String
+        get() {
+            return if(color != null && size != null) product.code + "-${color!!.slice(0..2)}-${size!![0]}"
+            else product.code
         }
 
-    var code: String = ""
+    var amount: Int
         set(value) {
-            field = value
-            binding.txtCode.text = value
+            product.amount = value
+            updateUI()
+        }
+        get() = product.amount
+
+    var unit: ProductUnit
+        set(value) {
+            product.unit = value
+            updateUI()
+        }
+        get() = product.unit
+
+    val items: List<ProductItem>
+        get() = product.items.filter { (size == null || it.size == size) && (color == null || it.color == color) }
+
+    private val price: String
+        get() = when (items.size) {
+            0 -> "0.0"
+            1 -> (items[0].price * unit.value).toString()
+            else -> "${items.minOf { it.price } * unit.value} ~ ${items.maxOf { it.price } * unit.value}"
         }
 
-    var price: String = ""
+    private val totalPrice: String
+        get() = price.split(" ~ ").joinToString(" ~ ") {
+            (amount * (it.toDoubleOrNull() ?: 1.0)).toString()
+        }
+
+
+    var color: String? = null
         set(value) {
             field = value
-            binding.txtPrice.apply {
-                if(price == "") {
-                    visibility = View.GONE
-                }
-                else {
-                    visibility = View.VISIBLE
-                    binding.txtPrice.text = getTxtPrice()
-                    binding.txtTotalPrice.text = getTxtTotalPrice()
-                }
+            updateUI()
+        }
+    var size: String? = null
+        set(value) {
+            field = value
+            updateUI()
+        }
+
+    var isUnitSelect = false
+        set(value) {
+            field = value
+            updateUI()
+        }
+
+    val colors get() = items.map { it.color }.distinct()
+    val sizes get() = items.map { it.size }.distinct()
+    val unitNames get() = product.units.map { it.name }.distinct()
+
+    fun updateUI() {
+        binding.run {
+            if (product.image == 0) binding.imgImage.isGone = true
+            else binding.imgImage.setImageResource(product.image)
+            binding.txtName.text = name
+            binding.txtCode.text = code
+
+            val isAmountChangeable = amount > 0
+            if (isAmountChangeable) {
+                txtAmount.text = amount.toString()
+                txtTotalPrice.text = totalPrice
             }
-        }
-
-    var amount: Int = 0
-        set(value) {
-            field = value
-            binding.apply {
-                if (value == 0) {
-                    btnAdd.visibility = View.GONE
-                    btnMinus.visibility = View.GONE
-                    txtAmount.visibility = View.GONE
-                    txtTotalPrice.visibility = View.GONE
-                } else {
-                    btnAdd.visibility = View.VISIBLE
-                    btnMinus.visibility = View.VISIBLE
-                    txtAmount.visibility = View.VISIBLE
-                    txtTotalPrice.visibility = View.VISIBLE
-
-                    txtAmount.text = value.toString()
-                    txtTotalPrice.text = getTxtTotalPrice()
-                }
-            }
-        }
-
-    var unit: ProductUnit = ProductUnit("", 1)
-        set(unit) {
-            field = unit
-            binding.txtUnit.text = if (unit.name == "") "" else "/${unit.name}"
-
-            binding.txtPrice.text = getTxtPrice()
-            binding.txtTotalPrice.text = getTxtTotalPrice()
-
-        }
-
-    var isUnitSelect: Boolean = false
-        set(value) {
-            field = value
-            binding.btnUnitSelect.visibility = if (value) View.VISIBLE else View.GONE
-        }
-
-    private fun getTxtTotalPrice(): String {
-        return price.split(" ~ ").joinToString(" ~ ") {
-            (amount * (it.toDoubleOrNull() ?: 1.0) * unit.value).toString()
+            listOf(btnAdd, btnMinus, txtAmount, txtTotalPrice).forEach { it.isVisible = isAmountChangeable }
+            btnUnitSelect.isVisible = isUnitSelect
+            txtPrice.text = price
+            txtUnit.text = if(unit.name.isNotEmpty()) "/${unit.name}" else ""
         }
     }
-    private fun getTxtPrice(): String {
-        return price.split(" ~ ").joinToString(" ~ ") {
-            ((it.toDoubleOrNull() ?: 1.0) * unit.value).toString()
-        }
-    }
+
     init {
-        context.obtainStyledAttributes(attrs, R.styleable.ItemSaleProductView).apply {
-            image = getResourceId(R.styleable.BtnCalculatorKey_icon, 0)
-            name = getString(R.styleable.ItemSaleProductView_name) ?: ""
-            code = getString(R.styleable.ItemSaleProductView_code) ?: ""
-            price = getString(R.styleable.ItemSaleProductView_price) ?: ""
-            amount = getInt(R.styleable.ItemSaleProductView_amount, 0)
-            isUnitSelect = getBoolean(R.styleable.ItemSaleProductView_isUnitSelect, false)
-        }.recycle()
+        layoutParams =
+            LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getDimension(context, R.dimen.product_item_height))
+        background = getDrawable(context, R.drawable.bg_product_item)
+        setPadding(getDimension(context, R.dimen.pad_medium))
+        isClickable = true
+        isFocusable = true
     }
 }

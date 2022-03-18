@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start">
-        <include layout="@layout/drawer_left_main" />
+        <include
+            android:id="@+id/drawer_left_main"
+            layout="@layout/drawer_left_main" />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

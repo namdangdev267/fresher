@@ -2,16 +2,32 @@ package com.misa.fresher.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.Gravity
+import android.view.View
+import android.widget.Toast
+import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 
-object Utils {
-    fun <T> listToArrayList(list: List<T>): ArrayList<T> {
-        val res = arrayListOf<T>()
-        res.addAll(list)
-        return res
-    }
-
-    fun getColor(context: Context?, color: Int): Int = ContextCompat.getColor(context!!, color)
-    fun getDrawable(context: Context?, drawable: Int): Drawable? = AppCompatResources.getDrawable(context!!, drawable)
+fun <T> listToArrayList(list: List<T>): ArrayList<T> {
+    val res = arrayListOf<T>()
+    res.addAll(list)
+    return res
 }
+fun <T> List<T>.toArrayList(): ArrayList<T> {
+    val res = arrayListOf<T>()
+    res.addAll(this)
+    return res
+}
+
+fun Context.showToast(message: String) {
+    val toast = Toast.makeText(
+        this, message, Toast.LENGTH_LONG
+    )
+    toast.setGravity(Gravity.TOP, 0, 120)
+    toast.show()
+}
+
+fun getColor(context: Context?, color: Int): Int = ContextCompat.getColor(context!!, color)
+fun getDrawable(context: Context?, drawable: Int): Drawable? = AppCompatResources.getDrawable(context!!, drawable)
+fun getDimension(context: Context?, dimension: Int) = context!!.resources.getDimensionPixelSize(dimension)

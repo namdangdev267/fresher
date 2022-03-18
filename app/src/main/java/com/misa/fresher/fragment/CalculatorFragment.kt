@@ -11,4 +11,8 @@ class CalculatorFragment : BaseFragment<FragmentCalculatorBinding>(FragmentCalcu
         transaction.add(R.id.calculator_keyboard, CalculatorKeyFragment())
         transaction.commit()
     }
+
+    companion object {
+        const val FRAGMENT_CALCULATOR = "calculator"
+    }
 }

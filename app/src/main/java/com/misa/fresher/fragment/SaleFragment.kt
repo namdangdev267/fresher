@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.misa.fresher.BR
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ButtonListAdapter
@@ -21,8 +22,7 @@ import com.misa.fresher.databinding.DialogBottomSheetBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.global.FakeData
 import com.misa.fresher.models.product.*
-import com.misa.fresher.utils.Enums
-import com.misa.fresher.utils.Utils
+import com.misa.fresher.utils.*
 import kotlinx.coroutines.*
 
 class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::inflate) {
@@ -42,7 +42,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         var viewMode = Enums.Product.MODEL
         var textSearch = ""
     }
-
 
     override fun initUI() {
         initListProductRecViewUI()
@@ -94,6 +93,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             spinnerSize.adapter = sizeAdapter
         }
     }
+
     private fun initBottomSheetDialogUI() {
         context?.let { ct ->
             _bottomSheetDialog = BottomSheetDialog(ct)
@@ -108,37 +108,39 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             }
         }
     }
+
     private fun initListProductRecViewUI() {
         binding.listProductRecView.adapter = SaleProductAdapter(displayedItems, showBottomSheetDialog)
         binding.listProductRecView.layoutManager = LinearLayoutManager(context)
     }
 
     private fun updateProductSelectedUI() {
-        val itemAmount = selectedItems.sumOf { it.getAmount() }
-        val totalPrice = "Total ${selectedItems.sumOf { it.getTotalPrice() }}"
+        val itemAmount = selectedItems.sumOf { it.amount }
+        val totalPrice = "Total ${selectedItems.sumOf { it.price }}"
         binding.apply {
             numberBtn.text = itemAmount.toString()
             if (itemAmount > 0) {
-                numberBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_left_violet)
-                numberBtn.setTextColor(Utils.getColor(context, R.color.white))
+                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left_violet)
+                numberBtn.setTextColor(getColor(context, R.color.white))
 
-                priceBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_right_violet)
+                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right_violet)
                 priceBtn.text = totalPrice
-                priceBtn.setTextColor(Utils.getColor(context, R.color.white))
+                priceBtn.setTextColor(getColor(context, R.color.white))
 
                 clearBtn.isActive = true
             } else {
-                numberBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_left)
-                numberBtn.setTextColor(Utils.getColor(context, R.color.black))
+                numberBtn.background = getDrawable(context, R.drawable.bg_btn_round_left)
+                numberBtn.setTextColor(getColor(context, R.color.black))
 
-                priceBtn.background = Utils.getDrawable(context, R.drawable.bg_btn_round_right)
+                priceBtn.background = getDrawable(context, R.drawable.bg_btn_round_right)
                 priceBtn.text = getString(R.string.btn_product_selected)
-                priceBtn.setTextColor(Utils.getColor(context, R.color.black))
+                priceBtn.setTextColor(getColor(context, R.color.black))
 
                 clearBtn.isActive = false
             }
         }
     }
+
     private fun updateProductListUI() {
         (binding.listProductRecView.adapter as SaleProductAdapter).run {
             items = displayedItems
@@ -153,7 +155,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         var job: Job? = null
         binding.textSearch.doAfterTextChanged {
             val txtSearch = binding.textSearch.text.toString().lowercase()
-            if(txtSearch != FilterConfig.textSearch) {
+            if (txtSearch != FilterConfig.textSearch) {
                 FilterConfig.textSearch = txtSearch
                 job?.cancel()
                 job = CoroutineScope(Dispatchers.Main).launch {
@@ -168,51 +170,55 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             }
         }
     }
+
     private fun initBottomButtonListener() {
         binding.clearBtn.setOnClickListener {
             selectedItems = arrayListOf()
             updateProductSelectedUI()
         }
         val navToBillFragment: (View) -> Unit = {
-            if(selectedItems.size > 0) {
-                findNavController().navigate(R.id.action_fragment_sale_to_fragment_bill, bundleOf("selected_items" to selectedItems))
+            if (selectedItems.size > 0) {
+                findNavController().navigate(
+                    R.id.action_fragment_sale_to_fragment_bill, bundleOf(BUNDLE_SELECTED_ITEMS to selectedItems)
+                )
             }
         }
         binding.numberBtn.setOnClickListener(navToBillFragment)
         binding.priceBtn.setOnClickListener(navToBillFragment)
     }
+
     private fun initBottomSheetDialogListener() {
         bottomSheetDialogBinding.itemSaleProductView.run {
-            binding.btnAdd.setOnClickListener { amount += 1 }
+            binding.btnAdd.setOnClickListener { product.amount += 1 }
             binding.btnMinus.setOnClickListener {
-                if (amount == 1) {
+                if (product.amount == 1) {
                     val toast = Toast.makeText(
                         context, "Quantity must be more than 0. Please check again.", Toast.LENGTH_LONG
                     )
                     toast.setGravity(Gravity.TOP, 0, 120)
                     toast.show()
-                } else amount -= 1
+                } else product.amount -= 1
             }
         }
     }
+
     private fun initSaleFilterDrawerListener() {
         binding.drawerSaleFilter.run {
             btnModel.setOnClickListener {
                 FilterConfig.viewMode = Enums.Product.MODEL
-                btnModel.background = Utils.getDrawable(context, R.drawable.bg_btn_round_violet)
-                btnModel.setTextColor(Utils.getColor(context, R.color.white))
-                btnItem.background = Utils.getDrawable(context, R.drawable.bg_btn_round_border_violet)
-                btnItem.setTextColor(Utils.getColor(context, R.color.purpleDark))
+                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnModel.setTextColor(getColor(context, R.color.white))
+                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnItem.setTextColor(getColor(context, R.color.purpleDark))
             }
             btnItem.setOnClickListener {
                 FilterConfig.viewMode = Enums.Product.ITEM
-                btnItem.background = Utils.getDrawable(context, R.drawable.bg_btn_round_violet)
-                btnItem.setTextColor(Utils.getColor(context, R.color.white))
-                btnModel.background = Utils.getDrawable(context, R.drawable.bg_btn_round_border_violet)
-                btnModel.setTextColor(Utils.getColor(context, R.color.purpleDark))
+                btnItem.background = getDrawable(context, R.drawable.bg_btn_round_violet)
+                btnItem.setTextColor(getColor(context, R.color.white))
+                btnModel.background = getDrawable(context, R.drawable.bg_btn_round_border_violet)
+                btnModel.setTextColor(getColor(context, R.color.purpleDark))
             }
             btnClear.setOnClickListener {
-                FilterConfig.viewMode = Enums.Product.MODEL
                 spinnerCategory.setSelection(0)
                 radioSortBy.clearCheck()
                 spinnerColor.setSelection(0)
@@ -237,9 +243,10 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
 
     private suspend fun productSaleSearch() {
         withContext(Dispatchers.Default) {
-            displayedItems =
-                if(FilterConfig.textSearch == "") filteredItems
-                else Utils.listToArrayList(filteredItems.filter { it.name.lowercase().contains(FilterConfig.textSearch) })
+            displayedItems = if (FilterConfig.textSearch == "") filteredItems
+            else filteredItems.filter {
+                it.name.lowercase().contains(FilterConfig.textSearch)
+            }.toArrayList()
         }
     }
 
@@ -255,78 +262,96 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
 
                 if (viewMode == Enums.Product.MODEL) {
                     filteredItems = totalItems
-                    if(category != "all") filteredItems = Utils.listToArrayList(filteredItems.filter { it.category == category })
-                    if(color != "all") filteredItems = Utils.listToArrayList(filteredItems.filter { it.getColors().contains(color)})
-                    if(size != "all") filteredItems = Utils.listToArrayList(filteredItems.filter { it.getSizes(null).contains(size)})
-                    if(isCheckAvailableQTY) filteredItems = Utils.listToArrayList(filteredItems.filter { it.quantity() > 0})
+                    if (category != "all") filteredItems = listToArrayList(filteredItems.filter {
+                        it.category == category
+                    })
+                    if (color != "all") filteredItems = listToArrayList(filteredItems.filter { prod ->
+                        prod.items.map { it.color }.contains(color)
+                    })
+                    if (size != "all") filteredItems = listToArrayList(filteredItems.filter { prod ->
+                        prod.items.map { it.size }.contains(size)
+                    })
+                    if (isCheckAvailableQTY) filteredItems = listToArrayList(filteredItems.filter { it.quantity > 0 })
 
-                } else if(viewMode == Enums.Product.ITEM) {
+                } else if (viewMode == Enums.Product.ITEM) {
                     filteredItems = arrayListOf()
                     for (product in totalItems) {
-                        if(category != "all" && product.category != category) continue
+                        if (category != "all" && product.category != category) continue
                         for (item in product.items) {
-                            if(
-                                (color == "all" || item.color == color)
-                                && (size == "all" || item.size == size)
-                                && (!isCheckAvailableQTY || item.quantity > 0)
-                            ) {
+                            if ((color == "all" || item.color == color) && (size == "all" || item.size == size) && (!isCheckAvailableQTY || item.quantity > 0)) {
                                 filteredItems.add(product.copy(items = arrayListOf(item)))
                             }
                         }
                     }
                 }
 
-                if(sortBy == R.id.sort_by_name) filteredItems.sortBy { it.name }
-                else if(sortBy == R.id.sort_by_date) filteredItems.sortBy { it.date }
+                if (sortBy == R.id.sort_by_name) filteredItems.sortBy { it.name }
+                else if (sortBy == R.id.sort_by_date) filteredItems.sortBy { it.date }
             }
         }
     }
 
-    private val showBottomSheetDialog: (product: Product, pos: Int) -> Unit = { product, _ ->
-        bottomSheetDialogBinding.apply {
-            itemSaleProductView.apply {
-                name = product.name
-                code = product.code
-                price = product.getPrice()
-                unit = product.unit
-                amount = 1
+    private val showBottomSheetDialog: (prod: Product, pos: Int) -> Unit = { prod, _ ->
+        val copyProd = prod.copy(amount = 1, image = 0)
+        val checkedIndex = if (prod.items.size == 1) 0 else -1
+
+        bottomSheetDialogBinding.run {2
+            itemSaleProductView.run {
+                product = copyProd
+                binding.btnAdd.setOnClickListener { amount += 1 }
+                binding.btnMinus.setOnClickListener {
+                    if (amount == 1) {
+                        val toast = Toast.makeText(
+                            context, "Quantity must be more than 0. Please check again.", Toast.LENGTH_LONG
+                        )
+                        toast.setGravity(Gravity.TOP, 0, 120)
+                        toast.show()
+                    } else amount -= 1
+                }
             }
 
-            val colors = product.getColors()
-            val sizes = product.getSizes(colors[0])
-            val unitNames = product.getUnitNames()
-            val unitPos = product.units.indexOf(product.unit)
 
-            colorRecView.adapter = ButtonListAdapter(colors, 0) { color, pos ->
-                (colorRecView.adapter as ButtonListAdapter).apply {
+            val colors = itemSaleProductView.colors.toArrayList()
+            colorRecView.adapter = ButtonListAdapter(colors, checkedIndex) { color, pos ->
+                (colorRecView.adapter as ButtonListAdapter).run {
                     if (checked != pos) {
-                        itemSaleProductView.price = product.getPrice(color)
+                        itemSaleProductView.color = color
                         checked = pos
-
                         notifyDataSetChanged()
-                        (sizeRecView.adapter as ButtonListAdapter).apply {
-                            items = product.getSizes(color)
-                            checked = -1
+                        (sizeRecView.adapter as ButtonListAdapter).run {
+                            if (checked == -1) {
+                                itemSaleProductView.size = null
+                                items = itemSaleProductView.sizes.toArrayList()
+                            } else {
+                                val preSize = items[checked]
+                                itemSaleProductView.size = null
+                                items = itemSaleProductView.sizes.toArrayList()
+                                checked = items.indexOf(preSize)
+                                if (checked != -1) itemSaleProductView.size = items[checked]
+                            }
                             notifyDataSetChanged()
                         }
                     }
                 }
             }
-            sizeRecView.adapter = ButtonListAdapter(sizes, -1) { size, pos ->
-                (sizeRecView.adapter as ButtonListAdapter).apply {
-                    if (checked != pos) {
-                        var color: String?
-                        (colorRecView.adapter as ButtonListAdapter).apply { color = items[checked] }
-                        itemSaleProductView.price = product.getPrice(color, size)
-                        checked = pos
-                        notifyDataSetChanged()
+            sizeRecView.adapter =
+                ButtonListAdapter(itemSaleProductView.sizes.toArrayList(), checkedIndex) { size, pos ->
+                    (sizeRecView.adapter as ButtonListAdapter).apply {
+                        if (checked != pos) {
+                            itemSaleProductView.size = size
+                            checked = pos
+                            notifyDataSetChanged()
+                        }
                     }
                 }
-            }
-            unitRecView.adapter = ButtonListAdapter(unitNames, unitPos) { _, pos ->
+
+            val unitNames = bottomSheetDialogBinding.itemSaleProductView.unitNames.toArrayList()
+            val unitPos = copyProd.units.indexOf(copyProd.unit)
+
+            unitRecView.adapter = ButtonListAdapter(unitNames, unitPos) { unitName, pos ->
                 (unitRecView.adapter as ButtonListAdapter).apply {
                     if (checked != pos) {
-                        itemSaleProductView.unit = product.units[pos]
+                        itemSaleProductView.unit = itemSaleProductView.product.units[pos]
                         checked = pos
                         notifyDataSetChanged()
                     }
@@ -334,44 +359,36 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             }
         }
         bottomSheetDialog.setOnDismissListener {
-            bottomSheetDialogBinding.apply {
-                try {
-                    var size: String?
-                    var color: String?
-                    var unit: ProductUnit
-                    (sizeRecView.adapter as ButtonListAdapter).apply { size = items[checked] }
-                    (colorRecView.adapter as ButtonListAdapter).apply { color = items[checked] }
-                    (unitRecView.adapter as ButtonListAdapter).apply {
-                        unit = product.units.find { it.name == items[checked] }!!
-                    }
+            bottomSheetDialogBinding.run {
+                val curColor = itemSaleProductView.color
+                val curSize = itemSaleProductView.size
 
-                    var selectedItem: Product? = null
-                    val isSplitRow = binding.splitRowSwitch.isChecked
-                    if(!isSplitRow) selectedItem = selectedItems.find { it.code == product.code && it.items[0].size == size && it.items[0].color == color && it.unit == unit }
+                if (curColor != null && curSize != null) {
+                    val curProd = itemSaleProductView.product.copy(items = itemSaleProductView.items.toArrayList())
+                    try {
+                        var selectedItem: Product? = null
+                        val isSplitRow = binding.splitRowSwitch.isChecked
+                        if (!isSplitRow) {
+                            selectedItem = selectedItems.find {
+                                it.name == curProd.name && it.code == curProd.code && it.items == curProd.items
+                            }
+                        }
 
-                    if (selectedItem != null) selectedItem.items[0].amount += itemSaleProductView.amount
-                    else product.items.find { it.color == color && it.size == size }?.let { item ->
-                        selectedItems.add(
-                            Product(
-                                name = product.name, code = product.code, items = arrayListOf(
-                                    ProductItem(
-                                        size = item.size,
-                                        color = item.color,
-                                        price = item.price,
-                                        quantity = item.quantity,
-                                        amount = itemSaleProductView.amount
-                                    )
-                                ), units = arrayListOf(itemSaleProductView.unit), unit = unit
-                            )
-                        )
+                        if (selectedItem != null) selectedItem.amount += curProd.amount
+                        else selectedItems.add(curProd)
+
+                        Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
+                        updateProductSelectedUI()
+                    } catch (e: Exception) {
+                        Toast.makeText(context, "FAIL", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
-                    updateProductSelectedUI()
-                } catch (e: Exception) {
-                    Toast.makeText(context, "FAIL", Toast.LENGTH_SHORT).show()
                 }
             }
         }
         bottomSheetDialog.show()
+    }
+
+    companion object {
+        const val  BUNDLE_SELECTED_ITEMS = "selected_items"
     }
 }

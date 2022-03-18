@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_bill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/bill_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/purpleDark"
         app:contentInsetEnd="@dimen/pad_small"
         app:contentInsetStart="@dimen/pad_small">
@@ -30,14 +31,15 @@
                 app:tint="@color/white" />
 
             <TextView
+                android:id="@+id/txt_bill_id"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="012345"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txt_extra"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="123"/>
 
             <ImageButton
                 android:id="@+id/btn_cart"
@@ -194,7 +196,7 @@
             app:isActive="true" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/product_item_count_btn"
+            android:id="@+id/btn_product_item_count"
             android:layout_width="@dimen/default_button_height"
             android:layout_height="@dimen/default_button_height"
             android:layout_marginEnd="1dp"
@@ -204,7 +206,7 @@
             android:text="0" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/payment_btn"
+            android:id="@+id/btn_payment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
