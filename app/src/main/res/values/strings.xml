@@ -64,4 +64,7 @@
     <string name="customer_name_phone_number">Customer name, phone number</string>
     <string name="buy_more">Buy morer</string>
     <string name="Sale_split_row">Split row</string>
+    <string name="code_payment">Code Payment</string>
+    <string name="todo">TODO</string>
+    <string name="_0">0</string>
 </resources>
