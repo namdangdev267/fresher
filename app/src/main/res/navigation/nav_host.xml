@@ -15,7 +15,22 @@
             android:id="@+id/action_fragment_sale_to_fragment_payment"
             app:destination="@id/fragment_payment"
             app:enterAnim="@anim/slide_in_from_right"
-            app:exitAnim="@anim/slide_out_to_left"/>
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_list_bill"
+            app:destination="@id/fragment_list_bill" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_list_bill"
+        android:name="com.misa.fresher.Fragment.Bill.ListBillFragment"
+        android:label="fragment_list_bill"
+        tools:layout="@layout/fragment_list_bill" >
+        <action
+            android:id="@+id/action_fragment_list_bill_to_fragment_sale"
+            app:destination="@id/fragment_sale" />
     </fragment>
 
     <fragment
@@ -27,12 +42,17 @@
             android:id="@+id/action_fragment_payment_to_fragment_ship"
             app:destination="@id/fragment_ship"
             app:enterAnim="@anim/slide_in_from_right"
-            app:exitAnim="@anim/slide_out_to_left" />
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
         <action
             android:id="@+id/action_fragment_payment_to_fragment_sale"
             app:destination="@id/fragment_sale"
             app:enterAnim="@anim/slide_in_from_left"
             app:exitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_fragment_payment_to_fragment_list_bill"
+            app:destination="@id/fragment_list_bill" />
     </fragment>
 
     <fragment
