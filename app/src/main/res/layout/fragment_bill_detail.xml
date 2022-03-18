@@ -58,7 +58,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_45"
         android:weightSum="8">
 
         <ImageView
@@ -67,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/dp_8"
-            android:src="@drawable/ic_person_24" />
+            android:src="@drawable/ic_user" />
 
         <TextView
             android:id="@+id/tv_bill_detail_customer_infor"
@@ -90,8 +90,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/dp_8"
-            android:src="@drawable/ic_calendar" />
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/price_policy" />
 
         <TextView
             android:layout_width="0dp"
@@ -113,13 +113,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:weightSum="10">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="8.5"
             android:background="@drawable/ripple_rectangle"
             android:clickable="true"
@@ -153,12 +153,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
             android:layout_weight="1.5"
             android:background="@drawable/bg_rounded_right_light"
             android:paddingTop="@dimen/dp_3"
-            android:paddingRight="@dimen/dp_5"
             android:paddingBottom="@dimen/dp_3"
             android:src="@drawable/ic_barcode_dark" />
 
@@ -178,7 +176,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@drawable/ripple_rectangle_stroke"
         android:orientation="horizontal"
         android:weightSum="10"

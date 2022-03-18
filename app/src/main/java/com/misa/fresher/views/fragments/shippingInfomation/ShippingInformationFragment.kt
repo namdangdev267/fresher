@@ -51,13 +51,12 @@ class ShippingInformationFragment : Fragment() {
 
         transitionFragment(view)
         configTabLayout(view)
-        configOtherView()
+
     }
 
     private fun transitionFragment(view: View) {
         binding.ivShipInforBack.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)
+            activity?.onBackPressed()
         }
     }
 
@@ -97,13 +96,9 @@ class ShippingInformationFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)
         }
-
     }
 
-    private fun configOtherView() {
 
-
-    }
 
 
     inner class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

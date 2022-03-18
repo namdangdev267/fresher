@@ -13,9 +13,23 @@
     <TextView
         android:id="@+id/tv_bill_id"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@id/tv_bill_infor_ship"
         android:layout_alignParentStart="true"
-        android:gravity="center" />
+        android:layout_alignParentTop="true"
+        android:gravity="bottom"
+        android:text="ddd"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_bill_infor_ship"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="top"
+        android:text="ddd"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_bill_price"
@@ -23,7 +37,10 @@
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/iv_bill_show_more"
         android:gravity="center"
-        android:paddingRight="@dimen/dp_5" />
+        android:paddingRight="@dimen/dp_5"
+
+        android:textColor="@color/black"
+        />
 
     <ImageView
         android:id="@+id/iv_bill_show_more"

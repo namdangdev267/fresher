@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.R
-import com.misa.fresher.showToast
+import com.misa.fresher.showToastUp
+import com.misa.fresher.showToastUp
+import com.misa.fresher.views.customViews.CustomToast
 
 class BillDetailAdapter(
     private var listItemBillDetail: MutableList<ItemBillDetail>,
@@ -42,7 +45,8 @@ class BillDetailAdapter(
                 }
                 else if(itemBillDetail.quantity==1)
                 {
-                    itemView.context.showToast("Quantity must be more than 0. Please check again")
+//                    itemView.context.showToastUp("Quantity must be more than 0. Please check again")
+                    CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
                 }
 
 

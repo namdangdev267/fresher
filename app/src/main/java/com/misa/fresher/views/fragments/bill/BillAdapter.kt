@@ -16,6 +16,14 @@ class BillAdapter(private var listItemBill: MutableList<ItemBill>) :
             itemView.findViewById<TextView>(R.id.tv_bill_id).text = itemBill.id
             itemView.findViewById<TextView>(R.id.tv_bill_price).text =
                 itemBill.getPrice().toString()
+
+
+            if(itemBill.inforShip?.receiver!=null && itemBill.inforShip?.tel!=null)
+            {
+                itemView.findViewById<TextView>(R.id.tv_bill_infor_ship).text= itemBill.inforShip?.receiver +"-"+itemBill.inforShip?.tel
+            }
+
+
         }
     }
 

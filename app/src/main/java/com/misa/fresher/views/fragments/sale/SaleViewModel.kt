@@ -90,7 +90,11 @@ class SaleViewModel : ViewModel() {
         Log.e("filter", filter.toString())
         var showList = mutableListOf<ItemProduct>()
         showList = listItemProduct.filter { it.name.contains(search, true) } as MutableList<ItemProduct>
-
+//        for (i in listItemProduct) {
+//            if (i.name.contains(search)) {
+//                showList.add(i)
+//            }
+//        }
         var res = mutableListOf<ItemProduct>()
         for (i in showList) {
             val filterCategory = (filter.category != null && filter.category != i.category)
@@ -101,6 +105,15 @@ class SaleViewModel : ViewModel() {
             {
                 res.add(i)
             }
+
+//            val filterCategory = (filter.category == null || filter.category == i.category)
+//            val filterColor = (filter.color == null ||  filter.color == i.color)
+//            val filterAvailable = (!filter.available || i.availableQuantity > 0)
+//
+//            if(filterAvailable && filterColor && filterCategory)
+//            {
+//                res.add(i)
+//            }
         }
 
         Log.e(this.javaClass.simpleName, res.toString())

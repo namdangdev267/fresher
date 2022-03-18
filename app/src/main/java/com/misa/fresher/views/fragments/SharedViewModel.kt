@@ -112,6 +112,9 @@ class SharedViewModel : ViewModel() {
                 Calendar.getInstance().time
             )
         )
+
+        _inforShip.postValue(  InforShip(null,null,null,null,null,null,null,null,null,false))
+
     }
 
     fun getTotalPrice(): Float {
@@ -171,6 +174,7 @@ class SharedViewModel : ViewModel() {
 
         _listBill.postValue(_listBill.value)
         clearListItemSelected()
+
         var i = 0
     }
 

@@ -28,6 +28,19 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
         configDrawer()
+
+
+    }
+
+    override fun onBackPressed() {
+        if(binding.root.isDrawerOpen(binding.nvMenu))
+        {
+            toggleDrawer(binding.nvMenu)
+        }
+        else
+        {
+            super.onBackPressed()
+        }
     }
 
 

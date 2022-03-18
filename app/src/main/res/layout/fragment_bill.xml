@@ -131,12 +131,15 @@
 
     <ImageView
         android:id="@+id/iv_bill_buy_more"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
         android:background="@drawable/bg_circle_dark"
-        android:padding="13dp"
+        android:padding="@dimen/dp_16"
         android:src="@drawable/ic_shopping_cart" />
 </RelativeLayout>

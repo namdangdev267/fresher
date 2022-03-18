@@ -15,7 +15,8 @@
             app:destination="@id/billDetailFragment"
             app:enterAnim="@anim/animation_slide_in_left"
             app:exitAnim="@anim/animation_slide_out_right"
-
+            app:popEnterAnim="@anim/animation_slide_in_right"
+            app:popExitAnim="@anim/animation_slide_out_left"
             />
     </fragment>
     <fragment
@@ -26,8 +27,10 @@
         <action
             android:id="@+id/action_shippingInformationFragment_to_billDetailFragment"
             app:destination="@id/billDetailFragment"
-            app:enterAnim="@anim/animation_slide_in_right"
-            app:exitAnim="@anim/animation_slide_out_left" />
+            app:enterAnim="@anim/animation_slide_in_left"
+            app:exitAnim="@anim/animation_slide_out_right"
+            app:popEnterAnim="@anim/animation_slide_in_right"
+            app:popExitAnim="@anim/animation_slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/billDetailFragment"
@@ -38,12 +41,16 @@
             android:id="@+id/action_billDetailFragment_to_shippingInformationFragment"
             app:destination="@id/shippingInformationFragment"
             app:enterAnim="@anim/animation_slide_in_left"
-            app:exitAnim="@anim/animation_slide_out_right" />
+            app:exitAnim="@anim/animation_slide_out_right"
+            app:popEnterAnim="@anim/animation_slide_in_right"
+            app:popExitAnim="@anim/animation_slide_out_left" />
         <action
             android:id="@+id/action_billDetailFragment_to_saleFragment"
             app:destination="@id/saleFragment"
-            app:enterAnim="@anim/animation_slide_in_right"
-            app:exitAnim="@anim/animation_slide_out_left" />
+            app:enterAnim="@anim/animation_slide_in_left"
+            app:exitAnim="@anim/animation_slide_out_right"
+            app:popEnterAnim="@anim/animation_slide_in_right"
+            app:popExitAnim="@anim/animation_slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/billFragment"
@@ -52,6 +59,11 @@
         tools:layout="@layout/fragment_bill">
         <action
             android:id="@+id/action_billFragment_to_saleFragment"
-            app:destination="@id/saleFragment" />
+            app:destination="@id/saleFragment"
+            app:enterAnim="@anim/animation_slide_in_left"
+            app:exitAnim="@anim/animation_slide_out_right"
+            app:popEnterAnim="@anim/animation_slide_in_right"
+            app:popExitAnim="@anim/animation_slide_out_left"
+            />
     </fragment>
 </navigation>

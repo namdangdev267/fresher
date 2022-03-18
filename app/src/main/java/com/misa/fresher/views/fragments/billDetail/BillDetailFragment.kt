@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -16,6 +17,7 @@ import com.misa.fresher.R
 import com.misa.fresher.views.customViews.CustomToast
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentBillDetailBinding
+import com.misa.fresher.showToastUp
 
 class BillDetailFragment : Fragment() {
 
@@ -34,7 +36,9 @@ class BillDetailFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
 
+
         return binding.root
+
     }
 
 
@@ -45,6 +49,13 @@ class BillDetailFragment : Fragment() {
         configToolbar()
         configListView()
         configOtherView(view)
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_billDetailFragment_to_saleFragment)
+            }
+        })
     }
 
     private fun configToolbar() {
@@ -58,12 +69,14 @@ class BillDetailFragment : Fragment() {
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
             sharedViewModel.addBillToListBill()
 
-            CustomToast.makeText(requireContext(), "Paid Successfully", Toast.LENGTH_SHORT).show()
+            CustomToast.makeText(this.context!!,"Paid Successfully",Toast.LENGTH_SHORT)
+
         }
 
         binding.imBillDetailBack.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
+
         }
 
         binding.ivBillDetailShip.setOnClickListener {
@@ -83,6 +96,10 @@ class BillDetailFragment : Fragment() {
             if(it.receiver!=null && it.tel!=null) {
                 binding.tvBillDetailCustomerInfor.text =
                     it.receiver.toString() + " - " + it.tel.toString()
+            }
+            else
+            {
+                binding.tvBillDetailCustomerInfor.text ="Customer name, phone number"
             }
         })
 

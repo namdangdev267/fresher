@@ -4,12 +4,14 @@ package com.misa.fresher.views.fragments.sale
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
@@ -28,13 +30,32 @@ import com.misa.fresher.views.activities.MainActivity
 import com.misa.fresher.views.customViews.CustomRecyclerView
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.showToast
+import com.misa.fresher.showToastUp
+import com.misa.fresher.views.customViews.CustomToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 
 class SaleFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val saleViewModel: SaleViewModel by viewModels()
+    var backAndOut = false
+
+    var timer = object : CountDownTimer(3000, 1000) {
+
+        override fun onTick(millisUntilFinished: Long) {
+            backAndOut = true
+        }
+
+        override fun onFinish() {
+            backAndOut = false
+        }
+    }
+
 
     private val binding:FragmentSaleBinding by lazy {
         getInflater(layoutInflater)
@@ -57,6 +78,7 @@ class SaleFragment : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,6 +87,8 @@ class SaleFragment : Fragment() {
         configToolbar()
         configOtherView()
         configListView()
+
+
     }
 
     private fun transitionFragment(view: View) {
@@ -73,6 +97,28 @@ class SaleFragment : Fragment() {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_saleFragment_to_billDetailFragment)
         }
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(binding.root.isDrawerOpen(binding.nvFilter))
+                {
+                    toggleDrawer(binding.nvFilter)
+                }
+                else
+                {
+                    if(backAndOut)
+                    {
+                        activity?.finish()
+                    }
+                    else
+                    {
+                        timer.start()
+                        Toast.makeText(context,"Click again to exit!",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+
     }
 
     private fun initViewModel() {
@@ -189,9 +235,9 @@ class SaleFragment : Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables", "NotifyDataSetChanged")
     private fun configListView() {
         binding.recyclerviewSaleFragment.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerviewSaleFragment.adapter =SaleAdapter(saleViewModel.listItemProduct) { saleItemClick(it) }
+
         saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
-            binding.recyclerviewSaleFragment.adapter?.notifyDataSetChanged()
+            binding.recyclerviewSaleFragment.adapter=SaleAdapter(it) { saleItemClick(it) }
         })
 
         sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
@@ -230,6 +276,10 @@ class SaleFragment : Fragment() {
             {
                 binding.tvInforCustomer.isSelected = true
                 binding.tvInforCustomer.text = it.receiver.toString()+" - "+it.tel.toString()
+            }
+            else
+            {
+                binding.tvInforCustomer.text ="Customer name, phone number"
             }
 
         })
@@ -276,7 +326,7 @@ class SaleFragment : Fragment() {
 
         btRemove.setOnClickListener {
             if (sharedViewModel.itemSelected.value?.quantity == 1) {
-                context?.showToast("Quantity must be more than 0. Please check again")
+                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
             } else {
                 sharedViewModel.updateItemSelectedQuantity(-1)
             }
