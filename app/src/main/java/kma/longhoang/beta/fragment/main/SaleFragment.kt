@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.component1
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -28,12 +30,13 @@ import kma.longhoang.beta.adapter.ProductAdapter
 import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
+import kotlin.math.absoluteValue
 
 /*
 * @author: Hoàng Gia Long
 * Date: 3/12/2022
 */
-class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class SaleFragment : Fragment() {
     private var listProduct = mutableListOf<ProductModel>()
     private var recyclerView: RecyclerView? = null
     private var tvOrderAmount: TextView? = null
@@ -44,12 +47,14 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var navFilter: NavigationView? = null
     private var drawerSale: DrawerLayout? = null
     private var tvCustomer: TextView? = null
-    private var conditionStyle: String = ""
+    private var selectedStyle: String = ""
+    private var selectedColor: String = ""
     private val saleViewModel: SaleViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
         navMenu()
+        setupFilterSpinner()
         navFilter()
         customerInfo(view)
         setupRecyclerView()
@@ -85,6 +90,7 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    // Filter
     private fun navFilter() {
         view?.findViewById<ImageButton>(R.id.button_filter)?.setOnClickListener {
             drawerSale?.setScrimColor(TRANSPARENT)
@@ -93,42 +99,56 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    //lọc sp
-    private fun filterProduct() {
+    private fun setupFilterSpinner() {
         val spinnerStyle = navFilter?.findViewById<Spinner>(R.id.filter_spinner_style)
-        val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
+        val spinnerColor = navFilter?.findViewById<Spinner>(R.id.filter_spinner_color)
+        val adapterStyle = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.filter_style,
             androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
         )
-        spinnerStyle?.adapter = adapter
-        spinnerStyle?.onItemSelectedListener = this
-        val radioGroup = navFilter?.findViewById<RadioGroup>(R.id.filter_radio_group)
-        val radioButton = radioGroup?.checkedRadioButtonId?.let {
-            navFilter?.findViewById<RadioButton>(
-                it
-            )
+        val adapterColor = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.filter_color,
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
+        )
+        spinnerStyle?.adapter = adapterStyle
+        spinnerColor?.adapter = adapterColor
+        spinnerStyle?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                selectedStyle = p0?.getItemAtPosition(p2).toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                selectedStyle = ""
+            }
         }
+        spinnerColor?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                selectedColor = p0?.getItemAtPosition(p2).toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                selectedColor = ""
+            }
+        }
+    }
+
+    //lọc sp
+    private fun filterProduct() {
         val btnDone = navFilter?.findViewById<Button>(R.id.button_done)
         val btnCancelFilter = navFilter?.findViewById<Button>(R.id.button_cancel_filter)
         btnCancelFilter?.setOnClickListener {
             updateItemList("")
-            conditionStyle = ""
+            selectedColor = ""
+            selectedStyle = ""
+            setupFilterSpinner()
             drawerSale?.closeDrawer(GravityCompat.END)
         }
         btnDone?.setOnClickListener {
             drawerSale?.closeDrawer(GravityCompat.END)
-            filterByProductStyle(conditionStyle)
+            filterByProductStyle(selectedStyle, selectedColor)
         }
-    }
-
-    //itemSelect của spinner filter
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        conditionStyle = p0?.getItemAtPosition(p2).toString()
-    }
-
-    //itemClick của spinner filter
-    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 
     private fun customerInfo(view: View) {
@@ -153,11 +173,23 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         listProduct.addAll(
             listOf<ProductModel>(
                 ProductModel(
+                    "Áo len nam",
+                    "AL01",
+                    175000F,
+                    FilterProduct.Style.TSHIRT,
+                ),
+                ProductModel(
                     "Áo thun cotton nam",
                     "AT01",
                     175000F,
                     FilterProduct.Style.TSHIRT,
                     FilterProduct.Color.BLACK
+                ),
+                ProductModel(
+                    "Áo len nữ",
+                    "AL02",
+                    175000F,
+                    FilterProduct.Style.TSHIRT,
                 ),
                 ProductModel(
                     "Áo polo",
@@ -287,60 +319,82 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // hiển thị bottomSheet Dialog chọn số lượng
     private fun showOptionDialog(product: ProductModel) {
-        val selectAmountDialog = BottomSheetDialog(requireContext())
-        selectAmountDialog.setContentView(
-            LayoutInflater.from(context).inflate(R.layout.dialog_select_sale_item, null)
-        )
-        val tvProductName = selectAmountDialog.findViewById<TextView>(R.id.tv_product_name)
-        val tvProductCode = selectAmountDialog.findViewById<TextView>(R.id.tv_product_code)
-        val tvAmount = selectAmountDialog.findViewById<TextView>(R.id.text_amount)
-        val btnPlus = selectAmountDialog.findViewById<ImageButton>(R.id.button_plus)
-        val btnMinus = selectAmountDialog.findViewById<ImageButton>(R.id.button_minus)
-        val btnSave = selectAmountDialog.findViewById<Button>(R.id.button_save)
-        tvProductName?.text = product.name
-        tvProductCode?.text = product.code
-        var amountProduct: Int = 1
-        tvAmount?.text = amountProduct.toString()
-        btnMinus?.setOnClickListener {
-            if (amountProduct == 1) {
-                ShowNote().toast(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
-            } else {
-                amountProduct -= 1
+        if (product.color != null) {
+            val selectAmountDialog = BottomSheetDialog(requireContext())
+            selectAmountDialog.setContentView(
+                LayoutInflater.from(context).inflate(R.layout.dialog_select_sale_item, null)
+            )
+            val tvProductName = selectAmountDialog.findViewById<TextView>(R.id.tv_product_name)
+            val tvProductCode = selectAmountDialog.findViewById<TextView>(R.id.tv_product_code)
+            val tvAmount = selectAmountDialog.findViewById<TextView>(R.id.text_amount)
+            val btnPlus = selectAmountDialog.findViewById<ImageButton>(R.id.button_plus)
+            val btnMinus = selectAmountDialog.findViewById<ImageButton>(R.id.button_minus)
+            val btnColor = selectAmountDialog.findViewById<TextView>(R.id.select_color)
+//        val btnColorBlue = selectAmountDialog.findViewById<Button>(R.id.select_color_blue)
+//        val btnColorBlack = selectAmountDialog.findViewById<Button>(R.id.select_color_black)
+//        val btnColorWhite = selectAmountDialog.findViewById<Button>(R.id.select_color_white)
+            when (product.color) {
+                FilterProduct.Color.RED -> btnColor?.text = "Đỏ"
+                FilterProduct.Color.BLUE -> btnColor?.text = "Xanh"
+                FilterProduct.Color.BLACK -> btnColor?.text = "Đen"
+                FilterProduct.Color.WHITE -> btnColor?.text = "Trắng"
+            }
+            tvProductName?.text = product.name
+            tvProductCode?.text = product.code
+            var amountProduct: Int = 1
+            tvAmount?.text = amountProduct.toString()
+            btnMinus?.setOnClickListener {
+                if (amountProduct == 1) {
+                    ShowNote().toast(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
+                } else {
+                    amountProduct -= 1
+                    tvAmount?.text = amountProduct.toString()
+                }
+            }
+            btnPlus?.setOnClickListener {
+                amountProduct += 1
                 tvAmount?.text = amountProduct.toString()
             }
-        }
-        btnPlus?.setOnClickListener {
-            amountProduct += 1
-            tvAmount?.text = amountProduct.toString()
-        }
-        btnSave?.setOnClickListener {
+            btnColor?.setOnClickListener {
+                val orderModel = OrderModel(
+                    product.name,
+                    product.code,
+                    product.color,
+                    product.price,
+                    amountProduct,
+                )
+                orderList.add(orderModel)
+                val totalPrice = orderList.map { it.amount * it.price }.sum()
+                val totalAmount = orderList.sumOf { it.amount }
+                tvOrderAmount?.text = totalAmount.toString()
+                btnTotal?.text = StringBuilder("Tổng ").append(totalPrice.toString())
+                changeButtonState()
+                selectAmountDialog.dismiss()
+            }
+            selectAmountDialog.setCanceledOnTouchOutside(true)
+            selectAmountDialog.setOnCancelListener {
+                if (tvOrderAmount?.text == "0") {
+                    resetOrder()
+                } else {
+                    selectAmountDialog.dismiss()
+                }
+            }
+            selectAmountDialog.show()
+        } else {
             val orderModel = OrderModel(
                 product.name,
                 product.code,
+                null,
                 product.price,
-                amountProduct,
+                1,
             )
             orderList.add(orderModel)
-            var totalPrice = 0.0
-            var totalAmount = 0
-            for (i in 0 until orderList.size) {
-                totalAmount += orderList[i].amount
-                totalPrice += (orderList[i].amount * orderList[i].price)
-            }
+            val totalPrice = orderList.map { it.amount * it.price }.sum()
+            val totalAmount = orderList.sumOf { it.amount }
             tvOrderAmount?.text = totalAmount.toString()
             btnTotal?.text = StringBuilder("Tổng ").append(totalPrice.toString())
             changeButtonState()
-            selectAmountDialog.dismiss()
         }
-        selectAmountDialog.setCanceledOnTouchOutside(true)
-        selectAmountDialog.setOnCancelListener {
-            if (tvOrderAmount?.text == "0") {
-                resetOrder()
-            } else {
-                selectAmountDialog.dismiss()
-            }
-        }
-        selectAmountDialog.show()
     }
 
     // đổi trạng thái thanh tổng giá
@@ -384,8 +438,8 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val listProductSearch = listProduct
         val list = mutableListOf<ProductModel>()
         for (product in listProductSearch) {
-            if (product.name.lowercase().contains(keySearch) || product.code
-                    .lowercase().contains(keySearch)
+            if (product.name.lowercase().contains(keySearch.lowercase()) || product.code
+                    .lowercase().contains(keySearch.lowercase())
             ) {
                 list.add(product)
             }
@@ -395,12 +449,27 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateItemList(style: FilterProduct.Style) {
+    private fun updateItemList(
+        style: FilterProduct.Style? = null,
+        color: FilterProduct.Color? = null
+    ) {
         val listProductSearch = listProduct
         val list = mutableListOf<ProductModel>()
         for (product in listProductSearch) {
-            if (product.style == style) {
-                list.add(product)
+            if (style != null && color != null) {
+                if (product.style == style && product.color == color) {
+                    list.add(product)
+                }
+            } else if (style != null) {
+                if (product.style == style) {
+                    list.add(product)
+                }
+            } else if (color != null) {
+                if (product.color == color) {
+                    list.add(product)
+                }
+            } else {
+                list.addAll(listProductSearch)
             }
         }
         recyclerView?.adapter = ProductAdapter(list) { onItemClick(it) }
@@ -415,9 +484,15 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             btnReset?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_gray)
             btnTotal?.background =
-                AppCompatResources.getDrawable(requireContext(), R.drawable.rectangle_button_gray)
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.rectangle_button_gray
+                )
             tvOrderAmount?.background =
-                AppCompatResources.getDrawable(requireContext(), R.drawable.rectangle_button_gray)
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.rectangle_button_gray
+                )
             btnTotal?.text = getString(R.string.not_selected_yet)
             btnTotal?.setTextColor(
                 AppCompatResources.getColorStateList(
@@ -437,16 +512,27 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     // lọc product
-    private fun filterByProductStyle(style: String) {
-        when (style) {
-            "T-Shirt" -> updateItemList(FilterProduct.Style.TSHIRT)
-            "Quần Short" -> updateItemList(FilterProduct.Style.SHORT)
-            "Quần Jean" -> updateItemList(FilterProduct.Style.JEAN)
-            "Váy ngắn" -> updateItemList(FilterProduct.Style.SHORTDRESS)
-            "Váy dài" -> updateItemList(FilterProduct.Style.LONGDRESS)
+    private fun filterByProductStyle(style: String, color: String) {
+        var filterStyle: FilterProduct.Style? = null
+        var filterColor: FilterProduct.Color? = null
+        filterStyle = when (style) {
+            "T-Shirt" -> FilterProduct.Style.TSHIRT
+            "Quần Short" -> FilterProduct.Style.SHORT
+            "Quần Jean" -> FilterProduct.Style.JEAN
+            "Váy ngắn" -> FilterProduct.Style.SHORTDRESS
+            "Váy dài" -> FilterProduct.Style.LONGDRESS
             else ->
-                updateItemList("")
+                null
         }
+        filterColor = when (color) {
+            "Đỏ" -> FilterProduct.Color.RED
+            "Xanh dương" -> FilterProduct.Color.BLUE
+            "Đen" -> FilterProduct.Color.BLACK
+            "Trắng" -> FilterProduct.Color.WHITE
+            else ->
+                null
+        }
+        updateItemList(filterStyle, filterColor)
     }
 
     private fun moveToOrderDetail(view: View) {
@@ -483,4 +569,5 @@ class SaleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         })
     }
+
 }

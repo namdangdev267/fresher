@@ -29,55 +29,26 @@
         app:layout_constraintTop_toBottomOf="@+id/text_product_group" />
 
     <TextView
-        android:id="@+id/text_filter_by"
+        android:id="@+id/text_filter_by_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_30"
-        android:text="@string/arrange_by"
+        android:text="@string/arrange_by_color"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_24"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filter_spinner_style" />
 
-    <RadioGroup
-        android:id="@+id/filter_radio_group"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/filter_spinner_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_50"
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_filter_by">
-
-        <RadioButton
-            android:id="@+id/filter_radio_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/violet_dark"
-            android:text="@string/name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_18" />
-
-        <RadioButton
-            android:id="@+id/filter_radio_new_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/violet_dark"
-            android:text="@string/product_new"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_18" />
-
-        <RadioButton
-            android:id="@+id/filter_radio_seller_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/violet_dark"
-            android:text="@string/product_seller"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_18" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/text_filter_by_color" />
 
     <LinearLayout
         android:id="@+id/linear_Layout"

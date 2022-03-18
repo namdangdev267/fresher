@@ -18,7 +18,7 @@ class PackageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_package)
         val list = mutableListOf<DeliveryModel>(
-            DeliveryModel.EnterTextView(getString(R.string.weight), null, "300", null ),
+            DeliveryModel.EnterTextView(getString(R.string.weight), null, "300", null),
             DeliveryModel.PackageSize(
                 getString(R.string.size),
                 0,
@@ -28,7 +28,12 @@ class PackageFragment : Fragment() {
         )
         val adapter = DeliveryAdapter(list)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 

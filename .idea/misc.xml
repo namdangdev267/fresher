@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Long/.gradle/caches/transforms-3/7d41cd8a5d82fd57439fdb8fd3dd7719/transformed/appcompat-1.4.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/custom_background_delivery_tab.xml" value="0.198" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/custom_delivery_tablayout.xml" value="0.198" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/custom_order_tv_amount.xml" value="0.198" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/custom_toolbar.xml" value="0.198" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.198" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/ic_baseline_local_shipping_24.xml" value="0.196" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/ic_baseline_playlist_add_check_circle_24.xml" value="0.196" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.198" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/activity_delivery.xml" value="0.10833333333333334" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/delivery_layout_2_column.xml" value="0.20416666666666666" />
@@ -13,9 +20,9 @@
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/delivery_layout_package_size.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/delivery_layout_radio_button.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/delivery_layout_text.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/dialog_select_sale_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/dialog_select_sale_item.xml" value="0.25" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/filter_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_bill_list.xml" value="0.22" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_bill_list.xml" value="0.25" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_customer_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_delivery.xml" value="0.1" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_delivery_info.xml" value="0.18" />
@@ -23,6 +30,8 @@
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_order_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_order_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/fragment_sale.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/item_bill.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/item_product.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/layout/searchview_layout.xml" value="0.1" />
         <entry key="..\:/Users/Long/AndroidStudioProjects/Beta/app/src/main/res/menu/nav_menu.xml" value="0.1" />
       </map>
