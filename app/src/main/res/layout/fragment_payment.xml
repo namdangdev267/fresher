@@ -17,41 +17,45 @@
             android:id="@+id/check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/textSize_18">
+            android:layout_marginEnd="@dimen/textSize_18">
 
             <ImageView
                 android:id="@+id/imgBackMain"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/back" />
+                android:src="@drawable/back"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/tvCodePayment"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_25"
                 android:layout_centerInParent="true"
-                android:text="Code Payment"
+                android:text="@string/code_payment"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dp_20" />
+                android:textSize="@dimen/dp_20"
+                tools:ignore="RelativeOverlap,SpUsage" />
 
             <ImageView
                 android:id="@+id/imgCartPayment"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_toLeftOf="@id/imgMenuPayment"
-                android:src="@drawable/trash" />
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_toStartOf="@id/imgMenuPayment"
+                android:src="@drawable/trash"
+                android:contentDescription="@string/todo" />
 
             <ImageView
                 android:id="@+id/imgMenuPayment"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/menudotsvertical" />
+                android:src="@drawable/menudotsvertical"
+                android:contentDescription="@string/todo" />
 
         </RelativeLayout>
 

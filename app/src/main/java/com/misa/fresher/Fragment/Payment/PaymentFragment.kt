@@ -18,9 +18,9 @@ import com.misa.fresher.databinding.FragmentPaymentBinding
 import kotlinx.android.synthetic.main.payment_context.view.*
 
 class PaymentFragment: Fragment() {
-    var binding: FragmentPaymentBinding? = null
-    var sharedViewModel: PublicViewModel? = null
-    var paymentViewModel: PaymentViewModel? = null
+    private var binding: FragmentPaymentBinding? = null
+    private var sharedViewModel: PublicViewModel? = null
+    private var paymentViewModel: PaymentViewModel? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,7 +30,7 @@ class PaymentFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPaymentBinding.inflate(inflater, container, false)
         return binding!!.root
     }
@@ -47,7 +47,6 @@ class PaymentFragment: Fragment() {
         transitionFragment(view)
         configToolbar()
         configureListView()
-        configureOtherView(view)
     }
 
     private fun configToolbar() {
@@ -72,30 +71,25 @@ class PaymentFragment: Fragment() {
         }
     }
 
-    private fun configureOtherView(view: View) {
-
-    }
-
     private fun configureListView() {
         binding?.root?.rcvPackage?.layoutManager = LinearLayoutManager(this.context)
 
         sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
             binding?.root?.rcvPackage?.adapter =
-                PaymentAdapter(it, { it -> clickItemBillDetail(it) })
+                PaymentAdapter(it) { it -> clickItemBillDetail(it) }
             binding!!.root.tvCountPackage.text =
-                sharedViewModel!!.listItemSelected.value?.size.toString()
+                sharedViewModel!!.getCount().toString()
             binding!!.root.tvMoneyReceivable.text = sharedViewModel!!.getTotalPrice().toString()
         })
     }
 
-    fun clickItemBillDetail(itemBillDetail: PackageProduct) {
+    private fun clickItemBillDetail(itemBillDetail: PackageProduct) {
         if (itemBillDetail.countPackage < 1) {
             Toast.makeText(requireContext(), "Quantity must be more than 0. Please check again",
                 Toast.LENGTH_SHORT
             ).show()
         }
         sharedViewModel?.updateQuantityOfItemBillDetail(itemBillDetail)
-
     }
 
 }
