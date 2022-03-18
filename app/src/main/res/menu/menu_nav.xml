@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/fragment_sale"
-        android:icon="@drawable/list64px"
-        android:title="Sale" />
-    <item
-        android:id="@+id/nav_SoGiaoHang"
-        android:icon="@drawable/bill24px"
-        android:title="Shipping book" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Sale"
+            android:icon="@drawable/list64px"
+            android:title="@string/sale" />
+        <item
+            android:id="@+id/nav_ListBill"
+            android:icon="@drawable/bill24px"
+            android:title="@string/shipping_book" />
+    </group>
 </menu>
