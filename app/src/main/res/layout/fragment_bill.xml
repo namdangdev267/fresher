@@ -178,7 +178,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/pad_medium">
 
-        <com.misa.fresher.customview.BtnRound
+        <com.misa.fresher.customview.ButtonOval
             android:id="@+id/btn_nav_to_ship_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
             app:icon="@drawable/ic_shipping_white"
             app:isActive="true" />
 
-        <com.misa.fresher.customview.BtnRound
+        <com.misa.fresher.customview.ButtonOval
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/pad_tiny"

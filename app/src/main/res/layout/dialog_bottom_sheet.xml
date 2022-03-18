@@ -7,7 +7,7 @@
     android:background="@drawable/bg_btn_round_white"
     android:paddingBottom="@dimen/pad_large"
     android:orientation="vertical">
-    <com.misa.fresher.customview.ItemSaleProductView
+    <com.misa.fresher.customview.ViewProduct
         android:id="@+id/item_sale_product_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/product_item_height"

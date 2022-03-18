@@ -1,10 +1,10 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.calculator
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.GridLayoutManager
 import com.misa.fresher.R
-import com.misa.fresher.adapter.CalculatorKeyAdapter
+import com.misa.fresher.ui.calculator.adapter.CalculatorKeyAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentCalculatorKeyboardBinding
 import com.misa.fresher.models.CalculatorKey

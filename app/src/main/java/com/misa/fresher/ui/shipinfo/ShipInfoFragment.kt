@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.shipinfo
 
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
-import com.misa.fresher.adapter.ShipInfoAdapter
+import com.misa.fresher.ui.shipinfo.adapter.ShipInfoAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.*
 import com.misa.fresher.models.ShipInfo

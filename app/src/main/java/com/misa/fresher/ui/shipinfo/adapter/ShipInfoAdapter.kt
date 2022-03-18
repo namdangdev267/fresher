@@ -1,4 +1,4 @@
-package com.misa.fresher.adapter
+package com.misa.fresher.ui.shipinfo.adapter
 
 import android.view.LayoutInflater
 import android.view.View

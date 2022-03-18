@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.calculator
 
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController

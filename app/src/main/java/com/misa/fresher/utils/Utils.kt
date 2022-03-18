@@ -3,21 +3,12 @@ package com.misa.fresher.utils
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.Gravity
-import android.view.View
 import android.widget.Toast
-import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 
-fun <T> listToArrayList(list: List<T>): ArrayList<T> {
-    val res = arrayListOf<T>()
-    res.addAll(list)
-    return res
-}
 fun <T> List<T>.toArrayList(): ArrayList<T> {
-    val res = arrayListOf<T>()
-    res.addAll(this)
-    return res
+    return ArrayList(this)
 }
 
 fun Context.showToast(message: String) {

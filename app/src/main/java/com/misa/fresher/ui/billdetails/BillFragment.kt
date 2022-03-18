@@ -1,14 +1,15 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.billdetails
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
-import com.misa.fresher.adapter.SaleProductAdapter
+import com.misa.fresher.ui.sale.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.global.FakeData
 import com.misa.fresher.models.product.Product
 import com.misa.fresher.models.product.ProductBill
+import com.misa.fresher.ui.sale.SaleFragment
 import com.misa.fresher.utils.showToast
 
 class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::inflate) {

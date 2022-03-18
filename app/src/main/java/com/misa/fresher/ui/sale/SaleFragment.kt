@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.sale
 
 import android.view.Gravity
 import android.view.View
@@ -12,11 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.BR
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
-import com.misa.fresher.adapter.ButtonListAdapter
-import com.misa.fresher.adapter.SaleProductAdapter
+import com.misa.fresher.ui.sale.adapter.ButtonOvalListAdapter
+import com.misa.fresher.ui.sale.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.DialogBottomSheetBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
@@ -262,16 +261,18 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
 
                 if (viewMode == Enums.Product.MODEL) {
                     filteredItems = totalItems
-                    if (category != "all") filteredItems = listToArrayList(filteredItems.filter {
+                    if (category != "all") filteredItems = filteredItems.filter {
                         it.category == category
-                    })
-                    if (color != "all") filteredItems = listToArrayList(filteredItems.filter { prod ->
+                    }.toArrayList()
+                    if (color != "all") filteredItems = filteredItems.filter { prod ->
                         prod.items.map { it.color }.contains(color)
-                    })
-                    if (size != "all") filteredItems = listToArrayList(filteredItems.filter { prod ->
+                    }.toArrayList()
+                    if (size != "all") filteredItems = filteredItems.filter { prod ->
                         prod.items.map { it.size }.contains(size)
-                    })
-                    if (isCheckAvailableQTY) filteredItems = listToArrayList(filteredItems.filter { it.quantity > 0 })
+                    }.toArrayList()
+                    if (isCheckAvailableQTY) filteredItems = filteredItems.filter {
+                        it.quantity > 0
+                    }.toArrayList()
 
                 } else if (viewMode == Enums.Product.ITEM) {
                     filteredItems = arrayListOf()
@@ -312,13 +313,13 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
 
 
             val colors = itemSaleProductView.colors.toArrayList()
-            colorRecView.adapter = ButtonListAdapter(colors, checkedIndex) { color, pos ->
-                (colorRecView.adapter as ButtonListAdapter).run {
+            colorRecView.adapter = ButtonOvalListAdapter(colors, checkedIndex) { color, pos ->
+                (colorRecView.adapter as ButtonOvalListAdapter).run {
                     if (checked != pos) {
                         itemSaleProductView.color = color
                         checked = pos
                         notifyDataSetChanged()
-                        (sizeRecView.adapter as ButtonListAdapter).run {
+                        (sizeRecView.adapter as ButtonOvalListAdapter).run {
                             if (checked == -1) {
                                 itemSaleProductView.size = null
                                 items = itemSaleProductView.sizes.toArrayList()
@@ -335,8 +336,8 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
                 }
             }
             sizeRecView.adapter =
-                ButtonListAdapter(itemSaleProductView.sizes.toArrayList(), checkedIndex) { size, pos ->
-                    (sizeRecView.adapter as ButtonListAdapter).apply {
+                ButtonOvalListAdapter(itemSaleProductView.sizes.toArrayList(), checkedIndex) { size, pos ->
+                    (sizeRecView.adapter as ButtonOvalListAdapter).apply {
                         if (checked != pos) {
                             itemSaleProductView.size = size
                             checked = pos
@@ -348,8 +349,8 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
             val unitNames = bottomSheetDialogBinding.itemSaleProductView.unitNames.toArrayList()
             val unitPos = copyProd.units.indexOf(copyProd.unit)
 
-            unitRecView.adapter = ButtonListAdapter(unitNames, unitPos) { unitName, pos ->
-                (unitRecView.adapter as ButtonListAdapter).apply {
+            unitRecView.adapter = ButtonOvalListAdapter(unitNames, unitPos) { unitName, pos ->
+                (unitRecView.adapter as ButtonOvalListAdapter).apply {
                     if (checked != pos) {
                         itemSaleProductView.unit = itemSaleProductView.product.units[pos]
                         checked = pos

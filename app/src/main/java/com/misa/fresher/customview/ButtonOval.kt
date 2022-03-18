@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setMargins
 import com.misa.fresher.R
 
-class BtnRound(context: Context, attrs: AttributeSet?) : androidx.appcompat.widget.AppCompatTextView(context, attrs) {
+class ButtonOval(context: Context, attrs: AttributeSet?) : androidx.appcompat.widget.AppCompatTextView(context, attrs) {
     private val scale = resources.displayMetrics.density
     private fun DPtoPX(dp: Int): Int = (dp * scale + 0.5f).toInt()
 
@@ -48,10 +48,10 @@ class BtnRound(context: Context, attrs: AttributeSet?) : androidx.appcompat.widg
         }
 
     init {
-        context.obtainStyledAttributes(attrs, R.styleable.BtnRound).apply {
-            value = getString(R.styleable.BtnRound_value) ?: ""
-            isActive = getBoolean(R.styleable.BtnRound_isActive, false)
-            icon = getResourceId(R.styleable.BtnRound_icon, 0)
+        context.obtainStyledAttributes(attrs, R.styleable.ButtonOval).apply {
+            value = getString(R.styleable.ButtonOval_value) ?: ""
+            isActive = getBoolean(R.styleable.ButtonOval_isActive, false)
+            icon = getResourceId(R.styleable.ButtonOval_icon, 0)
         }.recycle()
 
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)

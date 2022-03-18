@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.misa.fresher.R
 
 
-class BtnCalculatorKey(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
+class ButtonRound(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
     var value: String = ""
         set(value) {
             field = value
@@ -36,10 +36,10 @@ class BtnCalculatorKey(context: Context, attrs: AttributeSet) : AppCompatTextVie
         }
 
     init {
-        context.obtainStyledAttributes(attrs, R.styleable.BtnCalculatorKey).apply {
-            value = getString(R.styleable.BtnCalculatorKey_value) ?: ""
-            isActive = getBoolean(R.styleable.BtnCalculatorKey_isActive, false)
-            icon = getResourceId(R.styleable.BtnCalculatorKey_icon, 0)
+        context.obtainStyledAttributes(attrs, R.styleable.ButtonRound).apply {
+            value = getString(R.styleable.ButtonRound_value) ?: ""
+            isActive = getBoolean(R.styleable.ButtonRound_isActive, false)
+            icon = getResourceId(R.styleable.ButtonRound_icon, 0)
         }.recycle()
     }
 }

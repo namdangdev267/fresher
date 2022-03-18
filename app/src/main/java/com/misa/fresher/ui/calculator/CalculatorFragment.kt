@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.calculator
 
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment

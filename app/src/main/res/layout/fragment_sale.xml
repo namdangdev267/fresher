@@ -154,7 +154,7 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <com.misa.fresher.customview.BtnRound
+            <com.misa.fresher.customview.ButtonOval
                 android:id="@+id/clear_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

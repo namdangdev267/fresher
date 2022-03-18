@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment
+package com.misa.fresher.ui.listbills
 
 
 import com.misa.fresher.base.BaseFragment

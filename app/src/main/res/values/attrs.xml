@@ -4,19 +4,19 @@
     <attr name="icon" format="reference" />
     <attr name="isActive" format="boolean" />
 
-    <declare-styleable name="BtnCalculatorKey">
+    <declare-styleable name="ButtonRound">
         <attr name="value" />
         <attr name="icon" />
         <attr name="isActive" />
     </declare-styleable>
 
-    <declare-styleable name="BtnRound">
+    <declare-styleable name="ButtonOval">
         <attr name="value" />
         <attr name="icon" />
         <attr name="isActive" />
     </declare-styleable>
 
-    <declare-styleable name="ItemSaleProductView">
+    <declare-styleable name="VewProduct">
         <attr name="image" format="reference" />
         <attr name="name" format="string" />
         <attr name="code" format="string" />

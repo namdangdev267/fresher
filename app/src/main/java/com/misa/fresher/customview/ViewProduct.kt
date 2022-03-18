@@ -15,9 +15,8 @@ import com.misa.fresher.models.product.ProductItem
 import com.misa.fresher.models.product.ProductUnit
 import com.misa.fresher.utils.getDimension
 import com.misa.fresher.utils.getDrawable
-import com.misa.fresher.utils.listToArrayList
 
-class ItemSaleProductView(context: Context, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
+class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
 
     val binding = ItemSaleProductBinding.inflate(LayoutInflater.from(context), this, true)
 

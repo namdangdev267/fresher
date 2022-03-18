@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_sale"
-        android:name="com.misa.fresher.fragment.SaleFragment"
+        android:name="com.misa.fresher.ui.sale.SaleFragment"
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_bill"
-        android:name="com.misa.fresher.fragment.BillFragment"
+        android:name="com.misa.fresher.ui.billdetails.BillFragment"
         android:label="fragment_bill"
         tools:layout="@layout/fragment_bill">
 
@@ -49,19 +49,19 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_list_bills"
-        android:name="com.misa.fresher.fragment.ListBillFragment"
+        android:name="com.misa.fresher.ui.listbills.ListBillFragment"
         android:label="fragment_list_bills"
         tools:layout="@layout/fragment_list_bills" />
     <fragment
         android:id="@+id/fragment_ship_info"
-        android:name="com.misa.fresher.fragment.ShipInfoFragment"
+        android:name="com.misa.fresher.ui.shipinfo.ShipInfoFragment"
         android:label="fragment_ship_info"
         tools:layout="@layout/fragment_ship_info">
 
     </fragment>
     <fragment
         android:id="@+id/fragment_calculator"
-        android:name="com.misa.fresher.fragment.CalculatorFragment"
+        android:name="com.misa.fresher.ui.calculator.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" />
 </navigation>
