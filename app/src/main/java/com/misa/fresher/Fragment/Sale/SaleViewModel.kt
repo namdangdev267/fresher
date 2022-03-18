@@ -53,12 +53,7 @@ class SaleViewModel : ViewModel() {
     fun updateListItemShow(searchString: String) {
         search = searchString
         _listItemShow.postValue(listItemProduct)
-        var showList = mutableListOf<Product>()
-        for (i in listItemProduct) {
-            if (i.nameProduct.contains(searchString)) {
-                showList.add(i)
-            }
-        }
-        _listItemShow.postValue(showList)
+        var showList = listItemProduct.filter { it.nameProduct.contains(searchString, true) }
+        _listItemShow.postValue(showList as MutableList<Product>?)
     }
 }

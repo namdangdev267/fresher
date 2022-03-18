@@ -38,11 +38,7 @@ open class ProductAdapter(
         return MyViewHolder(productView, onClickItemListener)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(productList[position])
-    }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) = holder.bind(productList[position])
 
-    override fun getItemCount(): Int {
-        return productList.size
-    }
+    override fun getItemCount(): Int = productList.size
 }
