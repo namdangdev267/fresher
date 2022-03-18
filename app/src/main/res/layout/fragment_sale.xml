@@ -31,7 +31,233 @@
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/sale_context" />
+<!--        <include layout="@layout/sale_context" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0"
+                    android:layout_weight="3.8">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/glNgang1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.07" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/glNgang2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.13" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/glDocSwitchCompat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.15" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:background="@color/background_switch"
+                            app:layout_constraintBottom_toBottomOf="@id/glNgang2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/glNgang1" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:thumb="@drawable/thumb_custom"
+                            app:layout_constraintBottom_toBottomOf="@id/glNgang2"
+                            app:layout_constraintEnd_toEndOf="@id/glDocSwitchCompat"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/glNgang1"
+                            app:track="@drawable/track_custom" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="@dimen/dp_8"
+                            android:gravity="center|left"
+                            android:text="@string/Sale_split_row"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize_18"
+                            app:layout_constraintBottom_toBottomOf="@id/glNgang2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/glDocSwitchCompat"
+                            app:layout_constraintTop_toTopOf="@id/glNgang1" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_45"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="@id/glNgang1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/imgEdt"
+                                android:layout_width="@dimen/dp_25"
+                                android:layout_height="@dimen/dp_25"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_20"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <EditText
+                                android:id="@+id/etSearch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="@dimen/dp_10"
+                                android:layout_marginVertical="@dimen/dp_5"
+                                android:background="@null"
+                                android:clickable="true"
+                                android:ellipsize="end"
+                                android:focusable="true"
+                                android:gravity="center_vertical"
+                                android:hint="@string/customer_name_phone_number"
+                                android:lines="1"
+                                android:maxLines="1"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:textSize="@dimen/dp_12" />
+
+                            <RelativeLayout
+                                android:id="@+id/relativeKhongChon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgKhong"
+                                    android:layout_width="@dimen/dp_25"
+                                    android:layout_height="@dimen/dp_25"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginRight="@dimen/dp_5"
+                                    android:src="@drawable/calendar" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginRight="@dimen/dp_5"
+                                    android:layout_toRightOf="@id/imgKhong"
+                                    android:text="None"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dp_15" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcvProduct"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/glNgang2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/dp_8"
+                    android:layout_weight="0.3">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:id="@+id/btnRefresh"
+                            android:layout_width="@dimen/dp_45"
+                            android:layout_height="@dimen/dp_45"
+                            android:background="@drawable/custom_button_none"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/glDoc1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp_25"
+                                android:layout_height="@dimen/dp_25"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/refresh" />
+                        </RelativeLayout>
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/glDoc1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.15" />
+
+                        <LinearLayout
+                            android:id="@+id/linearQuantity"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_45"
+                            android:background="@drawable/custom_background_none"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/glDoc1"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tvCountProduct"
+                                android:layout_width="@dimen/dp_45"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:textSize="@dimen/textSize_18" />
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/white" />
+
+                            <TextView
+                                android:id="@+id/tvBillProduct"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/not_selected_item"
+                                android:textColor="@color/SwitchCompat"
+                                android:textSize="@dimen/textSize_18" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

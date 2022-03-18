@@ -24,14 +24,13 @@ import com.misa.fresher.Models.Product
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentSaleBinding
-import kotlinx.android.synthetic.main.sale_context.view.*
 import kotlinx.android.synthetic.main.search_view.view.*
 
 class SaleFragment : Fragment() {
 
-    var binding: FragmentSaleBinding? = null
-    var sharedViewModel: PublicViewModel? = null
-    var saleViewModel: SaleViewModel? = null
+    private var binding: FragmentSaleBinding? = null
+    private var sharedViewModel: PublicViewModel? = null
+    private var saleViewModel: SaleViewModel?= null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,7 +56,7 @@ class SaleFragment : Fragment() {
     }
 
     private fun transitionFragment(view: View) {
-        binding?.root?.linearQuantity?.setOnClickListener {
+        binding?.linearQuantity?.setOnClickListener {
             if (sharedViewModel?.listItemSelected?.value!!.size > 0) {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_fragment_sale_to_fragment_payment)
@@ -104,41 +103,41 @@ class SaleFragment : Fragment() {
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun configListView() {
-        binding?.root?.rcvProduct?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rcvProduct?.layoutManager = LinearLayoutManager(requireContext())
 
         saleViewModel?.listItemShow?.observe(viewLifecycleOwner, Observer {
-            binding?.root?.rcvProduct?.adapter = it?.let { it1 ->
+            binding?.rcvProduct?.adapter = it?.let { it1 ->
                 ProductAdapter(it1) { it -> saleItemClick(it) }
             }
         })
 
         sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
     //            binding.root.tvCountProduct.text = it.size.toString()
-            binding!!.root.tvCountProduct.text = sharedViewModel!!.getCount().toString()
+            binding!!.tvCountProduct.text = sharedViewModel!!.getCount().toString()
 
             if (it.size >= 1) {
-                binding!!.root.linearQuantity.background =
+                binding!!.linearQuantity.background =
                     this.context?.getDrawable(R.drawable.custom_background)
-                binding!!.root.btnRefresh.background =
+                binding!!.btnRefresh.background =
                     this.context?.getDrawable(R.drawable.custom_button)
-                binding!!.root.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
-                binding!!.root.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
-                binding!!.root.tvBillProduct.text =
+                binding!!.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
+                binding!!.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
+                binding!!.tvBillProduct.text =
                     "Total " + sharedViewModel!!.getTotalPrice().toString()
             } else {
-                binding!!.root.linearQuantity.background =
+                binding!!.linearQuantity.background =
                     this.context?.getDrawable(R.drawable.custom_background_none)
-                binding!!.root.btnRefresh.background =
+                binding!!.btnRefresh.background =
                     this.context?.getDrawable(R.drawable.custom_button_none)
-                binding!!.root.tvBillProduct.text = "Not yet selected item"
-                binding!!.root.tvCountProduct.setTextColor(Color.GRAY)
-                binding!!.root.tvBillProduct.setTextColor(Color.GRAY)
+                binding!!.tvBillProduct.text = "Not yet selected item"
+                binding?.tvCountProduct?.setTextColor(Color.GRAY)
+                binding?.tvBillProduct?.setTextColor(Color.GRAY)
             }
         })
     }
 
     private fun configureOtherView() {
-        binding?.root?.btnRefresh?.setOnClickListener {
+        binding?.btnRefresh?.setOnClickListener {
             sharedViewModel?.clearListItemSelected()
         }
     }
@@ -152,7 +151,7 @@ class SaleFragment : Fragment() {
     }
 
     private fun saleItemClick(itemProduct: Product) {
-        var bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         val bottomSheetView: View = LayoutInflater.from(requireContext()).inflate(
             R.layout.bottom_sheet_product,
             this.view as DrawerLayout, false
