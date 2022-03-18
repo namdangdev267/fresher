@@ -31,4 +31,19 @@
         <item>Debit</item>
         <item>Deleted</item>
     </string-array>
+    <string-array name="color">
+        <item>All</item>
+        <item>blue</item>
+        <item>while</item>
+        <item>black</item>
+        <item>green</item>
+        <item>orange</item>
+    </string-array>
+    <string-array name="size">
+        <item>All</item>
+        <item>L</item>
+        <item>XL</item>
+        <item>M</item>
+        <item>XXL</item>
+    </string-array>
 </resources>

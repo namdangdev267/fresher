@@ -22,6 +22,7 @@
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
+            android:id="@+id/tvBillCode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -63,7 +64,7 @@
             android:layout_marginStart="@dimen/d5"
             android:layout_weight="1"
             android:contentDescription="TODO"
-            android:src="@drawable/ic__users" />
+            android:src="@drawable/ic_user" />
 
         <TextView
             android:layout_width="0dp"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +29,7 @@
                 android:layout_weight="1"
                 android:text="Tổ chức"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <RadioButton
                 android:theme="@style/SCBSwitch"
@@ -37,7 +38,7 @@
                 android:layout_weight="1"
                 android:text="Cá nhân"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
         </LinearLayout>
 
         <TableRow
@@ -52,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tablerow1"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
             android:orientation="vertical">
 
             <TextView
@@ -61,16 +62,16 @@
                 android:layout_height="match_parent"
                 android:text="Đối tác giao hàng"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:layout_marginTop="@dimen/de10"
                 android:hint="Chạm để chọn"
-                android:textColor="@color/purple_700"
-                android:textSize="20sp" />
+                android:textColor="@color/violet_dark"
+                android:textSize="@dimen/ts16"
+                app:drawableEndCompat="@android:drawable/arrow_down_float" />
         </LinearLayout>
 
         <TableRow
@@ -94,14 +95,14 @@
                 android:layout_height="wrap_content"
                 android:text="Loại dịch vụ"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/de10"
                 android:hint="Chạm để chọn"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
         </LinearLayout>
 
         <TableRow
@@ -116,8 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tablerow3"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
             android:orientation="vertical">
 
             <TextView
@@ -125,16 +126,16 @@
                 android:layout_height="wrap_content"
                 android:text="Phí giao hàng trả đối tác"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawableEnd="@drawable/ic_baseline_calculate_24"
+                android:layout_marginTop="@dimen/de10"
                 android:text="0,0"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16"
+                app:drawableEndCompat="@drawable/ic_baseline_calculate_24" />
         </LinearLayout>
 
         <TableRow
@@ -158,15 +159,15 @@
                 android:layout_height="wrap_content"
                 android:text="Mã vận đơn"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/de10"
                 android:background="@null"
                 android:hint="Chạm để nhập"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
         </LinearLayout>
 
         <TableRow
@@ -181,8 +182,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tablerow5"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
             android:orientation="vertical">
 
             <TextView
@@ -190,15 +191,15 @@
                 android:layout_height="wrap_content"
                 android:text="Ghi chú giao hàng"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/de10"
                 android:background="@null"
                 android:hint="Chạm để nhập"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
         </LinearLayout>
 
         <TableRow
@@ -213,8 +214,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tablerow6"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/d5"
+            android:layout_marginBottom="@dimen/d5"
             android:orientation="vertical">
 
             <TextView
@@ -222,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ngày giao hàng"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -231,7 +232,7 @@
                 android:background="@null"
                 android:hint="01/03/2022"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="@dimen/ts16" />
         </LinearLayout>
         <TableRow
             android:id="@+id/tablerow7"

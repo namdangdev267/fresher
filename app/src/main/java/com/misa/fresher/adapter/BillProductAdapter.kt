@@ -64,11 +64,8 @@ class BillProductAdapter(
         val contactView = li.inflate(R.layout.layout_item_bill, parent, false)
         return ViewHolder(contactView)
     }
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mListBilll[position])
     }
-
     override fun getItemCount() = mListBilll.size
 }

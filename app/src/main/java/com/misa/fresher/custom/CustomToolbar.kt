@@ -1,10 +1,11 @@
-package com.misa.fresher
+package com.misa.fresher.custom
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.*
+import com.misa.fresher.R
 
 class CustomToolbar : LinearLayout
 {
@@ -21,15 +22,15 @@ class CustomToolbar : LinearLayout
         a.recycle()
         orientation= HORIZONTAL
         LayoutInflater.from(context).inflate(R.layout.item_toolbar,this,true)
-        val imbCart=findViewById<ImageView>(R.id.imb_cart)
+        val imbCart=findViewById<ImageButton>(R.id.imbCart)
         imbCart.setImageResource(imgCart)
-        val imbSearch=findViewById<ImageView>(R.id.imb_search)
+        val imbSearch=findViewById<ImageButton>(R.id.imbSearch)
         imbSearch.setImageResource(imgSearch)
-        val txtSearch=findViewById<EditText>(R.id.txt_search)
-        txtSearch.setHint(txtHint)
-        val imbBarcode=findViewById<ImageView>(R.id.imb_barcode)
+        val txtSearch=findViewById<EditText>(R.id.etSearch)
+        txtSearch.hint = txtHint
+        val imbBarcode=findViewById<ImageButton>(R.id.imbBarcode)
         imbBarcode.setImageResource(imgCode)
-        val imbFilter=findViewById<ImageView>(R.id.imb_filter)
+        val imbFilter=findViewById<ImageButton>(R.id.imbFilter)
         imbFilter.setImageResource(imgFilter)
     }
 }

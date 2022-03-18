@@ -1,36 +1,26 @@
 package com.misa.fresher.model
 
 class Product(
-    val productId:Int,
+    val productId: Int,
     val productName: String,
     val productSKU: String,
     val productPrice: Int,
-    val quantity:Int)
+    val color: String,
+    val size: String
+)
 {
-    companion object
-    {
-        fun createContactsList(numProducts: Int): ArrayList<Product>
+    companion object{
+        fun fakedat():MutableList<Product>
         {
-            var lastContactId = 0
-
-            val contacts = ArrayList<Product>()
-            for (i in 1..numProducts)
-            {
-                contacts.add(Product(i,"Giày " + ++lastContactId, "G" + lastContactId, 120000,5))
-            }
-            return contacts
-        }
-        fun fakeData():ArrayList<Product>
-        {
-            val contacts = ArrayList<Product>()
-            contacts.add(Product(1,"Áo sơ mi" , "G", 120000,5))
-            contacts.add(Product(2,"Giày Nike", "G", 60000,0))
-            contacts.add(Product(3,"Giày Addidas", "G" , 120000,5))
-            contacts.add(Product(4,"Bộ áo Bolo", "G", 80000,0))
-            contacts.add(Product(5,"Quần Âu", "G", 45000,5))
-            contacts.add(Product(6,"Áo trắng", "G", 120000,0))
-            contacts.add(Product(7,"Thuốc", "G", 120000,5))
-            return contacts
+            val contact= mutableListOf<Product>()
+            contact.add(Product(1, "T-Shirt", "G1", 120000,  "red", "L"))
+            contact.add(Product(2, "Shoe", "G2", 60000,  "blue", "XL"))
+            contact.add(Product(3, "Skin", "G3", 120000,  "while", "L"))
+            contact.add(Product(4, "Sneaker", "G4", 80000,  "orange", "M"))
+            contact.add(Product(5, "Q", "G5", 45000,  "green", "big"))
+            contact.add(Product(6, "R", "G6", 120000, "black", "small"))
+            contact.add(Product(7, "C", "G7", 120000,  "blue", "XXL"))
+            return contact
         }
     }
 }

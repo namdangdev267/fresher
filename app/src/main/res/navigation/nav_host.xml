@@ -11,32 +11,47 @@
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale" >
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             android:id="@+id/action_saleFragment_to_billDetailFragment"
             app:destination="@id/billDetailFragment" />
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_listBillsFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/listBillsFragment" />
     </fragment>
     <fragment
         android:id="@+id/shippingInforFragment"
         android:name="com.misa.fresher.fragment.ShippingInforFragment"
-        android:label="ShippingInforFragment" >
-        <action
-            android:id="@+id/action_shippingInforFragment_to_listBillsFragment"
-            app:destination="@id/listBillsFragment" />
-    </fragment>
+        android:label="ShippingInforFragment" />
     <fragment
         android:id="@+id/billDetailFragment"
         android:name="com.misa.fresher.fragment.BillDetailFragment"
         android:label="fragment_bill_detail"
         tools:layout="@layout/fragment_bill_detail" >
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             android:id="@+id/action_billDetailFragment_to_shippingInforFragment"
             app:destination="@id/shippingInforFragment" />
+        <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
+            android:id="@+id/action_billDetailFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
     <fragment
         android:id="@+id/listBillsFragment"
-        android:name="com.misa.fresher.base.ListBillsFragment"
+        android:name="com.misa.fresher.fragment.ListBillsFragment"
         android:label="fragment_list_bills"
         tools:layout="@layout/fragment_list_bills" />
 </navigation>

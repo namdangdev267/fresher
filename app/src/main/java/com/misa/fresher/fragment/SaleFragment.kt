@@ -3,70 +3,102 @@ package com.misa.fresher.fragment
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import com.misa.fresher.BillViewModel
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ProductApdapter
+import com.misa.fresher.model.BillInfor
+import com.misa.fresher.model.FilterProduct
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.SelectedProduct
 import java.text.DecimalFormat
 
 class SaleFragment : Fragment() {
-    var products: ArrayList<Product> = Product.fakeData()
+    var products = Product.fakedat()
     var rcv: RecyclerView? = null
     var productList = mutableListOf<SelectedProduct>()
+    var viewModel: BillViewModel? = null
+    var mListBill: MutableList<BillInfor>? = null
+    var rcvAdapter: ProductApdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
         return inflater.inflate(R.layout.fragment_sale, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRecyclerView(view)
-        setUpNavigationView(view)
+        setUpView(view)
         searchProduct(view)
         clearProduct(view)
-        openDrawerLayoutMenu(view)
-        setUpNavigation()
-        setUpFilter(view)
-        openBillFragment(view)
+        showBillFragment(view)
         updateView()
-        cleanFilter(view)
+        configFilter(view)
+        getListBill()
     }
+
     /**
      *Set up hiển thị Recycleview
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun setUpRecyclerView(view: View) {
+    private fun setUpView(view: View) {
         rcv = view.findViewById(R.id.rcvProduct)
-        val adapter = ProductApdapter(products) { showBottomDialog(it) }
-        rcv?.adapter = adapter
+        rcvAdapter = ProductApdapter(products as ArrayList<Product>) { showBottomDialog(it) }
+        rcv?.adapter = rcvAdapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
+        setUpNavigation()
+        openDrawerLayoutMenu(view)
     }
+
     /**
-     *Hiển thị BottomDialog để chọn số lượng của sản phẩm
+     *Thiết lập dữ liệu cho spinner
+     *@author:NCPhuc
+     *@date:3/18/2022
+     **/
+    private fun setUpSpinner(view: View) {
+        val spnColor = view.findViewById<Spinner>(R.id.spnColor)
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.color,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnColor?.adapter = adapter
+        }
+        val spnSize = view.findViewById<Spinner>(R.id.spnSize)
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.size,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnSize?.adapter = adapter
+        }
+    }
+
+    /**
+     *Hiển thị BottomDialog để chọn số lượng của sản phẩm -> dismiss->thêm sản phẩm chọn vào danh sách
      *@author:NCPhuc
      *@date:3/16/2022
      **/
@@ -116,17 +148,19 @@ class SaleFragment : Fragment() {
             updateView()
         }
     }
-   /**
-    *Tìm kiếm sản phẩm khi nhập từ khóa ở toolbar
-    *@author:NCPhuc
-    *@date:3/16/2022
-    **/
+
+    /**
+     *Tìm kiếm sản phẩm khi nhập từ khóa ở toolbar
+     *@author:NCPhuc
+     *@date:3/16/2022
+     **/
     private fun searchProduct(view: View) {
-        val txtSearch = view.findViewById<EditText>(R.id.txt_search)
+        val txtSearch = view.findViewById<EditText>(R.id.etSearch)
         txtSearch?.doAfterTextChanged {
             updateList(txtSearch.text.toString())
         }
     }
+
     /**
      *Cập nhật lại danh sách sản phẩm khi tìm kiếm
      *@author:NCPhuc
@@ -139,27 +173,10 @@ class SaleFragment : Fragment() {
                 productSearch.add(i)
             }
         }
-        rcv?.adapter = ProductApdapter(productSearch as ArrayList<Product>) { showBottomDialog(it) }
+        rcvAdapter = ProductApdapter(productSearch as ArrayList<Product>) { showBottomDialog(it) }
+        rcv?.adapter = rcvAdapter
     }
-    /**
-     *Thiết lập cho màn hình filter xuất hiện
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
-    @SuppressLint("WrongConstant")
-    private fun setUpNavigationView(view: View) {
-        val drawerLayout = view.findViewById<DrawerLayout>(R.id.drawer_layout)
-        val ibFilter = view.findViewById<ImageButton>(R.id.imb_filter)
-        ibFilter?.setOnClickListener {
-            drawerLayout?.openDrawer(GravityCompat.END)
-            drawerLayout?.setScrimColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    android.R.color.transparent
-                )
-            )
-        }
-    }
+
     /**
      *Xóa hết các sản phẩm có trong danh sách chọn mua
      *@author:NCPhuc
@@ -186,11 +203,13 @@ class SaleFragment : Fragment() {
             productList.clear()
         }
     }
+
     /**
      *Cập nhật lại UI khi chọn sản phẩm ở bottomDialog
      *@author:NCPhuc
      *@date:3/16/2022
      **/
+    @SuppressLint("SetTextI18n")
     private fun updateView() {
         val tvAmount = view?.findViewById<TextView>(R.id.tvProductAmount)
         val tvTotalPrice = view?.findViewById<TextView>(R.id.tvTotalPrice)
@@ -205,7 +224,8 @@ class SaleFragment : Fragment() {
             }
             tvTotalPrice.let {
                 it?.text =
-                    context?.getText(R.string.all).toString() +" "+ decimalFormat.format(productList.sumOf { it.amount * it.product.productPrice })
+                    context?.getText(R.string.all).toString() + " " + decimalFormat.format(
+                        productList.sumOf { it.amount * it.product.productPrice })
                         .toString()
                 it?.setTextColor(Color.WHITE)
                 it?.setBackgroundResource(R.drawable.textview_totalprice_border)
@@ -216,6 +236,7 @@ class SaleFragment : Fragment() {
             llRefresh?.setBackgroundResource(R.drawable.linearlayout_refresh_border)
         }
     }
+
     /**
      *Mở navigationView ở phía bên trái của màn hình
      *@author:NCPhuc
@@ -227,6 +248,7 @@ class SaleFragment : Fragment() {
             (activity as MainActivity).openDrawerLayout()
         }
     }
+
     /**
      *Thiết lập điều hướng khi chọn các item của NavigationView
      *@author:NCPhuc
@@ -238,7 +260,10 @@ class SaleFragment : Fragment() {
         navigationView?.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.mnBill -> {
-                    findNavController().navigate(R.id.action_saleFragment_to_listBillsFragment)
+                    findNavController().navigate(
+                        R.id.action_saleFragment_to_listBillsFragment,
+                        bundleOf("bill" to mListBill)
+                    )
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
@@ -246,22 +271,12 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun setUpFilter(view: View) {
-        val scSortQuantity = view.findViewById<SwitchCompat>(R.id.scSortQuantity)
-        scSortQuantity?.setOnClickListener {
-            if (scSortQuantity.isChecked) {
-                sortByQuantity()
-            } else {
-                setUpRecyclerView(view)
-            }
-        }
-    }
     /**
      *Chuyển sang BillFragment
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun openBillFragment(view: View) {
+    private fun showBillFragment(view: View) {
         view.findViewById<TextView>(R.id.tvProductAmount)?.setOnClickListener {
             if (productList.size > 0) {
                 findNavController().navigate(
@@ -280,28 +295,11 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun sortByQuantity() {
-        val productQuantity = mutableListOf<Product>()
-        for (i in products) {
-            if (i.quantity > 1) {
-                productQuantity.add(i)
-            }
-        }
-        rcv?.adapter =
-            ProductApdapter(productQuantity as ArrayList<Product>) { showBottomDialog(it) }
-    }
-
-    private fun sortByName() {
-        val rbName = view?.findViewById<RadioButton>(R.id.rbName)
-        if (rbName?.isChecked==true) {
-            products.sortBy { it.productName }
-
-        } else {
-            products.sortBy { it.productPrice }
-            rcv?.adapter = ProductApdapter(products) { showBottomDialog(it) }
-        }
-    }
-
+    /**
+     *Kiểm tra xem sản phẩm chọn mới đã có sản phẩm tương tự trong danh sách hay chưa
+     *@author:NCPhuc
+     *@date:3/18/2022
+     **/
     private fun checkSelectedProduct(id: Int): Boolean {
         var isOK = false
         for (i in productList) {
@@ -312,18 +310,65 @@ class SaleFragment : Fragment() {
         return isOK
     }
 
-    private fun cleanFilter(view: View) {
-        val drawerLayout = view.findViewById<DrawerLayout>(R.id.drawer_layout)
-        val btnClearn = view.findViewById<Button>(R.id.btnClearnFilter)
-        val btnDone = view.findViewById<Button>(R.id.btnDone)
-        val rbName = view.findViewById<RadioButton>(R.id.rbName)
-        val rbPrice = view.findViewById<RadioButton>(R.id.rbPrice)
-        btnClearn?.setOnClickListener {
+    private fun configFilter(view: View) {
+        setUpSpinner(view)
+        val mDrawer = view.findViewById<DrawerLayout>(R.id.dlFilter)
+        mDrawer.setScrimColor(Color.TRANSPARENT)
+        mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        view.findViewById<ImageButton>(R.id.imbFilter)?.setOnClickListener {
+            mDrawer.openDrawer(Gravity.RIGHT)
         }
-        btnDone?.setOnClickListener {
-            drawerLayout?.closeDrawer(GravityCompat.END)
-            sortByName()
+        val btnSave = view.findViewById<Button>(R.id.btnDone)
+        val btnClear = view.findViewById<Button>(R.id.btnClearnFilter)
+        btnSave.setOnClickListener {
+            filterProduct(getFilter(view))
+            Log.e("filter", getFilter(view).toString())
+            mDrawer.closeDrawer(Gravity.RIGHT)
         }
+        btnClear.setOnClickListener {
+            view.findViewById<Spinner>(R.id.spnColor)?.setSelection(0)
+            view.findViewById<Spinner>(R.id.spnSize)?.setSelection(0)
+            view.findViewById<RadioButton>(R.id.rbName)?.isChecked = true
+        }
+    }
+
+    /**
+     *Thiết lập filter
+     *@author:NCPhuc
+     *@date:3/18/2022
+     **/
+    private fun getFilter(view: View): FilterProduct {
+        val rbText = view.findViewById<RadioGroup>(R.id.rgSortby)
+        val selectRadioButon = rbText.checkedRadioButtonId
+        val radioButtonText = selectRadioButon.let { view.findViewById<RadioButton>(it)?.text }
+        val spColor = view.findViewById<Spinner>(R.id.spnColor).selectedItem.toString()
+        val spSize = view.findViewById<Spinner>(R.id.spnSize).selectedItem.toString()
+        val filterProduct = FilterProduct(radioButtonText.toString(), spColor, spSize)
+        return filterProduct
+    }
+
+    private fun filterProduct(filter: FilterProduct) {
+        if(filter.sortBy=="Tên")
+        {
+            products.sortBy { it.productName }
+        }
+        else if(filter.sortBy=="Giá")
+        {
+            products.sortBy { it.productPrice }
+        }
+        rcvAdapter?.items = products as ArrayList<Product>
+        rcvAdapter?.notifyDataSetChanged()
+    }
+
+    /**
+     *
+     *@author:NCPhuc
+     *@date:3/18/2022
+     **/
+    private fun getListBill() {
+        viewModel?.listItemBill?.observe(viewLifecycleOwner, Observer {
+            mListBill = it
+        })
     }
 
 }
