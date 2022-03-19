@@ -31,6 +31,39 @@
     <string name="note">Ghi chú</string>
     <string name="temp_save">Lưu tạm</string>
     <string name="delete_bill">Xóa đơn</string>
+    <string name="save">Lưu</string>
+    <string name="delivery_info">Thông tin giao hàng</string>
+    <string name="receiver">Người nhận</string>
+    <string name="ship">Giao hàng</string>
+    <string name="_package">Gói hàng</string>
+    <string name="tap_action">Chạm để chọn</string>
+    <string name="tap_insert">Chạm để nhập</string>
+    <string name="organization">Tổ chức</string>
+    <string name="personal">Cá nhân</string>
+    <string name="length">Chiều dài</string>
+    <string name="width">Chiều rộng</string>
+    <string name="height">Chiều cao</string>
+    <string name="please_select_receiver">Vui lòng chọn người nhận.</string>
+    <string name="save_bill_success">Lưu đơn hàng thành công</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="close">Đóng</string>
+    <string name="total">Tổng</string>
+    <string name="support_tele">Hỗ trợ: 1900 8677</string>
+    <string name="please_fill_required_field">Vui lòng nhập thông tin người nhận.</string>
+    <string-array name="filter_time">
+        <item>Hôm nay</item>
+        <item>Hôm qua</item>
+        <item>Hôm kia</item>
+        <item>Tuần này</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="filter_bill_status">
+        <item>Tất cả</item>
+        <item>Đã thu tiền</item>
+        <item>Ghi nợ</item>
+        <item>Đã hủy</item>
+        <item>Khác</item>
+    </string-array>
 
     <string-array name="test_arr">
         <item>ajhdfads</item>

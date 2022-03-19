@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.misa.fresher.core.BaseRecyclerAdapter
-import com.misa.fresher.data.model.CartItemModel
+import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.ItemProductInBillBinding
 import com.misa.fresher.ui.sale.bill.adapter.viewholder.ProductBillViewHolder
 
@@ -14,14 +14,15 @@ import com.misa.fresher.ui.sale.bill.adapter.viewholder.ProductBillViewHolder
  * @author Nguyễn Công Chính
  * @since 3/14/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/14/2022: Tạo class
+ * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha, không sử dụng hàm updateProductList nữa, dùng updateData thay thế
  */
 class ProductBillAdapter(
-    items: MutableList<CartItemModel>,
+    items: MutableList<ProductItemBill>,
     private val context: Context,
     private val onUpdateTotalListener: () -> Unit
-) : BaseRecyclerAdapter<CartItemModel, ProductBillViewHolder>(items) {
+) : BaseRecyclerAdapter<ProductItemBill, ProductBillViewHolder>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductBillViewHolder =
         ProductBillViewHolder(ItemProductInBillBinding.inflate(
@@ -30,20 +31,9 @@ class ProductBillAdapter(
             false
         ), context, onUpdateTotalListener)
 
-    /**
-     * Hàm cập nhật toàn bộ danh sách sản phẩm
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/14/2022
-     *
-     * @version 1
-     * @updated 3/14/2022: Tạo function
-     */
-    fun updateProductList(list: List<CartItemModel>) {
-        val tempSize = items.size
-        items.clear()
-        notifyItemRangeRemoved(0, tempSize)
-        items.addAll(list)
-        notifyItemRangeInserted(0, items.size)
-    }
+    override fun areContentsTheSame(oldItem: ProductItemBill, newItem: ProductItemBill): Boolean =
+        oldItem.equals(newItem)
+
+    override fun areItemsTheSame(oldItem: ProductItemBill, newItem: ProductItemBill): Boolean =
+        oldItem.item.id == newItem.item.id
 }

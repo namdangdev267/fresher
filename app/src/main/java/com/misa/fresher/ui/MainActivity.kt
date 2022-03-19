@@ -10,6 +10,7 @@ import com.misa.fresher.R
 import com.misa.fresher.core.BaseActivity
 import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.databinding.ActivityMainBinding
+import com.misa.fresher.databinding.HeaderNavBinding
 
 /**
  * Activity chính chứa hầu hết các view của ứng dụng
@@ -40,8 +41,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/9/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/9/2022: Tạo function
+     * @updated 3/17/2022: Thêm header cho drawer
      */
     private fun configDrawer() {
         val navHostFragment =
@@ -52,6 +54,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         appBarConfiguration?.let {
             binding.nvMenu.setupWithNavController(navController)
         }
+        val headerBinding = HeaderNavBinding.inflate(layoutInflater)
+        headerBinding.tvName.text = "Nam Dang"
+        headerBinding.tvShop.text = "Kho tổng"
+        binding.nvMenu.addHeaderView(headerBinding.root)
     }
 
     /**

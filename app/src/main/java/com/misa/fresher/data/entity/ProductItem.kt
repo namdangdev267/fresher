@@ -1,6 +1,8 @@
 package com.misa.fresher.data.entity
 
-import java.util.Calendar
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import java.util.*
 
 /**
  * Lớp dữ liệu chứa thông tin mỗi loại nhỏ trong 1 sản phẩm
@@ -8,19 +10,23 @@ import java.util.Calendar
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 6
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Bổ sung 2 thuộc tính tên và mã sản phẩm
+ * @updated 3/15/2022: Đổi tên thuộc tính quantity -> [quantityAvailable]
+ * @updated 3/16/2022: Fix lỗi serialize, khi truyền qua bundle
+ * @updated 3/17/2022: Thay serialize bằng parcelable
+ * @updated 3/18/2022: Thay trường [createdAt] từ Calendar -> Date
  */
+@Parcelize
 data class ProductItem(
     val id: Long,
     val color: ProductColor,
     val size: ProductSize,
     val unit: ProductUnit,
     val price: Double,
-    val quantity: Int,
-    val createdAt: Calendar,
-) {
-    var name: String = ""
+    val quantityAvailable: Int,
+    val createdAt: Date,
+    var name: String = "",
     var code: String = ""
-}
+) : Parcelable

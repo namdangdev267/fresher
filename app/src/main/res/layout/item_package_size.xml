@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/between_element">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text_in_white"
+            tools:text="@tools:sample/cities" />
+
+        <TextView
+            android:id="@+id/tv_required"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/between_element"
+            android:textColor="@color/red"
+            tools:text="@tools:sample/us_phones" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/between_element"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_length"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:hint="@string/length"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/font_size_normal" />
+
+        <EditText
+            android:id="@+id/edt_width"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:hint="@string/width"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/font_size_normal" />
+
+        <EditText
+            android:id="@+id/edt_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:hint="@string/height"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/font_size_normal" />
+    </LinearLayout>
+</LinearLayout>

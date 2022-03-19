@@ -42,7 +42,7 @@ class FilterProductModel {
         // Lọc số lương lớn hơn 0
         if (isQuantityMoreThanZero) {
             result = result.mapNotNull { product ->
-                val filterItems: List<ProductItem> = product.items.filter { it.quantity > 0 }
+                val filterItems: List<ProductItem> = product.items.filter { it.quantityAvailable > 0 }
                 if (filterItems.isNotEmpty()) {
                     Product(product, filterItems)
                 } else {
@@ -62,10 +62,10 @@ class FilterProductModel {
                 Collator.getInstance(Locale("vi", "VN")).compare(p1.name, p2.name)
             }
             ProductSortType.NEW_PRODUCT -> result.sortedByDescending { product ->
-                product.items.maxOf { it.createdAt.timeInMillis }
+                product.items.maxOf { it.createdAt.time }
             }
             else -> result.sortedByDescending { product ->
-                product.items.sumOf { it.quantity }
+                product.items.sumOf { it.quantityAvailable }
             }
         }
 

@@ -7,11 +7,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -20,7 +18,7 @@ import com.misa.fresher.common.FakeData
 import com.misa.fresher.common.Rand
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.*
-import com.misa.fresher.data.model.CartItemModel
+import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.data.model.FilterProductModel
 import com.misa.fresher.databinding.DialogProductTypeSelectorBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
@@ -28,9 +26,9 @@ import com.misa.fresher.ui.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
 import com.misa.fresher.ui.sale.adapter.TypeSelectorAdapter
 import com.misa.fresher.util.enum.ProductSortType
-import com.misa.fresher.util.getColorById
 import com.misa.fresher.util.guard
 import com.misa.fresher.util.toCurrency
+import com.misa.fresher.util.toast
 
 /**
  * Màn hình bán hàng
@@ -56,7 +54,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     }
     private val dialogBinding by lazy { DialogProductTypeSelectorBinding.inflate(layoutInflater) }
 
-    private var selectedItems = mutableListOf<CartItemModel>()
+    private var selectedItems = mutableListOf<ProductItemBill>()
     private val filter = FilterProductModel()
     private var quantity = 1
     private var color: ProductColor? = null
@@ -84,16 +82,19 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @author Nguyễn Công Chính
      * @since 3/15/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/15/2022: Tạo function
+     * @updated 3/16/2022: Cập nhật thêm trường hợp nếu tempCustomer null
      */
     private fun updateCustomer() {
         (activity as MainActivity).tempCustomer?.let {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
             binding.tvCustomer.text = it.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
+        } ?: run {
+            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.END
+            binding.tvCustomer.text = ""
         }
     }
 
@@ -127,7 +128,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
                     selectedItems.find { it.item == item }?.let {
                         it.quantity += quantity
                     } ?: run {
-                        selectedItems.add(CartItemModel(item, quantity))
+                        selectedItems.add(ProductItemBill(item, quantity))
                     }
                     updateSelectedItem()
                 }
@@ -164,8 +165,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         }
         dialogBinding.btnMinus.setOnClickListener {
             if (quantity == 1) {
-                Toast.makeText(context, R.string.quantity_must_be_bigger_than_0, Toast.LENGTH_SHORT)
-                    .show()
+                toast(requireContext(), R.string.quantity_must_be_bigger_than_0)
             } else {
                 quantity--
                 dialogBinding.tvQuantity.text = quantity.toString()
@@ -266,7 +266,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             (activity as MainActivity).tempCustomer =
                 FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
             binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
-            binding.tvCustomer.setTextColor(resources.getColorById(R.color.primary_text_in_white))
             binding.tvCustomer.isSelected = true
         }
         binding.btnRefresh.setOnClickListener {
@@ -276,7 +275,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         binding.btnCart.setOnClickListener {
             navigation.navigate(
                 R.id.action_fragment_sale_to_fragment_bill, bundleOf(
-                    "items" to selectedItems
+                    ARGUMENT_SELECTED_ITEMS to selectedItems
                 )
             )
         }
@@ -294,7 +293,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      */
     private fun initProductList() {
         val filterItems = filter.filter(FakeData.products)
-        productAdapter?.updateProductList(filterItems)
+        productAdapter?.updateData(filterItems.toMutableList())
     }
 
     /**
@@ -309,7 +308,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      */
     private fun configProductRcv() {
         productAdapter = ProductAdapter(mutableListOf(), this::showTypeSelectorDialog)
-        binding.rcvProduct.layoutManager = LinearLayoutManager(context)
         binding.rcvProduct.adapter = productAdapter
         binding.rcvProduct.addItemDecoration(
             DividerItemDecoration(
@@ -371,7 +369,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
         binding.llFilter.btnDone.setOnClickListener {
             val filterItems = filter.filter(FakeData.products)
-            productAdapter?.updateProductList(filterItems)
+            productAdapter?.updateData(filterItems.toMutableList())
             toggleDrawer(binding.nvFilter)
         }
 
@@ -412,7 +410,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 filter.keyword = textView.text.toString()
                 val filterItems = filter.filter(FakeData.products)
-                productAdapter?.updateProductList(filterItems)
+                productAdapter?.updateData(filterItems.toMutableList())
             }
             false
         }
@@ -433,5 +431,9 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         } else {
             binding.root.openDrawer(menu)
         }
+    }
+
+    companion object {
+        const val ARGUMENT_SELECTED_ITEMS = "items"
     }
 }

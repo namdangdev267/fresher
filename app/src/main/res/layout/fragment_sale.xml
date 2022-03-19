@@ -23,32 +23,32 @@
 
             <TextView
                 android:id="@+id/tv_customer"
+                style="@style/Theme.FreshersApplication.ClickableItem"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/between_element"
-                android:layout_marginEnd="@dimen/between_element_half"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/between_element"
                 android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center_vertical"
+                android:hint="@string/customer_name_tele"
+                android:paddingStart="@dimen/between_element"
+                android:paddingEnd="@dimen/between_element_half"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/customer_name_tele"
-                android:textColor="@color/secondary_text_in_white"
+                android:text=""
+                android:textColor="@color/primary_text_in_white"
                 app:drawableStartCompat="@drawable/ic_person"
                 app:drawableTint="@color/primary" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/between_element_half"
-                android:layout_marginEnd="@dimen/between_element"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/between_element"
                 android:gravity="center_vertical"
                 android:lines="1"
+                android:paddingStart="@dimen/between_element_half"
+                android:paddingEnd="@dimen/between_element"
                 android:text="@string/not_selected"
                 android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/ic_calendar"
@@ -68,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/between_element"
                 android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:theme="@style/Theme.FreshersApplication.Switch" />
+                android:minHeight="0dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,7 +81,8 @@
             android:id="@+id/rcv_product"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <LinearLayout
             android:id="@+id/ll_cart"
@@ -117,8 +117,7 @@
                     android:layout_width="@dimen/basic_line_height"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@drawable/selector_button_text_color"
-                    android:textSize="@dimen/font_size_big"
+                    android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <View
@@ -132,8 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@drawable/selector_button_text_color"
-                    android:textSize="@dimen/font_size_big"
+                    android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"
                     tools:text="@tools:sample/lorem" />
             </LinearLayout>
         </LinearLayout>

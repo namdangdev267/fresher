@@ -1,12 +1,15 @@
 package com.misa.fresher.util
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.util.*
 
 /**
  * Tìm drawable sử dụng ResourceCompat
@@ -57,14 +60,16 @@ fun Resources.getColorById(colorId: Int): ColorStateList? {
  * @author Nguyễn Công Chính
  * @since 3/11/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/11/2022: Tạo function
  * @updated 3/12/2022: Thêm generic cho hàm
+ * @updated 3/18/2022: [guard] giờ đây đã có thể trả về giá trị, kết hợp với toán tử elvis có thể tạo thành cụm "nếu không null thì {}, còn nếu null thì {}"
  */
-fun <T1, T2>guard(variable1: T1?, variable2: T2?, function: (T1, T2) -> Unit) {
+fun <T1, T2, R>guard(variable1: T1?, variable2: T2?, function: (T1, T2) -> R): R? {
     if (variable1 != null && variable2 != null) {
-        function(variable1, variable2)
+        return function(variable1, variable2)
     }
+    return null
 }
 
 /**
@@ -73,14 +78,16 @@ fun <T1, T2>guard(variable1: T1?, variable2: T2?, function: (T1, T2) -> Unit) {
  * @author Nguyễn Công Chính
  * @since 3/11/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/11/2022: Tạo function
  * @updated 3/12/2022: Thêm generic cho hàm
+ * @updated 3/18/2022: [guard] giờ đây đã có thể trả về giá trị, kết hợp với toán tử elvis có thể tạo thành cụm "nếu không null thì {}, còn nếu null thì {}"
  */
-fun <T1, T2, T3> guard(variable1: T1?, variable2: T2?, variable3: T3?, function: (T1, T2, T3) -> Unit) {
+fun <T1, T2, T3, R> guard(variable1: T1?, variable2: T2?, variable3: T3?, function: (T1, T2, T3) -> R): R? {
     if (variable1 != null && variable2 != null && variable3 != null) {
-        function(variable1, variable2, variable3)
+        return function(variable1, variable2, variable3)
     }
+    return null
 }
 
 /**
@@ -100,4 +107,53 @@ inline fun <reified T: Any> Bundle?.get(name: String, defaultValue: T): T {
         }
     }
     return defaultValue
+}
+
+/**
+ * Hiển thị toast với đầu vào là string
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/16/2022
+ *
+ * @version 1
+ * @updated 3/16/2022: Tạo function
+ */
+fun toast(context: Context, text: String, isLong: Boolean = false) {
+    Toast.makeText(
+        context,
+        text,
+        if (isLong) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+    ).show()
+}
+
+/**
+ * Hiển thị toast với đầu vào là string id
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/16/2022
+ *
+ * @version 1
+ * @updated 3/16/2022: Tạo function
+ */
+fun toast(context: Context, textId: Int, isLong: Boolean = false) {
+    Toast.makeText(
+        context,
+        context.getString(textId),
+        if (isLong) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+    ).show()
+}
+
+/**
+ * Hàm chuyển từ Date -> Calendar, do Date thì nhẹ nhàng, linh hoạt hơn. Nhưng so sánh thì Calendar tiện hơn
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/18/2022
+ *
+ * @version 1
+ * @updated 3/18/2022: Tạo function
+ */
+fun Date.toCalendar(): Calendar {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    return cal
 }
