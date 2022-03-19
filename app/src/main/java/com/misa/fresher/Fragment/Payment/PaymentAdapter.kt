@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.CustomView.ToastCustom
 import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.R
 
 class PaymentAdapter(
     private var listItemBillDetail: MutableList<PackageProduct>,
-    val listener: (itemBillDetail: PackageProduct) -> Unit
+    private val listener: (itemBillDetail: PackageProduct) -> Unit
 ) :
     RecyclerView.Adapter<PaymentAdapter.ViewHolder>() {
 
@@ -38,6 +40,12 @@ class PaymentAdapter(
             itemView.findViewById<ImageView>(R.id.imgRemove).setOnClickListener {
                 if (itemBillDetail.countPackage > 1) {
                     itemBillDetail.countPackage -= 1
+                } else {
+                    ToastCustom.makeToast(
+                        itemView.context,
+                        "Quantity must be more than 0. Please check again",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 listener(itemBillDetail)
 
@@ -52,9 +60,8 @@ class PaymentAdapter(
         return ViewHolder(view, listener)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(listItemBillDetail[position])
-    }
 
     override fun getItemCount() = listItemBillDetail.size
 }

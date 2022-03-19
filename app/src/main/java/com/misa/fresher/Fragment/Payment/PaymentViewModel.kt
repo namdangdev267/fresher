@@ -1,4 +1,6 @@
 package com.misa.fresher.Fragment.Payment
 
-class PaymentViewModel {
+import androidx.lifecycle.ViewModel
+
+class PaymentViewModel : ViewModel() {
 }
