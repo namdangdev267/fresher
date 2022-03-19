@@ -11,8 +11,4 @@ abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
         itemView.setOnClickListener { clickItemListener(item) }
     }
 
-
-
-
-
 }
