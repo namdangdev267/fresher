@@ -35,6 +35,7 @@
         <!--        <item name="android:colorForeground">#42221f1f-->
         <!--        </item>-->
         <item name="colorSecondary">@color/background</item>
+        <item name="background">@drawable/checkbox</item>
     </style>
 
     <style name="customTextCalculate">

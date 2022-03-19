@@ -27,13 +27,9 @@
     <string name="tracking_no">Tracking No.</string>
     <string name="notes">Notes</string>
     <string name="shipping_date">Shipping date</string>
-
     <string name="weight">Weight(g)</string>
     <string name="size">Size(cm)</string>
-
     <string name="search_view">Enter name, SKU code, S…</string>
-
-    <string name="shipping_information">Shipping information</string>
     <string name="receiver">Receiver</string>
     <string name="tel">Tel</string>
     <string name="address">Address</string>
@@ -51,8 +47,6 @@
     <string name="code_product">Code product</string>
     <string name="price_type_product">Price, Type product</string>
     <string name="not_selected_item">Not yet selected item</string>
-
-
     <string name="switch_name_filter">AVAILABLE ITEMS (QTY > 0)</string>
     <string name="item_name_filter">ITEM CATEGORY</string>
     <string name="clear_filter">Clear filter</string>
@@ -89,4 +83,9 @@
     <string name="shipping_book">Shipping book</string>
     <string name="nam_dang">Nam Dang</string>
     <string name="namfashionhn">namfashionhn</string>
+    <string name="save">Save</string>
+    <string name="shipping_information">Shipping information</string>
+    <string name="no_information">No information</string>
+    <string name="option_1">option 1</string>
+    <string name="option_2">option 2</string>
 </resources>
