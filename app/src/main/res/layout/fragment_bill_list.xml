@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_delivery_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.main.BillListFragment">
+
+    <View
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:background="@color/violet_dark"
+        android:paddingTop="@dimen/dp_10"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_menu"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginVertical="@dimen/dp_15"
+        android:layout_marginStart="@dimen/dp_10"
+        android:backgroundTint="@color/violet_dark"
+        android:gravity="start|top"
+        android:src="@drawable/ic_baseline_menu_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout_search"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="@drawable/custom_toolbar"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@id/text_close"
+        app:layout_constraintStart_toEndOf="@id/button_menu"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_search"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_5"
+            android:src="@drawable/ic_baseline_search_24" />
+
+        <EditText
+            android:id="@+id/edt_search_bill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/white"
+            android:ellipsize="end"
+            android:hint="@string/search_bill"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintEnd_toEndOf="@+id/img_search"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_list_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/list_bill"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:text="@string/close"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:backgroundTint="@color/violet_dark"
+        android:src="@drawable/ic_baseline_search_white_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/view_filter_bill"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@id/menu">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/filter_by_day"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/filter_by_state"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_split"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#EFEFEF"
+        app:layout_constraintTop_toBottomOf="@+id/view_filter_bill" />
+
+    <TextView
+        android:id="@+id/text_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:text="@string/total"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_filter_bill" />
+
+    <TextView
+        android:id="@+id/text_total_amount_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginVertical="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_10"
+        android:background="@drawable/custom_order_tv_amount"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:text="@string/number_0"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/text_total"
+        app:layout_constraintTop_toBottomOf="@id/view_filter_bill" />
+
+    <TextView
+        android:id="@+id/text_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:text="@string/number_0"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_filter_bill" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_bill_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        tools:listitem="@layout/item_bill"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_split" />
+</androidx.constraintlayout.widget.ConstraintLayout>

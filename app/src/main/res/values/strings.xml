@@ -1,3 +1,88 @@
 <resources>
     <string name="app_name">Beta</string>
+    <string name="not_selected_yet">Chưa chọn hàng</string>
+    <string name="not_selected">Không chọn</string>
+    <string name="search_sale">Nhập tên, mã SKU,mã qr mã này kia các thứ</string>
+    <string name="search_order">Số đơn, mã hàng, khách hàng, v.v</string>
+    <string name="search_bill">Nhập số hóa đơn, Tên KH/SĐT khách hàng</string>
+    <string name="customer_name">Tên khách hàng, Mã KH, số điện thoại, Mã thành viên</string>
+    <string name="customer">Khách hàng</string>
+    <string name="delivery_info">Thông tin giao hàng</string>
+    <string name="product_name">Tên sản phẩm</string>
+    <string name="product_price">Giá sản phẩm</string>
+    <string name="product_amount">Số lượng</string>
+    <string name="number_0">0</string>
+    <string name="line_split">Tách dòng</string>
+    <string name="recipient">Người nhận</string>
+    <string name="delivery">Giao hàng</string>
+    <string name="delivery_package">Gói hàng</string>
+    <string name="address">Địa chỉ</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="area">Khu vực</string>
+    <string name="wards">Phường, xã</string>
+    <string name="channel">Kênh bán hàng</string>
+    <string name="shipping_cost">Phí giao hàng thu khách</string>
+    <string name="deposit_form">Hình thức đặt cọc</string>
+    <string name="deposit_money">Số tiền đặt cọc</string>
+    <string name="save">Lưu</string>
+    <string name="size">Kích thước (cm)</string>
+    <string name="weight">Trọng lượng (g)</string>
+    <string name="star">*</string>
+    <string name="tap_to_select">Chạm để chọn</string>
+    <string name="tap_to_enter">Chạm để nhập</string>
+    <string name="nav_sale">Bán hàng</string>
+    <string name="nav_bill_list">danh sách hóa đơn</string>
+    <string name="nav_filter">Lọc</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="buy_more">Mua thêm</string>
+    <string name="cash">Thu tiền</string>
+    <string name="money_receivable">Còn phải thu</string>
+    <string name="today">Hôm nay</string>
+    <string name="total">Tổng</string>
+    <string name="waiting">Chờ giao/lấy hàng</string>
+    <string name="product_group">Nhóm hàng hóa</string>
+    <string name="arrange_by_color">Sắp xếp theo màu</string>
+    <string name="name">Tên</string>
+    <string name="product_new">Hàng mới về</string>
+    <string name="product_seller">Hàng bán chạy</string>
+    <string name="select_color">Màu sắc</string>
+    <string name="color_red">Đỏ</string>
+    <string name="color_blue">Xanh</string>
+    <string name="color_black">Đen</string>
+    <string name="color_white">Trắng</string>
+    <string name="cancel_filer">Bỏ lọc</string>
+    <string name="done">Xong</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filter_all">Tất cả</string>
+    <string name="close">Đóng</string>
+    <string name="list_bill">Danh sách hóa đơn</string>
+    <string-array name="filter_style">
+        <item>Tất cả</item>
+        <item>T-Shirt</item>
+        <item>Quần Short</item>
+        <item>Quần Jean</item>
+        <item>Váy ngắn</item>
+        <item>Váy dài</item>
+    </string-array>
+    <string-array name="filter_color">
+        <item> </item>
+        <item>Đỏ</item>
+        <item>Xanh dương</item>
+        <item>Đen</item>
+        <item>Trắng</item>
+    </string-array>
+    <string-array name="filter_bill_day">
+        <item>Hôm nay</item>
+        <item>Hôm qua</item>
+        <item>Hôm kia</item>
+        <item>Tuần này</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="filter_bill_state">
+        <item>Tất cả</item>
+        <item>Đã thu tiền</item>
+        <item>Ghi nợ</item>
+        <item>Đã hủy</item>
+    </string-array>
 </resources>
