@@ -310,6 +310,11 @@ class SaleFragment : Fragment() {
         return isOK
     }
 
+    /**
+     *Thiết lập filter
+     *@author:NCPhuc
+     *@date:3/18/2022
+     **/
     private fun configFilter(view: View) {
         setUpSpinner(view)
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlFilter)
@@ -333,7 +338,7 @@ class SaleFragment : Fragment() {
     }
 
     /**
-     *Thiết lập filter
+     *Nhận các giá trị để thực hiện filter
      *@author:NCPhuc
      *@date:3/18/2022
      **/
@@ -348,15 +353,33 @@ class SaleFragment : Fragment() {
     }
 
     private fun filterProduct(filter: FilterProduct) {
-        if(filter.sortBy=="Tên")
-        {
-            products.sortBy { it.productName }
+        var sortList = products as ArrayList<Product>
+        if (filter.sortBy == "Tên") {
+            sortList.sortWith(compareBy(Product::productName))
+            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productName))
+            else if (filter.color != "All" && filter.size == "All") sortList =
+                sortList.filter { it.color == filter.color } as ArrayList<Product>
+            else if (filter.color == "All" && filter.size != "All") sortList =
+                sortList.filter { it.size == filter.size } as ArrayList<Product>
+            else {
+                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
+            }
         }
-        else if(filter.sortBy=="Giá")
+        else
         {
-            products.sortBy { it.productPrice }
+            sortList.sortWith(compareBy(Product::productPrice))
+            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productPrice))
+            else if (filter.color != "All" && filter.size == "All") sortList =
+                sortList.filter { it.color == filter.color } as ArrayList<Product>
+            else if (filter.color == "All" && filter.size != "All") sortList =
+                sortList.filter { it.size == filter.size } as ArrayList<Product>
+            else {
+                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
+            }
         }
-        rcvAdapter?.items = products as ArrayList<Product>
+        rcvAdapter?.items = sortList
         rcvAdapter?.notifyDataSetChanged()
     }
 
