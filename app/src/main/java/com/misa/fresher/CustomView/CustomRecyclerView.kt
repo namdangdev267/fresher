@@ -5,11 +5,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 
 class CustomRecyclerView : LinearLayout {
@@ -26,11 +23,9 @@ class CustomRecyclerView : LinearLayout {
 
         array.recycle()
 
-
         LayoutInflater.from(context).inflate(R.layout.custom_recycler_view, this, true)
 
-
-        var titleRcv: TextView = findViewById(R.id.cv_rcv_title)
+        val titleRcv: TextView = findViewById(R.id.cv_rcv_title)
         titleRcv.text = title.toString()
 
 
