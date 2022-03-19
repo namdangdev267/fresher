@@ -42,4 +42,34 @@
     <string name="size">Size(cm)</string>
 
 
+    <string-array name="item_category">
+        <item>All</item>
+        <item>Shirt</item>
+        <item>Trouser</item>
+        <item>Electronic device</item>
+    </string-array>
+
+    <string-array name="color">
+        <item>All</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+    </string-array>
+
+    <string-array name="day">
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Before yesterday</item>
+        <item>This week</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>All</item>
+        <item>Got payment</item>
+        <item>Debit</item>
+        <item>Deleted</item>
+    </string-array>
+
 </resources>

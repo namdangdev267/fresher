@@ -1,0 +1,352 @@
+package com.misa.fresher.views.fragments.sale
+
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.doAfterTextChanged
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.misa.fresher.models.enum.Category
+import com.misa.fresher.models.enum.Color
+import com.misa.fresher.models.enum.SortBy
+import com.misa.fresher.models.ItemProduct
+import com.misa.fresher.R
+import com.misa.fresher.views.activities.MainActivity
+import com.misa.fresher.views.customViews.CustomRecyclerView
+import com.misa.fresher.views.fragments.SharedViewModel
+import com.misa.fresher.databinding.FragmentSaleBinding
+import com.misa.fresher.showToastUp
+import com.misa.fresher.views.customViews.CustomToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
+
+
+class SaleFragment : Fragment() {
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val saleViewModel: SaleViewModel by viewModels()
+    var backAndOut = false
+
+    var timer = object : CountDownTimer(3000, 1000) {
+
+        override fun onTick(millisUntilFinished: Long) {
+            backAndOut = true
+        }
+
+        override fun onFinish() {
+            backAndOut = false
+        }
+    }
+
+
+    private val binding:FragmentSaleBinding by lazy {
+        getInflater(layoutInflater)
+    }
+
+    val getInflater: (LayoutInflater) -> FragmentSaleBinding
+        get() = FragmentSaleBinding::inflate
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e(this.javaClass.simpleName, "attach")
+        initViewModel()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        transitionFragment(view)
+        configFilterDrawer()
+        configToolbar()
+        configOtherView()
+        configListView()
+
+
+    }
+
+    private fun transitionFragment(view: View) {
+        binding.llGetBillDetail.setOnClickListener {
+            if (sharedViewModel.listItemSelected.value?.size!! > 0)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_saleFragment_to_billDetailFragment)
+        }
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(binding.root.isDrawerOpen(binding.nvFilter))
+                {
+                    toggleDrawer(binding.nvFilter)
+                }
+                else
+                {
+                    if(backAndOut)
+                    {
+                        activity?.finish()
+                    }
+                    else
+                    {
+                        timer.start()
+                        Toast.makeText(context,"Click again to exit!",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun initViewModel() {
+        saleViewModel.initData()
+    }
+
+    private fun configToolbar() {
+        binding.searchViewSale.findViewById<ImageView>(R.id.imageview_search_icon3)
+            .setOnClickListener {
+                toggleDrawer(binding.nvFilter)
+            }
+
+        binding.searchViewSale.findViewById<ImageView>(R.id.imageview_search_icon1)
+            .setOnClickListener {
+                (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.nvMenu)
+            }
+
+        val editText = binding.searchViewSale.findViewById<EditText>(R.id.edittext_search_hint)
+
+        editText.doAfterTextChanged {
+            clearFilter()
+            saleViewModel.updateListItemShow(it.toString())
+            Log.e(this.javaClass.simpleName, it.toString())
+        }
+    }
+
+    private fun configFilterDrawer() {
+        binding.root.setScrimColor(android.graphics.Color.TRANSPARENT)
+        binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
+        binding.layoutFilter.radioBtNameSort.isChecked = true
+
+        binding.layoutFilter.swQuantity.setOnCheckedChangeListener { it, b ->
+            saleViewModel.filter.available = b
+        }
+
+        binding.layoutFilter.spinItemCategory.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    p0: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    p3: Long
+                ) {
+                    if (position == 0) {
+                        saleViewModel.filter.category = null
+                    } else {
+                        val categoryList = listOf(
+                            Category.SHIRT,
+                            Category.TROUSER,
+                            Category.ELECTRONIC
+                        )
+                        saleViewModel.filter.category = categoryList[position - 1]
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+
+        binding.layoutFilter.radioBtNameSort.setOnClickListener {
+            saleViewModel.filter.sortBy = SortBy.NAME
+        }
+
+        binding.layoutFilter.radioBtNewSort.setOnClickListener {
+            saleViewModel.filter.sortBy = SortBy.NEW_ARRIVAL
+        }
+
+        binding.layoutFilter.radioBtQuantitySort.setOnClickListener {
+            saleViewModel.filter.sortBy = SortBy.QUANTITY
+        }
+
+        binding.layoutFilter.spinItemColor.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    p0: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    p3: Long
+                ) {
+                    if (position == 0) {
+                        saleViewModel.filter.color = null
+                    } else {
+                        val colorList = listOf(
+                            Color.RED,
+                            Color.GREEN,
+                            Color.BLUE,
+                            Color.YELLOW
+                        )
+                        saleViewModel.filter.color = colorList[position - 1]
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+
+        binding.layoutFilter.tvFilterDone.setOnClickListener {
+            saleViewModel.filterListItemShow()
+            Log.e(this.javaClass.simpleName, "click")
+            toggleDrawer(binding.nvFilter)
+        }
+
+        binding.layoutFilter.tvFilterClear.setOnClickListener {
+            clearFilter()
+            saleViewModel.filterListItemShow()
+            toggleDrawer(binding.nvFilter)
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables", "NotifyDataSetChanged")
+    private fun configListView() {
+        binding.recyclerviewSaleFragment.layoutManager = LinearLayoutManager(requireContext())
+
+        saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
+            binding.recyclerviewSaleFragment.adapter=SaleAdapter(it) { saleItemClick(it) }
+        })
+
+        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
+            binding.tvQuantityItemSelected.text = it.size.toString()
+
+            if (it.size >= 1) {
+                binding.tvQuantityItemSelected.background =
+                    this.context?.getDrawable(R.drawable.bg_rounded_left_dark)
+                binding.tvTotalPrice.background =
+                    this.context?.getDrawable(R.drawable.bg_rounded_right_dark)
+                binding.ivRefresh.background = this.context?.getDrawable(R.drawable.bg_circle_dark)
+                binding.tvTotalPrice.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
+                binding.tvQuantityItemSelected.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
+                binding.tvTotalPrice.text = "Total "+sharedViewModel.getTotalPrice().toString()
+            } else {
+                binding.tvQuantityItemSelected.background =
+                    this.context?.getDrawable(R.drawable.bg_rounded_left)
+                binding.tvTotalPrice.background =
+                    this.context?.getDrawable(R.drawable.bg_rounded_right)
+                binding.ivRefresh.background = this.context?.getDrawable(R.drawable.bg_circle_light)
+                binding.tvTotalPrice.text = this.context?.getString(R.string.not_yet_selected_item)
+                binding.tvTotalPrice.setTextColor(android.graphics.Color.parseColor("#99000000"))
+                binding.tvQuantityItemSelected.setTextColor(android.graphics.Color.parseColor("#99000000"))
+            }
+        })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun configOtherView() {
+        binding.ivRefresh.setOnClickListener {
+            sharedViewModel.clearListItemSelected()
+        }
+
+        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+            if(it.receiver!=null && it.tel!=null)
+            {
+                binding.tvInforCustomer.isSelected = true
+                binding.tvInforCustomer.text = it.receiver.toString()+" - "+it.tel.toString()
+            }
+            else
+            {
+                binding.tvInforCustomer.text ="Customer name, phone number"
+            }
+
+        })
+    }
+
+    fun clearFilter() {
+        saleViewModel.clearFilter()
+        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_name_sort).isChecked = true
+        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_new_sort).isChecked = false
+        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_quantity_sort).isChecked = false
+        binding.nvFilter.findViewById<Spinner>(R.id.spin_item_category).setSelection(0)
+        binding.nvFilter.findViewById<Spinner>(R.id.spin_item_color).setSelection(0)
+    }
+
+    private fun toggleDrawer(view: View) {
+        if (binding.root.isDrawerOpen(view)) {
+            binding.root.closeDrawer(view)
+        } else {
+            binding.root.openDrawer(view)
+        }
+    }
+
+    private fun saleItemClick(itemProduct: ItemProduct) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val bottomSheetView: View = LayoutInflater.from(requireContext()).inflate(
+            R.layout.bottom_sheet_itemsale,
+            this.view as DrawerLayout, false
+        )
+
+        val tvItemName = bottomSheetView.findViewById<TextView>(R.id.tv_item_name)
+        val tvItemId = bottomSheetView.findViewById<TextView>(R.id.tv_item_id)
+        val tvItemQuantity = bottomSheetView.findViewById<TextView>(R.id.tv_quantity)
+        val recyclerView = bottomSheetView.findViewById<CustomRecyclerView>(R.id.cv_rcv)
+            .findViewById<RecyclerView>(R.id.cv_rcv_recyclerview)
+        val btAdd = bottomSheetView.findViewById<ImageView>(R.id.iv_add)
+        val btRemove = bottomSheetView.findViewById<ImageView>(R.id.iv_remove)
+
+        sharedViewModel.updateItemSelected(itemProduct)
+
+
+        btAdd.setOnClickListener {
+            sharedViewModel.updateItemSelectedQuantity(1)
+        }
+
+        btRemove.setOnClickListener {
+            if (sharedViewModel.itemSelected.value?.quantity == 1) {
+                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
+            } else {
+                sharedViewModel.updateItemSelectedQuantity(-1)
+            }
+        }
+
+        sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
+            tvItemQuantity.text = it.quantity.toString()
+            tvItemName.text = it.name
+            tvItemId.text = it.id
+        })
+        recyclerView.adapter =
+            CustomRecyclerViewAdapter(saleViewModel.getColorOf(itemProduct)) {
+                sharedViewModel.updateListItemSelected()
+                bottomSheetDialog.dismiss()
+            }
+
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+
+    }
+
+}
+

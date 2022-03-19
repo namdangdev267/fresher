@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativeMain"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/background"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_person_light"
+            />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/imgAvatar"
+            android:text="Nam Dang"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/imgAvatar"
+            android:text="namfashionhn"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_information"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/relativeMain"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_rounded_all_dark"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/imgCall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/tv_header_phone"
+            android:src="@drawable/ic_call"
+            />
+
+        <TextView
+            android:id="@+id/tv_header_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:layout_centerInParent="true"
+            android:text="Support: 1900 8677"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            />
+
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/background_light"
+        android:layout_below="@id/rl_information"
+        />
+
+
+
+</RelativeLayout>
