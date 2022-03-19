@@ -8,7 +8,7 @@ import com.misa.fresher.R
 import java.text.Collator
 
 class SaleViewModel : ViewModel() {
-    var search: String = ""
+    private var search: String = ""
 
     private var listItemProduct: MutableList<Product> = mutableListOf()
 

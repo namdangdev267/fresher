@@ -24,14 +24,16 @@ import com.misa.fresher.Models.Product
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentSaleBinding
+import kotlinx.android.synthetic.main.custom_search_view.view.*
 import kotlinx.android.synthetic.main.sale_context.view.*
-import kotlinx.android.synthetic.main.search_view.view.*
 
 class SaleFragment : Fragment() {
 
-    private var binding: FragmentSaleBinding? = null
+    private val binding: FragmentSaleBinding by lazy { getInflater(layoutInflater) }
     private var sharedViewModel: PublicViewModel? = null
-    private var saleViewModel: SaleViewModel?= null
+    private var saleViewModel: SaleViewModel? = null
+
+    val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,8 +44,7 @@ class SaleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSaleBinding.inflate(inflater, container, false)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ class SaleFragment : Fragment() {
 
     private fun transitionFragment(view: View) {
 
-        binding?.root?.linearQuantity?.setOnClickListener {
+        binding.root.linearQuantity?.setOnClickListener {
             if (sharedViewModel?.listItemSelected?.value!!.size > 0) {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_fragment_sale_to_fragment_payment)
@@ -73,81 +74,77 @@ class SaleFragment : Fragment() {
     }
 
     private fun configureToolbar() {
-        binding?.filterDrawer?.btnDone?.setOnClickListener {
-            binding?.let { it1 -> toggleDrawer(it1.navigationView) }
+        binding.filterDrawer.btnDone.setOnClickListener {
+            toggleDrawer(binding.navigationView)
         }
 
-        binding?.toolbarSale?.btnNav?.setOnClickListener {
+        binding.filterDrawer.btnReset.setOnClickListener {
+            toggleDrawer(binding.navigationView)
+        }
+
+        binding.searchviewSale.imageview_search_icon1.setOnClickListener {
             (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.navSaleFragment)
         }
 
-        binding?.root?.edtSearch?.doAfterTextChanged {
+        binding.searchviewSale.imageview_search_icon3.setOnClickListener {
+            toggleDrawer(binding.navigationView)
+        }
+
+        binding.searchviewSale.edittext_search_hint.doAfterTextChanged {
             saleViewModel?.updateListItemShow(it.toString())
         }
     }
 
     private fun configureFilterDrawer() {
-        binding?.root?.setScrimColor(Color.TRANSPARENT)
-        binding?.root?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding!!.navigationView)
-
-        binding?.toolbarSale?.root?.inflateMenu(R.menu.menu_main)
-
-        binding?.toolbarSale?.root?.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.btnFilter -> {
-                    toggleDrawer(binding!!.navigationView)
-                }
-            }
-            true
-        }
+        binding.root.setScrimColor(Color.TRANSPARENT)
+        binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.navigationView)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun configListView() {
-        binding?.rcvProduct?.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
 
         saleViewModel?.listItemShow?.observe(viewLifecycleOwner, Observer {
-            binding?.rcvProduct?.adapter = it?.let { it1 ->
+            binding.rcvProduct.adapter = it?.let { it1 ->
                 ProductAdapter(it1) { it -> saleItemClick(it) }
             }
         })
 
         sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
-    //            binding.root.tvCountProduct.text = it.size.toString()
-            binding!!.tvCountProduct.text = sharedViewModel!!.getCount().toString()
+            binding.tvCountProduct.text = sharedViewModel!!.getCount().toString()
 
             if (it.size >= 1) {
-                binding!!.linearQuantity.background =
+                binding.linearQuantity.background =
                     this.context?.getDrawable(R.drawable.custom_background)
-                binding!!.btnRefresh.background =
+                binding.btnRefresh.background =
                     this.context?.getDrawable(R.drawable.custom_button)
-                binding!!.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
-                binding!!.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
-                binding!!.tvBillProduct.text =
+                binding.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
+                binding.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
+                binding.tvBillProduct.text =
                     "Total " + sharedViewModel!!.getTotalPrice().toString()
             } else {
-                binding!!.linearQuantity.background =
+                binding.linearQuantity.background =
                     this.context?.getDrawable(R.drawable.custom_background_none)
-                binding!!.btnRefresh.background =
+                binding.btnRefresh.background =
                     this.context?.getDrawable(R.drawable.custom_button_none)
-                binding!!.tvBillProduct.text = "Not yet selected item"
-                binding?.tvCountProduct?.setTextColor(Color.GRAY)
-                binding?.tvBillProduct?.setTextColor(Color.GRAY)
+                binding.tvBillProduct.text = "Not yet selected item"
+                binding.tvCountProduct.setTextColor(Color.GRAY)
+                binding.tvBillProduct.setTextColor(Color.GRAY)
             }
         })
     }
 
     private fun configureOtherView() {
-        binding?.btnRefresh?.setOnClickListener {
+        binding.btnRefresh.setOnClickListener {
             sharedViewModel?.clearListItemSelected()
         }
     }
 
     private fun toggleDrawer(view: View) {
-        if (binding!!.root.isDrawerOpen(view)) {
-            binding!!.root.closeDrawer(view)
+        if (binding.root.isDrawerOpen(view)) {
+            binding.root.closeDrawer(view)
         } else {
-            binding!!.root.openDrawer(view)
+            binding.root.openDrawer(view)
         }
     }
 
@@ -172,7 +169,7 @@ class SaleFragment : Fragment() {
 
         btRemove.setOnClickListener {
             if (sharedViewModel?.itemSelected?.value?.countPackage == 1) {
-                var customToast = ToastCustom
+                val customToast = ToastCustom
                 customToast.makeToast(
                     requireContext(),
                     "Quantity must be more than 0. Please check again",

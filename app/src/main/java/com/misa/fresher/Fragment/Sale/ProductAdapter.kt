@@ -11,7 +11,7 @@ import com.misa.fresher.R
 
 open class ProductAdapter(
     private val productList: MutableList<Product>,
-    val onClickItemListener: (product: Product) -> Unit
+    private val onClickItemListener: (product: Product) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View, val listener: (itemProduct: Product) -> Unit) :
