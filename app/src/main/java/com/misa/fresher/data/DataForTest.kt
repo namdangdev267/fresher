@@ -59,7 +59,7 @@ object DataForTest {
         Bill(mutableListOf(SelectedProducts(1,listProduct[0])),2132320, listCus[1],"16/3/2022"),
         Bill(mutableListOf(SelectedProducts(1,listProduct[0])),2132321, listCus[0],"11/3/2022"),
         Bill(mutableListOf(SelectedProducts(3,listProduct[0])),2132322, listCus[0],"18/3/2022"),
-        Bill(mutableListOf(SelectedProducts(4,listProduct[0])),2132323, listCus[0],"18/3/2022")
-
+        Bill(mutableListOf(SelectedProducts(4,listProduct[0])),2132323, listCus[0],"18/3/2022"),
+        Bill(mutableListOf(SelectedProducts(4,listProduct[0])),2132323, listCus[0],"19/3/2022"),
     )
 }
