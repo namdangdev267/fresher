@@ -42,6 +42,7 @@ class PackageAdapter(private val adapterData: MutableList<ItemShipInfor>) :
                 is ItemShipInfor.ItemTouch -> bindItemTouch(itemShip)
                 is ItemShipInfor.Item3Col -> bindItem3Col(itemShip)
 
+                else -> {}
             }
         }
     }
@@ -57,9 +58,9 @@ class PackageAdapter(private val adapterData: MutableList<ItemShipInfor>) :
         return PackageAdapterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PackageAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PackageAdapterViewHolder, position: Int) =
         holder.bind(adapterData[position])
-    }
+
 
     override fun getItemCount() = adapterData.size
 

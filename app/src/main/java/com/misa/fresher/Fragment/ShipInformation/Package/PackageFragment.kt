@@ -7,19 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
+import com.misa.fresher.databinding.FragmentPackageBinding
 
 class PackageFragment: Fragment() {
-    var listItemShip = mutableListOf<ItemShipInfor>()
     private var packageViewModel: PackageViewModel? = null
+
+    private val binding: FragmentPackageBinding by lazy { getInflater(layoutInflater) }
+
+    val getInflater: (LayoutInflater) -> FragmentPackageBinding get() = FragmentPackageBinding::inflate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_package, container, false)
-
+    ): View {
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
