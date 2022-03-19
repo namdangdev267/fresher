@@ -146,8 +146,11 @@ class PublicViewModel : ViewModel() {
         }
     }
 
+    fun updateInforShip(inforShip: InforShip) = _inforShip.postValue(inforShip)
+
     fun addBillToListBill() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
+        _billHandling.value?.inforShip = _inforShip.value
         _billHandling.postValue(_billHandling.value)
 
         _billHandling.value?.let { _listBill.value?.add(it) }
