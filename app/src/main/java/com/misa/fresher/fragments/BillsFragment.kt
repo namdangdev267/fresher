@@ -1,7 +1,6 @@
 package com.misa.fresher.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,10 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
-import com.misa.fresher.model.Bill
 import com.misa.fresher.viewModel.BillsViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * Màn ListBill

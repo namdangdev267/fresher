@@ -1,7 +1,4 @@
 package com.misa.fresher.model
-import java.text.SimpleDateFormat
-import java.util.*
-
 /**
 * Tạo class dùng để lưu bill
 * @Auther : NTBao

@@ -7,11 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.Bill
+
 /**
-* tạo class BillsAdapter để sử dụng cho recyclerview màn Bills
-* @Auther : NTBao
-* @date : 3/16/2022
-**/
+ * tạo class BillsAdapter để sử dụng cho recyclerview màn Bills
+ * @Auther : NTBao
+ * @date : 3/16/2022
+ **/
 class BillsAdapter(var mBills: MutableList<Bill>) :
     RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillsAdapter.ViewHolder {
