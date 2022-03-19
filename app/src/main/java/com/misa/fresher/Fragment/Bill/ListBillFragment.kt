@@ -14,11 +14,12 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentListBillBinding
+import com.misa.fresher.views.fragments.bill.ListBillAdapter
 
 class ListBillFragment : Fragment() {
     private val sharedViewModel: PublicViewModel by activityViewModels()
 
-    val binding: FragmentListBillBinding by lazy {
+    private val binding: FragmentListBillBinding by lazy {
         getInflater(layoutInflater)
     }
 
@@ -44,7 +45,6 @@ class ListBillFragment : Fragment() {
 
     private fun configOtherView() {
         binding.tvBillTotalQuantity.text = sharedViewModel.listBill.value?.size.toString()
-
         binding.tvBillTotalPrice.text = sharedViewModel.getTotalPriceListBill().toString()
     }
 
@@ -58,7 +58,6 @@ class ListBillFragment : Fragment() {
         binding.rlBillBuyMore.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_list_bill_to_fragment_sale)
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")

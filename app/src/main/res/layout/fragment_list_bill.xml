@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/background"
+        android:contentInsetStart="0dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <RelativeLayout
@@ -43,8 +44,8 @@
                 android:layout_height="@dimen/dp_20"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/searchsmall"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="@string/todo"
+                android:src="@drawable/searchsmall" />
 
         </RelativeLayout>
 
