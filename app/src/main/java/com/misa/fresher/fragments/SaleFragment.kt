@@ -215,18 +215,13 @@ class SaleFragment : Fragment() {
         var sortListWithSize = mutableListOf<Products>()
         if (filter.coler != "cham de chon") {
             // nếu trùng với phần tử đầu tiên của arrayColor thì không xử lý
-            for (i in sortList) {
-                if (i.color == filter.coler) {
-                    sortListWithColor.add(i)
-                }
-            }
+           sortListWithColor = sortList.filter {
+                it.color == filter.coler
+            } as MutableList<Products>
             if (filter.size != "cham de chon") {
-                // nếu trùng với phần tử đầu tiên của arraySize thì không xử lý
-                for (i in sortListWithColor) {
-                    if (i.size == filter.size) {
-                        sortListWithSize.add(i)
-                    }
-                }
+                sortListWithSize = sortListWithColor.filter {
+                    it.size==filter.size
+                } as MutableList<Products>
             } else {
                 sortListWithSize = sortListWithColor
             }
@@ -234,11 +229,9 @@ class SaleFragment : Fragment() {
             sortListWithColor = sortList
             if (filter.size != "cham de chon") {
                 // nếu trùng với phần tử đầu tiên của arraySize thì không xử lý
-                for (i in sortListWithColor) {
-                    if (i.size == filter.size) {
-                        sortListWithSize.add(i)
-                    }
-                }
+                sortListWithSize = sortListWithColor.filter {
+                    it.size==filter.size
+                } as MutableList<Products>
             } else {
                 sortListWithSize = sortListWithColor
             }
