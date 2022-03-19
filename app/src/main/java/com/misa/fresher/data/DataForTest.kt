@@ -1,8 +1,10 @@
 package com.misa.fresher.data
 
 import com.misa.fresher.R
+import com.misa.fresher.model.Bill
 import com.misa.fresher.model.Customer
 import com.misa.fresher.model.Products
+import com.misa.fresher.model.SelectedProducts
 
 /**
  * tạo data
@@ -45,6 +47,19 @@ object DataForTest {
         Customer("Nguyễn Thái Minh", "0948621305", "Hà Tĩnh"),
         Customer("Nguyễn Thái Đạt", "0948621305", "Hà Tĩnh"),
         Customer("Nguyễn Thái Kiên", "0948621305", "Hà Tĩnh"),
+    )
+    val listBills = mutableListOf(
+        Bill(mutableListOf(SelectedProducts(2,listProduct[0])),2132313, listCus[0],"18/3/2022"),
+        Bill(mutableListOf(SelectedProducts(3,listProduct[1])),2132314, listCus[1],"17/3/2022"),
+        Bill(mutableListOf(SelectedProducts(4,listProduct[2])),2132315, listCus[2],"16/3/2022"),
+        Bill(mutableListOf(SelectedProducts(4,listProduct[3])),2132316, listCus[1],"15/3/2022"),
+        Bill(mutableListOf(SelectedProducts(5,listProduct[4])),2132317, listCus[3],"14/3/2022"),
+        Bill(mutableListOf(SelectedProducts(6,listProduct[5])),2132318, listCus[1],"18/3/2022"),
+        Bill(mutableListOf(SelectedProducts(7,listProduct[6])),2132319, listCus[1],"17/3/2022"),
+        Bill(mutableListOf(SelectedProducts(1,listProduct[0])),2132320, listCus[1],"16/3/2022"),
+        Bill(mutableListOf(SelectedProducts(1,listProduct[0])),2132321, listCus[0],"11/3/2022"),
+        Bill(mutableListOf(SelectedProducts(3,listProduct[0])),2132322, listCus[0],"18/3/2022"),
+        Bill(mutableListOf(SelectedProducts(4,listProduct[0])),2132323, listCus[0],"18/3/2022")
 
-        )
+    )
 }

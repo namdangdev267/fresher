@@ -24,6 +24,8 @@ import com.misa.fresher.model.SelectedProducts
 import com.misa.fresher.showToast
 import com.misa.fresher.viewModel.BillsViewModel
 import com.misa.fresher.viewModel.CustomerViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Tạo BillDetail
@@ -32,9 +34,9 @@ import com.misa.fresher.viewModel.CustomerViewModel
  **/
 class BillDetailFragment : Fragment() {
     private var listFromSale = mutableListOf<SelectedProducts>()
-    private val rnds = (1000..9999).random()
-    private var bill = Bill(listFromSale, rnds, null)
-    private val viewModel: BillsViewModel by activityViewModels()
+    private val rnds = (2132323..5132323).random()
+    private var bill = Bill(listFromSale, rnds, null, SimpleDateFormat("dd/M/yyyy").format(Date()))
+    private val billsViewModel: BillsViewModel by activityViewModels()
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private var cus: Customer? = null
 
@@ -57,20 +59,21 @@ class BillDetailFragment : Fragment() {
         setCustomer(view)
         deleteCustomer(view)
     }
+
     /**
-    * Delete Customer
-    * @Auther : NTBao
-    * @date : 3/18/2022
-    **/
+     * Delete Customer
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun deleteCustomer(view: View) {
         val ivCancel = view.findViewById<ImageView>(R.id.ivCancelBillDetail)
         val tvCustomer = view.findViewById<TextView>(R.id.tvContactBillsDetail)
         ivCancel.setOnClickListener {
             customerViewModel.deleteCustomer()
-            ivCancel.isVisible=false
+            ivCancel.isVisible = false
             tvCustomer.hint = "Tên khách hàng, số điện thoại"
             tvCustomer.text = ""
-            tvCustomer.isSelected=false
+            tvCustomer.isSelected = false
         }
     }
 
@@ -91,13 +94,13 @@ class BillDetailFragment : Fragment() {
     private fun updateReceiver(view: View) {
         val tvCustomer = view.findViewById<TextView>(R.id.tvContactBillsDetail)
         val ivCancel = view.findViewById<ImageView>(R.id.ivCancelBillDetail)
-        tvCustomer.isSelected=true
-        customerViewModel.customer.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
+        tvCustomer.isSelected = true
+        customerViewModel.customer.observe(viewLifecycleOwner, Observer { customer ->
+            customer?.let {
                 tvCustomer.text = it.name + "(" + it.number + ")"
                 tvCustomer.isSelected = true
                 bill.customer = it
-                ivCancel.isVisible=true
+                ivCancel.isVisible = true
             }
         })
 
@@ -168,7 +171,7 @@ class BillDetailFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.btnTotalPriceBill).setOnClickListener {
             bill.listSelectedProduct = listFromSale
-            viewModel.addBill(bill)
+            billsViewModel.addBill(bill)
             findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
             requireContext().showToast("Thanh toán thành công")
         }

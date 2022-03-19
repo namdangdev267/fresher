@@ -1,5 +1,7 @@
 package com.misa.fresher.model
-import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.*
+
 /**
 * Tạo class dùng để lưu bill
 * @Auther : NTBao
@@ -8,7 +10,6 @@ import java.util.Calendar
 data class Bill(
     var listSelectedProduct: MutableList<SelectedProducts>?,
     val id: Int,
-    var customer: Customer?
-){
-    val date = Calendar.getInstance().time
-}
+    var customer: Customer?,
+    var date : String
+)

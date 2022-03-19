@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -23,6 +20,8 @@ import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
 import com.misa.fresher.model.Bill
 import com.misa.fresher.viewModel.BillsViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Màn ListBill
@@ -31,7 +30,8 @@ import com.misa.fresher.viewModel.BillsViewModel
  **/
 class BillsFragment : Fragment() {
     private val viewModel: BillsViewModel by activityViewModels()
-    private var list = mutableListOf<Bill>()
+    private var adapter = BillsAdapter(mutableListOf())
+    private var rcv : RecyclerView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,12 +92,11 @@ class BillsFragment : Fragment() {
      * @date : 3/18/2022
      **/
     private fun configRecyclerView(view: View) {
-        val rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
+        rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
         val total = view.findViewById<TextView>(R.id.tvTotal)
         val totalPrice = view.findViewById<TextView>(R.id.tvTotalPriceBills)
-        val adapter = BillsAdapter(list)
-        rcv.adapter = adapter
-        rcv.layoutManager = LinearLayoutManager(view.context)
+        rcv?.adapter = adapter
+        rcv?.layoutManager = LinearLayoutManager(view.context)
         viewModel.listBill.observe(viewLifecycleOwner, Observer {
             adapter.mBills = it
             total.text = it.size.toString()
