@@ -1,6 +1,7 @@
 package com.misa.fresher
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -18,12 +19,13 @@ import com.misa.fresher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var appBarConfiguration: AppBarConfiguration? = null
-    lateinit var binding: ActivityMainBinding
+    val binding: ActivityMainBinding by lazy { getInflater(layoutInflater) }
     private lateinit var shareViewModel: PublicViewModel
+
+    val getInflater: (LayoutInflater) -> ActivityMainBinding get() = ActivityMainBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -33,19 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         shareViewModel = ViewModelProvider(this).get(PublicViewModel::class.java)
 
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        appBarConfiguration =
-            AppBarConfiguration(navController.graph, findViewById<DrawerLayout>(R.id.drawer_layout))
-        appBarConfiguration.let {
-            (findViewById<NavigationView>(R.id.navSaleFragment)).setupWithNavController(
-                navController
-            )
-        }
-
-//        configureXML()
+        configureXML()
     }
 
     fun toggleDrawer(view: View) {
@@ -70,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHost.navController
         appBarConfiguration = AppBarConfiguration(
             navController.graph,
-            findViewById<DrawerLayout>(R.id.drawerLayout)
+            findViewById<DrawerLayout>(R.id.drawerLayoutMain)
         )
         appBarConfiguration.let {
             (findViewById<NavigationView>(R.id.navSaleFragment)).setupWithNavController(
