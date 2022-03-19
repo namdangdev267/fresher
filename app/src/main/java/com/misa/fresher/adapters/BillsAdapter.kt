@@ -7,11 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.Bill
+
 /**
-* tạo class BillsAdapter để sử dụng cho recyclerview màn Bills
-* @Auther : NTBao
-* @date : 3/16/2022
-**/
+ * tạo class BillsAdapter để sử dụng cho recyclerview màn Bills
+ * @Auther : NTBao
+ * @date : 3/16/2022
+ **/
 class BillsAdapter(var mBills: MutableList<Bill>) :
     RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillsAdapter.ViewHolder {
@@ -28,9 +29,9 @@ class BillsAdapter(var mBills: MutableList<Bill>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Bill) {
             itemView.findViewById<TextView>(R.id.tvIdBill).text = item.id.toString()
-            if(item.receiver!=null){
+            item.customer?.let {
                 itemView.findViewById<TextView>(R.id.tvReceiver).text =
-                    item.receiver?.name + " - " + item.receiver?.phoneNumber
+                    it.name + " - " + it.number
             }
             itemView.findViewById<TextView>(R.id.tvTotalPriceBill).text =
                 "${item.listSelectedProduct?.sumOf { it.amonut * it.product.price }}"

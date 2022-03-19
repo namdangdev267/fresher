@@ -1,5 +1,9 @@
 package com.misa.fresher.model
-
+/**
+* Tạo class
+* @Auther : NTBao
+* @date : 3/18/2022
+**/
 data class Receiver(
     var name : String?,
     var phoneNumber:String?,

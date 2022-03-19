@@ -1,5 +1,6 @@
 package com.misa.fresher.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -7,25 +8,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapters.BillsAdapter
-import com.misa.fresher.model.Bill
 import com.misa.fresher.viewModel.BillsViewModel
 
+/**
+ * Màn ListBill
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class BillsFragment : Fragment() {
-    private val viewModel: BillsViewModel by activityViewModels()
-    private var list = mutableListOf<Bill>()
+    private val billsViewModel: BillsViewModel by activityViewModels()
+    private var adapter = BillsAdapter(mutableListOf())
+    private var rcv: RecyclerView? = null
+
+    /**
+     * Fake data cho List bills
+     * @Auther : NTBao
+     * @date : 3/19/2022
+     **/
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        billsViewModel.initData()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,8 +54,55 @@ class BillsFragment : Fragment() {
         configToolbar(view)
         configRecyclerView(view)
         configSpinner(view)
+        filterBills(view)
+        navigationEvent(view)
     }
 
+    /**
+     * filter list bill theo ngày
+     * @Auther : NTBao
+     * @date : 3/19/2022
+     **/
+    private fun filterBills(view: View) {
+        val dateSpinner = view.findViewById<Spinner>(R.id.spnDay)
+        val total = view.findViewById<TextView>(R.id.tvTotal)
+        val totalPrice = view.findViewById<TextView>(R.id.tvTotalPriceBills)
+        dateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val dateSpinnerValue = dateSpinner.selectedItem.toString()
+                billsViewModel.filterBill(dateSpinnerValue)
+                Log.d("test", dateSpinnerValue)
+                billsViewModel.filterList.observe(viewLifecycleOwner, Observer {
+                    adapter.mBills = it
+                    total.text = it.size.toString()
+                })
+                adapter.notifyDataSetChanged()
+                totalPrice.text = billsViewModel.getTotalPrice().toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    /**
+     * Chuyển màn hình
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
+    private fun navigationEvent(view: View) {
+        view.findViewById<FloatingActionButton>(R.id.flbCart).setOnClickListener {
+            findNavController().navigate(R.id.action_nav_bills_to_nav_sale)
+        }
+    }
+
+    /**
+     * Set giá trị cho spinner
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configSpinner(view: View) {
         val spnDay = view.findViewById<Spinner>(R.id.spnDay)
         val spnPayStatus = view.findViewById<Spinner>(R.id.spnPayStatus)
@@ -64,21 +126,22 @@ class BillsFragment : Fragment() {
         }
     }
 
+    /**
+     * Config List bills recycler view
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configRecyclerView(view: View) {
-        val rcv = view.findViewById<RecyclerView>(R.id.rcvListBills)
-        val total = view.findViewById<TextView>(R.id.tvTotal)
-        val totalPrice = view.findViewById<TextView>(R.id.tvTotalPriceBills)
-        val adapter = BillsAdapter(list)
-        rcv.adapter = adapter
-        rcv.layoutManager = LinearLayoutManager(view.context)
-        viewModel.listBill.observe(viewLifecycleOwner, Observer {
-            total.text = it.size.toString()
-            adapter.mBills=it
-        })
-        adapter.notifyDataSetChanged()
-        totalPrice.text = viewModel.getTotalPrice().toString()
+        rcv = view.findViewById(R.id.rcvListBills)
+        rcv?.adapter = adapter
+        rcv?.layoutManager = LinearLayoutManager(view.context)
     }
 
+    /**
+     * Set sự kiện khi click vào btn menu -> mở drawer
+     * @Auther : NTBao
+     * @date : 3/18/2022
+     **/
     private fun configToolbar(view: View) {
         val dlBills = (activity as MainActivity).findViewById<DrawerLayout>(R.id.drawerLayout)
         view.findViewById<ImageView>(R.id.btnMenuBills).setOnClickListener {

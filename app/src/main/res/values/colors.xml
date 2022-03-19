@@ -15,6 +15,6 @@
     <color name="rcv_boder">#DCDBDB</color>
     <color name="rcv_effect">#BFAAE4</color>
     <color name="gray">#B9BEC1</color>
-    <color name="red">@color/pink</color>
+    <color name="red">#FF0000</color>
     <color name="lightGray">#c0c0c9</color>
 </resources>

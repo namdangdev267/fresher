@@ -11,16 +11,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.ShippingView
 
-class ReceiverViewAdapter(
+/**
+ * Tạo adapter có mutil type item dùng để hiện thị view trong màn ShipInfor
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
+class ShipInforViewAdapter(
     private val adapterData: MutableList<ShippingView>,
     private val getDataChange: (ship: ShippingView) -> Unit
 ) :
-    RecyclerView.Adapter<ReceiverViewAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ShipInforViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ReceiverViewAdapter.ViewHolder {
+    ): ShipInforViewAdapter.ViewHolder {
         val layout = when (viewType) {
             0 -> R.layout.shipping_info_touch_tv
             1 -> R.layout.shipping_info_touch_ed
@@ -36,7 +41,7 @@ class ReceiverViewAdapter(
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ReceiverViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShipInforViewAdapter.ViewHolder, position: Int) {
         holder.bind(adapterData[position])
     }
 

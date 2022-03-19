@@ -65,11 +65,13 @@
         tools:ignore="RtlHardcoded">
 
         <ImageView
-            android:id="@+id/ivContact"
+            android:id="@+id/ivContactBillDetail"
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_person"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_user"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -77,19 +79,30 @@
             android:layout_width="@dimen/dp_24"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:gravity="center"
             android:hint="@string/contact_hint"
-            android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18" />
-
+        <ImageView
+            android:id="@+id/ivCancelBillDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:clickable="true"
+            android:src="@drawable/ic_cancel"/>
         <ImageView
             android:id="@+id/ivCalender"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:src="@drawable/ic_calender"
+            android:src="@drawable/ic_price_policy"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -119,6 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/llBillDetailContactCalender">
 
         <ImageButton
+            android:id="@+id/ivBuyMore"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -148,6 +162,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvListItem"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_8"
         android:layout_height="0dp"
         android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/llTotalprice"

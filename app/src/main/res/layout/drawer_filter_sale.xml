@@ -40,28 +40,6 @@
                 app:layout_constraintTop_toTopOf="@id/sw_quantity" />
 
             <TextView
-                android:id="@+id/tv_grouping"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:text="@string/filterCategoryTextViewText"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sw_quantity" />
-
-            <Spinner
-                android:id="@+id/spn_grouping"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
-                android:layout_marginTop="@dimen/dp_4"
-                android:overlapAnchor="false"
-                android:padding="@dimen/dp_4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_grouping" />
-
-            <TextView
                 android:id="@+id/tv_sorting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +49,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spn_grouping" />
+                app:layout_constraintTop_toBottomOf="@id/sw_quantity" />
 
             <RadioGroup
                 android:id="@+id/rg_sorting"

@@ -11,6 +11,11 @@ import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import com.misa.fresher.R
 
+/**
+ * Tạo custom view cho toolbar
+ * @Auther : NTBao
+ * @date : 3/18/2022
+ **/
 class CustomToolbar : LinearLayout {
     constructor(context: Context) : super(context, null)
 
