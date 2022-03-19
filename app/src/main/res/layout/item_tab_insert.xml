@@ -1,60 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp"
-    >
+    android:paddingVertical="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="end|center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
 
         <ImageView
             android:id="@+id/iv_icon"
             android:layout_width="24dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="fitCenter"
             android:layout_height="24dp"
-            app:tint="@color/background" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="@id/glImage"
+            app:tint="@color/background"
+            tools:ignore="MissingConstraints" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearSample"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/glImage"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/tv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sample"
-                android:textColor="@color/background" />
+                android:textColor="@color/background"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tv_required"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:singleLine="true"
                 android:text="*"
-                android:textColor="#FF0000" />
+                android:textColor="#FF0000"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/et_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@color/white"
-            android:hint="Touch to enter"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:hint="@string/touch_to_enter"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/glImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearSample"
+            tools:ignore="Autofill,TextFields" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

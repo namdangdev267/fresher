@@ -5,14 +5,13 @@
     android:background="@drawable/bg_item_recyclerview"
     android:paddingTop="@dimen/dp_15"
     android:paddingBottom="@dimen/dp_10"
-    android:paddingLeft="@dimen/dp_5"
-    android:paddingRight="@dimen/dp_10"
-    >
+    android:paddingStart="@dimen/dp_5"
+    android:paddingEnd="@dimen/dp_10">
 
     <CheckBox
         android:id="@+id/checkbok_check"
         android:layout_width="35dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textview_check_title"
@@ -20,6 +19,5 @@
         android:layout_height="match_parent"
         android:text="@string/collect_COD"
         android:textColor="#2b3176" />
-
 
 </LinearLayout>
