@@ -22,11 +22,12 @@ class PaymentAdapter(
         RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(itemBillDetail: PackageProduct) {
-            itemView.findViewById<TextView>(R.id.tvPriceProduct).text = itemBillDetail.getPrice().toString()
+            itemView.findViewById<TextView>(R.id.tvPriceProduct).text =
+                itemBillDetail.getPrice().toString()
             itemView.findViewById<TextView>(R.id.tvCountProduct).text =
                 itemBillDetail.countPackage.toString()
-            itemView.findViewById<TextView>(R.id.tvNameProduct).text = itemBillDetail.namePackage
-            itemView.findViewById<TextView>(R.id.tvCodeProduct).text = itemBillDetail.codePackage
+            itemView.findViewById<TextView>(R.id.tvNameProduct).text = itemBillDetail.nameProduct
+            itemView.findViewById<TextView>(R.id.tvCodeProduct).text = itemBillDetail.idProduct
             itemView.findViewById<TextView>(R.id.tvPriceAndType).text =
                 itemBillDetail.product.priceProduct.toString() + "/Package"
             itemView.findViewById<ImageView>(R.id.imgPackage).visibility = View.GONE

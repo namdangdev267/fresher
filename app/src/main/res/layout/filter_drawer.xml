@@ -105,7 +105,7 @@
                     android:id="@+id/rb_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="quantity_in_inventory"
+                    android:text="Quantity in inventory"
                     android:theme="@style/Theme.FreshersApplication.Switch"
                     tools:ignore="HardcodedText" />
             </RadioGroup>

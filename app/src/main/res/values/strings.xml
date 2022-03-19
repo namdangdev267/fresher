@@ -6,10 +6,8 @@
 
     <string-array name="item_arr">
         <item>All</item>
-        <item>orators</item>
-        <item>orators</item>
-        <item>orators</item>
-        <item>orators</item>
+        <item>Test</item>
+        <item>Test2</item>
     </string-array>
 
     <style name="TextViewFont">

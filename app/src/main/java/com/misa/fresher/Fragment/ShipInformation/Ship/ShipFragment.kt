@@ -29,8 +29,6 @@ class ShipFragment: Fragment() {
         recyclerView = view.findViewById(R.id.recyclerview_shipping_ship)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = ShipAdapter(shipViewModel.listItemShip)
-
-
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

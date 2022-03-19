@@ -9,9 +9,18 @@ import com.misa.fresher.Models.InforShip
 import com.misa.fresher.Models.ItemBill
 import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.Models.Product
+import java.util.*
 
 
 class PublicViewModel : ViewModel() {
+
+    private val _itemSelected = MutableLiveData<PackageProduct>()
+    val itemSelected: LiveData<PackageProduct>
+        get() = _itemSelected
+
+    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
+    val listItemSelected: LiveData<MutableList<PackageProduct>>
+        get() = _listItemSelected
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -25,20 +34,10 @@ class PublicViewModel : ViewModel() {
     val inforShip: LiveData<InforShip>
         get() = _inforShip
 
-    private val _itemSelected = MutableLiveData<PackageProduct>()
-    val itemSelected: LiveData<PackageProduct>
-        get() = _itemSelected
-
-    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
-    val listItemSelected: LiveData<MutableList<PackageProduct>>
-        get() = _listItemSelected
-
     init {
         _itemSelected.postValue(
             PackageProduct(
                 Product(R.drawable.ic_launcher_foreground, "", "", 0, 10),
-                "",
-                "",
                 1
             )
         )
@@ -50,7 +49,8 @@ class PublicViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling
+                BillStatus.Handling,
+                Calendar.getInstance().time
             )
         )
         _listBill.postValue(mutableListOf())
@@ -58,7 +58,7 @@ class PublicViewModel : ViewModel() {
 
     fun updateItemSelected(itemProduct: Product) {
         var itemSelected: PackageProduct =
-            PackageProduct(itemProduct, itemProduct.nameProduct, itemProduct.codeProduct, 1)
+            PackageProduct(itemProduct, 1)
         _listItemSelected.value?.let {
             for (i in it) {
                 if (i.product == itemProduct) {
@@ -73,15 +73,11 @@ class PublicViewModel : ViewModel() {
     fun updateItemSelectedQuantity(num: Int) {
         val itemSelected = _itemSelected.value?.let {
             PackageProduct(
-                it.product, "", "", it.countPackage + num
+                it.product, it.countPackage + num
             )
         }
         _itemSelected.postValue(itemSelected)
     }
-
-    /**
-     * List item selected
-     */
 
     @SuppressLint("NullSafeMutableLiveData")
     fun updateListItemSelected() {
@@ -110,7 +106,8 @@ class PublicViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling
+                BillStatus.Handling,
+                Calendar.getInstance().time
             )
         )
     }
@@ -152,12 +149,9 @@ class PublicViewModel : ViewModel() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
         _billHandling.value?.inforShip = _inforShip.value
         _billHandling.postValue(_billHandling.value)
-
         _billHandling.value?.let { _listBill.value?.add(it) }
-
         _listBill.postValue(_listBill.value)
         clearListItemSelected()
-        var i = 0
     }
 
     fun getTotalPriceListBill() = _listBill.value?.map { it.getPrice() }

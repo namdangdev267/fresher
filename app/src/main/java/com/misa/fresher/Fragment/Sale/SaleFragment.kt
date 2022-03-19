@@ -182,8 +182,8 @@ class SaleFragment : Fragment() {
 
         sharedViewModel?.itemSelected?.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.countPackage.toString()
-            tvItemName.text = it.namePackage
-            tvItemId.text = it.codePackage
+            tvItemName.text = it.nameProduct
+            tvItemId.text = it.idProduct
         })
 
         bottomSheetDialog.setContentView(bottomSheetView)

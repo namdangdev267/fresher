@@ -24,8 +24,6 @@ class ShipViewModel(context: Context): ViewModel()  {
             R.string.touch_to_enter),null,null))
         listItemShip.add(ItemShipInfor.ItemTouch(context.getString(R.string.notes),context.getString(R.string.touch_to_enter),null,null))
         listItemShip.add(ItemShipInfor.ItemTouch(context.getString(R.string.shipping_date),"28/2/2022",null,null))
-
-
     }
 
 }

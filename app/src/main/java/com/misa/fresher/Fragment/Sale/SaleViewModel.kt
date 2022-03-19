@@ -47,7 +47,6 @@ class SaleViewModel : ViewModel() {
             Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
         } as MutableList<Product>
 
-
     }
 
     fun updateListItemShow(searchString: String) {

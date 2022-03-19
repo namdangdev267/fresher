@@ -1,13 +1,15 @@
 package com.misa.fresher.Models
 
 import com.misa.fresher.Models.Enum.BillStatus
+import java.util.*
 
-data class ItemBill (
-    val id:String,
-    var listItemBillDetail:MutableList<PackageProduct>,
+data class ItemBill(
+    val id: String,
+    var listItemBillDetail: MutableList<PackageProduct>,
     var inforShip: InforShip?,
-    var status:BillStatus
+    var status: BillStatus,
+    var dayCreate: Date
 )
 {
-    fun getPrice() : Float = listItemBillDetail.map { it.getPrice() }.sum().toFloat()
+    fun getPrice() = listItemBillDetail.map { it.getPrice() }.sum()
 }

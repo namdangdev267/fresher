@@ -17,11 +17,11 @@ import com.misa.fresher.databinding.FragmentListBillBinding
 import com.misa.fresher.views.fragments.bill.ListBillAdapter
 
 class ListBillFragment : Fragment() {
-    private val sharedViewModel: PublicViewModel by activityViewModels()
-
     private val binding: FragmentListBillBinding by lazy {
         getInflater(layoutInflater)
     }
+
+    private val sharedViewModel: PublicViewModel by activityViewModels()
 
     val getInflater: (LayoutInflater) -> FragmentListBillBinding
         get() = FragmentListBillBinding::inflate
@@ -37,31 +37,31 @@ class ListBillFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transitionFragment(view)
-        configListView()
-        configToolbar()
-        configOtherView()
+        transitionFragment()
+        configureListView()
+        configureToolbar()
+        configureOtherView()
     }
 
-    private fun configOtherView() {
+    private fun configureOtherView() {
         binding.tvBillTotalQuantity.text = sharedViewModel.listBill.value?.size.toString()
         binding.tvBillTotalPrice.text = sharedViewModel.getTotalPriceListBill().toString()
     }
 
-    private fun configToolbar() {
+    private fun configureToolbar() {
         binding.imgBackMain.setOnClickListener {
             (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.navSaleFragment)
         }
     }
 
-    private fun transitionFragment(view: View) {
+    private fun transitionFragment() {
         binding.rlBillBuyMore.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_list_bill_to_fragment_sale)
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun configListView() {
+    private fun configureListView() {
         binding.recyclerviewBillList.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerviewBillList.adapter =
             sharedViewModel.listBill.value?.let { ListBillAdapter(it) }
