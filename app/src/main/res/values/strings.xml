@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Freshers Application</string>
-
+    <string name="button_icon_desc">Icon Button</string>
     <!-- shipping information activity -->
-    <string name="shipping_activity_name">Shipping Information</string>
+    <string name="ship_info_fragment_name">Shipping Information</string>
     <string name="receiver_fragment_name">Receiver</string>
     <string name="shipping_fragment_name">Ship</string>
     <string name="package_fragment_name">Package</string>
 
+    <string name="list_bills_fragment_name">List of bills</string>
+    <string name="toolbar_list_bills_search_hint">Enter bill no., customer name and tel</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,4 +22,8 @@
     <string name="checkbox_receiver_fragment">Collect COD</string>
 
     <string name="calculator_title">ENTER AMOUNT</string>
+
+    <string name="btn_filter_clear">Clear filter</string>
+    <string name="btn_done">Done</string>
+
 </resources>

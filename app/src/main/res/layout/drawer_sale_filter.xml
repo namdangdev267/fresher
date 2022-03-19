@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/filter_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="always"
+        android:padding="@dimen/pad_large"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_small"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/sw_available_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AVAILABLE ITEMS (QTY > 0)"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_category_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ITEM CATEGORY"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_medium"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_tiny"
+                android:background="@drawable/bg_spinner_border"
+                android:overlapAnchor="false" />
+
+            <TextView
+                android:id="@+id/txt_view_by_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIEW BY"
+                android:textColor="@color/purpleDark"
+                android:textSize="@dimen/txt_medium"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_tiny"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_round_violet"
+                    android:layout_marginEnd="@dimen/pad_small"
+                    android:text="Model"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/pad_small"
+                    android:background="@drawable/bg_btn_round_border_violet"
+                    android:text="Item"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_sort_by_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SORT BY"
+                android:textColor="@color/purpleDark"
+                android:textSize="@dimen/txt_medium"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radio_sort_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_tiny">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/sort_by_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/sort_by_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New arrival" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txt_color_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COLOR"
+                android:textColor="@color/purpleDark"
+                android:textSize="@dimen/txt_medium"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_tiny"
+                android:background="@drawable/bg_spinner_border"
+                android:overlapAnchor="false" />
+
+            <TextView
+                android:id="@+id/txt_size_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SIZE"
+                android:textColor="@color/purpleDark"
+                android:textSize="@dimen/txt_medium"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pad_tiny"
+                android:background="@drawable/bg_spinner_border"
+                android:overlapAnchor="false" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/btn_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/pad_small"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_round_border_violet"
+            android:text="@string/btn_filter_clear"
+            android:textAllCaps="false"
+            android:textColor="@color/purpleDark" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/pad_small"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_round_violet"
+            android:text="@string/btn_done"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

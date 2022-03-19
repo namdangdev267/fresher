@@ -8,4 +8,9 @@ sealed class Enums {
         CHECKBOX,
         RADIO
     }
+    enum class Product {
+        MODEL,
+        ITEM,
+        ITEM_SELECTED
+    }
 }

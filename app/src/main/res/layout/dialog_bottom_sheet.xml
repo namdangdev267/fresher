@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@drawable/bg_btn_round_white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/pad_large">
+
+    <com.misa.fresher.customview.ViewProduct
+        android:id="@+id/item_sale_product_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/product_item_height"
+        tools:amount="2"
+        tools:code="code"
+        tools:name="name"
+        tools:price="1000" />
+
     <TextView
-        android:id="@+id/bottom_sheet_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_marginEnd="@dimen/pad_large"
+        android:padding="@dimen/pad_small"
+        android:text="Color"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_small"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/color_rec_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test"
-        android:padding="10dp"/>
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/pad_large"
+        android:paddingEnd="@dimen/pad_large"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
     <TextView
-        android:id="@+id/bottom_sheet_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_marginEnd="@dimen/pad_large"
+        android:padding="@dimen/pad_small"
+        android:text="Size"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_small"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/size_rec_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test2"
-        android:padding="10dp"/>
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/pad_large"
+        android:paddingEnd="@dimen/pad_large"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="2" />
+
     <TextView
-        android:id="@+id/bottom_sheet_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_marginEnd="@dimen/pad_large"
+        android:padding="@dimen/pad_small"
+        android:text="Unit"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_small"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/unit_rec_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="test3"
-        android:padding="10dp"/>
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/pad_large"
+        android:paddingEnd="@dimen/pad_large"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="2" />
 </LinearLayout>

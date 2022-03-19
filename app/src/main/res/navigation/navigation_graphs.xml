@@ -7,38 +7,61 @@
 
     <fragment
         android:id="@+id/fragment_sale"
-        android:name="com.misa.fresher.fragment.SaleFragment"
-        android:label="fragment_1"
-        tools:layout="@layout/fragment_sale" >
-        <action
-            android:id="@+id/action_fragment_sale_to_fragment_ship_info"
-            app:destination="@id/fragment_ship_info"
-            app:popUpTo="@id/fragment_sale"
-
-            app:enterAnim="@anim/slide_left"
-            app:popEnterAnim="@anim/slide_wait"
-            app:exitAnim="@anim/slide_wait"
-            app:popExitAnim="@anim/slide_right" />
+        android:name="com.misa.fresher.ui.sale.SaleFragment"
+        android:label="fragment_sale"
+        tools:layout="@layout/fragment_sale">
         <action
             android:id="@+id/action_fragment_sale_to_fragment_calculator"
             app:destination="@id/fragment_calculator"
-            app:popUpTo="@id/fragment_sale"
 
             app:enterAnim="@anim/slide_left"
-            app:popEnterAnim="@anim/slide_wait"
             app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_bill"
+            app:destination="@id/fragment_bill"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_list_bills"
+            app:destination="@id/fragment_list_bills"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
             app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
+        android:id="@+id/fragment_bill"
+        android:name="com.misa.fresher.ui.salepayment.BillFragment"
+        android:label="fragment_bill"
+        tools:layout="@layout/fragment_bill">
+
+        <action
+            android:id="@+id/action_fragment_bill_to_fragment_ship_info"
+            app:destination="@id/fragment_ship_info"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_wait"
+            app:popEnterAnim="@anim/slide_wait"
+            app:popExitAnim="@anim/slide_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_list_bills"
+        android:name="com.misa.fresher.ui.listbills.ListBillFragment"
+        android:label="fragment_list_bills"
+        tools:layout="@layout/fragment_list_bills" />
+    <fragment
         android:id="@+id/fragment_ship_info"
-        android:name="com.misa.fresher.fragment.ShipInfoFragment"
+        android:name="com.misa.fresher.ui.shipinfo.ShipInfoFragment"
         android:label="fragment_ship_info"
-        tools:layout="@layout/fragment_ship_info" >
+        tools:layout="@layout/fragment_ship_info">
 
     </fragment>
     <fragment
         android:id="@+id/fragment_calculator"
-        android:name="com.misa.fresher.fragment.CalculatorFragment"
+        android:name="com.misa.fresher.ui.calculator.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" />
 </navigation>

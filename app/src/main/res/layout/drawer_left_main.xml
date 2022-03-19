@@ -3,17 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_purple"
+    android:background="@color/purpleLight"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/drawer_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/violet_dark"
-        android:paddingStart="30dp"
-        android:paddingTop="40dp"
-        android:paddingBottom="25dp">
+        android:background="@color/purpleDark"
+        android:padding="25dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/user_card"
@@ -32,7 +30,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center|bottom"
                 android:scaleType="fitCenter"
-                android:src="@drawable/img_person" />
+                android:src="@drawable/img_person"
+                android:contentDescription="@string/button_icon_desc" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -115,194 +114,46 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/nav_to_sale_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
+                android:layout_marginTop="@dimen/pad_small"
+                android:background="@drawable/bg_product_item"
+                android:drawablePadding="@dimen/pad_extra"
                 android:gravity="center_vertical"
-                android:padding="12dp"
+                android:padding="@dimen/pad_extra"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Sale"
-                app:drawableLeftCompat="@drawable/ic_phone" />
+                app:drawableLeftCompat="@drawable/ic_cart"
+                app:drawableTint="@android:color/holo_purple" />
 
             <TextView
+                android:id="@+id/nav_to_shipping_book_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
+                android:background="@drawable/bg_product_item"
+                android:drawablePadding="@dimen/pad_extra"
                 android:gravity="center_vertical"
-                android:padding="12dp"
+                android:padding="@dimen/pad_extra"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Shipping book"
-                app:drawableLeftCompat="@drawable/ic_phone" />
+                app:drawableLeftCompat="@drawable/ic_shipping_white"
+                app:drawableTint="@color/purpleDark" />
 
             <TextView
+                android:id="@+id/nav_to_list_bill_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
+                android:background="@drawable/bg_product_item"
+                android:drawablePadding="@dimen/pad_extra"
                 android:gravity="center_vertical"
-                android:padding="12dp"
+                android:padding="@dimen/pad_extra"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="List of bills"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Collect debt"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Ex/Re.item"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Order from sale advise"
-                app:drawableLeftCompat="@drawable/ic_phone"
-                app:drawableRightCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Order from order page"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Orders from OCM"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Shift report"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Sales from item"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Manager"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Consultant"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Share to friends"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Rate"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Product information"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Privacy policy"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:text="Send error"
-                app:drawableLeftCompat="@drawable/ic_phone" />
-
+                app:drawableLeftCompat="@drawable/ic_receipt_orange" />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
