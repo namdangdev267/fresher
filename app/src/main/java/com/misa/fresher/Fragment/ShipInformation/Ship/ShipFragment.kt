@@ -1,5 +1,6 @@
 package com.misa.fresher.Fragment.ShipInformation.Ship
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Input.InputReceiver
 import com.misa.fresher.Input.InputType
-import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
 
 class ShipFragment: Fragment() {
     lateinit var recyclerView: RecyclerView
-    lateinit var listItemShip: MutableList<ItemShipInfor>
-    lateinit var shipViewModel: ShipViewModel
+    private lateinit var shipViewModel: ShipViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +33,7 @@ class ShipFragment: Fragment() {
 
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun createData(): Array<InputReceiver> {
         return arrayOf(
             InputReceiver("", false, InputType.DELIVERY_TYPE),
@@ -73,7 +73,7 @@ class ShipFragment: Fragment() {
             val args = Bundle()
             args.putInt("shipPage", page)
             args.putString("shipTitle", title)
-            fragmentShip.setArguments(args)
+            fragmentShip.arguments = args
             return fragmentShip
         }
     }

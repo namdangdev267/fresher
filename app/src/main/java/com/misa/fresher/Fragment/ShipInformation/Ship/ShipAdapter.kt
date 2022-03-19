@@ -46,7 +46,7 @@ class ShipAdapter(private val adapterData: MutableList<ItemShipInfor>) :
                 is ItemShipInfor.ItemTouch -> bindItemTouch(itemShip)
                 is ItemShipInfor.ItemCalculator -> bindItemCalculator(itemShip)
                 is ItemShipInfor.ItemRadioButton -> bindItemRadioButton(itemShip)
-                is ItemShipInfor.ItemTouch -> bindItemTouch(itemShip)
+                else -> {}
             }
         }
     }

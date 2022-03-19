@@ -7,10 +7,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.Models.InforShip
 import com.misa.fresher.Models.ItemShipInfor
 import com.misa.fresher.R
 
-class ReceiverAdapter(private val adapterData: MutableList<ItemShipInfor>) :
+class ReceiverAdapter(
+    private val adapterData: MutableList<ItemShipInfor>,
+    val changeEditText: (infor: InforShip) -> Unit
+) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
     companion object {
@@ -34,7 +38,6 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShipInfor>) :
         private fun bindItemCalculator(item: ItemShipInfor.ItemCalculator) {
             itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
             itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
-//            itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(R.drawable.ic_calculator)
         }
 
         private fun bindItemMulticontent(item: ItemShipInfor.ItemMultiContent) {
@@ -58,6 +61,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShipInfor>) :
                 is ItemShipInfor.ItemCalculator -> bindItemCalculator(itemShip)
                 is ItemShipInfor.ItemMultiContent -> bindItemMulticontent(itemShip)
                 is ItemShipInfor.ItemCheck -> bindItemcheck(itemShip)
+                else -> {}
             }
         }
     }
@@ -75,9 +79,8 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemShipInfor>) :
         return ReceiverAdapterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ReceiverAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReceiverAdapterViewHolder, position: Int) =
         holder.bind(adapterData[position])
-    }
 
     override fun getItemCount() = adapterData.size
 

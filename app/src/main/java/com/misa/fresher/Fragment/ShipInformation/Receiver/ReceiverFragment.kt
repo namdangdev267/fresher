@@ -1,35 +1,58 @@
 package com.misa.fresher.Fragment.ShipInformation.Receiver
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.Models.ItemShipInfor
-import com.misa.fresher.Fragment.ShipInformation.ShipInforViewModel
+import com.misa.fresher.Models.InforShip
+import com.misa.fresher.PublicViewModel
 import com.misa.fresher.databinding.FragmentReceiverBinding
 
 class ReceiverFragment: Fragment() {
-    lateinit var binding: FragmentReceiverBinding
-    lateinit var listItemShip: MutableList<ItemShipInfor>
-    lateinit var shipInforViewModel: ShipInforViewModel
+    private lateinit var receiverViewModel: ReceiverViewModel
+    private lateinit var sharedViewModel: PublicViewModel
+    var inforShip = InforShip(null, null, null, null, null, null, null, null, null, false)
+
+    private val binding: FragmentReceiverBinding by lazy {
+        getInflater(layoutInflater)
+    }
+
+    val getInflater: (LayoutInflater) -> FragmentReceiverBinding
+        get() = FragmentReceiverBinding::inflate
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(PublicViewModel::class.java)
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentReceiverBinding.inflate(inflater, container, false)
+    ): View {
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        shipInforViewModel = ShipInforViewModel(view.context)
-        val rcvReceiver = binding.rcvReceiver
-        rcvReceiver.layoutManager = LinearLayoutManager(this.context)
-        rcvReceiver.adapter = ReceiverAdapter(shipInforViewModel.listItemShip)
+        receiverViewModel = ReceiverViewModel(view.context)
+        binding.rcvReceiver.layoutManager = LinearLayoutManager(this.context)
+
+        binding.rcvReceiver.adapter = ReceiverAdapter(receiverViewModel.listItemShip) {
+            changeEditText(it)
+        }
+
     }
+
+    private fun changeEditText(inforShip: InforShip) {
+        if (inforShip.receiver != null) this.inforShip.receiver = inforShip.receiver
+        else if (inforShip.tel != null) this.inforShip.tel = inforShip.tel
+        else if (inforShip.address != null) this.inforShip.address = inforShip.address
+    }
+
 }
+
