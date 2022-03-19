@@ -12,6 +12,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         super.onCreate(savedInstanceState)
         binding.drawerLeftMain.navToListBillFragment.setOnClickListener {
             findNavController(R.id.fragment_sale).navigate(R.id.action_fragment_sale_to_fragment_list_bills)
+            toggleDrawer()
         }
     }
 

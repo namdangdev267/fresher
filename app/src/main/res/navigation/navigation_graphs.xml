@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_bill"
-        android:name="com.misa.fresher.ui.billdetails.BillFragment"
+        android:name="com.misa.fresher.ui.salepayment.BillFragment"
         android:label="fragment_bill"
         tools:layout="@layout/fragment_bill">
 

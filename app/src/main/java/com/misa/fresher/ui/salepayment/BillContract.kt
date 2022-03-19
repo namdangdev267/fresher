@@ -1,4 +1,4 @@
-package com.misa.fresher.ui.billdetails
+package com.misa.fresher.ui.salepayment
 
 import android.os.Bundle
 import com.misa.fresher.base.BaseContract

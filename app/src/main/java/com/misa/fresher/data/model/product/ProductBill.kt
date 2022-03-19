@@ -9,4 +9,6 @@ data class ProductBill(
 ) : Serializable {
     companion object { var _id: Int = 1 }
     val id: Int = _id++
+    val price: Double
+        get() = products.sumOf { it.price }
 }

@@ -232,13 +232,13 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.END)
         drawerLayout.setScrimColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
 
-        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, categories.distinct())
+        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, categories)
         categoryAdapter.setDropDownViewResource(R.layout.item_spinner_item)
 
-        val colorAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, colors.distinct())
+        val colorAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, colors)
         colorAdapter.setDropDownViewResource(R.layout.item_spinner_item)
 
-        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, sizes.distinct())
+        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, sizes)
         sizeAdapter.setDropDownViewResource(R.layout.item_spinner_item)
 
         binding.drawerSaleFilter.run {

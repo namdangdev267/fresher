@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/pad_tiny"
-                android:background="@drawable/bg_spinner"
+                android:background="@drawable/bg_spinner_border"
                 android:overlapAnchor="false" />
 
             <TextView
@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/pad_tiny"
-                android:background="@drawable/bg_spinner"
+                android:background="@drawable/bg_spinner_border"
                 android:overlapAnchor="false" />
 
             <TextView
@@ -153,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/pad_tiny"
-                android:background="@drawable/bg_spinner"
+                android:background="@drawable/bg_spinner_border"
                 android:overlapAnchor="false" />
         </LinearLayout>
     </ScrollView>
