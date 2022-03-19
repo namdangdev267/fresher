@@ -12,6 +12,6 @@ class ListBillContract {
 
     interface Presenter: BaseContract.Presenter<View> {
         fun getFilterOptions()
-        fun getBills()
+        fun getBills(txtSearch: String = "")
     }
 }

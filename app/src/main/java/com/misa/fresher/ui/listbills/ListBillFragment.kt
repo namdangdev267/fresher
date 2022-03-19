@@ -3,6 +3,7 @@ package com.misa.fresher.ui.listbills
 
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.data.model.product.ProductBill
@@ -30,7 +31,10 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         binding.btnBack.setOnClickListener { activity?.onBackPressed() }
         binding.btnSearch.setOnClickListener { toggleSearch(true) }
         binding.btnClose.setOnClickListener { toggleSearch(false) }
-
+        binding.txtSearch.doAfterTextChanged {
+            val txtSearch = binding.txtSearch.text.toString().lowercase()
+            presenter?.getBills(txtSearch)
+        }
     }
 
     private fun initFilters() { presenter?.getFilterOptions() }
@@ -67,9 +71,6 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         binding.btnClose.isVisible = isOpenSearch
     }
 
-    override fun updateUI() {
-        super.updateUI()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

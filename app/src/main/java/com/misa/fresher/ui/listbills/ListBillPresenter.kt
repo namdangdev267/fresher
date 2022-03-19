@@ -1,6 +1,7 @@
 package com.misa.fresher.ui.listbills
 
 import com.misa.fresher.global.FakeData
+import com.misa.fresher.utils.toArrayList
 
 class ListBillPresenter : ListBillContract.Presenter {
     private var bills = FakeData.productBills
@@ -22,8 +23,11 @@ class ListBillPresenter : ListBillContract.Presenter {
         view?.updateFilters(dates, categories)
     }
 
-    override fun getBills() {
-        view?.updateBillStat(bills.size, bills.sumOf { it.price })
-        view?.updateListBillRecView(bills)
+    override fun getBills(txtSearch: String) {
+        search = txtSearch
+        val displayBills = if (search.isNotBlank()) bills.filter { it.id.toString().contains(search) } else bills
+
+        view?.updateBillStat(displayBills.size, displayBills.sumOf { it.price })
+        view?.updateListBillRecView(displayBills.toArrayList())
     }
 }
