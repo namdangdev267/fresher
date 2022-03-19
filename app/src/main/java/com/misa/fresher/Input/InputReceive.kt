@@ -8,7 +8,6 @@ class InputReceiver(
     var type: InputType,
     var icon: Drawable? = null,
 
-
     var cols: Array<InputReceiver> = arrayOf(),
     var arr: Array<String> = arrayOf(),
     var onClickListener: () -> Unit = {}
