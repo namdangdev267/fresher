@@ -8,17 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.Fragment.ShipInformation.Package.PackageFragment
+import com.misa.fresher.Fragment.ShipInformation.Package.PackageViewModel
 import com.misa.fresher.Fragment.ShipInformation.Receiver.ReceiverFragment
+import com.misa.fresher.Fragment.ShipInformation.Receiver.ReceiverViewModel
 import com.misa.fresher.Fragment.ShipInformation.Ship.ShipFragment
+import com.misa.fresher.Fragment.ShipInformation.Ship.ShipViewModel
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentShipInformationBinding
 
-class ShipInformationFragment: Fragment() {
+class ShipInformationFragment : Fragment() {
     private lateinit var sharedViewModel: PublicViewModel
 
     private val binding: FragmentShipInformationBinding by lazy {
@@ -47,26 +51,36 @@ class ShipInformationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transitionFragment(view)
-        configTabLayout(view)
+        transitionFragment()
+        configTabLayout()
 
     }
 
-    private fun transitionFragment(view: View) {
+    private fun transitionFragment() {
         binding.imgBackPayment.setOnClickListener {
             activity?.onBackPressed()
         }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun configTabLayout(view: View) {
+    private fun configTabLayout() {
         val tabLayout = binding.tabLayoutShipping
         val viewPager = binding.vpPager
 
         val viewPagerAdapter = ViewPagerAdapter(this)
-        viewPagerAdapter.addFragment(ReceiverFragment(), "Receiver")
-        viewPagerAdapter.addFragment(ShipFragment(), "Ship")
-        viewPagerAdapter.addFragment(PackageFragment(), "Package")
+        viewPagerAdapter.addFragment(
+            ReceiverFragment(
+                ReceiverViewModel(requireContext()),
+                PublicViewModel()
+            ), "Receiver"
+        )
+        viewPagerAdapter.addFragment(
+            ShipFragment(
+                RecyclerView(requireContext()),
+                ShipViewModel(requireContext())
+            ), "Ship"
+        )
+        viewPagerAdapter.addFragment(PackageFragment(PackageViewModel(requireContext())), "Package")
 
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -91,9 +105,7 @@ class ShipInformationFragment: Fragment() {
 
         binding.btnSave.setOnClickListener {
             sharedViewModel.updateInforShip((viewPagerAdapter.mFragmentList[0] as ReceiverFragment).inforShip)
-
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment_ship_to_fragment_payment)
+            findNavController().navigate(R.id.action_fragment_ship_information_to_fragment_payment)
         }
     }
 

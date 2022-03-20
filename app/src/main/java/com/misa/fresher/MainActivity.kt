@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -20,17 +19,13 @@ import com.misa.fresher.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private var appBarConfiguration: AppBarConfiguration? = null
     val binding: ActivityMainBinding by lazy { getInflater(layoutInflater) }
-    private lateinit var shareViewModel: PublicViewModel
+    private var shareViewModel: PublicViewModel? = null
 
     val getInflater: (LayoutInflater) -> ActivityMainBinding get() = ActivityMainBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         setContentView(binding.root)
 
         shareViewModel = ViewModelProvider(this).get(PublicViewModel::class.java)

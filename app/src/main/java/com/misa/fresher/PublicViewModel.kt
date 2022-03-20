@@ -49,7 +49,7 @@ class PublicViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling,
+                BillStatus.HANDLING,
                 Calendar.getInstance().time
             )
         )
@@ -106,7 +106,7 @@ class PublicViewModel : ViewModel() {
                 (1000000..2000000).random().toString(),
                 mutableListOf(),
                 null,
-                BillStatus.Handling,
+                BillStatus.HANDLING,
                 Calendar.getInstance().time
             )
         )
@@ -116,7 +116,6 @@ class PublicViewModel : ViewModel() {
         _listItemSelected.value?.sumOf { it.product.priceProduct * it.countPackage }
 
     fun getCount() = _listItemSelected.value?.sumOf { it.countPackage }
-
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
         if (itemBillDetail.countPackage == 0) {
@@ -154,6 +153,6 @@ class PublicViewModel : ViewModel() {
         clearListItemSelected()
     }
 
-    fun getTotalPriceListBill() = _listBill.value?.map { it.getPrice() }
+    fun getTotalPriceListBill() = _listBill.value?.sumOf { it.getPrice() }
 
 }

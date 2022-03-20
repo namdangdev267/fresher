@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.CustomView.ToastCustom
 import com.misa.fresher.Models.PackageProduct
 import com.misa.fresher.R
+import com.misa.fresher.showToast
 
 class PaymentAdapter(
     private var listItemBillDetail: MutableList<PackageProduct>,
@@ -42,11 +41,7 @@ class PaymentAdapter(
                 if (itemBillDetail.countPackage > 1) {
                     itemBillDetail.countPackage -= 1
                 } else {
-                    ToastCustom.makeToast(
-                        itemView.context,
-                        "Quantity must be more than 0. Please check again",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    itemView.context.showToast("Quantity must be more than 0. Please check again")
                 }
                 listener(itemBillDetail)
 

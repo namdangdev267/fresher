@@ -11,5 +11,5 @@ data class ItemBill(
     var dayCreate: Date
 )
 {
-    fun getPrice() = listItemBillDetail.map { it.getPrice() }.sum()
+    fun getPrice() = listItemBillDetail.sumOf { it.getPrice() }
 }

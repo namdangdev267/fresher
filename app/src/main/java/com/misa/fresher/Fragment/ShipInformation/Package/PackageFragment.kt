@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentPackageBinding
 
-class PackageFragment: Fragment() {
-    private var packageViewModel: PackageViewModel? = null
-
+class PackageFragment(private var packageViewModel: PackageViewModel) : Fragment() {
     private val binding: FragmentPackageBinding by lazy { getInflater(layoutInflater) }
 
     val getInflater: (LayoutInflater) -> FragmentPackageBinding get() = FragmentPackageBinding::inflate
@@ -30,7 +28,7 @@ class PackageFragment: Fragment() {
         packageViewModel = PackageViewModel(view.context)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview_shipping_package)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = PackageAdapter(packageViewModel!!.listItemShip)
+        recyclerView.adapter = PackageAdapter(packageViewModel.listItemShip)
     }
 
 }

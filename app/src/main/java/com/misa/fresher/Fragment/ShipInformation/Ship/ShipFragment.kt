@@ -12,9 +12,10 @@ import com.misa.fresher.Input.InputReceiver
 import com.misa.fresher.Input.InputType
 import com.misa.fresher.R
 
-class ShipFragment: Fragment() {
-    lateinit var recyclerView: RecyclerView
-    private lateinit var shipViewModel: ShipViewModel
+class ShipFragment(
+    private var recyclerView: RecyclerView,
+    private var shipViewModel: ShipViewModel
+) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,16 +64,5 @@ class ShipFragment: Fragment() {
             ),
             InputReceiver("Shipping date", false, InputType.TAP_ACTION) {},
         )
-    }
-
-    companion object{
-        fun newInstance(page: Int, title: String?): ShipFragment {
-            val fragmentShip = ShipFragment()
-            val args = Bundle()
-            args.putInt("shipPage", page)
-            args.putString("shipTitle", title)
-            fragmentShip.arguments = args
-            return fragmentShip
-        }
     }
 }

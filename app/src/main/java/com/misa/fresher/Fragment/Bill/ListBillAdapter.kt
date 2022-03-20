@@ -13,27 +13,26 @@ class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
     RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceAsColor", "SetTextI18n")
+        @SuppressLint("ResourceAsColor", "SetTextI18n", "CutPasteId")
         fun bind(itemBill: ItemBill) {
             itemView.findViewById<TextView>(R.id.tv_bill_id).text = itemBill.id
             itemView.findViewById<TextView>(R.id.tv_bill_price).text =
                 itemBill.getPrice().toString()
 
+            val tvBillInforShip = itemView.findViewById<TextView>(R.id.tv_bill_infor_ship)
 
             if (itemBill.inforShip?.receiver != null && itemBill.inforShip?.tel != null) {
-                itemView.findViewById<TextView>(R.id.tv_bill_infor_ship).text =
+                tvBillInforShip.text =
                     itemBill.inforShip?.receiver + "_" + itemBill.inforShip?.tel
-            } else {
-                itemView.findViewById<TextView>(R.id.tv_bill_infor_ship).setTextColor(R.color.black)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
+        val viewHolder = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_bill, parent, false)
 
-        return ViewHolder(view)
+        return ViewHolder(viewHolder)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

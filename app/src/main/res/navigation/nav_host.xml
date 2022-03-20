@@ -37,14 +37,7 @@
         android:id="@+id/fragment_payment"
         android:name="com.misa.fresher.Fragment.Payment.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" >
-        <action
-            android:id="@+id/action_fragment_payment_to_fragment_ship"
-            app:destination="@id/fragment_ship"
-            app:enterAnim="@anim/slide_in_from_right"
-            app:exitAnim="@anim/slide_out_to_left"
-            app:popEnterAnim="@anim/slide_in_from_left"
-            app:popExitAnim="@anim/slide_out_to_right" />
+        tools:layout="@layout/fragment_payment">
         <action
             android:id="@+id/action_fragment_payment_to_fragment_sale"
             app:destination="@id/fragment_sale"
@@ -53,15 +46,22 @@
         <action
             android:id="@+id/action_fragment_payment_to_fragment_list_bill"
             app:destination="@id/fragment_list_bill" />
+        <action
+            android:id="@+id/action_fragment_payment_to_fragment_ship_information"
+            app:destination="@id/fragment_ship_information"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_ship"
+        android:id="@+id/fragment_ship_information"
         android:name="com.misa.fresher.Fragment.ShipInformation.ShipInformationFragment"
-        android:label="fragment_ship"
+        android:label="fragment_ship_information"
         tools:layout="@layout/fragment_ship_information" >
         <action
-            android:id="@+id/action_fragment_ship_to_fragment_payment"
+            android:id="@+id/action_fragment_ship_information_to_fragment_payment"
             app:destination="@id/fragment_payment"
             app:enterAnim="@anim/slide_in_from_left"
             app:exitAnim="@anim/slide_out_to_right" />

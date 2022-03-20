@@ -1,11 +1,13 @@
 package com.misa.fresher.Fragment.ShipInformation.Receiver
 
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.Models.InforShip
 import com.misa.fresher.Models.ItemShipInfor
@@ -13,7 +15,7 @@ import com.misa.fresher.R
 
 class ReceiverAdapter(
     private val adapterData: MutableList<ItemShipInfor>,
-    val changeEditText: (infor: InforShip) -> Unit
+    val changeEditText: (inforShip: InforShip) -> Unit
 ) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
@@ -24,15 +26,36 @@ class ReceiverAdapter(
         private const val ITEM_CHECK = 3
     }
 
-    class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun bindItemTouch(item: ItemShipInfor.ItemTouch) {
-            itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
-                item.hintContent
+            val tvTitle = itemView.findViewById<TextView>(R.id.textview_touch_title)
+            val editText = itemView.findViewById<EditText>(R.id.edittext_touch_hint_content)
+            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
             item.imageResourcce?.let {
                 itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
             }
-            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
+
+            tvTitle.text = item.title
+            editText.hint = item.hintContent
+
+            if (item.title == "Tel") {
+                editText.inputType = InputType.TYPE_CLASS_NUMBER
+            }
+
+            val inforShip = InforShip(null, null, null, null, null, null, null, null, null, false)
+
+            editText.doAfterTextChanged {
+                if (item.title == "Receiver") {
+                    inforShip.receiver = it.toString()
+                    changeEditText(inforShip)
+                } else if (item.title == "Tel") {
+                    inforShip.tel = it.toString()
+                    changeEditText(inforShip)
+                } else if (item.title == "Address") {
+                    inforShip.address = it.toString()
+                    changeEditText(inforShip)
+                }
+            }
         }
 
         private fun bindItemCalculator(item: ItemShipInfor.ItemCalculator) {
@@ -66,7 +89,10 @@ class ReceiverAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiverAdapterViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ReceiverAdapter.ReceiverAdapterViewHolder {
         val layout = when (viewType) {
             ITEM_TOUCH -> R.layout.item_ship_touch
             ITEM_CALCULATOR -> R.layout.item_ship_calculator
@@ -79,7 +105,10 @@ class ReceiverAdapter(
         return ReceiverAdapterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ReceiverAdapterViewHolder, position: Int) =
+    override fun onBindViewHolder(
+        holder: ReceiverAdapter.ReceiverAdapterViewHolder,
+        position: Int
+    ) =
         holder.bind(adapterData[position])
 
     override fun getItemCount() = adapterData.size

@@ -9,29 +9,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.CustomView.ToastCustom
 import com.misa.fresher.MainActivity
 import com.misa.fresher.Models.Product
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentSaleBinding
+import com.misa.fresher.showToast
 import kotlinx.android.synthetic.main.custom_search_view.view.*
-import kotlinx.android.synthetic.main.sale_context.view.*
+import kotlinx.android.synthetic.main.filter_drawer.view.*
+import kotlinx.android.synthetic.main.fragment_sale.view.*
+import kotlinx.android.synthetic.main.sale_context.view.linearQuantity
 
 class SaleFragment : Fragment() {
 
     private val binding: FragmentSaleBinding by lazy { getInflater(layoutInflater) }
-    private var sharedViewModel: PublicViewModel? = null
-    private var saleViewModel: SaleViewModel? = null
+    private val sharedViewModel: PublicViewModel by activityViewModels()
+    private val saleViewModel: SaleViewModel by viewModels()
 
     val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
 
@@ -50,35 +52,33 @@ class SaleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transitionFragment(view)
+        transitionFragment()
         configureFilterDrawer()
         configureToolbar()
         configureOtherView()
         configListView()
     }
 
-    private fun transitionFragment(view: View) {
+    private fun transitionFragment() {
 
-        binding.root.linearQuantity?.setOnClickListener {
-            if (sharedViewModel?.listItemSelected?.value!!.size > 0) {
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_fragment_sale_to_fragment_payment)
+        binding.root.linearQuantity.setOnClickListener {
+            if (sharedViewModel.listItemSelected.value!!.size > 0) {
+                findNavController().navigate(R.id.action_fragment_sale_to_fragment_payment)
             }
         }
     }
 
     private fun initViewModel() {
-        saleViewModel = SaleViewModel()
-        saleViewModel!!.initData()
-        sharedViewModel = ViewModelProvider(requireActivity()).get(PublicViewModel::class.java)
+        saleViewModel.initData()
     }
 
     private fun configureToolbar() {
-        binding.filterDrawer.btnDone.setOnClickListener {
+
+        binding.root.filterDrawer.btn_done.setOnClickListener {
             toggleDrawer(binding.navigationView)
         }
 
-        binding.filterDrawer.btnReset.setOnClickListener {
+        binding.root.filterDrawer.btn_reset.setOnClickListener {
             toggleDrawer(binding.navigationView)
         }
 
@@ -91,7 +91,7 @@ class SaleFragment : Fragment() {
         }
 
         binding.searchviewSale.edittext_search_hint.doAfterTextChanged {
-            saleViewModel?.updateListItemShow(it.toString())
+            saleViewModel.updateListItemShow(it.toString())
         }
     }
 
@@ -100,33 +100,33 @@ class SaleFragment : Fragment() {
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.navigationView)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n", "NotifyDataSetChanged")
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
 
-        saleViewModel?.listItemShow?.observe(viewLifecycleOwner, Observer {
-            binding.rcvProduct.adapter = it?.let { it1 ->
-                ProductAdapter(it1) { it -> saleItemClick(it) }
+        saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
+            binding.rcvProduct.adapter = it.let { it1 ->
+                ProductAdapter(it1) { saleItemClick(it) }
             }
         })
 
-        sharedViewModel?.listItemSelected?.observe(viewLifecycleOwner, Observer {
-            binding.tvCountProduct.text = sharedViewModel!!.getCount().toString()
+        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
+            binding.tvCountProduct.text = sharedViewModel.getCount().toString()
 
             if (it.size >= 1) {
                 binding.linearQuantity.background =
-                    this.context?.getDrawable(R.drawable.custom_background)
+                    requireContext().getDrawable(R.drawable.custom_background)
                 binding.btnRefresh.background =
-                    this.context?.getDrawable(R.drawable.custom_button)
+                    requireContext().getDrawable(R.drawable.custom_button)
                 binding.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
                 binding.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
                 binding.tvBillProduct.text =
-                    "Total " + sharedViewModel!!.getTotalPrice().toString()
+                    "Total " + sharedViewModel.getTotalPrice().toString()
             } else {
                 binding.linearQuantity.background =
-                    this.context?.getDrawable(R.drawable.custom_background_none)
+                    requireContext().getDrawable(R.drawable.custom_background_none)
                 binding.btnRefresh.background =
-                    this.context?.getDrawable(R.drawable.custom_button_none)
+                    requireContext().getDrawable(R.drawable.custom_button_none)
                 binding.tvBillProduct.text = "Not yet selected item"
                 binding.tvCountProduct.setTextColor(Color.GRAY)
                 binding.tvBillProduct.setTextColor(Color.GRAY)
@@ -134,10 +134,23 @@ class SaleFragment : Fragment() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
         binding.btnRefresh.setOnClickListener {
-            sharedViewModel?.clearListItemSelected()
+            sharedViewModel.clearListItemSelected()
         }
+
+        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+            val tvCustomer = binding.tvCustomer
+            tvCustomer.isSelected = true
+            tvCustomer.isSingleLine = true
+            if (it.receiver != null && it.tel != null) {
+                tvCustomer.text = it.receiver.toString() + "_" + it.tel.toString()
+            } else {
+                tvCustomer.text = "Customer name, phone number"
+            }
+
+        })
     }
 
     private fun toggleDrawer(view: View) {
@@ -161,26 +174,21 @@ class SaleFragment : Fragment() {
         val btAdd = bottomSheetView.findViewById<ImageView>(R.id.imgAdd)
         val btRemove = bottomSheetView.findViewById<ImageView>(R.id.imgRemove)
 
-        sharedViewModel?.updateItemSelected(itemProduct)
+        sharedViewModel.updateItemSelected(itemProduct)
 
         btAdd.setOnClickListener {
-            sharedViewModel?.updateItemSelectedQuantity(1)
+            sharedViewModel.updateItemSelectedQuantity(1)
         }
 
         btRemove.setOnClickListener {
-            if (sharedViewModel?.itemSelected?.value?.countPackage == 1) {
-                val customToast = ToastCustom
-                customToast.makeToast(
-                    requireContext(),
-                    "Quantity must be more than 0. Please check again",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (sharedViewModel.itemSelected.value!!.countPackage == 1) {
+                requireContext().showToast("Quantity must be more than 0. Please check again")
             } else {
-                sharedViewModel?.updateItemSelectedQuantity(-1)
+                sharedViewModel.updateItemSelectedQuantity(-1)
             }
         }
 
-        sharedViewModel?.itemSelected?.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.countPackage.toString()
             tvItemName.text = it.nameProduct
             tvItemId.text = it.idProduct
@@ -189,7 +197,7 @@ class SaleFragment : Fragment() {
         bottomSheetDialog.setContentView(bottomSheetView)
 
         bottomSheetDialog.setOnDismissListener {
-            sharedViewModel?.updateListItemSelected()
+            sharedViewModel.updateListItemSelected()
         }
 
         bottomSheetDialog.show()

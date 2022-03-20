@@ -12,9 +12,10 @@ import com.misa.fresher.Models.InforShip
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.databinding.FragmentReceiverBinding
 
-class ReceiverFragment: Fragment() {
-    private lateinit var receiverViewModel: ReceiverViewModel
-    private lateinit var sharedViewModel: PublicViewModel
+class ReceiverFragment(
+    private var receiverViewModel: ReceiverViewModel,
+    private var sharedViewModel: PublicViewModel
+) : Fragment() {
     var inforShip = InforShip(null, null, null, null, null, null, null, null, null, false)
 
     private val binding: FragmentReceiverBinding by lazy {
@@ -41,18 +42,15 @@ class ReceiverFragment: Fragment() {
 
         receiverViewModel = ReceiverViewModel(view.context)
         binding.rcvReceiver.layoutManager = LinearLayoutManager(this.context)
-
         binding.rcvReceiver.adapter = ReceiverAdapter(receiverViewModel.listItemShip) {
             changeEditText(it)
         }
-
     }
 
     private fun changeEditText(inforShip: InforShip) {
         if (inforShip.receiver != null) this.inforShip.receiver = inforShip.receiver
-        else if (inforShip.tel != null) this.inforShip.tel = inforShip.tel
-        else if (inforShip.address != null) this.inforShip.address = inforShip.address
+        if (inforShip.tel != null) this.inforShip.tel = inforShip.tel
+        if (inforShip.address != null) this.inforShip.address = inforShip.address
     }
-
 }
 
