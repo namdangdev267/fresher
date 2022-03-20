@@ -2,7 +2,7 @@
 <resources>
 
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabIndicatorColor">@color/background</item>
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabBackground">@drawable/tab_color_selector</item>
         <item name="tabTextColor">@color/white</item>

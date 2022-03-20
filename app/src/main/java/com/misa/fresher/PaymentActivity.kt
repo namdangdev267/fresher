@@ -1,11 +1,10 @@
 package com.misa.fresher
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import com.misa.fresher.Activity.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +15,8 @@ class PaymentActivity : AppCompatActivity() {
         var imgBackMain = findViewById<ImageView>(R.id.imgBackMain)
 
         imgShip.setOnClickListener(View.OnClickListener {
-            val intent = Intent(baseContext, ViewPagerActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
+
+        overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
         })
 
         imgBackMain.setOnClickListener(View.OnClickListener {
