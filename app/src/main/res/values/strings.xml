@@ -8,6 +8,7 @@
     <string name="for_sale">Dành cho bán hàng</string>
     <string name="username">Tên đăng nhập</string>
     <string name="password">Mật khẩu</string>
+    <string name="retype_password">Nhập lại mật khẩu</string>
     <string name="log_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
     <string name="login_in_with_touch_id">Đăng nhập bằng vân tay</string>
