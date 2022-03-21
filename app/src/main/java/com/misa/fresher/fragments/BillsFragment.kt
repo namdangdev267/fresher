@@ -9,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
+import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -56,7 +59,29 @@ class BillsFragment : Fragment() {
         configSpinner(view)
         filterBills(view)
         navigationEvent(view)
+//        seacrchEvent(view)
     }
+
+//    private fun seacrchEvent(view: View) {
+//        val ivSearch = view.findViewById<ImageView>(R.id.ivSearchBills)
+//        val llSearchBills = view.findViewById<LinearLayout>(R.id.llSearch)
+//        val etSearch = view.findViewById<EditText>(R.id.etSearchBills)
+//        val tvClose = view.findViewById<TextView>(R.id.tvCloseBills)
+//        ivSearch.setOnClickListener {
+//            llSearchBills.isVisible = true
+//        }
+//        tvClose.setOnClickListener {
+//            llSearchBills.isVisible = false
+//        }
+//        etSearch.doAfterTextChanged {
+//            val text = etSearch.text.toString()
+//            billsViewModel.searchBills(text)
+//            billsViewModel.filterList.observe(viewLifecycleOwner, Observer {
+//                adapter.mBills = it
+//            })
+//        }
+//        adapter.notifyDataSetChanged()
+//    }
 
     /**
      * filter list bill theo ngày

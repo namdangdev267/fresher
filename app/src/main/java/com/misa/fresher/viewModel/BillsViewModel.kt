@@ -79,4 +79,11 @@ class BillsViewModel : ViewModel() {
         }
         _filterList.postValue(_filterList.value)
     }
+    fun searchBills(text : String){
+        _filterList.value?.filter {
+            it.id.toString().contains(text) || it.customer?.name?.contains(text) ?: false
+                    || it.customer?.number?.contains(text) ?: false
+        }
+        _filterList.postValue(_filterList.value)
+    }
 }
