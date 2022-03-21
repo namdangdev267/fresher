@@ -34,7 +34,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun getShippingInfor(view: View) {
-        var shipInfor=ShipInfor("","","","","")
+        val shipInfor=ShipInfor("","","","","")
         val etReceiver = view.findViewById<EditText>(R.id.edtReceiver)
         val etPhone = view.findViewById<EditText>(R.id.edtPhone)
         val etAddress = view.findViewById<EditText>(R.id.edtAddress)

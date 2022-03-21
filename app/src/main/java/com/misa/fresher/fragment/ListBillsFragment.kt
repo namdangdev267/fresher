@@ -1,7 +1,6 @@
 package com.misa.fresher.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
@@ -24,21 +20,21 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ListBillAdapter
 import com.misa.fresher.model.BillInfor
-import java.text.DecimalFormat
 
 class ListBillsFragment : Fragment() {
     var viewModel: BillViewModel? = null
-    var mListBill: ArrayList<BillInfor>? = null
+    var mListBill= arrayListOf<BillInfor>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_list_bills, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
         setUpView(view)
         mListBill = getListBill()
         setUpRecycleView(view)
@@ -81,7 +77,7 @@ class ListBillsFragment : Fragment() {
      **/
     private fun setUpRecycleView(view: View) {
         val rcvBill = view.findViewById<RecyclerView>(R.id.rcvBill)
-        val adapter = mListBill?.let { ListBillAdapter(it) }
+        val adapter = ListBillAdapter(mListBill)
         rcvBill.adapter = adapter
         rcvBill.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -115,16 +111,16 @@ class ListBillsFragment : Fragment() {
             true
         }
     }
+
     /**
      *Lấy danh sách hóa đơn
      *@author:NCPhuc
      *@date:3/18/2022
      **/
     private fun getListBill(): ArrayList<BillInfor> {
-        val bill = arguments?.get("bill").let {
-            it as ArrayList<BillInfor>
-        }
-        Log.e("test", bill.size.toString())
-        return bill
+        return arguments?.get(BILL) as ArrayList<BillInfor>
+    }
+    companion object{
+        const val BILL="bill"
     }
 }

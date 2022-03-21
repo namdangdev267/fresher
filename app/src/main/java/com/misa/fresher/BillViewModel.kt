@@ -14,14 +14,11 @@ class BillViewModel : ViewModel() {
     }
 
     fun calculateTotalAmount() =
-        listBill.value.let { listItemBill ->
-            listItemBill?.sumOf {
-                it.product.sumOf {
-                    it.amount * it.product.productPrice
-                }
+        listBill.value?.sumOf {
+            it.product.sumOf {
+                it.amount * it.product.productPrice
             }
         }
-    fun getSize()=listBill.value.let {
-        it?.size
-    }
+
+    fun getSize() = listBill.value?.size
 }

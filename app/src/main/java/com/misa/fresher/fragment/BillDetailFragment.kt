@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,18 +28,13 @@ import java.text.DecimalFormat
 import kotlin.random.Random
 
 class BillDetailFragment : Fragment() {
-    var listBillDetail = mutableListOf<SelectedProduct>()
+    var listBillDetail = arrayListOf<SelectedProduct>()
     val decimal = DecimalFormat("0,000.0")
-    var viewModel: BillViewModel? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    val viewModel: BillViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
         return inflater.inflate(R.layout.fragment_bill_detail, container, false)
     }
 
@@ -58,11 +54,8 @@ class BillDetailFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun getSelectedProduct(): MutableList<SelectedProduct> {
-        val list = arguments?.get("product").let {
-            it as MutableList<SelectedProduct>
-        }
-        return list
+    private fun getSelectedProduct(): ArrayList<SelectedProduct> {
+    return arguments?.get(PRODUCTS) as ArrayList<SelectedProduct>
     }
 
     /**
@@ -73,7 +66,7 @@ class BillDetailFragment : Fragment() {
     private fun setUpRecycleView(view: View) {
         val rvBillDetails = view.findViewById<RecyclerView>(R.id.rvSelectedProduct)
         val adapter = BillProductAdapter(
-            listBillDetail as ArrayList<SelectedProduct>,
+            listBillDetail,
             requireContext(),
             { changeAmountProduct(it) })
         rvBillDetails?.adapter = adapter
@@ -141,6 +134,7 @@ class BillDetailFragment : Fragment() {
             )
         }
     }
+
     /**
      *Lưu hóa đơn vào danh sách hóa đơn
      *@author:NCPhuc
@@ -152,11 +146,9 @@ class BillDetailFragment : Fragment() {
         tvTotalBillDetail?.setOnClickListener {
             val billInfor = BillInfor(
                 tvBillCode.text.toString().toInt(),
-                listBillDetail,ShipInfor("1", "2", "3", "4", "5"))
-            Log.e("aaaaaaâ",listBillDetail.get(0).amount.toString())
-            viewModel?.add(billInfor)
-            viewModel?.listItemBill?.observe(viewLifecycleOwner, Observer {
-            })
+                listBillDetail, ShipInfor("1", "2", "3", "4", "5")
+            )
+            viewModel.add(billInfor)
             Toast.makeText(requireContext(), "Thêm hóa đơn thành công", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_billDetailFragment_to_saleFragment)
         }
@@ -172,4 +164,9 @@ class BillDetailFragment : Fragment() {
         tvBillCode.text = billCode.toString()
     }
 
+    companion object {
+        const val PRODUCTS="product"
+    }
+
 }
+

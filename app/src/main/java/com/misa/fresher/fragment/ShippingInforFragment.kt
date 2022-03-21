@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
@@ -21,21 +22,18 @@ import com.misa.fresher.model.ShipInfor
 import com.misa.fresher.viewpager.PageAdapter
 
 class ShippingInforFragment : Fragment() {
-    var listSelectedProduct = mutableListOf<SelectedProduct>()
     var shipInfor: ShipInfor? = null
-    var model: ShipInforModel? = null
+    val model: ShipInforModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = ViewModelProvider(requireActivity()).get(ShipInforModel::class.java)
         return inflater.inflate(R.layout.fragment_shipping_infor, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViewPager()
-        listSelectedProduct = getList()
+        setUpViewPager(view)
         getShippingInfor()
     }
     /**
@@ -43,30 +41,21 @@ class ShippingInforFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/18/2022
      **/
-    private fun setUpViewPager() {
-        val vpPager = view?.findViewById<ViewPager>(R.id.vpPager)
-        vpPager?.adapter = PageAdapter((activity as AppCompatActivity).supportFragmentManager)
-        val tabLayout = view?.findViewById<TabLayout>(R.id.tabLayout)
+    private fun setUpViewPager(view: View) {
+        val vpPager = view.findViewById<ViewPager>(R.id.vpPager)
+        vpPager.adapter = PageAdapter((activity as AppCompatActivity).supportFragmentManager)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         tabLayout?.setupWithViewPager(vpPager)
     }
 
     private fun getShippingInfor() {
         val btnSave = view?.findViewById<Button>(R.id.btnSave)
+        model.shipItem.observe(viewLifecycleOwner, Observer {
+            shipInfor=it
+        })
         btnSave?.setOnClickListener {
-          model?.shipItem?.observe(viewLifecycleOwner, Observer {
-              shipInfor=it
-              Log.e("tesst",shipInfor?.addres.toString())
-              activity?.onBackPressed()
-          })
+            activity?.onBackPressed()
         }
-
-    }
-
-    private fun getList(): MutableList<SelectedProduct> {
-        val list = arguments?.get("listproduct").let {
-            it as MutableList<SelectedProduct>
-        }
-        return list
     }
 }
 

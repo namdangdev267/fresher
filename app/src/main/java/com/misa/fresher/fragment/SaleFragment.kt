@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,15 +35,14 @@ import java.text.DecimalFormat
 class SaleFragment : Fragment() {
     var products = Product.fakedat()
     var rcv: RecyclerView? = null
-    var productList = mutableListOf<SelectedProduct>()
-    var viewModel: BillViewModel? = null
+    var productList = arrayListOf<SelectedProduct>()
+    val viewModel: BillViewModel by activityViewModels()
     var mListBill: MutableList<BillInfor>? = null
     var rcvAdapter: ProductApdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
         return inflater.inflate(R.layout.fragment_sale, container, false)
     }
 
@@ -64,7 +64,7 @@ class SaleFragment : Fragment() {
      **/
     private fun setUpView(view: View) {
         rcv = view.findViewById(R.id.rcvProduct)
-        rcvAdapter = ProductApdapter(products as ArrayList<Product>) { showBottomDialog(it) }
+        rcvAdapter = ProductApdapter(products) { showBottomDialog(it) }
         rcv?.adapter = rcvAdapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
         setUpNavigation()
@@ -262,8 +262,7 @@ class SaleFragment : Fragment() {
                 R.id.mnBill -> {
                     findNavController().navigate(
                         R.id.action_saleFragment_to_listBillsFragment,
-                        bundleOf("bill" to mListBill)
-                    )
+                        bundleOf("bill" to mListBill))
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
@@ -343,8 +342,7 @@ class SaleFragment : Fragment() {
      *@date:3/18/2022
      **/
     private fun getFilter(view: View): FilterProduct {
-        val rbText = view.findViewById<RadioGroup>(R.id.rgSortby)
-        val selectRadioButon = rbText.checkedRadioButtonId
+        val selectRadioButon = view.findViewById<RadioGroup>(R.id.rgSortby).checkedRadioButtonId
         val radioButtonText = selectRadioButon.let { view.findViewById<RadioButton>(it)?.text }
         val spColor = view.findViewById<Spinner>(R.id.spnColor).selectedItem.toString()
         val spSize = view.findViewById<Spinner>(R.id.spnSize).selectedItem.toString()
@@ -353,7 +351,7 @@ class SaleFragment : Fragment() {
     }
 
     private fun filterProduct(filter: FilterProduct) {
-        var sortList = products as ArrayList<Product>
+        var sortList = products
         if (filter.sortBy == "Tên") {
             sortList.sortWith(compareBy(Product::productName))
             if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productName))
@@ -389,7 +387,7 @@ class SaleFragment : Fragment() {
      *@date:3/18/2022
      **/
     private fun getListBill() {
-        viewModel?.listItemBill?.observe(viewLifecycleOwner, Observer {
+        viewModel.listItemBill.observe(viewLifecycleOwner, Observer {
             mListBill = it
         })
     }

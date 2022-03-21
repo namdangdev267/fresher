@@ -10,9 +10,9 @@ class Product(
 )
 {
     companion object{
-        fun fakedat():MutableList<Product>
+        fun fakedat():ArrayList<Product>
         {
-            val contact= mutableListOf<Product>()
+            val contact= ArrayList<Product>()
             contact.add(Product(1, "T-Shirt", "G1", 120000,  "red", "L"))
             contact.add(Product(2, "Shoe", "G2", 60000,  "blue", "XL"))
             contact.add(Product(3, "Skin", "G3", 120000,  "while", "L"))
