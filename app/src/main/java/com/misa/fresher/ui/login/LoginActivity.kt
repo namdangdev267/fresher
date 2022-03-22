@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.misa.fresher.MainActivity
 import com.misa.fresher.ui.login.register.RegisterActivity
 import com.misa.fresher.databinding.ActivityLoginBinding
@@ -54,12 +55,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private fun checkValid() {
         val userName = bindding.tvUsername.text.toString()
         val password = bindding.tvPassword.text.toString()
+        val processBar = bindding.pbSignIn
         val user = User(userName,password)
         if (userName.isEmpty()) {
             applicationContext.showToast("Tên đăng nhập không được để trống")
         } else if (password.isEmpty()) {
             applicationContext.showToast("Mật khẩu không được để trống")
         } else {
+            processBar.isVisible = true
             mPresenter?.login(user)
         }
     }

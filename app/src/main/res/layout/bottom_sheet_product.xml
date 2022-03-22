@@ -50,9 +50,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/dp_8"
             android:layout_marginBottom="5dp"
-            android:gravity="center"
             android:layout_toStartOf="@id/ivAdd"
             android:layout_toRightOf="@+id/ivRemove"
+            android:gravity="center"
             android:text="1"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18" />

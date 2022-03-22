@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_sale">
     <fragment
         android:id="@+id/nav_sale"
-        android:name="com.misa.fresher.fragments.SaleFragment"
+        android:name="com.misa.fresher.ui.login.sale.SaleFragment"
         android:label="fragment_sale"
         tools:layout="@layout/fragment_sale">
         <action
