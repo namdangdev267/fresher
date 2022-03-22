@@ -1,10 +1,7 @@
 package com.misa.fresher.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ProductAdapter
 import com.misa.fresher.models.Product
@@ -50,33 +48,89 @@ class HomeFragment : Fragment(){
         onClickPayment()
         searchProduct()
         onClickReset()
-        onClickItemNav()
         configToolbar()
+        configFilter()
+        sortFilter()
     }
     fun disData(){
         val rcv = mView?.findViewById<View>(R.id.rcv_product) as RecyclerView
         val adapter = ProductAdapter(Product.getListProduct(),{onItemClickProduct(it)})
-        rcv?.adapter=adapter
+        rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(activity)
     }
-    fun configToolbar(){
-        val drawerLayout  = mView?.findViewById<DrawerLayout>(R.id.drawerLayout)
-        val toolbar = mView?.findViewById<Toolbar>(R.id.toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        toggle = ActionBarDrawerToggle(requireActivity(),drawerLayout,toolbar,R.string.open,R.string.close)
-        drawerLayout?.addDrawerListener(toggle!!)
-        toggle?.syncState()
-    }
-    fun onClickItemNav(){
-        val navView  = mView?.findViewById<NavigationView>(R.id.nav_view)
-        navView?.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_sale -> Toast.makeText(context,"SaleFragment", Toast.LENGTH_SHORT).show()
-                R.id.nav_pay -> Toast.makeText(context,"PayFragment", Toast.LENGTH_SHORT).show()
-            }
-            true
+
+    fun configFilter(){
+        val mDrawer = mView?.findViewById<DrawerLayout>(R.id.drawerFilter)
+        mDrawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        mView?.findViewById<ImageButton>(R.id.img_btn_icon4)?.setOnClickListener{
+            configFilter()
+            mDrawer?.openDrawer(Gravity.RIGHT)
         }
     }
+
+    fun sortFilter(){
+        var listFilter = mutableListOf<Product>()
+        val mDrawer = mView?.findViewById<DrawerLayout>(R.id.drawerFilter)
+        val radioButtonName = mView?.findViewById<RadioButton>(R.id.rb_name)
+        val radioButtonPrice = mView?.findViewById<RadioButton>(R.id.rb_price)
+        val spnColor = mView?.findViewById<Spinner>(R.id.spnColor)
+        val spnSize = mView?.findViewById<Spinner>(R.id.spnSize)
+        val btnXong = mView?.findViewById<Button>(R.id.btn_Xong)
+        val btnBoLoc = mView?.findViewById<Button>(R.id.btn_BoLoc)
+
+        val spnColorSelected = spnColor?.selectedItem.toString()
+        val spnSizeSelected = spnSize?.selectedItem.toString()
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.colorArray,
+            android.R.layout.simple_spinner_item
+        ).also {
+            arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnColor?.adapter = arrayAdapter
+        }
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.sizeArray,
+            android.R.layout.simple_spinner_item
+        ).also {
+                arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spnSize?.adapter = arrayAdapter
+        }
+
+        btnXong?.setOnClickListener{
+            if(radioButtonName?.isChecked == true){
+                listFilter = Data.sortedWith(compareBy(Product :: productName)) as MutableList<Product>
+            }else if(radioButtonPrice?.isChecked == true) {
+                listFilter = Data.sortedWith(compareBy(Product :: price)) as MutableList<Product>
+            }
+            var adapter = ProductAdapter(listFilter,{onItemClickProduct(it)})
+            rcv = mView?.findViewById(R.id.rcv_product)
+            rcv?.adapter = adapter
+            adapter.notifyDataSetChanged()
+            rcv?.layoutManager = LinearLayoutManager(requireContext())
+            mDrawer?.closeDrawer(Gravity.RIGHT)
+        }
+
+        btnBoLoc?.setOnClickListener{
+            radioButtonName?.isChecked = true
+            radioButtonPrice?.isChecked = false
+            spnColor?.setSelection(0)
+            spnSize?.setSelection(0)
+        }
+
+    }
+
+    fun configToolbar(){
+        val toolbar = mView?.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.drawerLayout)
+        val toggle = ActionBarDrawerToggle(requireActivity(),drawerLayout,toolbar,R.string.open,R.string.close)
+        drawerLayout?.addDrawerListener(toggle)
+        toggle.syncState()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle?.onOptionsItemSelected(item) == true){
             return true
@@ -136,9 +190,9 @@ class HomeFragment : Fragment(){
     // Đổ dữ liệu tìm kiếm lên màn hình
     fun configRecycleView(){
         var adapter = ProductAdapter(Data,{onItemClickProduct(it)})
-        adapter.notifyDataSetChanged()
         rcv = mView?.findViewById(R.id.rcv_product)
         rcv?.adapter = adapter
+        adapter.notifyDataSetChanged()
         rcv?.layoutManager = LinearLayoutManager(requireContext())
     }
     // Hiển thị bottom sheet và thêm dữ liệu vào list

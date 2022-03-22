@@ -4,16 +4,42 @@
     android:layout_height="match_parent"
      xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
-    tools:openDrawer="start">
-    <include layout="@layout/context_toolbar"/>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    android:id="@+id/drawerFilter"
+    tools:openDrawer="end">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true">
+        android:orientation="vertical"
+        tools:context =".fragment.HomeFragment">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="@color/color_blue_purple">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/Widget.AppCompat.Toolbar"
+                android:background="@color/color_blue_purple">
+                <com.misa.fresher.views.CustomSearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:imagebutton1="@drawable/ic_search"
+                    app:title="Nhập tên, mã SKU,..."
+                    app:imagebutton2="@drawable/ic_qr_code"
+                    app:imagebutton3="@drawable/ic_cart"
+                    app:imagebutton4="@drawable/ic_filter" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <include layout="@layout/fragment_sale"/>
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="55dp">
+        <include layout="@layout/fragment_filter" />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

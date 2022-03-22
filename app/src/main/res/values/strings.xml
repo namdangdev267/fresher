@@ -16,5 +16,16 @@
     <string name="tv_save">Lưu</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+<!--    fragment payment-->
+    <string name="tv_id">22323006</string>
+    <string name="tv_nameuser_sdt">Tên khách hàng,số điện thoại</string>
+    <string name="tv_no_select_payment">Không chọn</string>
+    <string name="tv_buy_insert">Mua thêm</string>
+<!--    fragment fiter-->
+    <string name="tv_title_sx">Sắp xếp theo</string>
+    <string name="rb_title_tensp">Tên sản phẩm(A->Z)</string>
+    <string name="rb_title_giasp">Giá sản phẩm(Tăng dần)</string>
+    <string name="tv_title_mausac">Màu sắc</string>
+    <string name="tv_title_size">Kích thước</string>
 
 </resources>
