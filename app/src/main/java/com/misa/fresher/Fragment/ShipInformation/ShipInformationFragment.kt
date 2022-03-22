@@ -1,4 +1,4 @@
-package com.misa.fresher.Fragment.ShipInformation
+package com.misa.fresher.fragment.shipinformation
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,12 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.misa.fresher.Fragment.ShipInformation.Package.PackageFragment
-import com.misa.fresher.Fragment.ShipInformation.Package.PackageViewModel
-import com.misa.fresher.Fragment.ShipInformation.Receiver.ReceiverFragment
-import com.misa.fresher.Fragment.ShipInformation.Receiver.ReceiverViewModel
-import com.misa.fresher.Fragment.ShipInformation.Ship.ShipFragment
-import com.misa.fresher.Fragment.ShipInformation.Ship.ShipViewModel
+import com.misa.fresher.fragment.shipinformation.`package`.PackageFragment
+import com.misa.fresher.fragment.shipinformation.`package`.PackageViewModel
+import com.misa.fresher.fragment.shipinformation.receiver.ReceiverFragment
+import com.misa.fresher.fragment.shipinformation.receiver.ReceiverViewModel
+import com.misa.fresher.fragment.shipinformation.ship.ShipFragment
+import com.misa.fresher.fragment.shipinformation.ship.ShipViewModel
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentShipInformationBinding

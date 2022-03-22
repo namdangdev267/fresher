@@ -1,4 +1,4 @@
-package com.misa.fresher.Fragment.Payment
+package com.misa.fresher.fragment.payment
 
 import androidx.lifecycle.ViewModel
 

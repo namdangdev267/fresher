@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.Models.Enum.BillStatus
-import com.misa.fresher.Models.InforShip
-import com.misa.fresher.Models.ItemBill
-import com.misa.fresher.Models.PackageProduct
-import com.misa.fresher.Models.Product
+import com.misa.fresher.models.enum.BillStatus
+import com.misa.fresher.models.InforShip
+import com.misa.fresher.models.ItemBill
+import com.misa.fresher.models.PackageProduct
+import com.misa.fresher.models.Product
 import java.util.*
 
 

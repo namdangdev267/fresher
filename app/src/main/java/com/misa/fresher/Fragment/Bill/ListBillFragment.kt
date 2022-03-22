@@ -1,4 +1,4 @@
-package com.misa.fresher.Fragment.Bill
+package com.misa.fresher.fragment.bill
 
 import android.annotation.SuppressLint
 import android.os.Bundle

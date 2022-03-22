@@ -1,4 +1,4 @@
-package com.misa.fresher.Fragment.Sale
+package com.misa.fresher.fragment.sale
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,7 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
-import com.misa.fresher.Models.Product
+import com.misa.fresher.models.Product
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentSaleBinding

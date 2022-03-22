@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Sale.SaleFragment">
+    tools:context=".fragment.sale.SaleFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:background="@color/background"
             android:orientation="horizontal">
 
-            <com.misa.fresher.CustomView.CustomSearchView
+            <com.misa.fresher.customview.CustomSearchView
                 android:id="@+id/searchviewSale"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

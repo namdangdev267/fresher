@@ -11,8 +11,8 @@
     </string-array>
 
     <style name="TextViewFont">
-        <item name="android:layout_width"> wrap_content </item>
-        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textAllCaps">false</item>
     </style>
@@ -86,4 +86,24 @@
     <string name="no_information">No information</string>
     <string name="option_1">option 1</string>
     <string name="option_2">option 2</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="log_in">LOG IN</string>
+    <string name="forgot_password">Forgot passwor?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="misa_eshop">MISA</string>
+    <string name="login_in_with_touch_id">Login in with Touch ID</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="ominichannelplatform">O m i n i c h a n n e l P l a t f o r m</string>
+    <string name="for_sale">For sale</string>
+    <string name="title_activity_login2">LoginActivity2</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
