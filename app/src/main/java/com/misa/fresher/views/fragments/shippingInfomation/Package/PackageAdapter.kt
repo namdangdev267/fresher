@@ -9,6 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemRecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.databinding.ItemBillBinding
+import com.misa.fresher.databinding.ItemShip3colBinding
+import com.misa.fresher.databinding.ItemShipBinding
+import com.misa.fresher.databinding.ItemShipTouchBinding
 
 class PackageAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<PackageAdapter.PackageAdapterViewHolder>() {
@@ -18,51 +22,60 @@ class PackageAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
         private const val ITEM_3COL = 1
     }
 
-    class PackageAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
-            itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).setText(
+    abstract class PackageAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        open fun bindData(item:ItemRecyclerView) {
+        }
+
+        fun bindItemTouch(item: ItemRecyclerView.ItemTouch, binding: ItemShipTouchBinding) {
+            binding.textviewTouchTitle.text = item.title
+            binding.edittextTouchHintContent.setText(
                 item.hintContent
             )
             item.imageResourcce?.let {
-                itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
+                binding.imageviewTouch.setImageResource(it)
             }
-            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
+
+            binding.textviewTouchRequire.text = item.require
+
         }
 
-        private fun bindItem3Col(item: ItemRecyclerView.Item3Col) {
-            itemView.findViewById<TextView>(R.id.textview_package_size).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_1)
-                .setText(item.content1)
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_2)
-                .setText(item.content2)
-            itemView.findViewById<EditText>(R.id.edittext_package_size_content_3)
-                .setText(item.content3)
+        fun bindItem3Col(item: ItemRecyclerView.Item3Col,binding: ItemShip3colBinding) {
+            binding.textviewPackageSize.text = item.title
+            binding.edittextPackageSizeContent1.setText(item.content1)
+            binding.edittextPackageSizeContent2.setText(item.content2)
+            binding.edittextPackageSizeContent3.setText(item.content3)
         }
 
+    }
 
-        fun bind(itemRecyclerView: ItemRecyclerView) {
-            when (itemRecyclerView) {
-                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
-                is ItemRecyclerView.Item3Col -> bindItem3Col(itemRecyclerView)
-
-            }
+    class ItemTouchViewHolder(val binding:ItemShipTouchBinding):PackageAdapterViewHolder(binding.root)
+    {
+        override fun bindData(item: ItemRecyclerView) {
+            bindItemTouch(item as ItemRecyclerView.ItemTouch,binding)
         }
     }
 
+    class Item3ColViewHolder(val binding:ItemShip3colBinding):PackageAdapterViewHolder(binding.root)
+    {
+        override fun bindData(item: ItemRecyclerView) {
+            bindItem3Col(item as ItemRecyclerView.Item3Col,binding)
+        }
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PackageAdapterViewHolder {
-        val layout = when (viewType) {
-            ITEM_TOUCH -> R.layout.item_ship_touch
-            ITEM_3COL -> R.layout.item_ship_3col
-            else -> R.layout.item_ship_touch
+        return when (viewType) {
+            ITEM_TOUCH -> ItemTouchViewHolder(ItemShipTouchBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+            ITEM_3COL -> Item3ColViewHolder(ItemShip3colBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+            else -> ItemTouchViewHolder(ItemShipTouchBinding.inflate(LayoutInflater.from(parent.context), parent,false))
         }
 
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return PackageAdapterViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PackageAdapterViewHolder, position: Int) {
-        holder.bind(adapterData[position])
+        holder.bindData(adapterData[position])
     }
 
     override fun getItemCount() = adapterData.size

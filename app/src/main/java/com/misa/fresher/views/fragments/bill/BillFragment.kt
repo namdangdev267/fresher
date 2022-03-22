@@ -61,7 +61,6 @@ class BillFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_billFragment_to_saleFragment)
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")

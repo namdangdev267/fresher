@@ -9,6 +9,7 @@ import com.misa.fresher.models.enum.Color
 import com.misa.fresher.models.enum.SortBy
 import com.misa.fresher.models.ItemProduct
 import java.text.Collator
+import java.util.*
 
 
 class SaleViewModel : ViewModel() {
@@ -87,30 +88,17 @@ class SaleViewModel : ViewModel() {
         Log.e("filter", filter.toString())
         var showList = mutableListOf<ItemProduct>()
         showList = listItemProduct.filter { it.name.contains(search, true) } as MutableList<ItemProduct>
-//        for (i in listItemProduct) {
-//            if (i.name.contains(search)) {
-//                showList.add(i)
-//            }
-//        }
         var res = mutableListOf<ItemProduct>()
         for (i in showList) {
             val filterCategory = (filter.category != null && filter.category != i.category)
             val filterColor = (filter.color != null && filter.color != i.color)
-            val filterAvailable = (filter.available == true && i.availableQuantity <= 0)
+            val filterAvailable = (filter.available && i.availableQuantity <= 0)
 
             if(!filterAvailable && !filterColor && !filterCategory)
             {
                 res.add(i)
             }
 
-//            val filterCategory = (filter.category == null || filter.category == i.category)
-//            val filterColor = (filter.color == null ||  filter.color == i.color)
-//            val filterAvailable = (!filter.available || i.availableQuantity > 0)
-//
-//            if(filterAvailable && filterColor && filterCategory)
-//            {
-//                res.add(i)
-//            }
         }
 
         Log.e(this.javaClass.simpleName, res.toString())
@@ -129,18 +117,18 @@ class SaleViewModel : ViewModel() {
             }
         }
         Log.e(this.javaClass.simpleName + "after sort: ", res.toString())
+        Calendar.getInstance()
 
 
         Log.e(this.javaClass.simpleName, showList.size.toString() + "--" + listItemProduct.size)
         _listItemShow.postValue(res)
-
     }
 
 
     fun getColorOf(itemProduct: ItemProduct): List<Color> {
         var mutableList: MutableList<Color> = mutableListOf()
         for (i in listItemProduct) {
-            if (i.name.equals(itemProduct.name)) {
+            if (i.name == itemProduct.name) {
                 mutableList.add(itemProduct.color)
             }
         }

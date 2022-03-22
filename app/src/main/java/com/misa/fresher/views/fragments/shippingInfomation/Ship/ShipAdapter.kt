@@ -9,6 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemRecyclerView
 import com.misa.fresher.R
+import com.misa.fresher.databinding.ItemShip3colBinding
+import com.misa.fresher.databinding.ItemShipCalculatorBinding
+import com.misa.fresher.databinding.ItemShipRadiobuttonBinding
+import com.misa.fresher.databinding.ItemShipTouchBinding
+import com.misa.fresher.views.fragments.shippingInfomation.Package.PackageAdapter
 
 class ShipAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<ShipAdapter.ShipAdapterViewHolder>() {
@@ -19,52 +24,72 @@ class ShipAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
         private const val ITEM_RADIO_BUTTON = 2
     }
 
-    class ShipAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemRecyclerView.ItemTouch) {
-            itemView.findViewById<TextView>(R.id.textview_touch_title).text = item.title
-            itemView.findViewById<EditText>(R.id.edittext_touch_hint_content).hint =
+    abstract class ShipAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        open fun bindData(item: ItemRecyclerView)
+        {
+        }
+
+        fun bindItemTouch(item: ItemRecyclerView.ItemTouch,binding: ItemShipTouchBinding) {
+            binding.textviewTouchTitle.text = item.title
+            binding.edittextTouchHintContent.setText(
                 item.hintContent
+            )
             item.imageResourcce?.let {
-                itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
+                binding.imageviewTouch.setImageResource(it)
             }
-            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
+
+            binding.textviewTouchRequire.text = item.require
         }
 
-        private fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator) {
-            itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
-            itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
+        fun bindItemCalculator(item: ItemRecyclerView.ItemCalculator,binding: ItemShipCalculatorBinding) {
+            binding.textviewCalculatorTitle.text = item.title
+            binding.textviewCalculatorContent.text = item.content
         }
 
-        private fun bindItemRadioButton(item: ItemRecyclerView.ItemRadioButton) {
-            itemView.findViewById<TextView>(R.id.radio_option1).text = item.option1
-            itemView.findViewById<TextView>(R.id.radio_option2).text = item.option2
-
-        }
-
-        fun bind(itemRecyclerView: ItemRecyclerView) {
-            when (itemRecyclerView) {
-                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
-                is ItemRecyclerView.ItemCalculator -> bindItemCalculator(itemRecyclerView)
-                is ItemRecyclerView.ItemRadioButton -> bindItemRadioButton(itemRecyclerView)
-                is ItemRecyclerView.ItemTouch -> bindItemTouch(itemRecyclerView)
-            }
+        fun bindItemRadioButton(item: ItemRecyclerView.ItemRadioButton,binding: ItemShipRadiobuttonBinding) {
+            binding.radioOption1.text = item.option1
+            binding.radioOption2.text = item.option2
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShipAdapterViewHolder {
-        val layout = when (viewType) {
-            ITEM_TOUCH -> R.layout.item_ship_touch
-            ITEM_CALCULATOR -> R.layout.item_ship_calculator
-            ITEM_RADIO_BUTTON -> R.layout.item_ship_radiobutton
-            else -> R.layout.item_ship_touch
+    class ItemTouchViewHolder(val binding:ItemShipTouchBinding):
+        ShipAdapter.ShipAdapterViewHolder(binding.root)
+    {
+        override fun bindData(item: ItemRecyclerView) {
+            bindItemTouch(item as ItemRecyclerView.ItemTouch,binding)
         }
+    }
 
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return ShipAdapterViewHolder(view)
+    class ItemCalculatorViewHolder(val binding: ItemShipCalculatorBinding):
+        ShipAdapter.ShipAdapterViewHolder(binding.root)
+    {
+        override fun bindData(item: ItemRecyclerView) {
+            bindItemCalculator(item as ItemRecyclerView.ItemCalculator,binding)
+        }
+    }
+
+
+    class ItemRadioViewHolder(val binding: ItemShipRadiobuttonBinding):
+        ShipAdapter.ShipAdapterViewHolder(binding.root)
+    {
+        override fun bindData(item: ItemRecyclerView) {
+            bindItemRadioButton(item as ItemRecyclerView.ItemRadioButton,binding)
+        }
+    }
+
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShipAdapterViewHolder {
+        return when (viewType) {
+            ITEM_TOUCH -> ItemTouchViewHolder(ItemShipTouchBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+            ITEM_CALCULATOR -> ItemCalculatorViewHolder(ItemShipCalculatorBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+            ITEM_RADIO_BUTTON -> ItemRadioViewHolder(ItemShipRadiobuttonBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+            else -> ItemTouchViewHolder(ItemShipTouchBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+        }
     }
 
     override fun onBindViewHolder(holder: ShipAdapterViewHolder, position: Int) {
-        holder.bind(adapterData[position])
+        holder.bindData(adapterData[position])
     }
 
     override fun getItemCount() = adapterData.size

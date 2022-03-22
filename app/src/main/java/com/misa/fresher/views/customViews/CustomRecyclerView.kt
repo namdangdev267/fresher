@@ -8,9 +8,13 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.misa.fresher.R
+import com.misa.fresher.databinding.CustomRecyclerViewBinding
 
 class CustomRecyclerView : LinearLayout {
     constructor(context: Context) : super(context)
+    val bindingCustomRecyclerView :CustomRecyclerViewBinding by lazy {
+        CustomRecyclerViewBinding.inflate(LayoutInflater.from(context),this)
+    }
 
     @SuppressLint("ResourceAsColor")
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -25,9 +29,10 @@ class CustomRecyclerView : LinearLayout {
 
 
         LayoutInflater.from(context).inflate(R.layout.custom_recycler_view, this, true)
+//         = CustomRecyclerViewBinding.inflate(LayoutInflater.from(this.context),this)
 
 
-        var titleRcv: TextView = findViewById(R.id.cv_rcv_title)
+        var titleRcv: TextView = bindingCustomRecyclerView.cvRcvTitle
         titleRcv.text = title.toString()
 
 

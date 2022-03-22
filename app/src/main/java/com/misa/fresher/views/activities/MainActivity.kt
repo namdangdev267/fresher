@@ -30,27 +30,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(binding.root.isDrawerOpen(binding.nvMenu))
-        {
+        if (binding.root.isDrawerOpen(binding.nvMenu)) {
             toggleDrawer(binding.nvMenu)
-        }
-        else
-        {
+        } else {
             super.onBackPressed()
         }
     }
 
-
     private fun configDrawer() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController.graph, findViewById<DrawerLayout>(R.id.drawer_layout))
-        appBarConfiguration.let {
-            (findViewById<NavigationView>(R.id.nv_menu)).setupWithNavController(
-                navController
-            )
-        }
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
+        appBarConfiguration.let { binding.nvMenu.setupWithNavController(navController) }
     }
 
     fun toggleDrawer(view: View) {
@@ -60,6 +52,4 @@ class MainActivity : AppCompatActivity() {
             binding.root.openDrawer(view)
         }
     }
-
-
 }

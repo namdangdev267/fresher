@@ -45,7 +45,6 @@ class ReceiverFragment : Fragment() {
 
         receiverViewModel = ReceiverViewModel(view.context)
         binding.recyclerviewShippingReceiver.layoutManager = LinearLayoutManager(this.context)
-
         binding.recyclerviewShippingReceiver.adapter = ReceiverAdapter(receiverViewModel.listItemRecyclerView) {
             changeEditText(it)
         }

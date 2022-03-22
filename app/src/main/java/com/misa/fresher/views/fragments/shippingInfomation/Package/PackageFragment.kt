@@ -35,7 +35,6 @@ class PackageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return binding.root
     }
 
