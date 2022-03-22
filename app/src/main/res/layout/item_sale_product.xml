@@ -1,121 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_item"
+    tools:layout_height="@dimen/product_item_height"
+    tools:parentTag="android.widget.RelativeLayout">
 
-    <merge
-        android:id="@+id/product_item"
-        tools:layout_height="@dimen/product_item_height"
-        tools:parentTag="android.widget.RelativeLayout">
+    <ImageView
+        android:id="@+id/img_image"
+        android:layout_width="@dimen/product_img_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        tools:src="@drawable/ic_product" />
 
-        <ImageView
-            android:id="@+id/img_image"
-            android:layout_width="@dimen/product_img_width"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            tools:src="@drawable/ic_product" />
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_code"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_toEndOf="@id/img_image"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_medium"
+        tools:text="Name" />
 
-        <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/txt_code"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/pad_large"
-            android:layout_toEndOf="@id/img_image"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/txt_medium"
-            tools:text="Name" />
+    <TextView
+        android:id="@+id/txt_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_toEndOf="@id/img_image"
+        android:textSize="@dimen/txt_medium"
+        tools:text="Code" />
 
-        <TextView
-            android:id="@+id/txt_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/pad_large"
-            android:layout_toEndOf="@id/img_image"
-            android:textSize="@dimen/txt_medium"
-            tools:text="Code" />
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_code"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/pad_large"
+        android:layout_toEndOf="@id/img_image"
+        android:gravity="center"
+        android:textColor="@color/purpleDark"
+        android:textSize="@dimen/txt_medium"
+        tools:text="Price" />
 
-        <TextView
-            android:id="@+id/txt_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_code"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/pad_large"
-            android:layout_toEndOf="@id/img_image"
-            android:gravity="center"
-            android:textColor="@color/purpleDark"
-            android:textSize="@dimen/txt_medium"
-            tools:text="Price" />
+    <TextView
+        android:id="@+id/txt_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_code"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/txt_price"
+        android:gravity="center"
+        android:textColor="@color/purpleDark"
+        android:textSize="@dimen/txt_medium"
+        tools:text="/Cái" />
 
-        <TextView
-            android:id="@+id/txt_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_code"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@id/txt_price"
-            android:gravity="center"
-            android:textColor="@color/purpleDark"
-            android:textSize="@dimen/txt_medium"
-            tools:text="/Cái" />
+    <ImageButton
+        android:id="@+id/btn_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/txt_amount"
+        android:background="@drawable/bg_round_25dp_purple_active"
+        android:padding="@dimen/pad_tiny"
+        android:src="@drawable/ic_minus_white" />
 
-        <ImageButton
-            android:id="@+id/btn_minus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/txt_amount"
-            android:background="@drawable/bg_round_25dp_purple_active"
-            android:padding="@dimen/pad_tiny"
-            android:src="@drawable/ic_minus_white" />
+    <TextView
+        android:id="@+id/txt_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/pad_tiny"
+        android:layout_marginEnd="@dimen/pad_tiny"
+        android:layout_toStartOf="@id/btn_add"
+        android:padding="@dimen/pad_large"
+        tools:text="12" />
 
-        <TextView
-            android:id="@+id/txt_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/pad_tiny"
-            android:layout_marginEnd="@dimen/pad_tiny"
-            android:layout_toStartOf="@id/btn_add"
-            android:padding="@dimen/pad_large"
-            tools:text="12" />
+    <ImageButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/pad_large"
+        android:background="@drawable/bg_round_25dp_purple_active"
+        android:padding="@dimen/pad_tiny"
+        android:src="@drawable/ic_add_white" />
 
-        <ImageButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/pad_large"
-            android:background="@drawable/bg_round_25dp_purple_active"
-            android:padding="@dimen/pad_tiny"
-            android:src="@drawable/ic_add_white" />
+    <TextView
+        android:id="@+id/txt_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/pad_large"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_medium"
+        android:textStyle="bold"
+        tools:text="15.000.000,0" />
 
-        <TextView
-            android:id="@+id/txt_total_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/pad_large"
-            android:textColor="@color/black"
-            android:textSize="@dimen/txt_medium"
-            android:textStyle="bold"
-            tools:text="15.000.000,0" />
-
-        <ImageButton
-            android:id="@+id/btn_unit_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_down_white"
-            app:tint="@color/greyDark" />
-    </merge>
-</layout>
+    <ImageButton
+        android:id="@+id/btn_unit_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_down_white"
+        app:tint="@color/greyDark" />
+</merge>
 

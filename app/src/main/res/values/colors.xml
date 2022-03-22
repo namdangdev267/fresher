@@ -16,4 +16,6 @@
 
     <color name="scrim_default">#99000000</color>
 
+    <color name="bg_loading">#80D5CFCF</color>
+
 </resources>

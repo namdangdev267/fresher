@@ -8,7 +8,6 @@ import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.databinding.FragmentListBillsBinding
-import com.misa.fresher.global.FakeData
 import com.misa.fresher.ui.listbills.adapter.ListBillAdapter
 import com.misa.fresher.utils.showToast
 
@@ -37,7 +36,10 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         }
     }
 
-    private fun initFilters() { presenter?.getFilterOptions() }
+    private fun initFilters() {
+        presenter?.getFilterOptions()
+    }
+
     override fun updateFilters(dates: ArrayList<String>, categories: ArrayList<String>) {
         val dateAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, dates)
         dateAdapter.setDropDownViewResource(R.layout.item_spinner_item)
@@ -51,10 +53,17 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         }
     }
 
-    private fun initListBillRecView() {presenter?.getBills()}
-    override fun updateListBillRecView(bills: ArrayList<ProductBill>) {
-        binding.listBillRecView.adapter = ListBillAdapter(bills) { bill, pos ->
+    private fun initListBillRecView() {
+        binding.listBillRecView.adapter = ListBillAdapter(arrayListOf()) { bill, pos ->
             context?.showToast("you click bill: ${bill.id}")
+        }
+        presenter?.getBills()
+    }
+
+    override fun updateListBillRecView(bills: ArrayList<ProductBill>) {
+        (binding.listBillRecView.adapter as ListBillAdapter).run {
+            items = bills
+            notifyDataSetChanged()
         }
     }
 
@@ -73,7 +82,7 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
 
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter?.detach()
+        super.onDestroy()
     }
 }

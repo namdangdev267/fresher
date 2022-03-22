@@ -18,7 +18,7 @@ import com.misa.fresher.utils.getDrawable
 
 class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
 
-    val binding = ItemSaleProductBinding.inflate(LayoutInflater.from(context), this, true)
+    val binding = ItemSaleProductBinding.inflate(LayoutInflater.from(context), this)
 
     var product: Product = Product()
         set(value) {
@@ -86,7 +86,7 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
             updateUI()
         }
 
-    var isUnitSelect = false
+    private var isUnitSelect = false
         set(value) {
             field = value
             updateUI()
@@ -96,7 +96,7 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
     val sizes get() = items.map { it.size }.distinct()
     val unitNames get() = product.units.map { it.name }.distinct()
 
-    fun updateUI() {
+    private fun updateUI() {
         binding.run {
             if (product.image == 0) binding.imgImage.isGone = true
             else binding.imgImage.setImageResource(product.image)

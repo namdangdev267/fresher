@@ -128,8 +128,8 @@ class SalePresenter : SaleContract.Presenter {
                 it.category == category
             }.toArrayList()
 
-            if (color != "all") filteredItems = filteredItems.filter { p -> p.items.find { it.color == color } != null }.toArrayList()
-            if (size != "all") filteredItems = filteredItems.filter { p -> p.items.find { it.size == size } != null }.toArrayList()
+            if (color != "all") filteredItems = filteredItems.filter { p -> p.items.any { it.color == color } }.toArrayList()
+            if (size != "all") filteredItems = filteredItems.filter { p -> p.items.any { it.size == size } }.toArrayList()
             if (isCheckQTY) filteredItems = filteredItems.filter { it.quantity > 0 }.toArrayList()
 
         } else if (viewMode == Enums.Product.ITEM) {

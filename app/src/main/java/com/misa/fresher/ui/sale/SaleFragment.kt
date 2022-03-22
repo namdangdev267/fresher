@@ -1,25 +1,21 @@
 package com.misa.fresher.ui.sale
 
-import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.ui.sale.adapter.ButtonOvalListAdapter
 import com.misa.fresher.ui.sale.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.DialogBottomSheetBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.global.FakeData
 import com.misa.fresher.data.model.product.*
 import com.misa.fresher.utils.*
 import kotlinx.coroutines.*
@@ -127,13 +123,8 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
                 product = copyProd
                 binding.btnAdd.setOnClickListener { amount += 1 }
                 binding.btnMinus.setOnClickListener {
-                    if (amount == 1) {
-                        val toast = Toast.makeText(
-                            context, "Quantity must be more than 0. Please check again.", Toast.LENGTH_LONG
-                        )
-                        toast.setGravity(Gravity.TOP, 0, 120)
-                        toast.show()
-                    } else amount -= 1
+                    if (amount == 1) context?.showToast("Quantity must be more than 0. Please check again.")
+                    else amount -= 1
                 }
             }
 
@@ -293,8 +284,8 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>(FragmentSaleBinding::infl
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter?.detach()
+        super.onDestroy()
     }
 
     companion object {

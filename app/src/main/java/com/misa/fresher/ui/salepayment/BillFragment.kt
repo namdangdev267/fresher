@@ -59,7 +59,7 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter?.detach()
+        super.onDestroy()
     }
 }

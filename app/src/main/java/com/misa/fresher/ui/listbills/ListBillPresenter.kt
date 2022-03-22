@@ -11,13 +11,8 @@ class ListBillPresenter : ListBillContract.Presenter {
 
     private var view: ListBillContract.View? = null
 
-    override fun attach(view: ListBillContract.View) {
-        this.view = view
-    }
-
-    override fun detach() {
-        view = null
-    }
+    override fun attach(view: ListBillContract.View) { this.view = view }
+    override fun detach() { view = null }
 
     override fun getFilterOptions() {
         view?.updateFilters(dates, categories)

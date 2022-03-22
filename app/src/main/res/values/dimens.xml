@@ -12,6 +12,8 @@
     <dimen name="pad_medium">8dp</dimen>
     <dimen name="pad_large">10dp</dimen>
     <dimen name="pad_extra">12dp</dimen>
+    <dimen name="pad_extra_double">24dp</dimen>
+    <dimen name="pad_super_extra">30dp</dimen>
 
     <dimen name="toolbar_height">50dp</dimen>
     <dimen name="default_button_height">50dp</dimen>
