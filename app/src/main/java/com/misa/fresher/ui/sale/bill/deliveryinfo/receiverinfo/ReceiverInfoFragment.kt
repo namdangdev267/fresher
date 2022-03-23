@@ -1,16 +1,16 @@
-package com.misa.fresher.ui.sale.bill.deliveryinfo
+package com.misa.fresher.ui.sale.bill.deliveryinfo.receiverinfo
 
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.Rand
+import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.data.model.*
 import com.misa.fresher.databinding.FragmentReceiverInfoBinding
-import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
 import com.misa.fresher.util.guard
 
@@ -20,14 +20,19 @@ import com.misa.fresher.util.guard
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/15/2022: Tạo class
  * @updated 3/16/2022: Bổ sung hàm [collectData] để thu dữ liệu từ recycler view, parent có thể gọi hàm này để nhận được dữ liệu
+ * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
  */
-class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
+class ReceiverInfoFragment :
+    BaseFragment<FragmentReceiverInfoBinding, ReceiverInfoContract.View, ReceiverInfoPresenter>(),
+    ReceiverInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentReceiverInfoBinding
         get() = FragmentReceiverInfoBinding::inflate
+    override val initPresenter: () -> ReceiverInfoPresenter
+        get() = { ReceiverInfoPresenter(this) }
 
     private var adapter: DeliveryInputAdapter? = null
 
@@ -51,7 +56,7 @@ class ReceiverInfoFragment: BaseFragment<FragmentReceiverInfoBinding>() {
                 (activity as MainActivity).tempCustomer?.name ?: ""
             ) {
                 (activity as MainActivity).tempCustomer =
-                    FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
+                    FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
                 (activity as MainActivity).tempCustomer?.let {
                     adapter?.updateData(ROW_CUSTOMER_NAME, it.name)
                     adapter?.updateData(ROW_CUSTOMER_TEL, it.tel)

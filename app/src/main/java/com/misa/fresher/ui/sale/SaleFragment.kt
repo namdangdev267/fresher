@@ -5,7 +5,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,14 +14,13 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.Rand
+import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.*
 import com.misa.fresher.data.entity.ProductItemBill
-import com.misa.fresher.data.model.FilterProductModel
 import com.misa.fresher.databinding.DialogProductTypeSelectorBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
 import com.misa.fresher.ui.sale.adapter.TypeSelectorAdapter
 import com.misa.fresher.util.enum.ProductSortType
@@ -36,17 +34,21 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 5
+ * @version 6
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
  * @updated 3/12/2022: Thêm chức năng lọc sản phẩm, tìm kiếm sản phẩm theo tên, mã
  * @updated 3/15/2022: Chuyển nhà các hàm trong [configTypeSelectorDialog] từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
+ * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
-class SaleFragment : BaseFragment<FragmentSaleBinding>() {
+class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePresenter>(),
+    SaleContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentSaleBinding
         get() = FragmentSaleBinding::inflate
+    override val initPresenter: () -> SalePresenter
+        get() = { SalePresenter(this) }
 
     private var productAdapter: ProductAdapter? = null
     private val typeSelectorDialog by lazy {
@@ -54,8 +56,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     }
     private val dialogBinding by lazy { DialogProductTypeSelectorBinding.inflate(layoutInflater) }
 
-    private var selectedItems = mutableListOf<ProductItemBill>()
-    private val filter = FilterProductModel()
     private var quantity = 1
     private var color: ProductColor? = null
     private var size: ProductSize? = null
@@ -73,7 +73,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
 
     override fun updateUI() {
         updateCustomer()
-        updateSelectedItem()
+        updateSelectedItems(mutableListOf())
     }
 
     /**
@@ -123,15 +123,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     private fun showTypeSelectorDialog(product: Product) {
         typeSelectorDialog.setOnDismissListener {
             guard(color, size, unit) { cl, sz, un ->
-                val item = product.items.find { it.color == cl && it.size == sz && it.unit == un }
-                item?.let {
-                    selectedItems.find { it.item == item }?.let {
-                        it.quantity += quantity
-                    } ?: run {
-                        selectedItems.add(ProductItemBill(item, quantity))
-                    }
-                    updateSelectedItem()
-                }
+                presenter?.addSelectedItem(product, quantity, cl, sz, un)
             }
         }
         initDialogUI(product)
@@ -218,37 +210,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
     }
 
     /**
-     * Cập nhật các sản phẩm đã chọn lên giao diện
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/11/2022
-     *
-     * @version 2
-     * @updated 3/11/2022: Tạo function
-     * @updated 3/15/2022: Đổi từ đếm số loại hàng trong giỏ thành đếm tổng số lượng hàng trong giỏ
-     */
-    private fun updateSelectedItem() {
-        if (selectedItems.isEmpty()) {
-            binding.btnRefresh.isEnabled = false
-            binding.btnCart.isEnabled = false
-            binding.tvCount.isEnabled = false
-            binding.tvInfo.isEnabled = false
-            binding.tvCount.text = "0"
-            binding.tvInfo.text = getString(R.string.no_item_selected)
-        } else {
-            binding.btnRefresh.isEnabled = true
-            binding.btnCart.isEnabled = true
-            binding.tvCount.isEnabled = true
-            binding.tvInfo.isEnabled = true
-
-            val total = selectedItems.sumOf { it.item.price * it.quantity }
-            binding.tvCount.text = selectedItems.sumOf { it.quantity }.toString()
-            binding.tvInfo.text = total.toCurrency()
-        }
-
-    }
-
-    /**
      * Cài đặt các nút và view phụ khác
      *
      * @author Nguyễn Công Chính
@@ -264,20 +225,21 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
             (activity as MainActivity).tempCustomer =
-                FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
+                FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
             binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
             binding.tvCustomer.isSelected = true
         }
         binding.btnRefresh.setOnClickListener {
-            selectedItems.clear()
-            updateSelectedItem()
+            presenter?.clearSelectedItem()
         }
         binding.btnCart.setOnClickListener {
-            navigation.navigate(
-                R.id.action_fragment_sale_to_fragment_bill, bundleOf(
-                    ARGUMENT_SELECTED_ITEMS to selectedItems
+            presenter?.let {
+                navigation.navigate(
+                    R.id.action_fragment_sale_to_fragment_bill, bundleOf(
+                        ARGUMENT_SELECTED_ITEMS to it.getSelectedItem()
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -292,8 +254,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
      * @updated 3/12/2022: Ngay khi khởi tạo danh sách mặc định sẽ lọc theo tên sản phẩm
      */
     private fun initProductList() {
-        val filterItems = filter.filter(FakeData.products)
-        productAdapter?.updateData(filterItems.toMutableList())
+        presenter?.filterByKeyword("")
     }
 
     /**
@@ -331,10 +292,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         binding.root.setScrimColor(Color.TRANSPARENT)
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
 
-        binding.llFilter.swQuantity.setOnCheckedChangeListener { _, b ->
-            filter.isQuantityMoreThanZero = b
-        }
-
         val groupItem = mutableListOf(getString(R.string.all))
         groupItem.addAll(FakeData.category.map { it.name })
         val groupAdapter = ArrayAdapter(
@@ -343,39 +300,30 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             groupItem
         )
         binding.llFilter.spnGrouping.adapter = groupAdapter
-        binding.llFilter.spnGrouping.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                    if (position == 0) {
-                        filter.selectedCategory = null
-                    } else {
-                        filter.selectedCategory = FakeData.category[position - 1]
-                    }
-                }
 
-                override fun onNothingSelected(p0: AdapterView<*>?) {}
-            }
-
+        var sortBy = ProductSortType.NAME
         binding.llFilter.rbName.setOnCheckedChangeListener { _, b ->
-            if (b) filter.sortBy = ProductSortType.NAME
+            if (b) sortBy = ProductSortType.NAME
         }
         binding.llFilter.rbNew.setOnCheckedChangeListener { _, b ->
-            if (b) filter.sortBy = ProductSortType.NEW_PRODUCT
+            if (b) sortBy = ProductSortType.NEW_PRODUCT
         }
         binding.llFilter.rbQuantity.setOnCheckedChangeListener { _, b ->
-            if (b) filter.sortBy = ProductSortType.QUANTITY
+            if (b) sortBy = ProductSortType.QUANTITY
         }
         binding.llFilter.rbName.isChecked = true
 
         binding.llFilter.btnDone.setOnClickListener {
-            val filterItems = filter.filter(FakeData.products)
-            productAdapter?.updateData(filterItems.toMutableList())
+            presenter?.filterByAttr(
+                binding.llFilter.swQuantity.isChecked,
+                binding.llFilter.spnGrouping.selectedItemPosition,
+                sortBy
+            )
             toggleDrawer(binding.nvFilter)
         }
 
         binding.llFilter.btnReset.setOnClickListener {
             binding.tbSale.etInput.text.clear()
-            filter.keyword = ""
             binding.llFilter.swQuantity.isChecked = false
             binding.llFilter.spnGrouping.setSelection(0)
             binding.llFilter.rbName.isChecked = true
@@ -408,9 +356,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
         }
         binding.tbSale.etInput.setOnEditorActionListener { textView, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
-                filter.keyword = textView.text.toString()
-                val filterItems = filter.filter(FakeData.products)
-                productAdapter?.updateData(filterItems.toMutableList())
+                presenter?.filterByKeyword(textView.text.toString())
             }
             false
         }
@@ -430,6 +376,30 @@ class SaleFragment : BaseFragment<FragmentSaleBinding>() {
             binding.root.closeDrawer(menu)
         } else {
             binding.root.openDrawer(menu)
+        }
+    }
+
+    override fun updateProductList(list: MutableList<Product>) {
+        productAdapter?.updateData(list)
+    }
+
+    override fun updateSelectedItems(list: MutableList<ProductItemBill>) {
+        if (list.isEmpty()) {
+            binding.btnRefresh.isEnabled = false
+            binding.btnCart.isEnabled = false
+            binding.tvCount.isEnabled = false
+            binding.tvInfo.isEnabled = false
+            binding.tvCount.text = "0"
+            binding.tvInfo.text = getString(R.string.no_item_selected)
+        } else {
+            binding.btnRefresh.isEnabled = true
+            binding.btnCart.isEnabled = true
+            binding.tvCount.isEnabled = true
+            binding.tvInfo.isEnabled = true
+
+            val total = list.sumOf { it.item.price * it.quantity }
+            binding.tvCount.text = list.sumOf { it.quantity }.toString()
+            binding.tvInfo.text = total.toCurrency()
         }
     }
 

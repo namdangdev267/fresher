@@ -6,8 +6,9 @@ import com.misa.fresher.R
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.databinding.FragmentDeliveryInfoBinding
-import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInfoAdapter
+import com.misa.fresher.ui.sale.bill.deliveryinfo.receiverinfo.ReceiverInfoFragment
 import com.misa.fresher.util.guard
 import com.misa.fresher.util.toast
 
@@ -17,14 +18,19 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/15/2022: Tạo class
  * @updated 3/16/2022: Nút lưu sẽ lưu lại các giá trị đã nhập thay vì làm cảnh như trước
+ * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
  */
-class DeliveryInfoFragment: BaseFragment<FragmentDeliveryInfoBinding>() {
+class DeliveryInfoFragment :
+    BaseFragment<FragmentDeliveryInfoBinding, DeliveryInfoContract.View, DeliveryInfoPresenter>(),
+    DeliveryInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentDeliveryInfoBinding
         get() = FragmentDeliveryInfoBinding::inflate
+    override val initPresenter: () -> DeliveryInfoPresenter
+        get() = { DeliveryInfoPresenter(this) }
 
     override fun initUI() {
         configToolbar()

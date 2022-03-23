@@ -50,6 +50,25 @@
     <string name="total">Tổng</string>
     <string name="support_tele">Hỗ trợ: 1900 8677</string>
     <string name="please_fill_required_field">Vui lòng nhập thông tin người nhận.</string>
+    <string name="test">Thử nghiệm</string>
+    <string name="intro_app">Nền tảng quản lí bán hàng đa kênh</string>
+    <string name="for_sale">Dành cho bán hàng</string>
+    <string name="shop_id">Mã cửa hàng</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="sign_up">Đăng kí</string>
+    <string name="back_to_login">Trở lại đăng nhập</string>
+    <string name="policy">Chính sách bảo mật</string>
+    <string name="unknown_error">Lỗi không xác định: </string>
+    <string name="invalid_password">Sai mật khẩu</string>
+    <string name="email_not_found">Không tồn tại email</string>
+    <string name="sign_up_success">Đăng kí thành công</string>
+    <string name="confirm_password_failed">Sai mật khẩu xác nhận</string>
+    <string name="email_exists">Email đã tồn tại</string>
+    <string name="invalid_email">Email không hợp lệ</string>
     <string-array name="filter_time">
         <item>Hôm nay</item>
         <item>Hôm qua</item>

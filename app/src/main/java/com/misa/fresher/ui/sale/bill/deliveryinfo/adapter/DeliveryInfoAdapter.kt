@@ -2,9 +2,9 @@ package com.misa.fresher.ui.sale.bill.deliveryinfo.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.misa.fresher.ui.sale.bill.deliveryinfo.PackageInfoFragment
-import com.misa.fresher.ui.sale.bill.deliveryinfo.ReceiverInfoFragment
-import com.misa.fresher.ui.sale.bill.deliveryinfo.ShipInfoFragment
+import com.misa.fresher.ui.sale.bill.deliveryinfo.packageinfo.PackageInfoFragment
+import com.misa.fresher.ui.sale.bill.deliveryinfo.receiverinfo.ReceiverInfoFragment
+import com.misa.fresher.ui.sale.bill.deliveryinfo.shipinfo.ShipInfoFragment
 
 /**
  * Adapter cho 3 tab tại màn hình thông tin giao hàng

@@ -22,6 +22,7 @@
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_bill.xml" value="0.2875" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_cart.xml" value="0.2875" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_coupon.xml" value="0.1545" />
+        <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_logo.xml" value="0.1545" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_minus.xml" value="0.1555" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_note.xml" value="0.1545" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/ic_refresh.xml" value="0.1625" />
@@ -40,6 +41,7 @@
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/selector_checkbox_round.xml" value="0.2175" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/selector_checkbox_text_color.xml" value="0.2175" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/drawable/selector_spinner_outline.xml" value="0.2175" />
+        <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/activity_login.xml" value="0.2191780821917808" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/dialog_product_type_select.xml" value="0.3569230769230769" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/dialog_product_type_selector.xml" value="0.18541666666666667" />
@@ -51,6 +53,7 @@
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/fragment_receiver_info.xml" value="0.24351851851851852" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.25" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/fragment_ship_info.xml" value="0.24351851851851852" />
+        <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/fragment_test.xml" value="0.21621621621621623" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/header_nav.xml" value="0.21333333333333335" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/item_bill.xml" value="0.25" />
         <entry key="..\:/Data/Android/fresher/app/src/main/res/layout/item_check.xml" value="0.3625" />

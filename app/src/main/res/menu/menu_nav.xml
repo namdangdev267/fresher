@@ -8,4 +8,9 @@
         android:id="@+id/fragment_list_bill"
         android:icon="@drawable/ic_bill"
         android:title="@string/list_bill" />
+<!--    <item-->
+<!--        android:id="@+id/fragment_test"-->
+<!--        android:icon="@drawable/ic_cart"-->
+<!--        android:title="@string/test" />-->
+
 </menu>

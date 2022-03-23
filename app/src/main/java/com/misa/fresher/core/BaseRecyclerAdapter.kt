@@ -55,7 +55,7 @@ abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder<T>>(
      * @updated 3/18/2022: Tạo function
      */
     fun updateData(newItems: MutableList<T>) {
-        val diffCallback = BaseDiffCallback(items, newItems)
+        val diffCallback = DiffCallback(items, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         items.clear()
@@ -69,10 +69,11 @@ abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder<T>>(
      * @author Nguyễn Công Chính
      * @since 3/18/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/18/2022: Tạo class
+     * @updated 3/23/2022: Đổi tên BaseDiffCalback -> [DiffCallback]
      */
-    private inner class BaseDiffCallback(
+    private inner class DiffCallback(
         private val oldItems: MutableList<T>,
         private val newItems: MutableList<T>
     ) : DiffUtil.Callback() {
