@@ -47,6 +47,8 @@
             app:popEnterAnim="@anim/anim_slide_in_right"
             app:popExitAnim="@anim/anim_slide_out_left"
             android:id="@+id/action_billDetailFragment_to_saleFragment"
+            app:popUpTo="@+id/saleFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/saleFragment" />
     </fragment>
     <fragment

@@ -18,8 +18,20 @@
     <string name="receivable">Receivable</string>
     <string name="get_payment">Get payment</string>
     <string name="buy_more">Buy more</string>
+    <string name="privacy_policy">Privacty policy</string>
+    <string name="sign_up">Sign up?</string>
+    <string name="login_in_with_touch_id">Login with touch id</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="ominichannelplatform">O m n i c h a n n e l P a t f o r m</string>
+    <string name="for_sale">For sale</string>
+    <string name="re_enter_password">Re-enter password</string>
+    <string name="sign_up_account">Sign up</string>
+    <string name="list_of_bills">List of bills</string>
+    <string name="total">Total</string>
     <string-array name="spnDay">
-       <item>Today</item>
+        <item>Today</item>
         <item>Yesterday</item>
         <item>Before yesterday</item>
         <item>This week</item>

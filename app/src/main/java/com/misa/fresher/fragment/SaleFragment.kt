@@ -3,7 +3,6 @@ package com.misa.fresher.fragment
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,19 +13,14 @@ import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
-import com.misa.fresher.BillViewModel
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ProductApdapter
-import com.misa.fresher.model.BillInfor
 import com.misa.fresher.model.FilterProduct
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.SelectedProduct
@@ -36,8 +30,6 @@ class SaleFragment : Fragment() {
     var products = Product.fakedat()
     var rcv: RecyclerView? = null
     var productList = arrayListOf<SelectedProduct>()
-    val viewModel: BillViewModel by activityViewModels()
-    var mListBill: MutableList<BillInfor>? = null
     var rcvAdapter: ProductApdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +46,6 @@ class SaleFragment : Fragment() {
         showBillFragment(view)
         updateView()
         configFilter(view)
-        getListBill()
     }
 
     /**
@@ -218,7 +209,7 @@ class SaleFragment : Fragment() {
         val decimalFormat = DecimalFormat("0,000.0")
         if (productList.size > 0) {
             tvAmount.let {
-                it?.text = productList.sumOf { it.amount }.toString()
+                it?.text = productList.sumOf {it.amount}.toString()
                 it?.setTextColor(Color.WHITE)
                 it?.setBackgroundResource(R.drawable.textview_amount_border)
             }
@@ -261,8 +252,8 @@ class SaleFragment : Fragment() {
             when (it.itemId) {
                 R.id.mnBill -> {
                     findNavController().navigate(
-                        R.id.action_saleFragment_to_listBillsFragment,
-                        bundleOf("bill" to mListBill))
+                        R.id.action_saleFragment_to_listBillsFragment
+                    )
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
@@ -314,6 +305,7 @@ class SaleFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/18/2022
      **/
+    @SuppressLint("RtlHardcoded")
     private fun configFilter(view: View) {
         setUpSpinner(view)
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlFilter)
@@ -326,7 +318,6 @@ class SaleFragment : Fragment() {
         val btnClear = view.findViewById<Button>(R.id.btnClearnFilter)
         btnSave.setOnClickListener {
             filterProduct(getFilter(view))
-            Log.e("filter", getFilter(view).toString())
             mDrawer.closeDrawer(Gravity.RIGHT)
         }
         btnClear.setOnClickListener {
@@ -346,10 +337,10 @@ class SaleFragment : Fragment() {
         val radioButtonText = selectRadioButon.let { view.findViewById<RadioButton>(it)?.text }
         val spColor = view.findViewById<Spinner>(R.id.spnColor).selectedItem.toString()
         val spSize = view.findViewById<Spinner>(R.id.spnSize).selectedItem.toString()
-        val filterProduct = FilterProduct(radioButtonText.toString(), spColor, spSize)
-        return filterProduct
+        return FilterProduct(radioButtonText.toString(), spColor, spSize)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun filterProduct(filter: FilterProduct) {
         var sortList = products
         if (filter.sortBy == "Tên") {
@@ -363,9 +354,7 @@ class SaleFragment : Fragment() {
                 sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
                 sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
             }
-        }
-        else
-        {
+        } else {
             sortList.sortWith(compareBy(Product::productPrice))
             if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productPrice))
             else if (filter.color != "All" && filter.size == "All") sortList =
@@ -379,17 +368,6 @@ class SaleFragment : Fragment() {
         }
         rcvAdapter?.items = sortList
         rcvAdapter?.notifyDataSetChanged()
-    }
-
-    /**
-     *
-     *@author:NCPhuc
-     *@date:3/18/2022
-     **/
-    private fun getListBill() {
-        viewModel.listItemBill.observe(viewLifecycleOwner, Observer {
-            mListBill = it
-        })
     }
 
 }

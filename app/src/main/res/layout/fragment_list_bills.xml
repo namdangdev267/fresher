@@ -28,7 +28,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="8"
             android:gravity="center"
-            android:text="List of bills"
+            android:text="@string/list_of_bills"
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
 
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
-            android:text="Total"
+            android:text="@string/total"
             android:layout_gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="@dimen/ts16"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:height="18dp" android:width="24dp" android:viewportWidth="24" android:viewportHeight="18">
+    <group>
+        <clip-path android:pathData="M0,0h24v19h-24z M 0,0"/>
+        <group>
+            <clip-path android:pathData="M-5,0h33.563v19.577h-33.563z M 0,0"/>
+            <path android:fillColor="#fff" android:pathData="M-5,0h33.563v19.577h-33.563z"/>
+            <path android:fillColor="#bd0034" android:pathData="M17.472,7.079 L28.56,0.871v-0.87h-0.765L15.153,7.079Z"/>
+            <path android:fillColor="#bd0034" android:pathData="M16.949,12.895 L28.56,19.395L28.56,18.095L19.269,12.895Z"/>
+            <path android:fillColor="#bd0034" android:pathData="M-5,1.495l9.935,5.588L7.26,7.083L-5,0.195Z"/>
+            <path android:fillColor="#bd0034" android:pathData="M6.729,12.895 L-5,19.464v0.113h2.119L9.051,12.895Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M26.265,0L14.514,0v6.581Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M9.326,0h-11.7l11.7,6.581Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M28.56,7.079L28.56,2.587L20.59,7.079Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M28.56,17.335L28.56,12.895L20.59,12.895Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M-1.714,19.578h11.04L9.326,13.395Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M14.514,19.578L25.589,19.578L14.514,13.395Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M-5,12.895v4.643L3.249,12.895Z"/>
+            <path android:fillColor="#1a237b" android:pathData="M-5,7.079h8.249l-8.249,-4.65Z"/>
+            <path android:fillColor="#bd0034" android:pathData="M10.36,0v8.241L-5,8.241v3.49L10.36,11.731v7.846h3.112L13.472,11.732L28.56,11.732v-3.49L13.476,8.242L13.476,0Z"/>
+        </group>
+    </group>
+</vector>

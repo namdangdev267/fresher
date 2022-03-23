@@ -118,9 +118,6 @@ class ListBillsFragment : Fragment() {
      *@date:3/18/2022
      **/
     private fun getListBill(): ArrayList<BillInfor> {
-        return arguments?.get(BILL) as ArrayList<BillInfor>
-    }
-    companion object{
-        const val BILL="bill"
+      return viewModel?.listItemBill?.value as ArrayList<BillInfor>
     }
 }

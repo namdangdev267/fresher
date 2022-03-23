@@ -24,6 +24,7 @@ import com.misa.fresher.adapter.BillProductAdapter
 import com.misa.fresher.model.BillInfor
 import com.misa.fresher.model.SelectedProduct
 import com.misa.fresher.model.ShipInfor
+import com.misa.fresher.showToast
 import java.text.DecimalFormat
 import kotlin.random.Random
 
@@ -149,7 +150,7 @@ class BillDetailFragment : Fragment() {
                 listBillDetail, ShipInfor("1", "2", "3", "4", "5")
             )
             viewModel.add(billInfor)
-            Toast.makeText(requireContext(), "Thêm hóa đơn thành công", Toast.LENGTH_SHORT).show()
+            activity?.showToast("Thêm hóa đơn thành công")
             findNavController().navigate(R.id.action_billDetailFragment_to_saleFragment)
         }
     }
