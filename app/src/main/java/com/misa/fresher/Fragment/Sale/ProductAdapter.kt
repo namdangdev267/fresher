@@ -23,7 +23,6 @@ open class ProductAdapter(
             binding.imgRemove.visibility = View.GONE
             binding.tvCountProduct.visibility = View.GONE
             binding.tvCountProduct.visibility = View.GONE
-            binding.tvPriceAndType.visibility = View.GONE
 
             binding.tvNameProduct.text = itemProduct.nameProduct
             binding.tvCodeProduct.text = itemProduct.codeProduct

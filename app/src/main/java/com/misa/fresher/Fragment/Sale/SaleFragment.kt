@@ -227,13 +227,14 @@ class SaleFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
+        binding.tvCustomer.isSelected = true
+
         binding.btnRefresh.setOnClickListener {
             sharedViewModel.clearListItemSelected()
         }
 
         sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
             val tvCustomer = binding.tvCustomer
-            tvCustomer.isSelected = true
             tvCustomer.isSingleLine = true
             if (it.receiver != null && it.tel != null) {
                 tvCustomer.text = it.receiver.toString() + "_" + it.tel.toString()

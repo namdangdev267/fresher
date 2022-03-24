@@ -14,7 +14,6 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentListBillBinding
-import com.misa.fresher.views.fragments.bill.ListBillAdapter
 
 class ListBillFragment : Fragment() {
     private val binding: FragmentListBillBinding by lazy {
