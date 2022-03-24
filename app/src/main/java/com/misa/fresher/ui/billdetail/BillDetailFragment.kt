@@ -50,14 +50,11 @@ class BillDetailFragment :
         binding.tvTotalPriceBill.text = price.toString()
     }
 
-    override fun updateSelectedClicked(list: MutableList<SelectedProducts>) {
-        rcvAdapter?.mSelectedProducts = list
-        rcvAdapter?.notifyDataSetChanged()
-    }
-
     override fun initPresenter() {
-        mPresenter = BillDetailPresenter().also {
-            it.attach(this)
+        if (mPresenter == null) {
+            mPresenter = BillDetailPresenter().also {
+                it.attach(this)
+            }
         }
     }
 
@@ -86,6 +83,11 @@ class BillDetailFragment :
 
     override fun updateBillId(BillId: Int) {
         binding.tvBillId.text = BillId.toString()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter = null
     }
 
     override val getInflater: (LayoutInflater) -> FragmentBillDetailBinding =

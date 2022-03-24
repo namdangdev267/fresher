@@ -24,13 +24,20 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     val getInflater: (LayoutInflater) -> ActivityLoginBinding
         get() = ActivityLoginBinding::inflate
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter = null
+    }
+
     override fun loginSuccess() {
         val intent = Intent(this, MainActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
     override fun initPresenter() {
-        mPresenter = LoginPresenter().also { it.attach(this) }
+        if (mPresenter==null){
+            mPresenter = LoginPresenter().also { it.attach(this) }
+        }
     }
 
     override fun showErrorMessage(msg: String) {

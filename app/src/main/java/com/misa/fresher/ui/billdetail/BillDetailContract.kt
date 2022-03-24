@@ -10,7 +10,6 @@ class BillDetailContract : BaseContract {
     interface View : BaseContract.View {
         fun updateRecyclerViewSelectedProducts(list: MutableList<SelectedProducts>)
         fun updateSelectedProduct(amount: Int, price: Double)
-        fun updateSelectedClicked(list: MutableList<SelectedProducts>)
         fun updateReceiver(customer: Customer)
         fun navigate()
         fun updateBillId(billId: Int)

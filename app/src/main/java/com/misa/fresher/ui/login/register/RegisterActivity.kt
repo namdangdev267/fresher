@@ -1,11 +1,11 @@
 package com.misa.fresher.ui.login.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import com.misa.fresher.databinding.ActivitySignUpBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.misa.fresher.data.model.User
+import com.misa.fresher.databinding.ActivitySignUpBinding
 import com.misa.fresher.showToast
 import com.misa.fresher.ui.login.LoginActivity
 
@@ -49,12 +49,19 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun initPresenter() {
-        mPresenter = RegisterPresenter().also {
-            it.attach(this)
+        if(mPresenter == null){
+            mPresenter = RegisterPresenter().also {
+                it.attach(this)
+            }
         }
     }
 
     override fun showErrorMessage(msg: String) {
         applicationContext.showToast(msg)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter = null
     }
 }

@@ -107,4 +107,8 @@ class BillsFragment :
     override val getInflater: (LayoutInflater) -> FragmentBillsBinding =
         FragmentBillsBinding::inflate
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter = null
+    }
 }

@@ -15,7 +15,6 @@ class SaleContract : BaseContract{
         fun getFilter() : FilterProducts
         fun navigation(list : MutableList<SelectedProducts>)
 
-
     }
     interface Presenter : BaseContract.Presenter<View>{
         fun getListProductFromDb(context: Context)

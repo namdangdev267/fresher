@@ -171,8 +171,7 @@ class SaleFragment :
      * @date : 3/22/2022
      **/
     override fun initPresenter() {
-        if (mPresenter != null) this.mPresenter
-        else {
+        if (mPresenter == null) {
             mPresenter = SalePresenter().also {
                 it.attach(this)
             }
