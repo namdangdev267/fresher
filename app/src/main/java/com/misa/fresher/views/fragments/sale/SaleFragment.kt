@@ -19,26 +19,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.enum.SortBy
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
 import com.misa.fresher.R
 import com.misa.fresher.databinding.BottomSheetItemsaleBinding
-import com.misa.fresher.databinding.DrawerFilterBinding
 import com.misa.fresher.views.activities.MainActivity
-import com.misa.fresher.views.customViews.CustomRecyclerView
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.showToastUp
 import com.misa.fresher.views.customViews.CustomToast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 
 class SaleFragment : Fragment() {
@@ -268,7 +259,7 @@ class SaleFragment : Fragment() {
             sharedViewModel.clearListItemSelected()
         }
 
-        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.infoShip.observe(viewLifecycleOwner, Observer {
             if(it.receiver!=null && it.tel!=null)
             {
                 binding.tvInforCustomer.isSelected = true
@@ -327,7 +318,7 @@ class SaleFragment : Fragment() {
         sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.quantity.toString()
             tvItemName.text = it.name
-            tvItemId.text = it.id
+            tvItemId.text = it.code
         })
 
         recyclerView.adapter =

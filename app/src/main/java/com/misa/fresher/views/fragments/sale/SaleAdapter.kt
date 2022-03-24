@@ -31,7 +31,7 @@ class SaleAdapter(
                 tvItemQuantity.visibility = View.GONE
                 tvItemTotalPrice.visibility = View.GONE
                 nameItem.text = itemProduct.name
-                idItem.text = itemProduct.id
+                idItem.text = itemProduct.code
                 priceItem.text = itemProduct.price.toString()
                 imageItem.setImageResource(R.drawable.ic_shopping_bag)
                 binding.root.setOnClickListener {

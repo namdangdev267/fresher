@@ -1,5 +1,6 @@
 package com.misa.fresher.views.fragments.billDetail
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,19 +20,19 @@ import com.misa.fresher.views.fragments.bill.BillAdapter
 class BillDetailAdapter(
     private var listItemBillDetail: MutableList<ItemBillDetail>,
     val listener: (itemBillDetail: ItemBillDetail) -> Unit
-) :
-    RecyclerView.Adapter<BillDetailAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<BillDetailAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemSaleAndBillDetailBinding, val listener: (itemBillDetail: ItemBillDetail) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(itemBillDetail: ItemBillDetail) {
             with(binding)
             {
                 tvItemTotalPrice.text = (itemBillDetail.getAllPrice().toString())
                 tvItemQuantity.text = itemBillDetail.quantity.toString()
                 nameItem.text = itemBillDetail.name
-                idItem.text = itemBillDetail.id
+                idItem.text = itemBillDetail.code
                 priceItem.text = itemBillDetail.itemProduct.price.toString() + "/Package"
                 imageItem.visibility = View.GONE
                 ivItemAdd.setOnClickListener {
@@ -46,7 +47,6 @@ class BillDetailAdapter(
                     }
                     else if(itemBillDetail.quantity==1)
                     {
-//                    itemView.context.showToastUp("Quantity must be more than 0. Please check again")
                         CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
                     }
                 }
@@ -59,7 +59,6 @@ class BillDetailAdapter(
                 }
                 else if(itemBillDetail.quantity==1)
                 {
-//                    itemView.context.showToastUp("Quantity must be more than 0. Please check again")
                     CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
                 }
             }

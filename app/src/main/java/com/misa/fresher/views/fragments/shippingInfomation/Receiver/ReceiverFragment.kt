@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.models.InforShip
+import com.misa.fresher.models.InfoShip
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentReceiverBinding
 
@@ -17,7 +17,7 @@ class ReceiverFragment : Fragment() {
 //    lateinit var binding: FragmentReceiverBinding
     lateinit var receiverViewModel: ReceiverViewModel
     lateinit var sharedViewModel: SharedViewModel
-    var inforShip = InforShip(null,null,null,null,null,null,null,null,null,false)
+    var inforShip = InfoShip(null,null,null,null)
 
     val binding:FragmentReceiverBinding by lazy {
         getInflater(layoutInflater)
@@ -51,11 +51,11 @@ class ReceiverFragment : Fragment() {
 
     }
 
-    fun changeEditText(inforShip: InforShip)
+    fun changeEditText(infoShip: InfoShip)
     {
-        if(inforShip.receiver!=null )this.inforShip.receiver = inforShip.receiver
-        else if(inforShip.tel!=null )this.inforShip.tel = inforShip.tel
-        else if(inforShip.address!=null )this.inforShip.address = inforShip.address
+        if(infoShip.receiver!=null )this.inforShip.receiver = infoShip.receiver
+        else if(infoShip.tel!=null )this.inforShip.tel = infoShip.tel
+        else if(infoShip.address!=null )this.inforShip.address = infoShip.address
     }
 
 }

@@ -10,19 +10,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentLoginBinding
 import com.misa.fresher.models.Country
 import com.misa.fresher.models.User
-import com.misa.fresher.models.enum.LoginMode
+import com.misa.fresher.models.enums.LoginMode
 import com.misa.fresher.services.ServiceBuilder
 import com.misa.fresher.services.UserService
-import com.misa.fresher.showToastUp
 import com.misa.fresher.utils.SimpleImageArrayAdapter
 import com.misa.fresher.views.activities.MainActivity
 import com.misa.fresher.views.customViews.CustomToast
-import com.misa.fresher.views.fragments.sale.SaleViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -56,11 +53,11 @@ class LoginFragment : Fragment() {
     private fun configOtherView() {
         loginViewModel.loginMode.observe(viewLifecycleOwner, Observer {
             if (loginViewModel.loginMode.value == LoginMode.SIGNUP) {
-                binding.tvSignUp.visibility = View.GONE
+                binding.tvLoginMode.text = "Log in"
                 binding.tvLogin.text = "Sign up"
                 binding.ilConfirmPassword.visibility = View.VISIBLE
             } else {
-                binding.tvSignUp.visibility = View.VISIBLE
+                binding.tvLoginMode.text = "Sign up"
                 binding.tvLogin.text = "Log in"
                 binding.ilConfirmPassword.visibility = View.GONE
             }
@@ -79,13 +76,14 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.tvSignUp.setOnClickListener {
+        binding.tvLoginMode.setOnClickListener {
             loginViewModel.changeLoginMode()
         }
     }
 
     private fun signUp(view: View) {
         val api = ServiceBuilder.buildService(UserService::class.java)
+        binding.progress.visibility = View.VISIBLE
         CoroutineScope(IO).launch {
             try {
                 val respond = api.signUp(
@@ -96,10 +94,12 @@ class LoginFragment : Fragment() {
                 )
 
                 if (respond.isSuccessful && respond.body() != null) {
+                    binding.progress.visibility = View.GONE
                     loginViewModel.changeLoginMode()
                     Log.e(this.javaClass.simpleName,respond.message())
                 } else {
                     withContext(Main) {
+                        binding.progress.visibility = View.GONE
                         CustomToast.makeText(
                             view.context,
                             "Email exist. Please enter other email.",
@@ -109,6 +109,7 @@ class LoginFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 withContext(Main) {
+                    binding.progress.visibility = View.GONE
                     Toast.makeText(
                         view.context,
                         "Error Occurred: ${e.message}",

@@ -1,16 +1,10 @@
 package com.misa.fresher.views.fragments.sale
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.R
-import com.misa.fresher.databinding.CustomRecyclerViewBinding
-import com.misa.fresher.databinding.ItemBillBinding
+import com.misa.fresher.models.enums.Color
 import com.misa.fresher.databinding.ItemCustomRecyclerviewBinding
-import com.misa.fresher.views.fragments.bill.BillAdapter
 
 class CustomRecyclerViewAdapter(
     private val listData: List<Color>,

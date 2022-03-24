@@ -4,20 +4,16 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.models.InforShip
+import com.misa.fresher.models.InfoShip
 import com.misa.fresher.models.ItemRecyclerView
-import com.misa.fresher.R
 import com.misa.fresher.databinding.ItemShipCalculatorBinding
 import com.misa.fresher.databinding.ItemShipCheckBinding
 import com.misa.fresher.databinding.ItemShipMulticontentBinding
 import com.misa.fresher.databinding.ItemShipTouchBinding
 
-class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val changeEditText: (inforShip:InforShip) -> Unit) :
+class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val changeEditText: (infoShip:InfoShip) -> Unit) :
     RecyclerView.Adapter<ReceiverAdapter.ReceiverAdapterViewHolder>() {
 
     companion object {
@@ -27,7 +23,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val
         private const val ITEM_CHECK = 3
     }
 
-    abstract class ReceiverAdapterViewHolder(itemView: View,val changeEditText: (inforShip:InforShip) -> Unit ) : RecyclerView.ViewHolder(itemView) {
+    abstract class ReceiverAdapterViewHolder(itemView: View,val changeEditText: (infoShip:InfoShip) -> Unit ) : RecyclerView.ViewHolder(itemView) {
         open fun bindData(item: ItemRecyclerView)
         {
 
@@ -50,7 +46,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
             }
 
-            var inforShip = InforShip(null,null,null,null,null,null,null,null,null,false)
+            var inforShip = InfoShip(null,null,null,null)
 
             editText.doAfterTextChanged {
                 if(item.title == "Receiver")
@@ -92,7 +88,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val
 
     class ItemTouchViewHolder(
         val binding: ItemShipTouchBinding,
-        changeEditText: (inforShip: InforShip) -> Unit
+        changeEditText: (infoShip: InfoShip) -> Unit
     ):
         ReceiverAdapterViewHolder(binding.root,changeEditText)
     {
@@ -101,7 +97,7 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val
         }
     }
 
-    class ItemCalculatorViewHolder(val binding: ItemShipCalculatorBinding,changeEditText: (inforShip: InforShip) -> Unit):
+    class ItemCalculatorViewHolder(val binding: ItemShipCalculatorBinding,changeEditText: (infoShip: InfoShip) -> Unit):
         ReceiverAdapterViewHolder(binding.root,changeEditText)
     {
         override fun bindData(item: ItemRecyclerView) {
@@ -109,14 +105,14 @@ class ReceiverAdapter(private val adapterData: MutableList<ItemRecyclerView>,val
         }
     }
 
-    class ItemMulticontentViewHolder(val binding:ItemShipMulticontentBinding,changeEditText: (inforShip: InforShip) -> Unit):ReceiverAdapterViewHolder(binding.root,changeEditText)
+    class ItemMulticontentViewHolder(val binding:ItemShipMulticontentBinding,changeEditText: (infoShip: InfoShip) -> Unit):ReceiverAdapterViewHolder(binding.root,changeEditText)
     {
         override fun bindData(item: ItemRecyclerView) {
             bindItemMulticontent(item as ItemRecyclerView.ItemMultiContent,binding)
         }
     }
 
-    class ItemCheckViewHolder(val binding:ItemShipCheckBinding,changeEditText: (inforShip: InforShip) -> Unit):ReceiverAdapterViewHolder(binding.root,changeEditText)
+    class ItemCheckViewHolder(val binding:ItemShipCheckBinding,changeEditText: (infoShip: InfoShip) -> Unit):ReceiverAdapterViewHolder(binding.root,changeEditText)
     {
         override fun bindData(item: ItemRecyclerView) {
             bindItemcheck(item as ItemRecyclerView.ItemCheck,binding)

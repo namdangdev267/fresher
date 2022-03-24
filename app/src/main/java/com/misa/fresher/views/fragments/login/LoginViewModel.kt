@@ -3,7 +3,7 @@ package com.misa.fresher.views.fragments.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.LoginMode
+import com.misa.fresher.models.enums.LoginMode
 
 class LoginViewModel:ViewModel() {
     private var _loginMode = MutableLiveData<LoginMode>()

@@ -3,17 +3,16 @@ package com.misa.fresher.views.fragments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.BillStatus
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.InforShip
+import com.misa.fresher.models.enums.BillStatus
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.InfoShip
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
 import java.util.*
 
 class SharedViewModel : ViewModel() {
-
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
         get() = _listBill
@@ -22,8 +21,8 @@ class SharedViewModel : ViewModel() {
     val billHandling: LiveData<ItemBill>
         get() = _billHandling
 
-    private val _inforShip = MutableLiveData<InforShip>()
-    val inforShip: LiveData<InforShip>
+    private val _inforShip = MutableLiveData<InfoShip>()
+    val infoShip: LiveData<InfoShip>
         get() = _inforShip
 
     private val _itemSelected = MutableLiveData<ItemBillDetail>()
@@ -54,7 +53,7 @@ class SharedViewModel : ViewModel() {
         )
         _listBill.postValue(mutableListOf())
 
-        _inforShip.postValue(  InforShip(null,null,null,null,null,null,null,null,null,false))
+        _inforShip.postValue(InfoShip(null,null,null,null))
     }
 
     /**
@@ -113,7 +112,7 @@ class SharedViewModel : ViewModel() {
             )
         )
 
-        _inforShip.postValue(  InforShip(null,null,null,null,null,null,null,null,null,false))
+        _inforShip.postValue(  InfoShip(null,null,null,null))
 
     }
 
@@ -156,8 +155,8 @@ class SharedViewModel : ViewModel() {
      * shipping information
      */
 
-    fun updateInforShip(inforShip: InforShip) {
-        _inforShip.postValue(inforShip)
+    fun updateInforShip(infoShip: InfoShip) {
+        _inforShip.postValue(infoShip)
     }
 
 
@@ -167,7 +166,7 @@ class SharedViewModel : ViewModel() {
 
     fun addBillToListBill() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
-        _billHandling.value?.inforShip = _inforShip.value!!
+        _billHandling.value?.infoShip = _inforShip.value!!
         _billHandling.postValue(_billHandling.value)
 
         _billHandling.value?.let { _listBill.value?.add(it) }

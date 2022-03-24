@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.enum.SortBy
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
 import java.text.Collator
 import java.util.*

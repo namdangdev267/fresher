@@ -1,7 +1,7 @@
 package com.misa.fresher.models
 
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
 
 data class ModelProduct(
     var name:String,

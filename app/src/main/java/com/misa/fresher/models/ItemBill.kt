@@ -1,12 +1,12 @@
 package com.misa.fresher.models
 
-import com.misa.fresher.models.enum.BillStatus
+import com.misa.fresher.models.enums.BillStatus
 import java.util.*
 
 data class ItemBill (
     val id:String,
     var listItemBillDetail:MutableList<ItemBillDetail>,
-    var inforShip: InforShip?,
+    var infoShip: InfoShip?,
     var status:BillStatus,
     var createDay:Date
 )

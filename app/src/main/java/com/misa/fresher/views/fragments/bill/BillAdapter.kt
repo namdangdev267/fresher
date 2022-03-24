@@ -2,16 +2,15 @@ package com.misa.fresher.views.fragments.bill
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.R
+import com.misa.fresher.base.BaseRecyclerViewAdapter
 import com.misa.fresher.databinding.ItemBillBinding
 
-class BillAdapter(private var listItemBill: MutableList<ItemBill>) :
-    RecyclerView.Adapter<BillAdapter.ViewHolder>() {
+class BillAdapter : BaseRecyclerViewAdapter<ItemBill,BillAdapter.ViewHolder>()
+ {
 
     class ViewHolder(private val binding: ItemBillBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor", "SetTextI18n")
@@ -19,8 +18,8 @@ class BillAdapter(private var listItemBill: MutableList<ItemBill>) :
             binding.tvBillId.text = itemBill.id
             binding.tvBillPrice.text = itemBill.getPrice().toString()
 
-            if (itemBill.inforShip?.receiver != null && itemBill.inforShip?.tel != null) {
-                binding.tvBillInforShip.text = itemBill.inforShip?.receiver + "_" + itemBill.inforShip?.tel
+            if (itemBill.infoShip?.receiver != null && itemBill.infoShip?.tel != null) {
+                binding.tvBillInforShip.text = itemBill.infoShip?.receiver + "_" + itemBill.infoShip?.tel
             } else {
                 binding.tvBillInforShip.setTextColor(R.color.black)
             }
@@ -33,8 +32,8 @@ class BillAdapter(private var listItemBill: MutableList<ItemBill>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listItemBill[position])
+        holder.bind(listData[position])
     }
 
-    override fun getItemCount() = listItemBill.size
+    override fun getItemCount() = listData.size
 }
