@@ -19,7 +19,7 @@ import com.misa.fresher.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private var appBarConfiguration: AppBarConfiguration? = null
     val binding: ActivityMainBinding by lazy { getInflater(layoutInflater) }
-    private lateinit var shareViewModel: PublicViewModel
+    private var shareViewModel: PublicViewModel? = null
 
     val getInflater: (LayoutInflater) -> ActivityMainBinding get() = ActivityMainBinding::inflate
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(binding.root)
 
-        shareViewModel = ViewModelProvider(this)[PublicViewModel::class.java]
+        shareViewModel = ViewModelProvider(this).get(PublicViewModel::class.java)
 
         configureXML()
     }

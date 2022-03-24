@@ -13,6 +13,6 @@
     <color name="background_track_custom">#9D93FF</color>
     <color name="background_switch">#D3D6E1</color>
     <color name="background_toast_custom">#5C5C5C</color>
-    <color name="SwitchCompat">#B1B1B1</color>
+    <color name="SwitchCompat">#A8A8A8</color>
     <color name="FilterSpinner">#D6D6D6</color>
 </resources>
