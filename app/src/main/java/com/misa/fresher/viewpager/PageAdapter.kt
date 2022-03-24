@@ -19,41 +19,19 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm)
     {
         when (position)
         {
-            0 ->
-            {
-                return FirstFragment()
-            }
-            1 ->
-            {
-                return SecondFragment()
-            }
-            2 ->
-            {
-                return ThirdFragment()
-            }
-            else ->
-            {
-                return FirstFragment()
-            }
+            0 -> return FirstFragment()
+            1 -> return SecondFragment()
+            2 -> return ThirdFragment()
+            else -> return FirstFragment()
         }
     }
-
     override fun getPageTitle(position: Int): CharSequence?
     {
         when (position)
         {
-            0 ->
-            {
-                return "Người nhận"
-            }
-            1 ->
-            {
-                return "Giao hàng"
-            }
-            2 ->
-            {
-                return "Gói hàng"
-            }
+            0 -> return "Người nhận"
+            1 -> return "Giao hàng"
+            2 -> return "Gói hàng"
         }
         return super.getPageTitle(position)
     }

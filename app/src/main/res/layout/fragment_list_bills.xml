@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragment.ListBillsFragment">
+
+    <LinearLayout
+        android:id="@+id/llToolbarBill"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/violet_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibMenuLB"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_baseline_menu_24" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:text="@string/list_of_bills"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ts16" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_baseline_search_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llFilterBill"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d40"
+        android:layout_below="@id/llToolbarBill"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spnDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <Spinner
+            android:id="@+id/spnPayment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTotalPrice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d35"
+        android:layout_below="@id/llFilterBill"
+        android:background="@color/colorGrayCommon"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d5"
+            android:text="@string/total"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textColor="@color/violet_dark"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/d5"
+            android:background="@drawable/tv_list_bill_border"
+            android:id="@+id/tvListBillSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/tvListBillAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d5"
+            android:layout_marginBottom="@dimen/d2"
+            android:layout_marginTop="@dimen/d2"
+            android:layout_marginStart="@dimen/d5"
+            android:gravity="end"
+            android:text="0,0"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvBill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llTotalPrice" />
+
+    <ImageButton
+        android:layout_width="@dimen/d50"
+        android:layout_height="@dimen/d50"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/d16"
+        android:layout_marginBottom="@dimen/d16"
+        android:background="@drawable/image_button_border"
+        android:src="@drawable/ic_baseline_shopping_cart_24" />
+</RelativeLayout>

@@ -28,75 +28,17 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvItemCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layoutSwitch"
-        android:layout_marginStart="@dimen/d5"
-        android:text="LOẠI HÀNG HÓA"
-        android:textColor="@color/black"
-        android:textSize="@dimen/ts16" />
-
-    <Spinner
-        android:layout_below="@id/tvItemCategory"
-        android:id="@+id/spItemCategory"
-        android:layout_margin="@dimen/d5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvViewBy"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/spItemCategory"-->
-<!--        android:layout_marginStart="@dimen/d5"-->
-<!--        android:layout_marginTop="@dimen/d5"-->
-<!--        android:layout_marginEnd="@dimen/d5"-->
-<!--        android:layout_marginBottom="@dimen/d5"-->
-<!--        android:text="XEM THEO"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="@dimen/ts16" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_below="@id/tvViewBy"-->
-<!--        android:id="@+id/llViewBy"-->
-<!--        android:layout_margin="@dimen/d5"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--           <TextView-->
-<!--               android:textSize="@dimen/ts16"-->
-<!--               android:layout_marginStart="@dimen/d5"-->
-<!--               android:layout_width="0dp"-->
-<!--               android:text="Mẫu mã"-->
-<!--               android:textAllCaps="false"-->
-<!--               android:layout_marginEnd="@dimen/d5"-->
-<!--               android:layout_height="wrap_content"-->
-<!--               android:layout_weight="0.5" />-->
-
-<!--           <TextView-->
-<!--               android:textSize="@dimen/ts16"-->
-<!--               android:text="Hàng hóa"-->
-<!--               android:textAllCaps="false"-->
-<!--               android:layout_marginStart="@dimen/d5"-->
-<!--               android:layout_marginEnd="@dimen/d5"-->
-<!--               android:layout_width="0dp"-->
-<!--               android:layout_height="wrap_content"-->
-<!--               android:layout_weight="0.5" />-->
-<!--    </LinearLayout>-->
-
-    <TextView
         android:id="@+id/tvSortby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spItemCategory"
+        android:layout_below="@id/layoutSwitch"
         android:layout_marginStart="@dimen/d5"
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
         android:text="XẾP THEO"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts16"
-        />
+        android:textSize="@dimen/ts16" />
     <RadioGroup
         android:layout_below="@id/tvSortby"
         android:id="@+id/rgSortby"
@@ -130,13 +72,12 @@
         android:layout_marginBottom="@dimen/d5"
         android:text="MÀU SẮC"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts16"
-         />
+        android:textSize="@dimen/ts16" />
 
-    <EditText
-        android:id="@+id/etColor"
+    <Spinner
+        android:id="@+id/spnColor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/d30"
         android:layout_below="@id/tvColor"
         android:layout_marginStart="@dimen/d5"
         android:background="@color/white"
@@ -147,7 +88,7 @@
         android:id="@+id/tvSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etColor"
+        android:layout_below="@id/spnColor"
         android:layout_marginStart="@dimen/d5"
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d5"
@@ -157,10 +98,10 @@
         android:textColor="@color/black"
         android:textSize="@dimen/ts16" />
 
-    <EditText
-        android:id="@+id/etSize"
+    <Spinner
+        android:id="@+id/spnSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/d30"
         android:layout_below="@id/tvSize"
         android:layout_marginStart="@dimen/d5"
         android:background="@color/white"

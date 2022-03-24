@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.SelectedProduct
+import com.misa.fresher.showToast
 import java.text.DecimalFormat
 
 class BillProductAdapter(
@@ -50,9 +51,7 @@ class BillProductAdapter(
                 }
                 else if(product.amount==1)
                 {
-                    val toast=Toast.makeText(mCtx,"Số lượng không được ít hơn 0.Hãy kiểm tra lại",Toast.LENGTH_LONG)
-                    toast.setGravity(Gravity.TOP,0,0)
-                    toast.show()
+                    mCtx.showToast("Số lượng không được ít hơn 0.Hãy kiểm tra lại")
                 }
             }
         }
@@ -64,11 +63,8 @@ class BillProductAdapter(
         val contactView = li.inflate(R.layout.layout_item_bill, parent, false)
         return ViewHolder(contactView)
     }
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mListBilll[position])
     }
-
     override fun getItemCount() = mListBilll.size
 }

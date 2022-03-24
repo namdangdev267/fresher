@@ -7,35 +7,36 @@
     <LinearLayout
         android:id="@+id/layout_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/violet_dark"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
+            android:background="@color/violet_dark"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_weight="0.1"
-            android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="0.8"
+            android:layout_weight="8"
             android:gravity="center"
             android:text="@string/ship_infor"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="@dimen/ts16"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
+            android:background="@color/violet_dark"
+            android:layout_margin="@dimen/d5"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.1"
-            android:background="@drawable/ic_baseline_delete_24" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_save" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,26 +57,29 @@
             app:tabBackground="@drawable/custom_tablayout"
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/violet_dark"
-            app:tabTextColor="@color/white">
-        </com.google.android.material.tabs.TabLayout>
+            app:tabTextColor="@color/white" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button_Save"
-        android:layout_below="@id/layout_tab"></androidx.viewpager.widget.ViewPager>
+        android:layout_above="@id/btnSave"
+        android:layout_below="@id/layout_tab" />
 
     <Button
-        android:id="@+id/button_Save"
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
+        android:layout_marginStart="@dimen/d5"
+        android:layout_marginTop="@dimen/d5"
+        android:layout_marginEnd="@dimen/d5"
+        android:layout_marginBottom="@dimen/d5"
         android:background="@color/violet_dark"
         android:gravity="center"
         android:text="Lưu"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/ts16" />
 </RelativeLayout>

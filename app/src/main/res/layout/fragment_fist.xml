@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="@dimen/de10"
     tools:context=".viewpager.FirstFragment">
 
     <ScrollView
@@ -27,24 +27,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Người nhận"
+                    android:text="@string/receiver"
                     android:textColor="@color/violet_dark"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/ts16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/de10"
                     android:text="*"
                     android:textColor="#EC0D0D" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textview_2"
+            <EditText
+                android:inputType="text"
+                android:background="@null"
+                android:id="@+id/edtReceiver"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Chạm để chọn"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_1" />
@@ -56,7 +58,7 @@
                 android:background="#19A6A4A4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_2" />
+                app:layout_constraintTop_toBottomOf="@id/edtReceiver" />
 
             <LinearLayout
                 android:id="@+id/textview_3"
@@ -70,10 +72,9 @@
                     android:layout_height="wrap_content"
                     android:text="Số điện thoại"
                     android:textColor="@color/violet_dark"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/ts16" />
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -81,12 +82,13 @@
                     android:textColor="#EC0D0D" />
             </LinearLayout>
 
-
             <EditText
-                android:id="@+id/edit_phone"
+                android:inputType="phone"
+                android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/de10"
+                android:textSize="@dimen/ts16"
                 android:background="@null"
                 android:hint="Chạm để nhập"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -100,7 +102,7 @@
                 android:background="#19A6A4A4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_phone" />
+                app:layout_constraintTop_toBottomOf="@id/edtPhone" />
 
             <LinearLayout
                 android:id="@+id/textview_4"
@@ -115,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ"
                     android:textColor="@color/violet_dark"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/ts16"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tablerow2" />
@@ -123,17 +125,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/de10"
                     android:text="*"
                     android:textColor="#EC0D0D" />
 
             </LinearLayout>
 
             <EditText
-                android:id="@+id/edit_address"
+                android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textSize="@dimen/ts16"
                 android:background="@null"
                 android:hint="Chạm để nhập"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -147,7 +150,7 @@
                 android:background="#19A6A4A4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_address" />
+                app:layout_constraintTop_toBottomOf="@id/edtAddress" />
 
             <TextView
                 android:id="@+id/textview_5"
@@ -155,22 +158,23 @@
                 android:layout_height="wrap_content"
                 android:text="Khu vực"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tablerow3" />
 
-            <TextView
-                android:id="@+id/textview_area"
+            <EditText
+                android:background="@null"
+                android:id="@+id/txtArea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:hint="Chạm để chọn"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_5" />
+                app:layout_constraintTop_toBottomOf="@id/textview_5"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
 
             <TableRow
                 android:id="@+id/tablerow4"
@@ -179,7 +183,7 @@
                 android:background="#19A6A4A4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_area" />
+                app:layout_constraintTop_toBottomOf="@id/txtArea" />
 
             <TextView
                 android:id="@+id/textview_6"
@@ -187,22 +191,23 @@
                 android:layout_height="wrap_content"
                 android:text="Phường, xã"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tablerow4" />
 
-            <TextView
-                android:id="@+id/textview_village"
+            <EditText
+                android:background="@null"
+                android:id="@+id/edtWard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:layout_marginTop="@dimen/de10"
                 android:hint="Chạm để chọn"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_6" />
+                app:layout_constraintTop_toBottomOf="@id/textview_6"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
 
             <TableRow
                 android:id="@+id/tablerow5"
@@ -211,7 +216,7 @@
                 android:background="#19A6A4A4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_village" />
+                app:layout_constraintTop_toBottomOf="@id/edtWard" />
 
             <TextView
                 android:id="@+id/textview_fee"
@@ -219,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:text="Phí giao hàng thu khách"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintTop_toBottomOf="@id/tablerow5" />
 
             <TextView
@@ -227,10 +232,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:drawableEnd="@drawable/ic_baseline_calculate_24"
                 android:text="0,0"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/textview_fee" />
+                app:layout_constraintTop_toBottomOf="@id/textview_fee"
+                app:drawableEndCompat="@drawable/ic_baseline_calculate_24" />
 
             <TableRow
                 android:id="@+id/tablerow6"
@@ -260,21 +265,21 @@
                         android:layout_height="wrap_content"
                         android:text="Hình thức đặt cọc"
                         android:textColor="@color/violet_dark"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/ts16" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableEnd="@android:drawable/arrow_down_float"
+                        android:layout_marginTop="@dimen/de10"
                         android:text="Chuyển khoản"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/ts16"
+                        app:drawableEndCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/de10"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -283,14 +288,14 @@
                         android:layout_height="wrap_content"
                         android:text="Số tiền đặt cọc"
                         android:textColor="@color/violet_dark"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/ts16" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/de10"
                         android:text="0,0"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/ts16" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -309,18 +314,18 @@
                 android:layout_height="wrap_content"
                 android:text="Kênh bán hàng"
                 android:textColor="@color/violet_dark"
-                android:textSize="20sp"
+                android:textSize="@dimen/ts16"
                 app:layout_constraintTop_toBottomOf="@id/tablerow7" />
 
             <TextView
                 android:id="@+id/txt_chanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:layout_marginTop="@dimen/de10"
                 android:hint="Chạm để chọn"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/textview_chanel" />
+                android:textSize="@dimen/ts16"
+                app:layout_constraintTop_toBottomOf="@id/textview_chanel"
+                app:drawableEndCompat="@android:drawable/arrow_down_float" />
 
             <TableRow
                 android:id="@+id/tablerow8"
@@ -345,7 +350,7 @@
                     android:layout_gravity="center"
                     android:text="Thu COD"
                     android:textColor="@color/violet_dark"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/ts16" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

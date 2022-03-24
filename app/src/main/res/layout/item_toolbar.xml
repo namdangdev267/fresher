@@ -2,14 +2,14 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageButton
-        android:id="@+id/imb_search"
+        android:id="@+id/imbSearch"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.1"
         android:background="@drawable/border_img_search" />
 
     <EditText
-        android:id="@+id/txt_search"
+        android:id="@+id/etSearch"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
@@ -21,7 +21,7 @@
         android:textSize="@dimen/ts16" />
 
     <ImageButton
-        android:id="@+id/imb_barcode"
+        android:id="@+id/imbBarcode"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -29,7 +29,7 @@
         android:background="@drawable/border_img" />
 
     <ImageButton
-        android:id="@+id/imb_cart"
+        android:id="@+id/imbCart"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/d5"
@@ -37,7 +37,7 @@
         android:background="@drawable/ripple_button_effect" />
 
     <ImageButton
-        android:id="@+id/imb_filter"
+        android:id="@+id/imbFilter"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/d5"

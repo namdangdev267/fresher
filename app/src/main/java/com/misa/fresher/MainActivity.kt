@@ -13,12 +13,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-     fun openDrawerLayout() {
-         val drawerLayout = findViewById<DrawerLayout>(R.id.dlLeft)
-         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-         drawerLayout.openDrawer(GravityCompat.START)
-     }
+
+    fun openDrawerLayout() {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.dlLeft)
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        drawerLayout.openDrawer(GravityCompat.START)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()||findNavController(R.id.fragmentContainerView).navigateUp()
+        return super.onSupportNavigateUp() || findNavController(R.id.fragmentContainerView).navigateUp()
     }
 }
