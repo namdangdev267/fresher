@@ -1,6 +1,7 @@
-package com.misa.fresher.views.fragments.bill
+package com.misa.fresher.fragment.bill
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
         fun bind(itemBill: ItemBill) {
             binding.tvBillId.text = itemBill.id
             binding.tvBillPrice.text = itemBill.getPrice().toString()
+            Log.e("tagPrice", itemBill.getPrice().toString())
+//            binding.tvBillPrice.text = "itemBill.getPrice().toString()"
 
             val tvBillInforShip = binding.tvBillInforShip
 

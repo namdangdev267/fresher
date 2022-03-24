@@ -11,10 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentPaymentBinding
+import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.showToast
 import kotlinx.android.synthetic.main.payment_context.view.*
 
@@ -39,18 +39,19 @@ class PaymentFragment: Fragment() {
         configureListView()
         configureOtherView()
 
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.action_fragment_payment_to_fragment_sale)
-            }
-        })
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_fragment_payment_to_fragment_sale)
+                }
+            })
     }
 
     @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
         val tvCustomer = binding.root.tvCustomer
         tvCustomer.isSelected = true
-        tvCustomer.isSingleLine = true
         sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
             if (it.receiver != null && it.tel != null) {
                 tvCustomer.text = it.receiver.toString() + " _ " + it.tel.toString()
@@ -66,9 +67,10 @@ class PaymentFragment: Fragment() {
 
     private fun transitionFragment() {
         binding.root.linearQuantity?.setOnClickListener {
-            activity?.onBackPressed()
+
             sharedViewModel.addBillToListBill()
             requireContext().showToast("Paid Successfully")
+            activity?.onBackPressed()
         }
 
         binding.imgBackMain.setOnClickListener {

@@ -52,7 +52,6 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLength="18"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/customer_name_phone_number"

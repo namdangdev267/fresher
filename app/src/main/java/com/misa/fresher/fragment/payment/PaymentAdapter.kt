@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.databinding.ItemPackageRcvBinding
 import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.showToast
+import java.util.*
 
 class PaymentAdapter(
     private var listItemBillDetail: MutableList<PackageProduct>,
@@ -21,12 +22,13 @@ class PaymentAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(itemBillDetail: PackageProduct) {
-            binding.tvPriceAndType.text = itemBillDetail.getPrice().toString()
+            binding.tvPriceProduct.text = itemBillDetail.getPrice().toString()
             binding.tvCountProduct.text = itemBillDetail.countPackage.toString()
             binding.tvNameProduct.text = itemBillDetail.nameProduct
             binding.tvCodeProduct.text = itemBillDetail.idProduct
-            binding.tvPriceAndType.text =
-                itemBillDetail.product.priceProduct.toString() + "/Package"
+            binding.tvPriceProduct.text =
+                itemBillDetail.product.priceProduct.toString() + "/" + itemBillDetail.product.category.toString()
+                    .lowercase(Locale.getDefault())
             binding.imgPackage.visibility = ViewGroup.GONE
             binding.imgAdd.setOnClickListener {
                 itemBillDetail.countPackage += 1

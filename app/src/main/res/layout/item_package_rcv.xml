@@ -4,8 +4,7 @@
     android:id="@+id/bottom_sheet_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ripple_rectangle_stroke"
-    android:orientation="horizontal">
+    android:background="@drawable/ripple_rectangle_stroke">
 
     <ImageView
         android:id="@+id/imgPackage"
@@ -19,6 +18,7 @@
     <LinearLayout
         android:layout_toEndOf="@id/imgPackage"
         android:id="@+id/InforProduct"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -42,15 +42,15 @@
             android:text="@string/code_product"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvPriceAndType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingTop="5dp"
-            android:paddingBottom="@dimen/dp_8"
-            android:text="@string/price_type_product"
-            android:textSize="18sp" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvPriceAndType"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:paddingHorizontal="@dimen/dp_10"-->
+        <!--            android:paddingTop="5dp"-->
+        <!--            android:paddingBottom="@dimen/dp_8"-->
+        <!--            android:text="@string/price_type_product"-->
+        <!--            android:textSize="18sp" />-->
     </LinearLayout>
 
     <LinearLayout

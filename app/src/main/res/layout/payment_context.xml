@@ -133,6 +133,12 @@
                         app:layout_constraintGuide_percent="0.15" />
 
                     <TextView
+                        android:layout_weight="3"
+                        android:ellipsize="marquee"
+                        android:fontFamily="sans-serif-light"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:text="@string/customer_name_phone_number"
+                        android:textColor="#99000000"
                         android:id="@+id/tvCustomer"
                         android:layout_width="0dp"
                         android:layout_height="0dp"

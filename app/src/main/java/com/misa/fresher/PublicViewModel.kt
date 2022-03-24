@@ -161,7 +161,7 @@ class PublicViewModel : ViewModel() {
         _billHandling.postValue(_billHandling.value)
         _billHandling.value?.let { _listBill.value?.add(it) }
         _listBill.postValue(_listBill.value)
-        clearListItemSelected()
+//        clearListItemSelected()
     }
 
     fun getTotalPriceListBill() = _listBill.value?.sumOf { it.getPrice() }
