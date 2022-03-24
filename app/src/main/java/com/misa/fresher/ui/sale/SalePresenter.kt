@@ -61,8 +61,7 @@ class SalePresenter : SaleContract.Presenter {
     }
 
     override fun setCustomer() {
-        val cus = DataForTest.listCus.get((0..DataForTest.listCus.size - 1).random())
-        view?.updateReceiver(cus)
+        TODO()
     }
 
     override fun getListSelectedProductToBillDetail() {

@@ -8,6 +8,7 @@ import com.misa.fresher.data.dao.selectedproduct.SelectedProductDao
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Bill
 import com.misa.fresher.data.model.SelectedProducts
+import com.misa.fresher.showToast
 import com.misa.fresher.ui.sale.SaleFragment
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -57,6 +58,7 @@ class BillDetailPresenter : BillDetailContract.Presenter {
                 )
             )
             withContext(Dispatchers.Main){
+                context.showToast("Thanh toán thành công")
                 view?.navigate()
             }
         }
