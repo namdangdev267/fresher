@@ -1,6 +1,6 @@
 package com.misa.fresher.loginactivity
 
 class User(
-    val email: String,
-    val password: String
+    var email: String,
+    var password: String
 )

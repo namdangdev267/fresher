@@ -9,14 +9,14 @@
     android:paddingEnd="@dimen/dp_10">
 
     <TextView
-        android:id="@+id/textview_calculator_title"
+        android:id="@+id/tv_calculator_title"
         style="@style/TextViewFont"
         android:textColor="#2b3176"
         android:text="@string/search_view"
         android:layout_alignParentTop="true" />
 
     <TextView
-        android:id="@+id/textview_calculator_content"
+        android:id="@+id/tv_calculator_content"
         style="@style/TextViewFont"
         android:singleLine="true"
         android:layout_alignParentBottom="true"

@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/dp_10">
 
     <TextView
-        android:id="@+id/textview_touch_title"
+        android:id="@+id/tv_touch_title"
         style="@style/TextViewFont"
         android:layout_alignParentTop="true"
         android:text="@string/search_view"
@@ -18,10 +18,10 @@
 
     <TextView
         android:paddingStart="@dimen/dp_3"
-        android:id="@+id/textview_touch_require"
+        android:id="@+id/tv_touch_require"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/textview_touch_title"
+        android:layout_toEndOf="@+id/tv_touch_title"
         android:textColor="#FF0000"
         tools:ignore="RtlSymmetry" />
 
@@ -35,7 +35,7 @@
         android:textColor="#C9737373" />
 
     <ImageView
-        android:id="@+id/imageview_touch"
+        android:id="@+id/img_touch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -6,8 +6,9 @@
 
     <string-array name="item_arr">
         <item>All</item>
-        <item>Test</item>
-        <item>Test2</item>
+        <item>Shirt</item>
+        <item>Trouser</item>
+        <item>ELECTRONIC</item>
     </string-array>
 
     <style name="TextViewFont">
@@ -16,6 +17,13 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <string-array name="color">
+        <item>All</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Blue</item>
+    </string-array>
 
     <string name="organization">Organization</string>
     <string name="personal">Personal</string>
@@ -106,4 +114,5 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="color">Color</string>
 </resources>

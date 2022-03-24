@@ -2,13 +2,10 @@ package com.misa.fresher.fragment.payment
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.databinding.ItemPackageRcvBinding
 import com.misa.fresher.models.PackageProduct
-import com.misa.fresher.R
 import com.misa.fresher.showToast
 
 class PaymentAdapter(
@@ -17,43 +14,40 @@ class PaymentAdapter(
 ) :
     RecyclerView.Adapter<PaymentAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View, val listener: (itemBillDetail: PackageProduct) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(
+        private val binding: ItemPackageRcvBinding,
+        val listener: (itemBillDetail: PackageProduct) -> Unit
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(itemBillDetail: PackageProduct) {
-            itemView.findViewById<TextView>(R.id.tvPriceProduct).text =
-                itemBillDetail.getPrice().toString()
-            itemView.findViewById<TextView>(R.id.tvCountProduct).text =
-                itemBillDetail.countPackage.toString()
-            itemView.findViewById<TextView>(R.id.tvNameProduct).text = itemBillDetail.nameProduct
-            itemView.findViewById<TextView>(R.id.tvCodeProduct).text = itemBillDetail.idProduct
-            itemView.findViewById<TextView>(R.id.tvPriceAndType).text =
+            binding.tvPriceAndType.text = itemBillDetail.getPrice().toString()
+            binding.tvCountProduct.text = itemBillDetail.countPackage.toString()
+            binding.tvNameProduct.text = itemBillDetail.nameProduct
+            binding.tvCodeProduct.text = itemBillDetail.idProduct
+            binding.tvPriceAndType.text =
                 itemBillDetail.product.priceProduct.toString() + "/Package"
-            itemView.findViewById<ImageView>(R.id.imgPackage).visibility = View.GONE
-
-            itemView.findViewById<ImageView>(R.id.imgAdd).setOnClickListener {
+            binding.imgPackage.visibility = ViewGroup.GONE
+            binding.imgAdd.setOnClickListener {
                 itemBillDetail.countPackage += 1
                 listener(itemBillDetail)
-
             }
-
-            itemView.findViewById<ImageView>(R.id.imgRemove).setOnClickListener {
+            binding.imgRemove.setOnClickListener {
                 if (itemBillDetail.countPackage > 1) {
                     itemBillDetail.countPackage -= 1
                 } else {
-                    itemView.context.showToast("Quantity must be more than 0. Please check again")
+                    binding.root.context.showToast("Quantity must be more than 0. Please check again")
                 }
                 listener(itemBillDetail)
-
             }
 
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_package_rcv, parent, false)
-        return ViewHolder(view, listener)
+        val binding =
+            ItemPackageRcvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =

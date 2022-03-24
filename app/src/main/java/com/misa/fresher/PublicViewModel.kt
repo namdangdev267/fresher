@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.BillStatus
 import com.misa.fresher.models.InforShip
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.models.Product
+import com.misa.fresher.models.enum.BillStatus
+import com.misa.fresher.models.enum.Category
+import com.misa.fresher.models.enum.Color
 import java.util.*
 
 
@@ -37,7 +39,16 @@ class PublicViewModel : ViewModel() {
     init {
         _itemSelected.postValue(
             PackageProduct(
-                Product(R.drawable.ic_launcher_foreground, "", "", 0, 10),
+                Product(
+                    R.drawable.ic_launcher_foreground,
+                    "",
+                    "",
+                    Color.BLUE,
+                    Category.TROUSER,
+                    0,
+                    10,
+                    "24/03/2022"
+                ),
                 1
             )
         )

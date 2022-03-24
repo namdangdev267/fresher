@@ -109,6 +109,22 @@
                     android:theme="@style/Theme.FreshersApplication.Switch"
                     tools:ignore="HardcodedText" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_color"
+                style="@style/title_filter"
+                android:text="@string/color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_sorting" />
+
+            <Spinner
+                android:id="@+id/spin_item_color"
+                style="@style/spinner"
+                android:background="@drawable/custom_filter_spinner"
+                android:entries="@array/color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_color" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

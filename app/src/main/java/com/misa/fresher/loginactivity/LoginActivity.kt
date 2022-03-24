@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class LoginActivity : AppCompatActivity() {
 
     private val binding: ActivityLoginBinding by lazy { getInflater(layoutInflater) }
@@ -26,23 +27,27 @@ class LoginActivity : AppCompatActivity() {
 
         val intentLogin = Intent(this, MainActivity::class.java)
 
-        binding.tvSignUp.setOnClickListener {
-            binding.textInputLayoutConfirmPassword.visibility = View.VISIBLE
-            binding.btnLogin.visibility = View.GONE
-            binding.btnSignUp.visibility = View.VISIBLE
-            binding.tvSignUp.visibility = View.GONE
+        binding.run {
+            tvSignUp.setOnClickListener {
+                textInputLayoutConfirmPassword.visibility = View.VISIBLE
+                btnLogIn.visibility = View.GONE
+                btnSignUp.visibility = View.VISIBLE
+                tvSignUp.visibility = View.GONE
+            }
+
+            btnSignUp.setOnClickListener {
+                textInputLayoutConfirmPassword.visibility = View.GONE
+                btnLogIn.visibility = View.VISIBLE
+                btnSignUp.visibility = View.GONE
+                tvSignUp.visibility = View.VISIBLE
+//                checkValid()
+            }
+
+            btnLogIn.setOnClickListener {
+                logIn(intentLogin)
+            }
         }
 
-        binding.btnSignUp.setOnClickListener {
-            binding.textInputLayoutConfirmPassword.visibility = View.GONE
-            binding.btnLogin.visibility = View.VISIBLE
-            binding.btnSignUp.visibility = View.GONE
-            binding.tvSignUp.visibility = View.VISIBLE
-        }
-
-        binding.btnLogin.setOnClickListener {
-            logIn(intentLogin)
-        }
     }
 
     private fun logIn(intent: Intent) {
@@ -57,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
         } else if (passWord.isEmpty()) {
             applicationContext.showToast("Password must not be empty")
         }
-
 
         CoroutineScope(IO).launch {
             try {
@@ -77,27 +81,45 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun signUp(intent: Intent) {
-        val userName = binding.tvUsername.text.toString()
-        val passWord = binding.tvPassword.text.toString()
-        val user = User(userName, passWord)
-        val signUpAPI = APIClient.newRetrofitInstance().create(UserInterfaceService::class.java)
-
-        CoroutineScope(IO).launch {
-            try {
-                val respone = signUpAPI.userLogin(user)
-
-                if (respone.isSuccessful && respone.body() != null) {
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } else {
-                    withContext(Main) {
-                        applicationContext.showToast("Error Occurred: ${respone.message()}")
-                    }
-                }
-            } catch (e: Exception) {
-                applicationContext.showToast("Error Occurred: ${e.message}")
-            }
-        }
-    }
+//    private fun checkValid() {
+//        val userName = binding.tvUsername.text.toString()
+//        val passWord = binding.tvPassword.text.toString()
+//        val confirmPassword = binding.tvConfirmPassword.text.toString()
+//        val user = User(userName, passWord)
+//
+//        if (userName.isBlank())
+//            applicationContext.showToast("Username must not be empty")
+//
+//        else if (passWord.isBlank())
+//            applicationContext.showToast("Password must not be empty")
+//
+//        else if (confirmPassword.isBlank())
+//            applicationContext.showToast("Please confirm password")
+//
+//        else if (passWord.compareTo(confirmPassword) != 0)
+//            applicationContext.showToast("Password do not matching")
+//
+//        else
+//            signUp(user)
+//    }
+//
+//    private fun signUp(user: User){
+//        val signUpAPI = APIClient.newRetrofitInstance().create(UserInterfaceService::class.java)
+//        CoroutineScope(IO).launch {
+//            try {
+//                val respone = signUpAPI.signUp(user)
+//
+//                if (respone.isSuccessful && respone.body() != null) {
+//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                    startActivity(intent)
+//                } else {
+//                    withContext(Main) {
+//                        applicationContext.showToast("Error Occurred: ${respone.message()}")
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                applicationContext.showToast("Error Occurred: ${e.message}")
+//            }
+//        }
+//    }
 }

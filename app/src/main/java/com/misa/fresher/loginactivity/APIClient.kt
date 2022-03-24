@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object APIClient {
-    val BASE_URL = "https://identitytoolkit.googleapis.com"
+    private const val BASE_URL = "https://identitytoolkit.googleapis.com"
 
     fun newRetrofitInstance(): Retrofit {
         return Retrofit.Builder()

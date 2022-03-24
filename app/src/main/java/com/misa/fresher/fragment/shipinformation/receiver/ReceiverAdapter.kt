@@ -4,14 +4,14 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.databinding.ItemShipCalculatorBinding
+import com.misa.fresher.databinding.ItemShipCheckBinding
+import com.misa.fresher.databinding.ItemShipMulticontentBinding
+import com.misa.fresher.databinding.ItemShipTouchBinding
 import com.misa.fresher.models.InforShip
 import com.misa.fresher.models.ItemShipInfor
-import com.misa.fresher.R
 
 class ReceiverAdapter(
     private val adapterData: MutableList<ItemShipInfor>,
@@ -26,15 +26,20 @@ class ReceiverAdapter(
         private const val ITEM_CHECK = 3
     }
 
-    inner class ReceiverAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindItemTouch(item: ItemShipInfor.ItemTouch) {
-            val tvTitle = itemView.findViewById<TextView>(R.id.textview_touch_title)
-            val editText = itemView.findViewById<EditText>(R.id.edittext_touch_hint_content)
-            itemView.findViewById<TextView>(R.id.textview_touch_require).text = item.require
-            item.imageResourcce?.let {
-                itemView.findViewById<ImageView>(R.id.imageview_touch).setImageResource(it)
-            }
+    abstract class ReceiverAdapterViewHolder(
+        itemView: View,
+        val changeEditText: (inforShip: InforShip) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
+        open fun bindingData(itemShip: ItemShipInfor) {
+        }
 
+        fun bindingItemTouch(item: ItemShipInfor.ItemTouch, binding: ItemShipTouchBinding) {
+
+            val tvTitle = binding.tvTouchTitle
+            val editText = binding.edtTouchHintContent
+
+            binding.tvTouchRequire.text = item.require
+            item.imageResourcce?.let { binding.imgTouch.setImageResource(it) }
             tvTitle.text = item.title
             editText.hint = item.hintContent
 
@@ -58,58 +63,120 @@ class ReceiverAdapter(
             }
         }
 
-        private fun bindItemCalculator(item: ItemShipInfor.ItemCalculator) {
-            itemView.findViewById<TextView>(R.id.textview_calculator_title).text = item.title
-            itemView.findViewById<TextView>(R.id.textview_calculator_content).text = item.content
+        fun bindingItemCalculator(
+            item: ItemShipInfor.ItemCalculator,
+            binding: ItemShipCalculatorBinding
+        ) {
+            binding.run {
+                tvCalculatorTitle.text = item.title
+                tvCalculatorContent.text = item.content
+            }
         }
 
-        private fun bindItemMulticontent(item: ItemShipInfor.ItemMultiContent) {
-            itemView.findViewById<TextView>(R.id.textview_multicontent_title1).text = item.title1
-            itemView.findViewById<TextView>(R.id.textview_multicontent_title2).text = item.title2
-            itemView.findViewById<TextView>(R.id.textview_multicontent_content1).text =
-                item.content1
-            itemView.findViewById<TextView>(R.id.textview_multicontent_content2).text =
-                item.content2
-            itemView.findViewById<ImageView>(R.id.imageview_multicontent)
-                .setImageResource(item.imageResource)
+        fun bindingItemMulticontent(
+            item: ItemShipInfor.ItemMultiContent,
+            binding: ItemShipMulticontentBinding
+        ) {
+            binding.run {
+                tvMulticontentTitle1.text = item.title1
+                tvMulticontentTitle2.text = item.title2
+                tvMulticontentTitle1.text = item.content1
+                tvMulticontentTitle2.text = item.content2
+                imgMulticontent.setImageResource(item.imageResource)
+            }
         }
 
-        private fun bindItemcheck(item: ItemShipInfor.ItemCheck) {
-            itemView.findViewById<TextView>(R.id.textview_check_title).text = item.title
-        }
-
-        fun bind(itemShip: ItemShipInfor) {
-            when (itemShip) {
-                is ItemShipInfor.ItemTouch -> bindItemTouch(itemShip)
-                is ItemShipInfor.ItemCalculator -> bindItemCalculator(itemShip)
-                is ItemShipInfor.ItemMultiContent -> bindItemMulticontent(itemShip)
-                is ItemShipInfor.ItemCheck -> bindItemcheck(itemShip)
-                else -> {}
+        fun bindingItemcheck(
+            item: ItemShipInfor.ItemCheck,
+            binding: ItemShipCheckBinding
+        ) {
+            binding.run {
+                tvCheckTitle.text = item.title
             }
         }
     }
+
+    class ItemTouchViewholder(
+        val binding: ItemShipTouchBinding,
+        changeEditText: (inforShip: InforShip) -> Unit
+    ) : ReceiverAdapter.ReceiverAdapterViewHolder(binding.root, changeEditText) {
+        override fun bindingData(itemShip: ItemShipInfor) {
+            bindingItemTouch(itemShip as ItemShipInfor.ItemTouch, binding)
+        }
+    }
+
+    class ItemMulticontentViewholder(
+        val binding: ItemShipMulticontentBinding,
+        changeEditText: (inforShip: InforShip) -> Unit
+    ) : ReceiverAdapter.ReceiverAdapterViewHolder(binding.root, changeEditText) {
+        override fun bindingData(itemShip: ItemShipInfor) {
+            bindingItemMulticontent(itemShip as ItemShipInfor.ItemMultiContent, binding)
+        }
+    }
+
+    class ItemCalculatorViewholder(
+        val binding: ItemShipCalculatorBinding,
+        changeEditText: (inforShip: InforShip) -> Unit
+    ) : ReceiverAdapter.ReceiverAdapterViewHolder(binding.root, changeEditText) {
+        override fun bindingData(itemShip: ItemShipInfor) {
+            bindingItemCalculator(itemShip as ItemShipInfor.ItemCalculator, binding)
+        }
+    }
+
+    class ItemCheckViewholder(
+        val binding: ItemShipCheckBinding,
+        changeEditText: (inforShip: InforShip) -> Unit
+    ) : ReceiverAdapter.ReceiverAdapterViewHolder(binding.root, changeEditText) {
+        override fun bindingData(itemShip: ItemShipInfor) {
+            bindingItemcheck(itemShip as ItemShipInfor.ItemCheck, binding)
+        }
+    }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ReceiverAdapter.ReceiverAdapterViewHolder {
-        val layout = when (viewType) {
-            ITEM_TOUCH -> R.layout.item_ship_touch
-            ITEM_CALCULATOR -> R.layout.item_ship_calculator
-            ITEM_MULTICONTENT -> R.layout.item_ship_multicontent
-            ITEM_CHECK -> R.layout.item_ship_check
-            else -> R.layout.item_ship_touch
+        return when (viewType) {
+            ITEM_TOUCH -> ItemTouchViewholder(
+                ItemShipTouchBinding.inflate(
+                    LayoutInflater.from(
+                        parent.context
+                    ), parent, false
+                ), changeEditText
+            )
+            ITEM_CALCULATOR -> ItemCalculatorViewholder(
+                ItemShipCalculatorBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), changeEditText
+            )
+            ITEM_MULTICONTENT -> ItemMulticontentViewholder(
+                ItemShipMulticontentBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), changeEditText
+            )
+            ITEM_CHECK -> ItemCheckViewholder(
+                ItemShipCheckBinding.inflate(
+                    LayoutInflater.from(
+                        parent.context
+                    ), parent, false
+                ), changeEditText
+            )
+            else -> ItemTouchViewholder(
+                ItemShipTouchBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                ), changeEditText
+            )
         }
-
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return ReceiverAdapterViewHolder(view)
     }
 
     override fun onBindViewHolder(
         holder: ReceiverAdapter.ReceiverAdapterViewHolder,
         position: Int
     ) =
-        holder.bind(adapterData[position])
+        holder.bindingData(adapterData[position])
 
     override fun getItemCount() = adapterData.size
 

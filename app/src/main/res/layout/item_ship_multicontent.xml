@@ -10,11 +10,11 @@
     android:background="@drawable/bg_item_recyclerview">
 
     <TextView
-        android:id="@+id/textview_multicontent_title1"
+        android:id="@+id/tv_multicontent_title_1"
         style="@style/TextViewFont"
         android:text="@string/deposit_method"
         android:textColor="#2b3176"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textview_multicontent_title2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_multicontent_title_2"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -25,7 +25,7 @@
         android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/textview_multicontent_title2"
+        android:id="@+id/tv_multicontent_title_2"
         style="@style/TextViewFont"
         android:textColor="#2b3176"
         android:text="@string/deposit"
@@ -44,7 +44,7 @@
         />
 
     <ImageView
-        android:id="@+id/imageview_multicontent"
+        android:id="@+id/img_multicontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toLeftOf="@id/guideline"
@@ -57,7 +57,7 @@
         android:text="@string/_0_0"
         android:singleLine="true"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/textview_multicontent_title2"
+        app:layout_constraintStart_toStartOf="@+id/tv_multicontent_title_2"
         app:layout_constraintBaseline_toBaselineOf="@+id/textview_multicontent_content1" />
 
 
