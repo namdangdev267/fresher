@@ -67,7 +67,6 @@ class PaymentFragment: Fragment() {
 
     private fun transitionFragment() {
         binding.root.linearQuantity?.setOnClickListener {
-
             sharedViewModel.addBillToListBill()
             requireContext().showToast("Paid Successfully")
             activity?.onBackPressed()
