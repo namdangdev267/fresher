@@ -20,9 +20,11 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ListBillAdapter
 import com.misa.fresher.model.BillInfor
+import java.text.DecimalFormat
 
 class ListBillsFragment : Fragment() {
     var viewModel: BillViewModel? = null
+    val decimalFormat=DecimalFormat("0,000.0")
     var mListBill= arrayListOf<BillInfor>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +70,7 @@ class ListBillsFragment : Fragment() {
         val tvListBillSize = view.findViewById<TextView>(R.id.tvListBillSize)
         tvListBillSize.text = viewModel?.getSize().toString()
         val tvListBillAmount = view.findViewById<TextView>(R.id.tvListBillAmount)
-        tvListBillAmount.text = viewModel?.calculateTotalAmount().toString()
+        tvListBillAmount.text = decimalFormat.format(viewModel?.calculateTotalAmount().toString().toInt()).toString()
     }
     /**
      *Thiết lập nạp dữ liệu vào RecycleView

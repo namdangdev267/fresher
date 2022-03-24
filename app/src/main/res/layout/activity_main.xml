@@ -28,5 +28,5 @@
         android:id="@+id/nvMenu"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/main_sale"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 </androidx.drawerlayout.widget.DrawerLayout>
