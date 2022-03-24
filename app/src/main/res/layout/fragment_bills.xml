@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.BillsFragment">
+    tools:context=".ui.bills.BillsFragment">
 
     <LinearLayout
         android:id="@+id/llListBills"
@@ -152,7 +152,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:paddingEnd="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_14"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>

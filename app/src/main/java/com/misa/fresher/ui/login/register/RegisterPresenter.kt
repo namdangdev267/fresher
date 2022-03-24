@@ -1,8 +1,7 @@
 package com.misa.fresher.ui.login.register
 
-import com.misa.fresher.model.User
-import com.misa.fresher.retrofit.ApiClient
-import com.misa.fresher.retrofit.api
+import com.misa.fresher.data.model.User
+import com.misa.fresher.data.retrofit.Api
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,12 +10,13 @@ import kotlinx.coroutines.withContext
 class RegisterPresenter : RegisterContract.Presenter {
     private var view: RegisterContract.View? = null
     override fun register(user: User) {
-        val signInApi = api.getInstance().create(ApiClient::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = signInApi.signUp(user)
+                val response = Api.apiClient.signIn(user)
                 if (response.isSuccessful && response.body() != null) {
-                    view?.registerSuccess()
+                    withContext(Dispatchers.Main){
+                        view?.registerSuccess()
+                    }
                 } else {
                     withContext(Dispatchers.Main) {
                         view?.showErrorMessage(response.errorBody().toString())

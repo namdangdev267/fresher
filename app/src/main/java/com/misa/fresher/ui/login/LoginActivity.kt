@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import com.misa.fresher.MainActivity
 import com.misa.fresher.ui.login.register.RegisterActivity
 import com.misa.fresher.databinding.ActivityLoginBinding
-import com.misa.fresher.model.User
+import com.misa.fresher.data.model.User
 import com.misa.fresher.showToast
 
 /**
@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showErrorMessage(msg: String) {
+        bindding.pbSignIn.isVisible = false
         application.showToast("Error :"+msg)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,9 +67,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             mPresenter?.login(user)
         }
     }
-    companion object{
-       const val REGISTERTAG = "registerFragment"
-    }
-
 }
 

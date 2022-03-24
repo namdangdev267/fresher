@@ -1,9 +1,9 @@
 package com.misa.fresher.ui.login
 
 import com.misa.fresher.base.BaseContract
-import com.misa.fresher.model.User
+import com.misa.fresher.data.model.User
 
-class LoginContract {
+class LoginContract:BaseContract {
     interface View : BaseContract.View{
         fun loginSuccess()
     }

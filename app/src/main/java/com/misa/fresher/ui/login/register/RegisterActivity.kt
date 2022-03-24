@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.misa.fresher.databinding.ActivitySignUpBinding
-import com.misa.fresher.model.User
+import com.misa.fresher.data.model.User
 import com.misa.fresher.showToast
 import com.misa.fresher.ui.login.LoginActivity
 

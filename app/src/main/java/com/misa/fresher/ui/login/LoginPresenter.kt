@@ -1,8 +1,7 @@
 package com.misa.fresher.ui.login
 
-import com.misa.fresher.model.User
-import com.misa.fresher.retrofit.ApiClient
-import com.misa.fresher.retrofit.api
+import com.misa.fresher.data.model.User
+import com.misa.fresher.data.retrofit.Api
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,12 +10,13 @@ import kotlinx.coroutines.withContext
 class LoginPresenter : LoginContract.Presenter {
     private var view: LoginContract.View? = null
     override fun login(user: User) {
-        val signInApi = api.getInstance().create(ApiClient::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = signInApi.signIn(user)
+                val response = Api.apiClient.signIn(user)
                 if (response.isSuccessful && response.body() != null) {
-                    view?.loginSuccess()
+                    withContext(Dispatchers.Main){
+                        view?.loginSuccess()
+                    }
                 } else {
                     withContext(Dispatchers.Main) {
                         view?.showErrorMessage(response.errorBody().toString())

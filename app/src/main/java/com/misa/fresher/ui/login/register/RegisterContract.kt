@@ -1,7 +1,7 @@
 package com.misa.fresher.ui.login.register
 
 import com.misa.fresher.base.BaseContract
-import com.misa.fresher.model.User
+import com.misa.fresher.data.model.User
 
 class RegisterContract :BaseContract {
     interface View : BaseContract.View{

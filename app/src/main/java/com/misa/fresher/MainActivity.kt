@@ -1,8 +1,8 @@
 package com.misa.fresher
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         configUi()
     }
+
 
     /**
      * confic app bar
@@ -47,6 +48,11 @@ class MainActivity : AppCompatActivity() {
             navController.navigateUp(it)
         } == true || super.onSupportNavigateUp()
     }
+    /**
+    * Xử lý sự kiện mở đóng toggle
+    * @Auther : NTBao
+    * @date : 3/22/2022
+    **/
     fun toggle(){
         val mDrawer = binding.drawerLayout
         val mNav = binding.navSale
