@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple_rectangle_stroke">
+
+    <ImageView
+        android:id="@+id/imgPackage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:contentDescription="@string/todo" />
+
+    <LinearLayout
+        android:layout_toEndOf="@id/imgPackage"
+        android:id="@+id/InforProduct"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvNameProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/name_product"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvCodeProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingTop="5dp"
+            android:paddingBottom="@dimen/dp_8"
+            android:text="@string/code_product"
+            android:textSize="18sp" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvPriceAndType"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:paddingHorizontal="@dimen/dp_10"-->
+        <!--            android:paddingTop="5dp"-->
+        <!--            android:paddingBottom="@dimen/dp_8"-->
+        <!--            android:text="@string/price_type_product"-->
+        <!--            android:textSize="18sp" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearClickQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@id/InforProduct"
+        android:gravity="right"
+        android:orientation="vertical"
+        tools:ignore="RtlHardcoded">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgRemove"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="@string/todo"
+                android:padding="15dp"
+                android:src="@drawable/ic_baseline_remove_circle_24" />
+
+            <TextView
+                android:id="@+id/tvCountProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/imgAdd"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="@string/todo"
+                android:padding="15dp"
+                android:src="@drawable/ic_baseline_add_circle_24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPriceProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:text="Price product"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+</RelativeLayout>

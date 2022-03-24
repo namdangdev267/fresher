@@ -16,6 +16,24 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
+    <style name="title_filter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_20</item>
+        <item name="android:layout_marginBottom">@dimen/dp_10</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">#99000000</item>
+        <item name="android:textSize">@dimen/dp_15</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_45</item>
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+
     <style name="Theme.FreshersApplication.Switch" parent="Theme.FreshersApplication">
         <!--        &lt;!&ndash; active thumb & track color (30% transparency) &ndash;&gt;-->
         <!--        <item name="colorControlActivated">@color/colorPrimary</item>-->
@@ -28,6 +46,7 @@
         <!--        <item name="android:colorForeground">#42221f1f-->
         <!--        </item>-->
         <item name="colorSecondary">@color/background</item>
+        <item name="background">@drawable/checkbox</item>
     </style>
 
     <style name="customCalculate">

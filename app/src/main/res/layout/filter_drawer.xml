@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_8">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:minWidth="@dimen/dp_0"
+                android:minHeight="@dimen/dp_0"
+                android:theme="@style/Theme.FreshersApplication.Switch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@string/switch_name_filter"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16"
+                app:layout_constraintBottom_toBottomOf="@id/sw_quantity"
+                app:layout_constraintStart_toEndOf="@id/sw_quantity"
+                app:layout_constraintTop_toTopOf="@id/sw_quantity"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/tv_grouping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/item_name_filter"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sw_quantity" />
+
+            <Spinner
+                android:id="@+id/spn_grouping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/custom_filter_spinner"
+                android:entries="@array/item_arr"
+                android:padding="@dimen/dp_8"
+                android:overlapAnchor="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_grouping" />
+
+            <TextView
+                android:id="@+id/tv_sorting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Sort by"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spn_grouping"
+                tools:ignore="HardcodedText" />
+
+            <RadioGroup
+                android:id="@+id/rg_sorting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tv_sorting"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RadioButton
+                    android:id="@+id/rb_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:theme="@style/Theme.FreshersApplication.Switch"
+                    tools:ignore="HardcodedText" />
+
+                <RadioButton
+                    android:id="@+id/rb_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New arrival"
+                    android:theme="@style/Theme.FreshersApplication.Switch"
+                    tools:ignore="HardcodedText" />
+
+                <RadioButton
+                    android:id="@+id/rb_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity in inventory"
+                    android:theme="@style/Theme.FreshersApplication.Switch"
+                    tools:ignore="HardcodedText" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_color"
+                style="@style/title_filter"
+                android:text="@string/color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_sorting" />
+
+            <Spinner
+                android:id="@+id/spin_item_color"
+                style="@style/spinner"
+                android:background="@drawable/custom_filter_spinner"
+                android:entries="@array/color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_color" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_reset"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_8"
+            android:layout_weight="1"
+            android:background="@drawable/custom_background_filter"
+            android:text="@string/clear_filter"
+            android:textColor="@color/background"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_18"
+            tools:ignore="SpUsage" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_done"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_8"
+            android:layout_weight="1"
+            android:background="@drawable/custom_background"
+            android:text="@string/done_filter"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_18"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background"
+        android:contentInsetStart="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <RelativeLayout
+            android:id="@+id/check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/textSize_18">
+
+            <ImageView
+                android:id="@+id/imgBackMain"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_menu_24" />
+
+            <TextView
+                android:id="@+id/tvCodePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_25"
+                android:layout_centerInParent="true"
+                android:text="@string/list_of_bills"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_20"
+                tools:ignore="RelativeOverlap,SpUsage" />
+
+            <ImageView
+                android:id="@+id/imgSearch"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/searchsmall" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll_bill_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:weightSum="2">
+
+        <Spinner
+            android:id="@+id/spin_filter_day"
+            style="@style/spinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:entries="@array/day" />
+
+        <Spinner
+            android:id="@+id/spin_filter_status"
+            style="@style/spinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner"
+            android:entries="@array/status" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bill_total_information"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_below="@id/ll_bill_filter"
+        android:padding="@dimen/dp_10"
+        android:background="@color/background_switch">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/total"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_bill_total_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:padding="@dimen/dp_3"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/_0"
+            android:textStyle="bold"
+            android:textColor="@color/background"
+            android:background="@drawable/custom_quantity" />
+
+        <TextView
+            android:id="@+id/tv_bill_total_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="@string/_0_0"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="RtlHardcoded" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_bill_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/ll_bill_total_information"
+        android:layout_alignParentBottom="true" />
+
+    <RelativeLayout
+        android:id="@+id/rl_bill_buy_more"
+        android:layout_width="@dimen/dp_55"
+        android:layout_height="@dimen/dp_55"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="25dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_button">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_baseline_shopping_cart_24" />
+    </RelativeLayout>
+
+</RelativeLayout>

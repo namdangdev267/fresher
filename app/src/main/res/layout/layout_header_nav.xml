@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -7,70 +8,79 @@
     <RelativeLayout
         android:id="@+id/relativeMain"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
+        android:padding="@dimen/dp_20"
         android:background="@color/background"
         tools:ignore="MissingConstraints">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/users" />
+            android:background="@color/white"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="@string/todo" />
 
-        <TextView
-            android:id="@+id/tvName"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@id/imgAvatar"
-            android:text="Nam Dang"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/imgAvatar">
 
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvName"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/imgAvatar"
-            android:text="namfashionhn"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nam_dang"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_25"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/namfashionhn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_18"
+                tools:ignore="SpUsage" />
+        </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relative_Contact"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="@dimen/dp_45"
         android:layout_below="@id/relativeMain"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="11dp"
         android:background="@drawable/custom_background">
 
-        <ImageView
-            android:id="@+id/imgCall"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="5dp"
-            android:layout_toLeftOf="@id/tvHoTro"
-            android:src="@drawable/call" />
-
         <TextView
             android:id="@+id/tvHoTro"
             android:layout_width="wrap_content"
-            android:layout_height="20sp"
+            android:layout_height="@dimen/dp_20"
             android:layout_centerInParent="true"
             android:text="Support: 1900 8677"
             android:textAllCaps="false"
+            android:drawablePadding="@dimen/dp_8"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textSize="@dimen/textSize_18"
+            app:drawableStartCompat="@drawable/ic_baseline_call_24"
+            tools:ignore="HardcodedText,SpUsage" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/background_switch"
+        android:layout_below="@id/relative_Contact"/>
 
 </RelativeLayout>

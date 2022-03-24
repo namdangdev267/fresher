@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@drawable/bg_item_recyclerview"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingStart="@dimen/dp_5"
+    android:paddingEnd="@dimen/dp_10">
+
+    <CheckBox
+        android:id="@+id/checkbok_check"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_check_title"
+        style="@style/TextViewFont"
+        android:layout_height="match_parent"
+        android:text="@string/collect_COD"
+        android:textColor="#2b3176" />
+
+</LinearLayout>

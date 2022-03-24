@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <RelativeLayout
+            android:id="@+id/check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/textSize_18">
+
+            <ImageView
+                android:id="@+id/imgBackMain"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/tvCodePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_25"
+                android:layout_centerInParent="true"
+                android:text="@string/code_payment"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_20"
+                tools:ignore="RelativeOverlap,SpUsage" />
+
+            <ImageView
+                android:id="@+id/imgCartPayment"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_toStartOf="@id/imgMenuPayment"
+                android:src="@drawable/trash"
+                android:contentDescription="@string/todo" />
+
+            <ImageView
+                android:id="@+id/imgMenuPayment"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/menudotsvertical"
+                android:contentDescription="@string/todo" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <include layout="@layout/payment_context" />
+
+</LinearLayout>

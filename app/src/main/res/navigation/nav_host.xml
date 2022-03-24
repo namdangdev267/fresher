@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/fragment_sale">
+
+    <fragment
+        android:id="@+id/fragment_sale"
+        android:name="com.misa.fresher.fragment.sale.SaleFragment"
+        android:label="fragment_sale"
+        tools:layout="@layout/fragment_sale" >
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_payment"
+            app:destination="@id/fragment_payment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
+        <action
+            android:id="@+id/action_fragment_sale_to_fragment_list_bill"
+            app:destination="@id/fragment_list_bill" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_list_bill"
+        android:name="com.misa.fresher.fragment.bill.ListBillFragment"
+        android:label="fragment_list_bill"
+        tools:layout="@layout/fragment_list_bill" >
+        <action
+            android:id="@+id/action_fragment_list_bill_to_fragment_sale"
+            app:destination="@id/fragment_sale" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_payment"
+        android:name="com.misa.fresher.fragment.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_fragment_payment_to_fragment_sale"
+            app:destination="@id/fragment_sale"
+            app:enterAnim="@anim/slide_in_from_left"
+            app:exitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_fragment_payment_to_fragment_list_bill"
+            app:destination="@id/fragment_list_bill" />
+        <action
+            android:id="@+id/action_fragment_payment_to_fragment_ship_information"
+            app:destination="@id/fragment_ship_information"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_ship_information"
+        android:name="com.misa.fresher.fragment.shipinformation.ShipInformationFragment"
+        android:label="fragment_ship_information"
+        tools:layout="@layout/fragment_ship_information" >
+        <action
+            android:id="@+id/action_fragment_ship_information_to_fragment_payment"
+            app:destination="@id/fragment_payment"
+            app:enterAnim="@anim/slide_in_from_left"
+            app:exitAnim="@anim/slide_out_to_right" />
+    </fragment>
+</navigation>

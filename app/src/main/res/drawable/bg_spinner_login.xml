@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners android:radius="@dimen/dp_3" />
+        </shape>
+    </item>
+
+    <item
+        android:left="50dp"
+        android:drawable="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:gravity="end|center_vertical" />
+</layer-list>

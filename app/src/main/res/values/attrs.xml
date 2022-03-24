@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="EditText">
-        <attr name="hint" format="string"/>
-        <attr name="imageStart" format="reference"/>
-        <attr name="imageEnd" format="reference"/>
+    <declare-styleable name="SearchView">
+        <attr name="title" format="string" />
+        <attr name="icon1" format="reference"/>
+        <attr name="icon2" format="reference"/>
+        <attr name="icon3" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="NavHost">
+        <attr format="reference" name="navGraph"/>
+    </declare-styleable>
+
+    <declare-styleable name="NavInclude">
+        <attr format="reference" name="graph"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomRecyclerView">
+        <attr name="title1" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="BtnCalculatorKey">
