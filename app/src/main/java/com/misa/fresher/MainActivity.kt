@@ -1,6 +1,7 @@
 package com.misa.fresher
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         configUi()
+        val img = R.drawable.ic_shopping_bag
     }
 
 

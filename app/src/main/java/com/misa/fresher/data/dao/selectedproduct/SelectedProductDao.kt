@@ -3,6 +3,8 @@ package com.misa.fresher.data.dao.selectedproduct
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.misa.fresher.data.database.AppDbHelper
+import com.misa.fresher.data.model.Bill
+import com.misa.fresher.data.model.Products
 import com.misa.fresher.data.model.SelectedProducts
 
 class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDao {
@@ -21,7 +23,13 @@ class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDa
     }
 
     override fun getSelectedProDuctByBill(billId: Int): MutableList<SelectedProducts> {
-        TODO("Not yet implemented")
+        val db = dbHelper.readableDatabase
+//        val cursor = db.rawQuery(
+//            "SELECT SP.${SelectedProducts.ID},SP.${SelectedProducts.ID_BILL},SP.${SelectedProducts.ID_PRODUCT},SP.${SelectedProducts.AMONUT}" +
+//                    "FROM ${SelectedProducts.TABLE_NAME} SP,${Bill.TABLE_NAME} B, ${Products.TABLE_NAME} P" +
+//                    "WHERE SP.${SelectedProducts.ID} = B.${Bill.ID} AND SP.${SelectedProducts.ID_PRODUCT} = P.${Products.ID}",null
+//        )
+        TODO()
     }
 
     companion object {

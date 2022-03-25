@@ -13,6 +13,10 @@ import com.misa.fresher.utils.Queries.DROP_BILL_TABLE
 import com.misa.fresher.utils.Queries.DROP_CUSTOMER_TABLE
 import com.misa.fresher.utils.Queries.DROP_PRODUCT_TABLE
 import com.misa.fresher.utils.Queries.DROP_SELECTED_PRODUCT_TABLE
+import com.misa.fresher.utils.Queries.INSERT_DEFAULT_BILL
+import com.misa.fresher.utils.Queries.INSERT_DEFAULT_PRODUCT
+import com.misa.fresher.utils.Queries.INSERT_DEFAULT_SELECTEDPRODUCT
+import com.misa.fresher.utils.Queries.INSERT_DEFAUL_CUSTOMER
 
 class AppDbHelper private constructor(
     context: Context, dbName: String, cursor: SQLiteDatabase.CursorFactory?, dbVersion: Int
@@ -24,6 +28,10 @@ class AppDbHelper private constructor(
             execSQL(CREATE_CUSTOMER_TABLE)
             execSQL(CREATE_BILL_TABLE)
             execSQL(CREATE_SELECTED_PRODUCT_TABLE)
+            execSQL(INSERT_DEFAULT_PRODUCT)
+            execSQL(INSERT_DEFAUL_CUSTOMER)
+            execSQL(INSERT_DEFAULT_BILL)
+            execSQL(INSERT_DEFAULT_SELECTEDPRODUCT)
         }
     }
 

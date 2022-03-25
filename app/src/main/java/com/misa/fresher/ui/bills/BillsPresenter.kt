@@ -56,14 +56,14 @@ class BillsPresenter : BillsContract.Presenter {
                 c.add(Calendar.DATE, -7)
                 dt = c.getTime()
                 bills = listBill.filter {
-                    it.date == SimpleDateFormat("dd/M/yyyy").format(dt)
+                    it.date >= SimpleDateFormat("dd/M/yyyy").format(dt)
                 } as MutableList<Bill>
             }
             "Khác" -> {
                 c.add(Calendar.DATE, -7)
                 dt = c.getTime()
                 bills = listBill.filter {
-                    it.date == SimpleDateFormat("dd/M/yyyy").format(dt)
+                    it.date < SimpleDateFormat("dd/M/yyyy").format(dt)
                 } as MutableList<Bill>
             }
         }

@@ -6,10 +6,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Customer(
-    val id:Int,
-    val name : String,
-    val number : String,
-    val address : String
+    val id:Int?,
+    val name : String?,
+    val number : String?,
+    val address : String?
 ):Parcelable{
     fun getContentValues(): ContentValues {
         return ContentValues().apply {

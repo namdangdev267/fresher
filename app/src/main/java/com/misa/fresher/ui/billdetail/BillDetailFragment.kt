@@ -28,6 +28,9 @@ class BillDetailFragment :
         mPresenter?.getBillId(requireContext())
         configRecyclerView()
         savingBill()
+        binding.btnBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     private fun savingBill() {

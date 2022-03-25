@@ -39,6 +39,11 @@ class CustomerDao(private val dbHelper: AppDbHelper) : ICustomerDao {
         databaseRead.close()
         return list
     }
+
+    override suspend fun getCustomerById(id: Int): Customer {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private var instance: CustomerDao? = null
         fun getInstance(dbHelper: AppDbHelper): CustomerDao =

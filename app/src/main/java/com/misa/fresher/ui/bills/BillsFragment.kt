@@ -90,12 +90,13 @@ class BillsFragment :
         }
     }
 
-    private fun configRecyclerView() {
+    private fun configRecyclerView():Boolean {
         rcv = binding.rcvListBills
         rcvAdapter = BillsAdapter(mutableListOf())
         rcv?.adapter = rcvAdapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
         mPresenter?.getListBillsForAdapter(requireContext())
+        return true
     }
 
     private fun configToggle() {

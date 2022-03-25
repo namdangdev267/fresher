@@ -3,9 +3,9 @@
     <string-array name="colorArray">
         <item>cham de chon</item>
         <item>Do</item>
-        <item>Xanh</item>
-        <item>Xam</item>
-        <item>Tim</item>
+        <item>XANH</item>
+        <item>XAM</item>
+        <item>TIM</item>
     </string-array>
     <string-array name="sizeArray">
         <item>cham de chon</item>

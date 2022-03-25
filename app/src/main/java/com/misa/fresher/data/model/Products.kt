@@ -1,5 +1,6 @@
 package com.misa.fresher.data.model
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
 import android.os.Parcelable
@@ -12,14 +13,15 @@ import kotlinx.parcelize.Parcelize
 **/
 @Parcelize
 data class Products(
-    val id : Int,
-    val code: String,
-    val name: String,
-    val price: Double,
-    val img: Int,
-    val color: String,
-    val size: String
+    var id : Int,
+    var code: String,
+    var name: String,
+    var price: Double,
+    var img: Int,
+    var color: String,
+    var size: String
 ):Parcelable{
+
     fun getContentValues():ContentValues{
         return ContentValues().apply {
             put(CODE,code)
