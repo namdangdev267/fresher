@@ -11,7 +11,7 @@ import com.misa.fresher.databinding.CustomToastBinding
 
 object CustomToast {
     private var toast:Toast?=null
-    fun makeText(context: Context, message: String, duration: Int){
+    fun makeText(context: Context, message: String){
         if(toast!=null)
         {
             toast?.cancel()
@@ -20,7 +20,7 @@ object CustomToast {
         val binding = CustomToastBinding.inflate(LayoutInflater.from(context))
         binding.tvToastMessage.text = message
 
-        toast?.duration = duration
+        toast?.duration = Toast.LENGTH_SHORT
         toast?.view = binding.root
         toast?.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 50)
         toast?.show()

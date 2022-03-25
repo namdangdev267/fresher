@@ -8,6 +8,7 @@ import com.misa.fresher.models.ItemBill
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseRecyclerViewAdapter
 import com.misa.fresher.databinding.ItemBillBinding
+import com.misa.fresher.getNumString
 
 class BillAdapter : BaseRecyclerViewAdapter<ItemBill,BillAdapter.ViewHolder>()
  {
@@ -15,11 +16,11 @@ class BillAdapter : BaseRecyclerViewAdapter<ItemBill,BillAdapter.ViewHolder>()
     class ViewHolder(private val binding: ItemBillBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun bind(itemBill: ItemBill) {
-            binding.tvBillId.text = itemBill.id
-            binding.tvBillPrice.text = itemBill.getPrice().toString()
+            binding.tvBillId.text =  itemBill.id.getNumString().substring(10)
+            binding.tvBillPrice.text = itemBill.billPrice.toString()
 
             if (itemBill.infoShip?.receiver != null && itemBill.infoShip?.tel != null) {
-                binding.tvBillInforShip.text = itemBill.infoShip?.receiver + "_" + itemBill.infoShip?.tel
+                binding.tvBillInforShip.text = itemBill.infoShip?.receiver + "-" + itemBill.infoShip?.tel
             } else {
                 binding.tvBillInforShip.setTextColor(R.color.black)
             }

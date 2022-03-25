@@ -7,15 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceBuilder {
     private const val URL = "https://identitytoolkit.googleapis.com"
 
-    private val okHttp = OkHttpClient.Builder()
 
-    private val builder = Retrofit.Builder().baseUrl(URL)
+    private val retrofit = Retrofit.Builder().baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttp.build())
+        .client(OkHttpClient.Builder().build()).build()
 
-    private val retrofit = builder.build()
-
-    fun <T> buildService (serviceType :Class<T>):T{
+    fun <T> buildService(serviceType: Class<T>): T {
         return retrofit.create(serviceType)
     }
 

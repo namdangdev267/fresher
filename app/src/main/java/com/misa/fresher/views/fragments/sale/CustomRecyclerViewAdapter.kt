@@ -7,14 +7,14 @@ import com.misa.fresher.models.enums.Color
 import com.misa.fresher.databinding.ItemCustomRecyclerviewBinding
 
 class CustomRecyclerViewAdapter(
-    private val listData: List<Color>,
-    val clickColor: (color: Color) -> Unit
+    private val listData: List<String>,
+    val clickColor: (color: String) -> Unit
 ) : RecyclerView.Adapter<CustomRecyclerViewAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding:ItemCustomRecyclerviewBinding, val clickColor: (color: Color) -> Unit) :
+    class ViewHolder(val binding:ItemCustomRecyclerviewBinding, val clickColor: (color: String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(color: Color) {
-            binding.tvCvRcvTitle.text = color.name.lowercase()
+        fun bind(color: String) {
+            binding.tvCvRcvTitle.text = color.lowercase()
             binding.root.setOnClickListener {
                 clickColor(color)
             }

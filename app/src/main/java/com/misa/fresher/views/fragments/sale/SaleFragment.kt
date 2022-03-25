@@ -74,7 +74,7 @@ class SaleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedViewModel.fakeData(requireContext())
         transitionFragment(view)
         configFilterDrawer()
         configToolbar()
@@ -113,7 +113,8 @@ class SaleFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        saleViewModel.initData()
+        saleViewModel.fakeData(requireContext())
+
     }
 
     private fun configToolbar() {
@@ -291,7 +292,6 @@ class SaleFragment : Fragment() {
     }
 
     private fun saleItemClick(itemProduct: ItemProduct) {
-
         val tvItemName = bottomSheetItemsaleBinding.tvItemName
         val tvItemId = bottomSheetItemsaleBinding.tvItemId
         val tvItemQuantity = bottomSheetItemsaleBinding.tvQuantity
@@ -309,7 +309,7 @@ class SaleFragment : Fragment() {
 
         btRemove.setOnClickListener {
             if (sharedViewModel.itemSelected.value?.quantity == 1) {
-                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
+                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again")
             } else {
                 sharedViewModel.updateItemSelectedQuantity(-1)
             }

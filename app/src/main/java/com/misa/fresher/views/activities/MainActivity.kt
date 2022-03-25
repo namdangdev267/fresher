@@ -2,6 +2,7 @@ package com.misa.fresher.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -10,8 +11,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.R
+import com.misa.fresher.data.dao.itembill.ItemBillDao
+import com.misa.fresher.data.database.AppDatabase
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
         configDrawer()
     }
 
@@ -39,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun configDrawer() {
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         appBarConfiguration.let { binding.nvMenu.setupWithNavController(navController) }
@@ -52,4 +62,5 @@ class MainActivity : AppCompatActivity() {
             binding.root.openDrawer(view)
         }
     }
+
 }

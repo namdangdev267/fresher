@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
                         CustomToast.makeText(
                             view.context,
                             "Email exist. Please enter other email.",
-                            Toast.LENGTH_SHORT
+
                         )
                     }
                 }
@@ -137,8 +137,7 @@ class LoginFragment : Fragment() {
                     withContext(Main) {
                         CustomToast.makeText(
                             view.context,
-                            "Username or password is incorrect. Please check again.",
-                            Toast.LENGTH_SHORT
+                            "Username or password is incorrect. Please check again."
                         )
                     }
                 }
@@ -180,23 +179,20 @@ class LoginFragment : Fragment() {
         if (binding.etLoginEmail.text.toString().isEmpty()) {
             CustomToast.makeText(
                 requireContext(),
-                "Username must not be empty",
-                Toast.LENGTH_SHORT
+                "Username must not be empty"
             )
             return false
         } else if (binding.etLoginPassword.text.toString().isEmpty()) {
             CustomToast.makeText(
                 requireContext(),
-                "Password must not be empty",
-                Toast.LENGTH_SHORT
+                "Password must not be empty"
             )
             return false
         }
         else if (binding.etLoginPassword.text.toString().length<6) {
             CustomToast.makeText(
                 requireContext(),
-                "Password should be at least 6 characters",
-                Toast.LENGTH_SHORT
+                "Password should be at least 6 characters"
             )
             return false
         }
@@ -204,8 +200,7 @@ class LoginFragment : Fragment() {
         {
             CustomToast.makeText(
                 requireContext(),
-                "Your confirm password is incorrect. Please check again.",
-                Toast.LENGTH_SHORT
+                "Your confirm password is incorrect. Please check again."
             )
             return false
         }

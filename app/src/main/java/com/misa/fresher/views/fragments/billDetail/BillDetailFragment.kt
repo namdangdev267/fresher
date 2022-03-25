@@ -16,6 +16,7 @@ import com.misa.fresher.R
 import com.misa.fresher.views.customViews.CustomToast
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentBillDetailBinding
+import com.misa.fresher.getNumString
 
 class BillDetailFragment : Fragment() {
 
@@ -53,7 +54,7 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun configToolbar() {
-        binding.tvBillDetailId.text = sharedViewModel.billHandling.value?.id
+        binding.tvBillDetailId.text = sharedViewModel.billHandling.value?.id?.getNumString()!!.substring(10)
     }
 
     private fun transitionFragment(view: View) {
@@ -61,9 +62,9 @@ class BillDetailFragment : Fragment() {
 
             Navigation.findNavController(view)
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
-            sharedViewModel.addBillToListBill()
+            sharedViewModel.addBillToListBill(view.context)
 
-            CustomToast.makeText(this.context!!,"Paid Successfully",Toast.LENGTH_SHORT)
+            CustomToast.makeText(this.context!!,"Paid Successfully")
 
         }
 

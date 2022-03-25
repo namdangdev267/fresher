@@ -39,14 +39,11 @@ class CustomSearchView : LinearLayout {
         editText = binding.edittextSearchHint
         editText.hint = title
 
-        var search_icon1 = binding.imageviewSearchIcon1
-        search_icon1.setImageResource(icon1)
+        binding.imageviewSearchIcon1.setImageResource(icon1)
 
-        var search_icon2 = binding.imageviewSearchIcon2
-        search_icon2.setImageResource(icon2)
+        binding.imageviewSearchIcon2.setImageResource(icon2)
 
-        var search_icon3 = binding.imageviewSearchIcon3
-        search_icon3.setImageResource(icon3)
+        binding.imageviewSearchIcon3.setImageResource(icon3)
 
     }
 

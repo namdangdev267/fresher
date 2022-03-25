@@ -33,7 +33,7 @@ class BillDetailAdapter(
                 tvItemQuantity.text = itemBillDetail.quantity.toString()
                 nameItem.text = itemBillDetail.name
                 idItem.text = itemBillDetail.code
-                priceItem.text = itemBillDetail.itemProduct.price.toString() + "/Package"
+                priceItem.text = itemBillDetail.itemProduct?.price.toString() + "/Package"
                 imageItem.visibility = View.GONE
                 ivItemAdd.setOnClickListener {
                     itemBillDetail.quantity += 1
@@ -47,7 +47,7 @@ class BillDetailAdapter(
                     }
                     else if(itemBillDetail.quantity==1)
                     {
-                        CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
+                        CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again")
                     }
                 }
             }
@@ -59,7 +59,7 @@ class BillDetailAdapter(
                 }
                 else if(itemBillDetail.quantity==1)
                 {
-                    CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
+                    CustomToast.makeText(itemView.context,"Quantity must be more than 0. Please check again")
                 }
             }
 
