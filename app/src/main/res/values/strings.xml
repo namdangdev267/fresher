@@ -77,7 +77,6 @@
         <item>Hôm qua</item>
         <item>Hôm kia</item>
         <item>Tuần này</item>
-        <item>Khác</item>
     </string-array>
     <string-array name="filter_bill_state">
         <item>Tất cả</item>
@@ -85,4 +84,11 @@
         <item>Ghi nợ</item>
         <item>Đã hủy</item>
     </string-array>
+    <string name="enter_email">Nhập email</string>
+    <string name="enter_password">Nhập password</string>
+    <string name="confirm_password">Nhập lại password</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="have_account">Đã có tài khoản? Đăng nhập</string>
+    <string name="no_account">Chưa có tài khoản? Đăng ký</string>
 </resources>

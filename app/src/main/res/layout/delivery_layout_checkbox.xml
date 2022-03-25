@@ -13,5 +13,5 @@
         android:layout_marginStart="@dimen/dp_5"
         android:buttonTint="@color/violet_dark"
         android:text="@string/tap_to_enter"
-        android:theme="@style/TextBlack18style" />
+        android:theme="@style/TextBlack14style" />
 </LinearLayout>

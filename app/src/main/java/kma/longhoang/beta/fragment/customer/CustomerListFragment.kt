@@ -1,5 +1,6 @@
 package kma.longhoang.beta.fragment.customer
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +9,17 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SaleViewModel
 import kma.longhoang.beta.adapter.CustomerAdapter
+import kma.longhoang.beta.dao.CustomerDAO
+import kma.longhoang.beta.database.AppDatabase
 import kma.longhoang.beta.model.CustomerModel
 
 class CustomerListFragment : Fragment() {
@@ -25,8 +30,12 @@ class CustomerListFragment : Fragment() {
     private var recyclerCustomer: RecyclerView? = null
     private var listCustomer = mutableListOf<CustomerModel>()
     private val saleViewModel: SaleViewModel by activityViewModels()
+
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val customerDAO = CustomerDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        listCustomer = customerDAO?.getAllCustomer()!!
         initView(view)
         setupRecyclerView()
         backFragment()
@@ -40,16 +49,6 @@ class CustomerListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        listCustomer.addAll(
-            listOf<CustomerModel>(
-                CustomerModel("A Nam", "09123456778"),
-                CustomerModel("Long", "0967538265"),
-                CustomerModel("Long 2", "01234567899"),
-                CustomerModel("Kiên", "0987654321"),
-                CustomerModel("Bảo", "2351575589659"),
-                CustomerModel("Chính", "09123576565"),
-            )
-        )
         recyclerCustomer?.layoutManager = LinearLayoutManager(context)
         recyclerCustomer?.setHasFixedSize(true)
         recyclerCustomer?.addItemDecoration(

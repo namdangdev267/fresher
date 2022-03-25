@@ -1,6 +1,7 @@
 package kma.longhoang.beta.fragment.delivery
 
 import android.annotation.SuppressLint
+import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -20,18 +22,29 @@ import kma.longhoang.beta.BillState
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SaleViewModel
 import kma.longhoang.beta.adapter.OrderDetailAdapter
+import kma.longhoang.beta.dao.BillDAO
+import kma.longhoang.beta.dao.CustomerDAO
+import kma.longhoang.beta.dao.OrderDAO
+import kma.longhoang.beta.dao.ProductDAO
+import kma.longhoang.beta.database.AppDatabase
 import kma.longhoang.beta.model.BillModel
 import kma.longhoang.beta.model.CustomerModel
 import kma.longhoang.beta.model.OrderModel
+import kma.longhoang.beta.showNote
+import org.w3c.dom.Text
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.util.*
 
 class OrderDetailFragment : Fragment() {
-
     private val saleViewModel: SaleViewModel by activityViewModels()
-    private var orderList : MutableList<OrderModel>?=null
+    private var billId: Int = 0
+
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        billId(view)
         setupRecyclerView()
         customerInfo(view)
         backFragment()
@@ -39,6 +52,21 @@ class OrderDetailFragment : Fragment() {
         buyMore()
         deliveryInfo(view)
         cashOrder()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_order_detail, container, false)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun billId(view: View) {
+        val tvBillId = view.findViewById<TextView>(R.id.text_bill_id)
+        val billDAO = BillDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        billId = billDAO?.getBillId()!!
+        tvBillId.text = billId.toString()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -52,24 +80,32 @@ class OrderDetailFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer { it->
-            recyclerView?.adapter = OrderDetailAdapter(it, saleViewModel)
+        val listOrder = saleViewModel.listOrder.value
+        recyclerView?.adapter = listOrder?.let { OrderDetailAdapter(it, saleViewModel) }
+        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer {
+            recyclerView?.adapter?.notifyDataSetChanged()
         })
-        recyclerView?.adapter?.notifyDataSetChanged()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_order_detail, container, false)
-    }
 
     private fun customerInfo(view: View) {
-        saleViewModel.customer.observe(viewLifecycleOwner, Observer {
-            view.findViewById<TextView>(R.id.text_customer)?.text =
-                StringBuilder(it.name).append(" (").append(it.phone).append(")")
-        })
+        val imgClearCustomer = view.findViewById<ImageView>(R.id.image_clear)
+        val tvCustomer = view.findViewById<TextView>(R.id.text_customer)
+        val customer = saleViewModel.customer.value
+        if (customer != null) {
+            tvCustomer?.text =
+                StringBuilder(customer.name).append(" (").append(customer.phone).append(")")
+            imgClearCustomer.isVisible = true
+            imgClearCustomer.setOnClickListener {
+                imgClearCustomer.isVisible = false
+                tvCustomer?.text = ""
+                saleViewModel.setCustomer(null)
+            }
+        } else {
+            imgClearCustomer.isVisible = false
+            tvCustomer?.text = ""
+            tvCustomer?.hint = getString(R.string.customer_name)
+        }
         view.findViewById<TextView>(R.id.text_customer)?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_orderDetailFragment_to_customerListFragment)
@@ -106,19 +142,36 @@ class OrderDetailFragment : Fragment() {
     @SuppressLint("NewApi")
     private fun cashOrder() {
         view?.findViewById<TextView>(R.id.text_total_amount)?.setOnClickListener {
-            Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
-            val billModel = BillModel(saleViewModel.listOrder.value, 1, saleViewModel.customer.value)
-            saleViewModel.addBill(billModel)
+            saveBill()
+            showNote(requireContext(), "Thu tiền thành công")
             saleViewModel.setListOrder(mutableListOf())
+            saleViewModel.setCustomer(null)
             activity?.onBackPressed()
         }
         view?.findViewById<Button>(R.id.button_cash)?.setOnClickListener {
-            Toast.makeText(context, "Thu tiền thành công", Toast.LENGTH_SHORT).show()
-            val billModel = BillModel(saleViewModel.listOrder.value, 1, saleViewModel.customer.value)
-            saleViewModel.addBill(billModel)
+            saveBill()
+            showNote(requireContext(), "Thu tiền thành công")
             saleViewModel.setListOrder(mutableListOf())
+            saleViewModel.setCustomer(null)
             activity?.onBackPressed()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun saveBill() {
+        val billDAO = BillDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        val orderDAO = OrderDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        val customerDAO = CustomerDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        val customerId = saleViewModel.customer.value?.phone?.let { customerDAO?.getCustomerId(it) }
+        for (order in saleViewModel.listOrder.value!!) {
+            orderDAO?.addOrder(order, billId)
+        }
+        val date = SimpleDateFormat(
+            "dd/MM/yyyy",
+            Locale.getDefault()
+        ).format(Calendar.getInstance().time)
+        val billModel = BillModel(billId, customerId, date, BillState.PAYED)
+        billDAO?.addBill(billModel)
     }
 
     private fun backFragment() {

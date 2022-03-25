@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/text_product_group"
@@ -14,15 +14,14 @@
         android:layout_marginStart="@dimen/dp_10"
         android:text="@string/product_group"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_24"
-        android:textStyle="bold"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/filter_spinner_style"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,15 +35,14 @@
         android:layout_marginTop="@dimen/dp_30"
         android:text="@string/arrange_by_color"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_24"
-        android:textStyle="bold"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filter_spinner_style" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/filter_spinner_color"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,17 +51,17 @@
     <LinearLayout
         android:id="@+id/linear_Layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_50"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_cancel_filter"
-            android:layout_width="@dimen/dp_90"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginVertical="@dimen/dp_2"
+            android:layout_marginHorizontal="@dimen/dp_5"
+            android:layout_marginVertical="@dimen/dp_5"
             android:layout_weight="1"
             android:background="@drawable/rectangle_violetdark_stroke"
             android:text="@string/cancel_filer"
@@ -71,10 +69,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_done"
-            android:layout_width="@dimen/dp_90"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginVertical="@dimen/dp_2"
+            android:layout_marginHorizontal="@dimen/dp_5"
+            android:layout_marginVertical="@dimen/dp_5"
             android:layout_weight="1"
             android:background="@drawable/rectangle_button_violet"
             android:text="@string/done"

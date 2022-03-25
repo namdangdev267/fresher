@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/number_0"
-        android:theme="@style/TextBlack18style"
+        android:theme="@style/TextBlack14style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:hint="@string/number_0"
-        android:theme="@style/TextBlack18style"
+        android:theme="@style/TextBlack14style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_bill_id" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_10"
         android:text="@string/app_name"
-        android:theme="@style/TextBlack18style"
+        android:theme="@style/TextBlack14style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/image_arrow_right"
         app:layout_constraintTop_toTopOf="parent" />

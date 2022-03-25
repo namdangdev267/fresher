@@ -9,7 +9,7 @@
     <View
         android:id="@+id/menu"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_header"
         android:background="@color/violet_dark"
         android:paddingTop="@dimen/dp_10"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,31 +18,29 @@
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dp_15"
         android:layout_marginStart="@dimen/dp_15"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/menu"
+        app:layout_constraintStart_toStartOf="@id/menu"
+        app:layout_constraintTop_toTopOf="@id/menu" />
 
     <TextView
         android:id="@+id/order_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
         android:text="@string/customer"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_24"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/menu"
+        app:layout_constraintEnd_toEndOf="@id/menu"
+        app:layout_constraintStart_toStartOf="@id/menu"
+        app:layout_constraintTop_toTopOf="@id/menu" />
 
     <LinearLayout
         android:id="@+id/view_search"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_45"
         android:background="@color/white"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/menu">
@@ -66,7 +64,7 @@
             android:hint="@string/customer_name"
             android:inputType="text"
             android:maxLines="1"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="@dimen/sp_14" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_SKU"

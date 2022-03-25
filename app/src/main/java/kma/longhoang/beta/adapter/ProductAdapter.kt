@@ -1,23 +1,12 @@
 package kma.longhoang.beta.adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
-import kma.longhoang.beta.fragment.main.SaleFragment
-import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
-import kotlin.coroutines.coroutineContext
 
 class ProductAdapter(
     private var listProduct: MutableList<ProductModel>,

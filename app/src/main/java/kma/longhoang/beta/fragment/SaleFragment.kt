@@ -1,16 +1,14 @@
-package kma.longhoang.beta.fragment.main
+package kma.longhoang.beta.fragment
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Color.TRANSPARENT
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.component1
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -22,15 +20,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
-import kma.longhoang.beta.MainActivity
+import kma.longhoang.beta.login.MainActivity
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SaleViewModel
-import kma.longhoang.beta.ShowNote
 import kma.longhoang.beta.adapter.ProductAdapter
+import kma.longhoang.beta.dao.ProductDAO
+import kma.longhoang.beta.database.AppDatabase
 import kma.longhoang.beta.model.FilterProduct
 import kma.longhoang.beta.model.OrderModel
 import kma.longhoang.beta.model.ProductModel
-import kotlin.math.absoluteValue
+import kma.longhoang.beta.showNote
 
 /*
 * @author: Hoàng Gia Long
@@ -50,15 +49,24 @@ class SaleFragment : Fragment() {
     private var selectedStyle: String = ""
     private var selectedColor: String = ""
     private val saleViewModel: SaleViewModel by activityViewModels()
+
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val productDAO = ProductDAO.getInstance(AppDatabase.getInstance(requireContext()))
+        if (productDAO != null) {
+            listProduct = productDAO.getAllProduct()
+        }
+        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer {
+            orderList = it
+        })
         initView(view)
         navMenu()
         setupFilterSpinner()
         navFilter()
         customerInfo(view)
         setupRecyclerView()
-        searchItem()
+        searchProduct()
         resetOrder()
         moveToOrderDetail(view)
     }
@@ -88,6 +96,7 @@ class SaleFragment : Fragment() {
         view?.findViewById<ImageButton>(R.id.button_menu)?.setOnClickListener {
             (activity as MainActivity).drawerView()
         }
+
     }
 
     // Filter
@@ -139,7 +148,7 @@ class SaleFragment : Fragment() {
         val btnDone = navFilter?.findViewById<Button>(R.id.button_done)
         val btnCancelFilter = navFilter?.findViewById<Button>(R.id.button_cancel_filter)
         btnCancelFilter?.setOnClickListener {
-            updateItemList("")
+            updateProductList("")
             selectedColor = ""
             selectedStyle = ""
             setupFilterSpinner()
@@ -152,9 +161,13 @@ class SaleFragment : Fragment() {
     }
 
     private fun customerInfo(view: View) {
-        saleViewModel.customer.observe(viewLifecycleOwner, Observer {
-            tvCustomer?.text = StringBuilder(it.name).append(" (").append(it.phone).append(")")
-        })
+        val customer = saleViewModel.customer.value
+        if (customer != null) {
+            tvCustomer?.text =
+                StringBuilder(customer.name).append(" (").append(customer.phone).append(")")
+        } else {
+            tvCustomer?.text = ""
+        }
         tvCustomer?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_saleFragment_to_customerListFragment)
@@ -170,134 +183,6 @@ class SaleFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun setupRecyclerView() {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView_Sale)
-        listProduct.addAll(
-            listOf<ProductModel>(
-                ProductModel(
-                    "Áo len nam",
-                    "AL01",
-                    175000F,
-                    FilterProduct.Style.TSHIRT,
-                ),
-                ProductModel(
-                    "Áo thun cotton nam",
-                    "AT01",
-                    175000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.BLACK
-                ),
-                ProductModel(
-                    "Áo len nữ",
-                    "AL02",
-                    175000F,
-                    FilterProduct.Style.TSHIRT,
-                ),
-                ProductModel(
-                    "Áo polo",
-                    "ACT01",
-                    135000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.WHITE
-                ),
-                ProductModel(
-                    "Váy ngắn",
-                    "VN01",
-                    120000F,
-                    FilterProduct.Style.SHORTDRESS,
-                    FilterProduct.Color.RED
-                ),
-                ProductModel(
-                    "Váy xòe",
-                    "VN02",
-                    146000F,
-                    FilterProduct.Style.SHORTDRESS,
-                    FilterProduct.Color.BLUE
-                ),
-                ProductModel(
-                    "Áo Somi nam",
-                    "ACT01",
-                    132000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.WHITE
-                ),
-                ProductModel(
-                    "Áo Sơ mi nữ",
-                    "ACT02",
-                    120000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.WHITE
-                ),
-                ProductModel(
-                    "Áo thun cotton nữ",
-                    "AT02",
-                    176000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.BLUE
-                ),
-                ProductModel(
-                    "Áo sơ mi cách điệu",
-                    "ACT03",
-                    200000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.RED
-                ),
-                ProductModel(
-                    "Quần Jean Nam",
-                    "QJ01",
-                    230000F,
-                    FilterProduct.Style.JEAN,
-                    FilterProduct.Color.BLUE
-                ),
-                ProductModel(
-                    "Quần Jean Nữ",
-                    "QJ02",
-                    270000F,
-                    FilterProduct.Style.JEAN,
-                    FilterProduct.Color.BLACK
-                ),
-                ProductModel(
-                    "Quần Jean nam rách",
-                    "QJ03",
-                    340000F,
-                    FilterProduct.Style.JEAN,
-                    FilterProduct.Color.WHITE
-                ),
-                ProductModel(
-                    "Áo thun cotton",
-                    "AT04",
-                    200000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.WHITE
-                ),
-                ProductModel(
-                    "Áo thun cotton A2",
-                    "AT05",
-                    150000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.BLACK
-                ),
-                ProductModel(
-                    "Quần nam",
-                    "Q01",
-                    220000F,
-                    FilterProduct.Style.SHORT,
-                    FilterProduct.Color.BLUE
-                ),
-                ProductModel(
-                    "Quần short nam",
-                    "Q02",
-                    250000F,
-                    FilterProduct.Style.SHORT,
-                    FilterProduct.Color.BLACK
-                ),
-                ProductModel(
-                    "Áo thun",
-                    "AT05",
-                    140000F,
-                    FilterProduct.Style.TSHIRT,
-                    FilterProduct.Color.RED
-                ),
-            )
-        )
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.setHasFixedSize(true)
         recyclerView?.addItemDecoration(
@@ -338,6 +223,7 @@ class SaleFragment : Fragment() {
                 FilterProduct.Color.BLUE -> btnColor?.text = "Xanh"
                 FilterProduct.Color.BLACK -> btnColor?.text = "Đen"
                 FilterProduct.Color.WHITE -> btnColor?.text = "Trắng"
+                else -> {}
             }
             tvProductName?.text = product.name
             tvProductCode?.text = product.code
@@ -345,7 +231,7 @@ class SaleFragment : Fragment() {
             tvAmount?.text = amountProduct.toString()
             btnMinus?.setOnClickListener {
                 if (amountProduct == 1) {
-                    ShowNote().toast(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
+                    showNote(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
                 } else {
                     amountProduct -= 1
                     tvAmount?.text = amountProduct.toString()
@@ -364,6 +250,7 @@ class SaleFragment : Fragment() {
                     amountProduct,
                 )
                 orderList.add(orderModel)
+                saleViewModel.setListOrder(orderList)
                 val totalPrice = orderList.map { it.amount * it.price }.sum()
                 val totalAmount = orderList.sumOf { it.amount }
                 tvOrderAmount?.text = totalAmount.toString()
@@ -389,6 +276,7 @@ class SaleFragment : Fragment() {
                 1,
             )
             orderList.add(orderModel)
+            orderList.let { saleViewModel.setListOrder(it) }
             val totalPrice = orderList.map { it.amount * it.price }.sum()
             val totalAmount = orderList.sumOf { it.amount }
             tvOrderAmount?.text = totalAmount.toString()
@@ -424,9 +312,9 @@ class SaleFragment : Fragment() {
     /*
     * tìm kiếm item trong recyclerView/ SaleFragment
     */
-    private fun searchItem() {
+    private fun searchProduct() {
         edtSearch?.doAfterTextChanged {
-            updateItemList(edtSearch?.text.toString())
+            updateProductList(edtSearch?.text.toString())
         }
     }
 
@@ -434,7 +322,7 @@ class SaleFragment : Fragment() {
     * hàm tìm kiếm
     */
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateItemList(keySearch: String) {
+    private fun updateProductList(keySearch: String) {
         val listProductSearch = listProduct
         val list = mutableListOf<ProductModel>()
         for (product in listProductSearch) {
@@ -449,7 +337,7 @@ class SaleFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateItemList(
+    private fun updateProductList(
         style: FilterProduct.Style? = null,
         color: FilterProduct.Color? = null
     ) {
@@ -481,6 +369,7 @@ class SaleFragment : Fragment() {
     private fun resetOrder() {
         btnReset?.setOnClickListener {
             orderList = mutableListOf<OrderModel>()
+            saleViewModel.setListOrder(orderList)
             btnReset?.background =
                 AppCompatResources.getDrawable(requireContext(), R.drawable.oval_button_gray)
             btnTotal?.background =
@@ -532,7 +421,7 @@ class SaleFragment : Fragment() {
             else ->
                 null
         }
-        updateItemList(filterStyle, filterColor)
+        updateProductList(filterStyle, filterColor)
     }
 
     private fun moveToOrderDetail(view: View) {
@@ -555,8 +444,8 @@ class SaleFragment : Fragment() {
     //show lại product đang chọn
     override fun onResume() {
         super.onResume()
-        saleViewModel.listOrder.observe(viewLifecycleOwner, Observer { list ->
-            orderList = list
+        val orderList = saleViewModel.listOrder.value
+        if (orderList != null) {
             if (orderList.isNotEmpty()) {
                 val amount = orderList.sumOf { it.amount }
                 val total = orderList.map { it.price * it.amount }.sum()
@@ -564,10 +453,25 @@ class SaleFragment : Fragment() {
                 btnTotal?.text = total.toString()
                 changeButtonState()
             } else {
-                tvCustomer?.text = ""
-                tvCustomer?.hint = getString(R.string.customer_name)
+                this.orderList = orderList
             }
-        })
+        }
+//        saleViewModel.customer.observe(viewLifecycleOwner, Observer { customer->
+//            val imgClearCustomer = view?.findViewById<ImageView>(R.id.image_clear)
+//            if (customer != null) {
+//                tvCustomer?.text =
+//                    StringBuilder(customer.name).append(" (").append(customer.phone).append(")")
+//                imgClearCustomer?.isVisible = true
+//                imgClearCustomer?.setOnClickListener {
+//                    imgClearCustomer.isVisible = false
+//                    saleViewModel.setCustomer(null)
+//                    tvCustomer?.text = ""
+//                }
+//            } else {
+//                tvCustomer?.text = ""
+//                imgClearCustomer?.isVisible = false
+//            }
+//        })
     }
 
 }

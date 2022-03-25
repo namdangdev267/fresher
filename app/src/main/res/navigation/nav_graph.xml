@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_sale"
-        android:name="kma.longhoang.beta.fragment.main.SaleFragment"
+        android:name="kma.longhoang.beta.fragment.SaleFragment"
         android:label="SaleFragment" >
         <action
             android:id="@+id/action_saleFragment_to_customerListFragment"
@@ -24,7 +24,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/exit_to_right" />
         <action
-            android:id="@+id/action_saleFragment_to_orderListFragment"
+            android:id="@+id/action_saleFragment_to_BillListFragment"
             app:destination="@id/nav_bill_list"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/exit_to_left"
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_bill_list"
-        android:name="kma.longhoang.beta.fragment.main.BillListFragment"
+        android:name="kma.longhoang.beta.fragment.BillListFragment"
         android:label="fragment_bill_list"
         tools:layout="@layout/fragment_bill_list" />
 </navigation>

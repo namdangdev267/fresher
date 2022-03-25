@@ -1,4 +1,4 @@
-package kma.longhoang.beta
+package kma.longhoang.beta.login
 
 
 import android.os.Bundle
@@ -12,14 +12,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import kma.longhoang.beta.R
+import kma.longhoang.beta.SaleViewModel
 
 class MainActivity : AppCompatActivity() {
 
     var appBarConfiguration: AppBarConfiguration? = null
-    private val saleViewModel : SaleViewModel by viewModels()
+    private val saleViewModel: SaleViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        saleViewModel.setListBill(mutableListOf())
         setContentView(R.layout.activity_main)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
