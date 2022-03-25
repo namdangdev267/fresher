@@ -1,13 +1,13 @@
 package com.misa.fresher.ui.sale.bill
 
+import android.content.Context
 import android.text.TextUtils
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.misa.fresher.R
-import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.Bill
+import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.FragmentBillBinding
 import com.misa.fresher.ui.main.MainActivity
@@ -24,18 +24,19 @@ import java.util.*
  * @author Nguyễn Công Chính
  * @since 3/13/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/13/2022: Tạo class
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
+ * @updated 3/25/2022: Chuyển từ mvc -> mvp
  */
-class BillFragment : BaseFragment<FragmentBillBinding, BillContract.View, BillPresenter>(),
+class BillFragment : BaseFragment<FragmentBillBinding, BillContract.Presenter>(),
     BillContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentBillBinding
         get() = FragmentBillBinding::inflate
-    override val initPresenter: () -> BillPresenter
-        get() = { BillPresenter(this) }
+    override val initPresenter: (Context) -> BillContract.Presenter
+        get() = { BillPresenter(this, it) }
 
     private val selectedItems by lazy { arguments.get(SaleFragment.ARGUMENT_SELECTED_ITEMS, mutableListOf<ProductItemBill>()) }
 
@@ -135,11 +136,7 @@ class BillFragment : BaseFragment<FragmentBillBinding, BillContract.View, BillPr
      */
     private fun configOtherView() {
         binding.tvCustomer.setOnClickListener {
-            binding.tvCustomer.marqueeRepeatLimit = 1
-            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
-            (activity as MainActivity).tempCustomer = FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
-            binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
-            binding.tvCustomer.isSelected = true
+            presenter?.randomCustomer()
         }
         binding.tvBuyMore.setOnClickListener {
             activity?.onBackPressed()
@@ -149,18 +146,14 @@ class BillFragment : BaseFragment<FragmentBillBinding, BillContract.View, BillPr
         }
         binding.llPayment.setOnClickListener {
             (activity as MainActivity).tempCustomer?.let {
-                val bill = Bill(
-                    binding.tbBill.tvTitle.text.toString().toLong(),
-                    it,
-                    selectedItems.toList(),
-                    Date()
+                presenter?.saveBill(
+                    Bill(
+                        binding.tbBill.tvTitle.text.toString().toLong(),
+                        it,
+                        selectedItems.toList(),
+                        Date()
+                    )
                 )
-                FakeData.bills.add(bill)
-                toast(requireContext(), R.string.save_bill_success)
-
-                (activity as MainActivity).tempCustomer = null
-                selectedItems.clear()
-                activity?.onBackPressed()
             } ?: run {
                 toast(requireContext(), R.string.please_select_receiver)
             }
@@ -182,6 +175,34 @@ class BillFragment : BaseFragment<FragmentBillBinding, BillContract.View, BillPr
         binding.tbBill.btnNav.setOnClickListener {
             activity?.onBackPressed()
         }
-        binding.tbBill.tvTitle.text = FakeData.getId(FakeData.BILL_ID).toString()
+        presenter?.getNextId()
+    }
+
+    override fun getNextIdSuccess(id: Long) {
+        binding.tbBill.tvTitle.text = id.toString()
+    }
+
+    override fun randomCustomerSuccess(customer: Customer) {
+        binding.tvCustomer.marqueeRepeatLimit = 1
+        binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
+        (activity as MainActivity).tempCustomer = customer
+        binding.tvCustomer.text = customer.toString()
+        binding.tvCustomer.isSelected = true
+    }
+
+    override fun randomCustomerFailure() {
+        toast(requireContext(), getString(R.string.customer_not_found))
+    }
+
+    override fun saveBillSuccess() {
+        toast(requireContext(), R.string.save_bill_success)
+
+        (activity as MainActivity).tempCustomer = null
+        selectedItems.clear()
+        activity?.onBackPressed()
+    }
+
+    override fun saveBillFailure() {
+        toast(requireContext(), R.string.save_bill_failure)
     }
 }

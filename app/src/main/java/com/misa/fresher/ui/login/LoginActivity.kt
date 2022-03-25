@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -20,15 +21,19 @@ import com.misa.fresher.util.toast
  * @version 1
  * @updated 3/23/2022: Tạo class
  */
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, LoginPresenter>(), LoginContract.View {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter>(), LoginContract.View {
 
     override val getInflater: (inflater: LayoutInflater) -> ActivityLoginBinding
         get() = ActivityLoginBinding::inflate
-    override val initPresenter: () -> LoginPresenter
-        get() = { LoginPresenter(this) }
+    override val initPresenter: (Context) -> LoginContract.Presenter
+        get() = { LoginPresenter(this, it) }
 
     override fun initUI() {
         configOtherView()
+    }
+
+    override fun updateUI() {
+        presenter?.changeState(LoginPresenter.STATE_SIGN_IN)
     }
 
     /**
@@ -37,8 +42,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, Log
      * @author Nguyễn Công Chính
      * @since 3/23/2022
      *
-     * @version 1
+     * @version 2
      * @updated 3/23/2022: Tạo function
+     * @updated 3/25/2022: Thêm sự kiện cho nút "Develop" để thực hiện các công việc đặc biệt
      */
     private fun configOtherView() {
         binding.btnAction.setOnClickListener {
@@ -54,6 +60,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, Log
         }
         binding.btnBack.setOnClickListener {
             presenter?.changeState(LoginPresenter.STATE_SIGN_IN)
+        }
+        binding.btnDev.setOnLongClickListener {
+            presenter?.developTest()
+            true
         }
     }
 
@@ -73,10 +83,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, Log
         binding.etConfirmPassword.text?.clear()
     }
 
-    override fun updateUI() {
-        presenter?.changeState(LoginPresenter.STATE_SIGN_IN)
-    }
-
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun toSignInState() {
         binding.tilConfirmPassword.visibility = View.GONE
         binding.btnAction.text = getString(R.string.sign_in)
@@ -86,6 +96,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, Log
         clearInput()
     }
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun toSignUpState() {
         binding.tilConfirmPassword.visibility = View.VISIBLE
         binding.btnAction.text = getString(R.string.sign_up)
@@ -125,5 +139,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.View, Log
             SignUpResponse.INVALID_EMAIL -> toast(baseContext, getString(R.string.invalid_email))
             else -> toast(baseContext, getString(R.string.unknown_error) + error)
         }
+    }
+
+    override fun developTestSuccess() {
+        toast(baseContext, "success")
     }
 }

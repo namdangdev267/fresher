@@ -11,13 +11,9 @@ import com.misa.fresher.core.BaseContract
  * @version 1
  * @updated 3/21/2022: Tạo class
  */
-class PackageInfoContract {
+interface PackageInfoContract {
 
-    interface View: BaseContract.View {
+    interface View: BaseContract.View
 
-    }
-
-    interface Presenter: BaseContract.Presenter {
-
-    }
+    interface Presenter: BaseContract.Presenter
 }

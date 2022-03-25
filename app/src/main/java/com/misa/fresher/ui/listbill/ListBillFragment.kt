@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.listbill
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -26,13 +27,13 @@ import com.misa.fresher.util.toCurrency
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
 class ListBillFragment :
-    BaseFragment<FragmentListBillBinding, ListBillContract.View, ListBillPresenter>(),
+    BaseFragment<FragmentListBillBinding, ListBillContract.Presenter>(),
     ListBillContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentListBillBinding
         get() = FragmentListBillBinding::inflate
-    override val initPresenter: () -> ListBillPresenter
-        get() = { ListBillPresenter(this) }
+    override val initPresenter: (Context) -> ListBillContract.Presenter
+        get() = { ListBillPresenter(this, it) }
 
     private var billAdapter: BillAdapter? = null
 
@@ -165,6 +166,10 @@ class ListBillFragment :
         }
     }
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun updateBillList(list: MutableList<Bill>) {
         billAdapter?.updateData(list)
         binding.tvCount.text = list.size.toString()

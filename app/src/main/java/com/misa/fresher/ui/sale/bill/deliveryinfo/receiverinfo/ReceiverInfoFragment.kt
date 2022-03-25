@@ -1,11 +1,10 @@
 package com.misa.fresher.ui.sale.bill.deliveryinfo.receiverinfo
 
+import android.content.Context
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.misa.fresher.R
-import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.Customer
 import com.misa.fresher.data.model.*
@@ -13,6 +12,7 @@ import com.misa.fresher.databinding.FragmentReceiverInfoBinding
 import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
 import com.misa.fresher.util.guard
+import com.misa.fresher.util.toast
 
 /**
  * Màn nhập các thông tin liên quan đến người nhận
@@ -20,19 +20,20 @@ import com.misa.fresher.util.guard
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/15/2022: Tạo class
  * @updated 3/16/2022: Bổ sung hàm [collectData] để thu dữ liệu từ recycler view, parent có thể gọi hàm này để nhận được dữ liệu
  * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
+ * @updated 3/25/2022: Chuyển từ mvc -> mvp
  */
 class ReceiverInfoFragment :
-    BaseFragment<FragmentReceiverInfoBinding, ReceiverInfoContract.View, ReceiverInfoPresenter>(),
+    BaseFragment<FragmentReceiverInfoBinding, ReceiverInfoContract.Presenter>(),
     ReceiverInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentReceiverInfoBinding
         get() = FragmentReceiverInfoBinding::inflate
-    override val initPresenter: () -> ReceiverInfoPresenter
-        get() = { ReceiverInfoPresenter(this) }
+    override val initPresenter: (Context) -> ReceiverInfoContract.Presenter
+        get() = { ReceiverInfoPresenter(this, it) }
 
     private var adapter: DeliveryInputAdapter? = null
 
@@ -55,13 +56,7 @@ class ReceiverInfoFragment :
             TapActionInputModel("Người nhận", true, R.drawable.ic_plus,
                 (activity as MainActivity).tempCustomer?.name ?: ""
             ) {
-                (activity as MainActivity).tempCustomer =
-                    FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
-                (activity as MainActivity).tempCustomer?.let {
-                    adapter?.updateData(ROW_CUSTOMER_NAME, it.name)
-                    adapter?.updateData(ROW_CUSTOMER_TEL, it.tel)
-                    adapter?.updateData(ROW_CUSTOMER_ADDRESS, it.address)
-                }
+                presenter?.randomCustomer()
             },
             TapInsertInputModel("Số điện thoại", true,
                 null, InputType.TYPE_CLASS_PHONE,
@@ -129,6 +124,19 @@ class ReceiverInfoFragment :
             customer = Customer(0L, name as String, tel as String, address as String)
         }
         return customer
+    }
+
+    override fun randomCustomerSuccess(customer: Customer) {
+        (activity as MainActivity).tempCustomer = customer
+        (activity as MainActivity).tempCustomer?.let {
+            adapter?.updateData(ROW_CUSTOMER_NAME, it.name)
+            adapter?.updateData(ROW_CUSTOMER_TEL, it.tel)
+            adapter?.updateData(ROW_CUSTOMER_ADDRESS, it.address)
+        }
+    }
+
+    override fun randomCustomerFailure() {
+        toast(requireContext(), getString(R.string.customer_not_found))
     }
 
     companion object {

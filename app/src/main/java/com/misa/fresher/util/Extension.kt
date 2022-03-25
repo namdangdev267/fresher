@@ -3,6 +3,7 @@ package com.misa.fresher.util
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Toast
@@ -157,3 +158,15 @@ fun Date.toCalendar(): Calendar {
     cal.time = this
     return cal
 }
+
+/**
+ * Hàm trả về đối tượng [Query] để query theo kiểu builder
+ *
+ * @author Nguyễn Công Chính
+ * @since 3/24/2022
+ *
+ * @version 1
+ * @updated 3/24/2022: Tạo function
+ */
+fun SQLiteDatabase.query(table: String): Query =
+    Query(this, table)

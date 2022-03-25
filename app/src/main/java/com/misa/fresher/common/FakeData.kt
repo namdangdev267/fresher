@@ -3,21 +3,22 @@ package com.misa.fresher.common
 import com.misa.fresher.data.entity.*
 
 /**
- * Lớp chứa dữ liệu giả cho ứng dụng
+ * Lớp chứa dữ liệu giả cho lần đầu cài đặt ứng dụng
  *
  * @author Nguyễn Công Chính
  * @since 3/10/2022
  *
- * @version 6
+ * @version 7
  * @updated 3/10/2022: Tạo class
  * @updated 3/12/2022: Bổ sung một số sản phẩm giả
  * @updated 3/12/2022: Đổi từ mutablelist -> list do không có nhu cầu sửa chữa
  * @updated 3/15/2022: Đổi từ public -> private do không có nhu cầu gọi từ bên ngoài, đổi list [customers] từ list string -> list [Customer]
- * @updated 3/16/2022: thêm trường [bills]
- * @updated 3/18/2022: Thêm hàm [getId] để lấy Id mà không lo bị trùng
+ * @updated 3/16/2022: thêm trường bills
+ * @updated 3/18/2022: Thêm hàm getId để lấy Id mà không lo bị trùng
+ * @updated 3/25/2022: Loại bỏ danh sách lưu bill do đã sử dụng sqlite để lưu trữ
  */
 object FakeData {
-    private val colors = listOf(
+    val colors = listOf(
         ProductColor(1L, "Xanh", "X"),
         ProductColor(2L, "Đỏ", "DO"),
         ProductColor(3L, "Tím", "T"),
@@ -30,7 +31,7 @@ object FakeData {
         ProductColor(10L, "Trắng", "T"),
     )
 
-    private val sizes = listOf(
+    val sizes = listOf(
         ProductSize(1L, "S", "S"),
         ProductSize(2L, "M", "M"),
         ProductSize(3L, "L", "L"),
@@ -39,7 +40,7 @@ object FakeData {
         ProductSize(6L, "Lớn", "LO"),
     )
 
-    private val units = listOf(
+    val units = listOf(
         ProductUnit(1L, "Chiếc"),
         ProductUnit(2L, "Cái"),
         ProductUnit(3L, "Chục"),
@@ -115,15 +116,4 @@ object FakeData {
         Customer(7L, "Hoàng Đức Minh", "01217632487263", "Thành phố Ninh Bình"),
         Customer(8L, "Hoàng Gia Long", "08374172364", "Văn Lãng, Lạng Sơn"),
     )
-
-    val bills = mutableListOf<Bill>()
-
-    private var billId = 21210010000L
-
-    fun getId(type: Int): Long = when (type) {
-        BILL_ID -> ++billId
-        else -> 0
-    }
-
-    const val BILL_ID = 1
 }

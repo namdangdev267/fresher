@@ -1,7 +1,9 @@
 package com.misa.fresher.ui.sale
 
+import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -13,8 +15,6 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.R
-import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.*
 import com.misa.fresher.data.entity.ProductItemBill
@@ -42,13 +42,13 @@ import com.misa.fresher.util.toast
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
-class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePresenter>(),
+class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>(),
     SaleContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentSaleBinding
         get() = FragmentSaleBinding::inflate
-    override val initPresenter: () -> SalePresenter
-        get() = { SalePresenter(this) }
+    override val initPresenter: (Context) -> SaleContract.Presenter
+        get() = { SalePresenter(this, it) }
 
     private var productAdapter: ProductAdapter? = null
     private val typeSelectorDialog by lazy {
@@ -73,7 +73,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
 
     override fun updateUI() {
         updateCustomer()
-        updateSelectedItems(mutableListOf())
+        presenter?.updateSelectedItems()
     }
 
     /**
@@ -222,12 +222,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
      */
     private fun configOtherView() {
         binding.tvCustomer.setOnClickListener {
-            binding.tvCustomer.marqueeRepeatLimit = 1
-            binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
-            (activity as MainActivity).tempCustomer =
-                FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
-            binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
-            binding.tvCustomer.isSelected = true
+            presenter?.randomCustomer()
         }
         binding.btnRefresh.setOnClickListener {
             presenter?.clearSelectedItem()
@@ -292,14 +287,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
         binding.root.setScrimColor(Color.TRANSPARENT)
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
 
-        val groupItem = mutableListOf(getString(R.string.all))
-        groupItem.addAll(FakeData.category.map { it.name })
-        val groupAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            groupItem
-        )
-        binding.llFilter.spnGrouping.adapter = groupAdapter
+        presenter?.getAllCategory()
 
         var sortBy = ProductSortType.NAME
         binding.llFilter.rbName.setOnCheckedChangeListener { _, b ->
@@ -316,7 +304,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
         binding.llFilter.btnDone.setOnClickListener {
             presenter?.filterByAttr(
                 binding.llFilter.swQuantity.isChecked,
-                binding.llFilter.spnGrouping.selectedItemPosition,
+                binding.llFilter.spnGrouping.selectedItemPosition - 1,
                 sortBy
             )
             toggleDrawer(binding.nvFilter)
@@ -379,10 +367,18 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
         }
     }
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun updateProductList(list: MutableList<Product>) {
         productAdapter?.updateData(list)
     }
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun updateSelectedItems(list: MutableList<ProductItemBill>) {
         if (list.isEmpty()) {
             binding.btnRefresh.isEnabled = false
@@ -401,6 +397,30 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.View, SalePr
             binding.tvCount.text = list.sumOf { it.quantity }.toString()
             binding.tvInfo.text = total.toCurrency()
         }
+    }
+
+    override fun getAllCategorySuccess(list: List<Category>) {
+        val groupItem = mutableListOf(getString(R.string.all))
+        Log.d("category", list.toString())
+        groupItem.addAll(list.map { it.name })
+        val groupAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            groupItem
+        )
+        binding.llFilter.spnGrouping.adapter = groupAdapter
+    }
+
+    override fun randomCustomerSuccess(customer: Customer) {
+        binding.tvCustomer.marqueeRepeatLimit = 1
+        binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
+        (activity as MainActivity).tempCustomer = customer
+        binding.tvCustomer.text = customer.toString()
+        binding.tvCustomer.isSelected = true
+    }
+
+    override fun randomCustomerFailure() {
+        toast(requireContext(), getString(R.string.customer_not_found))
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package com.misa.fresher.util
 
+import android.util.Log
 import com.misa.fresher.data.model.ErrorMessageModel
 
 /**
@@ -8,14 +9,17 @@ import com.misa.fresher.data.model.ErrorMessageModel
  * @author Nguyễn Công Chính
  * @since 3/23/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/23/2022: Tạo class
+ * @updated 3/25/2022: Bổ sung sự kiện mặc định khi trao đổi dữ liệu thất bại, sẽ sử dụng khi người dùng không gọi hàm [onFailure]
  */
 class ResponseObject<T>(
     private val function: (LoadedAction<T>) -> Unit
 ) {
     private var success: (T) -> Unit = {}
-    private var failure: (ErrorMessageModel) -> Unit = {}
+    private var failure: (ErrorMessageModel) -> Unit = {
+        Log.e("Unoverride response err", it.message)
+    }
 
     /**
      * Sự kiện khi trao đổi dữ liệu thành công, kết quả trả về đúng như kì vọng

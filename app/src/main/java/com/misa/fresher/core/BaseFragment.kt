@@ -1,5 +1,6 @@
 package com.misa.fresher.core
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +15,16 @@ import androidx.viewbinding.ViewBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 5
+ * @version 6
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Vì nav component luôn tạo lại view kể cả khi back trở lại.
  * Vì vậy [isInit] sẽ kiểm tra nếu đã khởi tạo rồi thì không chạy lại hàm khởi tạo nữa.
  * @updated 3/15/2022: Thêm biến [navigation] để có thể navigate từ fragment này sang fragment khác
  * @updated 3/15/2022: Bổ sung hàm [updateUI]
  * @updated 3/23/2022: Thêm [presenter]
+ * @updated 3/25/2022: Thay đổi generic, chỉ yêu cầu [BaseContract.Presenter] là đủ
  */
-abstract class BaseFragment<BD: ViewBinding, V: BaseContract.View, PS: BasePresenter<V>>
+abstract class BaseFragment<BD: ViewBinding, PS: BaseContract.Presenter>
     : Fragment() {
 
     protected val binding by lazy { getInflater(layoutInflater) }
@@ -30,7 +32,7 @@ abstract class BaseFragment<BD: ViewBinding, V: BaseContract.View, PS: BasePrese
     protected var presenter: PS? = null
 
     protected abstract val getInflater: (LayoutInflater) -> BD
-    protected abstract val initPresenter: () -> PS
+    protected abstract val initPresenter: (Context) -> PS
 
     private var isInit = false
 
@@ -42,9 +44,9 @@ abstract class BaseFragment<BD: ViewBinding, V: BaseContract.View, PS: BasePrese
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = initPresenter()
 
         if (!isInit) {
+            presenter = initPresenter(requireContext())
             initUI()
             isInit = true
         }

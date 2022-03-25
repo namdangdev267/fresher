@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.sale.bill.deliveryinfo
 
+import android.content.Context
 import android.view.LayoutInflater
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
@@ -18,19 +19,20 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/15/2022: Tạo class
  * @updated 3/16/2022: Nút lưu sẽ lưu lại các giá trị đã nhập thay vì làm cảnh như trước
  * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
+ * @updated 3/25/2022: Màn này không cần xử lí gì trong presenter
  */
 class DeliveryInfoFragment :
-    BaseFragment<FragmentDeliveryInfoBinding, DeliveryInfoContract.View, DeliveryInfoPresenter>(),
+    BaseFragment<FragmentDeliveryInfoBinding, DeliveryInfoContract.Presenter>(),
     DeliveryInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentDeliveryInfoBinding
         get() = FragmentDeliveryInfoBinding::inflate
-    override val initPresenter: () -> DeliveryInfoPresenter
-        get() = { DeliveryInfoPresenter(this) }
+    override val initPresenter: (Context) -> DeliveryInfoContract.Presenter
+        get() = { DeliveryInfoPresenter(this, it) }
 
     override fun initUI() {
         configToolbar()

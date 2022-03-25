@@ -15,9 +15,7 @@ import com.misa.fresher.util.LoadedAction
  */
 interface UserDataSource {
 
-    interface Local {
-
-    }
+    interface Local
 
     interface Remote {
         fun signIn(email: String, password: String, action: LoadedAction<SignInResponse>)
