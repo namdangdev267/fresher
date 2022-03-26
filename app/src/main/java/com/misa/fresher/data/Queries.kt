@@ -12,7 +12,7 @@ import com.misa.fresher.data.models.Product
  **/
 object Queries {
     const val DATABASE_NAME = "misa_fresher_database"
-    const val DATABASE_VERSION = 5
+    const val DATABASE_VERSION = 6
 
     const val CREATE_PRODUCT_TABLE =
         "CREATE TABLE ${Product.TABLE_NAME} " +
