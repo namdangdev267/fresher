@@ -270,7 +270,6 @@ class SaleFragment : Fragment() {
 //        }
 
         bottomSheetDialog.setContentView(bottomSheetView.root)
-        var i = 0
 
         bottomSheetDialog.setOnDismissListener {
             publicViewModel.updateListItemSelected()
