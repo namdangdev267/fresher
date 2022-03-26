@@ -37,14 +37,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transitionFragemnt(view)
-        configOtherView()
+        transitionFragemnt()
+        configureOtherView()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun configOtherView() {
-        loginViewModel.loginMode.observe(viewLifecycleOwner, Observer {
-            if (loginViewModel.loginMode.value == LoginMode.SIGNUP) {
+    private fun configureOtherView() {
+        loginViewModel.login.observe(viewLifecycleOwner, Observer {
+            if (loginViewModel.login.value == LoginMode.SIGNUP) {
                 binding.tvSignUp.text = "Log in"
                 binding.btnLogIn.text = "Sign up"
                 binding.textInputLayoutConfirmPassword.visibility = View.VISIBLE
@@ -56,11 +56,11 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun transitionFragemnt(view: View) {
+    private fun transitionFragemnt() {
         binding.btnLogIn.setOnClickListener {
             if (checkLogin()) {
-                if (loginViewModel.loginMode.value == LoginMode.LOGIN) {
-                    login(view)
+                if (loginViewModel.login.value == LoginMode.LOGIN) {
+                    login()
                 } else {
                     signUp()
                 }
@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun login(view: View) {
+    private fun login() {
         val api = APIClient.newRetrofitInstance().create(UserInterfaceService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -145,7 +145,7 @@ class LoginFragment : Fragment() {
         } else if (binding.tvPassword.text.toString().length < 6) {
             requireContext().showToast("Password should be at least 6 characters")
             false
-        } else if (loginViewModel.loginMode.value == LoginMode.SIGNUP && binding.tvConfirmPassword.text.toString() != binding.tvPassword.text.toString()) {
+        } else if (loginViewModel.login.value == LoginMode.SIGNUP && binding.tvConfirmPassword.text.toString() != binding.tvPassword.text.toString()) {
             requireContext().showToast("Your confirm password is incorrect. Please check again.")
             false
         } else {

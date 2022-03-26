@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
-    private var _loginMode = MutableLiveData<LoginMode>()
-    val loginMode: LiveData<LoginMode>
-        get() = _loginMode
+    private var mLogin = MutableLiveData<LoginMode>()
+    val login: LiveData<LoginMode>
+        get() = mLogin
 
     init {
-        _loginMode.postValue(LoginMode.LOGIN)
+        mLogin.postValue(LoginMode.LOGIN)
     }
 
     fun changeLoginMode() {
-        if (_loginMode.value == LoginMode.LOGIN) {
-            _loginMode.postValue(LoginMode.SIGNUP)
+        if (mLogin.value == LoginMode.LOGIN) {
+            mLogin.postValue(LoginMode.SIGNUP)
         } else {
-            _loginMode.postValue(LoginMode.LOGIN)
+            mLogin.postValue(LoginMode.LOGIN)
         }
     }
 }
