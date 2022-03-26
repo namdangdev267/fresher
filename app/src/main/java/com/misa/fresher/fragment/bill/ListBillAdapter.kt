@@ -15,8 +15,9 @@ class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
         @SuppressLint("ResourceAsColor", "SetTextI18n", "CutPasteId")
         fun bind(itemBill: ItemBill) {
             binding.tvBillId.text = itemBill.id
-            binding.tvBillPrice.text = itemBill.getPrice().toString()
-            Log.e("tagPrice", itemBill.getPrice().toString())
+//            binding.tvBillPrice.text = itemBill.getPrice().toString()
+            binding.tvBillPrice.text = itemBill.billPrice.toString()
+            Log.d("tagPrice", itemBill.getPrice().toString())
 //            binding.tvBillPrice.text = "itemBill.getPrice().toString()"
 
             val tvBillInforShip = binding.tvBillInforShip

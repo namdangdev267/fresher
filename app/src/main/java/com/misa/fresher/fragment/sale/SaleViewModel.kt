@@ -44,7 +44,7 @@ class SaleViewModel : ViewModel() {
         _listProductShow.postValue(listProduct)
         CoroutineScope(IO).launch {
             val productDao = ProductDao(AppDatabaseHelper.getInstance(context))
-            var listAllProduct =
+            val listAllProduct =
                 withContext(Dispatchers.Default) {
                     productDao.getAllProducts()
                 }
@@ -54,8 +54,13 @@ class SaleViewModel : ViewModel() {
                     listProduct.add(
                         Product(
                             R.drawable.shirt,
-                            i.toString() + "shirt" + i.toString(), "SH$i", "BLUE", "SHIRT",
-                            1000 * i, i, "23/02/2020"
+                            i.toString() + "shirt" + i.toString(),
+                            "SH$i",
+                            Color.BLUE.name,
+                            Category.SHIRT.name,
+                            1000 * i,
+                            i,
+                            "23/02/2020"
                         )
                     )
                 }
@@ -63,8 +68,13 @@ class SaleViewModel : ViewModel() {
                     listProduct.add(
                         Product(
                             R.drawable.shorts,
-                            i.toString() + "trouser" + i.toString(), "TS$i", "RED", "TROUSER",
-                            1000 * i, i, "14/06/2021"
+                            i.toString() + "trouser" + i.toString(),
+                            "TS$i",
+                            Color.RED.name,
+                            Category.TROUSER.name,
+                            1000 * i,
+                            i,
+                            "14/06/2021"
                         )
                     )
                 }
@@ -74,8 +84,8 @@ class SaleViewModel : ViewModel() {
                             R.drawable.phone,
                             i.toString() + "electronic" + i.toString(),
                             "ET$i",
-                            "YELLOW",
-                            "ELECTRONIC",
+                            Color.YELLOW.name,
+                            Category.ELECTRONIC.name,
                             1000 * i,
                             i,
                             "05/03/2022"
@@ -90,62 +100,21 @@ class SaleViewModel : ViewModel() {
 //                    withContext(Dispatchers.Default) {
 //                        productDao.getAllProducts()
 //                    }
-                _listProductShow.postValue(listAllProduct)
+                _listProductShow.postValue(listProduct)
+//                withContext(Dispatchers.Default){
+//                    listProduct = productDao.getAllProducts()
+//                }
+//                withContext(Dispatchers.Default){
+//                    listProduct = listProduct.sortWith{b1, b2 -> Collator.getInstance().compare(b1.nameProduct, b2.nameProduct)} as MutableList<Product>
+//                }
             } else {
                 withContext(Main) {
                     Log.d("test:", listAllProduct[0].toString())
                 }
                 _listProductShow.postValue(listAllProduct)
-                var i = 1
             }
-//            withContext(Default) {
-//                if (size == 0) {
-//                    for (item in listProduct) {
-//                        productDao.addProduct(item)
-//                    }
-//
-//                    withContext(Default) {
-//                        listProduct = productDao.getAllProducts()
-//                    }
-//                    withContext(Default) {
-//                        listProduct = listProduct.sortedWith { p1, p2 ->
-//                            Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
-//                        } as MutableList<Product>
-//                        _listProductShow.postValue(listProduct)
-//                    }
-//                } else {
-//                    withContext(Default) {
-//                        listProduct = productDao.getAllProducts()
-//                    }
-//                    withContext(Default) {
-//                        listProduct = listProduct.sortedWith { p1, p2 ->
-//                            Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
-//                        } as MutableList<Product>
-//                        _listProductShow.postValue(listProduct)
-//                    }
-//                    withContext(Default) {
-//                        itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
-//                    }
-//                }
-//            }
         }
 
-//        productDao = ProductDao(AppDatabaseHelper.getInstance(context))
-//        CoroutineScope(IO).launch {
-//            withContext(IO) {
-////                for(i in listProduct){
-////                    productDao.addProduct(i)
-////                }
-//                listProduct = productDao.getAllProducts() as MutableList<Product>
-////                listProduct = iProductDao.getAllProducts() as MutableList<Product>
-//            }
-//            withContext(IO) {
-//                listProduct = listProduct.sortedWith { p1, p2 ->
-//                    Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
-//                } as MutableList<Product>
-//            }
-//            _listProductShow.postValue(listProduct)
-//        }
     }
 
     fun updateListItemShow(searchString: String) {
@@ -163,8 +132,8 @@ class SaleViewModel : ViewModel() {
      **/
     fun clearFilter() {
         filter.sortBy = SortBy.NAME
-        filter.color = null
         filter.category = null
+        filter.color = null
         filter.available = false
     }
 

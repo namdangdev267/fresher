@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +23,6 @@ import com.misa.fresher.R
 import com.misa.fresher.data.models.Product
 import com.misa.fresher.data.models.enum.Category
 import com.misa.fresher.data.models.enum.SortBy
-import com.misa.fresher.data.source.AppDatabaseHelper
-import com.misa.fresher.data.source.local.dao.ProductDao
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.showToast
@@ -35,7 +32,7 @@ import kotlinx.android.synthetic.main.sale_context.view.*
 class SaleFragment : Fragment() {
 
     private val binding: FragmentSaleBinding by lazy { getInflater(layoutInflater) }
-    private val sharedViewModel: PublicViewModel by activityViewModels()
+    private val publicViewModel: PublicViewModel by activityViewModels()
     private val saleViewModel: SaleViewModel by viewModels()
     private val bottomSheetDialog by lazy {
         BottomSheetDialog(
@@ -46,19 +43,6 @@ class SaleFragment : Fragment() {
     private val bottomSheetView by lazy { BottomSheetProductBinding.inflate(layoutInflater) }
 
     val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
-
-    var goBackAndExit = false
-
-    var runTime = object : CountDownTimer(3000, 1000) {
-        override fun onTick(p0: Long) {
-            goBackAndExit = true
-        }
-
-        override fun onFinish() {
-            goBackAndExit = false
-        }
-
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,7 +59,7 @@ class SaleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.fakeData(requireContext())
+        publicViewModel.fakeData(requireContext())
 
         transitionFragment()
         configureFilterDrawer()
@@ -87,15 +71,13 @@ class SaleFragment : Fragment() {
     private fun transitionFragment() {
 
         binding.root.linearQuantity.setOnClickListener {
-            if (sharedViewModel.listItemSelected.value!!.size > 0) {
+            if (publicViewModel.listItemSelected.value!!.size > 0) {
                 findNavController().navigate(R.id.action_fragment_sale_to_fragment_payment)
             }
         }
     }
 
     private fun initViewModel() {
-        val productDao = ProductDao(AppDatabaseHelper.getInstance(requireContext()))
-//        saleViewModel = ViewModelProvider(this)[SaleViewModel::class.java]
         saleViewModel.createData(requireContext())
     }
 
@@ -198,12 +180,12 @@ class SaleFragment : Fragment() {
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
 
-        saleViewModel.listProductShow.observe(viewLifecycleOwner, Observer {
+        saleViewModel.listProductShow.observe(viewLifecycleOwner) { it ->
             binding.rcvProduct.adapter = ProductAdapter(it) { saleItemClick(it) }
-        })
+        }
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
-            binding.tvCountProduct.text = sharedViewModel.getCount().toString()
+        publicViewModel.listItemSelected.observe(viewLifecycleOwner) {
+            binding.tvCountProduct.text = publicViewModel.getCount().toString()
 
             if (it.size >= 1) {
                 binding.linearQuantity.background =
@@ -213,7 +195,7 @@ class SaleFragment : Fragment() {
                 binding.tvCountProduct.setTextColor(Color.parseColor("#FFFFFF"))
                 binding.tvBillProduct.setTextColor(Color.parseColor("#FFFFFF"))
                 binding.tvBillProduct.text =
-                    "Total " + sharedViewModel.getTotalPrice().toString()
+                    "Total " + publicViewModel.getTotalPrice().toString()
             } else {
                 binding.linearQuantity.background =
                     requireContext().getDrawable(R.drawable.custom_background_none)
@@ -223,7 +205,7 @@ class SaleFragment : Fragment() {
                 binding.tvCountProduct.setTextColor(Color.GRAY)
                 binding.tvBillProduct.setTextColor(Color.GRAY)
             }
-        })
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -231,10 +213,10 @@ class SaleFragment : Fragment() {
         binding.tvCustomer.isSelected = true
 
         binding.btnRefresh.setOnClickListener {
-            sharedViewModel.clearListItemSelected()
+            publicViewModel.clearListItemSelected()
         }
 
-        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+        publicViewModel.inforShip.observe(viewLifecycleOwner, Observer {
             val tvCustomer = binding.tvCustomer
             tvCustomer.isSingleLine = true
             if (it.receiver != null && it.tel != null) {
@@ -262,21 +244,21 @@ class SaleFragment : Fragment() {
         val btRemove = bottomSheetView.imgRemove
         val rcvColorClick = bottomSheetView.rcvColor.bindingCustomRecyclerView.cvRcvRecyclerview
 
-        sharedViewModel.updateItemSelected(itemProduct)
+        publicViewModel.updateItemSelected(itemProduct)
 
         btAdd.setOnClickListener {
-            sharedViewModel.updateItemSelectedQuantity(1)
+            publicViewModel.updateItemSelectedQuantity(1)
         }
 
         btRemove.setOnClickListener {
-            if (sharedViewModel.itemPackageProduct.value!!.countPackage == 1) {
+            if (publicViewModel.itemPackageProduct.value!!.countPackage == 1) {
                 requireContext().showToast("Quantity must be more than 0. Please check again")
             } else {
-                sharedViewModel.updateItemSelectedQuantity(-1)
+                publicViewModel.updateItemSelectedQuantity(-1)
             }
         }
 
-        sharedViewModel.itemPackageProduct.observe(viewLifecycleOwner, Observer {
+        publicViewModel.itemPackageProduct.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.countPackage.toString()
             tvItemName.text = it.namePackage
             tvItemId.text = it.codePackage
@@ -290,7 +272,7 @@ class SaleFragment : Fragment() {
         bottomSheetDialog.setContentView(bottomSheetView.root)
 
         bottomSheetDialog.setOnDismissListener {
-            sharedViewModel.updateListItemSelected()
+            publicViewModel.updateListItemSelected()
         }
 
         bottomSheetDialog.show()

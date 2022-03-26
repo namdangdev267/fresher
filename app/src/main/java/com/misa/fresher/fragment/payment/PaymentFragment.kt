@@ -98,7 +98,7 @@ class PaymentFragment: Fragment() {
     }
 
     private fun clickItemBillDetail(itemBillDetail: PackageProduct) {
-        sharedViewModel.updateQuantityOfItemBillDetail(itemBillDetail)
+        sharedViewModel.updateQuantityOfPackageProduct(itemBillDetail)
     }
 
 }
