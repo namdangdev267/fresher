@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.data.models.PackageProduct
 import com.misa.fresher.databinding.ItemPackageRcvBinding
-import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.showToast
 import java.util.*
 
@@ -21,26 +21,26 @@ class PaymentAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(itemBillDetail: PackageProduct) {
-            binding.tvPriceProduct.text = itemBillDetail.getPrice().toString()
-            binding.tvCountProduct.text = itemBillDetail.countPackage.toString()
-            binding.tvNameProduct.text = itemBillDetail.nameProduct
-            binding.tvCodeProduct.text = itemBillDetail.idProduct
+        fun bind(packageProduct: PackageProduct) {
+            binding.tvPriceProduct.text = packageProduct.getPrice().toString()
+            binding.tvCountProduct.text = packageProduct.countPackage.toString()
+            binding.tvNameProduct.text = packageProduct.namePackage
+            binding.tvCodeProduct.text = packageProduct.codePackage
             binding.tvPriceProduct.text =
-                itemBillDetail.product.priceProduct.toString() + "/" + itemBillDetail.product.category.toString()
+                packageProduct.product?.priceProduct.toString() + "/" + packageProduct.product?.category.toString()
                     .lowercase(Locale.getDefault())
             binding.imgPackage.visibility = ViewGroup.GONE
             binding.imgAdd.setOnClickListener {
-                itemBillDetail.countPackage += 1
-                listener(itemBillDetail)
+                packageProduct.countPackage += 1
+                listener(packageProduct)
             }
             binding.imgRemove.setOnClickListener {
-                if (itemBillDetail.countPackage > 1) {
-                    itemBillDetail.countPackage -= 1
+                if (packageProduct.countPackage > 1) {
+                    packageProduct.countPackage -= 1
                 } else {
                     binding.root.context.showToast("Quantity must be more than 0. Please check again")
                 }
-                listener(itemBillDetail)
+                listener(packageProduct)
             }
 
         }

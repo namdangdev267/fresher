@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.data.models.ItemBill
 import com.misa.fresher.databinding.ItemBillBinding
-import com.misa.fresher.models.ItemBill
 
 class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
     RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {

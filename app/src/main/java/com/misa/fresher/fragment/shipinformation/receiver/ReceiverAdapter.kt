@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.data.models.InforShip
+import com.misa.fresher.data.models.ItemShipInfor
 import com.misa.fresher.databinding.ItemShipCalculatorBinding
 import com.misa.fresher.databinding.ItemShipCheckBinding
 import com.misa.fresher.databinding.ItemShipMulticontentBinding
 import com.misa.fresher.databinding.ItemShipTouchBinding
-import com.misa.fresher.models.InforShip
-import com.misa.fresher.models.ItemShipInfor
 
 class ReceiverAdapter(
     private val adapterData: MutableList<ItemShipInfor>,
@@ -47,7 +47,7 @@ class ReceiverAdapter(
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
             }
 
-            val inforShip = InforShip(null, null, null, null, null, null, null, null, null, false)
+            val inforShip = InforShip(null, null, null, null)
 
             editText.doAfterTextChanged {
                 if (item.title == "Receiver") {

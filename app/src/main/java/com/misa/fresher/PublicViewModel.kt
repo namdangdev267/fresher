@@ -1,28 +1,28 @@
 package com.misa.fresher
 
-import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.InforShip
-import com.misa.fresher.models.ItemBill
-import com.misa.fresher.models.PackageProduct
-import com.misa.fresher.models.Product
-import com.misa.fresher.models.enum.BillStatus
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
+import com.misa.fresher.data.models.InforShip
+import com.misa.fresher.data.models.ItemBill
+import com.misa.fresher.data.models.PackageProduct
+import com.misa.fresher.data.models.Product
+import com.misa.fresher.data.models.enum.BillStatus
+import com.misa.fresher.data.models.enum.Category
+import com.misa.fresher.data.models.enum.Color
+import com.misa.fresher.data.source.AppDatabaseHelper
+import com.misa.fresher.data.source.local.dao.ItemBillDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import java.util.*
 
 
 class PublicViewModel : ViewModel() {
-
-    private val _itemSelected = MutableLiveData<PackageProduct>()
-    val itemSelected: LiveData<PackageProduct>
-        get() = _itemSelected
-
-    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
-    val listItemSelected: LiveData<MutableList<PackageProduct>>
-        get() = _listItemSelected
+    var isInit = false
+    var queueBill: LinkedList<ItemBill> = LinkedList()
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -36,69 +36,102 @@ class PublicViewModel : ViewModel() {
     val inforShip: LiveData<InforShip>
         get() = _inforShip
 
-    init {
-        _itemSelected.postValue(
-            PackageProduct(
-                Product(
-                    R.drawable.ic_launcher_foreground,
-                    "",
-                    "",
-                    Color.BLUE,
-                    Category.TROUSER,
-                    0,
-                    10,
-                    "24/03/2022"
-                ),
-                1
-            )
-        )
+    private val _itemSelected = MutableLiveData<PackageProduct>()
+    val itemSelected: LiveData<PackageProduct>
+        get() = _itemSelected
 
-        _listItemSelected.postValue(mutableListOf())
+    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
+    val listItemSelected: LiveData<MutableList<PackageProduct>>
+        get() = _listItemSelected
 
-        _billHandling.postValue(
-            ItemBill(
-                (1000000..2000000).random().toString(),
-                mutableListOf(),
-                null,
-                BillStatus.HANDLING,
-                Calendar.getInstance().time
+    /**
+     * get data
+     */
+
+    fun fakeData(context: Context) {
+
+        if (!isInit) {
+            isInit = true
+            _billHandling.postValue(
+                ItemBill(
+                    mutableListOf(),
+                    null,
+                    BillStatus.HANDLING.name,
+                    Calendar.getInstance().time.toString()
+                )
             )
-        )
-        _listBill.postValue(mutableListOf())
+
+            _itemSelected.postValue(
+                PackageProduct(
+                    Product(
+                        0,
+                        "",
+                        "",
+                        Color.BLUE.toString(),
+                        Category.ELECTRONIC.toString(),
+                        0,
+                        10,
+                        "23/02/2021"
+                    ), "0", 1
+                )
+            )
+            _listItemSelected.postValue(mutableListOf())
+
+            _listBill.postValue(mutableListOf())
+
+            _inforShip.postValue(InforShip(null, null, null, null))
+
+
+            CoroutineScope(IO).launch {
+
+                val itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
+                val x = itemBillDao.getAllListBill()
+                _listBill.postValue(x)
+                Log.e(
+                    "listBill",
+                    itemBillDao.getAllListBill().size.toString() + "" + _listBill.value?.size.toString()
+                )
+
+
+            }
+
+
+        }
+
+
     }
+
+    /**
+     * item selected
+     */
 
     fun updateItemSelected(itemProduct: Product) {
-        var itemSelected: PackageProduct =
-            PackageProduct(itemProduct, 1)
-        _listItemSelected.value?.let {
-            for (i in it) {
-                if (i.product == itemProduct) {
-                    itemSelected = i
-                }
-            }
-        }
-        _itemSelected.postValue(itemSelected)
+
+        Log.e("billl", _billHandling.value?.id.toString())
+        val itemSelected = _listItemSelected.value?.find {
+            it.product == itemProduct
+        } ?: _billHandling.value?.id?.let { PackageProduct(itemProduct, it, 1) }
+
+        _itemSelected.postValue(itemSelected!!)
     }
 
-    @SuppressLint("NullSafeMutableLiveData")
     fun updateItemSelectedQuantity(num: Int) {
-        val itemSelected = _itemSelected.value?.let {
-            PackageProduct(
-                it.product, it.countPackage + num
-            )
-        }
-        _itemSelected.postValue(itemSelected)
+        _itemSelected.value?.updateCount(num)
+        _itemSelected.postValue(_itemSelected.value)
     }
 
-    @SuppressLint("NullSafeMutableLiveData")
+    /**
+     * List item selected
+     */
+
     fun updateListItemSelected() {
         val listSelected = _listItemSelected.value
         var check = false
 
         listSelected?.let {
-            for (i in listSelected) {
-                if (i.product == _itemSelected.value?.product) {
-                    i.countPackage = _itemSelected.value!!.countPackage
+            for (item in listSelected) {
+                if (item.product == _itemSelected.value?.product) {
+                    item.countPackage = _itemSelected.value!!.countPackage
                     check = true
                 }
             }
@@ -106,65 +139,91 @@ class PublicViewModel : ViewModel() {
         if (!check) {
             _itemSelected.value?.let { listSelected?.add(it) }
         }
-        _listItemSelected.postValue(listSelected)
+        _listItemSelected.postValue(listSelected!!)
     }
 
     fun clearListItemSelected() {
         _listItemSelected.postValue(mutableListOf())
-        _billHandling.postValue(
-            ItemBill(
-                (1000000..2000000).random().toString(),
-                mutableListOf(),
-                null,
-                BillStatus.HANDLING,
-                Calendar.getInstance().time
-            )
-        )
 
-        _inforShip.postValue(InforShip(null, null, null, null, null, null, null, null, null, false))
+        CoroutineScope(IO).launch {
+            _billHandling.postValue(
+                ItemBill(
+                    mutableListOf(),
+                    null,
+                    BillStatus.HANDLING.name,
+                    Calendar.getInstance().time.toString()
+                )
+            )
+            _inforShip.postValue(InforShip(null, null, null, null))
+        }
     }
 
     fun getTotalPrice() =
-        _listItemSelected.value?.sumOf { it.product.priceProduct * it.countPackage }
+        _listItemSelected.value?.sumOf { it.product!!.priceProduct * it.countPackage }
 
     fun getCount() = _listItemSelected.value?.sumOf { it.countPackage }
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
-        if (itemBillDetail.countPackage == 0) {
-            val selectedList = mutableListOf<PackageProduct>()
-            for (i in selectedList) {
-                if (i.product == itemBillDetail.product) {
-
-                } else {
-                    selectedList.add(i)
-                }
-            }
-            _listItemSelected.postValue(selectedList)
-        } else {
-            val selectedList = _listItemSelected.value
-            selectedList?.let {
-                for (i in it) {
-                    if (i.product == itemBillDetail.product) {
-                        i.countPackage = itemBillDetail.countPackage
-                        _listItemSelected.postValue(it)
-                        break
-                    }
+        _listItemSelected.value?.let {
+            for (item in it) {
+                if (item.product == itemBillDetail.product) {
+                    item.countPackage = itemBillDetail.countPackage
+                    _listItemSelected.postValue(it)
+                    break
                 }
             }
         }
     }
 
-    fun updateInforShip(inforShip: InforShip) = _inforShip.postValue(inforShip)
+    /**
+     * shipping information
+     */
 
-    fun addBillToListBill() {
-        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
-        _billHandling.value?.inforShip = _inforShip.value
-        _billHandling.postValue(_billHandling.value)
-        _billHandling.value?.let { _listBill.value?.add(it) }
-        _listBill.postValue(_listBill.value)
-        clearListItemSelected()
+    fun updateInforShip(infoShip: InforShip) {
+        _inforShip.postValue(infoShip)
     }
 
-    fun getTotalPriceListBill() = _listBill.value?.sumOf { it.getPrice() }
+    /**
+     * bill
+     */
+
+    fun addBillToListBill(context: Context) {
+        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
+        _billHandling.value?.inforShip = _inforShip.value!!
+        _billHandling.postValue(_billHandling.value)
+        _billHandling.value?.let {
+            _listBill.value?.add(it)
+            it.setBillPrice()
+        }
+        Log.e("listItem", _billHandling.value?.listItemBillDetail!!.size.toString())
+
+        _billHandling.value?.let { queueBill.add(it) }
+
+        CoroutineScope(IO).launch {
+            val itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
+            while (queueBill.size != 0) {
+                itemBillDao.addListBill(queueBill.peek())
+                queueBill.pop()
+            }
+
+        }
+
+        _listBill.postValue(_listBill.value)
+        var j = 0
+        clearListItemSelected()
+
+    }
+
+    fun getTotalPriceListBill(): Float {
+        var res = 0f
+        _listBill.value?.let {
+            for (i in it) {
+                var k = 0
+                res += i.billPrice
+            }
+        }
+        return res
+    }
+
 
 }

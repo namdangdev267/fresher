@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
+import com.misa.fresher.data.models.PackageProduct
 import com.misa.fresher.databinding.FragmentPaymentBinding
-import com.misa.fresher.models.PackageProduct
 import com.misa.fresher.showToast
 import kotlinx.android.synthetic.main.payment_context.view.*
 
@@ -67,7 +67,7 @@ class PaymentFragment: Fragment() {
 
     private fun transitionFragment() {
         binding.root.linearQuantity?.setOnClickListener {
-            sharedViewModel.addBillToListBill()
+            sharedViewModel.addBillToListBill(requireContext())
             requireContext().showToast("Paid Successfully")
             activity?.onBackPressed()
         }

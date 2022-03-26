@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.databinding.ItemShipCalculatorBinding
 import com.misa.fresher.databinding.ItemShipRadiobuttonBinding
 import com.misa.fresher.databinding.ItemShipTouchBinding
-import com.misa.fresher.models.ItemShipInfor
+import com.misa.fresher.data.models.ItemShipInfor
 
 class ShipAdapter(private val adapterData: MutableList<ItemShipInfor>) :
     RecyclerView.Adapter<ShipAdapter.ShipAdapterViewHolder>() {

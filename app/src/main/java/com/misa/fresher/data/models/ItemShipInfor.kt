@@ -1,4 +1,4 @@
-package com.misa.fresher.models
+package com.misa.fresher.data.models
 
 import com.misa.fresher.R
 

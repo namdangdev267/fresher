@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.models.InforShip
 import com.misa.fresher.PublicViewModel
+import com.misa.fresher.data.models.InforShip
 import com.misa.fresher.databinding.FragmentReceiverBinding
 
 class ReceiverFragment(
     private var receiverViewModel: ReceiverViewModel,
     private var sharedViewModel: PublicViewModel
 ) : Fragment() {
-    var inforShip = InforShip(null, null, null, null, null, null, null, null, null, false)
+    var inforShip = InforShip(null, null, null, null)
 
     private val binding: FragmentReceiverBinding by lazy {
         getInflater(layoutInflater)

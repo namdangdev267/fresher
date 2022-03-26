@@ -4,20 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.databinding.ItemCustomRecyclerviewBinding
-import com.misa.fresher.models.enum.Color
 
 class CustomRCVAdapter(
-    private val listData: List<Color>,
-    val clickColor: (color: Color) -> Unit
+    private val listData: List<String>,
+    val clickColor: (color: String) -> Unit
 ) : RecyclerView.Adapter<CustomRCVAdapter.ViewHolder>() {
 
     class ViewHolder(
         val binding: ItemCustomRecyclerviewBinding,
-        val clickColor: (color: Color) -> Unit
+        val clickColor: (color: String) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(color: Color) {
-            binding.tvCvRcvTitle.text = color.name.lowercase()
+        fun bind(color: String) {
+            binding.tvCvRcvTitle.text = color.lowercase()
             binding.root.setOnClickListener {
                 clickColor(color)
             }

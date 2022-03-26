@@ -21,11 +21,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
+import com.misa.fresher.data.models.Product
+import com.misa.fresher.data.models.enum.Category
+import com.misa.fresher.data.models.enum.SortBy
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.models.Product
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.SortBy
 import com.misa.fresher.showToast
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 import kotlinx.android.synthetic.main.sale_context.view.*
@@ -73,6 +73,8 @@ class SaleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedViewModel.fakeData(requireContext())
+
         transitionFragment()
         configureFilterDrawer()
         configureToolbar()
@@ -90,7 +92,7 @@ class SaleFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        saleViewModel.initData()
+        saleViewModel.createData(requireContext())
     }
 
     private fun configureToolbar() {
@@ -161,9 +163,9 @@ class SaleFragment : Fragment() {
                         saleViewModel.filter.color = null
                     else {
                         val listColor = listOf(
-                            com.misa.fresher.models.enum.Color.RED,
-                            com.misa.fresher.models.enum.Color.YELLOW,
-                            com.misa.fresher.models.enum.Color.BLUE
+                            com.misa.fresher.data.models.enum.Color.RED,
+                            com.misa.fresher.data.models.enum.Color.YELLOW,
+                            com.misa.fresher.data.models.enum.Color.BLUE
                         )
                         saleViewModel.filter.color = listColor[p2 - 1]
                     }
@@ -191,13 +193,7 @@ class SaleFragment : Fragment() {
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
 
-//        saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
-//            binding.rcvProduct.adapter = it.let { it1 ->
-//                ProductAdapter(it1) { saleItemClick(it) }
-//            }
-//        })
-
-        saleViewModel.listProductShow.observe(viewLifecycleOwner, Observer { it ->
+        saleViewModel.listProductShow.observe(viewLifecycleOwner, Observer {
             binding.rcvProduct.adapter = ProductAdapter(it) { saleItemClick(it) }
         })
 
@@ -259,7 +255,7 @@ class SaleFragment : Fragment() {
         val tvItemQuantity = bottomSheetView.tvCountProduct
         val btAdd = bottomSheetView.imgAdd
         val btRemove = bottomSheetView.imgRemove
-        val rcvColor = bottomSheetView.rcvColor.bindingCustomRecyclerView.cvRcvRecyclerview
+        val rcvColorClick = bottomSheetView.rcvColor.bindingCustomRecyclerView.cvRcvRecyclerview
 
         sharedViewModel.updateItemSelected(itemProduct)
 
@@ -277,17 +273,17 @@ class SaleFragment : Fragment() {
 
         sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.countPackage.toString()
-            tvItemName.text = it.nameProduct
-            tvItemId.text = it.idProduct
+            tvItemName.text = it.namePackage
+            tvItemId.text = it.codePackage
         })
 
-        rcvColor.adapter = CustomRCVAdapter(saleViewModel.getColor(itemProduct)) {
+        rcvColorClick.adapter = CustomRCVAdapter(saleViewModel.getColor(itemProduct)) {
             sharedViewModel.updateListItemSelected()
             bottomSheetDialog.dismiss()
         }
 
         bottomSheetDialog.setContentView(bottomSheetView.root)
-
+//
 //        bottomSheetDialog.setOnDismissListener {
 //            sharedViewModel.updateListItemSelected()
 //        }

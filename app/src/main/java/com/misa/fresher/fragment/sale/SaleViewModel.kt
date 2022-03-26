@@ -1,22 +1,33 @@
 package com.misa.fresher.fragment.sale
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.misa.fresher.R
-import com.misa.fresher.models.Product
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.enum.SortBy
+import com.misa.fresher.data.models.Product
+import com.misa.fresher.data.models.enum.Category
+import com.misa.fresher.data.models.enum.Color
+import com.misa.fresher.data.models.enum.SortBy
+import com.misa.fresher.data.source.AppDatabaseHelper
+import com.misa.fresher.data.source.local.dao.ProductDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.Collator
 import java.util.*
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 class SaleViewModel : ViewModel() {
     private var search: String = ""
 
     var filter: Filter = Filter(null, null, false, SortBy.NAME)
 
-    private var listProduct: MutableList<Product> = mutableListOf()
+    var listProduct: MutableList<Product> = mutableListOf()
 
     private val _listProductShow = MutableLiveData<MutableList<Product>>()
     val listProductShow: LiveData<MutableList<Product>>
@@ -26,55 +37,119 @@ class SaleViewModel : ViewModel() {
         var category: Category?,
         var color: Color?,
         var available: Boolean,
-        var sortBy: SortBy
+        var sortBy: SortBy?
     )
 
-    fun initData() {
-        fakeData()
-        _listProductShow.postValue(listProduct)
-    }
+    fun createData(context: Context) {
 
-    private fun fakeData() {
+        CoroutineScope(IO).launch {
+            val productDao = ProductDao(AppDatabaseHelper.getInstance(context))
 
-        for (i in 1..6) {
-            listProduct.add(
-                Product(
-                    R.drawable.shirt,
-                    i.toString() + "shirt" + i.toString(), "SH$i", Color.BLUE, Category.SHIRT,
-                    1000 * i, i, "23/02/2020"
-                )
-            )
+            var listAllProduct = async {
+                productDao.getAllProducts()
+            }.await()
+            if (listAllProduct.size == 0) {
+                for (i in 1..6) {
+                    listProduct.add(
+                        Product(
+                            R.drawable.shirt,
+                            i.toString() + "shirt" + i.toString(), "SH$i", "BLUE", "SHIRT",
+                            1000 * i, i, "23/02/2020"
+                        )
+                    )
+                }
+                for (i in 1..5) {
+                    listProduct.add(
+                        Product(
+                            R.drawable.shorts,
+                            i.toString() + "trouser" + i.toString(), "TS$i", "RED", "TROUSER",
+                            1000 * i, i, "14/06/2021"
+                        )
+                    )
+                }
+                for (i in 1..4) {
+                    listProduct.add(
+                        Product(
+                            R.drawable.phone,
+                            i.toString() + "electronic" + i.toString(),
+                            "ET$i",
+                            "YELLOW",
+                            "ELECTRONIC",
+                            1000 * i,
+                            i,
+                            "05/03/2022"
+                        )
+                    )
+                }
+
+                for (item in listProduct) {
+                    productDao.addProduct(item)
+                }
+
+                listAllProduct = async {
+                    productDao.getAllProducts()
+                }.await()
+                _listProductShow.postValue(listAllProduct)
+
+            } else {
+                withContext(Main) {
+                    Log.d("test:", listAllProduct[0].toString())
+                }
+                _listProductShow.postValue(listAllProduct)
+                var i = 1
+            }
+
+
+//            withContext(Default) {
+//                if (size == 0) {
+//
+//
+//                    for (item in listProduct) {
+//                        productDao.addProduct(item)
+//                    }
+//
+//                    withContext(Default) {
+//                        listProduct = productDao.getAllProducts()
+//                    }
+//                    withContext(Default) {
+//                        listProduct = listProduct.sortedWith { p1, p2 ->
+//                            Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
+//                        } as MutableList<Product>
+//                        _listProductShow.postValue(listProduct)
+//                    }
+//                } else {
+//                    withContext(Default) {
+//                        listProduct = productDao.getAllProducts()
+//                    }
+//                    withContext(Default) {
+//                        listProduct = listProduct.sortedWith { p1, p2 ->
+//                            Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
+//                        } as MutableList<Product>
+//                        _listProductShow.postValue(listProduct)
+//                    }
+//                    withContext(Default) {
+//                        itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
+//                    }
+//                }
+//            }
         }
 
-        for (i in 1..5) {
-            listProduct.add(
-                Product(
-                    R.drawable.shorts,
-                    i.toString() + "trouser" + i.toString(), "TS$i", Color.RED, Category.TROUSER,
-                    1000 * i, i, "14/06/2021"
-                )
-            )
-        }
-
-        for (i in 1..4) {
-            listProduct.add(
-                Product(
-                    R.drawable.phone,
-                    i.toString() + "electronic" + i.toString(),
-                    "ET$i",
-                    Color.YELLOW,
-                    Category.ELECTRONIC,
-                    1000 * i,
-                    i,
-                    "05/03/2022"
-                )
-            )
-        }
-
-        listProduct = listProduct.sortedWith { p1, p2 ->
-            Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
-        } as MutableList<Product>
-
+//        productDao = ProductDao(AppDatabaseHelper.getInstance(context))
+//        CoroutineScope(IO).launch {
+//            withContext(IO) {
+////                for(i in listProduct){
+////                    productDao.addProduct(i)
+////                }
+//                listProduct = productDao.getAllProducts() as MutableList<Product>
+////                listProduct = iProductDao.getAllProducts() as MutableList<Product>
+//            }
+//            withContext(IO) {
+//                listProduct = listProduct.sortedWith { p1, p2 ->
+//                    Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
+//                } as MutableList<Product>
+//            }
+//            _listProductShow.postValue(listProduct)
+//        }
     }
 
     fun updateListItemShow(searchString: String) {
@@ -111,11 +186,16 @@ class SaleViewModel : ViewModel() {
         var resultFilter = mutableListOf<Product>()
 
         for (i in showListFilter) {
-            val filterCategory = (filter.category != null && filter.category != i.category)
-            val filterColor = (filter.color != null && filter.color != i.color)
+            val filterCategory =
+                (filter.category != null && filter.category.toString() != i.category)
+            val filterColor = (filter.color != null && filter.color.toString() != i.color)
             val filterAvailable = (filter.available && i.quantity <= 0)
 
             if (!filterAvailable && !filterColor && !filterCategory) {
+                resultFilter.add(i)
+            }
+
+            if (!filterAvailable) {
                 resultFilter.add(i)
             }
         }
@@ -137,11 +217,12 @@ class SaleViewModel : ViewModel() {
         }
     }
 
-    fun getColor(product: Product): List<Color> {
-        val mutableList: MutableList<Color> = mutableListOf()
+    fun getColor(product: Product): List<String> {
+        val mutableList: MutableList<String> = mutableListOf()
         for (i in listProduct) {
-            if (i.nameProduct == product.nameProduct)
+            if (i.nameProduct == product.nameProduct) {
                 mutableList.add(product.color)
+            }
         }
         return mutableList
     }
