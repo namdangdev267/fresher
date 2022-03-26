@@ -11,9 +11,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.R
+import com.misa.fresher.data.dao.infoship.InfoShipDao
 import com.misa.fresher.data.dao.itembill.ItemBillDao
 import com.misa.fresher.data.database.AppDatabase
 import com.misa.fresher.data.repositories.BillRepository
+import com.misa.fresher.data.repositories.InfoShipRepository
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.ActivityMainBinding
 import com.misa.fresher.views.fragments.ShareViewModelFactory
@@ -38,7 +40,9 @@ class MainActivity : AppCompatActivity() {
 
         val billDao = ItemBillDao(AppDatabase.getInstance(this))
         val billRepository  = BillRepository(billDao)
-        val factory = ShareViewModelFactory(billRepository)
+        val infoShipDao = InfoShipDao(AppDatabase.getInstance(this))
+        val infoShipRepository = InfoShipRepository(infoShipDao)
+        val factory = ShareViewModelFactory(billRepository,infoShipRepository)
         sharedViewModel = ViewModelProvider(this,factory).get(SharedViewModel::class.java)
         configDrawer()
     }

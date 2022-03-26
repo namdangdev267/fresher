@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.misa.fresher.data.repositories.BillRepository
+import com.misa.fresher.data.repositories.InfoShipRepository
 import com.misa.fresher.models.enums.BillStatus
 import com.misa.fresher.models.enums.Category
 import com.misa.fresher.models.enums.Color
@@ -17,8 +18,12 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import java.util.*
 
-class SharedViewModel(private val billRepository: BillRepository) : ViewModel() {
+class SharedViewModel(
+    private val billRepository: BillRepository,
+    private val infoShipRepository: InfoShipRepository
+) : ViewModel() {
     var queueBill: LinkedList<ItemBill> = LinkedList()
+    var queueInfoShip: LinkedList<InfoShip> = LinkedList()
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -32,13 +37,13 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
     val infoShip: LiveData<InfoShip>
         get() = _infoShip
 
-    private val _itemSelected = MutableLiveData<ItemBillDetail>()
-    val itemSelected: LiveData<ItemBillDetail>
-        get() = _itemSelected
+    private val _itemBillDetail = MutableLiveData<ItemBillDetail>()
+    val itemBillDetail: LiveData<ItemBillDetail>
+        get() = _itemBillDetail
 
-    private val _listItemSelected = MutableLiveData<MutableList<ItemBillDetail>>()
-    val listItemSelected: LiveData<MutableList<ItemBillDetail>>
-        get() = _listItemSelected
+    private val _listItemBillDetail = MutableLiveData<MutableList<ItemBillDetail>>()
+    val listItemBillDetail: LiveData<MutableList<ItemBillDetail>>
+        get() = _listItemBillDetail
 
 
     /**
@@ -49,13 +54,13 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
         _billHandling.postValue(
             ItemBill(
                 mutableListOf(),
-                null,
+                InfoShip(),
                 BillStatus.HANDLING.name,
                 Calendar.getInstance().time.toString()
             )
         )
 
-        _itemSelected.postValue(
+        _itemBillDetail.postValue(
             ItemBillDetail(
                 ItemProduct(
                     "",
@@ -70,15 +75,16 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
                 1
             )
         )
-        _listItemSelected.postValue(mutableListOf())
+        _listItemBillDetail.postValue(mutableListOf())
 
         _listBill.postValue(mutableListOf())
 
-        _infoShip.postValue(InfoShip(null, null, null, null))
+        _infoShip.postValue(InfoShip())
 
 
         viewModelScope.launch {
             _listBill.postValue(billRepository.getBills())
+            var i=0
         }
     }
 
@@ -90,42 +96,43 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
     fun updateItemSelected(itemProduct: ItemProduct) {
 
         Log.e("billl", _billHandling.value?.id.toString())
-        val itemSelected = _listItemSelected.value?.find {
+        val itemSelected = _listItemBillDetail.value?.find {
             it.itemProduct == itemProduct
         } ?: _billHandling.value?.id?.let { ItemBillDetail(itemProduct, it, 1) }
 
-        _itemSelected.postValue(itemSelected!!)
+        _itemBillDetail.postValue(itemSelected!!)
     }
 
     fun updateItemSelectedQuantity(num: Int) {
-        _itemSelected.value?.updateQuantity(num)
-        _itemSelected.postValue(_itemSelected.value)
+        _itemBillDetail.value?.updateQuantity(num)
+        _itemBillDetail.postValue(_itemBillDetail.value)
     }
+
 
     /**
      * List item selected
      */
 
     fun updateListItemSelected() {
-        val listSelected = _listItemSelected.value
+        val listSelected = _listItemBillDetail.value
         var check = false
 
         listSelected?.let {
             for (item in listSelected) {
-                if (item.itemProduct == _itemSelected.value?.itemProduct) {
-                    item.quantity = _itemSelected.value!!.quantity
+                if (item.itemProduct == _itemBillDetail.value?.itemProduct) {
+                    item.quantity = _itemBillDetail.value!!.quantity
                     check = true
                 }
             }
         }
         if (!check) {
-            _itemSelected.value?.let { listSelected?.add(it) }
+            _itemBillDetail.value?.let { listSelected?.add(it) }
         }
-        _listItemSelected.postValue(listSelected!!)
+        _listItemBillDetail.postValue(listSelected!!)
     }
 
     fun clearListItemSelected() {
-        _listItemSelected.postValue(mutableListOf())
+        _listItemBillDetail.postValue(mutableListOf())
 
         CoroutineScope(IO).launch {
             _billHandling.postValue(
@@ -142,7 +149,7 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
 
     fun getTotalPrice(): Float {
         var totalPrice = 0f
-        _listItemSelected.value?.let {
+        _listItemBillDetail.value?.let {
             for (i in it) {
                 totalPrice += i.itemProduct?.price!! * i.quantity
             }
@@ -151,11 +158,11 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
     }
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: ItemBillDetail) {
-        _listItemSelected.value?.let {
+        _listItemBillDetail.value?.let {
             for (item in it) {
                 if (item.itemProduct == itemBillDetail.itemProduct) {
                     item.quantity = itemBillDetail.quantity
-                    _listItemSelected.postValue(it)
+                    _listItemBillDetail.postValue(it)
                     break
                 }
             }
@@ -170,32 +177,43 @@ class SharedViewModel(private val billRepository: BillRepository) : ViewModel() 
         _infoShip.postValue(infoShip)
     }
 
+
     /**
      * bill
      */
 
     fun addBillToListBill() {
-        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
+        _billHandling.value?.listItemBillDetail = _listItemBillDetail.value!!
         _billHandling.value?.infoShip = _infoShip.value!!
         _billHandling.postValue(_billHandling.value)
         _billHandling.value?.let {
             _listBill.value?.add(it)
             it.setBillPrice()
         }
-        Log.e("listItem", _billHandling.value?.listItemBillDetail!!.size.toString())
+        _billHandling.value?.let {
+            queueBill.add(it)
+        }
 
-        _billHandling.value?.let { queueBill.add(it) }
+        _infoShip.value?.let {
+            queueInfoShip.add(it)
+        }
+
 
         viewModelScope.launch {
-
             while (queueBill.size != 0) {
                 billRepository.addBill(queueBill.peek())
                 queueBill.pop()
             }
         }
 
+        viewModelScope.launch {
+            while (queueInfoShip.size != 0) {
+                infoShipRepository.addInfoShip(queueInfoShip.peek())
+                queueInfoShip.pop()
+            }
+        }
+
         _listBill.postValue(_listBill.value)
-        var j = 0
         clearListItemSelected()
 
     }

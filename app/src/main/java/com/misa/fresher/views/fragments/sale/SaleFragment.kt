@@ -15,7 +15,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -67,7 +66,7 @@ class SaleFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.e(this.javaClass.simpleName, "ATTACH")
+//        Log.e(this.javaClass.simpleName, "ATTACH")
         initViewModel()
     }
 
@@ -90,7 +89,7 @@ class SaleFragment : Fragment() {
 
     private fun transitionFragment(view: View) {
         binding.llGetBillDetail.setOnClickListener {
-            if (sharedViewModel.listItemSelected.value?.size!! > 0)
+            if (sharedViewModel.listItemBillDetail.value?.size!! > 0)
                 Navigation.findNavController(view)
                     .navigate(R.id.action_saleFragment_to_billDetailFragment)
         }
@@ -240,7 +239,7 @@ class SaleFragment : Fragment() {
             binding.recyclerviewSaleFragment.adapter=SaleAdapter(it) { saleItemClick(it) }
         })
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.listItemBillDetail.observe(viewLifecycleOwner, Observer {
             binding.tvQuantityItemSelected.text = it.size.toString()
 
             if (it.size >= 1) {
@@ -319,14 +318,14 @@ class SaleFragment : Fragment() {
         }
 
         btRemove.setOnClickListener {
-            if (sharedViewModel.itemSelected.value?.quantity == 1) {
+            if (sharedViewModel.itemBillDetail.value?.quantity == 1) {
                 CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again")
             } else {
                 sharedViewModel.updateItemSelectedQuantity(-1)
             }
         }
 
-        sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.itemBillDetail.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.quantity.toString()
             tvItemName.text = it.name
             tvItemId.text = it.code
@@ -343,25 +342,25 @@ class SaleFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e(this.javaClass.simpleName,"RESUME")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e(this.javaClass.simpleName,"PAUSE")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.e(this.javaClass.simpleName,"START")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e(this.javaClass.simpleName,"STOP")
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        Log.e(this.javaClass.simpleName,"RESUME")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.e(this.javaClass.simpleName,"PAUSE")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        Log.e(this.javaClass.simpleName,"START")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.e(this.javaClass.simpleName,"STOP")
+//    }
 
 }
 

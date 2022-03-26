@@ -1,12 +1,13 @@
 package com.misa.fresher.data
 
+import com.misa.fresher.models.InfoShip
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
 
 object Queries {
     const val DATABASE_NAME = "database"
-    const val DATABASE_VERSION = 6
+    const val DATABASE_VERSION = 7
 
     const val CREATE_BILL_STATUS_TABLE = "CREATE TABLE " + "BILL_STATUS_TABLE" + " (" +
             "id" + " TEXT PRIMARY KEY, " +
@@ -20,9 +21,12 @@ object Queries {
             "id" + " TEXT PRIMARY KEY, " +
             "name" + " TEXT NOT NULL " + ")"
 
-    const val CREATE_INFO_SHIP_TABLE = "CREATE TABLE " + "INFO_SHIP_TABLE" + " (" +
-            "id" + " TEXT PRIMARY KEY, " +
-            "name" + " TEXT NOT NULL " + ")"
+    const val CREATE_INFO_SHIP_TABLE = "CREATE TABLE ${InfoShip.TABLE_NAME}  (" +
+            "${InfoShip.ID} TEXT PRIMARY KEY, " +
+            "${InfoShip.RECEIVER} TEXT, " +
+            "${InfoShip.TEL} TEXT, " +
+            "${InfoShip.ADDRESS} TEXT, " +
+            "${InfoShip.AREA} TEXT )"
 
     const val CREATE_ITEM_PRODUCT_TABLE = "CREATE TABLE ${ItemProduct.TABLE_NAME}  (" +
             "${ItemProduct.ID} TEXT PRIMARY KEY, " +

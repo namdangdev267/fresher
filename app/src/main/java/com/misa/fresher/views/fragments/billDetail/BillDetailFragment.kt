@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -102,7 +101,7 @@ class BillDetailFragment : Fragment() {
 
     private fun configListView() {
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer { it ->
+        sharedViewModel.listItemBillDetail.observe(viewLifecycleOwner, Observer { it ->
             binding.recyclerviewBillDetail.adapter =
                 BillDetailAdapter(it) { clickItemBillDetail(it) }
             binding.tvBillDetailTotalQuantity.text =it.size.toString()

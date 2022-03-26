@@ -17,7 +17,7 @@ class ItemBill() : Parcelable {
     var infoShip: InfoShip? = null
     var status: String = ""
     var createDay: String = ""
-    var billPrice:Float = 0f
+    var billPrice: Float = 0f
 
 
     @SuppressLint("Range")
@@ -28,6 +28,22 @@ class ItemBill() : Parcelable {
         status = cursor.getString(cursor.getColumnIndex(ItemBill.STATUS))
         createDay = cursor.getString(cursor.getColumnIndex(ItemBill.CREATE_DAY))
         billPrice = cursor.getFloat(cursor.getColumnIndex(ItemBill.BILL_PRICE))
+    }
+
+    constructor(
+        id: String,
+        listItemBillDetail: MutableList<ItemBillDetail>?,
+        infoShip: InfoShip?,
+        status: String,
+        createDay: String,
+        billPrice: Float
+    ) : this() {
+        this.id = id
+        this.listItemBillDetail = listItemBillDetail
+        this.infoShip = infoShip
+        this.status = status
+        this.createDay = createDay
+        this.billPrice = billPrice
     }
 
     constructor(
@@ -43,10 +59,9 @@ class ItemBill() : Parcelable {
         this.createDay = createDay
     }
 
-    fun setBillPrice()
-    {
+    fun setBillPrice() {
         getAllBillPrice()?.let {
-             this.billPrice = it
+            this.billPrice = it
         }
     }
 
@@ -63,7 +78,7 @@ class ItemBill() : Parcelable {
             put(ID_INFO_SHIP, infoShip?.id)
             put(STATUS, status)
             put(CREATE_DAY, createDay)
-            put(BILL_PRICE,billPrice)
+            put(BILL_PRICE, billPrice)
         }
     }
 
@@ -73,6 +88,6 @@ class ItemBill() : Parcelable {
         const val ID_INFO_SHIP: String = "idInfoShip"
         const val STATUS: String = "status"
         const val CREATE_DAY: String = "createDay"
-        const val BILL_PRICE:String = "billPrice"
+        const val BILL_PRICE: String = "billPrice"
     }
 }

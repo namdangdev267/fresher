@@ -12,7 +12,7 @@ import java.util.*
 @Parcelize
 class InfoShip() : Parcelable {
 
-    var id: String = ""
+    var id: String = UUID.randomUUID().toString()
     var receiver: String? = null
     var tel: String? = null
     var address: String? = null
@@ -53,19 +53,19 @@ class InfoShip() : Parcelable {
         return ContentValues().apply {
             put(ID, id)
             put(RECEIVER, receiver)
-            put(TEL, TEL)
+            put(TEL, tel)
             put(ADDRESS, address)
             put(AREA, area)
         }
     }
 
     companion object {
-        const val TABLE_NAME: String = "ITEM_PRODUCT_TABLE"
+        const val TABLE_NAME: String = "INFO_SHIP_TABLE"
         const val ID: String = "id"
-        const val RECEIVER: String = "name"
-        const val TEL: String = "name"
-        const val ADDRESS: String = "name"
-        const val AREA: String = "name"
+        const val RECEIVER: String = "receiver"
+        const val TEL: String = "tel"
+        const val ADDRESS: String = "address"
+        const val AREA: String = "area"
 
     }
 

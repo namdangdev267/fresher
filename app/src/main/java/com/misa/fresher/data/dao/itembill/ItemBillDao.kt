@@ -19,17 +19,35 @@ class ItemBillDao(private val appDatabase: AppDatabase) : IItemBillDao {
     @SuppressLint("Range")
     override suspend fun getAllBills(): MutableList<ItemBill> {
         val db = appDatabase.readableDatabase
-        val cursor = db.query(
-//            "SELECT * FROM ${ItemBill.TABLE_NAME} b LEFT JOIN ${InfoShip.TABLE_NAME} s ON b.${ItemBill.ID_INFO_SHIP}=s.${InfoShip.ID}",null)
+//        val cursor = db.query(
+//        ItemBill.TABLE_NAME, null, null,
+//        null, null, null, null)
 
-        ItemBill.TABLE_NAME, null, null,
-        null, null, null, null)
+        val cursor = db.rawQuery(
+            "SELECT * " +
+                    "FROM ${ItemBill.TABLE_NAME} b LEFT JOIN ${InfoShip.TABLE_NAME} s " +
+                    "ON b.${ItemBill.ID_INFO_SHIP}=s.${InfoShip.ID}", null
+        )
+
 
         val list = mutableListOf<ItemBill>()
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 list.add(
-                    ItemBill(cursor)
+                    ItemBill(
+                        cursor.getString(cursor.getColumnIndex(ItemBill.ID)),
+                        null,
+                        InfoShip(
+                            cursor.getString(cursor.getColumnIndex(ItemBill.ID_INFO_SHIP)),
+                            cursor.getString(cursor.getColumnIndex(InfoShip.RECEIVER)),
+                            cursor.getString(cursor.getColumnIndex(InfoShip.TEL)),
+                            cursor.getString(cursor.getColumnIndex(InfoShip.ADDRESS)),
+                            cursor.getString(cursor.getColumnIndex(InfoShip.AREA))
+                        ),
+                        cursor.getString(cursor.getColumnIndex(ItemBill.STATUS)),
+                        cursor.getString(cursor.getColumnIndex(ItemBill.CREATE_DAY)),
+                        cursor.getFloat(cursor.getColumnIndex(ItemBill.BILL_PRICE))
+                    )
                 )
                 cursor.moveToNext()
             }

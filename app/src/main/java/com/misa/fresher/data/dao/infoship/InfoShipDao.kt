@@ -16,7 +16,7 @@ class InfoShipDao(private val appDatabase: AppDatabase):IInfoShipDao {
     }
 
     @SuppressLint("Range")
-    override suspend fun getInforShipWithID(id: Int): InfoShip? {
+    override suspend fun getInfoShipWithID(id: Int): InfoShip? {
         val db = appDatabase.readableDatabase
         val cursor = db.rawQuery(
             "SELECT * FROM ${InfoShip.TABLE_NAME} WHERE ${InfoShip.ID} = $id",
