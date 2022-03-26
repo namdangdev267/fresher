@@ -30,7 +30,7 @@ class ProductAdapter(private val products : List<Product>,val clickItemListener 
         fun bind(product: Product){
             itemView.findViewById<ImageView>(R.id.img_imageProduct).setImageResource(product.productImage)
             itemView.findViewById<TextView>(R.id.tv_productName).text = product.productName
-            itemView.findViewById<TextView>(R.id.tv_productID).text = product.productID
+            itemView.findViewById<TextView>(R.id.tv_productID).text = product.productCode
             itemView.findViewById<TextView>(R.id.tv_productPrice).text = product.price.toString()
             itemView.setOnClickListener{
                 clickItemListener(product)

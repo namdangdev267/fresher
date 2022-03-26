@@ -1,5 +1,6 @@
 package com.misa.fresher.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -7,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +22,8 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ProductAdapter
 import com.misa.fresher.models.Product
+import com.misa.fresher.models.SelectedProduct
+
 /*
 *Màn hình sale
 *@Author:LTDat
@@ -30,7 +34,8 @@ class HomeFragment : Fragment(){
     var rcv : RecyclerView? = null
     var mView :View? = null
     private var Data = Product.getListProduct()
-    var bill  = mutableListOf<Product>()
+    var bill = arrayListOf<SelectedProduct>()
+   // var bill  = mutableListOf<Product>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +63,6 @@ class HomeFragment : Fragment(){
         rcv?.adapter = adapter
         rcv?.layoutManager = LinearLayoutManager(activity)
     }
-
     fun configFilter(){
         val mDrawer = mView?.findViewById<DrawerLayout>(R.id.drawerFilter)
         mDrawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -119,7 +123,6 @@ class HomeFragment : Fragment(){
             spnColor?.setSelection(0)
             spnSize?.setSelection(0)
         }
-
     }
 
     fun configToolbar(){
@@ -168,12 +171,12 @@ class HomeFragment : Fragment(){
 
         btnAmount?.setOnClickListener{
             if(bill.size > 0)
-            findNavController().navigate(R.id.action_homeFragment_to_paymentFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_paymentFragment, bundleOf("product" to bill))
         }
 
         btnSumMoney?.setOnClickListener{
             if(bill.size > 0)
-            findNavController().navigate(R.id.action_homeFragment_to_paymentFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_paymentFragment, bundleOf("product" to bill))
         }
     }
     //Cập nhật lại danh sách hàng thanh toán
@@ -197,42 +200,81 @@ class HomeFragment : Fragment(){
     }
     // Hiển thị bottom sheet và thêm dữ liệu vào list
     private fun onItemClickProduct(product: Product) {
-            bill.add(product)
+            //bill.add(product)
             val bottomSheetDiglog = BottomSheetDialog(requireContext(),R.style.BottomSheetDialogTheme)
             val bottomSheetView : View = LayoutInflater.from(requireContext()).inflate(
             R.layout.dialog_bottomsheet,
                 mView as DrawerLayout,false
         )
             bottomSheetView.findViewById<TextView>(R.id.tv_diglog_1).text = product.productName
-            bottomSheetView.findViewById<TextView>(R.id.tv_diglog_2).text = product.productID
+            bottomSheetView.findViewById<TextView>(R.id.tv_diglog_2).text = product.productCode
             bottomSheetDiglog.setContentView(bottomSheetView)
             bottomSheetDiglog.show()
-            updateItemSelected()
+
+            val btnGiam = bottomSheetView.findViewById<ImageButton>(R.id.imgbtn_giam_sl)
+            val tvSoLuong = bottomSheetView.findViewById<TextView>(R.id.tv_sum_sl)
+            val btnTang = bottomSheetView.findViewById<ImageButton>(R.id.imgbtn_tang_sl)
+
+            var amount = tvSoLuong.text.toString().toInt()
+
+            btnTang.setOnClickListener(){
+                amount += 1
+                tvSoLuong.text = amount.toString()
+            }
+
+            btnGiam.setOnClickListener(){
+                if(amount > 1){
+                    amount -= 1
+                    tvSoLuong.text = amount.toString()
+                }else{
+                    Toast.makeText(requireContext(),"Số lượng phải lớn hơn 0",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            bottomSheetDiglog.setOnDismissListener(){
+                if(checkSeclectedProduct(product.productCode)){
+                    for(i in bill)
+                        if(i.product.productCode == product.productCode)
+                            i.amount = i.amount + amount
+                }
+                else{
+                    bill.add(SelectedProduct(product,amount))
+                }
+                updateItemSelected()
+            }
+
     }
     private fun updateItemSelected() {
         val btnAmount = mView?.findViewById<Button>(R.id.btn_amount)
         val btnSumMoney = mView?.findViewById<Button>(R.id.btn_sum_money)
         val btnReset = mView?.findViewById<ImageButton>(R.id.btn_reset)
 
-        var price = 0.0
         btnAmount?.let{
-            it.text = "${bill.size}"
+            it.text = bill.sumOf { it.amount }.toString()
+            it.setTextColor(Color.WHITE)
             it.background = AppCompatResources.getDrawable(
                 requireContext(),
                 R.drawable.bg_btn_amount_blue
             )
         }
-        for(i in bill){
-            price += i.price
-        }
         btnSumMoney?.let{
-            it.text = "Tổng $price"
+            it.text = bill.sumOf { it.amount * it.product.price }.toString()
             it.background = AppCompatResources.getDrawable(requireContext(),R.drawable.bg_btn_sum_money_blue)
         }
         if(bill.size != null){
            btnReset?.background = AppCompatResources.getDrawable(requireContext(),R.drawable.bg_btn_reset_blue)
         }
 
+    }
+
+    fun checkSeclectedProduct(id : String) : Boolean{
+        var isCheck = false
+        for(i in bill ){
+            if(i.product.productCode == id){
+                isCheck = true
+            }
+        }
+        return isCheck
     }
 
 }

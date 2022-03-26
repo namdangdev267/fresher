@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
     private fun configUI(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navConTroller = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navConTroller.graph,
-        findViewById<DrawerLayout>(R.id.drawerLayout))
+        appBarConfiguration = AppBarConfiguration(navConTroller.graph, findViewById<DrawerLayout>(R.id.drawerLayout))
         appBarConfiguration.let {
             (findViewById(R.id.navSale) as NavigationView).setupWithNavController(navConTroller)
         }

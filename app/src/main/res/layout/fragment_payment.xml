@@ -3,37 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:text="@string/tv_id"
-            android:gravity="center"/>
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"
-            />
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"/>
-    </LinearLayout>
+    android:orientation="vertical"
+    android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:weightSum="10"
+                android:background="@color/color_blue_purple">
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_left"
+                    android:scaleType="fitCenter"
+                    android:background="@color/color_blue_purple"
+                    />
+                <TextView
+                    android:id="@+id/tv_id_bill"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:text="@string/tv_id"
+                    android:gravity="center"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_cart"
+                    android:scaleType="fitCenter"
+                    android:background="@color/color_blue_purple"
+                    android:padding="10dp"
+                    />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_menu"
+                    android:scaleType="fitCenter"
+                    android:background="@color/color_blue_purple"
+                    android:padding="12dp"/>
+            </LinearLayout>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="50dp">
@@ -41,27 +55,34 @@
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:src="@drawable/ic_cong"
-          android:scaleType="fitCenter"/>
+          android:src="@drawable/ic_user"
+          android:scaleType="fitCenter"
+          android:background="@color/white"
+          android:padding="10dp"/>
       <TextView
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="4"
           android:text="@string/tv_nameuser_sdt"
           android:gravity="center_vertical"
-          android:maxLines="1"/>
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:textColor="@color/color_black"/>
       <ImageButton
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:src="@drawable/ic_cong"
-          android:scaleType="fitCenter"/>
+          android:src="@drawable/ic_notselect"
+          android:scaleType="fitCenter"
+          android:padding="10dp"
+          android:background="@color/color_white"/>
       <TextView
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="4"
           android:text="@string/tv_no_select_payment"
-          android:gravity="center_vertical"/>
+          android:gravity="center_vertical"
+          android:textColor="@color/color_black"/>
   </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,22 +91,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"/>
+            android:src="@drawable/ic_add_buy"
+            android:scaleType="fitCenter"
+            android:padding="13dp"
+            android:background="@color/color_white" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:text="@string/tv_buy_insert"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:textColor="@color/color_black"/>
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"/>
+            android:src="@drawable/ic_qr_code"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            android:background="@color/color_white"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_SeclectedItem"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
@@ -96,26 +123,33 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_cong"
+            android:src="@drawable/ic_dollar"
             android:scaleType="fitCenter"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@color/color_white"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:text="Còn phải thu"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:textColor="@color/color_black"/>
         <TextView
+            android:id="@+id/tv_TongTien"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="0.0"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:textColor="@color/black"/>
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_cong"
+            android:src="@drawable/ic_arrow_right"
             android:scaleType="fitCenter"
+            android:background="@color/color_white"
+            android:padding="10dp"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -123,30 +157,47 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:weightSum="7">
+
+        <ImageButton
+            android:id="@+id/img_btn_shipping"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_ship_car"
+            android:padding="12dp"
+            android:background="@drawable/bg_circle_blue_size_50"/>
+
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"/>
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cong"
-            android:scaleType="fitCenter"/>
-        <TextView
+            android:src="@drawable/ic_gift"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bg_circle_blue_size_50"/>
+        <Button
+            android:id="@+id/tv_dem_tong"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="1"
-            android:gravity="center"/>
-        <TextView
+            android:textSize="16sp"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:background="@drawable/bg_left_blue_radius_5dp"/>
+        <Button
+            android:id="@+id/tv_thuTien"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:text="Thu tiền"
-            android:gravity="center"/>
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/color_white"
+            android:background="@drawable/bg_right_blue_radius_5dp"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -7,13 +7,13 @@
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity"
     tools:openDrawer="start">
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/my_nav"/>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/my_nav"/>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navSale"
         android:layout_width="match_parent"
@@ -22,6 +22,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
-
         />
 </androidx.drawerlayout.widget.DrawerLayout>
