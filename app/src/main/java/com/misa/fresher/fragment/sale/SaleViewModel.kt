@@ -13,9 +13,9 @@ import com.misa.fresher.data.models.enum.SortBy
 import com.misa.fresher.data.source.AppDatabaseHelper
 import com.misa.fresher.data.source.local.dao.ProductDao
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Collator
@@ -41,13 +41,14 @@ class SaleViewModel : ViewModel() {
     )
 
     fun createData(context: Context) {
-
+        _listProductShow.postValue(listProduct)
         CoroutineScope(IO).launch {
             val productDao = ProductDao(AppDatabaseHelper.getInstance(context))
+            var listAllProduct =
+                withContext(Dispatchers.Default) {
+                    productDao.getAllProducts()
+                }
 
-            var listAllProduct = async {
-                productDao.getAllProducts()
-            }.await()
             if (listAllProduct.size == 0) {
                 for (i in 1..6) {
                     listProduct.add(
@@ -85,12 +86,11 @@ class SaleViewModel : ViewModel() {
                 for (item in listProduct) {
                     productDao.addProduct(item)
                 }
-
-                listAllProduct = async {
-                    productDao.getAllProducts()
-                }.await()
+//                listAllProduct =
+//                    withContext(Dispatchers.Default) {
+//                        productDao.getAllProducts()
+//                    }
                 _listProductShow.postValue(listAllProduct)
-
             } else {
                 withContext(Main) {
                     Log.d("test:", listAllProduct[0].toString())
@@ -98,12 +98,8 @@ class SaleViewModel : ViewModel() {
                 _listProductShow.postValue(listAllProduct)
                 var i = 1
             }
-
-
 //            withContext(Default) {
 //                if (size == 0) {
-//
-//
 //                    for (item in listProduct) {
 //                        productDao.addProduct(item)
 //                    }
@@ -167,8 +163,8 @@ class SaleViewModel : ViewModel() {
      **/
     fun clearFilter() {
         filter.sortBy = SortBy.NAME
-        filter.category = null
         filter.color = null
+        filter.category = null
         filter.available = false
     }
 
@@ -179,42 +175,48 @@ class SaleViewModel : ViewModel() {
      * @date: 3/23/2022 8:36 PM
      **/
     fun filterShow() {
-        var showListFilter = mutableListOf<Product>()
-        showListFilter =
-            listProduct.filter { it.nameProduct.contains(search, true) } as MutableList<Product>
-
-        var resultFilter = mutableListOf<Product>()
-
-        for (i in showListFilter) {
+        var showListProduct = mutableListOf<Product>()
+        showListProduct =
+            listProduct.filter {
+                it.nameProduct.contains(
+                    search,
+                    true
+                )
+            } as MutableList<Product>
+        var res = mutableListOf<Product>()
+        for (i in showListProduct) {
             val filterCategory =
                 (filter.category != null && filter.category.toString() != i.category)
             val filterColor = (filter.color != null && filter.color.toString() != i.color)
             val filterAvailable = (filter.available && i.quantity <= 0)
 
             if (!filterAvailable && !filterColor && !filterCategory) {
-                resultFilter.add(i)
+                res.add(i)
             }
 
-            if (!filterAvailable) {
-                resultFilter.add(i)
-            }
         }
 
-        if (resultFilter.size != 0) {
-            resultFilter = when (filter.sortBy) {
-                SortBy.NAME -> resultFilter.sortedWith { f1, f2 ->
-                    Collator.getInstance().compare(f1.nameProduct, f2.nameProduct)
+        Log.e(this.javaClass.simpleName, res.toString())
+
+        if (res.size != 0) {
+            res = when (filter.sortBy) {
+                SortBy.NAME -> res.sortedWith { p1, p2 ->
+                    Collator.getInstance().compare(p1.nameProduct, p2.nameProduct)
                 } as MutableList<Product>
-                SortBy.NEW_ARRIVAL -> resultFilter.sortedWith { f1, f2 ->
-                    Collator.getInstance().compare(f1.dateArrival, f2.dateArrival)
+                SortBy.NEW_ARRIVAL -> res.sortedWith { p1, p2 ->
+                    Collator.getInstance().compare(p1.dateArrival, p2.dateArrival)
                 } as MutableList<Product>
-                else -> resultFilter.sortedByDescending { it.quantity } as MutableList<Product>
+                else -> res.sortedByDescending {
+                    it.quantity
+                } as MutableList<Product>
             }
-
-            Calendar.getInstance()
-
-            _listProductShow.postValue(resultFilter)
         }
+        Log.e(this.javaClass.simpleName + "after sort: ", res.toString())
+        Calendar.getInstance()
+
+
+        Log.e(this.javaClass.simpleName, showListProduct.size.toString() + "--" + listProduct.size)
+        _listProductShow.postValue(res)
     }
 
     fun getColor(product: Product): List<String> {
