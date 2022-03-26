@@ -24,6 +24,8 @@ import com.misa.fresher.R
 import com.misa.fresher.data.models.Product
 import com.misa.fresher.data.models.enum.Category
 import com.misa.fresher.data.models.enum.SortBy
+import com.misa.fresher.data.source.AppDatabaseHelper
+import com.misa.fresher.data.source.local.dao.ProductDao
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.showToast
@@ -92,6 +94,8 @@ class SaleFragment : Fragment() {
     }
 
     private fun initViewModel() {
+        val productDao = ProductDao(AppDatabaseHelper.getInstance(requireContext()))
+//        saleViewModel = ViewModelProvider(this)[SaleViewModel::class.java]
         saleViewModel.createData(requireContext())
     }
 
@@ -129,6 +133,7 @@ class SaleFragment : Fragment() {
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.navigationView)
 
         binding.filterDrawer.run {
+            rbName.isChecked = true
             spnGrouping.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -264,29 +269,29 @@ class SaleFragment : Fragment() {
         }
 
         btRemove.setOnClickListener {
-            if (sharedViewModel.itemSelected.value!!.countPackage == 1) {
+            if (sharedViewModel.itemPackageProduct.value!!.countPackage == 1) {
                 requireContext().showToast("Quantity must be more than 0. Please check again")
             } else {
                 sharedViewModel.updateItemSelectedQuantity(-1)
             }
         }
 
-        sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.itemPackageProduct.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.countPackage.toString()
             tvItemName.text = it.namePackage
             tvItemId.text = it.codePackage
         })
 
-        rcvColorClick.adapter = CustomRCVAdapter(saleViewModel.getColor(itemProduct)) {
-            sharedViewModel.updateListItemSelected()
-            bottomSheetDialog.dismiss()
-        }
+//        rcvColorClick.adapter = CustomRCVAdapter(saleViewModel.getColor(itemProduct)) {
+//            sharedViewModel.updateListItemSelected()
+//            bottomSheetDialog.dismiss()
+//        }
 
         bottomSheetDialog.setContentView(bottomSheetView.root)
-//
-//        bottomSheetDialog.setOnDismissListener {
-//            sharedViewModel.updateListItemSelected()
-//        }
+
+        bottomSheetDialog.setOnDismissListener {
+            sharedViewModel.updateListItemSelected()
+        }
 
         bottomSheetDialog.show()
 

@@ -20,39 +20,35 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PublicViewModel : ViewModel() {
-    var isInit = false
-    var queueBill: LinkedList<ItemBill> = LinkedList()
+    private var isInit = false
+    private var queueBillList: LinkedList<ItemBill> = LinkedList()
 
-    private val _listBill = MutableLiveData<MutableList<ItemBill>>()
+    private val mListBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
-        get() = _listBill
+        get() = mListBill
 
-    private val _billHandling = MutableLiveData<ItemBill>()
+    private val mBillHandling = MutableLiveData<ItemBill>()
     val billHandling: LiveData<ItemBill>
-        get() = _billHandling
+        get() = mBillHandling
 
-    private val _inforShip = MutableLiveData<InforShip>()
+    private val mInforShip = MutableLiveData<InforShip>()
     val inforShip: LiveData<InforShip>
-        get() = _inforShip
+        get() = mInforShip
 
-    private val _itemSelected = MutableLiveData<PackageProduct>()
-    val itemSelected: LiveData<PackageProduct>
-        get() = _itemSelected
+    private val mItemPackageProduct = MutableLiveData<PackageProduct>()
+    val itemPackageProduct: LiveData<PackageProduct>
+        get() = mItemPackageProduct
 
-    private val _listItemSelected = MutableLiveData<MutableList<PackageProduct>>()
+    private val mListItemSelected = MutableLiveData<MutableList<PackageProduct>>()
     val listItemSelected: LiveData<MutableList<PackageProduct>>
-        get() = _listItemSelected
-
-    /**
-     * get data
-     */
+        get() = mListItemSelected
 
     fun fakeData(context: Context) {
-
         if (!isInit) {
             isInit = true
-            _billHandling.postValue(
+            mBillHandling.postValue(
                 ItemBill(
                     mutableListOf(),
                     null,
@@ -61,7 +57,7 @@ class PublicViewModel : ViewModel() {
                 )
             )
 
-            _itemSelected.postValue(
+            mItemPackageProduct.postValue(
                 PackageProduct(
                     Product(
                         0,
@@ -75,78 +71,63 @@ class PublicViewModel : ViewModel() {
                     ), "0", 1
                 )
             )
-            _listItemSelected.postValue(mutableListOf())
+            mListItemSelected.postValue(mutableListOf())
 
-            _listBill.postValue(mutableListOf())
+            mListBill.postValue(mutableListOf())
 
-            _inforShip.postValue(InforShip(null, null, null, null))
+            mInforShip.postValue(InforShip(null, null, null, null))
 
 
             CoroutineScope(IO).launch {
-
                 val itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
                 val x = itemBillDao.getAllListBill()
-                _listBill.postValue(x)
+                mListBill.postValue(x)
                 Log.e(
                     "listBill",
-                    itemBillDao.getAllListBill().size.toString() + "" + _listBill.value?.size.toString()
+                    itemBillDao.getAllListBill().size.toString() + "" + mListBill.value?.size.toString()
                 )
-
-
             }
-
-
         }
-
-
     }
-
-    /**
-     * item selected
-     */
 
     fun updateItemSelected(itemProduct: Product) {
 
-        Log.e("billl", _billHandling.value?.id.toString())
-        val itemSelected = _listItemSelected.value?.find {
+        Log.e("billl", mBillHandling.value?.id.toString())
+        val itemSelected = mListItemSelected.value?.find {
             it.product == itemProduct
-        } ?: _billHandling.value?.id?.let { PackageProduct(itemProduct, it, 1) }
+        } ?: mBillHandling.value?.id?.let { PackageProduct(itemProduct, it, 1) }
 
-        _itemSelected.postValue(itemSelected!!)
+        mItemPackageProduct.postValue(itemSelected!!)
     }
 
     fun updateItemSelectedQuantity(num: Int) {
-        _itemSelected.value?.updateCount(num)
-        _itemSelected.postValue(_itemSelected.value)
+        mItemPackageProduct.value?.updateCount(num)
+        mItemPackageProduct.postValue(mItemPackageProduct.value)
     }
 
-    /**
-     * List item selected
-     */
-
     fun updateListItemSelected() {
-        val listSelected = _listItemSelected.value
+        val listSelected = mListItemSelected.value
         var check = false
 
         listSelected?.let {
             for (item in listSelected) {
-                if (item.product == _itemSelected.value?.product) {
-                    item.countPackage = _itemSelected.value!!.countPackage
+                if (item.product == mItemPackageProduct.value?.product) {
+                    item.countPackage = mItemPackageProduct.value!!.countPackage
                     check = true
                 }
             }
         }
         if (!check) {
-            _itemSelected.value?.let { listSelected?.add(it) }
+            mItemPackageProduct.value?.let { listSelected?.add(it) }
         }
-        _listItemSelected.postValue(listSelected!!)
+        mListItemSelected.postValue(listSelected!!)
     }
 
     fun clearListItemSelected() {
-        _listItemSelected.postValue(mutableListOf())
+        mListItemSelected.postValue(mutableListOf())
 
         CoroutineScope(IO).launch {
-            _billHandling.postValue(
+            mBillHandling.postValue(
                 ItemBill(
                     mutableListOf(),
                     null,
@@ -154,61 +135,53 @@ class PublicViewModel : ViewModel() {
                     Calendar.getInstance().time.toString()
                 )
             )
-            _inforShip.postValue(InforShip(null, null, null, null))
+            mInforShip.postValue(InforShip(null, null, null, null))
         }
     }
 
     fun getTotalPrice() =
-        _listItemSelected.value?.sumOf { it.product!!.priceProduct * it.countPackage }
+        mListItemSelected.value?.sumOf { it.product!!.priceProduct * it.countPackage }
 
-    fun getCount() = _listItemSelected.value?.sumOf { it.countPackage }
+    fun getCount() = mListItemSelected.value?.sumOf { it.countPackage }
 
-    fun updateQuantityOfItemBillDetail(itemBillDetail: PackageProduct) {
-        _listItemSelected.value?.let {
+    fun updateQuantityOfPackageProduct(packageProduct: PackageProduct) {
+        mListItemSelected.value?.let {
             for (item in it) {
-                if (item.product == itemBillDetail.product) {
-                    item.countPackage = itemBillDetail.countPackage
-                    _listItemSelected.postValue(it)
+                if (item.product == packageProduct.product) {
+                    item.countPackage = packageProduct.countPackage
+                    mListItemSelected.postValue(it)
                     break
                 }
             }
         }
     }
 
-    /**
-     * shipping information
-     */
-
     fun updateInforShip(infoShip: InforShip) {
-        _inforShip.postValue(infoShip)
+        mInforShip.postValue(infoShip)
     }
 
-    /**
-     * bill
-     */
-
     fun addBillToListBill(context: Context) {
-        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
-        _billHandling.value?.inforShip = _inforShip.value!!
-        _billHandling.postValue(_billHandling.value)
-        _billHandling.value?.let {
-            _listBill.value?.add(it)
+        mBillHandling.value?.listItemBillDetail = mListItemSelected.value!!
+        mBillHandling.value?.inforShip = mInforShip.value!!
+        mBillHandling.postValue(mBillHandling.value)
+        mBillHandling.value?.let {
+            mListBill.value?.add(it)
             it.setBillPrice()
         }
-        Log.e("listItem", _billHandling.value?.listItemBillDetail!!.size.toString())
+        Log.e("listItem", mBillHandling.value?.listItemBillDetail!!.size.toString())
 
-        _billHandling.value?.let { queueBill.add(it) }
+        mBillHandling.value?.let { queueBillList.add(it) }
 
         CoroutineScope(IO).launch {
             val itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
-            while (queueBill.size != 0) {
-                itemBillDao.addListBill(queueBill.peek())
-                queueBill.pop()
+            while (queueBillList.size != 0) {
+                itemBillDao.addListBill(queueBillList.peek())
+                queueBillList.pop()
             }
 
         }
 
-        _listBill.postValue(_listBill.value)
+        mListBill.postValue(mListBill.value)
         var j = 0
         clearListItemSelected()
 
@@ -216,7 +189,7 @@ class PublicViewModel : ViewModel() {
 
     fun getTotalPriceListBill(): Float {
         var res = 0f
-        _listBill.value?.let {
+        mListBill.value?.let {
             for (i in it) {
                 var k = 0
                 res += i.billPrice
