@@ -19,7 +19,13 @@ import com.misa.fresher.BillViewModel
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ListBillAdapter
+import com.misa.fresher.data.bill.ImplBillDAO
 import com.misa.fresher.model.BillInfor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 
 class ListBillsFragment : Fragment() {
@@ -37,9 +43,8 @@ class ListBillsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(BillViewModel::class.java)
-        setUpView(view)
-        mListBill = getListBill()
         setUpRecycleView(view)
+        setUpView(view)
         openDrawerLayoutMenu(view)
         showSaleFragment()
     }
@@ -67,21 +72,28 @@ class ListBillsFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spnPayment?.adapter = adapter
         }
-        val tvListBillSize = view.findViewById<TextView>(R.id.tvListBillSize)
-        tvListBillSize.text = viewModel?.getSize().toString()
-        val tvListBillAmount = view.findViewById<TextView>(R.id.tvListBillAmount)
-        tvListBillAmount.text = decimalFormat.format(viewModel?.calculateTotalAmount().toString().toInt()).toString()
+
     }
     /**
-     *Thiết lập nạp dữ liệu vào RecycleView
+     *Thiết lập lấy danh sách hóa đơn từ SQLite lên RecycleView
      *@author:NCPhuc
-     *@date:3/18/2022
+     *@date:3/25/2022
      **/
     private fun setUpRecycleView(view: View) {
         val rcvBill = view.findViewById<RecyclerView>(R.id.rcvBill)
-        val adapter = ListBillAdapter(mListBill)
-        rcvBill.adapter = adapter
-        rcvBill.layoutManager = LinearLayoutManager(requireContext())
+        val iBillDAO=ImplBillDAO(requireContext())
+        CoroutineScope(IO).launch {
+            mListBill=iBillDAO.selectAllBill()
+            withContext(Main){
+                val adapter = ListBillAdapter(mListBill)
+                rcvBill.adapter = adapter
+                rcvBill.layoutManager = LinearLayoutManager(requireContext())
+                val tvListBillSize = view.findViewById<TextView>(R.id.tvListBillSize)
+                tvListBillSize.text = mListBill.size.toString()
+                val tvListBillAmount = view.findViewById<TextView>(R.id.tvListBillAmount)
+                tvListBillAmount.text = decimalFormat.format(mListBill.sumOf { it.total }).toString()
+            }
+        }
     }
     /**
      *Mở Drawer

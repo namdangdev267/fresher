@@ -24,10 +24,16 @@ import com.misa.fresher.adapter.ProductApdapter
 import com.misa.fresher.model.FilterProduct
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.SelectedProduct
+import com.misa.fresher.data.product.ImplProductDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 
 class SaleFragment : Fragment() {
-    var products = Product.fakedat()
+    var products:ArrayList<Product>?=null
     var rcv: RecyclerView? = null
     var productList = arrayListOf<SelectedProduct>()
     var rcvAdapter: ProductApdapter? = null
@@ -49,17 +55,25 @@ class SaleFragment : Fragment() {
     }
 
     /**
-     *Set up hiển thị Recycleview
+     *Lấy danh sách sản phẩm phẩm để hiện thị lên RecycleView
      *@author:NCPhuc
      *@date:3/16/2022
      **/
     private fun setUpView(view: View) {
         rcv = view.findViewById(R.id.rcvProduct)
-        rcvAdapter = ProductApdapter(products) { showBottomDialog(it) }
-        rcv?.adapter = rcvAdapter
-        rcv?.layoutManager = LinearLayoutManager(requireContext())
-        setUpNavigation()
-        openDrawerLayoutMenu(view)
+        val iDAO = ImplProductDAO(requireContext())
+        CoroutineScope(IO).launch {
+            products = iDAO.selectAllProduct()
+            withContext(Main)
+            {
+                rcvAdapter = ProductApdapter(products!!) { showBottomDialog(it) }
+                rcv?.adapter = rcvAdapter
+                rcv?.layoutManager = LinearLayoutManager(requireContext())
+                setUpNavigation()
+                openDrawerLayoutMenu(view)
+            }
+        }
+
     }
 
     /**
@@ -159,7 +173,7 @@ class SaleFragment : Fragment() {
      **/
     private fun updateList(string: String) {
         val productSearch = mutableListOf<Product>()
-        for (i in products) {
+        for (i in products!!) {
             if (i.productName.contains(string) || i.productSKU.contains(string)) {
                 productSearch.add(i)
             }
@@ -209,7 +223,7 @@ class SaleFragment : Fragment() {
         val decimalFormat = DecimalFormat("0,000.0")
         if (productList.size > 0) {
             tvAmount.let {
-                it?.text = productList.sumOf {it.amount}.toString()
+                it?.text = productList.sumOf { it.amount }.toString()
                 it?.setTextColor(Color.WHITE)
                 it?.setBackgroundResource(R.drawable.textview_amount_border)
             }
@@ -344,29 +358,29 @@ class SaleFragment : Fragment() {
     private fun filterProduct(filter: FilterProduct) {
         var sortList = products
         if (filter.sortBy == "Tên") {
-            sortList.sortWith(compareBy(Product::productName))
-            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productName))
+            sortList?.sortWith(compareBy(Product::productName))
+            if (filter.color == "All" && filter.size == "All") sortList?.sortWith(compareBy(Product::productName))
             else if (filter.color != "All" && filter.size == "All") sortList =
-                sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList?.filter { it.color == filter.color } as ArrayList<Product>
             else if (filter.color == "All" && filter.size != "All") sortList =
-                sortList.filter { it.size == filter.size } as ArrayList<Product>
+                sortList?.filter { it.size == filter.size } as ArrayList<Product>
             else {
-                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList?.filter { it.color == filter.color } as ArrayList<Product>
                 sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
             }
         } else {
-            sortList.sortWith(compareBy(Product::productPrice))
-            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productPrice))
+            sortList?.sortWith(compareBy(Product::productPrice))
+            if (filter.color == "All" && filter.size == "All") sortList?.sortWith(compareBy(Product::productPrice))
             else if (filter.color != "All" && filter.size == "All") sortList =
-                sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList?.filter { it.color == filter.color } as ArrayList<Product>
             else if (filter.color == "All" && filter.size != "All") sortList =
-                sortList.filter { it.size == filter.size } as ArrayList<Product>
+                sortList?.filter { it.size == filter.size } as ArrayList<Product>
             else {
-                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList?.filter { it.color == filter.color } as ArrayList<Product>
                 sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
             }
         }
-        rcvAdapter?.items = sortList
+        rcvAdapter?.items = sortList!!
         rcvAdapter?.notifyDataSetChanged()
     }
 

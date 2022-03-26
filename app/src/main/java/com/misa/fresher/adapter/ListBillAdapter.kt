@@ -23,8 +23,7 @@ class ListBillAdapter(
             itemView.findViewById<TextView>(R.id.tvBillNum).text = billInfor.billNum.toString()
             val decimalFormat = DecimalFormat("0,000.0")
             itemView.findViewById<TextView>(R.id.tvBillAmount).text =
-                decimalFormat.format(billInfor.product.sumOf { it.amount * it.product.productPrice })
-                    .toString()
+                decimalFormat.format(billInfor.total).toString()
         }
     }
 

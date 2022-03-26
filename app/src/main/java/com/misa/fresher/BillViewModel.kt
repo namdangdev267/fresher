@@ -15,9 +15,7 @@ class BillViewModel : ViewModel() {
 
     fun calculateTotalAmount() =
         listBill.value?.sumOf {
-            it.product.sumOf {
-                it.amount * it.product.productPrice
-            }
+           it.total
         }
 
     fun getSize() = listBill.value?.size

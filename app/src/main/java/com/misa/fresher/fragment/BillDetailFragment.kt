@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +22,14 @@ import com.misa.fresher.model.BillInfor
 import com.misa.fresher.model.SelectedProduct
 import com.misa.fresher.model.ShipInfor
 import com.misa.fresher.showToast
+import com.misa.fresher.data.bill.ImplBillDAO
+import com.misa.fresher.data.cart.ImplCartDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
-import kotlin.random.Random
 
 class BillDetailFragment : Fragment() {
     var listBillDetail = arrayListOf<SelectedProduct>()
@@ -56,7 +59,7 @@ class BillDetailFragment : Fragment() {
      *@date:3/16/2022
      **/
     private fun getSelectedProduct(): ArrayList<SelectedProduct> {
-    return arguments?.get(PRODUCTS) as ArrayList<SelectedProduct>
+        return arguments?.get(PRODUCTS) as ArrayList<SelectedProduct>
     }
 
     /**
@@ -68,8 +71,8 @@ class BillDetailFragment : Fragment() {
         val rvBillDetails = view.findViewById<RecyclerView>(R.id.rvSelectedProduct)
         val adapter = BillProductAdapter(
             listBillDetail,
-            requireContext(),
-            { changeAmountProduct(it) })
+            requireContext()
+        ) { changeAmountProduct(it) }
         rvBillDetails?.adapter = adapter
         rvBillDetails?.layoutManager = LinearLayoutManager(requireActivity())
     }
@@ -136,37 +139,66 @@ class BillDetailFragment : Fragment() {
         }
     }
 
-    /**
-     *Lưu hóa đơn vào danh sách hóa đơn
-     *@author:NCPhuc
-     *@date:3/18/2022
-     **/
+  /**
+   *Lưu hóa đơn vào database bằng SQLite
+   *@author:NCPhuc
+   *@date:3/26/2022
+   **/
     private fun saveBillDetail(view: View) {
+        val iBillDAO = ImplBillDAO(requireContext())
+        val iCartDAO = ImplCartDAO(requireContext())
         val tvBillCode = view.findViewById<TextView>(R.id.tvBillCode)
         val tvTotalBillDetail = view.findViewById<TextView>(R.id.tvTotalBillPrice)
         tvTotalBillDetail?.setOnClickListener {
-            val billInfor = BillInfor(
-                tvBillCode.text.toString().toInt(),
-                listBillDetail, ShipInfor("1", "2", "3", "4", "5")
-            )
-            viewModel.add(billInfor)
+            CoroutineScope(IO).launch {
+                if (iBillDAO.addBill(0)) {
+                    for (i in listBillDetail) {
+                        iCartDAO.addItem(tvBillCode.text.toString().toInt(), i.product, i.amount)
+                    }
+                    if (iBillDAO.updateBill(
+                            listBillDetail.sumOf { it.amount * it.product.productPrice },
+                            tvBillCode.text.toString().toInt()
+                        )
+                    ) {
+                        Log.e("Update", "Cập nhật thành công")
+                    } else {
+                        Log.e("Update", "Thất bại")
+                    }
+                    withContext(Main) {
+                        activity?.showToast("Thêm đơn hàng thành công")
+                    }
+                } else {
+                    withContext(Main)
+                    {
+                        activity?.showToast("Thêm đơn hàng thất bại!")
+                    }
+
+                }
+            }
             activity?.showToast("Thêm hóa đơn thành công")
             findNavController().navigate(R.id.action_billDetailFragment_to_saleFragment)
         }
     }
+
     /**
-     *Thiết lập mã số hóa đơn ngẫu nhiên
+     *Lấy mã hóa đơn trong database
      *@author:NCPhuc
-     *@date:3/18/2022
+     *@date:3/26/2022
      **/
     private fun randomBillNum(view: View) {
-        val billCode = Random.nextInt(100000, 300000)
+        val iBillDAO = ImplBillDAO(requireContext())
         val tvBillCode = view.findViewById<TextView>(R.id.tvBillCode)
-        tvBillCode.text = billCode.toString()
+        CoroutineScope(IO).launch {
+            val id = iBillDAO.getBillID()
+            withContext(Main) {
+                tvBillCode.text = (id + 1).toString()
+            }
+        }
+
     }
 
     companion object {
-        const val PRODUCTS="product"
+        const val PRODUCTS = "product"
     }
 
 }
