@@ -8,5 +8,4 @@
         android:id="@+id/nav_pay"
         android:icon="@mipmap/ic_launcher"
         android:title="PayFragment"/>
-
 </menu>

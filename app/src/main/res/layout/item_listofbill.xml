@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white">
+
+    <TextView
+        android:id="@+id/tv_idlistofbill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="id"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_black"/>
+
+    <TextView
+        android:id="@+id/tv_sumlistofbill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/tv_chitiet"
+        android:text="giá tiền"
+        android:textSize="20dp"
+        android:textColor="@color/color_black"/>
+
+    <ImageButton
+        android:id="@+id/tv_chitiet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@color/color_white"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_right"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey"
+        android:layout_below="@id/tv_chitiet"/>
+
+</RelativeLayout>

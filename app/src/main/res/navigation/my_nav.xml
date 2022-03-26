@@ -25,5 +25,21 @@
         android:id="@+id/paymentFragment"
         tools:layout="@layout/fragment_payment"
         android:name="com.misa.fresher.fragment.PaymentFragment"
-        android:label="PaymentFragment" />
+        android:label="PaymentFragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_listOfBillFragment"
+            app:destination="@id/listOfBillFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_shippingInformationFragment"
+            app:destination="@id/shippingInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfBillFragment"
+        android:name="com.misa.fresher.fragment.ListOfBillFragment"
+        android:label="ListOfBillFragment"
+        tools:layout="@layout/fragment_listofbill">
+        <action
+            android:id="@+id/action_listOfBillFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
