@@ -1,4 +1,4 @@
-package com.misa.fresher.models.enum
+package com.misa.fresher.data.models.enum
 
 enum class DepositMethod {
     ATM,
