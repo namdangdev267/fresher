@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.misa.fresher.R
+import com.misa.fresher.data.database.AppDatabase
 import com.misa.fresher.databinding.FragmentLoginBinding
 import com.misa.fresher.models.Country
 import com.misa.fresher.models.User
@@ -104,7 +105,7 @@ class LoginFragment : Fragment() {
                             view.context,
                             "Email exist. Please enter other email.",
 
-                        )
+                            )
                     }
                 }
             } catch (e: Exception) {
@@ -155,7 +156,7 @@ class LoginFragment : Fragment() {
 
     private fun loginSuccess() {
         val intent = Intent(this.context, MainActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 

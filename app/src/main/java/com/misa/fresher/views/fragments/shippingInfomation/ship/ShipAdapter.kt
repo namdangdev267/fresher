@@ -1,19 +1,13 @@
-package com.misa.fresher.views.fragments.shippingInfomation.Ship
+package com.misa.fresher.views.fragments.shippingInfomation.ship
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemRecyclerView
-import com.misa.fresher.R
-import com.misa.fresher.databinding.ItemShip3colBinding
 import com.misa.fresher.databinding.ItemShipCalculatorBinding
 import com.misa.fresher.databinding.ItemShipRadiobuttonBinding
 import com.misa.fresher.databinding.ItemShipTouchBinding
-import com.misa.fresher.views.fragments.shippingInfomation.Package.PackageAdapter
 
 class ShipAdapter(private val adapterData: MutableList<ItemRecyclerView>) :
     RecyclerView.Adapter<ShipAdapter.ShipAdapterViewHolder>() {

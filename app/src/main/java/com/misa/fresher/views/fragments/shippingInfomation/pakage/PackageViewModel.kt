@@ -1,4 +1,4 @@
-package com.misa.fresher.views.fragments.shippingInfomation.Package
+package com.misa.fresher.views.fragments.shippingInfomation.pakage
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

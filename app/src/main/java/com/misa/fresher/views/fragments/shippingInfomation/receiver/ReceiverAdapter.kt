@@ -1,4 +1,4 @@
-package com.misa.fresher.views.fragments.shippingInfomation.Receiver
+package com.misa.fresher.views.fragments.shippingInfomation.receiver
 
 import android.text.InputType
 import android.view.LayoutInflater

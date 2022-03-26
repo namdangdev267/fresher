@@ -1,14 +1,11 @@
 package com.misa.fresher.views.fragments
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.data.dao.itembill.ItemBillDao
-import com.misa.fresher.data.dao.itembilldetail.ItemBillDetailDao
-import com.misa.fresher.data.dao.itemproduct.ItemProductDao
-import com.misa.fresher.data.database.AppDatabase
+import androidx.lifecycle.viewModelScope
+import com.misa.fresher.data.repositories.BillRepository
 import com.misa.fresher.models.enums.BillStatus
 import com.misa.fresher.models.enums.Category
 import com.misa.fresher.models.enums.Color
@@ -18,12 +15,10 @@ import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import java.text.Collator
 import java.util.*
 
-class SharedViewModel : ViewModel() {
-    var isInit = false
-    var queueBill:  LinkedList<ItemBill> = LinkedList()
+class SharedViewModel(private val billRepository: BillRepository) : ViewModel() {
+    var queueBill: LinkedList<ItemBill> = LinkedList()
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -45,65 +40,48 @@ class SharedViewModel : ViewModel() {
     val listItemSelected: LiveData<MutableList<ItemBillDetail>>
         get() = _listItemSelected
 
+
     /**
      * get data
      */
 
-    fun fakeData(context: Context){
-
-        if(!isInit)
-        {
-            isInit = true
-            _billHandling.postValue(
-                ItemBill(
-                    mutableListOf(),
-                    null,
-                    BillStatus.HANDLING.name,
-                    Calendar.getInstance().time.toString()
-                )
+    init {
+        _billHandling.postValue(
+            ItemBill(
+                mutableListOf(),
+                null,
+                BillStatus.HANDLING.name,
+                Calendar.getInstance().time.toString()
             )
+        )
 
-            _itemSelected.postValue(
-                ItemBillDetail(
-                    ItemProduct(
-                        "",
-                        0f,
-                        "",
-                        Color.RED.toString(),
-                        Category.SHIRT.toString(),
-                        10,
-                        "11/4/2011"
-                    ),
-                    "0",
-                    1
-                )
+        _itemSelected.postValue(
+            ItemBillDetail(
+                ItemProduct(
+                    "",
+                    0f,
+                    "",
+                    Color.RED.toString(),
+                    Category.SHIRT.toString(),
+                    10,
+                    "11/4/2011"
+                ),
+                "0",
+                1
             )
-            _listItemSelected.postValue(mutableListOf())
+        )
+        _listItemSelected.postValue(mutableListOf())
 
-            _listBill.postValue(mutableListOf())
+        _listBill.postValue(mutableListOf())
 
-            _infoShip.postValue(InfoShip(null, null, null, null))
-
-
-            CoroutineScope(IO).launch {
-
-                    val itemBillDao = ItemBillDao(AppDatabase.getInstance(context))
-                    val x = itemBillDao.getAllBills()
-                    _listBill.postValue(x)
-                    Log.e(
-                        "listBill",
-                        itemBillDao.getAllBills().size.toString() + "" + _listBill.value?.size.toString()
-                    )
+        _infoShip.postValue(InfoShip(null, null, null, null))
 
 
-            }
-
-
+        viewModelScope.launch {
+            _listBill.postValue(billRepository.getBills())
         }
-
-
-
     }
+
 
     /**
      * item selected
@@ -196,7 +174,7 @@ class SharedViewModel : ViewModel() {
      * bill
      */
 
-    fun addBillToListBill(context: Context) {
+    fun addBillToListBill() {
         _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
         _billHandling.value?.infoShip = _infoShip.value!!
         _billHandling.postValue(_billHandling.value)
@@ -208,18 +186,16 @@ class SharedViewModel : ViewModel() {
 
         _billHandling.value?.let { queueBill.add(it) }
 
-        CoroutineScope(IO).launch {
-            val itemBillDao = ItemBillDao(AppDatabase.getInstance(context))
-            while(queueBill.size!=0)
-            {
-                itemBillDao.addBill(queueBill.peek())
+        viewModelScope.launch {
+
+            while (queueBill.size != 0) {
+                billRepository.addBill(queueBill.peek())
                 queueBill.pop()
             }
-
         }
 
         _listBill.postValue(_listBill.value)
-        var j=0
+        var j = 0
         clearListItemSelected()
 
     }
@@ -228,13 +204,11 @@ class SharedViewModel : ViewModel() {
         var res = 0f
         _listBill.value?.let {
             for (i in it) {
-                var k=0
                 res += i.billPrice
             }
         }
         return res
     }
-
 
 
 }

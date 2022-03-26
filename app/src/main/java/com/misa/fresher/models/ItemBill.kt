@@ -17,7 +17,7 @@ class ItemBill() : Parcelable {
     var infoShip: InfoShip? = null
     var status: String = ""
     var createDay: String = ""
-    var billPrice:Float =0f
+    var billPrice:Float = 0f
 
 
     @SuppressLint("Range")
@@ -52,12 +52,11 @@ class ItemBill() : Parcelable {
 
     fun getAllBillPrice(): Float? = listItemBillDetail?.map { it.getAllPrice() }?.sum()
 
-
-
 //    fun setBillPrice()
 //    {
 //        this.billPrice = getAllBillPrice()
 //    }
+
     fun getContentValues(): ContentValues {
         return ContentValues().apply {
             put(ID, id)

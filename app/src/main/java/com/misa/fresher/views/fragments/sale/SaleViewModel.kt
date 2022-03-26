@@ -5,9 +5,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.misa.fresher.data.dao.itembill.ItemBillDao
 import com.misa.fresher.data.dao.itemproduct.ItemProductDao
 import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.ProductRepository
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.enums.Category
 import com.misa.fresher.models.enums.Color
@@ -19,8 +21,7 @@ import java.text.Collator
 import java.util.*
 
 
-class SaleViewModel : ViewModel() {
-    var init = false
+class SaleViewModel(private val productRepository: ProductRepository) : ViewModel() {
     var search: String = ""
     var filter: Filter = Filter(null, null, false, SortBy.NAME)
 
@@ -37,74 +38,65 @@ class SaleViewModel : ViewModel() {
         var sortBy: SortBy?
     )
 
-    fun fakeData(context: Context) {
+
+    fun fakeData() {
         _listItemShow.postValue(listItemProduct)
-        CoroutineScope(IO).launch {
-            val itemProductDao: ItemProductDao
-            val itemBillDao:ItemBillDao
-            withContext(Dispatchers.Default)
+        viewModelScope.launch {
+            if(productRepository.getProducts().size==0)
             {
-                itemProductDao = ItemProductDao(AppDatabase.getInstance(context))
-            }
-            withContext(Dispatchers.Default)
-            {
-                if (itemProductDao.getAllProducts().size == 0) {
-
-                    for (i in 1..20) {
-                        listItemProduct.add(
-                            ItemProduct(
-                                i.toString() + "trouser" + i,
-                                (i * 10).toFloat(),
-                                i.toString() + "AA",
-                                Color.RED.name,
-                                Category.TROUSER.name,
-                                i,
-                                "5/10/2011"
-                            )
+                for (i in 1..20) {
+                    listItemProduct.add(
+                        ItemProduct(
+                            i.toString() + "trouser" + i,
+                            (i * 10).toFloat(),
+                            i.toString() + "AA",
+                            Color.RED.name,
+                            Category.TROUSER.name,
+                            i,
+                            "5/10/2011"
                         )
-                    }
-
-                    for (i in 1..20) {
-                        listItemProduct.add(
-                            ItemProduct(
-                                i.toString() + "shirt" + i, (i * 10).toFloat(), i.toString() + "AA",
-                                Color.YELLOW.name, Category.SHIRT.name, i, "11/11/2011"
-                            )
-                        )
-                    }
-
-                    for (item in listItemProduct) {
-                        itemProductDao.addProduct(item)
-                    }
-
-                    withContext(Dispatchers.Default)
-                    {
-                        listItemProduct = itemProductDao.getAllProducts()
-                    }
-                    withContext(Dispatchers.Default)
-                    {
-                        listItemProduct = listItemProduct.sortedWith { p1, p2 ->
-                            Collator.getInstance().compare(p1.name, p2.name)
-                        } as MutableList<ItemProduct>
-                        _listItemShow.postValue(listItemProduct)
-                    }
-                } else {
-                    withContext(Dispatchers.Default)
-                    {
-                        listItemProduct = itemProductDao.getAllProducts()
-                    }
-                    withContext(Dispatchers.Default)
-                    {
-                        listItemProduct = listItemProduct.sortedWith { p1, p2 ->
-                            Collator.getInstance().compare(p1.name, p2.name)
-                        } as MutableList<ItemProduct>
-                        _listItemShow.postValue(listItemProduct)
-                    }
-                    withContext(Dispatchers.Default)
-                    {
-                        itemBillDao = ItemBillDao(AppDatabase.getInstance(context))
-                    }
+                    )
                 }
+
+                for (i in 1..20) {
+                    listItemProduct.add(
+                        ItemProduct(
+                            i.toString() + "shirt" + i, (i * 10).toFloat(), i.toString() + "AA",
+                            Color.YELLOW.name, Category.SHIRT.name, i, "11/11/2011"
+                        )
+                    )
+                }
+
+                for (item in listItemProduct) {
+                    productRepository.addProduct(item)
+                }
+
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = productRepository.getProducts()
+                }
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = listItemProduct.sortedWith { p1, p2 ->
+                        Collator.getInstance().compare(p1.name, p2.name)
+                    } as MutableList<ItemProduct>
+                    _listItemShow.postValue(listItemProduct)
+                }
+            }
+            else
+            {
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct =  productRepository.getProducts()
+                }
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = listItemProduct.sortedWith { p1, p2 ->
+                        Collator.getInstance().compare(p1.name, p2.name)
+                    } as MutableList<ItemProduct>
+                    _listItemShow.postValue(listItemProduct)
+                }
+
             }
         }
     }

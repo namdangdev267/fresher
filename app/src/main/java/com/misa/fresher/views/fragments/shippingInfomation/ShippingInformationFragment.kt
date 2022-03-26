@@ -12,9 +12,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
 import com.misa.fresher.views.fragments.SharedViewModel
-import com.misa.fresher.views.fragments.shippingInfomation.Package.PackageFragment
-import com.misa.fresher.views.fragments.shippingInfomation.Receiver.ReceiverFragment
-import com.misa.fresher.views.fragments.shippingInfomation.Ship.ShipFragment
+import com.misa.fresher.views.fragments.shippingInfomation.pakage.PackageFragment
+import com.misa.fresher.views.fragments.shippingInfomation.receiver.ReceiverFragment
+import com.misa.fresher.views.fragments.shippingInfomation.ship.ShipFragment
 import com.misa.fresher.databinding.FragmentShippingInformationBinding
 
 class ShippingInformationFragment : Fragment() {

@@ -62,7 +62,7 @@ class BillDetailFragment : Fragment() {
 
             Navigation.findNavController(view)
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
-            sharedViewModel.addBillToListBill(view.context)
+            sharedViewModel.addBillToListBill()
 
             CustomToast.makeText(this.context!!,"Paid Successfully")
 

@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -25,6 +26,9 @@ import com.misa.fresher.models.enums.Color
 import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
 import com.misa.fresher.R
+import com.misa.fresher.data.dao.itemproduct.ItemProductDao
+import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.ProductRepository
 import com.misa.fresher.databinding.BottomSheetItemsaleBinding
 import com.misa.fresher.views.activities.MainActivity
 import com.misa.fresher.views.fragments.SharedViewModel
@@ -39,7 +43,9 @@ class SaleFragment : Fragment() {
         BottomSheetItemsaleBinding.inflate(layoutInflater)
     }
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val saleViewModel: SaleViewModel by viewModels()
+//    private val saleViewModel: SaleViewModel by viewModels()
+    private lateinit var saleViewModel:SaleViewModel
+
     var backAndOut = false
 
     var timer = object : CountDownTimer(3000, 1000) {
@@ -61,7 +67,7 @@ class SaleFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.e(this.javaClass.simpleName, "attach")
+        Log.e(this.javaClass.simpleName, "ATTACH")
         initViewModel()
     }
 
@@ -74,7 +80,7 @@ class SaleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedViewModel.fakeData(requireContext())
+
         transitionFragment(view)
         configFilterDrawer()
         configToolbar()
@@ -113,7 +119,12 @@ class SaleFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        saleViewModel.fakeData(requireContext())
+        val productDao = ItemProductDao(AppDatabase.getInstance(requireContext()))
+        val productRepository = ProductRepository(productDao)
+        val factory = SaleViewModelFactory(productRepository)
+
+        saleViewModel = ViewModelProvider(this,factory).get(SaleViewModel::class.java)
+        saleViewModel.fakeData()
 
     }
 
@@ -330,6 +341,26 @@ class SaleFragment : Fragment() {
         bottomSheetDialog.setContentView(bottomSheetItemsaleBinding.root)
         bottomSheetDialog.show()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(this.javaClass.simpleName,"RESUME")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(this.javaClass.simpleName,"PAUSE")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(this.javaClass.simpleName,"START")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(this.javaClass.simpleName,"STOP")
     }
 
 }

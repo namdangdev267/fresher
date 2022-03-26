@@ -1,4 +1,4 @@
-package com.misa.fresher.views.fragments.shippingInfomation.Receiver
+package com.misa.fresher.views.fragments.shippingInfomation.receiver
 
 import android.content.Context
 import android.os.Bundle
@@ -30,8 +30,6 @@ class ReceiverFragment : Fragment() {
         super.onAttach(context)
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

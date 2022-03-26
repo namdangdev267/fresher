@@ -13,8 +13,10 @@ import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.R
 import com.misa.fresher.data.dao.itembill.ItemBillDao
 import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.BillRepository
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.ActivityMainBinding
+import com.misa.fresher.views.fragments.ShareViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -33,8 +35,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
+        val billDao = ItemBillDao(AppDatabase.getInstance(this))
+        val billRepository  = BillRepository(billDao)
+        val factory = ShareViewModelFactory(billRepository)
+        sharedViewModel = ViewModelProvider(this,factory).get(SharedViewModel::class.java)
         configDrawer()
     }
 

@@ -1,4 +1,4 @@
-package com.misa.fresher.views.fragments.shippingInfomation.Ship
+package com.misa.fresher.views.fragments.shippingInfomation.ship
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentShipBinding
 
 class ShipFragment : Fragment() {
