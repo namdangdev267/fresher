@@ -1,5 +1,6 @@
 package com.misa.fresher.data.dao.selectedproduct
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.misa.fresher.data.database.AppDbHelper
@@ -8,7 +9,7 @@ import com.misa.fresher.data.model.Products
 import com.misa.fresher.data.model.SelectedProducts
 
 class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDao {
-    override fun addSelectedProduct(selectedProducts: SelectedProducts, billId: Int): Long {
+    override suspend fun addSelectedProduct(selectedProducts: SelectedProducts, billId: Int): Long {
         val contentValues = ContentValues()
         val databaseWrite = dbHelper.writableDatabase
         contentValues.apply {
@@ -22,14 +23,32 @@ class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDa
         ).also { databaseWrite.close() }
     }
 
-    override fun getSelectedProDuctByBill(billId: Int): MutableList<SelectedProducts> {
+    @SuppressLint("Range")
+    override suspend fun getSelectedProductByBill(billId: Int): MutableList<SelectedProducts> {
         val db = dbHelper.readableDatabase
-//        val cursor = db.rawQuery(
-//            "SELECT SP.${SelectedProducts.ID},SP.${SelectedProducts.ID_BILL},SP.${SelectedProducts.ID_PRODUCT},SP.${SelectedProducts.AMONUT}" +
-//                    "FROM ${SelectedProducts.TABLE_NAME} SP,${Bill.TABLE_NAME} B, ${Products.TABLE_NAME} P" +
-//                    "WHERE SP.${SelectedProducts.ID} = B.${Bill.ID} AND SP.${SelectedProducts.ID_PRODUCT} = P.${Products.ID}",null
-//        )
-        TODO()
+        val list = mutableListOf<SelectedProducts>()
+        val cursor = db.rawQuery("select s.amount,p.id,p.code,p.name,p.price,p.img,p.color,p.size \n" +
+                "from selectedproduct s, bill b, product p\n" +
+                "where s.idProduct = p.id\n" +
+                "and s.idBill = b.id \n " +
+                "and s.idBill = ${billId} ",null)
+        if(cursor.moveToFirst()){
+            while (!cursor.isAfterLast){
+                list.add(SelectedProducts(
+                    cursor.getInt(cursor.getColumnIndex("amount")),
+                    Products(cursor.getInt(cursor.getColumnIndex("id")),
+                        cursor.getString(cursor.getColumnIndex("code")),
+                        cursor.getString(cursor.getColumnIndex("name")),
+                        cursor.getDouble(cursor.getColumnIndex("price")),
+                        cursor.getInt(cursor.getColumnIndex("img")),
+                        cursor.getString(cursor.getColumnIndex("color")),
+                        cursor.getString(cursor.getColumnIndex("size"))
+                    ))
+                )
+                cursor.moveToNext()
+            }
+        }
+        return list
     }
 
     companion object {

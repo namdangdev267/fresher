@@ -1,12 +1,11 @@
 package com.misa.fresher.data.dao.product
 
-import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteDatabase
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Products
 
 class ProductDao(private val dbHelper: AppDbHelper) : IProductDao {
-    @SuppressLint("Range")
+
     override suspend fun getAllProducts(): MutableList<Products> {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
@@ -16,17 +15,7 @@ class ProductDao(private val dbHelper: AppDbHelper) : IProductDao {
         val list = mutableListOf<Products>()
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
-                list.add(
-                    Products(
-                        cursor.getInt(cursor.getColumnIndex(Products.ID)),
-                        cursor.getString(cursor.getColumnIndex(Products.CODE)),
-                        cursor.getString(cursor.getColumnIndex(Products.NAME)),
-                        cursor.getDouble(cursor.getColumnIndex(Products.PRICE)),
-                        cursor.getInt(cursor.getColumnIndex(Products.IMG)),
-                        cursor.getString(cursor.getColumnIndex(Products.COLOR)),
-                        cursor.getString(cursor.getColumnIndex(Products.SIZE))
-                    )
-                )
+                list.add(Products(cursor))
                 cursor.moveToNext()
             }
         }

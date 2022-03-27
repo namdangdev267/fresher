@@ -2,7 +2,6 @@ package com.misa.fresher.data.dao.bill
 
 import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteDatabase
-import com.misa.fresher.data.dao.product.ProductDao
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Bill
 import com.misa.fresher.data.model.Customer
@@ -21,12 +20,7 @@ class BillDao(private val dbHelper: AppDbHelper) : IBillDao {
     @SuppressLint("Range")
     override suspend fun getAllBill(): MutableList<Bill> {
         val databaseRead = dbHelper.readableDatabase
-        val cursor = databaseRead.rawQuery(
-            "SELECT bill.id,customer.id AS id_cus ,customer.name AS name_cus,customer.number AS number_cus," +
-                    "customer.address AS address_cus,bill.date,bill.totalPrice " +
-                    "FROM bill LEFT JOIN customer " +
-                    "ON bill.idCustomer = customer.id", null
-        )
+        val cursor = databaseRead.rawQuery(QUERY_BILL, null)
         val list = mutableListOf<Bill>()
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {

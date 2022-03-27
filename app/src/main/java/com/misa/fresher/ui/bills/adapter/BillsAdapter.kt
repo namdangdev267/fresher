@@ -20,7 +20,7 @@ class BillsAdapter(var mBills: MutableList<Bill>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvBillId.text = mBills[position].id.toString()
-        if(mBills[position].customer?.name != null && mBills[position].customer?.name != null){
+        if(mBills[position].customer!=null&&mBills[position].customer?.name != null && mBills[position].customer?.name != null){
             holder.tvCustomer.text = mBills[position].customer?.name + " - " + mBills[position].customer?.number
         }
         holder.tvTotalPriceBill.text = "${mBills[position].totalPrice}"

@@ -1,13 +1,13 @@
 package com.misa.fresher.ui.bills
 
 import android.content.Context
+import android.util.Log
 import com.misa.fresher.data.dao.bill.BillDao
+import com.misa.fresher.data.dao.selectedproduct.SelectedProductDao
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Bill
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.misa.fresher.data.model.SelectedProducts
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 

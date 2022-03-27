@@ -46,9 +46,8 @@ class BillsFragment :
     override fun initUI() {
         initPresenter()
         configToggle()
-        configRecyclerView()
         configSpinnerView()
-        getValuesForFilter()
+        configRecyclerView()
     }
 
     private fun getValuesForFilter() {
@@ -58,7 +57,6 @@ class BillsFragment :
                 val dateSpinnerValue = spnDate.selectedItem.toString()
                 mPresenter?.getFilterBills(dateSpinnerValue)
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
@@ -90,13 +88,13 @@ class BillsFragment :
         }
     }
 
-    private fun configRecyclerView():Boolean {
+    private fun configRecyclerView() {
         rcv = binding.rcvListBills
         rcvAdapter = BillsAdapter(mutableListOf())
         rcv?.adapter = rcvAdapter
         rcv?.layoutManager = LinearLayoutManager(requireContext())
         mPresenter?.getListBillsForAdapter(requireContext())
-        return true
+        getValuesForFilter()
     }
 
     private fun configToggle() {

@@ -1,6 +1,5 @@
 package com.misa.fresher.data.model
 
-import android.content.ContentValues
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

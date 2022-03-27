@@ -89,9 +89,8 @@ object Queries {
 
     const val SELECT_LASTEST_BILL_ID =
         "SELECT * FROM ${Bill.TABLE_NAME} ORDER BY ${Bill.ID} DESC LIMIT 1"
-    const val QUERY_BILL = "SELECT b.id,cus.id AS id_cus ,cus.name AS name_cus," +
-            "cus.number AS number_cus,cus.address AS address_cus,b.date,b.totalPrice" +
-            "FROM bill b, customer cus " +
-            "WHERE b.idCustomer = cus.id"
-
+    const val QUERY_BILL = "SELECT bill.id,customer.id AS id_cus ,customer.name AS name_cus,customer.number AS number_cus," +
+            "customer.address AS address_cus,bill.date,bill.totalPrice " +
+            "FROM bill LEFT JOIN customer " +
+            "ON bill.idCustomer = customer.id"
 }

@@ -21,6 +21,16 @@ data class Products(
     var color: String,
     var size: String
 ):Parcelable{
+    @SuppressLint("Range")
+    constructor(cursor: Cursor): this(0,"","",0.0,0,"",""){
+        id = cursor.getInt(cursor.getColumnIndex(ID))
+        code = cursor.getString(cursor.getColumnIndex(CODE))
+        name = cursor.getString(cursor.getColumnIndex(NAME))
+        price = cursor.getDouble(cursor.getColumnIndex(PRICE))
+        img = cursor.getInt(cursor.getColumnIndex(IMG))
+        color = cursor.getString(cursor.getColumnIndex(COLOR))
+        size = cursor.getString(cursor.getColumnIndex(SIZE))
+    }
 
     fun getContentValues():ContentValues{
         return ContentValues().apply {
