@@ -50,10 +50,22 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="Theme.FreshersApplication.ClickableItem">
+    <style name="Theme.FreshersApplication.ClickableItem" parent="Theme.FreshersApplication.Clickable">
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.Clickable">
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Theme.FreshersApplication.TextInputLayout">
+        <item name="endIconMode">clear_text</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="hintEnabled">false</item>
+        <item name="errorEnabled">false</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 
 </resources>

@@ -1,4 +1,6 @@
 # EShop
+## Màn hình đăng nhập
+<img src="./doc/sign_in_screen_raw.png?raw=true" width="240"/> <img src="./doc/sign_up_screen_raw.png?raw=true" width="240"/> <img src="./doc/sign_in_screen_layout.png?raw=true" width="240"/> <img src="./doc/sign_up_screen_layout.png?raw=true" width="240"/>
 ## Màn hình bán hàng (Sale)
 <img src="./doc/sale_screen_raw.png?raw=true" width="240"/> <img src="./doc/sale_screen_layout.png?raw=true" width="240"/>
 #### Các giao diện khác của màn hình bán hàng

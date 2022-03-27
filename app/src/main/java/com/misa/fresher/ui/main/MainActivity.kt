@@ -1,4 +1,4 @@
-package com.misa.fresher.ui
+package com.misa.fresher.ui.main
 
 import android.view.LayoutInflater
 import androidx.navigation.findNavController
@@ -18,14 +18,17 @@ import com.misa.fresher.databinding.HeaderNavBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/9/2022: Tạo class
  * @updated 3/15/2022: Thêm biến chung [tempCustomer] để sử dụng giữa các fragment
+ * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainContract.View, MainPresenter>(), MainContract.View {
 
     override val getInflater: (inflater: LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
+    override val initPresenter: () -> MainPresenter
+        get() = { MainPresenter(this) }
 
     private var appBarConfiguration: AppBarConfiguration? = null
 

@@ -8,13 +8,16 @@ import java.util.*
  * @author Nguyễn Công Chính
  * @since 3/14/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/14/2022: Tạo class
  * @updated 3/18/2022: Không sử dụng hàm generateBillCode() nữa, thay thế bằng [FakeData.getId]
+ * @updated 3/23/2022: Chuyển lớp Random -> [RandomSingleton]
  */
-object Rand {
+object RandomSingleton {
 
-    val instance = Random()
+    private val random = Random()
+
+    fun getInstance(): Random = random
 
     /**
      * Hàm sinh thời gian ngẫu nhiên từ khoảng 30 ngày trước đến hiện tại
@@ -24,11 +27,11 @@ object Rand {
      *
      * @version 2
      * @updated 3/10/2022: Tạo function
-     * @updated 3/15/2022: Đổi nhà mới từ [FakeData] -> [Rand]
+     * @updated 3/15/2022: Đổi nhà mới từ [FakeData] -> [RandomSingleton]
      */
     fun generateTime(): Date {
         val now = Date()
-        val randomDay = instance.nextInt(60)
+        val randomDay = getInstance().nextInt(60)
         now.time -= randomDay * 86400000L
         return now
     }

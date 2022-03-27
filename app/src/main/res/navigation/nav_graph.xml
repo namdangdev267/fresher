@@ -41,4 +41,9 @@
         android:name="com.misa.fresher.ui.sale.bill.deliveryinfo.DeliveryInfoFragment"
         android:label=""
         tools:layout="@layout/fragment_delivery_info"/>
+<!--    <fragment-->
+<!--        android:id="@+id/fragment_test"-->
+<!--        android:name="com.misa.fresher.ui.test.TestFragment"-->
+<!--        android:label=""-->
+<!--        tools:layout="@layout/fragment_test"/>-->
 </navigation>

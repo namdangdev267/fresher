@@ -1,4 +1,4 @@
-package com.misa.fresher.ui.sale.bill.deliveryinfo
+package com.misa.fresher.ui.sale.bill.deliveryinfo.packageinfo
 
 import android.text.InputType
 import android.view.LayoutInflater
@@ -14,13 +14,19 @@ import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/15/2022: Tạo class
+ * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
  */
-class PackageInfoFragment: BaseFragment<FragmentPackageInfoBinding>() {
+class PackageInfoFragment :
+    BaseFragment<FragmentPackageInfoBinding, PackageInfoContract.View, PackageInfoPresenter>(),
+    PackageInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentPackageInfoBinding
         get() = FragmentPackageInfoBinding::inflate
+    override val initPresenter: () -> PackageInfoPresenter
+        get() = { PackageInfoPresenter(this) }
+
     private var adapter: DeliveryInputAdapter? = null
 
     override fun initUI() {

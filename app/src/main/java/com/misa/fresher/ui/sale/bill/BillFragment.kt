@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.misa.fresher.R
 import com.misa.fresher.common.FakeData
-import com.misa.fresher.common.Rand
+import com.misa.fresher.common.RandomSingleton
 import com.misa.fresher.core.BaseFragment
 import com.misa.fresher.data.entity.Bill
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.FragmentBillBinding
-import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.SaleFragment
 import com.misa.fresher.ui.sale.bill.adapter.ProductBillAdapter
 import com.misa.fresher.util.get
@@ -24,14 +24,18 @@ import java.util.*
  * @author Nguyễn Công Chính
  * @since 3/13/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/13/2022: Tạo class
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
+ * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
  */
-class BillFragment: BaseFragment<FragmentBillBinding>() {
+class BillFragment : BaseFragment<FragmentBillBinding, BillContract.View, BillPresenter>(),
+    BillContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentBillBinding
         get() = FragmentBillBinding::inflate
+    override val initPresenter: () -> BillPresenter
+        get() = { BillPresenter(this) }
 
     private val selectedItems by lazy { arguments.get(SaleFragment.ARGUMENT_SELECTED_ITEMS, mutableListOf<ProductItemBill>()) }
 
@@ -133,7 +137,7 @@ class BillFragment: BaseFragment<FragmentBillBinding>() {
         binding.tvCustomer.setOnClickListener {
             binding.tvCustomer.marqueeRepeatLimit = 1
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.MARQUEE
-            (activity as MainActivity).tempCustomer = FakeData.customers[Rand.instance.nextInt(FakeData.customers.size)]
+            (activity as MainActivity).tempCustomer = FakeData.customers[RandomSingleton.getInstance().nextInt(FakeData.customers.size)]
             binding.tvCustomer.text = (activity as MainActivity).tempCustomer.toString()
             binding.tvCustomer.isSelected = true
         }

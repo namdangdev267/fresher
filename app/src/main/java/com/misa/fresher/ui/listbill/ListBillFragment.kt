@@ -6,11 +6,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.misa.fresher.R
-import com.misa.fresher.common.FakeData
 import com.misa.fresher.core.BaseFragment
-import com.misa.fresher.data.model.FilterBillModel
+import com.misa.fresher.data.entity.Bill
 import com.misa.fresher.databinding.FragmentListBillBinding
-import com.misa.fresher.ui.MainActivity
+import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.listbill.adapter.BillAdapter
 import com.misa.fresher.util.enum.TimeFilterType
 import com.misa.fresher.util.toCurrency
@@ -21,17 +20,21 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/9/2022: Tạo class
  * @updated 3/16/2022: Thêm nội dung cho màn hình
+ * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
-class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
+class ListBillFragment :
+    BaseFragment<FragmentListBillBinding, ListBillContract.View, ListBillPresenter>(),
+    ListBillContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentListBillBinding
         get() = FragmentListBillBinding::inflate
+    override val initPresenter: () -> ListBillPresenter
+        get() = { ListBillPresenter(this) }
 
     private var billAdapter: BillAdapter? = null
-    private val filter: FilterBillModel = FilterBillModel()
 
     override fun initUI() {
         configToolbar()
@@ -39,7 +42,20 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
         configBillRcv()
         configOtherView()
 
-        updateListBill()
+        initListBill()
+    }
+
+    /**
+     * Khởi tạo danh sách hóa đơn
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/23/2022
+     *
+     * @version 1
+     * @updated 3/23/2022: Tạo function
+     */
+    private fun initListBill() {
+        presenter?.filterByKeyword("")
     }
 
     /**
@@ -89,14 +105,14 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
         binding.spnFilterTime.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                    when (position) {
-                        0 -> filter.time = TimeFilterType.TODAY
-                        1 -> filter.time = TimeFilterType.YESTERDAY
-                        2 -> filter.time = TimeFilterType.BEFORE_YESTERDAY
-                        3 -> filter.time = TimeFilterType.THIS_WEEK
-                        else -> filter.time = TimeFilterType.OTHER
+                    val time: TimeFilterType = when (position) {
+                        0 -> TimeFilterType.TODAY
+                        1 -> TimeFilterType.YESTERDAY
+                        2 -> TimeFilterType.BEFORE_YESTERDAY
+                        3 -> TimeFilterType.THIS_WEEK
+                        else -> TimeFilterType.OTHER
                     }
-                    updateListBill()
+                    presenter?.filterByTime(time)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -106,24 +122,6 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
             R.layout.item_simple_text_spinner,
             resources.getStringArray(R.array.filter_bill_status)
         )
-    }
-
-    /**
-     * Hàm cập nhật lại danh sách hóa đơn sau mỗi lần lọc/tìm kiếm
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/16/2022
-     *
-     * @version 1
-     * @updated 3/16/2022: Tạo function
-     */
-    private fun updateListBill() {
-        val filterItems = filter.filter(FakeData.bills)
-        billAdapter?.updateData(filterItems.toMutableList())
-        binding.tvCount.text = filterItems.size.toString()
-        binding.tvTotal.text = filterItems.sumOf { item ->
-            item.items.sumOf { it.item.price * it.quantity }
-        }.toCurrency()
     }
 
     /**
@@ -151,8 +149,7 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
                 }
                 R.id.btn_close -> {
                     binding.tbListBill.etInput.text.clear()
-                    filter.keyword = ""
-                    updateListBill()
+                    presenter?.filterByKeyword("")
                     binding.tbListBill.llSearch.visibility = View.GONE
                     binding.tbListBill.root.menu.clear()
                     binding.tbListBill.root.inflateMenu(R.menu.menu_list_bill)
@@ -162,10 +159,17 @@ class ListBillFragment : BaseFragment<FragmentListBillBinding>() {
         }
         binding.tbListBill.etInput.setOnEditorActionListener { textView, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
-                filter.keyword = textView.text.toString()
-                updateListBill()
+                presenter?.filterByKeyword(textView.text.toString())
             }
             false
         }
+    }
+
+    override fun updateBillList(list: MutableList<Bill>) {
+        billAdapter?.updateData(list)
+        binding.tvCount.text = list.size.toString()
+        binding.tvTotal.text = list.sumOf { item ->
+            item.items.sumOf { it.item.price * it.quantity }
+        }.toCurrency()
     }
 }
