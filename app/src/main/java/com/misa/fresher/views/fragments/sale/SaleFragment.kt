@@ -15,38 +15,39 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.enum.SortBy
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
 import com.misa.fresher.R
+import com.misa.fresher.data.dao.itemproduct.ItemProductDao
+import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.ProductRepository
+import com.misa.fresher.databinding.BottomSheetItemsaleBinding
 import com.misa.fresher.views.activities.MainActivity
-import com.misa.fresher.views.customViews.CustomRecyclerView
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.showToastUp
 import com.misa.fresher.views.customViews.CustomToast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 
 class SaleFragment : Fragment() {
 
+    private val bottomSheetDialog by lazy {   BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)}
+    private val bottomSheetItemsaleBinding: BottomSheetItemsaleBinding by lazy {
+        BottomSheetItemsaleBinding.inflate(layoutInflater)
+    }
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val saleViewModel: SaleViewModel by viewModels()
+//    private val saleViewModel: SaleViewModel by viewModels()
+    private lateinit var saleViewModel:SaleViewModel
+
     var backAndOut = false
 
     var timer = object : CountDownTimer(3000, 1000) {
-
         override fun onTick(millisUntilFinished: Long) {
             backAndOut = true
         }
@@ -55,7 +56,6 @@ class SaleFragment : Fragment() {
             backAndOut = false
         }
     }
-
 
     private val binding:FragmentSaleBinding by lazy {
         getInflater(layoutInflater)
@@ -66,7 +66,7 @@ class SaleFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.e(this.javaClass.simpleName, "attach")
+//        Log.e(this.javaClass.simpleName, "ATTACH")
         initViewModel()
     }
 
@@ -77,8 +77,6 @@ class SaleFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -87,13 +85,11 @@ class SaleFragment : Fragment() {
         configToolbar()
         configOtherView()
         configListView()
-
-
     }
 
     private fun transitionFragment(view: View) {
         binding.llGetBillDetail.setOnClickListener {
-            if (sharedViewModel.listItemSelected.value?.size!! > 0)
+            if (sharedViewModel.listItemBillDetail.value?.size!! > 0)
                 Navigation.findNavController(view)
                     .navigate(R.id.action_saleFragment_to_billDetailFragment)
         }
@@ -122,21 +118,27 @@ class SaleFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        saleViewModel.initData()
+        val productDao = ItemProductDao(AppDatabase.getInstance(requireContext()))
+        val productRepository = ProductRepository(productDao)
+        val factory = SaleViewModelFactory(productRepository)
+
+        saleViewModel = ViewModelProvider(this,factory).get(SaleViewModel::class.java)
+        saleViewModel.fakeData()
+
     }
 
     private fun configToolbar() {
-        binding.searchViewSale.findViewById<ImageView>(R.id.imageview_search_icon3)
+        binding.searchViewSale.binding.imageviewSearchIcon3
             .setOnClickListener {
                 toggleDrawer(binding.nvFilter)
             }
 
-        binding.searchViewSale.findViewById<ImageView>(R.id.imageview_search_icon1)
+        binding.searchViewSale.binding.imageviewSearchIcon1
             .setOnClickListener {
                 (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.nvMenu)
             }
 
-        val editText = binding.searchViewSale.findViewById<EditText>(R.id.edittext_search_hint)
+        val editText = binding.searchViewSale.binding.edittextSearchHint
 
         editText.doAfterTextChanged {
             clearFilter()
@@ -150,7 +152,7 @@ class SaleFragment : Fragment() {
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
         binding.layoutFilter.radioBtNameSort.isChecked = true
 
-        binding.layoutFilter.swQuantity.setOnCheckedChangeListener { it, b ->
+        binding.layoutFilter.swQuantity.setOnCheckedChangeListener { _, b ->
             saleViewModel.filter.available = b
         }
 
@@ -177,7 +179,6 @@ class SaleFragment : Fragment() {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
-
             }
 
         binding.layoutFilter.radioBtNameSort.setOnClickListener {
@@ -216,7 +217,6 @@ class SaleFragment : Fragment() {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
-
             }
 
         binding.layoutFilter.tvFilterDone.setOnClickListener {
@@ -235,12 +235,11 @@ class SaleFragment : Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables", "NotifyDataSetChanged")
     private fun configListView() {
         binding.recyclerviewSaleFragment.layoutManager = LinearLayoutManager(requireContext())
-
         saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
             binding.recyclerviewSaleFragment.adapter=SaleAdapter(it) { saleItemClick(it) }
         })
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.listItemBillDetail.observe(viewLifecycleOwner, Observer {
             binding.tvQuantityItemSelected.text = it.size.toString()
 
             if (it.size >= 1) {
@@ -271,7 +270,7 @@ class SaleFragment : Fragment() {
             sharedViewModel.clearListItemSelected()
         }
 
-        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.infoShip.observe(viewLifecycleOwner, Observer {
             if(it.receiver!=null && it.tel!=null)
             {
                 binding.tvInforCustomer.isSelected = true
@@ -281,17 +280,17 @@ class SaleFragment : Fragment() {
             {
                 binding.tvInforCustomer.text ="Customer name, phone number"
             }
-
         })
     }
 
     fun clearFilter() {
         saleViewModel.clearFilter()
-        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_name_sort).isChecked = true
-        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_new_sort).isChecked = false
-        binding.nvFilter.findViewById<RadioButton>(R.id.radio_bt_quantity_sort).isChecked = false
-        binding.nvFilter.findViewById<Spinner>(R.id.spin_item_category).setSelection(0)
-        binding.nvFilter.findViewById<Spinner>(R.id.spin_item_color).setSelection(0)
+
+        binding.layoutFilter.radioBtNameSort.isChecked = true
+        binding.layoutFilter.radioBtNewSort.isChecked = false
+        binding.layoutFilter.radioBtQuantitySort.isChecked = false
+        binding.layoutFilter.spinItemCategory.setSelection(0)
+        binding.layoutFilter.spinItemColor.setSelection(0)
     }
 
     private fun toggleDrawer(view: View) {
@@ -303,19 +302,13 @@ class SaleFragment : Fragment() {
     }
 
     private fun saleItemClick(itemProduct: ItemProduct) {
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        val bottomSheetView: View = LayoutInflater.from(requireContext()).inflate(
-            R.layout.bottom_sheet_itemsale,
-            this.view as DrawerLayout, false
-        )
+        val tvItemName = bottomSheetItemsaleBinding.tvItemName
+        val tvItemId = bottomSheetItemsaleBinding.tvItemId
+        val tvItemQuantity = bottomSheetItemsaleBinding.tvQuantity
+        val recyclerView = bottomSheetItemsaleBinding.cvRcv.bindingCustomRecyclerView.cvRcvRecyclerview
 
-        val tvItemName = bottomSheetView.findViewById<TextView>(R.id.tv_item_name)
-        val tvItemId = bottomSheetView.findViewById<TextView>(R.id.tv_item_id)
-        val tvItemQuantity = bottomSheetView.findViewById<TextView>(R.id.tv_quantity)
-        val recyclerView = bottomSheetView.findViewById<CustomRecyclerView>(R.id.cv_rcv)
-            .findViewById<RecyclerView>(R.id.cv_rcv_recyclerview)
-        val btAdd = bottomSheetView.findViewById<ImageView>(R.id.iv_add)
-        val btRemove = bottomSheetView.findViewById<ImageView>(R.id.iv_remove)
+        val btAdd = bottomSheetItemsaleBinding.ivAdd
+        val btRemove = bottomSheetItemsaleBinding.ivRemove
 
         sharedViewModel.updateItemSelected(itemProduct)
 
@@ -325,28 +318,49 @@ class SaleFragment : Fragment() {
         }
 
         btRemove.setOnClickListener {
-            if (sharedViewModel.itemSelected.value?.quantity == 1) {
-                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again",Toast.LENGTH_SHORT)
+            if (sharedViewModel.itemBillDetail.value?.quantity == 1) {
+                CustomToast.makeText(this.context!!,"Quantity must be more than 0. Please check again")
             } else {
                 sharedViewModel.updateItemSelectedQuantity(-1)
             }
         }
 
-        sharedViewModel.itemSelected.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.itemBillDetail.observe(viewLifecycleOwner, Observer {
             tvItemQuantity.text = it.quantity.toString()
             tvItemName.text = it.name
-            tvItemId.text = it.id
+            tvItemId.text = it.code
         })
+
         recyclerView.adapter =
             CustomRecyclerViewAdapter(saleViewModel.getColorOf(itemProduct)) {
                 sharedViewModel.updateListItemSelected()
                 bottomSheetDialog.dismiss()
             }
 
-        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.setContentView(bottomSheetItemsaleBinding.root)
         bottomSheetDialog.show()
 
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        Log.e(this.javaClass.simpleName,"RESUME")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.e(this.javaClass.simpleName,"PAUSE")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        Log.e(this.javaClass.simpleName,"START")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.e(this.javaClass.simpleName,"STOP")
+//    }
 
 }
 

@@ -2,6 +2,7 @@ package com.misa.fresher.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -10,8 +11,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.R
+import com.misa.fresher.data.dao.infoship.InfoShipDao
+import com.misa.fresher.data.dao.itembill.ItemBillDao
+import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.BillRepository
+import com.misa.fresher.data.repositories.InfoShipRepository
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.ActivityMainBinding
+import com.misa.fresher.views.fragments.ShareViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,32 +37,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
+        val billDao = ItemBillDao(AppDatabase.getInstance(this))
+        val billRepository  = BillRepository(billDao)
+        val infoShipDao = InfoShipDao(AppDatabase.getInstance(this))
+        val infoShipRepository = InfoShipRepository(infoShipDao)
+        val factory = ShareViewModelFactory(billRepository,infoShipRepository)
+        sharedViewModel = ViewModelProvider(this,factory).get(SharedViewModel::class.java)
         configDrawer()
     }
 
     override fun onBackPressed() {
-        if(binding.root.isDrawerOpen(binding.nvMenu))
-        {
+        if (binding.root.isDrawerOpen(binding.nvMenu)) {
             toggleDrawer(binding.nvMenu)
-        }
-        else
-        {
+        } else {
             super.onBackPressed()
         }
     }
 
-
     private fun configDrawer() {
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController.graph, findViewById<DrawerLayout>(R.id.drawer_layout))
-        appBarConfiguration.let {
-            (findViewById<NavigationView>(R.id.nv_menu)).setupWithNavController(
-                navController
-            )
-        }
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
+        appBarConfiguration.let { binding.nvMenu.setupWithNavController(navController) }
     }
 
     fun toggleDrawer(view: View) {
@@ -60,6 +71,5 @@ class MainActivity : AppCompatActivity() {
             binding.root.openDrawer(view)
         }
     }
-
 
 }

@@ -1,18 +1,29 @@
 package com.misa.fresher.views.fragments
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.BillStatus
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.InforShip
+import androidx.lifecycle.viewModelScope
+import com.misa.fresher.data.repositories.BillRepository
+import com.misa.fresher.data.repositories.InfoShipRepository
+import com.misa.fresher.models.enums.BillStatus
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.InfoShip
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import java.util.*
 
-class SharedViewModel : ViewModel() {
+class SharedViewModel(
+    private val billRepository: BillRepository,
+    private val infoShipRepository: InfoShipRepository
+) : ViewModel() {
+    var queueBill: LinkedList<ItemBill> = LinkedList()
+    var queueInfoShip: LinkedList<InfoShip> = LinkedList()
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -22,131 +33,137 @@ class SharedViewModel : ViewModel() {
     val billHandling: LiveData<ItemBill>
         get() = _billHandling
 
-    private val _inforShip = MutableLiveData<InforShip>()
-    val inforShip: LiveData<InforShip>
-        get() = _inforShip
+    private val _infoShip = MutableLiveData<InfoShip>()
+    val infoShip: LiveData<InfoShip>
+        get() = _infoShip
 
-    private val _itemSelected = MutableLiveData<ItemBillDetail>()
-    val itemSelected: LiveData<ItemBillDetail>
-        get() = _itemSelected
+    private val _itemBillDetail = MutableLiveData<ItemBillDetail>()
+    val itemBillDetail: LiveData<ItemBillDetail>
+        get() = _itemBillDetail
 
-    private val _listItemSelected = MutableLiveData<MutableList<ItemBillDetail>>()
-    val listItemSelected: LiveData<MutableList<ItemBillDetail>>
-        get() = _listItemSelected
+    private val _listItemBillDetail = MutableLiveData<MutableList<ItemBillDetail>>()
+    val listItemBillDetail: LiveData<MutableList<ItemBillDetail>>
+        get() = _listItemBillDetail
+
+
+    /**
+     * get data
+     */
 
     init {
-        _itemSelected.postValue(
+        _billHandling.postValue(
+            ItemBill(
+                mutableListOf(),
+                InfoShip(),
+                BillStatus.HANDLING.name,
+                Calendar.getInstance().time.toString()
+            )
+        )
+
+        _itemBillDetail.postValue(
             ItemBillDetail(
-                ItemProduct("", 0f, "", Color.RED, Category.SHIRT, 10, "11/4/2011"),
+                ItemProduct(
+                    "",
+                    0f,
+                    "",
+                    Color.RED.toString(),
+                    Category.SHIRT.toString(),
+                    10,
+                    "11/4/2011"
+                ),
+                "0",
                 1
             )
         )
-        _listItemSelected.postValue(mutableListOf())
+        _listItemBillDetail.postValue(mutableListOf())
 
-        _billHandling.postValue(
-            ItemBill(
-                (1000000..2000000).random().toString(),
-                mutableListOf(),
-                null,
-                BillStatus.HANDLING,
-                Calendar.getInstance().time
-            )
-        )
         _listBill.postValue(mutableListOf())
 
-        _inforShip.postValue(  InforShip(null,null,null,null,null,null,null,null,null,false))
+        _infoShip.postValue(InfoShip())
+
+
+        viewModelScope.launch {
+            _listBill.postValue(billRepository.getBills())
+            var i=0
+        }
     }
+
 
     /**
      * item selected
      */
 
     fun updateItemSelected(itemProduct: ItemProduct) {
-        val itemSelected = _listItemSelected.value?.find {
+
+        Log.e("billl", _billHandling.value?.id.toString())
+        val itemSelected = _listItemBillDetail.value?.find {
             it.itemProduct == itemProduct
-        }?:ItemBillDetail(itemProduct, 1)
+        } ?: _billHandling.value?.id?.let { ItemBillDetail(itemProduct, it, 1) }
 
-
-        _itemSelected.postValue(itemSelected)
+        _itemBillDetail.postValue(itemSelected!!)
     }
 
     fun updateItemSelectedQuantity(num: Int) {
-        val itemSelected = _itemSelected.value?.let {
-            ItemBillDetail(
-                it.itemProduct, it.quantity + num
-            )
-        }
-        _itemSelected.postValue(itemSelected!!)
+        _itemBillDetail.value?.updateQuantity(num)
+        _itemBillDetail.postValue(_itemBillDetail.value)
     }
+
 
     /**
      * List item selected
      */
 
     fun updateListItemSelected() {
-        val listSelected = _listItemSelected.value
+        val listSelected = _listItemBillDetail.value
         var check = false
 
         listSelected?.let {
             for (item in listSelected) {
-                if (item.itemProduct == _itemSelected.value?.itemProduct) {
-                    item.quantity = _itemSelected.value!!.quantity
+                if (item.itemProduct == _itemBillDetail.value?.itemProduct) {
+                    item.quantity = _itemBillDetail.value!!.quantity
                     check = true
                 }
             }
         }
         if (!check) {
-            _itemSelected.value?.let { listSelected?.add(it) }
+            _itemBillDetail.value?.let { listSelected?.add(it) }
         }
-        _listItemSelected.postValue(listSelected!!)
+        _listItemBillDetail.postValue(listSelected!!)
     }
 
     fun clearListItemSelected() {
-        _listItemSelected.postValue(mutableListOf())
-        _billHandling.postValue(
-            ItemBill(
-                (1000000..2000000).random().toString(),
-                mutableListOf(),
-                null,
-                BillStatus.HANDLING,
-                Calendar.getInstance().time
+        _listItemBillDetail.postValue(mutableListOf())
+
+        CoroutineScope(IO).launch {
+            _billHandling.postValue(
+                ItemBill(
+                    mutableListOf(),
+                    null,
+                    BillStatus.HANDLING.name,
+                    Calendar.getInstance().time.toString()
+                )
             )
-        )
-
-        _inforShip.postValue(  InforShip(null,null,null,null,null,null,null,null,null,false))
-
+            _infoShip.postValue(InfoShip(null, null, null, null))
+        }
     }
 
     fun getTotalPrice(): Float {
         var totalPrice = 0f
-        _listItemSelected.value?.let {
+        _listItemBillDetail.value?.let {
             for (i in it) {
-                totalPrice += i.itemProduct.price * i.quantity
+                totalPrice += i.itemProduct?.price!! * i.quantity
             }
         }
         return totalPrice
     }
 
     fun updateQuantityOfItemBillDetail(itemBillDetail: ItemBillDetail) {
-        if (itemBillDetail.quantity == 0) {
-            val selectedList = mutableListOf<ItemBillDetail>()
-            for (i in selectedList) {
-                if (i.itemProduct == itemBillDetail.itemProduct) {
-
-                } else {
-                    selectedList.add(i)
-                }
-            }
-            _listItemSelected.postValue(selectedList)
-        } else {
-            var selectedList = _listItemSelected.value
-            selectedList?.let {
-                for (i in it) {
-                    if (i.itemProduct == itemBillDetail.itemProduct) {
-                        i.quantity = itemBillDetail.quantity
-                        _listItemSelected.postValue(it)
-                        break
-                    }
+        _listItemBillDetail.value?.let {
+            for (item in it) {
+                if (item.itemProduct == itemBillDetail.itemProduct) {
+                    item.quantity = itemBillDetail.quantity
+                    _listItemBillDetail.postValue(it)
+                    break
                 }
             }
         }
@@ -156,8 +173,8 @@ class SharedViewModel : ViewModel() {
      * shipping information
      */
 
-    fun updateInforShip(inforShip: InforShip) {
-        _inforShip.postValue(inforShip)
+    fun updateInforShip(infoShip: InfoShip) {
+        _infoShip.postValue(infoShip)
     }
 
 
@@ -166,27 +183,49 @@ class SharedViewModel : ViewModel() {
      */
 
     fun addBillToListBill() {
-        _billHandling.value?.listItemBillDetail = _listItemSelected.value!!
-        _billHandling.value?.inforShip = _inforShip.value!!
+        _billHandling.value?.listItemBillDetail = _listItemBillDetail.value!!
+        _billHandling.value?.infoShip = _infoShip.value!!
         _billHandling.postValue(_billHandling.value)
+        _billHandling.value?.let {
+            _listBill.value?.add(it)
+            it.setBillPrice()
+        }
+        _billHandling.value?.let {
+            queueBill.add(it)
+        }
 
-        _billHandling.value?.let { _listBill.value?.add(it) }
+        _infoShip.value?.let {
+            queueInfoShip.add(it)
+        }
+
+
+        viewModelScope.launch {
+            while (queueBill.size != 0) {
+                billRepository.addBill(queueBill.peek())
+                queueBill.pop()
+            }
+        }
+
+        viewModelScope.launch {
+            while (queueInfoShip.size != 0) {
+                infoShipRepository.addInfoShip(queueInfoShip.peek())
+                queueInfoShip.pop()
+            }
+        }
 
         _listBill.postValue(_listBill.value)
         clearListItemSelected()
 
-        var i = 0
     }
 
     fun getTotalPriceListBill(): Float {
         var res = 0f
         _listBill.value?.let {
-            for (i in _listBill.value!!) {
-                res += i.getPrice()
+            for (i in it) {
+                res += i.billPrice
             }
         }
         return res
-
     }
 
 

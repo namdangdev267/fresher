@@ -38,16 +38,11 @@ class BillFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.sharedViewModel = sharedViewModel
+        binding.billAdapter = BillAdapter()
+
         transitionFragment(view)
-        configListView()
         configToolbar()
-        configOtherView()
-    }
-
-    private fun configOtherView() {
-        binding.tvBillTotalQuantity.text = sharedViewModel.listBill.value?.size.toString()
-
-        binding.tvBillTotalPrice.text  = sharedViewModel.getTotalPriceListBill().toString()
     }
 
     private fun configToolbar() {
@@ -61,18 +56,5 @@ class BillFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_billFragment_to_saleFragment)
         }
-
     }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun configListView() {
-        binding.recyclerviewBillList.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerviewBillList.adapter = sharedViewModel.listBill.value?.let { BillAdapter(it) }
-
-        sharedViewModel.listBill.observe(viewLifecycleOwner, Observer {
-            binding.recyclerviewBillList.adapter?.notifyDataSetChanged()
-        })
-    }
-
-
 }

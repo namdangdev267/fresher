@@ -1,18 +1,27 @@
 package com.misa.fresher.views.fragments.sale
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.misa.fresher.models.enum.Category
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.models.enum.SortBy
+import androidx.lifecycle.viewModelScope
+import com.misa.fresher.data.dao.itembill.ItemBillDao
+import com.misa.fresher.data.dao.itemproduct.ItemProductDao
+import com.misa.fresher.data.database.AppDatabase
+import com.misa.fresher.data.repositories.ProductRepository
+import com.misa.fresher.models.ItemBill
+import com.misa.fresher.models.enums.Category
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import java.text.Collator
+import java.util.*
 
 
-class SaleViewModel : ViewModel() {
-    var init = false
+class SaleViewModel(private val productRepository: ProductRepository) : ViewModel() {
     var search: String = ""
     var filter: Filter = Filter(null, null, false, SortBy.NAME)
 
@@ -29,33 +38,67 @@ class SaleViewModel : ViewModel() {
         var sortBy: SortBy?
     )
 
-    fun initData() {
-        fakeData()
+
+    fun fakeData() {
         _listItemShow.postValue(listItemProduct)
-    }
+        viewModelScope.launch {
+            if(productRepository.getProducts().size==0)
+            {
+                for (i in 1..20) {
+                    listItemProduct.add(
+                        ItemProduct(
+                            i.toString() + "trouser" + i,
+                            (i * 10).toFloat(),
+                            i.toString() + "AA",
+                            Color.RED.name,
+                            Category.TROUSER.name,
+                            i,
+                            "5/10/2011"
+                        )
+                    )
+                }
 
-    private fun fakeData() {
-        for (i in 1..20) {
-            listItemProduct.add(
-                ItemProduct(
-                    i.toString() + "trouser" + i, (i * 10).toFloat(), i.toString() + "AA",
-                    Color.RED, Category.TROUSER, i, "5/10/2011"
-                )
-            )
+                for (i in 1..20) {
+                    listItemProduct.add(
+                        ItemProduct(
+                            i.toString() + "shirt" + i, (i * 10).toFloat(), i.toString() + "AA",
+                            Color.YELLOW.name, Category.SHIRT.name, i, "11/11/2011"
+                        )
+                    )
+                }
+
+                for (item in listItemProduct) {
+                    productRepository.addProduct(item)
+                }
+
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = productRepository.getProducts()
+                }
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = listItemProduct.sortedWith { p1, p2 ->
+                        Collator.getInstance().compare(p1.name, p2.name)
+                    } as MutableList<ItemProduct>
+                    _listItemShow.postValue(listItemProduct)
+                }
+            }
+            else
+            {
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct =  productRepository.getProducts()
+                }
+                withContext(Dispatchers.Default)
+                {
+                    listItemProduct = listItemProduct.sortedWith { p1, p2 ->
+                        Collator.getInstance().compare(p1.name, p2.name)
+                    } as MutableList<ItemProduct>
+                    _listItemShow.postValue(listItemProduct)
+                }
+
+            }
         }
-
-        for (i in 1..20) {
-            listItemProduct.add(
-                ItemProduct(
-                    i.toString() + "shirt" + i, (i * 10).toFloat(), i.toString() + "AA",
-                    Color.YELLOW, Category.SHIRT, i, "11/11/2011"
-                )
-            )
-        }
-
-        listItemProduct = listItemProduct.sortedWith { p1, p2 ->
-            Collator.getInstance().compare(p1.name, p2.name)
-        } as MutableList<ItemProduct>
     }
 
     /**
@@ -78,7 +121,12 @@ class SaleViewModel : ViewModel() {
         search = searchString
         _listItemShow.postValue(listItemProduct)
         var showList = mutableListOf<ItemProduct>()
-        showList = listItemProduct.filter { it.name.contains(searchString, true) } as MutableList<ItemProduct>
+        showList = listItemProduct.filter {
+            it.name.contains(
+                searchString,
+                true
+            )
+        } as MutableList<ItemProduct>
 
         _listItemShow.postValue(showList)
     }
@@ -86,31 +134,24 @@ class SaleViewModel : ViewModel() {
     fun filterListItemShow() {
         Log.e("filter", filter.toString())
         var showList = mutableListOf<ItemProduct>()
-        showList = listItemProduct.filter { it.name.contains(search, true) } as MutableList<ItemProduct>
-//        for (i in listItemProduct) {
-//            if (i.name.contains(search)) {
-//                showList.add(i)
-//            }
-//        }
+        showList =
+            listItemProduct.filter {
+                it.name.contains(
+                    search,
+                    true
+                )
+            } as MutableList<ItemProduct>
         var res = mutableListOf<ItemProduct>()
         for (i in showList) {
-            val filterCategory = (filter.category != null && filter.category != i.category)
-            val filterColor = (filter.color != null && filter.color != i.color)
-            val filterAvailable = (filter.available == true && i.availableQuantity <= 0)
+            val filterCategory =
+                (filter.category != null && filter.category.toString() != i.category)
+            val filterColor = (filter.color != null && filter.color.toString() != i.color)
+            val filterAvailable = (filter.available && i.availableQuantity <= 0)
 
-            if(!filterAvailable && !filterColor && !filterCategory)
-            {
+            if (!filterAvailable && !filterColor && !filterCategory) {
                 res.add(i)
             }
 
-//            val filterCategory = (filter.category == null || filter.category == i.category)
-//            val filterColor = (filter.color == null ||  filter.color == i.color)
-//            val filterAvailable = (!filter.available || i.availableQuantity > 0)
-//
-//            if(filterAvailable && filterColor && filterCategory)
-//            {
-//                res.add(i)
-//            }
         }
 
         Log.e(this.javaClass.simpleName, res.toString())
@@ -129,18 +170,18 @@ class SaleViewModel : ViewModel() {
             }
         }
         Log.e(this.javaClass.simpleName + "after sort: ", res.toString())
+        Calendar.getInstance()
 
 
         Log.e(this.javaClass.simpleName, showList.size.toString() + "--" + listItemProduct.size)
         _listItemShow.postValue(res)
-
     }
 
 
-    fun getColorOf(itemProduct: ItemProduct): List<Color> {
-        var mutableList: MutableList<Color> = mutableListOf()
+    fun getColorOf(itemProduct: ItemProduct): List<String> {
+        var mutableList: MutableList<String> = mutableListOf()
         for (i in listItemProduct) {
-            if (i.name.equals(itemProduct.name)) {
+            if (i.name == itemProduct.name) {
                 mutableList.add(itemProduct.color)
             }
         }

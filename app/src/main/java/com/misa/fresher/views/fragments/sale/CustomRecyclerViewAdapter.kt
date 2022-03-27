@@ -1,32 +1,30 @@
 package com.misa.fresher.views.fragments.sale
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.models.enum.Color
-import com.misa.fresher.R
+import com.misa.fresher.models.enums.Color
+import com.misa.fresher.databinding.ItemCustomRecyclerviewBinding
 
 class CustomRecyclerViewAdapter(
-    private val listData: List<Color>,
-    val clickColor: (color: Color) -> Unit
+    private val listData: List<String>,
+    val clickColor: (color: String) -> Unit
 ) : RecyclerView.Adapter<CustomRecyclerViewAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View, val clickColor: (color: Color) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
-        fun bind(color: Color) {
-            itemView.findViewById<TextView>(R.id.tv_cv_rcv_title).text = color.name.lowercase()
-            itemView.setOnClickListener {
+    class ViewHolder(val binding:ItemCustomRecyclerviewBinding, val clickColor: (color: String) -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(color: String) {
+            binding.tvCvRcvTitle.text = color.lowercase()
+            binding.root.setOnClickListener {
                 clickColor(color)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_custom_recyclerview, parent, false)
-        return ViewHolder(view, clickColor)
+        val binding = ItemCustomRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return ViewHolder(binding,clickColor)
+
     }
 
     override fun onBindViewHolder(holder: CustomRecyclerViewAdapter.ViewHolder, position: Int) {

@@ -5,39 +5,45 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemProduct
 import com.misa.fresher.R
+import com.misa.fresher.databinding.ItemBillBinding
+import com.misa.fresher.databinding.ItemSaleAndBillDetailBinding
+import com.misa.fresher.views.customViews.CustomToast
+import com.misa.fresher.views.fragments.bill.BillAdapter
+import com.misa.fresher.views.fragments.billDetail.BillDetailAdapter
 
 class SaleAdapter(
     private var listItemProduct: MutableList<ItemProduct>,
     val listener: (itemProduct: ItemProduct) -> Unit
 ) : RecyclerView.Adapter<SaleAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(val binding:ItemSaleAndBillDetailBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(itemProduct: ItemProduct) {
-            itemView.findViewById<ImageView>(R.id.iv_item_add).visibility = View.GONE
-            itemView.findViewById<ImageView>(R.id.iv_item_remove).visibility = View.GONE
-            itemView.findViewById<TextView>(R.id.tv_item_quantity).visibility = View.GONE
-            itemView.findViewById<TextView>(R.id.tv_item_total_price).visibility = View.GONE
 
-            itemView.findViewById<TextView>(R.id.name_item).text = itemProduct.name
-            itemView.findViewById<TextView>(R.id.id_item).text = itemProduct.id
-            itemView.findViewById<TextView>(R.id.price_item).text = itemProduct.price.toString()
-            itemView.findViewById<ImageView>(R.id.image_item)
-                .setImageResource(R.drawable.ic_shopping_bag)
-            itemView.setOnClickListener {
-                listener(itemProduct)
+            with(binding)
+            {
+                ivItemAdd.visibility = View.GONE
+                ivItemRemove.visibility = View.GONE
+                tvItemQuantity.visibility = View.GONE
+                tvItemTotalPrice.visibility = View.GONE
+                nameItem.text = itemProduct.name
+                idItem.text = itemProduct.code
+                priceItem.text = itemProduct.price.toString()
+                imageItem.setImageResource(R.drawable.ic_shopping_bag)
+                binding.root.setOnClickListener {
+                    listener(itemProduct)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_sale_and_bill_detail, parent, false)
-
-        return ViewHolder(view)
+        val binding = ItemSaleAndBillDetailBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

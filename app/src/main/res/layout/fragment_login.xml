@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_login"
+            android:orientation="vertical"
+            tools:context=".views.fragments.login.LoginFragment">
+
+            <ImageView
+                android:id="@+id/iv_misa_logo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/ic_misa_logo" />
+
+            <TextView
+                android:id="@+id/tv_omnichannel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center"
+                android:text="O m n i c h a n n e l   P l a t f o r m"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_forsale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="For sale"
+                android:textColor="@color/white"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_rounded_all_light_5"
+                android:orientation="vertical"
+
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    app:hintEnabled="false"
+                    app:endIconMode="clear_text"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_login_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:hint="Username"
+                        android:drawableStart="@drawable/ic_user"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    app:hintEnabled="false"
+                    app:endIconMode="clear_text"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:hint="Password"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:drawableStart="@drawable/ic_lock_open"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:inputType="textPassword"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    app:hintEnabled="false"
+                    app:endIconMode="clear_text"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:hint="Confirm password"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:drawableStart="@drawable/ic_lock_open"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:inputType="textPassword"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_rounded_all_dark"
+                    android:gravity="center"
+                    android:text="log in"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_login_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Sign up" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                />
+
+            <Spinner
+                android:id="@+id/spin_login_flag"
+                style="@style/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_spinner_transparent"
+                android:layout_gravity="center"
+                android:popupBackground="@color/transparent"
+                />
+
+            <TextView
+                android:id="@+id/tv_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="Privacy policy"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#63000000"
+            android:visibility="gone"
+            >
+            <ProgressBar
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+    </FrameLayout>
+
+
+
+</ScrollView>

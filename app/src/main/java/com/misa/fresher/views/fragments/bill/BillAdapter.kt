@@ -2,45 +2,39 @@ package com.misa.fresher.views.fragments.bill
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.R
+import com.misa.fresher.base.BaseRecyclerViewAdapter
+import com.misa.fresher.databinding.ItemBillBinding
+import com.misa.fresher.getNumString
 
-class BillAdapter(private var listItemBill: MutableList<ItemBill>) :
-    RecyclerView.Adapter<BillAdapter.ViewHolder>() {
+class BillAdapter : BaseRecyclerViewAdapter<ItemBill,BillAdapter.ViewHolder>()
+ {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceAsColor")
+    class ViewHolder(private val binding: ItemBillBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun bind(itemBill: ItemBill) {
-            itemView.findViewById<TextView>(R.id.tv_bill_id).text = itemBill.id
-            itemView.findViewById<TextView>(R.id.tv_bill_price).text =
-                itemBill.getPrice().toString()
+            binding.tvBillId.text =  itemBill.id.getNumString().substring(10)
+            binding.tvBillPrice.text = itemBill.billPrice.toString()
 
-
-            if(itemBill.inforShip?.receiver!=null && itemBill.inforShip?.tel!=null)
-            {
-                itemView.findViewById<TextView>(R.id.tv_bill_infor_ship).text= itemBill.inforShip?.receiver +"-"+itemBill.inforShip?.tel
-            }
-            else
-            {
-                itemView.findViewById<TextView>(R.id.tv_bill_infor_ship).setTextColor(R.color.black)
+            if (itemBill.infoShip?.receiver != null && itemBill.infoShip?.tel != null) {
+                binding.tvBillInforShip.text = itemBill.infoShip?.receiver + "-" + itemBill.infoShip?.tel
+            } else {
+                binding.tvBillInforShip.setTextColor(R.color.black)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_bill, parent, false)
-
-        return ViewHolder(view)
+        val binding = ItemBillBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listItemBill[position])
+        holder.bind(listData[position])
     }
 
-    override fun getItemCount() = listItemBill.size
+    override fun getItemCount() = listData.size
 }
