@@ -1,0 +1,26 @@
+package com.misa.fresher.database
+
+object Queries {
+    const val DATABASE_NAME = "database"
+    const val DATABASE_VERSION = 1
+    const val CREATE_PRODUCT_TABLE = "CREATE TABLE PRODUCT ("+
+            "PRODUCT_ID INTEGER PRIMARY KEY AUTOINCREMENT\n"+
+            "PRODUCT_IMG TEXT NOT NULL,"+
+            "PRODUCT_NAME TEXT NOT NULL,"+
+            "PRODUCT_CODE TEXT NOT NULL,"+
+            "PRODUCT_PRICE INTEGER NOT NULL,"+
+            "PRODUCT_COLOR  TEXT NOT NULL,"+
+            "PRODUCT_SIZE TEXT NOT NULL)"
+
+    const val CREATE_CUSTOMER_TABLE = "CREATE TABLE CUSTOMER ("+
+            "CUSTOMER_ID INTEGER PRIMARY KEY AUTOINCREMENT\n"+
+            "CUSTOMER_NAME TEXT NOT NULL,"+
+            "CUSTOMER_PHONE TEXT NOT NULL,"+
+            "CUSTOMER_ADDRESS TEXT NOT NULL)"
+
+    const val CREATE_BILL_TABLE = "CREATE TABLE BILL ("+
+            "BILL_ID INTEGER PRIMARY KEY AUTOINCREMENT\n"+
+            " NOT NULL,"+
+            "CUSTOMER_ID INTEGER REFERENCES CUSTOMER (CUSTOMER_ID) NOT NULL,"+
+            "TOTAL REAL )"
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.misa.fresher.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_shippingInformationFragment"
+            app:destination="@id/shippingInformationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shippingInformationFragment"
+        android:name="com.misa.fresher.fragment.ShippingInformationFragment"
+        android:label="ShippingInformationFragment"
+        tools:layout="@layout/fragment_shipping_information"/>
+    <fragment
+        android:id="@+id/paymentFragment"
+        tools:layout="@layout/fragment_payment"
+        android:name="com.misa.fresher.fragment.PaymentFragment"
+        android:label="PaymentFragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_listOfBillFragment"
+            app:destination="@id/listOfBillFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_shippingInformationFragment"
+            app:destination="@id/shippingInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfBillFragment"
+        android:name="com.misa.fresher.fragment.ListOfBillFragment"
+        android:label="ListOfBillFragment"
+        tools:layout="@layout/fragment_listofbill">
+        <action
+            android:id="@+id/action_listOfBillFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

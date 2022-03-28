@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSearchView">
+        <attr name="imagebutton1" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="imagebutton2" format="reference"/>
+        <attr name="imagebutton3" format="reference"/>
+        <attr name="imagebutton4" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--        Tổ chức , cá nhân-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổ chức"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_black"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cá nhân"
+                    android:textSize="18dp"
+                    android:textColor="@color/color_black"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Đối tác giao hàng-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_doitacgiaohang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đối tác giao hàng"
+                android:textSize="20dp"
+                android:textColor="@color/color_blue_purple"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chạm để chọn"
+                android:layout_below="@id/tv_doitacgiaohang"
+                android:textSize="18sp"
+                />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_doitacgiaohang"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Loại dịch vụ-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_loaidichvu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loại dịch vụ"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chạm để chọn"
+                android:layout_below="@id/tv_loaidichvu"
+                android:textSize="18dp"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Phí giao hàng đối tác-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_PhiGiaoHangDoiTac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phí giao hàng trả đối tác"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0,0"
+                android:textSize="18dp"
+                android:layout_below="@id/tv_PhiGiaoHangDoiTac"
+                />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_PhiGiaoHangDoiTac"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Mã đơn hàng-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_mavanchuyen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã đơn hàng"
+                android:textSize="20dp"
+                android:textColor="@color/color_blue_purple"
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_mavanchuyen"
+                android:background="@null"
+                android:hint="Chạm để nhập"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:maxLines="1"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Ghi chú giao hàng-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/id_ghichugiaohang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ghi chú giao hàng"
+                android:textSize="20dp"
+                android:textColor="@color/color_blue_purple"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_ghichugiaohang"
+                android:hint="Chạm để nhập"
+                android:background="@null"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+        <!--        Ngày giao hàng-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ngaygiaohang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ngày giao hàng"
+                android:textColor="@color/color_blue_purple"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="03/03/2022"
+                android:textColor="@color/color_black"
+                android:textSize="18dp"
+                android:layout_below="@+id/ngaygiaohang"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp">
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
