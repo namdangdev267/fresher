@@ -31,6 +31,9 @@ class BillDetailFragment :
         binding.btnBack.setOnClickListener {
             activity?.onBackPressed()
         }
+        binding.ivShipInfor.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_billDetail_to_shipInforFragment)
+        }
     }
 
     private fun savingBill() {
