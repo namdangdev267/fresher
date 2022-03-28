@@ -1,11 +1,10 @@
-package com.misa.fresher.fragment.payment
+package com.misa.fresher.ui.fragment.payment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -39,13 +38,13 @@ class PaymentFragment: Fragment() {
         configureListView()
         configureOtherView()
 
-        activity?.onBackPressedDispatcher?.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_fragment_payment_to_fragment_sale)
-                }
-            })
+//        activity?.onBackPressedDispatcher?.addCallback(
+//            viewLifecycleOwner,
+//            object : OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                    activity?.onBackPressed()
+//                }
+//            })
     }
 
     @SuppressLint("SetTextI18n")
