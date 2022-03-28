@@ -5,6 +5,8 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.os.Parcel
 import android.os.Parcelable
+import com.misa.fresher.R
+import com.misa.fresher.getNumString
 import com.misa.fresher.models.enums.Category
 import com.misa.fresher.models.enums.Color
 import kotlinx.android.parcel.Parcelize
@@ -23,6 +25,16 @@ class ItemProduct() : Parcelable {
     var category: String = ""
     var availableQuantity: Int = 0
     var dateArrival: String = ""
+
+
+    val priceForView: String
+        get() = price.toString()
+
+    val idForView: String
+        get() = id.getNumString()
+
+//    val imageResourceForList:Int
+//        get() = R.drawable.ic_shopping_bag
 
     constructor(
         name: String,
@@ -54,6 +66,8 @@ class ItemProduct() : Parcelable {
         this.availableQuantity = cursor.getInt(cursor.getColumnIndex(ItemProduct.AVAILABLE_QUANTITY))
         this.dateArrival = cursor.getString(cursor.getColumnIndex(ItemProduct.DATE_ARRIVAL))
     }
+
+
 
 
     fun getContentValues(): ContentValues {

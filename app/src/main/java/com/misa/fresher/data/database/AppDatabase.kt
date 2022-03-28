@@ -24,8 +24,6 @@ class AppDatabase private constructor(
             null,
             DATABASE_VERSION
         ).also { INSTANCE = it }
-
-
     }
 
 

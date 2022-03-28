@@ -32,21 +32,29 @@ import com.misa.fresher.databinding.BottomSheetItemsaleBinding
 import com.misa.fresher.views.activities.MainActivity
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentSaleBinding
+import com.misa.fresher.utils.EventObserver
 import com.misa.fresher.views.customViews.CustomToast
 
 
 class SaleFragment : Fragment() {
 
+    private val binding:FragmentSaleBinding by lazy {
+        getInflater(layoutInflater)
+    }
+
+    val getInflater: (LayoutInflater) -> FragmentSaleBinding
+        get() = FragmentSaleBinding::inflate
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    //    private val saleViewModel: SaleViewModel by viewModels()
+    private lateinit var saleViewModel:SaleViewModel
+
     private val bottomSheetDialog by lazy {   BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)}
     private val bottomSheetItemsaleBinding: BottomSheetItemsaleBinding by lazy {
         BottomSheetItemsaleBinding.inflate(layoutInflater)
     }
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-//    private val saleViewModel: SaleViewModel by viewModels()
-    private lateinit var saleViewModel:SaleViewModel
 
     var backAndOut = false
-
     var timer = object : CountDownTimer(3000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             backAndOut = true
@@ -57,34 +65,40 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private val binding:FragmentSaleBinding by lazy {
-        getInflater(layoutInflater)
-    }
-
-    val getInflater: (LayoutInflater) -> FragmentSaleBinding
-        get() = FragmentSaleBinding::inflate
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        Log.e(this.javaClass.simpleName, "ATTACH")
+        Log.e(this.javaClass.simpleName,"ATTACH")
         initViewModel()
+    }
+
+    private fun initViewModel() {
+        val productDao = ItemProductDao(AppDatabase.getInstance(requireContext()))
+        val productRepository = ProductRepository(productDao)
+        val factory = SaleViewModelFactory(productRepository)
+
+        saleViewModel = ViewModelProvider(this,factory).get(SaleViewModel::class.java)
+        saleViewModel.fakeData()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return binding.root
+        return binding.saleFragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.shareViewModel = sharedViewModel
+        binding.saleViewModel = saleViewModel
+        binding.saleAdapter = SaleAdapter(saleViewModel)
+
         transitionFragment(view)
         configFilterDrawer()
         configToolbar()
         configOtherView()
-        configListView()
     }
 
     private fun transitionFragment(view: View) {
@@ -93,10 +107,9 @@ class SaleFragment : Fragment() {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_saleFragment_to_billDetailFragment)
         }
-
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(binding.root.isDrawerOpen(binding.nvFilter))
+                if(binding.saleFragment.isDrawerOpen(binding.nvFilter))
                 {
                     toggleDrawer(binding.nvFilter)
                 }
@@ -114,42 +127,11 @@ class SaleFragment : Fragment() {
                 }
             }
         })
-
-    }
-
-    private fun initViewModel() {
-        val productDao = ItemProductDao(AppDatabase.getInstance(requireContext()))
-        val productRepository = ProductRepository(productDao)
-        val factory = SaleViewModelFactory(productRepository)
-
-        saleViewModel = ViewModelProvider(this,factory).get(SaleViewModel::class.java)
-        saleViewModel.fakeData()
-
-    }
-
-    private fun configToolbar() {
-        binding.searchViewSale.binding.imageviewSearchIcon3
-            .setOnClickListener {
-                toggleDrawer(binding.nvFilter)
-            }
-
-        binding.searchViewSale.binding.imageviewSearchIcon1
-            .setOnClickListener {
-                (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.nvMenu)
-            }
-
-        val editText = binding.searchViewSale.binding.edittextSearchHint
-
-        editText.doAfterTextChanged {
-            clearFilter()
-            saleViewModel.updateListItemShow(it.toString())
-            Log.e(this.javaClass.simpleName, it.toString())
-        }
     }
 
     private fun configFilterDrawer() {
-        binding.root.setScrimColor(android.graphics.Color.TRANSPARENT)
-        binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
+        binding.saleFragment.setScrimColor(android.graphics.Color.TRANSPARENT)
+        binding.saleFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvFilter)
         binding.layoutFilter.radioBtNameSort.isChecked = true
 
         binding.layoutFilter.swQuantity.setOnCheckedChangeListener { _, b ->
@@ -221,7 +203,6 @@ class SaleFragment : Fragment() {
 
         binding.layoutFilter.tvFilterDone.setOnClickListener {
             saleViewModel.filterListItemShow()
-            Log.e(this.javaClass.simpleName, "click")
             toggleDrawer(binding.nvFilter)
         }
 
@@ -232,58 +213,33 @@ class SaleFragment : Fragment() {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables", "NotifyDataSetChanged")
-    private fun configListView() {
-        binding.recyclerviewSaleFragment.layoutManager = LinearLayoutManager(requireContext())
-        saleViewModel.listItemShow.observe(viewLifecycleOwner, Observer {
-            binding.recyclerviewSaleFragment.adapter=SaleAdapter(it) { saleItemClick(it) }
-        })
-
-        sharedViewModel.listItemBillDetail.observe(viewLifecycleOwner, Observer {
-            binding.tvQuantityItemSelected.text = it.size.toString()
-
-            if (it.size >= 1) {
-                binding.tvQuantityItemSelected.background =
-                    this.context?.getDrawable(R.drawable.bg_rounded_left_dark)
-                binding.tvTotalPrice.background =
-                    this.context?.getDrawable(R.drawable.bg_rounded_right_dark)
-                binding.ivRefresh.background = this.context?.getDrawable(R.drawable.bg_circle_dark)
-                binding.tvTotalPrice.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
-                binding.tvQuantityItemSelected.setTextColor(android.graphics.Color.parseColor("#FFFFFF"))
-                binding.tvTotalPrice.text = "Total "+sharedViewModel.getTotalPrice().toString()
-            } else {
-                binding.tvQuantityItemSelected.background =
-                    this.context?.getDrawable(R.drawable.bg_rounded_left)
-                binding.tvTotalPrice.background =
-                    this.context?.getDrawable(R.drawable.bg_rounded_right)
-                binding.ivRefresh.background = this.context?.getDrawable(R.drawable.bg_circle_light)
-                binding.tvTotalPrice.text = this.context?.getString(R.string.not_yet_selected_item)
-                binding.tvTotalPrice.setTextColor(android.graphics.Color.parseColor("#99000000"))
-                binding.tvQuantityItemSelected.setTextColor(android.graphics.Color.parseColor("#99000000"))
+    private fun configToolbar() {
+        binding.searchViewSale.binding.imageviewSearchIcon3
+            .setOnClickListener {
+                toggleDrawer(binding.nvFilter)
             }
-        })
+
+        binding.searchViewSale.binding.imageviewSearchIcon1
+            .setOnClickListener {
+                (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.nvMenu)
+            }
+
+        val editText = binding.searchViewSale.binding.edittextSearchHint
+
+        editText.doAfterTextChanged {
+            clearFilter()
+            saleViewModel.updateListItemShow(it.toString())
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun configOtherView() {
-        binding.ivRefresh.setOnClickListener {
-            sharedViewModel.clearListItemSelected()
-        }
-
-        sharedViewModel.infoShip.observe(viewLifecycleOwner, Observer {
-            if(it.receiver!=null && it.tel!=null)
-            {
-                binding.tvInforCustomer.isSelected = true
-                binding.tvInforCustomer.text = it.receiver.toString()+" - "+it.tel.toString()
-            }
-            else
-            {
-                binding.tvInforCustomer.text ="Customer name, phone number"
-            }
+        saleViewModel.selectProductEvent.observe(viewLifecycleOwner,EventObserver{
+            saleItemClick(it)
         })
     }
 
-    fun clearFilter() {
+    private fun clearFilter() {
         saleViewModel.clearFilter()
 
         binding.layoutFilter.radioBtNameSort.isChecked = true
@@ -294,10 +250,10 @@ class SaleFragment : Fragment() {
     }
 
     private fun toggleDrawer(view: View) {
-        if (binding.root.isDrawerOpen(view)) {
-            binding.root.closeDrawer(view)
+        if (binding.saleFragment.isDrawerOpen(view)) {
+            binding.saleFragment.closeDrawer(view)
         } else {
-            binding.root.openDrawer(view)
+            binding.saleFragment.openDrawer(view)
         }
     }
 
@@ -311,7 +267,6 @@ class SaleFragment : Fragment() {
         val btRemove = bottomSheetItemsaleBinding.ivRemove
 
         sharedViewModel.updateItemSelected(itemProduct)
-
 
         btAdd.setOnClickListener {
             sharedViewModel.updateItemSelectedQuantity(1)
@@ -342,25 +297,6 @@ class SaleFragment : Fragment() {
 
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        Log.e(this.javaClass.simpleName,"RESUME")
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        Log.e(this.javaClass.simpleName,"PAUSE")
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        Log.e(this.javaClass.simpleName,"START")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        Log.e(this.javaClass.simpleName,"STOP")
-//    }
 
 }
 

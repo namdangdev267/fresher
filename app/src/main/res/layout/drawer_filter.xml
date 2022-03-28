@@ -1,141 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <ScrollView
+<layout>
+
+    <data>
+        <variable
+            name="shareViewModel"
+            type="com.misa.fresher.views.fragments.SharedViewModel" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="@dimen/dp_10"
+            android:layout_weight="1">
 
-            >
-
-            <Switch
-                android:id="@+id/sw_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="@dimen/dp_5"
-                android:paddingLeft="@dimen/dp_20"
-                android:theme="@style/Widget.AppCompat.CompoundButton.Switch"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_title_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:text="AVAILABLE ITEMS (QTY>0)"
-                app:layout_constraintLeft_toRightOf="@id/sw_quantity"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_item_category"
-                style="@style/title_filter"
-                android:text="item category"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sw_quantity"
-                />
-
-            <Spinner
-                android:id="@+id/spin_item_category"
-                style="@style/spinner"
-                android:entries="@array/item_category"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_item_category" />
-
-            <TextView
-                android:id="@+id/tv_sort_by"
-                style="@style/title_filter"
-                android:text="sort by"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spin_item_category" />
-
-            <RadioGroup
-                android:id="@+id/radio_sort_by"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp_10"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_sort_by">
+                android:layout_height="0dp"
+                android:padding="@dimen/dp_10"
+                >
 
-                <RadioButton
-                    android:id="@+id/radio_bt_name_sort"
+                <Switch
+                    android:id="@+id/sw_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_5"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:theme="@style/Widget.AppCompat.CompoundButton.Switch"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_title_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5"
+                    android:text="AVAILABLE ITEMS (QTY>0)"
+                    app:layout_constraintLeft_toRightOf="@id/sw_quantity"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_item_category"
+                    style="@style/title_filter"
+                    android:text="item category"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sw_quantity"
+                    />
+
+                <Spinner
+                    android:id="@+id/spin_item_category"
+                    style="@style/spinner"
+                    android:entries="@array/item_category"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_category" />
+
+                <TextView
+                    android:id="@+id/tv_sort_by"
+                    style="@style/title_filter"
+                    android:text="sort by"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spin_item_category" />
+
+                <RadioGroup
+                    android:id="@+id/radio_sort_by"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name" />
+                    android:paddingLeft="@dimen/dp_10"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_sort_by">
 
-                <RadioButton
-                    android:id="@+id/radio_bt_new_sort"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="New arrival" />
-
-                <RadioButton
-                    android:id="@+id/radio_bt_quantity_sort"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity in stock" />
+                    <RadioButton
+                        android:id="@+id/radio_bt_name_sort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
 
 
-            </RadioGroup>
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_bt_new_sort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New arrival" />
+
+                    <RadioButton
+                        android:id="@+id/radio_bt_quantity_sort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Quantity in stock" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_color"
+                    style="@style/title_filter"
+                    android:text="color"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/radio_sort_by"
+                    />
+
+                <Spinner
+                    android:id="@+id/spin_item_color"
+                    style="@style/spinner"
+                    android:entries="@array/color"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_color"
+
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
-                android:id="@+id/tv_color"
-                style="@style/title_filter"
-                android:text="color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radio_sort_by"
+                android:id="@+id/tv_filter_clear"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_all_stroke"
+                android:gravity="center"
+                android:text="Clear filter"
+                android:textColor="@color/background" />
 
-                />
+            <TextView
+                android:id="@+id/tv_filter_done"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_all_dark"
+                android:gravity="center"
+                android:text="Done"
+                android:textColor="@color/white" />
 
-            <Spinner
-                android:id="@+id/spin_item_color"
-                style="@style/spinner"
-                android:entries="@array/color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_color" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <TextView
-            android:id="@+id/tv_filter_clear"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/dp_5"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rounded_all_stroke"
-            android:gravity="center"
-            android:text="Clear filter"
-            android:textColor="@color/background" />
-
-        <TextView
-            android:id="@+id/tv_filter_done"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/dp_5"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rounded_all_dark"
-            android:gravity="center"
-            android:text="Done"
-            android:textColor="@color/white" />
-
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+</layout>
+

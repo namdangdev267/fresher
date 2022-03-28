@@ -78,6 +78,7 @@
                         android:drawablePadding="@dimen/dp_10"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
+                        android:singleLine="true"
 
                         />
 
@@ -106,6 +107,7 @@
                         android:drawableStart="@drawable/ic_lock_open"
                         android:drawablePadding="@dimen/dp_10"
                         android:inputType="textPassword"
+                        android:singleLine="true"
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -119,6 +121,7 @@
                     app:endIconMode="clear_text"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -132,6 +135,7 @@
                         android:drawableStart="@drawable/ic_lock_open"
                         android:drawablePadding="@dimen/dp_10"
                         android:inputType="textPassword"
+                        android:singleLine="true"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 

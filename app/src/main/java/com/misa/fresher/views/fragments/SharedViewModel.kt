@@ -1,10 +1,7 @@
 package com.misa.fresher.views.fragments
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.misa.fresher.data.repositories.BillRepository
 import com.misa.fresher.data.repositories.InfoShipRepository
 import com.misa.fresher.models.enums.BillStatus
@@ -14,6 +11,7 @@ import com.misa.fresher.models.InfoShip
 import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
+import com.misa.fresher.utils.Event
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import java.util.*
@@ -22,8 +20,8 @@ class SharedViewModel(
     private val billRepository: BillRepository,
     private val infoShipRepository: InfoShipRepository
 ) : ViewModel() {
-    var queueBill: LinkedList<ItemBill> = LinkedList()
-    var queueInfoShip: LinkedList<InfoShip> = LinkedList()
+    private var queueBill: LinkedList<ItemBill> = LinkedList()
+    private var queueInfoShip: LinkedList<InfoShip> = LinkedList()
 
     private val _listBill = MutableLiveData<MutableList<ItemBill>>()
     val listBill: LiveData<MutableList<ItemBill>>
@@ -45,6 +43,25 @@ class SharedViewModel(
     val listItemBillDetail: LiveData<MutableList<ItemBillDetail>>
         get() = _listItemBillDetail
 
+    val infoShipForView: String
+        get() = if (_infoShip.value?.receiver != null && _infoShip.value?.tel != null) "${_infoShip.value?.receiver} - ${_infoShip.value?.tel}" else "Customer name, phone number"
+
+
+    var isListItemBillDetailNull: LiveData<Boolean> = Transformations.map(_listItemBillDetail)
+    {
+        it.size == 0
+    }
+
+    var billDetailPrice:LiveData<Float> = Transformations.map(_listItemBillDetail)
+    {
+        var totalPrice = 0f
+        it.let {
+            for (i in it) {
+                totalPrice += i.itemProduct?.price!! * i.quantity
+            }
+        }
+        totalPrice
+    }
 
     /**
      * get data
@@ -81,13 +98,10 @@ class SharedViewModel(
 
         _infoShip.postValue(InfoShip())
 
-
         viewModelScope.launch {
             _listBill.postValue(billRepository.getBills())
-            var i=0
         }
     }
-
 
     /**
      * item selected
@@ -108,31 +122,32 @@ class SharedViewModel(
         _itemBillDetail.postValue(_itemBillDetail.value)
     }
 
-
     /**
      * List item selected
      */
 
     fun updateListItemSelected() {
-        val listSelected = _listItemBillDetail.value
         var check = false
-
-        listSelected?.let {
-            for (item in listSelected) {
+        _listItemBillDetail.value?.let {
+            for (item in it) {
                 if (item.itemProduct == _itemBillDetail.value?.itemProduct) {
                     item.quantity = _itemBillDetail.value!!.quantity
                     check = true
+                    break
                 }
             }
         }
         if (!check) {
-            _itemBillDetail.value?.let { listSelected?.add(it) }
+            _itemBillDetail.value?.let { _listItemBillDetail.value?.add(it) }
         }
-        _listItemBillDetail.postValue(listSelected!!)
+
+
+        _listItemBillDetail.postValue(_listItemBillDetail.value)
     }
 
     fun clearListItemSelected() {
         _listItemBillDetail.postValue(mutableListOf())
+
 
         CoroutineScope(IO).launch {
             _billHandling.postValue(
@@ -167,13 +182,14 @@ class SharedViewModel(
                 }
             }
         }
+        _listItemBillDetail.postValue(_listItemBillDetail.value)
     }
 
     /**
      * shipping information
      */
 
-    fun updateInforShip(infoShip: InfoShip) {
+    fun updateInfoShip(infoShip: InfoShip) {
         _infoShip.postValue(infoShip)
     }
 
@@ -215,7 +231,6 @@ class SharedViewModel(
 
         _listBill.postValue(_listBill.value)
         clearListItemSelected()
-
     }
 
     fun getTotalPriceListBill(): Float {

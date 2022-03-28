@@ -1,43 +1,42 @@
 package com.misa.fresher.views.fragments.sale
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.misa.fresher.data.dao.itembill.ItemBillDao
-import com.misa.fresher.data.dao.itemproduct.ItemProductDao
-import com.misa.fresher.data.database.AppDatabase
 import com.misa.fresher.data.repositories.ProductRepository
-import com.misa.fresher.models.ItemBill
+import com.misa.fresher.models.Filter
 import com.misa.fresher.models.enums.Category
 import com.misa.fresher.models.enums.Color
 import com.misa.fresher.models.enums.SortBy
 import com.misa.fresher.models.ItemProduct
+import com.misa.fresher.utils.Event
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import java.text.Collator
 import java.util.*
-
 
 class SaleViewModel(private val productRepository: ProductRepository) : ViewModel() {
     var search: String = ""
     var filter: Filter = Filter(null, null, false, SortBy.NAME)
 
-    var listItemProduct: MutableList<ItemProduct> = mutableListOf()
+    private var listItemProduct: MutableList<ItemProduct> = mutableListOf()
 
     private val _listItemShow = MutableLiveData<MutableList<ItemProduct>>()
     val listItemShow: LiveData<MutableList<ItemProduct>>
         get() = _listItemShow
 
-    data class Filter(
-        var category: Category?,
-        var color: Color?,
-        var available: Boolean,
-        var sortBy: SortBy?
-    )
+    private val _selectProductEvent = MutableLiveData<Event<ItemProduct>>()
+    val selectProductEvent: LiveData<Event<ItemProduct>> = _selectProductEvent
 
+    /**
+     * Event
+     */
+
+    fun selectProduct(itemProduct: ItemProduct)
+    {
+        _selectProductEvent.value = Event(itemProduct)
+    }
 
     fun fakeData() {
         _listItemShow.postValue(listItemProduct)
@@ -96,7 +95,6 @@ class SaleViewModel(private val productRepository: ProductRepository) : ViewMode
                     } as MutableList<ItemProduct>
                     _listItemShow.postValue(listItemProduct)
                 }
-
             }
         }
     }
@@ -111,7 +109,6 @@ class SaleViewModel(private val productRepository: ProductRepository) : ViewMode
         filter.color = null
         filter.available = false
     }
-
 
     /**
      * List item show

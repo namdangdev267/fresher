@@ -36,6 +36,7 @@ fun String.getNumString(): String {
         }
 
     }
+    res = res.substring(0,6)
     return res
 }
 
