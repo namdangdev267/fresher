@@ -17,10 +17,6 @@ class BillDAOImpl(
     private val customerDAO = CustomerDAO.getInstance(appDatabase)
     private val itemBillDAO = ProductItemBillDAO.getInstance(appDatabase)
 
-    override fun create(list: List<Bill>): Boolean {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -91,18 +87,6 @@ class BillDAOImpl(
         }
 
         return result
-    }
-
-    override fun getById(id: Long): Bill? {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(t: Bill): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: Bill): Boolean {
-        TODO("Not yet implemented")
     }
 
     /**

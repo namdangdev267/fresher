@@ -17,18 +17,6 @@ class ProductItemDAOImpl(
     private val sizeDAO = ProductSizeDAO.getInstance(appDatabase)
     private val unitDAO = ProductUnitDAO.getInstance(appDatabase)
 
-    override fun create(list: List<ProductItem>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: ProductItem): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(): List<ProductItem> {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -67,14 +55,6 @@ class ProductItemDAOImpl(
         }
 
         return result
-    }
-
-    override fun update(t: ProductItem): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: ProductItem): Boolean {
-        TODO("Not yet implemented")
     }
 
     /**

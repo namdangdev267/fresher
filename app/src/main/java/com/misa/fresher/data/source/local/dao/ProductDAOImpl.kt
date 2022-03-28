@@ -15,14 +15,6 @@ class ProductDAOImpl(
     private val categoryDAO = CategoryDAO.getInstance(appDatabase)
     private val itemDAO = ProductItemDAO.getInstance(appDatabase)
 
-    override fun create(list: List<Product>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: Product): Boolean {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -57,17 +49,5 @@ class ProductDAOImpl(
         }
 
         return result
-    }
-
-    override fun getById(id: Long): Product? {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(t: Product): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: Product): Boolean {
-        TODO("Not yet implemented")
     }
 }

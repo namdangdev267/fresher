@@ -12,14 +12,6 @@ class CategoryDAOImpl(
     private val appDatabase: AppDatabase
 ) : CategoryDAO {
 
-    override fun create(list: List<Category>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: Category): Boolean {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -56,13 +48,5 @@ class CategoryDAOImpl(
         cursor.close()
         db.close()
         return result
-    }
-
-    override fun update(t: Category): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: Category): Boolean {
-        TODO("Not yet implemented")
     }
 }

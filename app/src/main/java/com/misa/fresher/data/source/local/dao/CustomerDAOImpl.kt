@@ -12,14 +12,6 @@ class CustomerDAOImpl(
     private val appDatabase: AppDatabase
 ) : CustomerDAO {
 
-    override fun create(list: List<Customer>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: Customer): Boolean {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -58,13 +50,5 @@ class CustomerDAOImpl(
         cursor.close()
         db.close()
         return result
-    }
-
-    override fun update(t: Customer): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: Customer): Boolean {
-        TODO("Not yet implemented")
     }
 }

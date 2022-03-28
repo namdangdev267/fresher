@@ -12,18 +12,6 @@ class ProductUnitDAOImpl(
     private val appDatabase: AppDatabase
 ) : ProductUnitDAO {
 
-    override fun create(list: List<ProductUnit>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: ProductUnit): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(): List<ProductUnit> {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -41,13 +29,5 @@ class ProductUnitDAOImpl(
         cursor.close()
         db.close()
         return result
-    }
-
-    override fun update(t: ProductUnit): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: ProductUnit): Boolean {
-        TODO("Not yet implemented")
     }
 }

@@ -12,18 +12,6 @@ class ProductColorDAOImpl(
     private val appDatabase: AppDatabase
 ) : ProductColorDAO {
 
-    override fun create(list: List<ProductColor>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(t: ProductColor): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(): List<ProductColor> {
-        TODO("Not yet implemented")
-    }
-
     /**
      * @version 1
      * @updated 3/25/2022: Override lần đầu
@@ -41,13 +29,5 @@ class ProductColorDAOImpl(
         cursor.close()
         db.close()
         return result
-    }
-
-    override fun update(t: ProductColor): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(t: ProductColor): Boolean {
-        TODO("Not yet implemented")
     }
 }
