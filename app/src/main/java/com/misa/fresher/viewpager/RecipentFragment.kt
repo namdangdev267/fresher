@@ -1,7 +1,6 @@
 package com.misa.fresher.viewpager
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import com.misa.fresher.R
 import com.misa.fresher.ShipInforModel
 import com.misa.fresher.model.ShipInfor
 
-class FirstFragment : Fragment() {
+class RecipentFragment : Fragment() {
     private var model: ShipInforModel? = null
     private var shipInfor: ShipInfor? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         model = ViewModelProvider(requireActivity()).get(ShipInforModel::class.java)
-        return inflater.inflate(R.layout.fragment_fist, container, false)
+        return inflater.inflate(R.layout.fragment_receiver, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

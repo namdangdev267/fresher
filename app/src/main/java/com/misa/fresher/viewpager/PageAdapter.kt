@@ -1,19 +1,24 @@
 package com.misa.fresher.viewpager
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class PageAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
-    override fun getItemCount(): Int =3
+    private val mFragmentList = ArrayList<Fragment>()
 
-    override fun createFragment(position: Int): Fragment =
-        when (position) {
-            0 -> FirstFragment()
-            1 -> SecondFragment()
-            2 -> ThirdFragment()
-            else -> FirstFragment()
-        }
+    private val mFragmentTittle = ArrayList<String>()
 
+    override fun getItemCount(): Int {
+        return mFragmentList.size
+    }
+
+    override fun createFragment(position: Int): Fragment {
+        return mFragmentList[position]
+    }
+
+    fun getFragmentTittle(position: Int): String = mFragmentTittle[position]
+    fun addFragment(fragment: Fragment, tittle: String) {
+        mFragmentList.add(fragment)
+        mFragmentTittle.add(tittle)
+    }
 }
