@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".fragments.SaleFragment">
+        tools:context=".ui.sale.SaleFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,6 +27,7 @@
                 android:src="@drawable/ic_baseline_menu_24" />
 
             <com.misa.fresher.customViews.CustomToolbar
+                android:id="@+id/customToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:btnCartSrc="@drawable/ic_cart"
@@ -41,7 +42,8 @@
         </LinearLayout>
 
 
-        <include layout="@layout/context_sale" />
+        <include layout="@layout/context_sale"
+            android:id="@+id/contextSale"/>
 
     </LinearLayout>
 
@@ -52,6 +54,7 @@
         android:layout_marginTop="@dimen/dp_48"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/drawer_filter_sale" />
+        <include layout="@layout/drawer_filter_sale"
+            android:id="@+id/contextDrawerFilter"/>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

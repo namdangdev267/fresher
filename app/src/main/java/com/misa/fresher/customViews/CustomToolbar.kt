@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import com.misa.fresher.R
+import com.misa.fresher.databinding.ActivityLoginBinding
+import com.misa.fresher.databinding.CustomToolbarBinding
 
 /**
  * Tạo custom view cho toolbar
@@ -17,6 +19,7 @@ import com.misa.fresher.R
  * @date : 3/18/2022
  **/
 class CustomToolbar : LinearLayout {
+    val binding = CustomToolbarBinding.inflate(LayoutInflater.from(context), this)
     constructor(context: Context) : super(context, null)
 
     @SuppressLint("ResourceAsColor")
@@ -33,23 +36,23 @@ class CustomToolbar : LinearLayout {
         val btnFilterSrc = a.getResourceId(R.styleable.CustomToolbar_btnFilterSrc, 0)
         a.recycle()
 
-        val view = LayoutInflater.from(context).inflate(R.layout.custom_toolbar, this, true)
+//        val view = LayoutInflater.from(context).inflate(R.layout.custom_toolbar, this, true)
 
 //        setBackgroundColor(R.color.purple_700)
         orientation = HORIZONTAL
 
-        val ivSearch = view.findViewById<ImageView>(R.id.ivSearch)
+        val ivSearch = binding.ivSearch
         ivSearch.setImageResource(ivSearchSrc)
         ivSearch.background = AppCompatResources.getDrawable(context, ivSearchSrcBg)
-        val edSearch = view.findViewById<EditText>(R.id.edSearch)
+        val edSearch = binding.edSearch
         edSearch.setHint(edSearchHint)
         edSearch.background = AppCompatResources.getDrawable(context, edSearchBg)
-        val btnQrCode = view.findViewById<ImageButton>(R.id.btnQrCode)
+        val btnQrCode = binding.btnQrCode
         btnQrCode.setImageResource(btnQrCodeSrc)
         btnQrCode.background = AppCompatResources.getDrawable(context, btnQrCodeBg)
-        val btnCart = view.findViewById<ImageButton>(R.id.btnCart)
+        val btnCart = binding.btnCart
         btnCart.setImageResource(btnCartSrc)
-        val btnFilter = view.findViewById<ImageButton>(R.id.btnFilter)
+        val btnFilter = binding.btnFilter
         btnFilter.setImageResource(btnFilterSrc)
 
     }

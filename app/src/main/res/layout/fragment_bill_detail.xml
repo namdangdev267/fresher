@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.BillDetailFragment">
+    tools:context=".ui.billdetail.BillDetailFragment">
 
     <LinearLayout
         android:id="@+id/llBillDetailId"
@@ -265,7 +265,7 @@
             android:background="@color/white" />
 
         <Button
-            android:id="@+id/btnTotalPriceBill"
+            android:id="@+id/btnGetPayment"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center"

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_backgroud"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <ImageView
+        android:id="@+id/imgLogoMisa"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="@dimen/dp_30"
+        android:src="@drawable/ic_misa_text_logo" />
+
+    <TextView
+        android:id="@+id/tvPlatform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgLogoMisa"
+        android:layout_centerInParent="true"
+        android:text="@string/ominichannelplatform"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvSaletittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPlatform"
+        android:layout_centerInParent="true"
+        android:text="@string/for_sale"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/llSignInForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSaletittle"
+        android:layout_marginHorizontal="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/bg_all_radius"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dp_10">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/purple_700">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:hint="@string/username"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_lock_open_24"
+            app:startIconTint="@color/purple_700">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:drawablePadding="@dimen/dp_8"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutRetypePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_lock_open_24"
+            app:startIconTint="@color/purple_700">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvPasswordReType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:drawablePadding="@dimen/dp_8"
+                android:hint="@string/retype_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_weight="2"
+            android:background="@color/purple_700"
+            android:padding="@dimen/dp_12"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llSignInForm"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/login_in_with_touch_id"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_15"
+            tools:ignore="SpUsage" />
+
+        <ImageButton
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginStart="@dimen/dp_12"
+            android:background="@drawable/custom_button_touchid"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_fingerprint_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvPrivacyPolicy"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables,UselessParent">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="bottom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_10"
+            android:text="Tiếng việt"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPrivacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:text="@string/privacy_policy"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+
+    <FrameLayout
+        android:id="@+id/pbSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80D5CFCF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center" />
+    </FrameLayout>
+</RelativeLayout>

@@ -10,7 +10,6 @@
         <attr name="btnQrCodeBg" format="reference" />
         <attr name="btnQrCodeSrc" format="reference" />
         <attr name="btnCartSrc" format="reference" />
-
         <attr name="btnFilterSrc" format="reference" />
     </declare-styleable>
 </resources>

@@ -1,23 +1,30 @@
 package com.misa.fresher
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.drawerlayout.widget.DrawerLayout
+import android.util.Log
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
-
+import com.misa.fresher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     var appBarConfiguration: AppBarConfiguration? = null
+    private val binding: ActivityMainBinding by lazy {
+        getInflater(layoutInflater)
+    }
+    val getInflater: (LayoutInflater) -> ActivityMainBinding
+        get() = ActivityMainBinding::inflate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         configUi()
+        val img = R.drawable.ic_shopping_bag
     }
+
 
     /**
      * confic app bar
@@ -30,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(
             navController.graph,
-            findViewById<DrawerLayout>(R.id.drawerLayout)
+            binding.drawerLayout
         )
         appBarConfiguration.let {
-            (findViewById(R.id.navSale) as NavigationView).setupWithNavController(navController)
+            (binding.navSale).setupWithNavController(navController)
         }
     }
 
@@ -43,10 +50,24 @@ class MainActivity : AppCompatActivity() {
             navController.navigateUp(it)
         } == true || super.onSupportNavigateUp()
     }
+    /**
+    * Xử lý sự kiện mở đóng toggle
+    * @Auther : NTBao
+    * @date : 3/22/2022
+    **/
+    fun toggle(){
+        val mDrawer = binding.drawerLayout
+        val mNav = binding.navSale
+        if(mDrawer.isDrawerOpen(mNav)){
+            mDrawer.closeDrawer(mNav)
+        }else{
+            mDrawer.openDrawer(mNav)
+        }
+    }
 
     override fun onBackPressed() {
-        val mDrawer = findViewById<DrawerLayout>(R.id.drawerLayout)
-        val mNav = findViewById<NavigationView>(R.id.navSale)
+        val mDrawer = binding.drawerLayout
+        val mNav = binding.navSale
         if (mDrawer.isDrawerOpen(mNav)) {
             mDrawer.closeDrawer(mNav)
         } else {
