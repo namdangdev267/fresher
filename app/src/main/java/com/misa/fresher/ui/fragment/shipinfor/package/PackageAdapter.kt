@@ -1,12 +1,12 @@
-package com.misa.fresher.fragment.shipinformation.`package`
+package com.misa.fresher.ui.fragment.shipinfor.`package`
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.data.models.ItemShipInfor
 import com.misa.fresher.databinding.ItemShip3colBinding
 import com.misa.fresher.databinding.ItemShipTouchBinding
-import com.misa.fresher.data.models.ItemShipInfor
 
 class PackageAdapter(private val adapterData: MutableList<ItemShipInfor>) :
     RecyclerView.Adapter<PackageAdapter.PackageAdapterViewHolder>() {

@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.shipinformation.`package`
+package com.misa.fresher.ui.fragment.shipinfor.`package`
 
 import android.os.Bundle
 import android.view.LayoutInflater
