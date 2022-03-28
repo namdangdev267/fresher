@@ -24,7 +24,9 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/de10"
             android:gravity="center_vertical"
-            android:text="HÀNG HÓA CÓ SẴN(SL>0)" />
+            android:textAllCaps="true"
+            android:text="@string/available_item"
+            tools:ignore="AllCaps" />
     </LinearLayout>
 
     <TextView
@@ -36,7 +38,7 @@
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
-        android:text="XẾP THEO"
+        android:text="@string/sort_by"
         android:textColor="@color/black"
         android:textSize="@dimen/ts16" />
     <RadioGroup
@@ -48,14 +50,14 @@
         android:layout_height="wrap_content">
         <RadioButton
             android:textSize="@dimen/ts16"
-            android:text="Tên"
+            android:text="@string/name"
             android:checked="true"
             android:id="@+id/rbName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <RadioButton
             android:textSize="@dimen/ts16"
-            android:text="Giá"
+            android:text="@string/price"
             android:id="@+id/rbPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -70,7 +72,7 @@
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
-        android:text="MÀU SẮC"
+        android:text="@string/color"
         android:textColor="@color/black"
         android:textSize="@dimen/ts16" />
 
@@ -81,7 +83,6 @@
         android:layout_below="@id/tvColor"
         android:layout_marginStart="@dimen/d5"
         android:background="@color/white"
-        android:hint="Nhập tên màu"
         android:textSize="@dimen/ts16" />
 
     <TextView
@@ -94,7 +95,8 @@
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
         android:background="@null"
-        android:text="KÍCH THƯỚC"
+        android:text="@string/size_filter"
+        android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="@dimen/ts16" />
 
@@ -105,7 +107,6 @@
         android:layout_below="@id/tvSize"
         android:layout_marginStart="@dimen/d5"
         android:background="@color/white"
-        android:hint="Nhập kích cỡ"
         android:textSize="@dimen/ts16" />
     <LinearLayout
         android:layout_alignParentBottom="true"
@@ -113,7 +114,7 @@
         android:layout_height="@dimen/d50">
         <Button
             android:layout_margin="@dimen/d5"
-            android:text="Bỏ lọc"
+            android:text="@string/clear_filter"
             android:background="@drawable/buttom_clear_filter_border"
             android:textSize="@dimen/ts16"
             android:textColor="@color/violet_dark"
@@ -124,7 +125,7 @@
             android:layout_height="match_parent"/>
         <Button
             android:layout_margin="@dimen/d5"
-            android:text="Xong"
+            android:text="@string/done"
             android:id="@+id/btnDone"
             android:background="@drawable/button_done_border"
             android:textColor="@color/white"

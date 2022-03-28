@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +25,20 @@ import com.misa.fresher.adapter.ProductApdapter
 import com.misa.fresher.model.FilterProduct
 import com.misa.fresher.model.Product
 import com.misa.fresher.model.SelectedProduct
+import com.misa.fresher.data.product.ImplProductDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.Collator
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class SaleFragment : Fragment() {
-    var products = Product.fakedat()
+    var products:ArrayList<Product>?=null
     var rcv: RecyclerView? = null
     var productList = arrayListOf<SelectedProduct>()
     var rcvAdapter: ProductApdapter? = null
@@ -49,17 +60,25 @@ class SaleFragment : Fragment() {
     }
 
     /**
-     *Set up hiển thị Recycleview
+     *Lấy danh sách sản phẩm phẩm để hiện thị lên RecycleView
      *@author:NCPhuc
      *@date:3/16/2022
      **/
     private fun setUpView(view: View) {
         rcv = view.findViewById(R.id.rcvProduct)
-        rcvAdapter = ProductApdapter(products) { showBottomDialog(it) }
-        rcv?.adapter = rcvAdapter
-        rcv?.layoutManager = LinearLayoutManager(requireContext())
-        setUpNavigation()
-        openDrawerLayoutMenu(view)
+        val iDAO = ImplProductDAO(requireContext())
+        CoroutineScope(IO).launch {
+            products = iDAO.selectAllProduct()
+            withContext(Main)
+            {
+                rcvAdapter = ProductApdapter(products!!) { showBottomDialog(it) }
+                rcv?.adapter = rcvAdapter
+                rcv?.layoutManager = LinearLayoutManager(requireContext())
+                setUpNavigation()
+                openDrawerLayoutMenu(view)
+            }
+        }
+
     }
 
     /**
@@ -157,10 +176,10 @@ class SaleFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun updateList(string: String) {
+    private fun updateList(strSearch: String) {
         val productSearch = mutableListOf<Product>()
-        for (i in products) {
-            if (i.productName.contains(string) || i.productSKU.contains(string)) {
+        for (i in products!!) {
+            if (i.productName.lowercase().contains(strSearch.lowercase()) || i.productSKU.lowercase().contains(strSearch.lowercase())) {
                 productSearch.add(i)
             }
         }
@@ -209,7 +228,7 @@ class SaleFragment : Fragment() {
         val decimalFormat = DecimalFormat("0,000.0")
         if (productList.size > 0) {
             tvAmount.let {
-                it?.text = productList.sumOf {it.amount}.toString()
+                it?.text = productList.sumOf { it.amount }.toString()
                 it?.setTextColor(Color.WHITE)
                 it?.setBackgroundResource(R.drawable.textview_amount_border)
             }
@@ -267,7 +286,9 @@ class SaleFragment : Fragment() {
      *@date:3/16/2022
      **/
     private fun showBillFragment(view: View) {
+        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
         view.findViewById<TextView>(R.id.tvProductAmount)?.setOnClickListener {
+            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
             if (productList.size > 0) {
                 findNavController().navigate(
                     R.id.action_saleFragment_to_billDetailFragment,
@@ -276,6 +297,7 @@ class SaleFragment : Fragment() {
             }
         }
         view.findViewById<TextView>(R.id.tvTotalPrice)?.setOnClickListener {
+            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
             if (productList.size > 0) {
                 findNavController().navigate(
                     R.id.action_saleFragment_to_billDetailFragment,
@@ -310,7 +332,7 @@ class SaleFragment : Fragment() {
         setUpSpinner(view)
         val mDrawer = view.findViewById<DrawerLayout>(R.id.dlFilter)
         mDrawer.setScrimColor(Color.TRANSPARENT)
-        mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        mDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
         view.findViewById<ImageButton>(R.id.imbFilter)?.setOnClickListener {
             mDrawer.openDrawer(Gravity.RIGHT)
         }
@@ -344,29 +366,30 @@ class SaleFragment : Fragment() {
     private fun filterProduct(filter: FilterProduct) {
         var sortList = products
         if (filter.sortBy == "Tên") {
-            sortList.sortWith(compareBy(Product::productName))
-            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productName))
+            if (filter.color == "All" && filter.size == "All") sortList?.sortWith { t, t2 ->
+                Collator.getInstance(Locale("vi", "VN")).compare(t.productName, t2.productName)
+            }
             else if (filter.color != "All" && filter.size == "All") sortList =
-                sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList?.filter { it.color == filter.color } as ArrayList<Product>
             else if (filter.color == "All" && filter.size != "All") sortList =
-                sortList.filter { it.size == filter.size } as ArrayList<Product>
+                sortList?.filter { it.size == filter.size } as ArrayList<Product>
             else {
-                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList?.filter { it.color == filter.color } as ArrayList<Product>
                 sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
             }
         } else {
-            sortList.sortWith(compareBy(Product::productPrice))
-            if (filter.color == "All" && filter.size == "All") sortList.sortWith(compareBy(Product::productPrice))
+            sortList?.sortWith(compareBy(Product::productPrice))
+            if (filter.color == "All" && filter.size == "All") sortList?.sortWith(compareBy(Product::productPrice))
             else if (filter.color != "All" && filter.size == "All") sortList =
-                sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList?.filter { it.color == filter.color } as ArrayList<Product>
             else if (filter.color == "All" && filter.size != "All") sortList =
-                sortList.filter { it.size == filter.size } as ArrayList<Product>
+                sortList?.filter { it.size == filter.size } as ArrayList<Product>
             else {
-                sortList = sortList.filter { it.color == filter.color } as ArrayList<Product>
+                sortList = sortList?.filter { it.color == filter.color } as ArrayList<Product>
                 sortList = sortList.filter { it.size == filter.size } as ArrayList<Product>
             }
         }
-        rcvAdapter?.items = sortList
+        rcvAdapter?.items = sortList!!
         rcvAdapter?.notifyDataSetChanged()
     }
 

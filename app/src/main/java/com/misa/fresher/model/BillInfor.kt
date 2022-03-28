@@ -1,4 +1,7 @@
 package com.misa.fresher.model
 
-class BillInfor(val billNum:Int,val product: MutableList<SelectedProduct>,val shipInfor: ShipInfor) {
-}
+class BillInfor(
+    val billNum:Int,
+    val product: MutableList<SelectedProduct>?,
+    val shipInfor: ShipInfor?,
+    val total:Int)

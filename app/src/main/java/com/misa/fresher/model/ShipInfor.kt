@@ -6,5 +6,4 @@ class ShipInfor(
     var addres: String,
     var area: String,
     var ward: String
-) {
-}
+)

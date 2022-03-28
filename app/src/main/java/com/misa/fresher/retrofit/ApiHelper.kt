@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiHelper {
-    val baseUrl = "https://identitytoolkit.googleapis.com"
+    private val baseUrl = "https://identitytoolkit.googleapis.com"
     fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutBottomSheet"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_width="@dimen/d30"
         android:layout_height="@dimen/d30"
         android:layout_marginTop="@dimen/d5"
-        android:layout_toLeftOf="@id/tvAmount"
+        android:layout_toStartOf="@id/tvAmount"
         android:background="@drawable/border_button_bottomsheet"
         android:text="-"
         android:textColor="@color/white"
@@ -43,7 +43,7 @@
         android:layout_width="@dimen/d30"
         android:layout_height="@dimen/d30"
         android:layout_marginTop="@dimen/d5"
-        android:layout_toLeftOf="@id/btnAdd"
+        android:layout_toStartOf="@id/btnAdd"
         android:gravity="center"
         android:text="1" />
 
@@ -60,8 +60,4 @@
         android:textColor="@color/white"
         android:textSize="@dimen/ts16"
         android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
 </RelativeLayout>

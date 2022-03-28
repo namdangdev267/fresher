@@ -7,5 +7,4 @@ class UserRespone(
     val displayName: String,
     val idToken: String,
     val registered: Boolean
-) {
-}
+)

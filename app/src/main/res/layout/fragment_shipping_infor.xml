@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,12 +13,14 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/imb_back"
             android:background="@color/violet_dark"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/d5"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="0dp"
@@ -51,16 +54,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/d5"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/tab_layout_border"
-            app:tabBackground="@drawable/custom_tablayout"
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/violet_dark"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabTextColor="@color/white" />
     </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +82,7 @@
         android:layout_marginBottom="@dimen/d5"
         android:background="@color/violet_dark"
         android:gravity="center"
-        android:text="Lưu"
+        android:text="@string/save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/ts16" />

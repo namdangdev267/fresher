@@ -20,37 +20,38 @@ class BillProductAdapter(
 ) :
     RecyclerView.Adapter<BillProductAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvBillProductName = itemView.findViewById<TextView>(R.id.tvBillProductName)
+        private val tvBillProductPrice = itemView.findViewById<TextView>(R.id.tvBillProductPrice)
+        private val tvBillProductSKU = itemView.findViewById<TextView>(R.id.tvBillProductSKU)
+        private val tvBillTotalPrice = itemView.findViewById<TextView>(R.id.tvBillTotalPrice)
+        private val tvAmountProduct = itemView.findViewById<TextView>(R.id.tvAmountProduct)
+        private val ibAddAmount = itemView.findViewById<ImageButton>(R.id.ibAddAmount)
+        private val ibSubtractAmount = itemView.findViewById<ImageButton>(R.id.ibSubtractAmount)
+        private val decimalFormat = DecimalFormat("0,000.0")
         fun bind(product: SelectedProduct) {
-            itemView.findViewById<TextView>(R.id.tvBillProductName).text =
-                product.product.productName
-            itemView.findViewById<TextView>(R.id.tvBillProductSKU).text = product.product.productSKU
-            val decimalFormat = DecimalFormat("0,000.0")
-            itemView.findViewById<TextView>(R.id.tvBillProductPrice).text =
-                decimalFormat.format(product.product.productPrice).toString()
-            itemView.findViewById<TextView>(R.id.tvBillTotalPrice).text =
+            tvBillProductName.text = product.product.productName
+            tvBillProductSKU.text = product.product.productSKU
+            tvBillProductPrice.text = decimalFormat.format(product.product.productPrice).toString()
+            tvBillTotalPrice.text =
                 decimalFormat.format(product.amount * product.product.productPrice)
                     .toString()
-            itemView.findViewById<TextView>(R.id.tvAmountProduct).text = product.amount.toString()
-            itemView.findViewById<ImageButton>(R.id.ibAddAmount).setOnClickListener {
+            tvAmountProduct.text = product.amount.toString()
+            ibAddAmount.setOnClickListener {
                 product.amount++
-                itemView.findViewById<TextView>(R.id.tvAmountProduct).text =
-                    product.amount.toString()
-                itemView.findViewById<TextView>(R.id.tvBillTotalPrice).text =
+                tvAmountProduct.text = product.amount.toString()
+                tvBillProductPrice.text =
                     decimalFormat.format(product.amount * product.product.productPrice).toString()
                 updateView(product)
             }
-            itemView.findViewById<ImageButton>(R.id.ibSubtractAmount).setOnClickListener {
+            ibSubtractAmount.setOnClickListener {
                 if (product.amount > 1) {
                     product.amount--
-                    itemView.findViewById<TextView>(R.id.tvAmountProduct).text =
-                        product.amount.toString()
-                    itemView.findViewById<TextView>(R.id.tvBillTotalPrice).text =
+                    tvAmountProduct.text = product.amount.toString()
+                    tvBillTotalPrice.text =
                         decimalFormat.format(product.amount * product.product.productPrice)
                             .toString()
                     updateView(product)
-                }
-                else if(product.amount==1)
-                {
+                } else if (product.amount == 1) {
                     mCtx.showToast("Số lượng không được ít hơn 0.Hãy kiểm tra lại")
                 }
             }
@@ -63,8 +64,9 @@ class BillProductAdapter(
         val contactView = li.inflate(R.layout.layout_item_bill, parent, false)
         return ViewHolder(contactView)
     }
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(mListBilll[position])
-    }
+
     override fun getItemCount() = mListBilll.size
 }
