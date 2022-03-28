@@ -77,18 +77,18 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
-        android:orientation="vertical">
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="@dimen/dp_10"-->
+    <!--        android:orientation="vertical">-->
 
-        <com.misa.fresher.customview.CustomRecyclerView
-            android:id="@+id/rcvColor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:title1="Color" />
-    </LinearLayout>
+    <!--        <com.misa.fresher.ui.customview.CustomRecyclerView-->
+    <!--            android:id="@+id/rcvColor"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            app:title1="Color" />-->
+    <!--    </LinearLayout>-->
 
 
 </LinearLayout>

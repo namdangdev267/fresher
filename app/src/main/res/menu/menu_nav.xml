@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/fragment_sale"
+            android:id="@+id/fragmentsale"
             android:icon="@drawable/list64px"
             android:title="@string/sale" />
         <item
-            android:id="@+id/fragment_list_bill"
+            android:id="@+id/fragmentlistbill"
             android:icon="@drawable/bill24px"
-            android:title="@string/shipping_book" />
+            android:title="@string/list_of_bill" />
     </group>
 </menu>

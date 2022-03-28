@@ -10,7 +10,7 @@
         tools:ignore="ExtraText">
 
         <ImageView
-            android:id="@+id/imageview_search_icon1"
+            android:id="@+id/img_icon1"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/ripple_circle"
@@ -38,7 +38,7 @@
                 tools:ignore="NestedWeights" />
 
             <EditText
-                android:id="@+id/edittext_search_hint"
+                android:id="@+id/edt_search_hint"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
@@ -65,7 +65,7 @@
 
 
         <ImageView
-            android:id="@+id/imageview_search_icon2"
+            android:id="@+id/img_search2"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/ripple_circle"
@@ -75,7 +75,7 @@
             android:padding="@dimen/dp_12" />
 
         <ImageView
-            android:id="@+id/imageview_search_icon3"
+            android:id="@+id/img_search3"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/ripple_circle"

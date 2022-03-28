@@ -23,6 +23,7 @@
         <item>Red</item>
         <item>Yellow</item>
         <item>Blue</item>
+        <item>Black</item>
     </string-array>
 
     <string name="organization">Organization</string>
@@ -116,4 +117,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="color">Color</string>
     <string name="no_infor_user">No infor user</string>
+    <string name="list_of_bill">List of bill</string>
 </resources>

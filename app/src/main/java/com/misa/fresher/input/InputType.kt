@@ -7,7 +7,6 @@ enum class InputType {
     CHECK_BOX,
     TWO_COL,
 
-    // specical type
     DELIVERY_TYPE,
     PACKAGE_SIZE,
 }
