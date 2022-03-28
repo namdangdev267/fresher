@@ -1,4 +1,4 @@
-package com.misa.fresher.loginactivity
+package com.misa.fresher.ui.fragment.login
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,9 +10,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.misa.fresher.MainActivity
+import com.misa.fresher.data.models.User
 import com.misa.fresher.databinding.FragmentLoginBinding
+import com.misa.fresher.loginactivity.APIClient
+import com.misa.fresher.loginactivity.LoginMode
+import com.misa.fresher.loginactivity.LoginViewModel
+import com.misa.fresher.loginactivity.UserInterfaceService
 import com.misa.fresher.showToast
+import com.misa.fresher.ui.activity.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
