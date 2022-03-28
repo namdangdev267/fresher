@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="7dp"
             android:gravity="center"
-            android:text="Support: 1900 8677"
+            android:text="@string/txt_phone_support"
             android:textColor="@color/white"
             android:textSize="13sp"
             app:drawableLeftCompat="@drawable/ic_phone"
@@ -95,7 +95,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="-15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:src="@drawable/ic_phone"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -154,6 +154,19 @@
                 android:focusable="true"
                 android:text="List of bills"
                 app:drawableLeftCompat="@drawable/ic_receipt_orange" />
+
+            <TextView
+                android:id="@+id/nav_to_auth_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_product_item"
+                android:drawablePadding="@dimen/pad_extra"
+                android:gravity="center_vertical"
+                android:padding="@dimen/pad_extra"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Sign out"
+                app:drawableLeftCompat="@drawable/ic_power_red" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -8,13 +8,16 @@ import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.databinding.FragmentListBillsBinding
-import com.misa.fresher.global.FakeData
 import com.misa.fresher.ui.listbills.adapter.ListBillAdapter
 import com.misa.fresher.utils.showToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBillsBinding::inflate),
     ListBillContract.View {
     private var presenter: ListBillPresenter? = null
+    private var listBillAdapter: ListBillAdapter? = null
 
     override fun initPresenter() {
         presenter = ListBillPresenter().also { it.attach(this) }
@@ -33,11 +36,18 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         binding.btnClose.setOnClickListener { toggleSearch(false) }
         binding.txtSearch.doAfterTextChanged {
             val txtSearch = binding.txtSearch.text.toString().lowercase()
-            presenter?.getBills(txtSearch)
+            context?.let {
+                CoroutineScope(Dispatchers.IO).launch {
+                    presenter?.getBills(it, txtSearch)
+                }
+            }
         }
     }
 
-    private fun initFilters() { presenter?.getFilterOptions() }
+    private fun initFilters() {
+        presenter?.getFilterOptions()
+    }
+
     override fun updateFilters(dates: ArrayList<String>, categories: ArrayList<String>) {
         val dateAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_item, dates)
         dateAdapter.setDropDownViewResource(R.layout.item_spinner_item)
@@ -51,10 +61,22 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         }
     }
 
-    private fun initListBillRecView() {presenter?.getBills()}
-    override fun updateListBillRecView(bills: ArrayList<ProductBill>) {
-        binding.listBillRecView.adapter = ListBillAdapter(bills) { bill, pos ->
+    private fun initListBillRecView() {
+        listBillAdapter = ListBillAdapter(arrayListOf()) { bill, pos ->
             context?.showToast("you click bill: ${bill.id}")
+        }
+        binding.listBillRecView.adapter = listBillAdapter
+        context?.let {
+            CoroutineScope(Dispatchers.IO).launch {
+                presenter?.getBills(it)
+            }
+        }
+    }
+
+    override fun updateListBillRecView(bills: ArrayList<ProductBill>) {
+        listBillAdapter?.run {
+            items = bills
+            notifyDataSetChanged()
         }
     }
 
@@ -73,7 +95,7 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
 
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter?.detach()
+        super.onDestroy()
     }
 }

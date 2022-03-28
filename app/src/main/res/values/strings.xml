@@ -26,4 +26,22 @@
     <string name="btn_filter_clear">Clear filter</string>
     <string name="btn_done">Done</string>
 
+    <string name="txt_sign_up">sign up</string>
+    <string name="txt_back_to_sign_in">Back to sign in</string>
+    <string name="txt_sign_in">sign in</string>
+    <string name="txt_register_new_account">Register new account</string>
+    <string name="txt_something_wrong">Something goes wrong!</string>
+    <string name="txt_sign_up_success">Create account success!</string>
+    <string name="txt_invalid_email">Email is incorrect!</string>
+    <string name="txt_invalid_password"><![CDATA[Password must be > 6 characters]]></string>
+    <string name="txt_invalid_confirm_password">Confirm password is incorrect!</string>
+    <string name="txt_app_brand">O m n i c h a n n e l P l a t o r m</string>
+    <string name="txt_for_sale">For sale</string>
+    <string name="txt_hint_username">Username</string>
+    <string name="txt_hint_password">Password</string>
+    <string name="txt_hint_confirm_password">Confirm password</string>
+    <string name="txt_sign_in_touch_id">Sign in with Touch ID</string>
+    <string name="txt_privacy_policy">Privacy policy</string>
+    <string name="txt_phone_support">Support: 1900 8677</string>
+
 </resources>

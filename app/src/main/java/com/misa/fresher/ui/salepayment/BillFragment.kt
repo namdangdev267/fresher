@@ -5,9 +5,12 @@ import com.misa.fresher.R
 import com.misa.fresher.ui.sale.adapter.SaleProductAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentBillBinding
-import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.data.model.product.ProductModel
 import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.utils.showToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::inflate), BillContract.View {
     private var presenter: BillPresenter? = null
@@ -25,7 +28,11 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
         binding.btnNavToShipInfo.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_bill_to_fragment_ship_info)
         }
-        binding.btnPayment.setOnClickListener { presenter?.payProducts() }
+        binding.btnPayment.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                presenter?.payProducts(context)
+            }
+        }
     }
 
 
@@ -35,14 +42,14 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
     }
 
     private fun initToolbarUI() {
-        binding.txtBillId.text = ProductBill._id.toString()
+        binding.txtBillId.text = "Bill details"
         binding.btnBack.setOnClickListener { activity?.onBackPressed() }
     }
 
 
-    override fun updateListProductRecViewUI(products: ArrayList<Product>) {
+    override fun updateListProductRecViewUI(productModels: ArrayList<ProductModel>) {
         binding.listProductRecView.adapter = SaleProductAdapter(
-            products,
+            productModels,
             onAmountChanged = { presenter?.getSelectedProductsStatistic() },
             clickItemListener = {_, _ ->}
         )
@@ -59,7 +66,7 @@ class BillFragment : BaseFragment<FragmentBillBinding>(FragmentBillBinding::infl
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter?.detach()
+        super.onDestroy()
     }
 }

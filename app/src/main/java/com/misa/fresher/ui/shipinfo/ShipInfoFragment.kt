@@ -12,7 +12,7 @@ import com.misa.fresher.R
 import com.misa.fresher.ui.shipinfo.adapter.ShipInfoAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.*
-import com.misa.fresher.data.model.ShipInfo
+import com.misa.fresher.data.model.ship.ShipInfo
 
 class ShipInfoFragment : BaseFragment<FragmentShipInfoBinding>(FragmentShipInfoBinding::inflate) {
     override fun initUI() {

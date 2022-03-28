@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_auth_img">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_marginTop="@dimen/pad_super_extra"
+                android:src="@drawable/ic_logo"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/txt_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/txt_app_brand"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_extra" />
+
+            <TextView
+                android:id="@+id/txt_purpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="@dimen/pad_medium"
+                android:text="@string/txt_for_sale"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/form_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/pad_extra_double"
+                android:layout_marginTop="@dimen/pad_extra_double"
+                android:layout_marginBottom="@dimen/pad_large"
+                android:background="@drawable/bg_btn_round_white"
+                android:orientation="vertical"
+                android:padding="@dimen/pad_extra">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/field_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_user_blue"
+                        android:drawablePadding="@dimen/pad_large"
+                        android:hint="@string/txt_hint_username"
+                        android:inputType="textEmailAddress"
+                        android:padding="@dimen/pad_extra"
+                        android:textSize="@dimen/txt_medium" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/purpleLight" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/field_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/purpleDark"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_lock"
+                        android:drawablePadding="@dimen/pad_large"
+                        android:hint="@string/txt_hint_password"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/pad_extra"
+                        android:textSize="@dimen/txt_medium" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/purpleLight" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/field_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:boxStrokeColor="@color/purpleDark"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_lock"
+                        android:drawablePadding="@dimen/pad_large"
+                        android:hint="@string/txt_hint_confirm_password"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/pad_extra"
+                        android:textSize="@dimen/txt_medium" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/purpleLight" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pad_extra_double"
+                    android:layout_marginBottom="@dimen/pad_extra"
+                    android:background="@drawable/bg_btn_round_violet"
+                    android:text="@string/txt_sign_in"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/btn_toggle_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/pad_small"
+                    android:text="@string/txt_register_new_account" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_touch_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_sign_in_touch_id"
+                    android:textColor="@color/white" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/pad_large"
+                    android:background="@drawable/bg_oval_white_opacity_40"
+                    android:padding="@dimen/pad_large"
+                    android:src="@drawable/ic_fingerprint_white"
+                    app:tint="@color/white" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/txt_privacy_policy"
+                android:textColor="@color/white"
+                android:gravity="center|bottom"
+                android:layout_margin="@dimen/pad_extra_double"/>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/layout_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_loading"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </FrameLayout>
+</ScrollView>

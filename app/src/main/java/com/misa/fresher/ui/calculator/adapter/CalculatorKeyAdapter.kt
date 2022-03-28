@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.misa.fresher.base.BaseAdapter
 import com.misa.fresher.base.BaseViewHolder
 import com.misa.fresher.databinding.ItemCalculatorKeyBinding
-import com.misa.fresher.data.model.CalculatorKey
+import com.misa.fresher.data.model.calculator.CalculatorKey
 
 class CalculatorKeyAdapter(
     override var items: ArrayList<CalculatorKey>,
