@@ -4,7 +4,7 @@ import com.misa.fresher.data.model.product.*
 
 object Queries {
     const val DATABASE_NAME: String = "fresher_database"
-    const val DATABASE_VERSION: Int = 1
+    const val DATABASE_VERSION: Int = 4
 
     const val CREATE_PRODUCT_MODEL_TABLE =
         "CREATE TABLE ${ProductModel.TABLE_NAME} ( " +
@@ -49,6 +49,7 @@ object Queries {
                 "${ItemBill.ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${ItemBill.ITEM_ID} INTEGER NOT NULL, " +
                 "${ItemBill.BILL_ID} INTEGER NOT NULL, " +
+                "${ItemBill.UNIT_ID} INTEGER NOT NULL, " +
                 "${ItemBill.AMOUNT} INTEGER NOT NULL )"
 
 

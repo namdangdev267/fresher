@@ -16,7 +16,9 @@ interface IProductDataSource {
             fun delete(row: T): Long
         }
 
-        interface IModel: IBase<ProductModel> {}
+        interface IModel: IBase<ProductModel> {
+
+        }
 
         interface IItem: IBase<ProductItem> {
         }
@@ -25,11 +27,17 @@ interface IProductDataSource {
             fun getByModelId(modelId: Int): ArrayList<ProductUnit>
         }
 
-        interface IBill: IBase<ProductBill> {}
+        interface IBill: IBase<ProductBill> {
 
-        interface IModelUnit: IBase<ModelUnit> {}
+        }
 
-        interface IItemBill: IBase<ItemBill> {}
+        interface IModelUnit: IBase<ModelUnit> {
+
+        }
+
+        interface IItemBill: IBase<ItemBill> {
+
+        }
     }
 
     interface Remote {

@@ -1,5 +1,6 @@
 package com.misa.fresher.data.repository.product
 
+import com.misa.fresher.data.model.product.ProductModel
 import com.misa.fresher.data.model.product.ProductUnit
 import com.misa.fresher.data.source.IProductDataSource
 
@@ -13,6 +14,11 @@ class ProductUnitRepository private constructor(private val productUnitLocalData
 
     override fun getByModelId(modelId: Int): ArrayList<ProductUnit> {
         return productUnitLocalDataSource.getByModelId(modelId = modelId)
+    }
+
+    override fun getById(unitId: Int): ProductUnit? {
+        val pUnits = productUnitLocalDataSource.getByCol(ProductUnit.ID, unitId.toString())
+        return if(pUnits.isNotEmpty()) pUnits[0] else null
     }
 
     companion object {

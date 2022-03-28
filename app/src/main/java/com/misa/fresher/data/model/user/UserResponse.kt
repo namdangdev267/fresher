@@ -1,4 +1,4 @@
-package com.misa.fresher.data.model
+package com.misa.fresher.data.model.user
 
 /**
  * - class's purpose: User authenticate body response model
@@ -15,7 +15,7 @@ package com.misa.fresher.data.model
  * @edit_at 21/03/2022
  */
 
-data class User(
+data class UserResponse(
 
     val kind: String?, val localId: String?, val email: String?, val idToken: String?,
 

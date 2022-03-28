@@ -7,7 +7,7 @@ import com.misa.fresher.R
 import com.misa.fresher.ui.calculator.adapter.CalculatorKeyAdapter
 import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.databinding.FragmentCalculatorKeyboardBinding
-import com.misa.fresher.data.model.CalculatorKey
+import com.misa.fresher.data.model.calculator.CalculatorKey
 
 class CalculatorKeyFragment : BaseFragment<FragmentCalculatorKeyboardBinding>(FragmentCalculatorKeyboardBinding::inflate) {
 

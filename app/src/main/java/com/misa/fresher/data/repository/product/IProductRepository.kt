@@ -6,16 +6,19 @@ interface IProductRepository {
     interface IModel {
         fun insert(productModel: ProductModel): Long
         fun getAll(): ArrayList<ProductModel>
+        fun getById(modelId: Int): ProductModel?
     }
 
     interface IItem {
         fun insert(productItem: ProductItem): Long
         fun getByModelId(modelId: Int): ArrayList<ProductItem>
+        fun getById(itemId: Int): ProductItem?
     }
 
     interface IUnit {
         fun insert(productUnit: ProductUnit): Long
         fun getByModelId(modelId: Int): ArrayList<ProductUnit>
+        fun getById(unitId: Int): ProductUnit?
     }
 
     interface IBill {

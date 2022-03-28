@@ -3,7 +3,7 @@ package com.misa.fresher.data.model.product
 import android.content.ContentValues
 import android.database.Cursor
 import android.os.Parcelable
-import com.misa.fresher.data.model.IDatabaseModel
+import com.misa.fresher.base.IDatabaseModel
 import com.misa.fresher.utils.handleException
 import kotlinx.parcelize.Parcelize
 

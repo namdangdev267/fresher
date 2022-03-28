@@ -10,6 +10,11 @@ class ProductItemRepository private constructor(private val productItemLocalData
         return productItemLocalDataSource.insert(productItem)
     }
 
+    override fun getById(itemId: Int): ProductItem? {
+        val pItems = productItemLocalDataSource.getByCol(ProductItem.ID, itemId.toString())
+        return if(pItems.isNotEmpty()) pItems[0] else null
+    }
+
     override fun getByModelId(modelId: Int): ArrayList<ProductItem> {
         return productItemLocalDataSource.getByCol(ProductItem.MODEL_ID, modelId.toString())
     }

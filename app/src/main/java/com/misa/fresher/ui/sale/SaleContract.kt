@@ -1,7 +1,8 @@
 package com.misa.fresher.ui.sale
 
-import com.misa.fresher.base.BaseContract
-import com.misa.fresher.data.model.product.Product
+import android.content.Context
+import com.misa.fresher.base.IBaseContract
+import com.misa.fresher.data.model.product.ProductModel
 import com.misa.fresher.utils.Enums
 
 /**
@@ -12,30 +13,28 @@ import com.misa.fresher.utils.Enums
  */
 
 class SaleContract {
-    interface View : BaseContract.View {
-        fun updateProductRecViewUI(products: ArrayList<Product>)
+    interface View : IBaseContract.View {
+        fun updateProductRecViewUI(productModels: ArrayList<ProductModel>)
 
         fun updateProductSelectedUI(totalAmount: Int, totalPrice: Double)
 
         fun updateSaleFilterDrawerUI(colors: List<String>, sizes: List<String>, categories: List<String>)
 
-        fun navToBillFragment(products: ArrayList<Product>)
+        fun navToBillFragment(productModels: ArrayList<ProductModel>)
     }
 
-    interface Presenter : BaseContract.Presenter<View> {
-        fun getDisplayProducts()
+    interface Presenter : IBaseContract.Presenter<View> {
+        suspend fun getAllProducts(context: Context?)
+
+        suspend fun filterProducts(isCheckQTY: Boolean, category: String, viewMode: Enums.Product, sortBy: String, color: String, size: String, search: String = "")
+
+        suspend fun searchProducts(search: String)
 
         fun clearSelectedProducts()
 
         fun checkSelectedProducts()
 
-        fun selectProduct(isSplit: Boolean, product: Product)
-
-        fun getFilterOptions()
-
-        fun filterProducts(isCheckQTY: Boolean, category: String, viewMode: Enums.Product, sortBy: String, color: String, size: String, search: String = "")
-
-        fun searchProducts(search: String)
+        fun selectProduct(isSplit: Boolean, productModel: ProductModel)
 
         fun getSelectedProductStatistic()
     }

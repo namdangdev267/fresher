@@ -1,4 +1,4 @@
-package com.misa.fresher.data.model
+package com.misa.fresher.base
 
 import android.content.ContentValues
 

@@ -1,6 +1,6 @@
 package com.misa.fresher.base
 
-interface BaseContract {
+interface IBaseContract {
     interface Presenter<T> {
         fun attach(view: T)
         fun detach()

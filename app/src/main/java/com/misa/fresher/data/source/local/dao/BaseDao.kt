@@ -1,8 +1,7 @@
 package com.misa.fresher.data.source.local.dao
 
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.misa.fresher.data.model.IDatabaseModel
+import com.misa.fresher.base.IDatabaseModel
 import com.misa.fresher.data.source.local.database.AppDbHelper
 import com.misa.fresher.utils.handleException
 
@@ -12,14 +11,8 @@ import com.misa.fresher.utils.handleException
  * @author HTLong
  * @edit_at 24/03/2022
  */
-abstract class BaseDao<T: IDatabaseModel>(protected val dbHelper: AppDbHelper) {
-    protected abstract val tableName: String
-    protected abstract fun fromCursor(cursor: Cursor): T?
-
-    abstract fun update(row: T): Long
-    abstract fun delete(row: T): Long
-
-    fun insert(row: T): Long {
+abstract class BaseDao<T : IDatabaseModel>(private val dbHelper: AppDbHelper) : IProductDao.IBase<T> {
+    override fun insert(row: T): Long {
         return try {
             val db: SQLiteDatabase = dbHelper.writableDatabase
             val contentValues = row.getContentValues()
@@ -30,12 +23,11 @@ abstract class BaseDao<T: IDatabaseModel>(protected val dbHelper: AppDbHelper) {
             handleException(e)
             -1
         }
-
     }
 
-    fun getByCol(colName: String? = null, colValue: String? = null): ArrayList<T> {
+    override fun getByCol(colName: String?, colValue: String?): ArrayList<T> {
         var sql = "SELECT * FROM $tableName"
-        if(colName != null) sql += " WHERE $colName = $colValue"
+        if (colName != null) sql += " WHERE $colName = $colValue"
 
         return getBySql(sql)
     }

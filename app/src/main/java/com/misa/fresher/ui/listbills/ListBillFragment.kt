@@ -10,10 +10,14 @@ import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.databinding.FragmentListBillsBinding
 import com.misa.fresher.ui.listbills.adapter.ListBillAdapter
 import com.misa.fresher.utils.showToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBillsBinding::inflate),
     ListBillContract.View {
     private var presenter: ListBillPresenter? = null
+    private var listBillAdapter: ListBillAdapter? = null
 
     override fun initPresenter() {
         presenter = ListBillPresenter().also { it.attach(this) }
@@ -32,7 +36,11 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
         binding.btnClose.setOnClickListener { toggleSearch(false) }
         binding.txtSearch.doAfterTextChanged {
             val txtSearch = binding.txtSearch.text.toString().lowercase()
-            presenter?.getBills(txtSearch)
+            context?.let {
+                CoroutineScope(Dispatchers.IO).launch {
+                    presenter?.getBills(it, txtSearch)
+                }
+            }
         }
     }
 
@@ -54,14 +62,19 @@ class ListBillFragment : BaseFragment<FragmentListBillsBinding>(FragmentListBill
     }
 
     private fun initListBillRecView() {
-        binding.listBillRecView.adapter = ListBillAdapter(arrayListOf()) { bill, pos ->
+        listBillAdapter = ListBillAdapter(arrayListOf()) { bill, pos ->
             context?.showToast("you click bill: ${bill.id}")
         }
-        presenter?.getBills()
+        binding.listBillRecView.adapter = listBillAdapter
+        context?.let {
+            CoroutineScope(Dispatchers.IO).launch {
+                presenter?.getBills(it)
+            }
+        }
     }
 
     override fun updateListBillRecView(bills: ArrayList<ProductBill>) {
-        (binding.listBillRecView.adapter as ListBillAdapter).run {
+        listBillAdapter?.run {
             items = bills
             notifyDataSetChanged()
         }

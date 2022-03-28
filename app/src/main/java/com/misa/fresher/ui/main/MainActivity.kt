@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseActivity
@@ -17,7 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         initNavigation()
     }
 
-    fun initNavigation() {
+    private fun initNavigation() {
         binding.drawerLeftMain.run {
             navToListBillFragment.setOnClickListener {
                 findNavController(R.id.fragment_sale).navigate(R.id.action_fragment_sale_to_fragment_list_bills)
@@ -28,6 +29,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 startActivity(AuthActivity.getIntent(baseContext))
             }
         }
+        val drawerLayout = binding.drawerLayoutMain
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START)
     }
 
     fun toggleDrawer() {

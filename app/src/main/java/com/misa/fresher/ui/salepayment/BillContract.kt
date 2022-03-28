@@ -1,8 +1,9 @@
 package com.misa.fresher.ui.salepayment
 
+import android.content.Context
 import android.os.Bundle
-import com.misa.fresher.base.BaseContract
-import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.base.IBaseContract
+import com.misa.fresher.data.model.product.ProductModel
 
 /**
  * - class's purpose:
@@ -12,15 +13,15 @@ import com.misa.fresher.data.model.product.Product
  */
 
 class BillContract {
-    interface View: BaseContract.View {
-        fun updateListProductRecViewUI(products: ArrayList<Product>)
+    interface View: IBaseContract.View {
+        fun updateListProductRecViewUI(productModels: ArrayList<ProductModel>)
         fun productPaid()
         fun updateSelectedProductsStatisticUI(totalPrice: Double, totalAmount: Int)
     }
 
-    interface Presenter: BaseContract.Presenter<View> {
+    interface Presenter: IBaseContract.Presenter<View> {
         fun getSelectedProducts(bundle: Bundle?)
-        fun payProducts()
+        suspend fun payProducts(context: Context?)
         fun getSelectedProductsStatistic()
     }
 }

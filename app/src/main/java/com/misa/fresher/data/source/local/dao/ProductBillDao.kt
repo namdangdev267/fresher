@@ -4,7 +4,8 @@ import android.database.Cursor
 import com.misa.fresher.data.model.product.ProductBill
 import com.misa.fresher.data.source.local.database.AppDbHelper
 
-class ProductBillDao private constructor(dbHelper: AppDbHelper) : BaseDao<ProductBill>(dbHelper){
+class ProductBillDao private constructor(dbHelper: AppDbHelper) : BaseDao<ProductBill>(dbHelper),
+    IProductDao.IBill<ProductBill> {
     override val tableName: String = ProductBill.TABLE_NAME
     override fun fromCursor(cursor: Cursor): ProductBill? = ProductBill.fromCursor(cursor)
 

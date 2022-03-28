@@ -2,10 +2,9 @@ package com.misa.fresher.ui.auth
 
 import com.misa.fresher.R
 import com.misa.fresher.data.IOnLoadedCallback
-import com.misa.fresher.data.model.User
-import com.misa.fresher.data.model.UserError
-import com.misa.fresher.data.repository.UserRepository
-import com.misa.fresher.data.source.user.remote.UserRemoteDataSource
+import com.misa.fresher.data.model.user.UserResponse
+import com.misa.fresher.data.model.user.UserError
+import com.misa.fresher.di.Injector
 
 /**
  * - Class's purpose:
@@ -16,12 +15,12 @@ import com.misa.fresher.data.source.user.remote.UserRemoteDataSource
 
 class AuthPresenter : AuthContract.Presenter {
     private var view: AuthContract.View? = null
-    private val userRepo by lazy { UserRepository.getInstance(UserRemoteDataSource.getInstance()) }
+    private val userRepo by lazy { Injector.getUserRepository() }
 
     override fun signIn(email: String, password: String) {
         if (validate(email, password)) {
-            userRepo.signIn(email, password, object : IOnLoadedCallback<User, UserError> {
-                override fun onSuccess(data: User) {
+            userRepo.signIn(email, password, object : IOnLoadedCallback<UserResponse, UserError> {
+                override fun onSuccess(data: UserResponse) {
                     view?.navToMainView(email)
                 }
 
@@ -39,8 +38,8 @@ class AuthPresenter : AuthContract.Presenter {
 
     override fun signUp(email: String, password: String, confirm: String) {
         if (validate(email, password, confirm)) {
-            userRepo.signUp(email, password, object : IOnLoadedCallback<User, UserError> {
-                override fun onSuccess(data: User) {
+            userRepo.signUp(email, password, object : IOnLoadedCallback<UserResponse, UserError> {
+                override fun onSuccess(data: UserResponse) {
                     view?.toggleSignUpUI()
                     view?.notifyMessage(default = R.string.txt_sign_up_success)
                 }

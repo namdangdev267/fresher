@@ -14,6 +14,11 @@ class ProductModelRepository private constructor(private val productModelLocalDa
         return productModelLocalDataSource.getByCol()
     }
 
+    override fun getById(modelId: Int): ProductModel? {
+        val pModels = productModelLocalDataSource.getByCol(ProductModel.ID, modelId.toString())
+        return if(pModels.isNotEmpty()) pModels[0] else null
+    }
+
     companion object {
         private var instance: ProductModelRepository? = null
         fun getInstance(productModelLocalDataSource: IProductDataSource.Local.IModel) =

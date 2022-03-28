@@ -24,6 +24,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initPresenter()
         initUI()
     }
 
@@ -32,9 +33,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
     }
 
     private fun initUI() {
-        initPresenter()
-
-        binding.edtEmail.setText(SharePreferenceHelper.getSharedPreferenceString(baseContext, SharePreferenceHelper.KEY_LOGIN, ""))
+        binding.edtEmail.setText(SharePreferenceHelper.getString(baseContext, SharePreferenceHelper.KEY_LOGIN, ""))
 
         binding.btnSubmit.setOnClickListener {
             binding.layoutLoading.isVisible = true
@@ -72,7 +71,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
     }
 
     override fun navToMainView(email: String) {
-        SharePreferenceHelper.setSharedPreferenceString(baseContext, SharePreferenceHelper.KEY_LOGIN, email)
+        SharePreferenceHelper.setString(baseContext, SharePreferenceHelper.KEY_LOGIN, email)
         startActivity(MainActivity.getIntent(context = baseContext))
     }
 

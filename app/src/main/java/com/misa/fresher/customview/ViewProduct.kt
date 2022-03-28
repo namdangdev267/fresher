@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.misa.fresher.R
 import com.misa.fresher.databinding.ItemSaleProductBinding
-import com.misa.fresher.data.model.product.Product
+import com.misa.fresher.data.model.product.ProductModel
 import com.misa.fresher.data.model.product.ProductItem
 import com.misa.fresher.data.model.product.ProductUnit
 import com.misa.fresher.utils.getDimension
@@ -20,7 +20,7 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
 
     val binding = ItemSaleProductBinding.inflate(LayoutInflater.from(context), this)
 
-    var product: Product = Product()
+    var productModel: ProductModel = ProductModel()
         set(value) {
             field = value
             if(value.items.size == 1) {
@@ -35,38 +35,32 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
         }
 
     val name: String
-        get() {
-            return if(color != null && size != null) product.name + "(${color}/${size})"
-            else product.name
-        }
+        get() = if(items.size == 1) items[0].name else productModel.name
     val code: String
-        get() {
-            return if(color != null && size != null) product.code + "-${color!!.slice(0..2)}-${size!![0]}"
-            else product.code
-        }
+        get() = if(items.size == 1) items[0].code else productModel.code
 
     var amount: Int
         set(value) {
-            product.amount = value
+            productModel.amount = value
             updateUI()
         }
-        get() = product.amount
+        get() = productModel.amount
 
-    var unit: ProductUnit
+    var productUnit: ProductUnit
         set(value) {
-            product.unit = value
+            productModel.unit = value
             updateUI()
         }
-        get() = product.unit
+        get() = productModel.unit
 
     val items: List<ProductItem>
-        get() = product.items.filter { (size == null || it.size == size) && (color == null || it.color == color) }
+        get() = productModel.items.filter { (size == null || it.size == size) && (color == null || it.color == color) }
 
     private val price: String
         get() = when (items.size) {
             0 -> "0.0"
-            1 -> (items[0].price * unit.value).toString()
-            else -> "${items.minOf { it.price } * unit.value} ~ ${items.maxOf { it.price } * unit.value}"
+            1 -> (items[0].price * productUnit.value).toString()
+            else -> "${items.minOf { it.price } * productUnit.value} ~ ${items.maxOf { it.price } * productUnit.value}"
         }
 
     private val totalPrice: String
@@ -94,12 +88,12 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
 
     val colors get() = items.map { it.color }.distinct()
     val sizes get() = items.map { it.size }.distinct()
-    val unitNames get() = product.units.map { it.name }.distinct()
+    val unitNames get() = productModel.units.map { it.name }.distinct()
 
     private fun updateUI() {
         binding.run {
-            if (product.image == 0) binding.imgImage.isGone = true
-            else binding.imgImage.setImageResource(product.image)
+            if (productModel.image == 0) binding.imgImage.isGone = true
+            else binding.imgImage.setImageResource(productModel.image)
             binding.txtName.text = name
             binding.txtCode.text = code
 
@@ -111,7 +105,7 @@ class ViewProduct(context: Context, attrs: AttributeSet? = null) : RelativeLayou
             listOf(btnAdd, btnMinus, txtAmount, txtTotalPrice).forEach { it.isVisible = isAmountChangeable }
             btnUnitSelect.isVisible = isUnitSelect
             txtPrice.text = price
-            txtUnit.text = if(unit.name.isNotEmpty()) "/${unit.name}" else ""
+            txtUnit.text = if(productUnit.name.isNotEmpty()) "/${productUnit.name}" else ""
         }
     }
 
