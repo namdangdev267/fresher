@@ -10,13 +10,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.R
 import com.misa.fresher.views.customViews.CustomToast
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentBillDetailBinding
 import com.misa.fresher.getNumString
-import com.misa.fresher.views.fragments.bill.BillAdapter
 
 class BillDetailFragment : Fragment() {
 
@@ -67,13 +65,11 @@ class BillDetailFragment : Fragment() {
             sharedViewModel.addBillToListBill()
 
             CustomToast.makeText(this.context!!,"Paid Successfully")
-
         }
 
         binding.imBillDetailBack.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_billDetailFragment_to_saleFragment)
-
         }
 
         binding.ivBillDetailShip.setOnClickListener {

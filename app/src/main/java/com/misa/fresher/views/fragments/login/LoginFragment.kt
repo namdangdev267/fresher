@@ -53,22 +53,28 @@ class LoginFragment : Fragment() {
 
     private fun configOtherView() {
         loginViewModel.loginMode.observe(viewLifecycleOwner, Observer {
+            Log.e("thiss", loginViewModel.loginMode.value.toString())
             if (loginViewModel.loginMode.value == LoginMode.SIGNUP) {
                 binding.tvLoginMode.text = "Log in"
                 binding.tvLogin.text = "Sign up"
-                binding.ilConfirmPassword.visibility = View.VISIBLE
+//                binding.ilConfirmPassword.visibility = View.VISIBLE
+//                binding.etConfirmPassword.visibility = View.VISIBLE
             } else {
                 binding.tvLoginMode.text = "Sign up"
                 binding.tvLogin.text = "Log in"
-                binding.ilConfirmPassword.visibility = View.GONE
+                binding.etLoginPassword.setText("")
+//                binding.etConfirmPassword.visibility = View.GONE
+//                binding.ilConfirmPassword.visibility = View.GONE
+
             }
+
+
         })
     }
 
     private fun transitionFragemnt(view: View) {
         binding.tvLogin.setOnClickListener {
-            if(checkLogin())
-            {
+            if (checkLogin()) {
                 if (loginViewModel.loginMode.value == LoginMode.LOGIN) {
                     login(view)
                 } else {
@@ -97,23 +103,23 @@ class LoginFragment : Fragment() {
                 if (respond.isSuccessful && respond.body() != null) {
                     binding.progress.visibility = View.GONE
                     loginViewModel.changeLoginMode()
-                    Log.e(this.javaClass.simpleName,respond.message())
+                    Log.e(this.javaClass.simpleName, respond.message())
                 } else {
                     withContext(Main) {
                         binding.progress.visibility = View.GONE
                         CustomToast.makeText(
                             view.context,
                             "Email exist. Please enter other email.",
-
                             )
                     }
                 }
             } catch (e: Exception) {
-                withContext(Main) {
+                withContext(Main)
+                {
                     binding.progress.visibility = View.GONE
                     Toast.makeText(
                         view.context,
-                        "Error Occurred: ${e.message}",
+                        "Something went wrong. Please try other account.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -175,8 +181,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun checkLogin():Boolean
-    {
+    fun checkLogin(): Boolean {
         if (binding.etLoginEmail.text.toString().isEmpty()) {
             CustomToast.makeText(
                 requireContext(),
@@ -189,25 +194,26 @@ class LoginFragment : Fragment() {
                 "Password must not be empty"
             )
             return false
-        }
-        else if (binding.etLoginPassword.text.toString().length<6) {
+        } else if (!binding.etLoginEmail.text.toString().contains("@gmail.com")) {
+            CustomToast.makeText(
+                requireContext(), "Bad email address.Please check again."
+            )
+            return false
+        } else if (binding.etLoginPassword.text.toString().length < 6) {
             CustomToast.makeText(
                 requireContext(),
                 "Password should be at least 6 characters"
             )
             return false
         }
-        else if(loginViewModel.loginMode.value == LoginMode.SIGNUP && binding.etConfirmPassword.text.toString() != binding.etLoginPassword.text.toString())
-        {
-            CustomToast.makeText(
-                requireContext(),
-                "Your confirm password is incorrect. Please check again."
-            )
-            return false
-        }
-
-        else
-        {
+//        else if (loginViewModel.loginMode.value == LoginMode.SIGNUP && binding.etConfirmPassword.text.toString() != binding.etLoginPassword.text.toString()) {
+//            CustomToast.makeText(
+//                requireContext(),
+//                "Your confirm password is incorrect. Please check again."
+//            )
+//            return false
+//        }
+        else {
             return true
         }
 

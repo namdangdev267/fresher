@@ -144,7 +144,7 @@
             android:layout_alignParentBottom="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:adapter="@{billAdapter}"
-            app:submitList="@{sharedViewModel.listBill}" />
+            app:submitListBill="@{sharedViewModel.listBill}" />
 <!--        app:setAdapter="@{billAdapter}"-->
         <ImageView
             android:id="@+id/iv_bill_buy_more"

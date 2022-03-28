@@ -8,8 +8,8 @@ import com.misa.fresher.models.ItemBill
 import com.misa.fresher.models.ItemBillDetail
 import com.misa.fresher.models.ItemProduct
 
-@BindingAdapter("submitList")
-fun submitList(recyclerView: RecyclerView, list: MutableList<ItemBill>?) {
+@BindingAdapter("submitListBill")
+fun submitLisBill(recyclerView: RecyclerView, list: MutableList<ItemBill>?) {
     val adapter = recyclerView.adapter as BaseRecyclerViewAdapter<ItemBill,RecyclerView.ViewHolder>
     adapter.updateList(list ?: mutableListOf())
 }
@@ -19,7 +19,6 @@ fun submitListBillDetail(recyclerView: RecyclerView, list: MutableList<ItemBillD
     val adapter = recyclerView.adapter as BaseRecyclerViewAdapter<ItemBillDetail,RecyclerView.ViewHolder>
     adapter.updateList(list ?: mutableListOf())
 }
-
 
 @BindingAdapter("submitListProduct")
 fun submitListProduct(recyclerView: RecyclerView, list: MutableList<ItemProduct>?) {
