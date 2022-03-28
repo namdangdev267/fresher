@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.MainActivity
@@ -49,6 +50,9 @@ class BillsFragment :
         configToggle()
         configSpinnerView()
         configRecyclerView()
+        binding.flbCart.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_bills_to_nav_sale)
+        }
     }
 
     override fun getValuesForFilter() {

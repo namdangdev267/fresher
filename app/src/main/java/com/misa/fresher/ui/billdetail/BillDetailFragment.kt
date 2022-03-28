@@ -35,6 +35,12 @@ class BillDetailFragment :
         binding.ivShipInfor.setOnClickListener {
             findNavController().navigate(R.id.action_nav_billDetail_to_shipInforFragment)
         }
+        binding.ivBuyMore.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        binding.tvBuyMore.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     private fun savingBill() {

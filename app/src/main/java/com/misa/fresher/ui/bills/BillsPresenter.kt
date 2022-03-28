@@ -22,7 +22,6 @@ class BillsPresenter(context: Context) : BillsContract.Presenter {
                 view?.getValuesForFilter()
             }
         }
-
     }
 
     override fun getFilterBills(sortBy: String) {
@@ -68,8 +67,6 @@ class BillsPresenter(context: Context) : BillsContract.Presenter {
             }
         }
         view?.upDateReclerView(bills)
-        println(bills.size)
-        println(bills)
     }
 
     override fun attach(view: BillsContract.View) {

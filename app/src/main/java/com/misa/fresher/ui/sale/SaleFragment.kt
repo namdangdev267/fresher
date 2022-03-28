@@ -30,10 +30,23 @@ import com.misa.fresher.ui.sale.adapter.ProductsAdapter
  * @date : 3/18/2022
  **/
 class SaleFragment :
-    BaseFragment<FragmentSaleBinding, SaleContract.View, SaleContract.Presenter>(),
-    SaleContract.View {
+        BaseFragment<FragmentSaleBinding, SaleContract.View, SaleContract.Presenter>(),
+        SaleContract.View {
     private var mPresenter: SalePresenter? = null
     private var rcvAdapter: ProductsAdapter? = null
+
+    override val getInflater: (LayoutInflater) ->
+    FragmentSaleBinding = FragmentSaleBinding::inflate
+
+    /**
+     * Hủy presenter
+     * @Auther : NTBao
+     * @date : 3/22/2022
+     **/
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter?.detach()
+    }
 
     override fun initUI() {
         initPresenter()
@@ -74,40 +87,40 @@ class SaleFragment :
         val btnTotalPrice = binding.contextSale.btnTotalPrice
         if (amount > 0) {
             btnReset.background = AppCompatResources.getDrawable(
-                requireContext(),
-                R.drawable.oval_button
+                    requireContext(),
+                    R.drawable.oval_button
             )
             btnAmount.run {
                 this.text = amount.toString()
                 this.background = AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.item_amount_bg_selected
+                        requireContext(),
+                        R.drawable.item_amount_bg_selected
                 )
             }
             btnTotalPrice.run {
                 this.text = "Tổng $price"
                 this.background = AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.total_price_selected
+                        requireContext(),
+                        R.drawable.total_price_selected
                 )
             }
         } else {
             btnReset.background = AppCompatResources.getDrawable(
-                requireContext(),
-                R.drawable.oval_button_base
+                    requireContext(),
+                    R.drawable.oval_button_base
             )
             btnAmount.run {
                 this.text = amount.toString()
                 this.background = AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.item_amount_bg_base
+                        requireContext(),
+                        R.drawable.item_amount_bg_base
                 )
             }
             btnTotalPrice.run {
                 this.text = "Tổng $price"
                 this.background = AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.total_price_base
+                        requireContext(),
+                        R.drawable.total_price_base
                 )
             }
         }
@@ -147,20 +160,11 @@ class SaleFragment :
      **/
     override fun navigation(list: MutableList<SelectedProducts>) {
         findNavController().navigate(
-            R.id.action_nav_sale_to_nav_billDetail,
-            bundleOf(BUNDLE_SELECTEDITEM to list)
+                R.id.action_nav_sale_to_nav_billDetail,
+                bundleOf(BUNDLE_SELECTEDITEM to list)
         )
     }
 
-    /**
-     * Hủy presenter
-     * @Auther : NTBao
-     * @date : 3/22/2022
-     **/
-    override fun onDestroy() {
-        super.onDestroy()
-        mPresenter?.detach()
-    }
 
     /**
      * khởi tạo presenter
@@ -205,18 +209,18 @@ class SaleFragment :
         mDrawer.setScrimColor(Color.TRANSPARENT)
 
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.colorArray,
-            android.R.layout.simple_spinner_item
+                requireContext(),
+                R.array.colorArray,
+                android.R.layout.simple_spinner_item
 
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spnColor.adapter = arrayAdapter
         }
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.sizeArray,
-            android.R.layout.simple_spinner_item
+                requireContext(),
+                R.array.sizeArray,
+                android.R.layout.simple_spinner_item
 
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -284,8 +288,6 @@ class SaleFragment :
             tvAmount.text = "1"
         }
     }
-
-    override val getInflater: (LayoutInflater) -> FragmentSaleBinding = FragmentSaleBinding::inflate
 
     companion object {
         const val BUNDLE_SELECTEDITEM = "items"
