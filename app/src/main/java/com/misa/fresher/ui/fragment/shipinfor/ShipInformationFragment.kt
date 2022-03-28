@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.shipinformation
+package com.misa.fresher.ui.fragment.shipinfor
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,19 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.misa.fresher.fragment.shipinformation.`package`.PackageFragment
-import com.misa.fresher.fragment.shipinformation.`package`.PackageViewModel
-import com.misa.fresher.fragment.shipinformation.receiver.ReceiverFragment
-import com.misa.fresher.fragment.shipinformation.receiver.ReceiverViewModel
-import com.misa.fresher.fragment.shipinformation.ship.ShipFragment
-import com.misa.fresher.fragment.shipinformation.ship.ShipViewModel
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentShipInformationBinding
+import com.misa.fresher.ui.fragment.shipinfor.`package`.PackageFragment
+import com.misa.fresher.ui.fragment.shipinfor.`package`.PackageViewModel
+import com.misa.fresher.ui.fragment.shipinfor.receiver.ReceiverFragment
+import com.misa.fresher.ui.fragment.shipinfor.receiver.ReceiverViewModel
+import com.misa.fresher.ui.fragment.shipinfor.ship.ShipFragment
+import com.misa.fresher.ui.fragment.shipinfor.ship.ShipViewModel
 
 class ShipInformationFragment : Fragment() {
     private lateinit var sharedViewModel: PublicViewModel
@@ -105,7 +104,7 @@ class ShipInformationFragment : Fragment() {
 
         binding.btnSave.setOnClickListener {
             sharedViewModel.updateInforShip((viewPagerAdapter.mFragmentList[0] as ReceiverFragment).inforShip)
-            findNavController().navigate(R.id.action_fragment_ship_information_to_fragment_payment)
+            activity?.onBackPressed()
         }
     }
 

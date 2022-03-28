@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.shipinformation.ship
+package com.misa.fresher.ui.fragment.shipinfor.ship
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.misa.fresher.R
 import com.misa.fresher.input.InputReceiver
 import com.misa.fresher.input.InputType
-import com.misa.fresher.R
 
 class ShipFragment(
     private var recyclerView: RecyclerView,
