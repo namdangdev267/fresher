@@ -6,6 +6,6 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.misa.fresher.loginactivity.LoginFragment"
+        android:name="com.misa.fresher.ui.fragment.login.LoginFragment"
         android:label="LoginFragment" />
 </navigation>
