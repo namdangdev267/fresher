@@ -18,9 +18,7 @@ class BillsPresenter(context: Context) : BillsContract.Presenter {
     override fun getListBillsForAdapter(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             listBill = billDao.getAllBill()
-            println(listBill)
             withContext(Dispatchers.Main) {
-                view?.upDateReclerView(listBill)
                 view?.getValuesForFilter()
             }
         }
@@ -69,8 +67,9 @@ class BillsPresenter(context: Context) : BillsContract.Presenter {
                 } as MutableList<Bill>
             }
         }
-        println(bills)
         view?.upDateReclerView(bills)
+        println(bills.size)
+        println(bills)
     }
 
     override fun attach(view: BillsContract.View) {

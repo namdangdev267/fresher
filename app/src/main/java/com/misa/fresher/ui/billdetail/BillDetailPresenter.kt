@@ -19,6 +19,7 @@ class BillDetailPresenter(context: Context) : BillDetailContract.Presenter {
     private var listFromSale = mutableListOf<SelectedProducts>()
     private var billId = 0
     val billDao = BillDao.getInstance((AppDbHelper.getInstance(context)))
+    val selectedProductsDao = SelectedProductDao.getInstance((AppDbHelper.getInstance(context)))
     override fun getSelectedProducts(bundle: Bundle) {
         listFromSale = bundle.get(SaleFragment.BUNDLE_SELECTEDITEM) as MutableList<SelectedProducts>
         view?.updateRecyclerViewSelectedProducts(listFromSale)
@@ -41,10 +42,8 @@ class BillDetailPresenter(context: Context) : BillDetailContract.Presenter {
         getSelectedProductStatic()
     }
 
-    override fun saveBill(context: Context,billId:Int) {
+    override fun saveBill(billId:Int) {
         val price = listFromSale.sumOf { it.amonut *it.product.price }
-
-        val selectedProductsDao = SelectedProductDao(AppDbHelper.getInstance(context))
         CoroutineScope(Dispatchers.IO).launch {
             for (selected in listFromSale){
                 selectedProductsDao.addSelectedProduct(selected,billId)
@@ -59,8 +58,7 @@ class BillDetailPresenter(context: Context) : BillDetailContract.Presenter {
                 )
             )
             withContext(Dispatchers.Main){
-                context.showToast("Thanh toán thành công")
-                view?.navigate()
+                view?.saveSuccess()
             }
         }
     }

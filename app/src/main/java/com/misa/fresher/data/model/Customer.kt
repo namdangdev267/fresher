@@ -24,7 +24,6 @@ data class Customer(
 
     fun getContentValues(): ContentValues {
         return ContentValues().apply {
-            put(ID,id)
             put(NAME,name)
             put(NUMBER,number)
             put(ADDRESS,address)

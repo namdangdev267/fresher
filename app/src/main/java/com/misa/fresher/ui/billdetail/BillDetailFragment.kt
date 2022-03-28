@@ -9,6 +9,7 @@ import com.misa.fresher.base.BaseFragment
 import com.misa.fresher.data.model.Customer
 import com.misa.fresher.data.model.SelectedProducts
 import com.misa.fresher.databinding.FragmentBillDetailBinding
+import com.misa.fresher.showToast
 import com.misa.fresher.ui.billdetail.adapter.ProductSelectedAdapter
 
 /**
@@ -39,10 +40,7 @@ class BillDetailFragment :
     private fun savingBill() {
         binding.btnGetPayment.setOnClickListener {
             val id = binding.tvBillId.text.toString()
-            mPresenter?.saveBill(
-                requireContext(),
-                id.toInt()
-            )
+            mPresenter?.saveBill(id.toInt())
         }
     }
 
@@ -76,14 +74,15 @@ class BillDetailFragment :
 
 
     override fun showErrorMessage(msg: String) {
-        TODO("Not yet implemented")
+
     }
 
     override fun updateReceiver(customer: Customer) {
-        TODO("Not yet implemented")
+
     }
 
-    override fun navigate() {
+    override fun saveSuccess() {
+        requireContext().showToast("Thanh toán thành công")
         findNavController().navigate(R.id.action_nav_billDetail_to_nav_sale)
     }
 

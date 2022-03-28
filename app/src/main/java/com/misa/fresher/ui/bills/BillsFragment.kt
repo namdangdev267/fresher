@@ -26,8 +26,10 @@ class BillsFragment :
     override fun upDateReclerView(list: MutableList<Bill>) {
         binding.tvTotal.text = list.size.toString()
         binding.tvTotalPriceBills.text = "${list.sumOf { it.totalPrice }}"
-        rcvAdapter?.mBills = list
-        rcvAdapter?.notifyDataSetChanged()
+        rcvAdapter?.run {
+            mBills = list
+            notifyDataSetChanged()
+        }
     }
 
     override fun initPresenter() {
@@ -54,6 +56,7 @@ class BillsFragment :
         spnDate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val dateSpinnerValue = spnDate.selectedItem.toString()
+                println(dateSpinnerValue)
                 mPresenter?.getFilterBills(dateSpinnerValue)
             }
             override fun onNothingSelected(p0: AdapterView<*>?) { }

@@ -8,7 +8,7 @@ import com.misa.fresher.data.model.Bill
 import com.misa.fresher.data.model.Products
 import com.misa.fresher.data.model.SelectedProducts
 
-class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDao {
+class SelectedProductDao private constructor(private val dbHelper: AppDbHelper) : ISelectedProductDao {
     override suspend fun addSelectedProduct(selectedProducts: SelectedProducts, billId: Int): Long {
         val contentValues = ContentValues()
         val databaseWrite = dbHelper.writableDatabase

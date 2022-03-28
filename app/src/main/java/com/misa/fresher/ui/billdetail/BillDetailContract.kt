@@ -11,7 +11,7 @@ class BillDetailContract : BaseContract {
         fun updateRecyclerViewSelectedProducts(list: MutableList<SelectedProducts>)
         fun updateSelectedProduct(amount: Int, price: Double)
         fun updateReceiver(customer: Customer)
-        fun navigate()
+        fun saveSuccess()
         fun updateBillId(billId: Int)
     }
 
@@ -19,7 +19,7 @@ class BillDetailContract : BaseContract {
         fun getSelectedProducts(bundle: Bundle)
         fun getSelectedProductStatic()
         fun getUpdateSelectedClicked(selectedProducts: SelectedProducts)
-        fun saveBill(context: Context,billId:Int)
+        fun saveBill(billId:Int)
         fun getBillId(context: Context)
     }
 }
