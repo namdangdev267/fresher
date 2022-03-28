@@ -1,4 +1,4 @@
-package com.misa.fresher.customview
+package com.misa.fresher.ui.customview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,19 +25,9 @@ class CustomRecyclerView : LinearLayout {
         )
         val title = array.getString(R.styleable.CustomRecyclerView_title1)
         Log.e(this.javaClass.simpleName, title.toString())
-
         array.recycle()
-
-
         LayoutInflater.from(context).inflate(R.layout.custom_recycler_view, this, true)
-//         = CustomRecyclerViewBinding.inflate(LayoutInflater.from(this.context),this)
-
-
         val titleRcv: TextView = bindingCustomRecyclerView.cvRcvTitle
         titleRcv.text = title.toString()
-
-
     }
-
-
 }

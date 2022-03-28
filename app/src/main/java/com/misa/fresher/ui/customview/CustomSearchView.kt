@@ -1,4 +1,4 @@
-package com.misa.fresher.customview
+package com.misa.fresher.ui.customview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -32,16 +32,16 @@ class CustomSearchView : LinearLayout {
 
         LayoutInflater.from(context).inflate(R.layout.custom_search_view, this, true)
 
-        editText = findViewById<EditText>(R.id.edittext_search_hint)
+        editText = findViewById<EditText>(R.id.edt_search_hint)
         editText.hint = title
 
-        val search_icon1: ImageView = findViewById(R.id.imageview_search_icon1)
+        val search_icon1: ImageView = findViewById(R.id.img_icon1)
         search_icon1.setImageResource(icon1)
 
-        val search_icon2 = findViewById<ImageView>(R.id.imageview_search_icon2)
+        val search_icon2 = findViewById<ImageView>(R.id.img_search2)
         search_icon2.setImageResource(icon2)
 
-        val search_icon3 = findViewById<ImageView>(R.id.imageview_search_icon3)
+        val search_icon3 = findViewById<ImageView>(R.id.img_search3)
         search_icon3.setImageResource(icon3)
 
     }

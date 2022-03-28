@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.sale
+package com.misa.fresher.ui.customview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
