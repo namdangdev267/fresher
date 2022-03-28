@@ -1,4 +1,4 @@
-package com.misa.fresher
+package com.misa.fresher.ui.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.misa.fresher.PublicViewModel
+import com.misa.fresher.R
 import com.misa.fresher.databinding.ActivityMainBinding
 
 
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         shareViewModel = ViewModelProvider(this)[PublicViewModel::class.java]
-
         configureXML()
     }
 

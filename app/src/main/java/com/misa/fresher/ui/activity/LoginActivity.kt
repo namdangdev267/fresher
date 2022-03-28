@@ -1,4 +1,4 @@
-package com.misa.fresher.loginactivity
+package com.misa.fresher.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
