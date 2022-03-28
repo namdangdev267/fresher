@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.bill
+package com.misa.fresher.ui.fragment.bill
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,10 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.MainActivity
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentListBillBinding
+import com.misa.fresher.fragment.bill.ListBillAdapter
+import com.misa.fresher.ui.activity.MainActivity
 
 class ListBillFragment : Fragment() {
     private val binding: FragmentListBillBinding by lazy {
