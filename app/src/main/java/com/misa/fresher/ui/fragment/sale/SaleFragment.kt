@@ -1,9 +1,10 @@
-package com.misa.fresher.fragment.sale
+package com.misa.fresher.ui.fragment.sale
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.MainActivity
 import com.misa.fresher.PublicViewModel
 import com.misa.fresher.R
 import com.misa.fresher.data.models.Product
@@ -25,7 +25,9 @@ import com.misa.fresher.data.models.enum.Category
 import com.misa.fresher.data.models.enum.SortBy
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
+import com.misa.fresher.fragment.sale.SaleViewModel
 import com.misa.fresher.showToast
+import com.misa.fresher.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 import kotlinx.android.synthetic.main.sale_context.view.*
 
@@ -34,6 +36,7 @@ class SaleFragment : Fragment() {
     private val binding: FragmentSaleBinding by lazy { getInflater(layoutInflater) }
     private val publicViewModel: PublicViewModel by activityViewModels()
     private val saleViewModel: SaleViewModel by viewModels()
+    private var adapter: ProductAdapter? = null
     private val bottomSheetDialog by lazy {
         BottomSheetDialog(
             requireContext(),
@@ -41,12 +44,13 @@ class SaleFragment : Fragment() {
         )
     }
     private val bottomSheetView by lazy { BottomSheetProductBinding.inflate(layoutInflater) }
-
     val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
+
+    var newFilter: com.misa.fresher.data.models.Filter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        initViewModel()
+        initViewModel(context)
     }
 
     override fun onCreateView(
@@ -60,12 +64,12 @@ class SaleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         publicViewModel.fakeData(requireContext())
-
         transitionFragment()
         configureFilterDrawer()
         configureToolbar()
         configureOtherView()
         configListView()
+        updateListView()
     }
 
     private fun transitionFragment() {
@@ -77,24 +81,23 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun initViewModel() {
-        saleViewModel.createData(requireContext())
+    private fun initViewModel(context: Context) {
+        saleViewModel.createData(context)
     }
 
     private fun configureToolbar() {
 
-        binding.searchviewSale.imageview_search_icon1.setOnClickListener {
+        binding.searchviewSale.img_icon1.setOnClickListener {
             (activity as MainActivity).toggleDrawer((activity as MainActivity).binding.navSaleFragment)
         }
 
-        binding.searchviewSale.imageview_search_icon3.setOnClickListener {
+        binding.searchviewSale.img_search3.setOnClickListener {
             toggleDrawer(binding.navigationView)
         }
 
-        binding.searchviewSale.edittext_search_hint.doAfterTextChanged {
-            clearFilter()
+        binding.searchviewSale.edt_search_hint.doAfterTextChanged {
             saleViewModel.updateListItemShow(it.toString())
-            toggleDrawer(binding.navigationView)
+            Log.d("tagSearch", it.toString())
         }
     }
 
@@ -116,6 +119,9 @@ class SaleFragment : Fragment() {
 
         binding.filterDrawer.run {
             rbName.isChecked = true
+            swQuantity.setOnCheckedChangeListener { compoundButton, b ->
+                saleViewModel.filter.available = b
+            }
             spnGrouping.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -140,9 +146,16 @@ class SaleFragment : Fragment() {
                     }
                 }
 
-            rbName.setOnClickListener { saleViewModel.filter.sortBy = SortBy.NAME }
-            rbNew.setOnClickListener { saleViewModel.filter.sortBy = SortBy.NEW_ARRIVAL }
-            rbQuantity.setOnClickListener { saleViewModel.filter.sortBy = SortBy.QUANTITY }
+            rbName.setOnClickListener {
+                saleViewModel.filter.sortBy = SortBy.NAME
+            }
+            rbNew.setOnClickListener {
+                saleViewModel.filter.sortBy = SortBy.NEW_ARRIVAL
+
+            }
+            rbQuantity.setOnClickListener {
+                saleViewModel.filter.sortBy = SortBy.QUANTITY
+            }
 
             spinItemColor.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -152,10 +165,12 @@ class SaleFragment : Fragment() {
                         val listColor = listOf(
                             com.misa.fresher.data.models.enum.Color.RED,
                             com.misa.fresher.data.models.enum.Color.YELLOW,
-                            com.misa.fresher.data.models.enum.Color.BLUE
+                            com.misa.fresher.data.models.enum.Color.BLUE,
+                            com.misa.fresher.data.models.enum.Color.BLACK
                         )
                         saleViewModel.filter.color = listColor[p2 - 1]
                     }
+
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -165,7 +180,9 @@ class SaleFragment : Fragment() {
 
             btnDone.setOnClickListener {
                 saleViewModel.filterShow()
+                Log.e("tagFilter", newFilter.toString())
                 toggleDrawer(binding.navigationView)
+                updateListByFilter()
             }
 
             btnReset.setOnClickListener {
@@ -176,13 +193,22 @@ class SaleFragment : Fragment() {
         }
     }
 
+    private fun updateListByFilter() {
+        saleViewModel.filterList.observe(viewLifecycleOwner, Observer {
+            adapter?.listItems = it
+            adapter?.notifyDataSetChanged()
+        })
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n", "NotifyDataSetChanged")
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
-
-        saleViewModel.listProductShow.observe(viewLifecycleOwner) { it ->
-            binding.rcvProduct.adapter = ProductAdapter(it) { saleItemClick(it) }
-        }
+        adapter = ProductAdapter(mutableListOf()) { saleItemClick(it) }
+        binding.rcvProduct.adapter = adapter
+        saleViewModel.listProductShow.observe(viewLifecycleOwner, Observer {
+            adapter?.listItems = it
+            adapter?.notifyDataSetChanged()
+        })
 
         publicViewModel.listItemSelected.observe(viewLifecycleOwner) {
             binding.tvCountProduct.text = publicViewModel.getCount().toString()
@@ -208,6 +234,14 @@ class SaleFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateListView() {
+        saleViewModel.searchList.observe(viewLifecycleOwner, Observer {
+            adapter?.listItems = it
+            adapter?.notifyDataSetChanged()
+        })
+    }
+
     @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
         binding.tvCustomer.isSelected = true
@@ -224,7 +258,6 @@ class SaleFragment : Fragment() {
             } else {
                 tvCustomer.text = "Customer name, phone number"
             }
-
         })
     }
 
@@ -242,7 +275,6 @@ class SaleFragment : Fragment() {
         val tvItemQuantity = bottomSheetView.tvCountProduct
         val btAdd = bottomSheetView.imgAdd
         val btRemove = bottomSheetView.imgRemove
-        val rcvColorClick = bottomSheetView.rcvColor.bindingCustomRecyclerView.cvRcvRecyclerview
 
         publicViewModel.updateItemSelected(itemProduct)
 
@@ -264,11 +296,6 @@ class SaleFragment : Fragment() {
             tvItemId.text = it.codePackage
         })
 
-//        rcvColorClick.adapter = CustomRCVAdapter(saleViewModel.getColor(itemProduct)) {
-//            sharedViewModel.updateListItemSelected()
-//            bottomSheetDialog.dismiss()
-//        }
-
         bottomSheetDialog.setContentView(bottomSheetView.root)
 
         bottomSheetDialog.setOnDismissListener {
@@ -278,6 +305,5 @@ class SaleFragment : Fragment() {
         bottomSheetDialog.show()
 
     }
-
 }
 

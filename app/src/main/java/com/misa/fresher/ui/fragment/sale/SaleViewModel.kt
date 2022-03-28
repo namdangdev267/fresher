@@ -32,6 +32,8 @@ class SaleViewModel : ViewModel() {
     private val _listProductShow = MutableLiveData<MutableList<Product>>()
     val listProductShow: LiveData<MutableList<Product>>
         get() = _listProductShow
+    var searchList = MutableLiveData<MutableList<Product>>(mutableListOf())
+    var filterList = MutableLiveData<MutableList<Product>>(mutableListOf())
 
     data class Filter(
         var category: Category?,
@@ -44,7 +46,7 @@ class SaleViewModel : ViewModel() {
         _listProductShow.postValue(listProduct)
         CoroutineScope(IO).launch {
             val productDao = ProductDao(AppDatabaseHelper.getInstance(context))
-            val listAllProduct =
+            var listAllProduct =
                 withContext(Dispatchers.Default) {
                     productDao.getAllProducts()
                 }
@@ -96,17 +98,12 @@ class SaleViewModel : ViewModel() {
                 for (item in listProduct) {
                     productDao.addProduct(item)
                 }
-//                listAllProduct =
-//                    withContext(Dispatchers.Default) {
-//                        productDao.getAllProducts()
-//                    }
+                listAllProduct =
+                    withContext(Dispatchers.Default) {
+                        productDao.getAllProducts()
+                    }
                 _listProductShow.postValue(listProduct)
-//                withContext(Dispatchers.Default){
-//                    listProduct = productDao.getAllProducts()
-//                }
-//                withContext(Dispatchers.Default){
-//                    listProduct = listProduct.sortWith{b1, b2 -> Collator.getInstance().compare(b1.nameProduct, b2.nameProduct)} as MutableList<Product>
-//                }
+
             } else {
                 withContext(Main) {
                     Log.d("test:", listAllProduct[0].toString())
@@ -118,10 +115,13 @@ class SaleViewModel : ViewModel() {
     }
 
     fun updateListItemShow(searchString: String) {
-        search = searchString
-        _listProductShow.postValue(listProduct)
-        val showList = listProduct.filter { it.nameProduct.contains(searchString, true) }
-        _listProductShow.postValue(showList as MutableList<Product>?)
+        searchList.value = _listProductShow.value?.filter {
+            it.nameProduct.contains(
+                searchString,
+                true
+            )
+        } as MutableList<Product>
+        searchList.postValue(searchList.value)
     }
 
     /**
@@ -144,21 +144,19 @@ class SaleViewModel : ViewModel() {
      * @date: 3/23/2022 8:36 PM
      **/
     fun filterShow() {
-        var showListProduct = mutableListOf<Product>()
-        showListProduct =
-            listProduct.filter {
+        filterList.value =
+            _listProductShow.value?.filter {
                 it.nameProduct.contains(
                     search,
                     true
                 )
             } as MutableList<Product>
         var res = mutableListOf<Product>()
-        for (i in showListProduct) {
+        for (i in filterList.value!!) {
             val filterCategory =
                 (filter.category != null && filter.category.toString() != i.category)
             val filterColor = (filter.color != null && filter.color.toString() != i.color)
             val filterAvailable = (filter.available && i.quantity <= 0)
-
             if (!filterAvailable && !filterColor && !filterCategory) {
                 res.add(i)
             }
@@ -183,9 +181,8 @@ class SaleViewModel : ViewModel() {
         Log.e(this.javaClass.simpleName + "after sort: ", res.toString())
         Calendar.getInstance()
 
-
-        Log.e(this.javaClass.simpleName, showListProduct.size.toString() + "--" + listProduct.size)
-        _listProductShow.postValue(res)
+//        Log.e(this.javaClass.simpleName, showListProduct.size.toString() + "--" + listProduct.size)
+        filterList.postValue(res)
     }
 
     fun getColor(product: Product): List<String> {
