@@ -1,39 +1,19 @@
 package com.misa.fresher.viewpager
 
-import android.provider.Settings.Global.getString
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.google.android.material.tabs.TabLayout
-import com.misa.fresher.R
-import java.util.*
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm)
-{
-    override fun getCount(): Int
-    {
-        return 3
-    }
+class PageAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
+    override fun getItemCount(): Int =3
 
-    override fun getItem(position: Int): Fragment
-    {
-        when (position)
-        {
-            0 -> return FirstFragment()
-            1 -> return SecondFragment()
-            2 -> return ThirdFragment()
-            else -> return FirstFragment()
+    override fun createFragment(position: Int): Fragment =
+        when (position) {
+            0 -> FirstFragment()
+            1 -> SecondFragment()
+            2 -> ThirdFragment()
+            else -> FirstFragment()
         }
-    }
-    override fun getPageTitle(position: Int): CharSequence?
-    {
-        when (position)
-        {
-            0 -> return "Người nhận"
-            1 -> return "Giao hàng"
-            2 -> return "Gói hàng"
-        }
-        return super.getPageTitle(position)
-    }
 
 }

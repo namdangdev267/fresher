@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/imb_back"
             android:background="@color/violet_dark"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -60,7 +61,7 @@
             app:tabTextColor="@color/white" />
     </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

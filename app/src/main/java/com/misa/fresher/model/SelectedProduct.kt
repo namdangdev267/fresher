@@ -1,5 +1,4 @@
 package com.misa.fresher.model
 
 
-class SelectedProduct(val product: Product, var amount: Int) {
-}
+class SelectedProduct(val product: Product, var amount: Int)

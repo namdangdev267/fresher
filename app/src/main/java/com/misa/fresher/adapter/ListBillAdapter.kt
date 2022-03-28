@@ -1,17 +1,12 @@
 package com.misa.fresher.adapter
 
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.R
 import com.misa.fresher.model.BillInfor
-import com.misa.fresher.model.SelectedProduct
 import java.text.DecimalFormat
 
 class ListBillAdapter(
@@ -19,14 +14,14 @@ class ListBillAdapter(
 ) :
     RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvBillNum =itemView.findViewById<TextView>(R.id.tvBillNum)
+        private val decimalFormat = DecimalFormat("0,000.0")
+        private val tvBillAmount=itemView.findViewById<TextView>(R.id.tvBillAmount)
         fun bind(billInfor: BillInfor) {
-            itemView.findViewById<TextView>(R.id.tvBillNum).text = billInfor.billNum.toString()
-            val decimalFormat = DecimalFormat("0,000.0")
-            itemView.findViewById<TextView>(R.id.tvBillAmount).text =
-                decimalFormat.format(billInfor.total).toString()
+            tvBillNum.text = billInfor.billNum.toString()
+            tvBillAmount.text = decimalFormat.format(billInfor.total).toString()
         }
     }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

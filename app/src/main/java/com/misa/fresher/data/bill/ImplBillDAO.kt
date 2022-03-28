@@ -53,10 +53,10 @@ class ImplBillDAO(
         return id
     }
 
-    override suspend fun updateBill(total: Int, billID: Int): Boolean {
+    override suspend fun updateBill(total: Int, billId: Int): Boolean {
         val ctV = ContentValues()
         ctV.put("TOTAL", total)
-        val c = mDB.update("BILL", ctV, "BILL_ID=$billID", null)
+        val c = mDB.update("BILL", ctV, "BILL_ID=$billId", null)
         return c > 0
     }
 

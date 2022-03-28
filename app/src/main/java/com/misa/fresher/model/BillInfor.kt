@@ -4,5 +4,4 @@ class BillInfor(
     val billNum:Int,
     val product: MutableList<SelectedProduct>?,
     val shipInfor: ShipInfor?,
-    val total:Int) {
-}
+    val total:Int)

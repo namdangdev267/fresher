@@ -33,7 +33,7 @@ import java.text.DecimalFormat
 
 class BillDetailFragment : Fragment() {
     var listBillDetail = arrayListOf<SelectedProduct>()
-    val decimal = DecimalFormat("0,000.0")
+    private val decimal = DecimalFormat("0,000.0")
     val viewModel: BillViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -165,7 +165,7 @@ class BillDetailFragment : Fragment() {
                         Log.e("Update", "Thất bại")
                     }
                     withContext(Main) {
-                        activity?.showToast("Thêm đơn hàng thành công")
+                        context?.showToast("Thêm đơn hàng thành công")
                     }
                 } else {
                     withContext(Main)
