@@ -20,14 +20,6 @@ class CustomerRepositoryImpl(
      * @version 1
      * @updated 3/25/2022: Override lần đầu
      */
-    override fun create(list: List<Customer>, action: LoadedAction<Boolean>) {
-        customerLocal.create(list, action)
-    }
-
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun getAll(action: LoadedAction<List<Customer>>) {
         customerLocal.getAll(action)
     }

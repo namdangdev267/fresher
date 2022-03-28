@@ -9,13 +9,13 @@ import com.misa.fresher.util.LoadedAction
  * @author Nguyễn Công Chính
  * @since 3/24/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/24/2022: Tạo class
+ * @updated 3/28/2022: Loại bỏ hàm createList do không có nhu cầu sử dụng
  */
 interface CustomerDataSource {
 
     interface Local {
-        fun create(list: List<Customer>, action: LoadedAction<Boolean>)
         fun getAll(action: LoadedAction<List<Customer>>)
     }
 

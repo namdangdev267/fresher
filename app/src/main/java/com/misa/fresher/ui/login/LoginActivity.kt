@@ -61,10 +61,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter
         binding.btnBack.setOnClickListener {
             presenter?.changeState(LoginPresenter.STATE_SIGN_IN)
         }
-        binding.btnDev.setOnLongClickListener {
-            presenter?.developTest()
-            true
-        }
     }
 
     /**
@@ -139,9 +135,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter
             SignUpResponse.INVALID_EMAIL -> toast(baseContext, getString(R.string.invalid_email))
             else -> toast(baseContext, getString(R.string.unknown_error) + error)
         }
-    }
-
-    override fun developTestSuccess() {
-        toast(baseContext, "success")
     }
 }

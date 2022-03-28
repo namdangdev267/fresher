@@ -12,9 +12,10 @@ import com.misa.fresher.util.ResponseObject
  * @author Nguyễn Công Chính
  * @since 3/21/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/21/2022: Tạo class
  * @updated 3/25/2022: Thêm các hàm để trao đổi dữ liệu với database
+ * @updated 3/28/2022: Loại bỏ các hàm để thêm dữ liệu giả do đã thêm ngay lúc khởi tạo csdl
  */
 interface DataManager {
 
@@ -25,20 +26,11 @@ interface DataManager {
     fun getAllBill(): ResponseObject<List<Bill>>
     fun getMaxIdBill(): ResponseObject<Long>
 
-    fun createCategory(list: List<Category>): ResponseObject<Boolean>
     fun getAllCategory(): ResponseObject<List<Category>>
 
-    fun createCustomer(list: List<Customer>): ResponseObject<Boolean>
     fun getAllCustomer(): ResponseObject<List<Customer>>
 
-    fun createProduct(list: List<Product>): ResponseObject<Boolean>
     fun getAllProduct(): ResponseObject<List<Product>>
-
-    fun createProductColor(list: List<ProductColor>): ResponseObject<Boolean>
-
-    fun createProductSize(list: List<ProductSize>): ResponseObject<Boolean>
-
-    fun createProductUnit(list: List<ProductUnit>): ResponseObject<Boolean>
     
     companion object {
         private var dataManager: DataManager? = null

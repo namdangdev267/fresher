@@ -25,25 +25,6 @@ class CustomerLocalDataSource(
      * @version 1
      * @updated 3/25/2022: Override lần đầu
      */
-    override fun create(list: List<Customer>, action: LoadedAction<Boolean>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val result = customerDAO.create(list)
-                withContext(Dispatchers.Main) {
-                    action.onResponse(result)
-                }
-            } catch (ex: Exception) {
-                withContext(Dispatchers.Main) {
-                    action.onException(ex)
-                }
-            }
-        }
-    }
-
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun getAll(action: LoadedAction<List<Customer>>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {

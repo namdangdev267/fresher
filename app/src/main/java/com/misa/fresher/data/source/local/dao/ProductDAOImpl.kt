@@ -1,8 +1,6 @@
 package com.misa.fresher.data.source.local.dao
 
-import android.database.sqlite.SQLiteDatabase
 import com.misa.fresher.data.entity.Product
-import com.misa.fresher.data.entity.ProductItem
 import com.misa.fresher.data.source.local.database.AppDatabase
 import com.misa.fresher.util.query
 
@@ -17,46 +15,8 @@ class ProductDAOImpl(
     private val categoryDAO = CategoryDAO.getInstance(appDatabase)
     private val itemDAO = ProductItemDAO.getInstance(appDatabase)
 
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun create(list: List<Product>): Boolean {
-        val db = appDatabase.writableDatabase
-        db.beginTransaction()
-
-        var isSuccess = true
-        for (item in list) {
-            val values = item.getContentValues()
-            if (db.insertWithOnConflict(
-                    Product.TABLE_NAME,
-                    null,
-                    values,
-                    SQLiteDatabase.CONFLICT_REPLACE) > 0) {
-                for (ite in item.items) {
-                    val itemValues = ite.getContentValues()
-                    itemValues.put(ProductItem.PRODUCT_ID, item.id)
-                    if (db.insertWithOnConflict(
-                            ProductItem.TABLE_NAME,
-                            null,
-                            itemValues,
-                            SQLiteDatabase.CONFLICT_REPLACE) <= 0) {
-                        isSuccess = false
-                        break
-                    }
-                }
-            } else {
-                isSuccess = false
-                break
-
-            }
-        }
-        if (isSuccess) {
-            db.setTransactionSuccessful()
-        }
-        db.endTransaction()
-        db.close()
-        return isSuccess
+        TODO("Not yet implemented")
     }
 
     override fun create(t: Product): Boolean {

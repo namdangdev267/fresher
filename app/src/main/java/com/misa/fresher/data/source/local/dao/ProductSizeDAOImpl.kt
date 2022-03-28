@@ -13,32 +13,8 @@ class ProductSizeDAOImpl(
     private val appDatabase: AppDatabase
 ) : ProductSizeDAO {
 
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun create(list: List<ProductSize>): Boolean {
-        val db = appDatabase.writableDatabase
-        db.beginTransaction()
-
-        var isSuccess = true
-        for (item in list) {
-            val values = item.getContentValues()
-            if (db.insertWithOnConflict(
-                    ProductSize.TABLE_NAME,
-                    null,
-                    values,
-                    SQLiteDatabase.CONFLICT_REPLACE) <= 0) {
-                isSuccess = false
-                break
-            }
-        }
-        if (isSuccess) {
-            db.setTransactionSuccessful()
-        }
-        db.endTransaction()
-        db.close()
-        return isSuccess
+        TODO("Not yet implemented")
     }
 
     /**

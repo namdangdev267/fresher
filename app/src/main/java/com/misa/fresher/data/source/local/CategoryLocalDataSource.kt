@@ -25,25 +25,6 @@ class CategoryLocalDataSource(
      * @version 1
      * @updated 3/25/2022: Override lần đầu
      */
-    override fun create(list: List<Category>, action: LoadedAction<Boolean>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val result = categoryDAO.create(list)
-                withContext(Dispatchers.Main) {
-                    action.onResponse(result)
-                }
-            } catch (ex: Exception) {
-                withContext(Dispatchers.Main) {
-                    action.onException(ex)
-                }
-            }
-        }
-    }
-
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun getAll(action: LoadedAction<List<Category>>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {

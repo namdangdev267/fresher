@@ -20,14 +20,6 @@ class CategoryRepositoryImpl(
      * @version 1
      * @updated 3/25/2022: Override lần đầu
      */
-    override fun create(list: List<Category>, action: LoadedAction<Boolean>) {
-        categoryLocal.create(list, action)
-    }
-
-    /**
-     * @version 1
-     * @updated 3/25/2022: Override lần đầu
-     */
     override fun getAll(action: LoadedAction<List<Category>>) {
         categoryLocal.getAll(action)
     }

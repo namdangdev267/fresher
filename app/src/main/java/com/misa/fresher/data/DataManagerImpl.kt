@@ -8,9 +8,10 @@ import com.misa.fresher.data.source.remote.response.SignUpResponse
 import com.misa.fresher.util.ResponseObject
 
 /**
- * @version 2
+ * @version 3
  * @updated 3/21/2022: Override lần đầu
  * @updated 3/25/2022: Cập nhật hàm mới theo [DataManager]
+ * @updated 3/28/2022: Cập nhật hàm mới theo [DataManager]
  */
 class DataManagerImpl(
     context: Context
@@ -21,9 +22,6 @@ class DataManagerImpl(
     private val categoryRepo: CategoryRepository = CategoryRepositoryImpl(context)
     private val customerRepo: CustomerRepository = CustomerRepositoryImpl(context)
     private val productRepo: ProductRepository = ProductRepositoryImpl(context)
-    private val colorRepo: ProductColorRepository = ProductColorRepositoryImpl(context)
-    private val sizeRepo: ProductSizeRepository = ProductSizeRepositoryImpl(context)
-    private val unitRepo: ProductUnitRepository = ProductUnitRepositoryImpl(context)
 
     override fun signIn(email: String, password: String): ResponseObject<SignInResponse> {
         return ResponseObject { userRepo.signIn(email, password, it) }
@@ -45,39 +43,15 @@ class DataManagerImpl(
         return ResponseObject { billRepo.getMaxId(it) }
     }
 
-    override fun createCategory(list: List<Category>): ResponseObject<Boolean> {
-        return ResponseObject { categoryRepo.create(list, it) }
-    }
-
     override fun getAllCategory(): ResponseObject<List<Category>> {
         return ResponseObject { categoryRepo.getAll(it) }
-    }
-
-    override fun createCustomer(list: List<Customer>): ResponseObject<Boolean> {
-        return ResponseObject { customerRepo.create(list, it) }
     }
 
     override fun getAllCustomer(): ResponseObject<List<Customer>> {
         return ResponseObject { customerRepo.getAll(it) }
     }
 
-    override fun createProduct(list: List<Product>): ResponseObject<Boolean> {
-        return ResponseObject { productRepo.create(list, it) }
-    }
-
     override fun getAllProduct(): ResponseObject<List<Product>> {
         return ResponseObject { productRepo.getAll(it) }
-    }
-
-    override fun createProductColor(list: List<ProductColor>): ResponseObject<Boolean> {
-        return ResponseObject { colorRepo.create(list, it) }
-    }
-
-    override fun createProductSize(list: List<ProductSize>): ResponseObject<Boolean> {
-        return ResponseObject { sizeRepo.create(list, it) }
-    }
-
-    override fun createProductUnit(list: List<ProductUnit>): ResponseObject<Boolean> {
-        return ResponseObject { unitRepo.create(list, it) }
     }
 }
