@@ -28,7 +28,7 @@ class ListBillAdapter(private val listBill: MutableList<BillModel>):
             holder.tvBillCustomer.hint  = StringBuilder(""+listBill[position].customer?.name).append(" - ").append(listBill[position].customer?.phone)
         }else
             holder.tvBillCustomer.isVisible = false
-        val totalPrice = listBill[position].orderList?.map { it.amount * it.price}?.sum()
+        val totalPrice = listBill[position].listOrder?.map { it.amount * it.price}?.sum()
         holder.tvBillPrice.text = totalPrice.toString()
     }
 

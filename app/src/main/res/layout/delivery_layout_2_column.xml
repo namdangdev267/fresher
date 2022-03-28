@@ -34,7 +34,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:backgroundTint="@color/white"
             android:hint="@string/tap_to_enter"
-            android:theme="@style/TextBlack18style"
+            android:theme="@style/TextBlack14style"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_title_1" />
 
@@ -76,6 +76,6 @@
             android:layout_marginTop="@dimen/dp_10"
             android:backgroundTint="@color/white"
             android:hint="@string/tap_to_enter"
-            android:theme="@style/TextBlack18style" />
+            android:theme="@style/TextBlack14style" />
     </LinearLayout>
 </LinearLayout>

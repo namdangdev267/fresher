@@ -7,8 +7,8 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import kma.longhoang.beta.R
 import kma.longhoang.beta.SaleViewModel
-import kma.longhoang.beta.ShowNote
 import kma.longhoang.beta.model.OrderModel
+import kma.longhoang.beta.showNote
 
 class OrderDetailAdapter(
     private var orderList: MutableList<OrderModel>,
@@ -47,7 +47,7 @@ class OrderDetailAdapter(
             (orderList[position].amount * orderList[position].price).toString()
         holder.btnMinus.setOnClickListener {
             if (holder.tvAmount.text == "1") {
-                ShowNote().toast(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
+                showNote(it.context, "Số lượng phải lớn hơn 0. Hãy kiểm tra lại")
             } else {
                 orderList[position].amount -= 1
                 holder.tvAmount.text = orderList[position].amount.toString()

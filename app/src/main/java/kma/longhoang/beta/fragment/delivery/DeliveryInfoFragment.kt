@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kma.longhoang.beta.MainActivity
 import kma.longhoang.beta.R
 import kma.longhoang.beta.adapter.ViewPagerDeliveryAdapter
-import kma.longhoang.beta.fragment.main.SaleFragment
 
 class DeliveryInfoFragment : Fragment() {
 
@@ -28,7 +25,7 @@ class DeliveryInfoFragment : Fragment() {
         val viewPager2 = view.findViewById<ViewPager2>(R.id.viewPager_delivery)
         val adapter = ViewPagerDeliveryAdapter(this)
         viewPager2?.adapter = adapter
-        val tabLayoutMediator = tabLayout?.let {
+        tabLayout?.let {
             viewPager2?.let { it1 ->
                 TabLayoutMediator(
                     it, it1
