@@ -22,7 +22,6 @@ class BillsFragment :
     BaseFragment<FragmentBillsBinding, BillsContract.View, BillsContract.Presenter>(),
     BillsContract.View {
     private var mPresenter: BillsPresenter? = null
-    private var rcv: RecyclerView? = null
     private var rcvAdapter: BillsAdapter? = null
     override fun upDateReclerView(list: MutableList<Bill>) {
         binding.tvTotal.text = list.size.toString()
@@ -33,7 +32,7 @@ class BillsFragment :
 
     override fun initPresenter() {
         if (mPresenter == null) {
-            mPresenter = BillsPresenter().also {
+            mPresenter = BillsPresenter(requireContext()).also {
                 it.attach(this)
             }
         }
@@ -50,16 +49,14 @@ class BillsFragment :
         configRecyclerView()
     }
 
-    private fun getValuesForFilter() {
+    override fun getValuesForFilter() {
         val spnDate = binding.spnDay
         spnDate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val dateSpinnerValue = spnDate.selectedItem.toString()
                 mPresenter?.getFilterBills(dateSpinnerValue)
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+            override fun onNothingSelected(p0: AdapterView<*>?) { }
 
         }
 
@@ -89,10 +86,10 @@ class BillsFragment :
     }
 
     private fun configRecyclerView() {
-        rcv = binding.rcvListBills
+        val rcv = binding.rcvListBills
         rcvAdapter = BillsAdapter(mutableListOf())
-        rcv?.adapter = rcvAdapter
-        rcv?.layoutManager = LinearLayoutManager(requireContext())
+        rcv.adapter = rcvAdapter
+        rcv.layoutManager = LinearLayoutManager(requireContext())
         mPresenter?.getListBillsForAdapter(requireContext())
         getValuesForFilter()
     }

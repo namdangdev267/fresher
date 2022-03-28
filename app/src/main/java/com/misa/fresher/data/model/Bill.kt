@@ -1,8 +1,6 @@
 package com.misa.fresher.data.model
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
-import android.database.Cursor
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

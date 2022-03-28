@@ -14,10 +14,11 @@ import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BillDetailPresenter : BillDetailContract.Presenter {
+class BillDetailPresenter(context: Context) : BillDetailContract.Presenter {
     private var view: BillDetailContract.View? = null
     private var listFromSale = mutableListOf<SelectedProducts>()
     private var billId = 0
+    val billDao = BillDao.getInstance((AppDbHelper.getInstance(context)))
     override fun getSelectedProducts(bundle: Bundle) {
         listFromSale = bundle.get(SaleFragment.BUNDLE_SELECTEDITEM) as MutableList<SelectedProducts>
         view?.updateRecyclerViewSelectedProducts(listFromSale)
@@ -42,7 +43,7 @@ class BillDetailPresenter : BillDetailContract.Presenter {
 
     override fun saveBill(context: Context,billId:Int) {
         val price = listFromSale.sumOf { it.amonut *it.product.price }
-        val billDao = BillDao(AppDbHelper.getInstance(context))
+
         val selectedProductsDao = SelectedProductDao(AppDbHelper.getInstance(context))
         CoroutineScope(Dispatchers.IO).launch {
             for (selected in listFromSale){
@@ -65,7 +66,6 @@ class BillDetailPresenter : BillDetailContract.Presenter {
     }
 
     override fun getBillId(context: Context){
-        val billDao = BillDao(AppDbHelper.getInstance(context))
         CoroutineScope(Dispatchers.IO).launch {
             val id = billDao.getLastestBillID() + 1
             withContext(Dispatchers.Main) {

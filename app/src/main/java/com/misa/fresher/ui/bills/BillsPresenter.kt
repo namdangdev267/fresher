@@ -1,25 +1,27 @@
 package com.misa.fresher.ui.bills
 
 import android.content.Context
-import android.util.Log
 import com.misa.fresher.data.dao.bill.BillDao
-import com.misa.fresher.data.dao.selectedproduct.SelectedProductDao
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Bill
-import com.misa.fresher.data.model.SelectedProducts
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BillsPresenter : BillsContract.Presenter {
+class BillsPresenter(context: Context) : BillsContract.Presenter {
     private var view: BillsContract.View? = null
     private var listBill = mutableListOf<Bill>()
+    val billDao = BillDao.getInstance((AppDbHelper.getInstance(context)))
     override fun getListBillsForAdapter(context: Context) {
-        val billDao = BillDao(AppDbHelper.getInstance(context))
-        CoroutineScope(Dispatchers.IO).launch{
+        CoroutineScope(Dispatchers.IO).launch {
             listBill = billDao.getAllBill()
-            withContext(Dispatchers.Main){
+            println(listBill)
+            withContext(Dispatchers.Main) {
                 view?.upDateReclerView(listBill)
+                view?.getValuesForFilter()
             }
         }
 
@@ -67,6 +69,7 @@ class BillsPresenter : BillsContract.Presenter {
                 } as MutableList<Bill>
             }
         }
+        println(bills)
         view?.upDateReclerView(bills)
     }
 

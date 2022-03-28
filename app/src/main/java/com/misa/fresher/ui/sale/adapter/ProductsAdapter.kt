@@ -30,12 +30,13 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = mProducts[position].name
-        holder.code.text = mProducts[position].code
-        holder.price.text = mProducts[position].price.toString()
-        holder.img.setImageResource(mProducts[position].img)
+        val product = mProducts[position]
+        holder.name.text = product.name
+        holder.code.text = product.code
+        holder.price.text = product.price.toString()
+        holder.img.setImageResource(product.img)
         holder.binding.root.setOnClickListener {
-            clickItemListener(mProducts[position])
+            clickItemListener(product)
         }
     }
 

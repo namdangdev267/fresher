@@ -58,7 +58,7 @@ class BillDetailFragment :
 
     override fun initPresenter() {
         if (mPresenter == null) {
-            mPresenter = BillDetailPresenter().also {
+            mPresenter = BillDetailPresenter(requireContext()).also {
                 it.attach(this)
             }
         }

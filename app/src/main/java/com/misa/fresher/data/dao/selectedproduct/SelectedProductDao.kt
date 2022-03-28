@@ -35,14 +35,14 @@ class SelectedProductDao(private val dbHelper: AppDbHelper) : ISelectedProductDa
         if(cursor.moveToFirst()){
             while (!cursor.isAfterLast){
                 list.add(SelectedProducts(
-                    cursor.getInt(cursor.getColumnIndex("amount")),
-                    Products(cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("code")),
-                        cursor.getString(cursor.getColumnIndex("name")),
-                        cursor.getDouble(cursor.getColumnIndex("price")),
-                        cursor.getInt(cursor.getColumnIndex("img")),
-                        cursor.getString(cursor.getColumnIndex("color")),
-                        cursor.getString(cursor.getColumnIndex("size"))
+                    cursor.getInt(cursor.getColumnIndex(SelectedProducts.AMONUT)),
+                    Products(cursor.getInt(cursor.getColumnIndex(SelectedProducts.ID_PRODUCT)),
+                        cursor.getString(cursor.getColumnIndex(Products.CODE)),
+                        cursor.getString(cursor.getColumnIndex(Products.NAME)),
+                        cursor.getDouble(cursor.getColumnIndex(Products.PRICE)),
+                        cursor.getInt(cursor.getColumnIndex(Products.IMG)),
+                        cursor.getString(cursor.getColumnIndex(Products.COLOR)),
+                        cursor.getString(cursor.getColumnIndex(Products.SIZE))
                     ))
                 )
                 cursor.moveToNext()

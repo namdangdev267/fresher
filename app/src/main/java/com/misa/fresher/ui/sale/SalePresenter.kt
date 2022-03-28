@@ -12,14 +12,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class SalePresenter : SaleContract.Presenter {
+class SalePresenter(context: Context) : SaleContract.Presenter {
     private var ListProductFromdb = mutableListOf<Products>()
     private var searchProducts = mutableListOf<Products>()
     private var selectedItems = arrayListOf<SelectedProducts>()
     private var view: SaleContract.View? = null
-
-    override fun getListProductFromDb(context: Context) {
-        val productDao = ProductDao(AppDbHelper.getInstance(context))
+    val productDao = ProductDao.getInstance(AppDbHelper.getInstance(context))
+    override fun getListProductFromDb() {
         CoroutineScope(Dispatchers.IO).launch {
             ListProductFromdb = productDao.getAllProducts()
             searchProducts = ListProductFromdb

@@ -8,21 +8,19 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.base.BaseFragment
-import com.misa.fresher.databinding.BottomSheetProductBinding
-import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.data.model.Customer
 import com.misa.fresher.data.model.FilterProducts
 import com.misa.fresher.data.model.Products
 import com.misa.fresher.data.model.SelectedProducts
+import com.misa.fresher.databinding.BottomSheetProductBinding
+import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.showToast
 import com.misa.fresher.ui.sale.adapter.ProductsAdapter
 
@@ -35,7 +33,6 @@ class SaleFragment :
     BaseFragment<FragmentSaleBinding, SaleContract.View, SaleContract.Presenter>(),
     SaleContract.View {
     private var mPresenter: SalePresenter? = null
-    private var rcv: RecyclerView? = null
     private var rcvAdapter: ProductsAdapter? = null
 
     override fun initUI() {
@@ -172,7 +169,7 @@ class SaleFragment :
      **/
     override fun initPresenter() {
         if (mPresenter == null) {
-            mPresenter = SalePresenter().also {
+            mPresenter = SalePresenter(requireContext()).also {
                 it.attach(this)
             }
         }
@@ -248,11 +245,11 @@ class SaleFragment :
     }
 
     private fun configRecyclerView() {
-        rcv = binding.contextSale.rcvListProduct
+        val rcv = binding.contextSale.rcvListProduct
         rcvAdapter = ProductsAdapter(arrayListOf(), { productClick(it) })
-        rcv?.adapter = rcvAdapter
-        rcv?.layoutManager = LinearLayoutManager(requireContext())
-        mPresenter?.getListProductFromDb(requireContext())
+        rcv.adapter = rcvAdapter
+        rcv.layoutManager = LinearLayoutManager(requireContext())
+        mPresenter?.getListProductFromDb()
     }
 
     private fun productClick(products: Products) {

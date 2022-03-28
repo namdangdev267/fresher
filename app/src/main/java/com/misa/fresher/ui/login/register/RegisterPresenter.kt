@@ -12,7 +12,7 @@ class RegisterPresenter : RegisterContract.Presenter {
     override fun register(user: User) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = Api.apiClient.signIn(user)
+                val response = Api.apiClient.signUp(user)
                 if (response.isSuccessful && response.body() != null) {
                     withContext(Dispatchers.Main){
                         view?.registerSuccess()

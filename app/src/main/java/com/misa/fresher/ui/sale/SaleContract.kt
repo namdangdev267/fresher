@@ -17,7 +17,7 @@ class SaleContract : BaseContract{
 
     }
     interface Presenter : BaseContract.Presenter<View>{
-        fun getListProductFromDb(context: Context)
+        fun getListProductFromDb()
         fun selectProduct(products: Products, amount:Int)
         fun getSelectedProduct()
         fun clearSelected()

@@ -8,12 +8,12 @@ import com.misa.fresher.data.model.Customer
 import com.misa.fresher.utils.Queries.QUERY_BILL
 import com.misa.fresher.utils.Queries.SELECT_LASTEST_BILL_ID
 
-class BillDao(private val dbHelper: AppDbHelper) : IBillDao {
+class BillDao private constructor(private val dbHelper: AppDbHelper) : IBillDao {
     override suspend fun addBill(bill: Bill): Long {
         val db = dbHelper.writableDatabase
         return db.insertWithOnConflict(
-            Bill.TABLE_NAME, null,
-            bill.getContentValues(), SQLiteDatabase.CONFLICT_REPLACE
+                Bill.TABLE_NAME, null,
+                bill.getContentValues(), SQLiteDatabase.CONFLICT_REPLACE
         ).also { db.close() }
     }
 
@@ -25,18 +25,18 @@ class BillDao(private val dbHelper: AppDbHelper) : IBillDao {
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 list.add(
-                    Bill(
-                        cursor.getInt(cursor.getColumnIndex(Bill.ID)),
-                        null,
-                        Customer(
-                            cursor.getInt(cursor.getColumnIndex("id_cus")),
-                            cursor.getString(cursor.getColumnIndex("name_cus")),
-                            cursor.getString(cursor.getColumnIndex("number_cus")),
-                            cursor.getString(cursor.getColumnIndex("address_cus"))
-                        ),
-                        cursor.getString(cursor.getColumnIndex(Bill.DATE)),
-                        cursor.getDouble(cursor.getColumnIndex(Bill.TOTAL_PRICE))
-                    )
+                        Bill(
+                                cursor.getInt(cursor.getColumnIndex(Bill.ID)),
+                                null,
+                                Customer(
+                                        cursor.getInt(cursor.getColumnIndex(Bill.ID_CUSTOMER)),
+                                        cursor.getString(cursor.getColumnIndex(Customer.NAME)),
+                                        cursor.getString(cursor.getColumnIndex(Customer.NUMBER)),
+                                        cursor.getString(cursor.getColumnIndex(Customer.ADDRESS))
+                                ),
+                                cursor.getString(cursor.getColumnIndex(Bill.DATE)),
+                                cursor.getDouble(cursor.getColumnIndex(Bill.TOTAL_PRICE))
+                        )
                 )
                 cursor.moveToNext()
             }
@@ -50,8 +50,8 @@ class BillDao(private val dbHelper: AppDbHelper) : IBillDao {
     override suspend fun getLastestBillID(): Int {
         val databaseRead = dbHelper.readableDatabase
         val cursor = databaseRead.rawQuery(
-            SELECT_LASTEST_BILL_ID,
-            null
+                SELECT_LASTEST_BILL_ID,
+                null
         )
         if (cursor.moveToFirst()) {
             databaseRead.close()
@@ -64,6 +64,6 @@ class BillDao(private val dbHelper: AppDbHelper) : IBillDao {
     companion object {
         private var instance: BillDao? = null
         fun getInstance(dbHelper: AppDbHelper): BillDao =
-            instance ?: BillDao(dbHelper).also { instance = it }
+                instance ?: BillDao(dbHelper).also { instance = it }
     }
 }

@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.misa.fresher.data.database.AppDbHelper
 import com.misa.fresher.data.model.Products
 
-class ProductDao(private val dbHelper: AppDbHelper) : IProductDao {
+class ProductDao private constructor(private val dbHelper: AppDbHelper) : IProductDao {
 
     override suspend fun getAllProducts(): MutableList<Products> {
         val db = dbHelper.readableDatabase

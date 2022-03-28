@@ -12,18 +12,19 @@ import com.misa.fresher.data.model.Bill
  * @date : 3/16/2022
  **/
 class BillsAdapter(var mBills: MutableList<Bill>) :
-    RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
+        RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemListBillBinding.inflate(LayoutInflater.from(parent.context))
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvBillId.text = mBills[position].id.toString()
-        if(mBills[position].customer!=null&&mBills[position].customer?.name != null && mBills[position].customer?.name != null){
-            holder.tvCustomer.text = mBills[position].customer?.name + " - " + mBills[position].customer?.number
-        }
-        holder.tvTotalPriceBill.text = "${mBills[position].totalPrice}"
+        val bill = mBills[position]
+        holder.tvBillId.text = bill.id.toString()
+        if (bill.customer != null && bill.customer?.name != null && bill.customer?.name != null) {
+            holder.tvCustomer.text = bill.customer?.name + " - " + bill.customer?.number
+        } else holder.tvCustomer.text = ""
+        holder.tvTotalPriceBill.text = "${bill.totalPrice}"
     }
 
     override fun getItemCount() = mBills.size

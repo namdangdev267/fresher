@@ -1,6 +1,7 @@
 package com.misa.fresher.utils
 
 import com.misa.fresher.data.model.*
+import com.misa.fresher.data.model.Bill.Companion.ID_CUSTOMER
 
 object Queries {
     const val DATABASE_NAME: String = "fresher_database"
@@ -89,8 +90,8 @@ object Queries {
 
     const val SELECT_LASTEST_BILL_ID =
         "SELECT * FROM ${Bill.TABLE_NAME} ORDER BY ${Bill.ID} DESC LIMIT 1"
-    const val QUERY_BILL = "SELECT bill.id,customer.id AS id_cus ,customer.name AS name_cus,customer.number AS number_cus," +
-            "customer.address AS address_cus,bill.date,bill.totalPrice " +
+    const val QUERY_BILL = "SELECT bill.id,bill.idCustomer,customer.name,customer.number," +
+            "customer.address,bill.date,bill.totalPrice " +
             "FROM bill LEFT JOIN customer " +
             "ON bill.idCustomer = customer.id"
 }

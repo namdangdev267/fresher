@@ -7,6 +7,7 @@ import com.misa.fresher.data.model.Bill
 class BillsContract:BaseContract {
     interface View : BaseContract.View{
         fun upDateReclerView(list: MutableList<Bill>)
+        fun getValuesForFilter()
     }
     interface Presenter : BaseContract.Presenter<View>{
         fun getListBillsForAdapter(context: Context)
