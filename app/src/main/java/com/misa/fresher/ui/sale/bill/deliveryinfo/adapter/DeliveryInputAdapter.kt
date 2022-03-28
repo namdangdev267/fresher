@@ -21,7 +21,7 @@ import com.misa.fresher.util.enum.InputInfoType
  * @updated 3/18/2022: Override hàm [areContentsTheSame], [areItemsTheSame] tương ứng với lớp cha, thêm hàm để cập nhật và lấy dữ liệu tại item xác định
  */
 class DeliveryInputAdapter(
-    val inputItems: List<InputInfoModel>,
+    private val inputItems: List<InputInfoModel>,
     private val context: Context
 ) : BaseRecyclerAdapter<InputInfoModel, BaseViewHolder<InputInfoModel>>(inputItems.toMutableList()) {
 

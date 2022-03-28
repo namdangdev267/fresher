@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.sale.bill.deliveryinfo.packageinfo
 
+import android.content.Context
 import com.misa.fresher.core.BasePresenter
 
 /**
@@ -12,6 +13,6 @@ import com.misa.fresher.core.BasePresenter
  * @updated 3/21/2022: Tạo class
  */
 class PackageInfoPresenter(
-    view: PackageInfoContract.View
-) : BasePresenter<PackageInfoContract.View>(view), PackageInfoContract.Presenter {
-}
+    view: PackageInfoContract.View,
+    context: Context
+) : BasePresenter<PackageInfoContract.View>(view, context), PackageInfoContract.Presenter

@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.main
 
+import android.content.Context
 import com.misa.fresher.core.BasePresenter
 
 /**
@@ -12,6 +13,6 @@ import com.misa.fresher.core.BasePresenter
  * @updated 3/21/2022: Tạo class
  */
 class MainPresenter(
-    view: MainContract.View
-) : BasePresenter<MainContract.View>(view), MainContract.Presenter {
-}
+    view: MainContract.View,
+    context: Context
+) : BasePresenter<MainContract.View>(view, context), MainContract.Presenter

@@ -10,10 +10,11 @@ import com.misa.fresher.util.enum.ProductSortType
  * @author Nguyễn Công Chính
  * @since 3/21/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/21/2022: Tạo class
+ * @updated 3/25/2022: Bổ sung hàm để lấy các tt danh mục hàng hóa, chọn khách hàng từ database
  */
-class SaleContract {
+interface SaleContract {
 
     interface View: BaseContract.View {
 
@@ -38,6 +39,10 @@ class SaleContract {
          * @updated 3/21/2022: Tạo function
          */
         fun updateSelectedItems(list: MutableList<ProductItemBill>)
+
+        fun getAllCategorySuccess(list: List<Category>)
+        fun randomCustomerSuccess(customer: Customer)
+        fun randomCustomerFailure()
     }
 
     interface Presenter: BaseContract.Presenter {
@@ -106,5 +111,39 @@ class SaleContract {
             size: ProductSize,
             unit: ProductUnit
         )
+
+        /**
+         * Hàm lấy toàn bộ danh sách loại sản phẩm
+         *
+         * @author Nguyễn Công Chính
+         * @since 3/24/2022
+         *
+         * @version 1
+         * @updated 3/24/2022: Tạo function
+         */
+        fun getAllCategory()
+
+        /**
+         * Hàm chọn 1 khách hàng ngẫu nhiên từ danh sách khách hàng có sẵn
+         *
+         * @author Nguyễn Công Chính
+         * @since 3/24/2022
+         *
+         * @version 1
+         * @updated 3/24/2022: Tạo function
+         */
+        fun randomCustomer()
+
+        /**
+         * Hàm cập nhật danh sách sản phẩm đã chọn lên giao diện
+         *
+         * @author Nguyễn Công Chính
+         * @since 3/21/2022
+         *
+         * @version 1
+         * @updated 3/21/2022: Tạo function
+         */
+        fun updateSelectedItems()
+
     }
 }

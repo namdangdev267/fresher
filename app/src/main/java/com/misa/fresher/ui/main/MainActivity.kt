@@ -1,6 +1,8 @@
 package com.misa.fresher.ui.main
 
+import android.content.Context
 import android.view.LayoutInflater
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,12 +25,12 @@ import com.misa.fresher.databinding.HeaderNavBinding
  * @updated 3/15/2022: Thêm biến chung [tempCustomer] để sử dụng giữa các fragment
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainContract.View, MainPresenter>(), MainContract.View {
+class MainActivity : BaseActivity<ActivityMainBinding, MainContract.Presenter>(), MainContract.View {
 
     override val getInflater: (inflater: LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
-    override val initPresenter: () -> MainPresenter
-        get() = { MainPresenter(this) }
+    override val initPresenter: (Context) -> MainContract.Presenter
+        get() = { MainPresenter(this, it) }
 
     private var appBarConfiguration: AppBarConfiguration? = null
 
@@ -44,9 +46,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainContract.View, MainPr
      * @author Nguyễn Công Chính
      * @since 3/9/2022
      *
-     * @version 2
+     * @version 3
      * @updated 3/9/2022: Tạo function
      * @updated 3/17/2022: Thêm header cho drawer
+     * @updated 3/25/2022: Cấm mấy thằng con/cháu/chắt được mở drawer, màn nào được mở drawer cần cài argument "can_open_drawer" = true bên nav graph
      */
     private fun configDrawer() {
         val navHostFragment =
@@ -58,9 +61,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainContract.View, MainPr
             binding.nvMenu.setupWithNavController(navController)
         }
         val headerBinding = HeaderNavBinding.inflate(layoutInflater)
-        headerBinding.tvName.text = "Nam Dang"
-        headerBinding.tvShop.text = "Kho tổng"
+        headerBinding.tvName.text = getString(R.string.sample_user_name)
+        headerBinding.tvShop.text = getString(R.string.sample_shop)
         binding.nvMenu.addHeaderView(headerBinding.root)
+
+        navController.addOnDestinationChangedListener { _, _, arguments ->
+            if(arguments?.getBoolean(ARGUMENT_CAN_OPEN_DRAWER, false) == true) {
+                binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, binding.nvMenu)
+            } else {
+                binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, binding.nvMenu)
+            }
+        }
     }
 
     /**
@@ -92,5 +103,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainContract.View, MainPr
         } else {
             super.onBackPressed()
         }
+    }
+
+    companion object {
+        const val ARGUMENT_CAN_OPEN_DRAWER = "can_open_drawer"
     }
 }

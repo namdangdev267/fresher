@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.login
 
+import android.content.Context
 import com.misa.fresher.core.BasePresenter
 import com.misa.fresher.data.source.remote.response.SignUpResponse
 
@@ -13,11 +14,16 @@ import com.misa.fresher.data.source.remote.response.SignUpResponse
  * @updated 3/23/2022: Tạo class
  */
 class LoginPresenter(
-    view: LoginContract.View
-) : BasePresenter<LoginContract.View>(view), LoginContract.Presenter {
+    view: LoginContract.View,
+    context: Context
+) : BasePresenter<LoginContract.View>(view, context), LoginContract.Presenter {
 
     private var currentState = STATE_SIGN_IN
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun changeState(state: Int) {
         currentState = state
         when (currentState) {
@@ -26,6 +32,10 @@ class LoginPresenter(
         }
     }
 
+    /**
+     * @version 1
+     * @updated 3/23/2022: Override lần đầu
+     */
     override fun action(email: String, password: String, confirmPassword: String) {
         when (currentState) {
             STATE_SIGN_IN -> {

@@ -20,7 +20,7 @@ interface BaseContract {
      * @version 1
      * @updated 3/21/2022: Tạo class
      */
-    interface View {}
+    interface View
 
     /**
      * Base interface của các interface presenter con, hiện tại chưa có gì
@@ -31,5 +31,5 @@ interface BaseContract {
      * @version 1
      * @updated 3/21/2022: Tạo class
      */
-    interface Presenter {}
+    interface Presenter
 }

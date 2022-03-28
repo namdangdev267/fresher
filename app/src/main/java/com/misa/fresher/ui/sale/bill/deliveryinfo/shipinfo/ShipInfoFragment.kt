@@ -1,5 +1,6 @@
 package com.misa.fresher.ui.sale.bill.deliveryinfo.shipinfo
 
+import android.content.Context
 import android.text.InputType
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,18 +16,19 @@ import com.misa.fresher.ui.sale.bill.deliveryinfo.adapter.DeliveryInputAdapter
  * @author Nguyễn Công Chính
  * @since 3/15/2022
  *
- * @version 2
+ * @version 3
  * @updated 3/15/2022: Tạo class
  * @updated 3/23/2022: Tạo khuôn presenter nhưng chưa chuyển hoàn toàn sang mvp
+ * @updated 3/25/2022: Màn này không có xử lí gì bên presenter
  */
 class ShipInfoFragment :
-    BaseFragment<FragmentShipInfoBinding, ShipInfoContract.View, ShipInfoPresenter>(),
+    BaseFragment<FragmentShipInfoBinding, ShipInfoContract.Presenter>(),
     ShipInfoContract.View {
 
     override val getInflater: (LayoutInflater) -> FragmentShipInfoBinding
         get() = FragmentShipInfoBinding::inflate
-    override val initPresenter: () -> ShipInfoPresenter
-        get() = { ShipInfoPresenter(this) }
+    override val initPresenter: (Context) -> ShipInfoContract.Presenter
+        get() = { ShipInfoPresenter(this, it) }
 
     private var adapter: DeliveryInputAdapter? = null
 

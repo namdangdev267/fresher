@@ -11,8 +11,9 @@ import retrofit2.Response
  * @author Nguyễn Công Chính
  * @since 3/22/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/22/2022: Tạo class
+ * @updated 3/25/2022: Bổ sung 1 [onResponse] nữa phục vụ cho trao đổi dữ liệu với local database
  */
 class LoadedAction<T>(
     private val onSuccess: (T) -> Unit,
@@ -20,7 +21,7 @@ class LoadedAction<T>(
 ) {
 
     /**
-     * Khi trao đổi dữ liệu thành công, dữ liệu trả về có thể là kết quả mong muốn, hoặc một message lỗi
+     * Khi trao đổi dữ liệu qua mạng thành công, dữ liệu trả về có thể là kết quả mong muốn, hoặc một message lỗi
      *
      * @author Nguyễn Công Chính
      * @since 3/22/2022
@@ -43,6 +44,22 @@ class LoadedAction<T>(
     }
 
     /**
+     * Khi trao đổi dữ liệu với local database thành công, dữ liệu trả về có thể là kết quả mong muốn, hoặc một message lỗi
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/24/2022
+     *
+     * @version 1
+     * @updated 3/24/2022: Tạo function
+     */
+    fun onResponse(response: T?) {
+        response?.let(onSuccess)
+            ?: run {
+                onFailure(ErrorMessageModel(ErrorMessageModel.LOCAL_ERROR, "NULL_RESPONSE"))
+            }
+    }
+
+    /**
      * Khi trao đổi dữ liệu thất bại, lỗi xảy ra do bản thân thiết bị
      *
      * @author Nguyễn Công Chính
@@ -52,7 +69,7 @@ class LoadedAction<T>(
      * @updated 3/22/2022: Tạo function
      */
     fun onException(ex: Throwable) {
-        val error = ErrorMessageModel(ErrorMessageModel.LOCAL_ERROR, ex.localizedMessage)
+        val error = ErrorMessageModel(ErrorMessageModel.LOCAL_ERROR, ex.localizedMessage ?: "UNKNOWN_MESSAGE")
         onFailure(error)
     }
 }

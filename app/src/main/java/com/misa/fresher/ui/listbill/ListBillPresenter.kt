@@ -1,6 +1,6 @@
 package com.misa.fresher.ui.listbill
 
-import com.misa.fresher.common.FakeData
+import android.content.Context
 import com.misa.fresher.core.BasePresenter
 import com.misa.fresher.data.model.FilterBillModel
 import com.misa.fresher.util.enum.TimeFilterType
@@ -15,20 +15,39 @@ import com.misa.fresher.util.enum.TimeFilterType
  * @updated 3/21/2022: Tạo class
  */
 class ListBillPresenter(
-    view: ListBillContract.View
-) : BasePresenter<ListBillContract.View>(view), ListBillContract.Presenter {
+    view: ListBillContract.View,
+    context: Context
+) : BasePresenter<ListBillContract.View>(view, context), ListBillContract.Presenter {
 
     private val filter: FilterBillModel = FilterBillModel()
 
+    /**
+     * @version 2
+     * @updated 3/23/2022: Override lần đầu
+     * @updated 3/25/2022: Chuyển sang trao đổi dữ liệu với database
+     */
     override fun filterByKeyword(keyword: String) {
         filter.keyword = keyword
-        val filterItems = filter.filter(FakeData.bills)
-        view.updateBillList(filterItems.toMutableList())
+        dataManager.getAllBill()
+            .onSuccess {
+                val filterItems = filter.filter(it)
+                view.updateBillList(filterItems.toMutableList())
+            }
+            .call()
     }
 
+    /**
+     * @version 2
+     * @updated 3/23/2022: Override lần đầu
+     * @updated 3/25/2022: Chuyển sang trao đổi dữ liệu với database
+     */
     override fun filterByTime(time: TimeFilterType) {
         filter.time = time
-        val filterItems = filter.filter(FakeData.bills)
-        view.updateBillList(filterItems.toMutableList())
+        dataManager.getAllBill()
+            .onSuccess {
+                val filterItems = filter.filter(it)
+                view.updateBillList(filterItems.toMutableList())
+            }
+            .call()
     }
 }
