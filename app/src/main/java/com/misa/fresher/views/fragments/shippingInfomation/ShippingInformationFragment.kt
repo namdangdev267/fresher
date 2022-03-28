@@ -91,7 +91,7 @@ class ShippingInformationFragment : Fragment() {
             }.attach()
 
         binding.btShippingInforSave.setOnClickListener {
-            sharedViewModel.updateInforShip((viewPagerAdapter.mFragmentList[0] as ReceiverFragment).inforShip)
+            sharedViewModel.updateInfoShip((viewPagerAdapter.mFragmentList[0] as ReceiverFragment).inforShip)
 
             Navigation.findNavController(view)
                 .navigate(R.id.action_shippingInformationFragment_to_billDetailFragment)

@@ -3,8 +3,11 @@ package com.misa.fresher.models
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
+import android.graphics.Color
 import android.os.Parcelable
 import android.util.Log
+import com.misa.fresher.R
+import com.misa.fresher.getNumString
 import com.misa.fresher.models.enums.BillStatus
 import kotlinx.android.parcel.Parcelize
 
@@ -19,6 +22,19 @@ class ItemBill() : Parcelable {
     var createDay: String = ""
     var billPrice: Float = 0f
 
+    val idForView: String
+        get() = id.getNumString()
+
+    val infoShipForView: String
+        get() = if (infoShip?.receiver != null && infoShip?.tel != null) (infoShip?.receiver + "-" + infoShip?.tel) else "Chưa có thông tin"
+
+    val colorInfoShipForView: Int
+        get() = if (infoShip?.receiver != null && infoShip?.tel != null) Color.parseColor("#FF000000") else Color.parseColor(
+            "#99000000"
+        )
+
+    val billPriceForList: String
+        get() = billPrice.toString()
 
     @SuppressLint("Range")
     constructor(cursor: Cursor) : this() {
@@ -67,10 +83,6 @@ class ItemBill() : Parcelable {
 
     fun getAllBillPrice(): Float? = listItemBillDetail?.map { it.getAllPrice() }?.sum()
 
-//    fun setBillPrice()
-//    {
-//        this.billPrice = getAllBillPrice()
-//    }
 
     fun getContentValues(): ContentValues {
         return ContentValues().apply {

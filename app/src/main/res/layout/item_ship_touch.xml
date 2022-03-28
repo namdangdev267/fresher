@@ -28,14 +28,12 @@
         style="@style/TextViewFont"
         android:layout_alignParentBottom="true"
         android:background="@color/transparent"
-        android:hint="@string/touch_to_enter"
-        android:textColorHint="#C9737373"
-        android:textSize="14dp"
         android:focusableInTouchMode="true"
+        android:hint="@string/touch_to_enter"
         android:maxLength="40"
         android:singleLine="true"
-
-
+        android:textColorHint="#C9737373"
+        android:textSize="14dp"
         />
 
     <ImageView

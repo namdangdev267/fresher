@@ -16,6 +16,7 @@ import com.misa.fresher.views.customViews.CustomToast
 import com.misa.fresher.views.fragments.SharedViewModel
 import com.misa.fresher.databinding.FragmentBillDetailBinding
 import com.misa.fresher.getNumString
+import com.misa.fresher.views.fragments.bill.BillAdapter
 
 class BillDetailFragment : Fragment() {
 
@@ -38,10 +39,12 @@ class BillDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.sharedViewModel = sharedViewModel
+        binding.billDetailAdapter = BillDetailAdapter(sharedViewModel)
 
         transitionFragment(view)
         configToolbar()
-        configListView()
         configOtherView(view)
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
@@ -53,7 +56,7 @@ class BillDetailFragment : Fragment() {
     }
 
     private fun configToolbar() {
-        binding.tvBillDetailId.text = sharedViewModel.billHandling.value?.id?.getNumString()!!.substring(10)
+        binding.tvBillDetailId.text = sharedViewModel.billHandling.value?.id?.getNumString()!!
     }
 
     private fun transitionFragment(view: View) {
@@ -96,21 +99,9 @@ class BillDetailFragment : Fragment() {
                 binding.tvBillDetailCustomerInfor.text ="Customer name, phone number"
             }
         })
-
     }
 
-    private fun configListView() {
 
-        sharedViewModel.listItemBillDetail.observe(viewLifecycleOwner, Observer { it ->
-            binding.recyclerviewBillDetail.adapter =
-                BillDetailAdapter(it) { clickItemBillDetail(it) }
-            binding.tvBillDetailTotalQuantity.text =it.size.toString()
-            binding.tvBillDetailTotalPrice.text = sharedViewModel.getTotalPrice().toString()
-        })
-    }
 
-    private fun clickItemBillDetail(itemBillDetail: ItemBillDetail) {
-        sharedViewModel.updateQuantityOfItemBillDetail(itemBillDetail)
-    }
 
 }
