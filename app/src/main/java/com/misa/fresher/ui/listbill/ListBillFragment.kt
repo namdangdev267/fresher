@@ -21,10 +21,11 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/9/2022: Tạo class
  * @updated 3/16/2022: Thêm nội dung cho màn hình
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
+ * @updated 3/28/2022: Hàm initListBill, và khi cài đặt sự kiện spinner, nó tự exec luôn, 2 thằng cùng chọc vào db cùng lúc sẽ đấm nhau. Do vậy loại bỏ hàm initListBill
  */
 class ListBillFragment :
     BaseFragment<FragmentListBillBinding, ListBillContract.Presenter>(),
@@ -42,21 +43,6 @@ class ListBillFragment :
         configFilter()
         configBillRcv()
         configOtherView()
-
-        initListBill()
-    }
-
-    /**
-     * Khởi tạo danh sách hóa đơn
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/23/2022
-     *
-     * @version 1
-     * @updated 3/23/2022: Tạo function
-     */
-    private fun initListBill() {
-        presenter?.filterByKeyword("")
     }
 
     /**
@@ -105,7 +91,12 @@ class ListBillFragment :
         )
         binding.spnFilterTime.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                override fun onItemSelected(
+                    p0: AdapterView<*>?,
+                    p1: View?,
+                    position: Int,
+                    p3: Long
+                ) {
                     val time: TimeFilterType = when (position) {
                         0 -> TimeFilterType.TODAY
                         1 -> TimeFilterType.YESTERDAY
