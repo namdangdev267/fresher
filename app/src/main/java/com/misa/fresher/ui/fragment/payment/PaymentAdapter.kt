@@ -3,25 +3,25 @@ package com.misa.fresher.ui.fragment.payment
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.misa.fresher.base.BaseAdapter
-import com.misa.fresher.base.BaseViewHolder
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.data.models.PackageProduct
 import com.misa.fresher.databinding.ItemPackageRcvBinding
 import com.misa.fresher.showToast
 import java.util.*
 
 class PaymentAdapter(
-    override var listItems: MutableList<PackageProduct>,
-    override var clickItems: (PackageProduct) -> Unit
-) : BaseAdapter<PackageProduct, BaseViewHolder<PackageProduct>>() {
+    var listItems: MutableList<PackageProduct>,
+    private var clickItems: (PackageProduct) -> Unit
+) : ListAdapter<PackageProduct, PaymentAdapter.PaymentViewHolder>(PostDiffCallBack()) {
 
-    class PaymentViewholder(
-        val binding: ItemPackageRcvBinding,
-        override var clickItem: (PackageProduct) -> Unit
-    ) : BaseViewHolder<PackageProduct>(binding.root) {
+    class PaymentViewHolder(
+        private val binding: ItemPackageRcvBinding,
+        private var clickItem: (PackageProduct) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        override fun bindingData(item: PackageProduct) {
-            super.bindingData(item)
+        fun bindingData(item: PackageProduct) {
             binding.run {
                 tvPriceProduct.text = item.getPrice().toString()
                 tvCountProduct.text = item.countPackage.toString()
@@ -50,8 +50,8 @@ class PaymentAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<PackageProduct> =
-        PaymentViewholder(
+    ): PaymentViewHolder =
+        PaymentViewHolder(
             ItemPackageRcvBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -59,6 +59,21 @@ class PaymentAdapter(
             ), clickItems
         )
 
+    override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
+        val currentItem = getItem(position)
+        holder.bindingData(currentItem)
+    }
+
 }
+
+class PostDiffCallBack : DiffUtil.ItemCallback<PackageProduct>() {
+    override fun areItemsTheSame(oldItem: PackageProduct, newItem: PackageProduct): Boolean =
+        oldItem.id == newItem.id
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: PackageProduct, newItem: PackageProduct): Boolean =
+        oldItem == newItem
+}
+
 
 

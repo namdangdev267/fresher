@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.PublicViewModel
@@ -20,6 +19,7 @@ import kotlinx.android.synthetic.main.payment_context.view.*
 class PaymentFragment: Fragment() {
     private val binding: FragmentPaymentBinding by lazy { getInflater(layoutInflater) }
     private val sharedViewModel: PublicViewModel by activityViewModels()
+    private var adapter: PaymentAdapter? = null
 
     val getInflater: (LayoutInflater) -> FragmentPaymentBinding get() = FragmentPaymentBinding::inflate
 
@@ -51,13 +51,13 @@ class PaymentFragment: Fragment() {
     private fun configureOtherView() {
         val tvCustomer = binding.root.tvCustomer
         tvCustomer.isSelected = true
-        sharedViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.inforShip.observe(viewLifecycleOwner) {
             if (it.receiver != null && it.tel != null) {
                 tvCustomer.text = it.receiver.toString() + " _ " + it.tel.toString()
             } else {
                 tvCustomer.text = "Customer name, phone number"
             }
-        })
+        }
     }
 
     private fun configToolbar() {
@@ -86,14 +86,16 @@ class PaymentFragment: Fragment() {
 
     private fun configureListView() {
         binding.root.rcvPackage?.layoutManager = LinearLayoutManager(this.context)
+        adapter = PaymentAdapter(mutableListOf()) { clickItemBillDetail(it) }
+        binding.root.rcvPackage.adapter = adapter
 
-        sharedViewModel.listItemSelected.observe(viewLifecycleOwner, Observer { it ->
-            binding.root.rcvPackage?.adapter =
-                PaymentAdapter(it) { clickItemBillDetail(it) }
+        sharedViewModel.listItemSelected.observe(viewLifecycleOwner) {
+            adapter?.submitList(it)
             binding.root.tvCountPackage.text =
                 sharedViewModel.getCount().toString()
             binding.root.tvMoneyReceivable.text = sharedViewModel.getTotalPrice().toString()
-        })
+
+        }
     }
 
     private fun clickItemBillDetail(itemBillDetail: PackageProduct) {

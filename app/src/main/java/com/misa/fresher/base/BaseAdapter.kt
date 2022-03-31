@@ -1,16 +1,14 @@
 package com.misa.fresher.base
 
-import androidx.recyclerview.widget.RecyclerView
-
-abstract class BaseAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adapter<V>() {
-    abstract var listItems: MutableList<T>
-    abstract var clickItems: (T) -> Unit
-
-    override fun onBindViewHolder(holder: V, position: Int) {
-        holder.bindingData(listItems[position])
-    }
-
-    override fun getItemCount(): Int =
-        listItems.size
-
-}
+//abstract class BaseAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adapter<V>() {
+//    abstract var listItems: MutableList<T>
+//    abstract var clickItems: (T) -> Unit
+//
+//    override fun onBindViewHolder(holder: V, position: Int) {
+//        holder.bindingData(listItems[position])
+//    }
+//
+//    override fun getItemCount(): Int =
+//        listItems.size
+//
+//}

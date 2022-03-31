@@ -14,7 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -25,11 +24,11 @@ import com.misa.fresher.data.models.enum.Category
 import com.misa.fresher.data.models.enum.SortBy
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.fragment.sale.SaleViewModel
 import com.misa.fresher.showToast
 import com.misa.fresher.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 import kotlinx.android.synthetic.main.sale_context.view.*
+@SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n", "NotifyDataSetChanged")
 
 class SaleFragment : Fragment() {
 
@@ -46,7 +45,7 @@ class SaleFragment : Fragment() {
     private val bottomSheetView by lazy { BottomSheetProductBinding.inflate(layoutInflater) }
     val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
 
-    var newFilter: com.misa.fresher.data.models.Filter? = null
+    private var newFilter: com.misa.fresher.data.models.Filter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -119,7 +118,7 @@ class SaleFragment : Fragment() {
 
         binding.filterDrawer.run {
             rbName.isChecked = true
-            swQuantity.setOnCheckedChangeListener { compoundButton, b ->
+            swQuantity.setOnCheckedChangeListener { _, b ->
                 saleViewModel.filter.available = b
             }
             spnGrouping.onItemSelectedListener =
@@ -194,21 +193,23 @@ class SaleFragment : Fragment() {
     }
 
     private fun updateListByFilter() {
-        saleViewModel.filterList.observe(viewLifecycleOwner, Observer {
+
+        saleViewModel.filterList.observe(viewLifecycleOwner) {
             adapter?.listItems = it
-            adapter?.notifyDataSetChanged()
-        })
+//            adapter?.notifyDataSetChanged()
+            adapter?.submitList(it)
+        }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n", "NotifyDataSetChanged")
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
         adapter = ProductAdapter(mutableListOf()) { saleItemClick(it) }
         binding.rcvProduct.adapter = adapter
-        saleViewModel.listProductShow.observe(viewLifecycleOwner, Observer {
+        saleViewModel.listProductShow.observe(viewLifecycleOwner) {
             adapter?.listItems = it
-            adapter?.notifyDataSetChanged()
-        })
+//            adapter?.notifyDataSetChanged()
+            adapter?.submitList(it)
+        }
 
         publicViewModel.listItemSelected.observe(viewLifecycleOwner) {
             binding.tvCountProduct.text = publicViewModel.getCount().toString()
@@ -234,15 +235,13 @@ class SaleFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun updateListView() {
-        saleViewModel.searchList.observe(viewLifecycleOwner, Observer {
+        saleViewModel.searchList.observe(viewLifecycleOwner) {
             adapter?.listItems = it
             adapter?.notifyDataSetChanged()
-        })
+        }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
         binding.tvCustomer.isSelected = true
 
@@ -250,7 +249,7 @@ class SaleFragment : Fragment() {
             publicViewModel.clearListItemSelected()
         }
 
-        publicViewModel.inforShip.observe(viewLifecycleOwner, Observer {
+        publicViewModel.inforShip.observe(viewLifecycleOwner) {
             val tvCustomer = binding.tvCustomer
             tvCustomer.isSingleLine = true
             if (it.receiver != null && it.tel != null) {
@@ -258,7 +257,7 @@ class SaleFragment : Fragment() {
             } else {
                 tvCustomer.text = "Customer name, phone number"
             }
-        })
+        }
     }
 
     private fun toggleDrawer(view: View) {
@@ -290,11 +289,11 @@ class SaleFragment : Fragment() {
             }
         }
 
-        publicViewModel.itemPackageProduct.observe(viewLifecycleOwner, Observer {
+        publicViewModel.itemPackageProduct.observe(viewLifecycleOwner) {
             tvItemQuantity.text = it.countPackage.toString()
             tvItemName.text = it.namePackage
             tvItemId.text = it.codePackage
-        })
+        }
 
         bottomSheetDialog.setContentView(bottomSheetView.root)
 

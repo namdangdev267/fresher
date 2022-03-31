@@ -4,16 +4,19 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.data.models.ItemBill
 import com.misa.fresher.databinding.ItemBillBinding
 
-class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
-    RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {
+class ListBillAdapter :
+    ListAdapter<ItemBill, ListBillAdapter.ListBillViewHolder>(PostDiffCallBack()) {
 
-    class ViewHolder(private val binding: ItemBillBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ListBillViewHolder(private val binding: ItemBillBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor", "SetTextI18n", "CutPasteId")
-        fun bind(itemBill: ItemBill) {
+        fun bindingData(itemBill: ItemBill) {
             binding.tvBillId.text = itemBill.id
             binding.tvBillPrice.text = itemBill.billPrice.toString()
             Log.d("tagPrice", itemBill.getPrice().toString())
@@ -25,14 +28,23 @@ class ListBillAdapter(private var listItemBill: MutableList<ItemBill>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemBillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBillViewHolder =
+        ListBillViewHolder(
+            ItemBillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listItemBill[position])
-    }
+    override fun onBindViewHolder(holder: ListBillViewHolder, position: Int) =
+        holder.bindingData(getItem(position))
 
-    override fun getItemCount() = listItemBill.size
 }
+
+class PostDiffCallBack : DiffUtil.ItemCallback<ItemBill>() {
+    override fun areItemsTheSame(oldItem: ItemBill, newItem: ItemBill): Boolean =
+        oldItem.id == newItem.id
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: ItemBill, newItem: ItemBill): Boolean =
+        oldItem == newItem
+}
+
+

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.PublicViewModel
@@ -22,7 +21,7 @@ class ListBillFragment : Fragment() {
     }
 
     private val sharedViewModel: PublicViewModel by activityViewModels()
-
+    private var adapter: ListBillAdapter? = null
     val getInflater: (LayoutInflater) -> FragmentListBillBinding
         get() = FragmentListBillBinding::inflate
 
@@ -63,11 +62,11 @@ class ListBillFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun configureListView() {
         binding.recyclerviewBillList.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerviewBillList.adapter =
-            sharedViewModel.listBill.value?.let { ListBillAdapter(it) }
-        sharedViewModel.listBill.observe(viewLifecycleOwner, Observer {
-            binding.recyclerviewBillList.adapter?.notifyDataSetChanged()
-        })
+        adapter = ListBillAdapter()
+        binding.recyclerviewBillList.adapter = adapter
+        sharedViewModel.listBill.observe(viewLifecycleOwner) {
+            adapter?.submitList(it)
+        }
     }
 
 }
