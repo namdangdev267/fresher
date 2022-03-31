@@ -72,7 +72,10 @@
     <string name="customer_not_found">Không tìm thấy khách hàng</string>
     <string name="save_bill_failure">Lưu đơn hàng thất bại</string>
     <string name="sample_user_name">Nam Dang</string>
-    <string name="sample_shop">Kho tổng</string>
+    <string name="accept">Đồng ý</string>
+    <string name="select_shop">Chọn cửa hàng làm việc</string>
+    <string name="sample_shop_1">Kho tổng</string>
+    <string name="sample_shop_2">namfashionhn</string>
     <string-array name="filter_time">
         <item>Hôm nay</item>
         <item>Hôm qua</item>

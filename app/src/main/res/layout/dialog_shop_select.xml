@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/between_element_double">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_shop"
+        android:textColor="@color/primary_text_in_white"
+        android:textSize="@dimen/font_size_big"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/between_element"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_shop_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_shop_1"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_shop_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_shop_2"/>
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/between_element_double"
+        android:layout_marginHorizontal="@dimen/between_element_double"
+        android:background="@drawable/selector_button"
+        android:text="@string/accept"
+        android:textAppearance="@style/Theme.FreshersApplication.Text.BottomButton"/>
+</LinearLayout>

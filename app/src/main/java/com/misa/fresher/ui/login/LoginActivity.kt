@@ -9,6 +9,8 @@ import com.misa.fresher.core.BaseActivity
 import com.misa.fresher.data.source.remote.response.SignInResponse
 import com.misa.fresher.data.source.remote.response.SignUpResponse
 import com.misa.fresher.databinding.ActivityLoginBinding
+import com.misa.fresher.databinding.DialogShopSelectBinding
+import com.misa.fresher.ui.login.dialog.ShopSelectorDialog
 import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.util.toast
 
@@ -18,8 +20,9 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/23/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/23/2022: Tạo class
+ * @updated 3/31/2022: Thêm dialog chọn cửa hàng sau khi đăng nhập thành công
  */
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter>(), LoginContract.View {
 
@@ -106,9 +109,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter
     }
 
     override fun signInSuccess() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        val dialog = ShopSelectorDialog(this, DialogShopSelectBinding.inflate(layoutInflater)) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra(ARGUMENT_SHOP, it)
+            startActivity(intent)
+        }
+        dialog.show()
     }
 
     override fun signInFailure(error: String) {
@@ -135,5 +142,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginContract.Presenter
             SignUpResponse.INVALID_EMAIL -> toast(baseContext, getString(R.string.invalid_email))
             else -> toast(baseContext, getString(R.string.unknown_error) + error)
         }
+    }
+
+    companion object {
+        const val ARGUMENT_SHOP = "selected_shop"
     }
 }

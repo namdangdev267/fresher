@@ -11,8 +11,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseActivity
 import com.misa.fresher.data.entity.Customer
+import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.ActivityMainBinding
 import com.misa.fresher.databinding.HeaderNavBinding
+import com.misa.fresher.ui.login.LoginActivity
+import com.misa.fresher.ui.sale.SaleFragment
+import com.misa.fresher.util.get
 
 /**
  * Activity chính chứa hầu hết các view của ứng dụng
@@ -20,10 +24,11 @@ import com.misa.fresher.databinding.HeaderNavBinding
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/9/2022: Tạo class
  * @updated 3/15/2022: Thêm biến chung [tempCustomer] để sử dụng giữa các fragment
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
+ * @updated 3/31/2022: Nhận thông tin cửa hàng từ màn hình đăng nhập và hiển thị nó lên drawer
  */
 class MainActivity : BaseActivity<ActivityMainBinding, MainContract.Presenter>(), MainContract.View {
 
@@ -33,6 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainContract.Presenter>()
         get() = { MainPresenter(this, it) }
 
     private var appBarConfiguration: AppBarConfiguration? = null
+    private val shop by lazy { intent.extras.get(LoginActivity.ARGUMENT_SHOP, getString(R.string.sample_shop_1)) }
 
     var tempCustomer: Customer? = null
 
@@ -62,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainContract.Presenter>()
         }
         val headerBinding = HeaderNavBinding.inflate(layoutInflater)
         headerBinding.tvName.text = getString(R.string.sample_user_name)
-        headerBinding.tvShop.text = getString(R.string.sample_shop)
+        headerBinding.tvShop.text = shop
         binding.nvMenu.addHeaderView(headerBinding.root)
 
         navController.addOnDestinationChangedListener { _, _, arguments ->

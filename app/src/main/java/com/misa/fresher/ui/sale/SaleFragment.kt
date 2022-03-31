@@ -3,7 +3,6 @@ package com.misa.fresher.ui.sale
 import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -11,20 +10,18 @@ import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.misa.fresher.R
 import com.misa.fresher.core.BaseFragment
-import com.misa.fresher.data.entity.*
+import com.misa.fresher.data.entity.Category
+import com.misa.fresher.data.entity.Customer
+import com.misa.fresher.data.entity.Product
 import com.misa.fresher.data.entity.ProductItemBill
 import com.misa.fresher.databinding.DialogProductTypeSelectorBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.ui.main.MainActivity
 import com.misa.fresher.ui.sale.adapter.ProductAdapter
-import com.misa.fresher.ui.sale.adapter.TypeSelectorAdapter
+import com.misa.fresher.ui.sale.dialog.ProductTypeSelectorDialog
 import com.misa.fresher.util.enum.ProductSortType
-import com.misa.fresher.util.guard
 import com.misa.fresher.util.toCurrency
 import com.misa.fresher.util.toast
 
@@ -34,14 +31,15 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 7
+ * @version 8
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
  * @updated 3/12/2022: Thêm chức năng lọc sản phẩm, tìm kiếm sản phẩm theo tên, mã
- * @updated 3/15/2022: Chuyển nhà các hàm trong [configTypeSelectorDialog] từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
+ * @updated 3/15/2022: Chuyển nhà các hàm trong configTypeSelectorDialog từ com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder sang đây
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
  * @updated 3/31/2022: Cập nhật swipe to refresh
+ * @updated 3/31/2022: Di chuyển dialog chọn loại hàng/số lượng sang class [com.misa.fresher.ui.login.dialog.ShopSelectorDialog]
  */
 class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>(),
     SaleContract.View {
@@ -52,21 +50,21 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
         get() = { SalePresenter(this, it) }
 
     private var productAdapter: ProductAdapter? = null
-    private val typeSelectorDialog by lazy {
-        BottomSheetDialog(requireContext(), R.style.Theme_FreshersApplication_BottomDialog)
-    }
-    private val dialogBinding by lazy { DialogProductTypeSelectorBinding.inflate(layoutInflater) }
 
-    private var quantity = 1
-    private var color: ProductColor? = null
-    private var size: ProductSize? = null
-    private var unit: ProductUnit? = null
+    private val dialog by lazy {
+        ProductTypeSelectorDialog(
+            requireContext(),
+            R.style.Theme_FreshersApplication_BottomDialog,
+            DialogProductTypeSelectorBinding.inflate(layoutInflater)
+        ) { product, quantity, color, size, unit ->
+            presenter?.addSelectedItem(product, quantity, color, size, unit)
+        }
+    }
 
     override fun initUI() {
         configToolbar()
         configFilterDrawer()
         configProductRcv()
-        configTypeSelectorDialog()
         configOtherView()
 
         initProductList()
@@ -96,117 +94,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
         } ?: run {
             binding.tvCustomer.ellipsize = TextUtils.TruncateAt.END
             binding.tvCustomer.text = ""
-        }
-    }
-
-    /**
-     * Cài đặt dialog chọn loại hàng
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/14/2022
-     *
-     * @version 1
-     * @updated 3/14/2022: Tạo function
-     */
-    private fun configTypeSelectorDialog() {
-        typeSelectorDialog.setContentView(dialogBinding.root)
-    }
-
-    /**
-     * Hàm chuẩn bị các view bên trong dialog và hiển thị luôn
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/14/2022
-     *
-     * @version 1
-     * @updated 3/14/2022: Tạo function
-     */
-    private fun showTypeSelectorDialog(product: Product) {
-        typeSelectorDialog.setOnDismissListener {
-            guard(color, size, unit) { cl, sz, un ->
-                presenter?.addSelectedItem(product, quantity, cl, sz, un)
-            }
-        }
-        initDialogUI(product)
-
-        typeSelectorDialog.show()
-    }
-
-    /**
-     * Cài đặt giao diện cho hộp thoại chọn loại sản phẩm
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/11/2022
-     *
-     * @version 2
-     * @updated 3/11/2022: Tạo function
-     * @updated 3/15/2022: Chuyển nhà từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
-     */
-    private fun initDialogUI(product: Product) {
-        quantity = 1
-        color = null
-        size = null
-        unit = null
-
-        dialogBinding.tvName.text = product.name
-        dialogBinding.tvCode.text = product.code
-        dialogBinding.tvQuantity.text = quantity.toString()
-
-        dialogBinding.btnPlus.setOnClickListener {
-            quantity++
-            dialogBinding.tvQuantity.text = quantity.toString()
-        }
-        dialogBinding.btnMinus.setOnClickListener {
-            if (quantity == 1) {
-                toast(requireContext(), R.string.quantity_must_be_bigger_than_0)
-            } else {
-                quantity--
-                dialogBinding.tvQuantity.text = quantity.toString()
-            }
-        }
-
-        config3RcvInDialog(product)
-    }
-
-    /**
-     * Cài đặt 3 recyclerview trong hộp thoại chọn sản phẩm trong 1 hàm
-     *
-     * @author Nguyễn Công Chính
-     * @since 3/11/2022
-     *
-     * @version 2
-     * @updated 3/11/2022: Tạo function
-     * @updated 3/15/2022: Chuyển nhà từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
-     */
-    private fun config3RcvInDialog(product: Product) {
-        dialogBinding.rcvColor.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
-        dialogBinding.rcvColor.adapter = TypeSelectorAdapter(product.items
-            .map { it.color }
-            .let { item -> item.distinctBy { it.id } }
-            .toMutableList()
-        ) { data ->
-            color = data
-            guard(color, size, unit) { _, _, _ -> typeSelectorDialog.dismiss() }
-        }
-
-        dialogBinding.rcvSize.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
-        dialogBinding.rcvSize.adapter = TypeSelectorAdapter(product.items
-            .map { it.size }
-            .let { item -> item.distinctBy { it.id } }
-            .toMutableList()
-        ) { data ->
-            size = data
-            guard(color, size, unit) { _, _, _ -> typeSelectorDialog.dismiss() }
-        }
-
-        dialogBinding.rcvUnit.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
-        dialogBinding.rcvUnit.adapter = TypeSelectorAdapter(product.items
-            .map { it.unit }
-            .let { item -> item.distinctBy { it.id } }
-            .toMutableList()
-        ) { data ->
-            unit = data
-            guard(color, size, unit) { _, _, _ -> typeSelectorDialog.dismiss() }
         }
     }
 
@@ -268,7 +155,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
      * @updated 3/12/2022: Cập nhật vào giỏ hàng khi lựa chọn xong hàng muốn mua
      */
     private fun configProductRcv() {
-        productAdapter = ProductAdapter(mutableListOf(), this::showTypeSelectorDialog)
+        productAdapter = ProductAdapter(mutableListOf(), dialog::show)
         binding.rcvProduct.adapter = productAdapter
         binding.rcvProduct.addItemDecoration(
             DividerItemDecoration(
@@ -409,7 +296,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
 
     override fun getAllCategorySuccess(list: List<Category>) {
         val groupItem = mutableListOf(getString(R.string.all))
-        Log.d("category", list.toString())
         groupItem.addAll(list.map { it.name })
         val groupAdapter = ArrayAdapter(
             requireContext(),

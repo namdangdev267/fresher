@@ -8,10 +8,11 @@ import java.util.*
  * @author Nguyễn Công Chính
  * @since 3/14/2022
  *
- * @version 3
+ * @version 4
  * @updated 3/14/2022: Tạo class
- * @updated 3/18/2022: Không sử dụng hàm generateBillCode() nữa, thay thế bằng [FakeData.getId]
+ * @updated 3/18/2022: Không sử dụng hàm generateBillCode() nữa, thay thế bằng FakeData.getId
  * @updated 3/23/2022: Chuyển lớp Random -> [RandomSingleton]
+ * @updated 3/31/2022: Thêm 2 hàm sinh giá tiền và số lượng
  */
 object RandomSingleton {
 
@@ -35,4 +36,31 @@ object RandomSingleton {
         now.time -= randomDay * 86400000L
         return now
     }
+
+    /**
+     * Hàm sinh giá tiền ngẫu nhiên, [min], [max] nhập vào có đơn vị nghìn đồng
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/31/2022
+     *
+     * @version 1
+     * @updated 3/31/2022: Tạo function
+     */
+    fun generatePrice(min: Int, max: Int, step: Int = 5): Double {
+        val stepsAvail = (max - min) / step
+        return (min + getInstance().nextInt(stepsAvail) * step).toDouble() * 1000
+    }
+
+    /**
+     * Hàm sinh số lượng không ngẫu nhiên cho lắm, [min], [max] nhập vào có đơn vị nghìn đồng
+     *
+     * @author Nguyễn Công Chính
+     * @since 3/31/2022
+     *
+     * @version 1
+     * @updated 3/31/2022: Tạo function
+     */
+    fun generateQuantity(): Int =
+        if (getInstance().nextInt(5) == 0) 0
+        else getInstance().nextInt(100)
 }
