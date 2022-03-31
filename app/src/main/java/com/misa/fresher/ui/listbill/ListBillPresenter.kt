@@ -26,8 +26,10 @@ class ListBillPresenter(
      * @updated 3/23/2022: Override lần đầu
      * @updated 3/25/2022: Chuyển sang trao đổi dữ liệu với database
      */
-    override fun filterByKeyword(keyword: String) {
-        filter.keyword = keyword
+    override fun filterByKeyword(keyword: String?) {
+        keyword?.let {
+            filter.keyword = it
+        }
         dataManager.getAllBill()
             .onSuccess {
                 val filterItems = filter.filter(it)

@@ -1,4 +1,4 @@
-package com.misa.fresher.core
+package com.misa.fresher.util
 
 import android.content.ContentValues
 
@@ -8,8 +8,9 @@ import android.content.ContentValues
  * @author Nguyễn Công Chính
  * @since 3/24/2022
  *
- * @version 1
+ * @version 2
  * @updated 3/24/2022: Tạo class
+ * @updated 3/31/2022: Di chuyển từ package core -> util
  */
 interface CanContentValues {
 

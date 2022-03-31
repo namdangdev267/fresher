@@ -34,13 +34,14 @@ import com.misa.fresher.util.toast
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 6
+ * @version 7
  * @updated 3/9/2022: Tạo class
  * @updated 3/12/2022: Thêm chức năng chọn loại sản phẩm, cập nhật vào giỏ hàng
  * @updated 3/12/2022: Thêm chức năng lọc sản phẩm, tìm kiếm sản phẩm theo tên, mã
  * @updated 3/15/2022: Chuyển nhà các hàm trong [configTypeSelectorDialog] từ [com.misa.fresher.ui.sale.adapter.viewholder.ProductViewHolder] sang đây
  * @updated 3/15/2022: Cập nhật customer mỗi lần màn hình hiện ra
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
+ * @updated 3/31/2022: Cập nhật swipe to refresh
  */
 class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>(),
     SaleContract.View {
@@ -236,6 +237,9 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
                 )
             }
         }
+        binding.swpProduct.setOnRefreshListener {
+            presenter?.filterByKeyword()
+        }
     }
 
     /**
@@ -249,6 +253,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
      * @updated 3/12/2022: Ngay khi khởi tạo danh sách mặc định sẽ lọc theo tên sản phẩm
      */
     private fun initProductList() {
+        binding.swpProduct.isRefreshing = true
         presenter?.filterByKeyword("")
     }
 
@@ -302,6 +307,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
         binding.llFilter.rbName.isChecked = true
 
         binding.llFilter.btnDone.setOnClickListener {
+            binding.swpProduct.isRefreshing = true
             presenter?.filterByAttr(
                 binding.llFilter.swQuantity.isChecked,
                 binding.llFilter.spnGrouping.selectedItemPosition - 1,
@@ -344,6 +350,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
         }
         binding.tbSale.etInput.setOnEditorActionListener { textView, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
+                binding.swpProduct.isRefreshing = true
                 presenter?.filterByKeyword(textView.text.toString())
             }
             false
@@ -372,6 +379,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleContract.Presenter>()
      * @updated 3/23/2022: Override lần đầu
      */
     override fun updateProductList(list: MutableList<Product>) {
+        binding.swpProduct.isRefreshing = false
         productAdapter?.updateData(list)
     }
 

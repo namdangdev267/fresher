@@ -42,7 +42,7 @@
     </style>
 
     <style name="Theme.FreshersApplication.Text.BottomButton" parent="Theme.FreshersApplication.Text">
-        <item name="android:textColor">@color/primary_text_in_primary</item>
+        <item name="android:textColor">@drawable/selector_button_text_color</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/font_size_big</item>
         <item name="android:textAllCaps">false</item>

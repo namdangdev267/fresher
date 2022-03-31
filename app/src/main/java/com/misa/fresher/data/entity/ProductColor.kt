@@ -2,7 +2,7 @@ package com.misa.fresher.data.entity
 
 import android.content.ContentValues
 import android.database.Cursor
-import com.misa.fresher.core.CanContentValues
+import com.misa.fresher.util.CanContentValues
 import kotlinx.parcelize.Parcelize
 
 /**

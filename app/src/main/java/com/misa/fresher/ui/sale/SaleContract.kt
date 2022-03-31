@@ -53,10 +53,11 @@ interface SaleContract {
          * @author Nguyễn Công Chính
          * @since 3/21/2022
          *
-         * @version 1
+         * @version 2
          * @updated 3/21/2022: Tạo function
+         * @updated 3/31/2022: Param [keyword] giờ là nullable
          */
-        fun filterByKeyword(keyword: String)
+        fun filterByKeyword(keyword: String? = null)
 
         /**
          * Hàm lọc sản phẩm theo các thuộc tính: số hàng còn lại > 0, danh mục sản phẩm, kiểu sắp xếp

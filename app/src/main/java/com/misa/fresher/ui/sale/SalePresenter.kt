@@ -31,8 +31,10 @@ class SalePresenter(
      * @updated 3/23/2022: Override lần đầu
      * @updated 3/25/2022: Chuyển thành lấy dữ liệu từ database
      */
-    override fun filterByKeyword(keyword: String) {
-        filter.keyword = keyword
+    override fun filterByKeyword(keyword: String?) {
+        keyword?.let {
+            filter.keyword = keyword
+        }
         dataManager.getAllProduct()
             .onSuccess {
                 val filterItems = filter.filter(it)

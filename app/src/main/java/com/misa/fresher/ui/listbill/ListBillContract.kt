@@ -37,10 +37,11 @@ interface ListBillContract {
          * @author Nguyễn Công Chính
          * @since 3/23/2022
          *
-         * @version 1
+         * @version 2
          * @updated 3/23/2022: Tạo function
+         * @updated 3/31/2022: Param [keyword] giờ là nullable
          */
-        fun filterByKeyword(keyword: String)
+        fun filterByKeyword(keyword: String? = null)
 
         /**
          * Hàm lọc hóa đơn theo thời gian tạo hóa đơn

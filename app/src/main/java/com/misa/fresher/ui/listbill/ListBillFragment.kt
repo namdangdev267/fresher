@@ -21,11 +21,12 @@ import com.misa.fresher.util.toCurrency
  * @author Nguyễn Công Chính
  * @since 3/9/2022
  *
- * @version 4
+ * @version 5
  * @updated 3/9/2022: Tạo class
  * @updated 3/16/2022: Thêm nội dung cho màn hình
  * @updated 3/23/2022: Chuyển từ mvc -> mvp
  * @updated 3/28/2022: Hàm initListBill, và khi cài đặt sự kiện spinner, nó tự exec luôn, 2 thằng cùng chọc vào db cùng lúc sẽ đấm nhau. Do vậy loại bỏ hàm initListBill
+ * @updated 3/31/2022: Cập nhật swipe to refresh
  */
 class ListBillFragment :
     BaseFragment<FragmentListBillBinding, ListBillContract.Presenter>(),
@@ -57,6 +58,9 @@ class ListBillFragment :
     private fun configOtherView() {
         binding.btnBuyMore.setOnClickListener {
             navigation.popBackStack(R.id.fragment_sale, false)
+        }
+        binding.swpListBill.setOnRefreshListener {
+            presenter?.filterByKeyword(null)
         }
     }
 
@@ -104,6 +108,7 @@ class ListBillFragment :
                         3 -> TimeFilterType.THIS_WEEK
                         else -> TimeFilterType.OTHER
                     }
+                    binding.swpListBill.isRefreshing = true
                     presenter?.filterByTime(time)
                 }
 
@@ -141,6 +146,7 @@ class ListBillFragment :
                 }
                 R.id.btn_close -> {
                     binding.tbListBill.etInput.text.clear()
+                    binding.swpListBill.isRefreshing = true
                     presenter?.filterByKeyword("")
                     binding.tbListBill.llSearch.visibility = View.GONE
                     binding.tbListBill.root.menu.clear()
@@ -151,6 +157,7 @@ class ListBillFragment :
         }
         binding.tbListBill.etInput.setOnEditorActionListener { textView, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
+                binding.swpListBill.isRefreshing = true
                 presenter?.filterByKeyword(textView.text.toString())
             }
             false
@@ -162,6 +169,7 @@ class ListBillFragment :
      * @updated 3/23/2022: Override lần đầu
      */
     override fun updateBillList(list: MutableList<Bill>) {
+        binding.swpListBill.isRefreshing = false
         billAdapter?.updateData(list)
         binding.tvCount.text = list.size.toString()
         binding.tvTotal.text = list.sumOf { item ->
