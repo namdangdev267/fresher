@@ -54,6 +54,9 @@ class ProductAdapter(
     private var clickItems: (Product) -> Unit
 ) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PostDiffCallBack()) {
 
+    private val VIEW_TYPE_ITEM = 0
+    private val VIEW_TYPE_LOADING = 1
+
     class ProductViewHolder(
         private val binding: ItemPackageRcvBinding,
         var clickItem: (Product) -> Unit

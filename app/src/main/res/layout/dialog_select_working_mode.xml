@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_50"
+    android:layout_marginVertical="@dimen/dp_80"
+    android:background="@drawable/custom_searchview"
+    android:padding="@dimen/dp_15">
+
+    <TextView
+        android:id="@+id/tvSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select working mode"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize_18"
+        android:textStyle="bold"
+        tools:ignore="SpUsage" />
+
+    <RadioButton
+        android:id="@+id/rbKhoTong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSelect"
+        android:checked="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSelect"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/rbKhoTong"
+        android:text="@string/cashier" />
+
+    <TextView
+        android:id="@+id/tvSaleAdvice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rbKhoTong"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@id/rbKhoTong"
+        android:text="Sale advice, get payment and manage pay-ins/pay-outs" />
+
+    <RadioButton
+        android:id="@+id/rbSalesPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSaleAdvice" />
+
+    <TextView
+        android:id="@+id/tvSalesPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSaleAdvice"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/rbKhoTong"
+        android:text="Sales Person" />
+
+    <TextView
+        android:id="@+id/tvSale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSalesPerson"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@id/rbKhoTong"
+        android:text="Sale advice" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_done"
+        android:layout_below="@id/tvSale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_50"
+        android:background="@drawable/custom_background"
+        android:text="@string/ok"
+        android:textColor="@color/white" />
+</RelativeLayout>

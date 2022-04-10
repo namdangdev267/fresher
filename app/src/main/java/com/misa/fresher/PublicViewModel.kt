@@ -22,6 +22,7 @@ import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PublicViewModel : ViewModel() {
+
     private var isInit = false
     private var queueBillList: LinkedList<ItemBill> = LinkedList()
 
@@ -76,7 +77,6 @@ class PublicViewModel : ViewModel() {
             mListBill.postValue(mutableListOf())
 
             mInforShip.postValue(InforShip(null, null, null, null))
-
 
             CoroutineScope(IO).launch {
                 val itemBillDao = ItemBillDao(AppDatabaseHelper.getInstance(context))
@@ -182,7 +182,6 @@ class PublicViewModel : ViewModel() {
         }
 
         mListBill.postValue(mListBill.value)
-        var j = 0
         clearListItemSelected()
 
     }
@@ -191,7 +190,6 @@ class PublicViewModel : ViewModel() {
         var res = 0f
         mListBill.value?.let {
             for (i in it) {
-                var k = 0
                 res += i.billPrice
             }
         }

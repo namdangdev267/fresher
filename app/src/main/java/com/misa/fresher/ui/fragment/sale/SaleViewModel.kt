@@ -1,4 +1,4 @@
-package com.misa.fresher.fragment.sale
+package com.misa.fresher.ui.fragment.sale
 
 import android.content.Context
 import android.util.Log
@@ -27,7 +27,7 @@ class SaleViewModel : ViewModel() {
 
     var filter: Filter = Filter(null, null, false, SortBy.NAME)
 
-    var listProduct: MutableList<Product> = mutableListOf()
+    private var listProduct: MutableList<Product> = mutableListOf()
 
     private val _listProductShow = MutableLiveData<MutableList<Product>>()
     val listProductShow: LiveData<MutableList<Product>>
@@ -42,6 +42,11 @@ class SaleViewModel : ViewModel() {
         var sortBy: SortBy?
     )
 
+    /**
+     * Mục địch sử dụng: Khởi tạo dữ liệu Product và update table Product db
+     * Sử dụng khi:
+     * @created_by Truong Trung Kien on 3/28/2022
+     **/
     fun createData(context: Context) {
         _listProductShow.postValue(listProduct)
         CoroutineScope(IO).launch {

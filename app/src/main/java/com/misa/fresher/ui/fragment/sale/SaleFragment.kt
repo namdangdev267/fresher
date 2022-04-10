@@ -16,15 +16,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.misa.fresher.PublicViewModel
-import com.misa.fresher.R
+import com.misa.fresher.*
 import com.misa.fresher.data.models.Product
 import com.misa.fresher.data.models.enum.Category
 import com.misa.fresher.data.models.enum.SortBy
 import com.misa.fresher.databinding.BottomSheetProductBinding
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.showToast
 import com.misa.fresher.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 import kotlinx.android.synthetic.main.sale_context.view.*
@@ -44,8 +43,10 @@ class SaleFragment : Fragment() {
     }
     private val bottomSheetView by lazy { BottomSheetProductBinding.inflate(layoutInflater) }
     val getInflater: (LayoutInflater) -> FragmentSaleBinding get() = FragmentSaleBinding::inflate
-
     private var newFilter: com.misa.fresher.data.models.Filter? = null
+
+    private lateinit var scrollListener: RecyclerViewLoadMoreScroll
+    private lateinit var mLayoutManagement: RecyclerView.LayoutManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -80,10 +81,6 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun initViewModel(context: Context) {
-        saleViewModel.createData(context)
-    }
-
     private fun configureToolbar() {
 
         binding.searchviewSale.img_icon1.setOnClickListener {
@@ -98,6 +95,10 @@ class SaleFragment : Fragment() {
             saleViewModel.updateListItemShow(it.toString())
             Log.d("tagSearch", it.toString())
         }
+    }
+
+    private fun initViewModel(context: Context) {
+        saleViewModel.createData(context)
     }
 
     private fun clearFilter() {
@@ -193,7 +194,6 @@ class SaleFragment : Fragment() {
     }
 
     private fun updateListByFilter() {
-
         saleViewModel.filterList.observe(viewLifecycleOwner) {
             adapter?.listItems = it
 //            adapter?.notifyDataSetChanged()
@@ -201,10 +201,28 @@ class SaleFragment : Fragment() {
         }
     }
 
+    private fun setScrollListener() {
+        binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
+        scrollListener = RecyclerViewLoadMoreScroll(mLayoutManagement as LinearLayoutManager)
+        scrollListener.setOnLoadMoreListener(object : OnLoadMoreListener {
+            override fun onLoadMore() {
+                loadMoreData()
+            }
+
+        })
+        binding.rcvProduct.addOnScrollListener(scrollListener)
+    }
+
+    private fun loadMoreData() {
+        TODO("Not yet implemented")
+    }
+
     private fun configListView() {
         binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcvProduct.setHasFixedSize(true)
         adapter = ProductAdapter(mutableListOf()) { saleItemClick(it) }
         binding.rcvProduct.adapter = adapter
+
         saleViewModel.listProductShow.observe(viewLifecycleOwner) {
             adapter?.listItems = it
 //            adapter?.notifyDataSetChanged()
@@ -238,7 +256,8 @@ class SaleFragment : Fragment() {
     private fun updateListView() {
         saleViewModel.searchList.observe(viewLifecycleOwner) {
             adapter?.listItems = it
-            adapter?.notifyDataSetChanged()
+//            adapter?.notifyDataSetChanged()
+            adapter?.submitList(it)
         }
     }
 

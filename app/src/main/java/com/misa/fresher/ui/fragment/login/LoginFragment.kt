@@ -1,16 +1,18 @@
 package com.misa.fresher.ui.fragment.login
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import com.misa.fresher.R
 import com.misa.fresher.data.models.User
+import com.misa.fresher.databinding.DialogSelectWorkingShopBinding
 import com.misa.fresher.databinding.FragmentLoginBinding
 import com.misa.fresher.loginactivity.APIClient
 import com.misa.fresher.loginactivity.LoginMode
@@ -42,13 +44,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transitionFragemnt()
+        transitionFragment()
         configureOtherView()
     }
 
     @SuppressLint("SetTextI18n")
     private fun configureOtherView() {
-        loginViewModel.login.observe(viewLifecycleOwner, Observer {
+        loginViewModel.login.observe(viewLifecycleOwner) {
             if (loginViewModel.login.value == LoginMode.SIGNUP) {
                 binding.tvSignUp.text = "Log in"
                 binding.btnLogIn.text = "Sign up"
@@ -58,18 +60,19 @@ class LoginFragment : Fragment() {
                 binding.btnLogIn.text = "Log in"
                 binding.textInputLayoutConfirmPassword.visibility = View.GONE
             }
-        })
+        }
     }
 
-    private fun transitionFragemnt() {
+    private fun transitionFragment() {
         binding.btnLogIn.setOnClickListener {
-            if (checkLogin()) {
-                if (loginViewModel.login.value == LoginMode.LOGIN) {
-                    login()
-                } else {
-                    signUp()
-                }
-            }
+//            if (checkLogin()) {
+//                if (loginViewModel.login.value == LoginMode.LOGIN) {
+//                    login()
+            openDialogSelectWorkingShop()
+//                } else {
+//                    signUp()
+//                }
+//            }
         }
 
         binding.tvSignUp.setOnClickListener {
@@ -121,6 +124,7 @@ class LoginFragment : Fragment() {
 
                 if (respond.isSuccessful && respond.body() != null) {
                     loginSuccess()
+//                    openDialogSelectWorkingShop()
                 } else {
                     withContext(Dispatchers.Main) {
                         requireContext().showToast("Username or password is incorrect. Please check again.")
@@ -134,7 +138,43 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun openDialogSelectWorkingShop() {
+        val dialog = Dialog(requireContext())
+        val mBinding = DialogSelectWorkingShopBinding.inflate(LayoutInflater.from(requireContext()))
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_select_working_shop)
+        val window = dialog.window ?: return
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val windowArtributes: WindowManager.LayoutParams = window.attributes
+        windowArtributes.gravity = Gravity.CENTER
+        window.attributes = windowArtributes
+        dialog.setCancelable(true)
+        dialog.show()
+        mBinding.btnDone.setOnClickListener {
+            requireContext().showToast("Checkkkkkkkkk DONE")
+        }
+    }
+
     private fun loginSuccess() {
+//        val dialog = Dialog(requireContext())
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setContentView(R.layout.dialog_select_working_shop)
+//        val window = dialog.window ?: return
+//        window.setLayout(
+//            WindowManager.LayoutParams.MATCH_PARENT,
+//            WindowManager.LayoutParams.WRAP_CONTENT
+//        )
+//        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        val windowArtributes: WindowManager.LayoutParams = window.attributes
+//        windowArtributes.gravity = Gravity.CENTER
+//        window.attributes = windowArtributes
+//        dialog.setCancelable(true)
+//        dialog.show()
+
         val intent = Intent(this.context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)

@@ -118,4 +118,10 @@
     <string name="color">Color</string>
     <string name="no_infor_user">No infor user</string>
     <string name="list_of_bill">List of bill</string>
+    <string name="ok">OK</string>
+    <string name="kienfashionhanoi">KienFashionHaNoi</string>
+    <string name="kho_t_ng">Kho tổng</string>
+    <string name="select_working_shop">Select working shop</string>
+    <string name="sale_advice_get_payment_and_manage_pay_ins_pay_outs">Sale advice, get payment and manage pay-ins/pay-outs</string>
+    <string name="cashier">Cashier</string>
 </resources>
